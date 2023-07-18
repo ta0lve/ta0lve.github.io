@@ -13,10 +13,10 @@
 <meta content="zh-cn" http-equiv="content-language"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta content="ie=edge" http-equiv="X-UA-Compatible"/>
-<title>misc-Weird Letter · ta0lve</title>
-<meta content="misc-Weird Letter · ta0lve" name="title"/>
-<meta content="CTF, misc, 古典密码学, " name="keywords"/>
-<link href="https://ta0lve.github.io/posts/wp/2023_04_ctf/7_weird-letter_write_up/" rel="canonical"/>
+<title>PWN-Level 1 Nimgame · ta0lve</title>
+<meta content="PWN-Level 1 Nimgame · ta0lve" name="title"/>
+<meta content="CTF, PWN, 栈溢出, " name="keywords"/>
+<link href="https://ta0lve.github.io/posts/wp/2023_04_w4ter/3_nimgame-level-1_write_up/" rel="canonical"/>
 <link href="/css/main.bundle.min.c6116b9ed1c907a8c0eb015f377d3eecc07e448d75729e31fc3de5881465c6c172ba9fa9a6800c030116caf2a110d92242bb816639484ca791f7cd107a8d49b5.css" integrity="sha512-xhFrntHJB6jA6wFfN30+7MB+RI11cp4x/D3liBRlxsFyup+ppoAMAwEWyvKhENkiQruBZjlITKeR980Qeo1JtQ==" rel="stylesheet" type="text/css"/>
 <script integrity="sha512-UWoWdFvqWpvQERONJUzA/TlzzVXObhXz3sdj58fCx0SPj+e1TMqBHLghsMfhLNFhyqzh3XlKw9NNQJN8vMnuEg==" src="/js/appearance.min.516a16745bea5a9bd011138d254cc0fd3973cd55ce6e15f3dec763e7c7c2c7448f8fe7b54cca811cb821b0c7e12cd161caace1dd794ac3d34d40937cbcc9ee12.js" type="text/javascript"></script>
 <script data-copied="" data-copy="" defer="" id="script-bundle" integrity="sha512-PdzwT1sNTDL3LnJtPBLuvM2MPJ+dqpoTQUgIiV3grh4c3d2mhJaA1b2W27YNCx4LJMKfXIPlYx5V5+a8AgFUkA==" src="/js/main.bundle.min.3ddcf04f5b0d4c32f72e726d3c12eebccd8c3c9f9daa9a13414808895de0ae1e1cdddda6849680d5bd96dbb60d0b1e0b24c29f5c83e5631e55e7e6bc02015490.js" type="text/javascript"></script>
@@ -25,19 +25,19 @@
 <link href="/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="/site.webmanifest" rel="manifest"/>
-<meta content="misc-Weird Letter" property="og:title"/>
+<meta content="PWN-Level 1 Nimgame" property="og:title"/>
 <meta content="此文章仅限战队内部成员阅读
 路过的师傅们看看远处的wp吧：
 
     2023 ciscn 初赛 · ta0lve" property="og:description"/>
 <meta content="article" property="og:type"/>
-<meta content="https://ta0lve.github.io/posts/wp/2023_04_ctf/7_weird-letter_write_up/" property="og:url"/><meta content="https://ta0lve.github.io/posts/wp/2023_04_ctf/7_weird-letter_write_up/featured.jpg" property="og:image"/><meta content="posts" property="article:section"/>
+<meta content="https://ta0lve.github.io/posts/wp/2023_04_w4ter/3_nimgame-level-1_write_up/" property="og:url"/><meta content="https://ta0lve.github.io/posts/wp/2023_04_w4ter/3_nimgame-level-1_write_up/featured.jpg" property="og:image"/><meta content="posts" property="article:section"/>
 <meta content="2023-07-05T00:00:00+00:00" property="article:published_time"/>
 <meta content="2023-07-05T00:00:00+00:00" property="article:modified_time"/>
-<meta content="https://ta0lve.github.io/posts/wp/2023_04_ctf/6_gz-rsa_write_up/" property="og:see_also"/><meta content="https://ta0lve.github.io/posts/wp/2023_04_ctf/10_chisato_write_up/" property="og:see_also"/><meta content="https://ta0lve.github.io/posts/wp/2023_04_ctf/8_shadow_write_up/" property="og:see_also"/><meta content="https://ta0lve.github.io/posts/wp/2023_04_ctf/9_usb-hacker_write_up/" property="og:see_also"/><meta content="https://ta0lve.github.io/posts/wp/2023_04_ctf/11_w4ter-disk_write_up/" property="og:see_also"/>
+<meta content="https://ta0lve.github.io/posts/wp/2023_04_w4ter/6_gz-rsa_write_up/" property="og:see_also"/><meta content="https://ta0lve.github.io/posts/wp/2023_04_w4ter/10_chisato_write_up/" property="og:see_also"/><meta content="https://ta0lve.github.io/posts/wp/2023_04_w4ter/8_shadow_write_up/" property="og:see_also"/><meta content="https://ta0lve.github.io/posts/wp/2023_04_w4ter/9_usb-hacker_write_up/" property="og:see_also"/><meta content="https://ta0lve.github.io/posts/wp/2023_04_w4ter/11_w4ter-disk_write_up/" property="og:see_also"/><meta content="https://ta0lve.github.io/posts/wp/2023_04_w4ter/7_weird-letter_write_up/" property="og:see_also"/>
 <meta content="summary_large_image" name="twitter:card"/>
-<meta content="https://ta0lve.github.io/posts/wp/2023_04_ctf/7_weird-letter_write_up/featured.jpg" name="twitter:image"/>
-<meta content="misc-Weird Letter" name="twitter:title"/>
+<meta content="https://ta0lve.github.io/posts/wp/2023_04_w4ter/3_nimgame-level-1_write_up/featured.jpg" name="twitter:image"/>
+<meta content="PWN-Level 1 Nimgame" name="twitter:title"/>
 <meta content="此文章仅限战队内部成员阅读
 路过的师傅们看看远处的wp吧：
 
@@ -47,12 +47,12 @@
     "@context": "https://schema.org",
     "@type": "Article",
     "articleSection": "Posts",
-    "name": "misc-Weird Letter",
-    "headline": "misc-Weird Letter",
+    "name": "PWN-Level 1 Nimgame",
+    "headline": "PWN-Level 1 Nimgame",
     
     "abstract": "\u003cp\u003e\u003cstrong\u003e此文章仅限战队内部成员阅读\u003c\/strong\u003e\u003c\/p\u003e\n\u003cp\u003e路过的师傅们看看远处的wp吧：\u003c\/p\u003e\n\u003cp\u003e\u003ca href=\u0022https:\/\/ta0lve.github.io\/posts\/wp\/2023_06_ciscn\/\u0022   target=\u0022_blank\u0022\u003e\n    2023 ciscn 初赛 · ta0lve\u003c\/a\u003e\u003c\/p\u003e",
     "inLanguage": "zh-cn",
-    "url" : "https:\/\/ta0lve.github.io\/posts\/wp\/2023_04_ctf\/7_weird-letter_write_up\/",
+    "url" : "https:\/\/ta0lve.github.io\/posts\/wp\/2023_04_w4ter\/3_nimgame-level-1_write_up\/",
     "author" : {
       "@type": "Person",
       "name": "ta0lve"
@@ -63,10 +63,10 @@
     
     "dateModified": "2023-07-05T00:00:00\u002b00:00",
     
-    "keywords": ["CTF","misc","古典密码学"],
+    "keywords": ["CTF","PWN","栈溢出"],
     
     "mainEntityOfPage": "true",
-    "wordCount": "835"
+    "wordCount": "223"
   }]
   </script>
 <meta content="ta0lve" name="author"/>
@@ -247,7 +247,7 @@
 <main class="grow" id="main-content">
 <article>
 <div class="h-[150px] md:h-[200px]" id="hero"></div>
-<div class="fixed inset-x-0 top-0 h-[800px] single_hero_background nozoom" style="background-image:url(/posts/wp/2023_04_ctf/7_weird-letter_write_up/featured.jpg);">
+<div class="fixed inset-x-0 top-0 h-[800px] single_hero_background nozoom" style="background-image:url(/posts/wp/2023_04_w4ter/3_nimgame-level-1_write_up/featured.jpg);">
 <div class="absolute inset-0 bg-gradient-to-t from-neutral dark:from-neutral-800 to-transparent mix-blend-normal">
 </div>
 <div class="absolute inset-0 opacity-60 bg-gradient-to-t from-neutral dark:from-neutral-800 to-neutral-100 dark:to-neutral-800 mix-blend-normal">
@@ -262,15 +262,15 @@
 <a class="hover:underline decoration-neutral-300 dark:underline-neutral-600" href="/posts/">Posts</a><span class="px-1 text-primary-500">/</span>
 </li>
 <li class="inline hidden">
-<a class="hover:underline decoration-neutral-300 dark:underline-neutral-600" href="/posts/wp/2023_04_ctf/7_weird-letter_write_up/">misc-Weird Letter</a><span class="px-1 text-primary-500">/</span>
+<a class="hover:underline decoration-neutral-300 dark:underline-neutral-600" href="/posts/wp/2023_04_w4ter/3_nimgame-level-1_write_up/">PWN-Level 1 Nimgame</a><span class="px-1 text-primary-500">/</span>
 </li>
 </ol>
 <h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">
-      misc-Weird Letter
+      PWN-Level 1 Nimgame
     </h1>
 <div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-07-05 00:00:00 +0000 UTC">July 5, 2023</time><span class="px-2 text-primary-500">·</span><span>835 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">2 分钟</span>
+<time datetime="2023-07-05 00:00:00 +0000 UTC">July 5, 2023</time><span class="px-2 text-primary-500">·</span><span>223 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">1 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
 <span class="mr-2" onclick="window.open(&quot;/categories/wp/&quot;,'_self');" style="margin-top:0.5rem">
@@ -287,17 +287,17 @@
   </span>
 </span>
 </span>
-<span class="mr-2" onclick="window.open(&quot;/tags/misc/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="mr-2" onclick="window.open(&quot;/tags/pwn/&quot;,'_self');" style="margin-top:0.5rem">
 <span class="flex">
 <span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    misc
+    PWN
   </span>
 </span>
 </span>
-<span class="mr-2" onclick="window.open(&quot;/tags/%E5%8F%A4%E5%85%B8%E5%AF%86%E7%A0%81%E5%AD%A6/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="mr-2" onclick="window.open(&quot;/tags/%E6%A0%88%E6%BA%A2%E5%87%BA/&quot;,'_self');" style="margin-top:0.5rem">
 <span class="flex">
 <span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    古典密码学
+    栈溢出
   </span>
 </span>
 </span>
@@ -342,55 +342,55 @@
         My first series of CTF wp - This article is part of a series.
     </summary>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/posts/wp/2023_04_ctf/1_what-is-netcat_write_up/">
+<a href="https://ta0lve.github.io/posts/wp/2023_04_w4ter/1_what-is-netcat_write_up/">
             Part 1: PWN-What is NetCat
         </a>
 </div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/posts/wp/2023_04_ctf/2_tic-tac-toe-level-0_write_up/">
+<a href="https://ta0lve.github.io/posts/wp/2023_04_w4ter/2_tic-tac-toe-level-0_write_up/">
             Part 2: PWN-Level 0 Tic-Tac-Toe 
         </a>
 </div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/posts/wp/2023_04_ctf/3_nimgame-level-1_write_up/">
-            Part 3: PWN-Level 1 Nimgame
-        </a>
-</div>
+        Part 3: This Article
+    </div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/posts/wp/2023_04_ctf/4_lazy-puts_write_up/">
+<a href="https://ta0lve.github.io/posts/wp/2023_04_w4ter/4_lazy-puts_write_up/">
             Part 4: reverse-Lazy Puts
         </a>
 </div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/posts/wp/2023_04_ctf/5_oh-my-python_write_up/">
+<a href="https://ta0lve.github.io/posts/wp/2023_04_w4ter/5_oh-my-python_write_up/">
             Part 5: reverse-Oh My Python
         </a>
 </div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/posts/wp/2023_04_ctf/6_gz-rsa_write_up/">
+<a href="https://ta0lve.github.io/posts/wp/2023_04_w4ter/6_gz-rsa_write_up/">
             Part 6: Crypto-GZ RSA
         </a>
 </div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/posts/wp/2023_04_ctf/8_shadow_write_up/">
+<a href="https://ta0lve.github.io/posts/wp/2023_04_w4ter/8_shadow_write_up/">
             Part 8: misc-Shadow
         </a>
 </div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-        Part 8: This Article
-    </div>
+<a href="https://ta0lve.github.io/posts/wp/2023_04_w4ter/7_weird-letter_write_up/">
+            Part 8: misc-Weird Letter
+        </a>
+</div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/posts/wp/2023_04_ctf/9_usb-hacker_write_up/">
+<a href="https://ta0lve.github.io/posts/wp/2023_04_w4ter/9_usb-hacker_write_up/">
             Part 9: misc-USB Hacker
         </a>
 </div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/posts/wp/2023_04_ctf/10_chisato_write_up/">
+<a href="https://ta0lve.github.io/posts/wp/2023_04_w4ter/10_chisato_write_up/">
             Part 10: misc-Chisato
         </a>
 </div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/posts/wp/2023_04_ctf/11_w4ter-disk_write_up/">
+<a href="https://ta0lve.github.io/posts/wp/2023_04_w4ter/11_w4ter-disk_write_up/">
             Part 11: misc-W4ter Disk
         </a>
 </div>
@@ -407,84 +407,84 @@
 <input class="hugo-encryptor-input" placeholder="请输入密码"/>
 <input class="hugo-encryptor-button" onclick="_click_handler(this)" type="button" value="点击验证"/>
 </div>
-<div class="hugo-encryptor-cipher-text" style="display: none;">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</div>
+<div class="hugo-encryptor-cipher-text" style="display: none;">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</div>
 </div>
 <details class="mt-2 mb-5 overflow-hidden rounded-lg ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5" style="margin-left:0px">
 <summary class="py-1 text-lg font-semibold cursor-pointer bg-primary-200 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-primary-800 dark:text-neutral-100">
         My first series of CTF wp - This article is part of a series.
     </summary>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/posts/wp/2023_04_ctf/1_what-is-netcat_write_up/">
+<a href="https://ta0lve.github.io/posts/wp/2023_04_w4ter/1_what-is-netcat_write_up/">
             Part 1: PWN-What is NetCat
         </a>
 </div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/posts/wp/2023_04_ctf/2_tic-tac-toe-level-0_write_up/">
+<a href="https://ta0lve.github.io/posts/wp/2023_04_w4ter/2_tic-tac-toe-level-0_write_up/">
             Part 2: PWN-Level 0 Tic-Tac-Toe 
         </a>
 </div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/posts/wp/2023_04_ctf/3_nimgame-level-1_write_up/">
-            Part 3: PWN-Level 1 Nimgame
-        </a>
-</div>
+        Part 3: This Article
+    </div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/posts/wp/2023_04_ctf/4_lazy-puts_write_up/">
+<a href="https://ta0lve.github.io/posts/wp/2023_04_w4ter/4_lazy-puts_write_up/">
             Part 4: reverse-Lazy Puts
         </a>
 </div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/posts/wp/2023_04_ctf/5_oh-my-python_write_up/">
+<a href="https://ta0lve.github.io/posts/wp/2023_04_w4ter/5_oh-my-python_write_up/">
             Part 5: reverse-Oh My Python
         </a>
 </div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/posts/wp/2023_04_ctf/6_gz-rsa_write_up/">
+<a href="https://ta0lve.github.io/posts/wp/2023_04_w4ter/6_gz-rsa_write_up/">
             Part 6: Crypto-GZ RSA
         </a>
 </div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/posts/wp/2023_04_ctf/8_shadow_write_up/">
+<a href="https://ta0lve.github.io/posts/wp/2023_04_w4ter/8_shadow_write_up/">
             Part 8: misc-Shadow
         </a>
 </div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-        Part 8: This Article
-    </div>
+<a href="https://ta0lve.github.io/posts/wp/2023_04_w4ter/7_weird-letter_write_up/">
+            Part 8: misc-Weird Letter
+        </a>
+</div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/posts/wp/2023_04_ctf/9_usb-hacker_write_up/">
+<a href="https://ta0lve.github.io/posts/wp/2023_04_w4ter/9_usb-hacker_write_up/">
             Part 9: misc-USB Hacker
         </a>
 </div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/posts/wp/2023_04_ctf/10_chisato_write_up/">
+<a href="https://ta0lve.github.io/posts/wp/2023_04_w4ter/10_chisato_write_up/">
             Part 10: misc-Chisato
         </a>
 </div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/posts/wp/2023_04_ctf/11_w4ter-disk_write_up/">
+<a href="https://ta0lve.github.io/posts/wp/2023_04_w4ter/11_w4ter-disk_write_up/">
             Part 11: misc-W4ter Disk
         </a>
 </div>
 </details>
 </div>
 <script>
-        var oid = "views_posts\\wp\\2023_04_CTF\\7_Weird Letter_write_up\\index.md"
-        var oid_likes = "likes_posts\\wp\\2023_04_CTF\\7_Weird Letter_write_up\\index.md"
+        var oid = "views_posts\\wp\\2023_04_W4ter\\3_Nimgame Level 1_write_up\\index.md"
+        var oid_likes = "likes_posts\\wp\\2023_04_W4ter\\3_Nimgame Level 1_write_up\\index.md"
       </script>
 <script integrity="sha512-DkmXO0rQo4LHxgEti/+CJjFmQtqrxPiiBHe9CGdPPabi+pk7wgrU9R58W7aOb5E6IHp8T+N+oOe4BolK/OCmTg==" src="/js/page.min.0e49973b4ad0a382c7c6012d8bff8226316642daabc4f8a20477bd08674f3da6e2fa993bc20ad4f51e7c5bb68e6f913a207a7c4fe37ea0e7b806894afce0a64e.js" type="text/javascript"></script>
 </section>
 <footer class="pt-8 max-w-prose print:hidden">
 <h2 class="mt-8 text-2xl font-extrabold mb-10">Related</h2>
 <section class="w-full grid gap-4 sm:grid-cols-2 md:grid-cols-3">
-<a class="min-w-full" href="/posts/wp/2023_04_ctf/10_chisato_write_up/">
+<a class="min-w-full" href="/posts/wp/2023_04_w4ter/2_tic-tac-toe-level-0_write_up/">
 <div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
-<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/posts/wp/2023_04_ctf/10_chisato_write_up/featured.jpg);"></div>
+<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/posts/wp/2023_04_w4ter/2_tic-tac-toe-level-0_write_up/featured.jpg);"></div>
 <div class="px-6 py-4">
-<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/wp/2023_04_ctf/10_chisato_write_up/">misc-Chisato</div>
+<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/wp/2023_04_w4ter/2_tic-tac-toe-level-0_write_up/">PWN-Level 0 Tic-Tac-Toe </div>
 <div class="text-sm text-neutral-500 dark:text-neutral-400">
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-07-05 00:00:00 +0000 UTC">July 5, 2023</time><span class="px-2 text-primary-500">·</span><span>3458 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">7 分钟</span>
+<time datetime="2023-07-05 00:00:00 +0000 UTC">July 5, 2023</time><span class="px-2 text-primary-500">·</span><span>828 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">2 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
 <span class="mr-2" onclick="window.open(&quot;/categories/wp/&quot;,'_self');" style="margin-top:0.5rem">
@@ -501,17 +501,17 @@
   </span>
 </span>
 </span>
-<span class="mr-2" onclick="window.open(&quot;/tags/misc/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="mr-2" onclick="window.open(&quot;/tags/pwn/&quot;,'_self');" style="margin-top:0.5rem">
 <span class="flex">
 <span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    misc
+    PWN
   </span>
 </span>
 </span>
-<span class="mr-2" onclick="window.open(&quot;/tags/pwntool/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="mr-2" onclick="window.open(&quot;/tags/%E6%A0%88%E6%BA%A2%E5%87%BA/&quot;,'_self');" style="margin-top:0.5rem">
 <span class="flex">
 <span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    pwntool
+    栈溢出
   </span>
 </span>
 </span>
@@ -522,14 +522,14 @@
 </div>
 </div>
 </a>
-<a class="min-w-full" href="/posts/wp/2023_04_ctf/8_shadow_write_up/">
+<a class="min-w-full" href="/posts/wp/2023_04_w4ter/1_what-is-netcat_write_up/">
 <div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
-<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/posts/wp/2023_04_ctf/8_shadow_write_up/featured.jpg);"></div>
+<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/posts/wp/2023_04_w4ter/1_what-is-netcat_write_up/featured.jpg);"></div>
 <div class="px-6 py-4">
-<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/wp/2023_04_ctf/8_shadow_write_up/">misc-Shadow</div>
+<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/wp/2023_04_w4ter/1_what-is-netcat_write_up/">PWN-What is NetCat</div>
 <div class="text-sm text-neutral-500 dark:text-neutral-400">
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-07-05 00:00:00 +0000 UTC">July 5, 2023</time><span class="px-2 text-primary-500">·</span><span>178 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">1 分钟</span>
+<time datetime="2023-07-05 00:00:00 +0000 UTC">July 5, 2023</time><span class="px-2 text-primary-500">·</span><span>203 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">1 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
 <span class="mr-2" onclick="window.open(&quot;/categories/wp/&quot;,'_self');" style="margin-top:0.5rem">
@@ -546,10 +546,10 @@
   </span>
 </span>
 </span>
-<span class="mr-2" onclick="window.open(&quot;/tags/misc/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="mr-2" onclick="window.open(&quot;/tags/pwn/&quot;,'_self');" style="margin-top:0.5rem">
 <span class="flex">
 <span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    misc
+    PWN
   </span>
 </span>
 </span>
@@ -560,14 +560,14 @@
 </div>
 </div>
 </a>
-<a class="min-w-full" href="/posts/wp/2023_04_ctf/9_usb-hacker_write_up/">
+<a class="min-w-full" href="/posts/wp/2023_07_hws/fmt2/">
 <div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
-<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/posts/wp/2023_04_ctf/9_usb-hacker_write_up/featured.jpg);"></div>
+<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/posts/wp/2023_07_hws/fmt2/featured.jpg);"></div>
 <div class="px-6 py-4">
-<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/wp/2023_04_ctf/9_usb-hacker_write_up/">misc-USB Hacker</div>
+<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/wp/2023_07_hws/fmt2/">HWS 2023 PWN fmt exp</div>
 <div class="text-sm text-neutral-500 dark:text-neutral-400">
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-07-05 00:00:00 +0000 UTC">July 5, 2023</time><span class="px-2 text-primary-500">·</span><span>1281 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">3 分钟</span>
+<time datetime="2023-07-18 00:00:00 +0000 UTC">July 18, 2023</time><span class="px-2 text-primary-500">·</span><span>5533 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">12 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
 <span class="mr-2" onclick="window.open(&quot;/categories/wp/&quot;,'_self');" style="margin-top:0.5rem">
@@ -584,17 +584,17 @@
   </span>
 </span>
 </span>
-<span class="mr-2" onclick="window.open(&quot;/tags/misc/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="mr-2" onclick="window.open(&quot;/tags/pwn/&quot;,'_self');" style="margin-top:0.5rem">
 <span class="flex">
 <span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    misc
+    PWN
   </span>
 </span>
 </span>
-<span class="mr-2" onclick="window.open(&quot;/tags/%E6%B5%81%E9%87%8F%E5%8F%96%E8%AF%81/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="mr-2" onclick="window.open(&quot;/tags/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%BC%8F%E6%B4%9E/&quot;,'_self');" style="margin-top:0.5rem">
 <span class="flex">
 <span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    流量取证
+    格式化字符串漏洞
   </span>
 </span>
 </span>
@@ -612,8 +612,8 @@
 <div style="padding-bottom:1em;">
 <p> </p>
 <p>本文作者：<a href="https://ta0lve.github.io/about/" target="_blank">ta0lve</a></p>
-<p>本文链接：<a href="https://ta0lve.github.io/posts/wp/2023_04_ctf/7_weird-letter_write_up/" target="_blank">misc-Weird Letter</a></p>
-<p><a href="https://ta0lve.github.io/posts/wp/2023_04_ctf/7_weird-letter_write_up/" target="_blank">( https://ta0lve.github.io/posts/wp/2023_04_ctf/7_weird-letter_write_up/ )</a></p>
+<p>本文链接：<a href="https://ta0lve.github.io/posts/wp/2023_04_w4ter/3_nimgame-level-1_write_up/" target="_blank">PWN-Level 1 Nimgame</a></p>
+<p><a href="https://ta0lve.github.io/posts/wp/2023_04_w4ter/3_nimgame-level-1_write_up/" target="_blank">( https://ta0lve.github.io/posts/wp/2023_04_w4ter/3_nimgame-level-1_write_up/ )</a></p>
 <p>版权声明：<a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">「署名-非商业性使用-相同方式共享 4.0 国际」</a></p>
 </div>
 </div>
@@ -622,11 +622,11 @@
 <hr class="border-dotted border-neutral-300 dark:border-neutral-600"/>
 <div class="flex justify-between pt-3">
 <span>
-<a class="flex group mr-3" href="/posts/wp/2023_04_ctf/2_tic-tac-toe-level-0_write_up/">
+<a class="flex group mr-3" href="/posts/wp/2023_04_w4ter/1_what-is-netcat_write_up/">
 <span class="mr-3 text-neutral-700 group-hover:text-primary-600 ltr:inline rtl:hidden dark:text-neutral dark:group-hover:text-primary-400">←</span>
 <span class="ml-3 text-neutral-700 group-hover:text-primary-600 ltr:hidden rtl:inline dark:text-neutral dark:group-hover:text-primary-400">→</span>
 <span class="flex flex-col">
-<span class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500">PWN-Level 0 Tic-Tac-Toe </span>
+<span class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500">PWN-What is NetCat</span>
 <span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
 <time datetime="2023-07-05 00:00:00 +0000 UTC">July 5, 2023</time>
 </span>
@@ -634,9 +634,9 @@
 </a>
 </span>
 <span>
-<a class="flex text-right group ml-3" href="/posts/wp/2023_04_ctf/11_w4ter-disk_write_up/">
+<a class="flex text-right group ml-3" href="/posts/wp/2023_04_w4ter/2_tic-tac-toe-level-0_write_up/">
 <span class="flex flex-col">
-<span class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500">misc-W4ter Disk</span>
+<span class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500">PWN-Level 0 Tic-Tac-Toe </span>
 <span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
 <time datetime="2023-07-05 00:00:00 +0000 UTC">July 5, 2023</time>
 </span>

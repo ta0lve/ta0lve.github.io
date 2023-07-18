@@ -13,7 +13,7 @@
       <pubDate>Tue, 18 Jul 2023 00:00:00 +0000</pubDate>
       
       <guid>https://ta0lve.github.io/posts/wp/2023_07_hws/fmt/</guid>
-      <description>wp如下: # encoding: utf-8 from pwn import * from LibcSearcher import * is_debug = 1 is_remote = 0 is_ret = 1 if is_debug: context(os=&amp;#39;linux&amp;#39;, arch=&amp;#39;amd64&amp;#39;, log_level=&amp;#39;debug&amp;#39;)</description>
+      <description>前言： # 本文是HWS 线上赛的pwn方向fmt题目的wp，写得</description>
     </item>
     
     <item>

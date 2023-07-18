@@ -26,7 +26,7 @@
 <link href="/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="/site.webmanifest" rel="manifest"/>
 <meta content="HWS 2023 fmt wp" property="og:title"/>
-<meta content="wp如下: # encoding: utf-8 from pwn import * from LibcSearcher import * is_debug = 1 is_remote = 0 is_ret = 1 if is_debug: context(os='linux', arch='amd64', log_level='debug')" property="og:description"/>
+<meta content="前言： # 本文是HWS 线上赛的pwn方向fmt题目的wp，写得" property="og:description"/>
 <meta content="article" property="og:type"/>
 <meta content="https://ta0lve.github.io/posts/wp/2023_07_hws/fmt/" property="og:url"/><meta content="https://ta0lve.github.io/posts/wp/2023_07_hws/fmt/featured.jpg" property="og:image"/><meta content="posts" property="article:section"/>
 <meta content="2023-07-18T00:00:00+00:00" property="article:published_time"/>
@@ -35,7 +35,7 @@
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="https://ta0lve.github.io/posts/wp/2023_07_hws/fmt/featured.jpg" name="twitter:image"/>
 <meta content="HWS 2023 fmt wp" name="twitter:title"/>
-<meta content="wp如下: # encoding: utf-8 from pwn import * from LibcSearcher import * is_debug = 1 is_remote = 0 is_ret = 1 if is_debug: context(os='linux', arch='amd64', log_level='debug')" name="twitter:description"/>
+<meta content="前言： # 本文是HWS 线上赛的pwn方向fmt题目的wp，写得" name="twitter:description"/>
 <script type="application/ld+json">
   [{
     "@context": "https://schema.org",
@@ -44,7 +44,7 @@
     "name": "HWS 2023 fmt wp",
     "headline": "HWS 2023 fmt wp",
     
-    "abstract": "wp如下: # encoding: utf-8 from pwn import * from LibcSearcher import * is_debug = 1 is_remote = 0 is_ret = 1 if is_debug: context(os=\u0026#39;linux\u0026#39;, arch=\u0026#39;amd64\u0026#39;, log_level=\u0026#39;debug\u0026#39;)",
+    "abstract": "前言： # 本文是HWS 线上赛的pwn方向fmt题目的wp，写得",
     "inLanguage": "zh-cn",
     "url" : "https:\/\/ta0lve.github.io\/posts\/wp\/2023_07_hws\/fmt\/",
     "author" : {
@@ -60,7 +60,7 @@
     "keywords": ["CTF","PWN","格式化字符串漏洞"],
     
     "mainEntityOfPage": "true",
-    "wordCount": "2536"
+    "wordCount": "4710"
   }]
   </script>
 <meta content="ta0lve" name="author"/>
@@ -264,7 +264,7 @@
     </h1>
 <div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-07-18 00:00:00 +0000 UTC">July 18, 2023</time><span class="px-2 text-primary-500">·</span><span>2536 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">6 分钟</span>
+<time datetime="2023-07-18 00:00:00 +0000 UTC">July 18, 2023</time><span class="px-2 text-primary-500">·</span><span>4710 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">10 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
 <span class="mr-2" onclick="window.open(&quot;/categories/wp/&quot;,'_self');" style="margin-top:0.5rem">
@@ -330,6 +330,94 @@
 <div class="mb-5"></div>
 </header>
 <section class="flex flex-col max-w-full mt-0 prose dark:prose-invert lg:flex-row">
+<div class="order-first sm:max-w-prose lg:ml-auto px-0 lg:order-last lg:max-w-xs ltr:lg:pl-8 rtl:lg:pr-8">
+<div class="toc ltr:pl-5 rtl:pr-5 print:hidden lg:sticky lg:top-10">
+<details class="mt-0 overflow-hidden rounded-lg ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 hidden lg:block" open="">
+<summary class="block py-1 text-lg font-semibold cursor-pointer bg-neutral-100 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-neutral-700 dark:text-neutral-100 lg:hidden">
+</summary>
+<div class="min-w-[220px] py-2 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#前言">前言：</a></li>
+<li><a href="#checksec-检查">checksec 检查</a>
+<ul>
+<li><a href="#关于-relro">关于 RELRO</a></li>
+</ul>
+</li>
+<li><a href="#ida-查看">IDA 查看</a></li>
+<li><a href="#漏洞利用分析">漏洞利用分析</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</details>
+<details class="mt-0 overflow-hidden rounded-lg ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 lg:hidden">
+<summary class="py-1 text-lg font-semibold cursor-pointer bg-neutral-100 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-neutral-700 dark:text-neutral-100 lg:hidden">
+</summary>
+<div class="py-2 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#前言">前言：</a></li>
+<li><a href="#checksec-检查">checksec 检查</a>
+<ul>
+<li><a href="#关于-relro">关于 RELRO</a></li>
+</ul>
+</li>
+<li><a href="#ida-查看">IDA 查看</a></li>
+<li><a href="#漏洞利用分析">漏洞利用分析</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</details>
+<script>
+  (function () {
+    var $toc = $('#TableOfContents');
+    if ($toc.length > 0) {
+      var $window = $(window);
+
+      function onScroll() {
+        var currentScroll = $window.scrollTop();
+        var h = $('.anchor');
+        var id = "";
+        h.each(function (i, e) {
+          e = $(e);
+          if (e.offset().top - $(window).height()/3 <= currentScroll) {
+            id = e.attr('id');
+          }
+        });
+        var active = $toc.find('a.active');      
+        if (active.length == 1 && active.eq(0).attr('href') == '#' + id) return true;
+
+        active.each(function (i, e) {
+           
+            $(e).removeClass('active').siblings('ul').hide();
+          
+        });
+        $toc.find('a[href="#' + id + '"]').addClass('active')
+        $toc.find('a[href="#' + id + '"]').parentsUntil('#TableOfContents').each(function (i, e) {
+          $(e).children('a').parents('ul').show();          
+        });
+      }
+
+      $window.on('scroll', onScroll);
+      $(document).ready(function () {
+         
+          $toc.find('a').parent('li').find('ul').hide();
+        
+        onScroll();
+      });
+    }
+  })();
+</script>
+</div>
+</div>
 <div class="min-w-0 min-h-0 max-w-prose">
 <details class="mt-2 mb-5 overflow-hidden rounded-lg ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5" open="" style="margin-left:0px">
 <summary class="py-1 text-lg font-semibold cursor-pointer bg-primary-200 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-primary-800 dark:text-neutral-100">
@@ -344,6 +432,208 @@
         </a>
 </div>
 </details>
+<div class="anchor" id="前言"></div>
+<h3 class="relative group">前言： 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e5%89%8d%e8%a8%80" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<p>本文是HWS 线上赛的pwn方向fmt题目的wp，写得不好还望师傅们多多包容。</p>
+<p>（题目提供的二进制文件 fmt 以下统称为 pwn ）</p>
+<div class="anchor" id="checksec-检查"></div>
+<h3 class="relative group">checksec 检查 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#checksec-%e6%a3%80%e6%9f%a5" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 可以使用的最新的checksec命令，不过需要先更新checksce的版本</span>
+</span></span><span class="line"><span class="cl">checksec --file<span class="o">=</span>pwn
+</span></span></code></pre></div><p>
+<figure>
+<img alt="image-20230719022935312" class="my-0 rounded-md" src="https://s2.loli.net/2023/07/19/lSaHDoYgCRu6IB2.png"/>
+</figure>
+</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 检测的保护机制变多了，不过由于宽度过大所以不是那么好看</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 使用原来的checksec命令也可以</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">checksec pwn
+</span></span></code></pre></div><p>
+<figure>
+<img alt="image-20230719023706757" class="my-0 rounded-md" src="https://s2.loli.net/2023/07/19/g8GT3vbzaFNCeqW.png"/>
+</figure>
+</p>
+<p>可以看到常见的保护机制都是全开的，尤其是这个 <strong>Full RELRO</strong>，划重点后面会考🐶</p>
+<div class="anchor" id="关于-relro"></div>
+<h4 class="relative group">关于 RELRO 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e5%85%b3%e4%ba%8e-relro" style="text-decoration-line: none !important;">#</a></span>
+</h4>
+<blockquote>
+<p>设置符号重定向表格为只读或在程序启动时就解析并绑定所有动态符号，从而减少对GOT（Global Offset Table）攻击。</p>
+<p>RELRO为” Partial RELRO ”时，说明我们对GOT表具有写权限。</p>
+<p>RELRO为” Full RELRO ”时，说明我们对GOT表不具有写权限。</p>
+</blockquote>
+<p>其实就是我们不能够采用<strong>更改got表</strong>指向的函数来达成调用system等函数的getshell方式</p>
+<p>有同学可能会疑惑，好像我们平时getshell也不常用更改got表的方法啊，其实这只是你刚刚好比较少碰到需要用到<strong>got表覆写漏洞</strong>的题目，当我们发现一个让我们能够<strong>任意地址写</strong>的漏洞时，我们就可以直接将puts、printf等函数的got表改为system，然后让他们以**" ;/bin/sh; “**为参数，就可以getshell了，还是比直接构造ROP链来getshell要方便一些的</p>
+<div class="anchor" id="ida-查看"></div>
+<h3 class="relative group">IDA 查看 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#ida-%e6%9f%a5%e7%9c%8b" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<p>checksec 完就直接将二进制文件拖入ida，<strong>Tab</strong>或者<strong>F5</strong>查看伪代码，先看看main函数：</p>
+<p>
+<figure>
+<img alt="image-20230719015745554" class="my-0 rounded-md" src="https://s2.loli.net/2023/07/19/jkK7UIhxcyEACPH.png"/>
+</figure>
+</p>
+<p>看来我们的分析主要就集中在这个run函数了，点击进入run函数查看伪代码：</p>
+<p>
+<figure>
+<img alt="image-20230719020648147" class="my-0 rounded-md" src="https://s2.loli.net/2023/07/19/DWbcxeGHn38gEdo.png"/>
+</figure>
+</p>
+<ol>
+<li>有一个exit函数，不知道有什么用。</li>
+</ol>
+<p>如果这道题没有开full RELRO保护的话，我们可以改exit的got表来跳转后门函数（如果有的话）或者我们的shellcode地址,</p>
+<p>不过在这道题里，这一整个判断语句好像真的没什么用😴</p>
+<ol start="2">
+<li>
+<p>后面出现了 <code>printf</code>函数，而且有明显的格式化字符串漏洞，与题目fmt相对应。</p>
+</li>
+<li>
+<p>这里还有一次格式化字符串漏洞，可以好好构思一下怎么用好这两次fmtstr漏洞</p>
+</li>
+<li>
+<p>一般fmtstr漏洞分为3步：</p>
+</li>
+</ol>
+<p>（1）泄露相关数据（计算libcbase ，计算函数偏移值，得到 canary 的值）</p>
+<p>（2）覆写got表 / 填shellcode / 构造rop链;</p>
+<p>（3）调用修改后的got函数 / 执行shellcode / 更改ret指令指向的地址</p>
+<div class="anchor" id="漏洞利用分析"></div>
+<h3 class="relative group">漏洞利用分析 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e6%bc%8f%e6%b4%9e%e5%88%a9%e7%94%a8%e5%88%86%e6%9e%90" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<p>这道题目前来看应该可以通过fmtstr漏洞来实现任意地址写，不够由于有80个字符的限制，我们可能需要多利用几次才能够完成第二步。</p>
+<p>由于开了NX保护，所以执行shellcode应该不可以了，不过我们也可以vmmap看看：</p>
+<p>
+<figure>
+<img alt="image-20230719030442030" class="my-0 rounded-md" src="https://s2.loli.net/2023/07/19/Le98jyBc2OhgIXx.png"/>
+</figure>
+</p>
+<p>确实没有既可写有可执行的内存区域，got表也不能覆写，那我们只能来构造ROP链了。</p>
+<p>构造ROP链我们需要在栈上构造出如下的结构（图中黄色部分）：</p>
+<p>
+<figure>
+<img alt="image-20230719040706079" class="my-0 rounded-md" src="https://s2.loli.net/2023/07/19/XJuApTRQvjzO57b.png"/>
+</figure>
+</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"></th>
+<th style="text-align:left"></th>
+<th style="text-align:left"></th>
+<th style="text-align:left"></th>
+<th style="text-align:center"></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">原来的栈结构：</td>
+<td style="text-align:left">要构造的ROP链结构：</td>
+<td style="text-align:left"></td>
+<td style="text-align:center">偏移值</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">canary</td>
+<td style="text-align:left">canary</td>
+<td style="text-align:left">（这个canary不碍事）</td>
+<td style="text-align:center">17</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">rbp</td>
+<td style="text-align:left">rbp</td>
+<td style="text-align:left">（这个也不碍事）</td>
+<td style="text-align:center">18</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">原来的ret指向的地址</td>
+<td style="text-align:left">pop_rdi_ret</td>
+<td style="text-align:left">（64位调用函数时rdi中放第一个参数）</td>
+<td style="text-align:center">19</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">/</td>
+<td style="text-align:left">/bin/sh的地址</td>
+<td style="text-align:left">（system函数的参数）</td>
+<td style="text-align:center">20</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">/</td>
+<td style="text-align:left">ret 指令地址</td>
+<td style="text-align:left">（用来栈平衡的，可能会用到）</td>
+<td style="text-align:center">21</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">/</td>
+<td style="text-align:left">system函数的地址</td>
+<td style="text-align:left">（getshell）</td>
+<td style="text-align:center">22</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:center"></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># gdb插件下用tel指令查看栈的结构：</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">0x00007fffffffdc30│+0x0038: 0x0000000000616161 <span class="o">(</span><span class="s2">"aaa"</span>?<span class="o">)</span>	 ← <span class="nv">$rsi</span> <span class="c1"># 这是我们随手输入的值，即栈的输入位置，偏移为6</span>
+</span></span><span class="line"><span class="cl">0x00007fffffffdc38│+0x0040: 0x0000000000000000  					  <span class="c1"># 偏移为7</span>
+</span></span><span class="line"><span class="cl">0x00007fffffffdc40│+0x0048: 0x00007ffff7e16600  →  0x0000000000000000 <span class="c1"># 偏移为8</span>
+</span></span><span class="line"><span class="cl">0x00007fffffffdc48│+0x0050: 0x00007ffff7c8a62d  →  &lt;_IO_file_setbuf+13&gt; <span class="nb">test</span> rax, rax <span class="c1"># 偏移为9</span>
+</span></span><span class="line"><span class="cl">0x00007fffffffdc50│+0x0058: 0x00007ffff7e1a6a0  →  &lt;_IO_2_1_stderr_&gt;  ◂— 0xfbad2087 <span class="c1"># 偏移为10</span>
+</span></span><span class="line"><span class="cl">0x00007fffffffdc58│+0x0060: 0x00007ffff7c815ff  →  &lt;setbuffer+191&gt; <span class="nb">test</span> DWORD PTR <span class="o">[</span>rbx<span class="o">]</span>, 0x8000 <span class="c1"># 偏移为11</span>
+</span></span><span class="line"><span class="cl">0x00007fffffffdc60│+0x0068: 0x00007ffff7fc1000  →  0x00010102464c457f <span class="c1"># 偏移为12</span>
+</span></span><span class="line"><span class="cl">0x00007fffffffdc68│+0x0070: 0x0000000000000000						  <span class="c1"># 偏移为13</span>
+</span></span><span class="line"><span class="cl">0x00007fffffffdc70│+0x0078: 0x00007fffffffdc90  →  0x00007fffffffdca0  →  0x0000000000000001 <span class="c1"># 偏移为14</span>
+</span></span><span class="line"><span class="cl">0x00007fffffffdc78│+0x0080: 0x00007fffffffddb8  →  0x00007fffffffe122  →  0x61742f656d6f682f <span class="c1"># 偏移为15</span>
+</span></span><span class="line"><span class="cl">0x00007fffffffdc80│+0x0088: 0x00005555555553c6  →  &lt;main+0&gt; endbr64   <span class="c1"># 偏移为16</span>
+</span></span><span class="line"><span class="cl">0x00007fffffffdc88│+0x0090: 0x44d0ad3aacec0200  <span class="c1"># 尾部明显的/00字节，确定是cananry没错了，偏移为17</span>
+</span></span><span class="line"><span class="cl">0x00007fffffffdc90│+0x0098: 0x00007fffffffdca0  →  0x0000000000000001 <span class="c1"># rbp，偏移为18</span>
+</span></span><span class="line"><span class="cl">0x00007fffffffdc98│+0x00a0: 0x00005555555553e2  →  &lt;main+28&gt; mov eax, 0x0 <span class="c1"># 原来的ret地址，是一个main函数的指令，可以用来计算main函数的偏移值，偏移为19</span>
+</span></span><span class="line"><span class="cl">0x00007fffffffdca0│+0x00a8: 0x0000000000000001  <span class="c1"># 偏移为20</span>
+</span></span><span class="line"><span class="cl">0x00007fffffffdca8│+0x00b0: 0x00007ffff7c29d90  →  &lt;__libc_start_call_main+128&gt; mov edi, eax <span class="c1"># 偏移为21,</span>
+</span></span><span class="line"><span class="cl">0x00007fffffffdcb0│+0x00b8: 0x0000000000000000
+</span></span><span class="line"><span class="cl">0x00007fffffffdcb8│+0x00c0: 0x00005555555553c6  →  &lt;main+0&gt; endbr64 <span class="c1"># 偏移为22</span>
+</span></span></code></pre></div><p>关于偏移为10的<code>_IO_2_1_stderr\</code>函数，gdb-gef有时候不显示是哪一个函数，而gdb-pwndbg就会用显眼的其他颜色来显示：</p>
+<p>如下图中的紫色（不过我改了终端的颜色主题，应该会不太一样）</p>
+<p>所以建议大家把gdb的三个插件都下载下来，想用哪个用哪个🐶</p>
+<p>
+<figure>
+<img alt="image-20230719040203307" class="my-0 rounded-md" src="https://s2.loli.net/2023/07/19/39Jb8MzOB6AmU7d.png"/>
+</figure>
+</p>
 <p>wp如下:</p>
 <div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># encoding: utf-8</span>
 </span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
@@ -923,11 +1213,11 @@
 </div>
 </div>
 </a>
-<a class="min-w-full" href="/posts/wp/2023_04_ctf/2_tic-tac-toe-level-0_write_up/">
+<a class="min-w-full" href="/posts/wp/2023_04_w4ter/2_tic-tac-toe-level-0_write_up/">
 <div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
-<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/posts/wp/2023_04_ctf/2_tic-tac-toe-level-0_write_up/featured.jpg);"></div>
+<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/posts/wp/2023_04_w4ter/2_tic-tac-toe-level-0_write_up/featured.jpg);"></div>
 <div class="px-6 py-4">
-<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/wp/2023_04_ctf/2_tic-tac-toe-level-0_write_up/">PWN-Level 0 Tic-Tac-Toe </div>
+<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/wp/2023_04_w4ter/2_tic-tac-toe-level-0_write_up/">PWN-Level 0 Tic-Tac-Toe </div>
 <div class="text-sm text-neutral-500 dark:text-neutral-400">
 <div class="flex flex-row flex-wrap items-center">
 <time datetime="2023-07-05 00:00:00 +0000 UTC">July 5, 2023</time><span class="px-2 text-primary-500">·</span><span>828 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">2 分钟</span>
@@ -968,11 +1258,11 @@
 </div>
 </div>
 </a>
-<a class="min-w-full" href="/posts/wp/2023_04_ctf/3_nimgame-level-1_write_up/">
+<a class="min-w-full" href="/posts/wp/2023_04_w4ter/3_nimgame-level-1_write_up/">
 <div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
-<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/posts/wp/2023_04_ctf/3_nimgame-level-1_write_up/featured.jpg);"></div>
+<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/posts/wp/2023_04_w4ter/3_nimgame-level-1_write_up/featured.jpg);"></div>
 <div class="px-6 py-4">
-<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/wp/2023_04_ctf/3_nimgame-level-1_write_up/">PWN-Level 1 Nimgame</div>
+<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/wp/2023_04_w4ter/3_nimgame-level-1_write_up/">PWN-Level 1 Nimgame</div>
 <div class="text-sm text-neutral-500 dark:text-neutral-400">
 <div class="flex flex-row flex-wrap items-center">
 <time datetime="2023-07-05 00:00:00 +0000 UTC">July 5, 2023</time><span class="px-2 text-primary-500">·</span><span>223 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">1 分钟</span>

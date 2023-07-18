@@ -12,7 +12,7 @@
 <link>https://ta0lve.github.io/posts/wp/2023_07_hws/fmt/</link>
 <pubDate>Tue, 18 Jul 2023 00:00:00 +0000</pubDate>
 <guid>https://ta0lve.github.io/posts/wp/2023_07_hws/fmt/</guid>
-<description>wp如下: # encoding: utf-8 from pwn import * from LibcSearcher import * is_debug = 1 is_remote = 0 is_ret = 1 if is_debug: context(os=&amp;#39;linux&amp;#39;, arch=&amp;#39;amd64&amp;#39;, log_level=&amp;#39;debug&amp;#39;)</description>
+<description>前言： # 本文是HWS 线上赛的pwn方向fmt题目的wp，写得</description>
 <media:content url="https://ta0lve.github.io/posts/wp/2023_07_hws/fmt/featured.jpg" xmlns:media="http://search.yahoo.com/mrss/"/>
 </item>
 <item>
@@ -72,75 +72,75 @@
 </item>
 <item>
 <title>Crypto-GZ RSA</title>
-<link>https://ta0lve.github.io/posts/wp/2023_04_ctf/6_gz-rsa_write_up/</link>
+<link>https://ta0lve.github.io/posts/wp/2023_04_w4ter/6_gz-rsa_write_up/</link>
 <pubDate>Wed, 05 Jul 2023 00:00:00 +0000</pubDate>
-<guid>https://ta0lve.github.io/posts/wp/2023_04_ctf/6_gz-rsa_write_up/</guid>
+<guid>https://ta0lve.github.io/posts/wp/2023_04_w4ter/6_gz-rsa_write_up/</guid>
 <description>&lt;p&gt;&lt;strong&gt;此文章仅限战队内部成员阅读&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;路过的师傅们看看远处的wp吧：&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://ta0lve.github.io/posts/wp/2023_06_ciscn/"   target="_blank"&gt;
     2023 ciscn 初赛 · ta0lve&lt;/a&gt;&lt;/p&gt;</description>
-<media:content url="https://ta0lve.github.io/posts/wp/2023_04_ctf/6_gz-rsa_write_up/featured.jpg" xmlns:media="http://search.yahoo.com/mrss/"/>
+<media:content url="https://ta0lve.github.io/posts/wp/2023_04_w4ter/6_gz-rsa_write_up/featured.jpg" xmlns:media="http://search.yahoo.com/mrss/"/>
 </item>
 <item>
 <title>misc-Chisato</title>
-<link>https://ta0lve.github.io/posts/wp/2023_04_ctf/10_chisato_write_up/</link>
+<link>https://ta0lve.github.io/posts/wp/2023_04_w4ter/10_chisato_write_up/</link>
 <pubDate>Wed, 05 Jul 2023 00:00:00 +0000</pubDate>
-<guid>https://ta0lve.github.io/posts/wp/2023_04_ctf/10_chisato_write_up/</guid>
+<guid>https://ta0lve.github.io/posts/wp/2023_04_w4ter/10_chisato_write_up/</guid>
 <description>&lt;p&gt;&lt;strong&gt;此文章仅限战队内部成员阅读&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;路过的师傅们看看远处的wp吧：&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://ta0lve.github.io/posts/wp/2023_06_ciscn/"   target="_blank"&gt;
     2023 ciscn 初赛 · ta0lve&lt;/a&gt;&lt;/p&gt;</description>
-<media:content url="https://ta0lve.github.io/posts/wp/2023_04_ctf/10_chisato_write_up/featured.jpg" xmlns:media="http://search.yahoo.com/mrss/"/>
+<media:content url="https://ta0lve.github.io/posts/wp/2023_04_w4ter/10_chisato_write_up/featured.jpg" xmlns:media="http://search.yahoo.com/mrss/"/>
 </item>
 <item>
 <title>misc-Shadow</title>
-<link>https://ta0lve.github.io/posts/wp/2023_04_ctf/8_shadow_write_up/</link>
+<link>https://ta0lve.github.io/posts/wp/2023_04_w4ter/8_shadow_write_up/</link>
 <pubDate>Wed, 05 Jul 2023 00:00:00 +0000</pubDate>
-<guid>https://ta0lve.github.io/posts/wp/2023_04_ctf/8_shadow_write_up/</guid>
+<guid>https://ta0lve.github.io/posts/wp/2023_04_w4ter/8_shadow_write_up/</guid>
 <description>&lt;p&gt;&lt;strong&gt;此文章仅限战队内部成员阅读&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;路过的师傅们看看远处的wp吧：&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://ta0lve.github.io/posts/wp/2023_06_ciscn/"   target="_blank"&gt;
     2023 ciscn 初赛 · ta0lve&lt;/a&gt;&lt;/p&gt;</description>
-<media:content url="https://ta0lve.github.io/posts/wp/2023_04_ctf/8_shadow_write_up/featured.jpg" xmlns:media="http://search.yahoo.com/mrss/"/>
+<media:content url="https://ta0lve.github.io/posts/wp/2023_04_w4ter/8_shadow_write_up/featured.jpg" xmlns:media="http://search.yahoo.com/mrss/"/>
 </item>
 <item>
 <title>misc-USB Hacker</title>
-<link>https://ta0lve.github.io/posts/wp/2023_04_ctf/9_usb-hacker_write_up/</link>
+<link>https://ta0lve.github.io/posts/wp/2023_04_w4ter/9_usb-hacker_write_up/</link>
 <pubDate>Wed, 05 Jul 2023 00:00:00 +0000</pubDate>
-<guid>https://ta0lve.github.io/posts/wp/2023_04_ctf/9_usb-hacker_write_up/</guid>
+<guid>https://ta0lve.github.io/posts/wp/2023_04_w4ter/9_usb-hacker_write_up/</guid>
 <description>&lt;p&gt;&lt;strong&gt;此文章仅限战队内部成员阅读&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;路过的师傅们看看远处的wp吧：&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://ta0lve.github.io/posts/wp/2023_06_ciscn/"   target="_blank"&gt;
     2023 ciscn 初赛 · ta0lve&lt;/a&gt;&lt;/p&gt;</description>
-<media:content url="https://ta0lve.github.io/posts/wp/2023_04_ctf/9_usb-hacker_write_up/featured.jpg" xmlns:media="http://search.yahoo.com/mrss/"/>
+<media:content url="https://ta0lve.github.io/posts/wp/2023_04_w4ter/9_usb-hacker_write_up/featured.jpg" xmlns:media="http://search.yahoo.com/mrss/"/>
 </item>
 <item>
 <title>misc-W4ter Disk</title>
-<link>https://ta0lve.github.io/posts/wp/2023_04_ctf/11_w4ter-disk_write_up/</link>
+<link>https://ta0lve.github.io/posts/wp/2023_04_w4ter/11_w4ter-disk_write_up/</link>
 <pubDate>Wed, 05 Jul 2023 00:00:00 +0000</pubDate>
-<guid>https://ta0lve.github.io/posts/wp/2023_04_ctf/11_w4ter-disk_write_up/</guid>
+<guid>https://ta0lve.github.io/posts/wp/2023_04_w4ter/11_w4ter-disk_write_up/</guid>
 <description>&lt;p&gt;&lt;strong&gt;此文章仅限战队内部成员阅读&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;路过的师傅们看看远处的wp吧：&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://ta0lve.github.io/posts/wp/2023_06_ciscn/"   target="_blank"&gt;
     2023 ciscn 初赛 · ta0lve&lt;/a&gt;&lt;/p&gt;</description>
-<media:content url="https://ta0lve.github.io/posts/wp/2023_04_ctf/11_w4ter-disk_write_up/featured.jpg" xmlns:media="http://search.yahoo.com/mrss/"/>
+<media:content url="https://ta0lve.github.io/posts/wp/2023_04_w4ter/11_w4ter-disk_write_up/featured.jpg" xmlns:media="http://search.yahoo.com/mrss/"/>
 </item>
 <item>
 <title>misc-Weird Letter</title>
-<link>https://ta0lve.github.io/posts/wp/2023_04_ctf/7_weird-letter_write_up/</link>
+<link>https://ta0lve.github.io/posts/wp/2023_04_w4ter/7_weird-letter_write_up/</link>
 <pubDate>Wed, 05 Jul 2023 00:00:00 +0000</pubDate>
-<guid>https://ta0lve.github.io/posts/wp/2023_04_ctf/7_weird-letter_write_up/</guid>
+<guid>https://ta0lve.github.io/posts/wp/2023_04_w4ter/7_weird-letter_write_up/</guid>
 <description>&lt;p&gt;&lt;strong&gt;此文章仅限战队内部成员阅读&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;路过的师傅们看看远处的wp吧：&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://ta0lve.github.io/posts/wp/2023_06_ciscn/"   target="_blank"&gt;
     2023 ciscn 初赛 · ta0lve&lt;/a&gt;&lt;/p&gt;</description>
-<media:content url="https://ta0lve.github.io/posts/wp/2023_04_ctf/7_weird-letter_write_up/featured.jpg" xmlns:media="http://search.yahoo.com/mrss/"/>
+<media:content url="https://ta0lve.github.io/posts/wp/2023_04_w4ter/7_weird-letter_write_up/featured.jpg" xmlns:media="http://search.yahoo.com/mrss/"/>
 </item>
 <item>
 <title>PWN-Level 0 Tic-Tac-Toe </title>
-<link>https://ta0lve.github.io/posts/wp/2023_04_ctf/2_tic-tac-toe-level-0_write_up/</link>
+<link>https://ta0lve.github.io/posts/wp/2023_04_w4ter/2_tic-tac-toe-level-0_write_up/</link>
 <pubDate>Wed, 05 Jul 2023 00:00:00 +0000</pubDate>
-<guid>https://ta0lve.github.io/posts/wp/2023_04_ctf/2_tic-tac-toe-level-0_write_up/</guid>
+<guid>https://ta0lve.github.io/posts/wp/2023_04_w4ter/2_tic-tac-toe-level-0_write_up/</guid>
 <description>&lt;p&gt;&lt;strong&gt;此文章仅限战队内部成员阅读&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;路过的师傅们看看远处的wp吧：&lt;/p&gt;
 
@@ -319,24 +319,24 @@
     
 &lt;/section&gt;
 &lt;hr&gt;</description>
-<media:content url="https://ta0lve.github.io/posts/wp/2023_04_ctf/2_tic-tac-toe-level-0_write_up/featured.jpg" xmlns:media="http://search.yahoo.com/mrss/"/>
+<media:content url="https://ta0lve.github.io/posts/wp/2023_04_w4ter/2_tic-tac-toe-level-0_write_up/featured.jpg" xmlns:media="http://search.yahoo.com/mrss/"/>
 </item>
 <item>
 <title>PWN-Level 1 Nimgame</title>
-<link>https://ta0lve.github.io/posts/wp/2023_04_ctf/3_nimgame-level-1_write_up/</link>
+<link>https://ta0lve.github.io/posts/wp/2023_04_w4ter/3_nimgame-level-1_write_up/</link>
 <pubDate>Wed, 05 Jul 2023 00:00:00 +0000</pubDate>
-<guid>https://ta0lve.github.io/posts/wp/2023_04_ctf/3_nimgame-level-1_write_up/</guid>
+<guid>https://ta0lve.github.io/posts/wp/2023_04_w4ter/3_nimgame-level-1_write_up/</guid>
 <description>&lt;p&gt;&lt;strong&gt;此文章仅限战队内部成员阅读&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;路过的师傅们看看远处的wp吧：&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://ta0lve.github.io/posts/wp/2023_06_ciscn/"   target="_blank"&gt;
     2023 ciscn 初赛 · ta0lve&lt;/a&gt;&lt;/p&gt;</description>
-<media:content url="https://ta0lve.github.io/posts/wp/2023_04_ctf/3_nimgame-level-1_write_up/featured.jpg" xmlns:media="http://search.yahoo.com/mrss/"/>
+<media:content url="https://ta0lve.github.io/posts/wp/2023_04_w4ter/3_nimgame-level-1_write_up/featured.jpg" xmlns:media="http://search.yahoo.com/mrss/"/>
 </item>
 <item>
 <title>PWN-What is NetCat</title>
-<link>https://ta0lve.github.io/posts/wp/2023_04_ctf/1_what-is-netcat_write_up/</link>
+<link>https://ta0lve.github.io/posts/wp/2023_04_w4ter/1_what-is-netcat_write_up/</link>
 <pubDate>Wed, 05 Jul 2023 00:00:00 +0000</pubDate>
-<guid>https://ta0lve.github.io/posts/wp/2023_04_ctf/1_what-is-netcat_write_up/</guid>
+<guid>https://ta0lve.github.io/posts/wp/2023_04_w4ter/1_what-is-netcat_write_up/</guid>
 <description>&lt;p&gt;&lt;strong&gt;此文章仅限战队内部成员阅读&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;路过的师傅们看看远处的wp吧：&lt;/p&gt;
 &lt;hr&gt;
@@ -515,37 +515,37 @@
         
     
 &lt;/section&gt;</description>
-<media:content url="https://ta0lve.github.io/posts/wp/2023_04_ctf/1_what-is-netcat_write_up/featured.jpg" xmlns:media="http://search.yahoo.com/mrss/"/>
+<media:content url="https://ta0lve.github.io/posts/wp/2023_04_w4ter/1_what-is-netcat_write_up/featured.jpg" xmlns:media="http://search.yahoo.com/mrss/"/>
 </item>
 <item>
 <title>reverse-Lazy Puts</title>
-<link>https://ta0lve.github.io/posts/wp/2023_04_ctf/4_lazy-puts_write_up/</link>
+<link>https://ta0lve.github.io/posts/wp/2023_04_w4ter/4_lazy-puts_write_up/</link>
 <pubDate>Wed, 05 Jul 2023 00:00:00 +0000</pubDate>
-<guid>https://ta0lve.github.io/posts/wp/2023_04_ctf/4_lazy-puts_write_up/</guid>
+<guid>https://ta0lve.github.io/posts/wp/2023_04_w4ter/4_lazy-puts_write_up/</guid>
 <description>&lt;p&gt;&lt;strong&gt;此文章仅限战队内部成员阅读&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;路过的师傅们看看远处的wp吧：&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://ta0lve.github.io/posts/wp/2023_06_ciscn/"   target="_blank"&gt;
     2023 ciscn 初赛 · ta0lve&lt;/a&gt;&lt;/p&gt;</description>
-<media:content url="https://ta0lve.github.io/posts/wp/2023_04_ctf/4_lazy-puts_write_up/featured.jpg" xmlns:media="http://search.yahoo.com/mrss/"/>
+<media:content url="https://ta0lve.github.io/posts/wp/2023_04_w4ter/4_lazy-puts_write_up/featured.jpg" xmlns:media="http://search.yahoo.com/mrss/"/>
 </item>
 <item>
 <title>reverse-Oh My Python</title>
-<link>https://ta0lve.github.io/posts/wp/2023_04_ctf/5_oh-my-python_write_up/</link>
+<link>https://ta0lve.github.io/posts/wp/2023_04_w4ter/5_oh-my-python_write_up/</link>
 <pubDate>Wed, 05 Jul 2023 00:00:00 +0000</pubDate>
-<guid>https://ta0lve.github.io/posts/wp/2023_04_ctf/5_oh-my-python_write_up/</guid>
+<guid>https://ta0lve.github.io/posts/wp/2023_04_w4ter/5_oh-my-python_write_up/</guid>
 <description>&lt;p&gt;&lt;strong&gt;此文章仅限战队内部成员阅读&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;路过的师傅们看看远处的wp吧：&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://ta0lve.github.io/posts/wp/2023_06_ciscn/"   target="_blank"&gt;
     2023 ciscn 初赛 · ta0lve&lt;/a&gt;&lt;/p&gt;</description>
-<media:content url="https://ta0lve.github.io/posts/wp/2023_04_ctf/5_oh-my-python_write_up/featured.jpg" xmlns:media="http://search.yahoo.com/mrss/"/>
+<media:content url="https://ta0lve.github.io/posts/wp/2023_04_w4ter/5_oh-my-python_write_up/featured.jpg" xmlns:media="http://search.yahoo.com/mrss/"/>
 </item>
 <item>
 <title>An Encrypted Post</title>
-<link>https://ta0lve.github.io/posts/wp/2023_04_ctf/111/</link>
+<link>https://ta0lve.github.io/posts/wp/2023_04_w4ter/111/</link>
 <pubDate>Tue, 04 Jul 2023 00:00:00 +0000</pubDate>
-<guid>https://ta0lve.github.io/posts/wp/2023_04_ctf/111/</guid>
+<guid>https://ta0lve.github.io/posts/wp/2023_04_w4ter/111/</guid>
 <description>&lt;p&gt;Believe it or not , this is just a **test **. [doge]&lt;/p&gt;</description>
-<media:content url="https://ta0lve.github.io/posts/wp/2023_04_ctf/111/featured.jpg" xmlns:media="http://search.yahoo.com/mrss/"/>
+<media:content url="https://ta0lve.github.io/posts/wp/2023_04_w4ter/111/featured.jpg" xmlns:media="http://search.yahoo.com/mrss/"/>
 </item>
 <item>
 <title/>

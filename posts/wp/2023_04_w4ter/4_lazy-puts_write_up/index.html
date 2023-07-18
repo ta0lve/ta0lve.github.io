@@ -13,10 +13,10 @@
 <meta content="zh-cn" http-equiv="content-language"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta content="ie=edge" http-equiv="X-UA-Compatible"/>
-<title>misc-Shadow · ta0lve</title>
-<meta content="misc-Shadow · ta0lve" name="title"/>
-<meta content="CTF, misc, " name="keywords"/>
-<link href="https://ta0lve.github.io/posts/wp/2023_04_ctf/8_shadow_write_up/" rel="canonical"/>
+<title>reverse-Lazy Puts · ta0lve</title>
+<meta content="reverse-Lazy Puts · ta0lve" name="title"/>
+<meta content="CTF, reverse, " name="keywords"/>
+<link href="https://ta0lve.github.io/posts/wp/2023_04_w4ter/4_lazy-puts_write_up/" rel="canonical"/>
 <link href="/css/main.bundle.min.c6116b9ed1c907a8c0eb015f377d3eecc07e448d75729e31fc3de5881465c6c172ba9fa9a6800c030116caf2a110d92242bb816639484ca791f7cd107a8d49b5.css" integrity="sha512-xhFrntHJB6jA6wFfN30+7MB+RI11cp4x/D3liBRlxsFyup+ppoAMAwEWyvKhENkiQruBZjlITKeR980Qeo1JtQ==" rel="stylesheet" type="text/css"/>
 <script integrity="sha512-UWoWdFvqWpvQERONJUzA/TlzzVXObhXz3sdj58fCx0SPj+e1TMqBHLghsMfhLNFhyqzh3XlKw9NNQJN8vMnuEg==" src="/js/appearance.min.516a16745bea5a9bd011138d254cc0fd3973cd55ce6e15f3dec763e7c7c2c7448f8fe7b54cca811cb821b0c7e12cd161caace1dd794ac3d34d40937cbcc9ee12.js" type="text/javascript"></script>
 <script data-copied="" data-copy="" defer="" id="script-bundle" integrity="sha512-PdzwT1sNTDL3LnJtPBLuvM2MPJ+dqpoTQUgIiV3grh4c3d2mhJaA1b2W27YNCx4LJMKfXIPlYx5V5+a8AgFUkA==" src="/js/main.bundle.min.3ddcf04f5b0d4c32f72e726d3c12eebccd8c3c9f9daa9a13414808895de0ae1e1cdddda6849680d5bd96dbb60d0b1e0b24c29f5c83e5631e55e7e6bc02015490.js" type="text/javascript"></script>
@@ -25,19 +25,19 @@
 <link href="/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="/site.webmanifest" rel="manifest"/>
-<meta content="misc-Shadow" property="og:title"/>
+<meta content="reverse-Lazy Puts" property="og:title"/>
 <meta content="此文章仅限战队内部成员阅读
 路过的师傅们看看远处的wp吧：
 
     2023 ciscn 初赛 · ta0lve" property="og:description"/>
 <meta content="article" property="og:type"/>
-<meta content="https://ta0lve.github.io/posts/wp/2023_04_ctf/8_shadow_write_up/" property="og:url"/><meta content="https://ta0lve.github.io/posts/wp/2023_04_ctf/8_shadow_write_up/featured.jpg" property="og:image"/><meta content="posts" property="article:section"/>
+<meta content="https://ta0lve.github.io/posts/wp/2023_04_w4ter/4_lazy-puts_write_up/" property="og:url"/><meta content="https://ta0lve.github.io/posts/wp/2023_04_w4ter/4_lazy-puts_write_up/featured.jpg" property="og:image"/><meta content="posts" property="article:section"/>
 <meta content="2023-07-05T00:00:00+00:00" property="article:published_time"/>
 <meta content="2023-07-05T00:00:00+00:00" property="article:modified_time"/>
-<meta content="https://ta0lve.github.io/posts/wp/2023_04_ctf/6_gz-rsa_write_up/" property="og:see_also"/><meta content="https://ta0lve.github.io/posts/wp/2023_04_ctf/10_chisato_write_up/" property="og:see_also"/><meta content="https://ta0lve.github.io/posts/wp/2023_04_ctf/9_usb-hacker_write_up/" property="og:see_also"/><meta content="https://ta0lve.github.io/posts/wp/2023_04_ctf/11_w4ter-disk_write_up/" property="og:see_also"/><meta content="https://ta0lve.github.io/posts/wp/2023_04_ctf/7_weird-letter_write_up/" property="og:see_also"/>
+<meta content="https://ta0lve.github.io/posts/wp/2023_04_w4ter/6_gz-rsa_write_up/" property="og:see_also"/><meta content="https://ta0lve.github.io/posts/wp/2023_04_w4ter/10_chisato_write_up/" property="og:see_also"/><meta content="https://ta0lve.github.io/posts/wp/2023_04_w4ter/8_shadow_write_up/" property="og:see_also"/><meta content="https://ta0lve.github.io/posts/wp/2023_04_w4ter/9_usb-hacker_write_up/" property="og:see_also"/><meta content="https://ta0lve.github.io/posts/wp/2023_04_w4ter/11_w4ter-disk_write_up/" property="og:see_also"/><meta content="https://ta0lve.github.io/posts/wp/2023_04_w4ter/7_weird-letter_write_up/" property="og:see_also"/>
 <meta content="summary_large_image" name="twitter:card"/>
-<meta content="https://ta0lve.github.io/posts/wp/2023_04_ctf/8_shadow_write_up/featured.jpg" name="twitter:image"/>
-<meta content="misc-Shadow" name="twitter:title"/>
+<meta content="https://ta0lve.github.io/posts/wp/2023_04_w4ter/4_lazy-puts_write_up/featured.jpg" name="twitter:image"/>
+<meta content="reverse-Lazy Puts" name="twitter:title"/>
 <meta content="此文章仅限战队内部成员阅读
 路过的师傅们看看远处的wp吧：
 
@@ -47,12 +47,12 @@
     "@context": "https://schema.org",
     "@type": "Article",
     "articleSection": "Posts",
-    "name": "misc-Shadow",
-    "headline": "misc-Shadow",
+    "name": "reverse-Lazy Puts",
+    "headline": "reverse-Lazy Puts",
     
     "abstract": "\u003cp\u003e\u003cstrong\u003e此文章仅限战队内部成员阅读\u003c\/strong\u003e\u003c\/p\u003e\n\u003cp\u003e路过的师傅们看看远处的wp吧：\u003c\/p\u003e\n\u003cp\u003e\u003ca href=\u0022https:\/\/ta0lve.github.io\/posts\/wp\/2023_06_ciscn\/\u0022   target=\u0022_blank\u0022\u003e\n    2023 ciscn 初赛 · ta0lve\u003c\/a\u003e\u003c\/p\u003e",
     "inLanguage": "zh-cn",
-    "url" : "https:\/\/ta0lve.github.io\/posts\/wp\/2023_04_ctf\/8_shadow_write_up\/",
+    "url" : "https:\/\/ta0lve.github.io\/posts\/wp\/2023_04_w4ter\/4_lazy-puts_write_up\/",
     "author" : {
       "@type": "Person",
       "name": "ta0lve"
@@ -63,10 +63,10 @@
     
     "dateModified": "2023-07-05T00:00:00\u002b00:00",
     
-    "keywords": ["CTF","misc"],
+    "keywords": ["CTF","reverse"],
     
     "mainEntityOfPage": "true",
-    "wordCount": "178"
+    "wordCount": "84"
   }]
   </script>
 <meta content="ta0lve" name="author"/>
@@ -247,7 +247,7 @@
 <main class="grow" id="main-content">
 <article>
 <div class="h-[150px] md:h-[200px]" id="hero"></div>
-<div class="fixed inset-x-0 top-0 h-[800px] single_hero_background nozoom" style="background-image:url(/posts/wp/2023_04_ctf/8_shadow_write_up/featured.jpg);">
+<div class="fixed inset-x-0 top-0 h-[800px] single_hero_background nozoom" style="background-image:url(/posts/wp/2023_04_w4ter/4_lazy-puts_write_up/featured.jpg);">
 <div class="absolute inset-0 bg-gradient-to-t from-neutral dark:from-neutral-800 to-transparent mix-blend-normal">
 </div>
 <div class="absolute inset-0 opacity-60 bg-gradient-to-t from-neutral dark:from-neutral-800 to-neutral-100 dark:to-neutral-800 mix-blend-normal">
@@ -262,15 +262,15 @@
 <a class="hover:underline decoration-neutral-300 dark:underline-neutral-600" href="/posts/">Posts</a><span class="px-1 text-primary-500">/</span>
 </li>
 <li class="inline hidden">
-<a class="hover:underline decoration-neutral-300 dark:underline-neutral-600" href="/posts/wp/2023_04_ctf/8_shadow_write_up/">misc-Shadow</a><span class="px-1 text-primary-500">/</span>
+<a class="hover:underline decoration-neutral-300 dark:underline-neutral-600" href="/posts/wp/2023_04_w4ter/4_lazy-puts_write_up/">reverse-Lazy Puts</a><span class="px-1 text-primary-500">/</span>
 </li>
 </ol>
 <h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">
-      misc-Shadow
+      reverse-Lazy Puts
     </h1>
 <div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-07-05 00:00:00 +0000 UTC">July 5, 2023</time><span class="px-2 text-primary-500">·</span><span>178 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">1 分钟</span>
+<time datetime="2023-07-05 00:00:00 +0000 UTC">July 5, 2023</time><span class="px-2 text-primary-500">·</span><span>84 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">1 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
 <span class="mr-2" onclick="window.open(&quot;/categories/wp/&quot;,'_self');" style="margin-top:0.5rem">
@@ -287,10 +287,10 @@
   </span>
 </span>
 </span>
-<span class="mr-2" onclick="window.open(&quot;/tags/misc/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="mr-2" onclick="window.open(&quot;/tags/reverse/&quot;,'_self');" style="margin-top:0.5rem">
 <span class="flex">
 <span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    misc
+    reverse
   </span>
 </span>
 </span>
@@ -335,55 +335,55 @@
         My first series of CTF wp - This article is part of a series.
     </summary>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/posts/wp/2023_04_ctf/1_what-is-netcat_write_up/">
+<a href="https://ta0lve.github.io/posts/wp/2023_04_w4ter/1_what-is-netcat_write_up/">
             Part 1: PWN-What is NetCat
         </a>
 </div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/posts/wp/2023_04_ctf/2_tic-tac-toe-level-0_write_up/">
+<a href="https://ta0lve.github.io/posts/wp/2023_04_w4ter/2_tic-tac-toe-level-0_write_up/">
             Part 2: PWN-Level 0 Tic-Tac-Toe 
         </a>
 </div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/posts/wp/2023_04_ctf/3_nimgame-level-1_write_up/">
+<a href="https://ta0lve.github.io/posts/wp/2023_04_w4ter/3_nimgame-level-1_write_up/">
             Part 3: PWN-Level 1 Nimgame
         </a>
 </div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/posts/wp/2023_04_ctf/4_lazy-puts_write_up/">
-            Part 4: reverse-Lazy Puts
-        </a>
-</div>
+        Part 4: This Article
+    </div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/posts/wp/2023_04_ctf/5_oh-my-python_write_up/">
+<a href="https://ta0lve.github.io/posts/wp/2023_04_w4ter/5_oh-my-python_write_up/">
             Part 5: reverse-Oh My Python
         </a>
 </div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/posts/wp/2023_04_ctf/6_gz-rsa_write_up/">
+<a href="https://ta0lve.github.io/posts/wp/2023_04_w4ter/6_gz-rsa_write_up/">
             Part 6: Crypto-GZ RSA
         </a>
 </div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-        Part 8: This Article
-    </div>
+<a href="https://ta0lve.github.io/posts/wp/2023_04_w4ter/8_shadow_write_up/">
+            Part 8: misc-Shadow
+        </a>
+</div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/posts/wp/2023_04_ctf/7_weird-letter_write_up/">
+<a href="https://ta0lve.github.io/posts/wp/2023_04_w4ter/7_weird-letter_write_up/">
             Part 8: misc-Weird Letter
         </a>
 </div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/posts/wp/2023_04_ctf/9_usb-hacker_write_up/">
+<a href="https://ta0lve.github.io/posts/wp/2023_04_w4ter/9_usb-hacker_write_up/">
             Part 9: misc-USB Hacker
         </a>
 </div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/posts/wp/2023_04_ctf/10_chisato_write_up/">
+<a href="https://ta0lve.github.io/posts/wp/2023_04_w4ter/10_chisato_write_up/">
             Part 10: misc-Chisato
         </a>
 </div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/posts/wp/2023_04_ctf/11_w4ter-disk_write_up/">
+<a href="https://ta0lve.github.io/posts/wp/2023_04_w4ter/11_w4ter-disk_write_up/">
             Part 11: misc-W4ter Disk
         </a>
 </div>
@@ -400,84 +400,84 @@
 <input class="hugo-encryptor-input" placeholder="请输入密码"/>
 <input class="hugo-encryptor-button" onclick="_click_handler(this)" type="button" value="点击验证"/>
 </div>
-<div class="hugo-encryptor-cipher-text" style="display: none;">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</div>
+<div class="hugo-encryptor-cipher-text" style="display: none;">l2JPLEO32BC9w43tsqtzGeyRiUtbA9EMLpcL3Q96nPyVyh45ujWW3pgIaKEkA+jNooZUjWBDe85luqjq5q9UEf8boN2Zx3QAk9GJ0xFr9bHm1u05XPJmkr6A+mes9S9of2olc7RQNXSbyda7Pp/Bi1BifXhk1VDScvk0ZYZKD9z1sGd/tfm2sVCOONWTKK2ffd7g6LTovtWoP7XsTwIo26lkHzxX3YizVQ37LJWwVaelzd/eBh44zD+38oZ7klw1RKcXgW9tW9L0HPq4i1w5huCpQagM7wiksyBJAWtxaE/PC3JX2nS89MPw9n/E26EwigQQa/TCSyiv4Pxmo4hn1hA5F0f3uz0rYx6Gk4Y6i7Tqgr6EDQCPGVO3iY+vJ5Vv</div>
 </div>
 <details class="mt-2 mb-5 overflow-hidden rounded-lg ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5" style="margin-left:0px">
 <summary class="py-1 text-lg font-semibold cursor-pointer bg-primary-200 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-primary-800 dark:text-neutral-100">
         My first series of CTF wp - This article is part of a series.
     </summary>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/posts/wp/2023_04_ctf/1_what-is-netcat_write_up/">
+<a href="https://ta0lve.github.io/posts/wp/2023_04_w4ter/1_what-is-netcat_write_up/">
             Part 1: PWN-What is NetCat
         </a>
 </div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/posts/wp/2023_04_ctf/2_tic-tac-toe-level-0_write_up/">
+<a href="https://ta0lve.github.io/posts/wp/2023_04_w4ter/2_tic-tac-toe-level-0_write_up/">
             Part 2: PWN-Level 0 Tic-Tac-Toe 
         </a>
 </div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/posts/wp/2023_04_ctf/3_nimgame-level-1_write_up/">
+<a href="https://ta0lve.github.io/posts/wp/2023_04_w4ter/3_nimgame-level-1_write_up/">
             Part 3: PWN-Level 1 Nimgame
         </a>
 </div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/posts/wp/2023_04_ctf/4_lazy-puts_write_up/">
-            Part 4: reverse-Lazy Puts
-        </a>
-</div>
+        Part 4: This Article
+    </div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/posts/wp/2023_04_ctf/5_oh-my-python_write_up/">
+<a href="https://ta0lve.github.io/posts/wp/2023_04_w4ter/5_oh-my-python_write_up/">
             Part 5: reverse-Oh My Python
         </a>
 </div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/posts/wp/2023_04_ctf/6_gz-rsa_write_up/">
+<a href="https://ta0lve.github.io/posts/wp/2023_04_w4ter/6_gz-rsa_write_up/">
             Part 6: Crypto-GZ RSA
         </a>
 </div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-        Part 8: This Article
-    </div>
+<a href="https://ta0lve.github.io/posts/wp/2023_04_w4ter/8_shadow_write_up/">
+            Part 8: misc-Shadow
+        </a>
+</div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/posts/wp/2023_04_ctf/7_weird-letter_write_up/">
+<a href="https://ta0lve.github.io/posts/wp/2023_04_w4ter/7_weird-letter_write_up/">
             Part 8: misc-Weird Letter
         </a>
 </div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/posts/wp/2023_04_ctf/9_usb-hacker_write_up/">
+<a href="https://ta0lve.github.io/posts/wp/2023_04_w4ter/9_usb-hacker_write_up/">
             Part 9: misc-USB Hacker
         </a>
 </div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/posts/wp/2023_04_ctf/10_chisato_write_up/">
+<a href="https://ta0lve.github.io/posts/wp/2023_04_w4ter/10_chisato_write_up/">
             Part 10: misc-Chisato
         </a>
 </div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/posts/wp/2023_04_ctf/11_w4ter-disk_write_up/">
+<a href="https://ta0lve.github.io/posts/wp/2023_04_w4ter/11_w4ter-disk_write_up/">
             Part 11: misc-W4ter Disk
         </a>
 </div>
 </details>
 </div>
 <script>
-        var oid = "views_posts\\wp\\2023_04_CTF\\8_Shadow_write_up\\index.md"
-        var oid_likes = "likes_posts\\wp\\2023_04_CTF\\8_Shadow_write_up\\index.md"
+        var oid = "views_posts\\wp\\2023_04_W4ter\\4_Lazy Puts_write_up\\index.md"
+        var oid_likes = "likes_posts\\wp\\2023_04_W4ter\\4_Lazy Puts_write_up\\index.md"
       </script>
 <script integrity="sha512-DkmXO0rQo4LHxgEti/+CJjFmQtqrxPiiBHe9CGdPPabi+pk7wgrU9R58W7aOb5E6IHp8T+N+oOe4BolK/OCmTg==" src="/js/page.min.0e49973b4ad0a382c7c6012d8bff8226316642daabc4f8a20477bd08674f3da6e2fa993bc20ad4f51e7c5bb68e6f913a207a7c4fe37ea0e7b806894afce0a64e.js" type="text/javascript"></script>
 </section>
 <footer class="pt-8 max-w-prose print:hidden">
 <h2 class="mt-8 text-2xl font-extrabold mb-10">Related</h2>
 <section class="w-full grid gap-4 sm:grid-cols-2 md:grid-cols-3">
-<a class="min-w-full" href="/posts/wp/2023_04_ctf/10_chisato_write_up/">
+<a class="min-w-full" href="/posts/wp/2023_04_w4ter/5_oh-my-python_write_up/">
 <div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
-<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/posts/wp/2023_04_ctf/10_chisato_write_up/featured.jpg);"></div>
+<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/posts/wp/2023_04_w4ter/5_oh-my-python_write_up/featured.jpg);"></div>
 <div class="px-6 py-4">
-<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/wp/2023_04_ctf/10_chisato_write_up/">misc-Chisato</div>
+<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/wp/2023_04_w4ter/5_oh-my-python_write_up/">reverse-Oh My Python</div>
 <div class="text-sm text-neutral-500 dark:text-neutral-400">
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-07-05 00:00:00 +0000 UTC">July 5, 2023</time><span class="px-2 text-primary-500">·</span><span>3458 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">7 分钟</span>
+<time datetime="2023-07-05 00:00:00 +0000 UTC">July 5, 2023</time><span class="px-2 text-primary-500">·</span><span>505 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">2 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
 <span class="mr-2" onclick="window.open(&quot;/categories/wp/&quot;,'_self');" style="margin-top:0.5rem">
@@ -494,17 +494,17 @@
   </span>
 </span>
 </span>
-<span class="mr-2" onclick="window.open(&quot;/tags/misc/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="mr-2" onclick="window.open(&quot;/tags/reverse/&quot;,'_self');" style="margin-top:0.5rem">
 <span class="flex">
 <span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    misc
+    reverse
   </span>
 </span>
 </span>
-<span class="mr-2" onclick="window.open(&quot;/tags/pwntool/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="mr-2" onclick="window.open(&quot;/tags/pyc%E9%80%86%E5%90%91/&quot;,'_self');" style="margin-top:0.5rem">
 <span class="flex">
 <span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    pwntool
+    pyc逆向
   </span>
 </span>
 </span>
@@ -515,14 +515,14 @@
 </div>
 </div>
 </a>
-<a class="min-w-full" href="/posts/wp/2023_04_ctf/9_usb-hacker_write_up/">
+<a class="min-w-full" href="/posts/wp/2023_06_ciscn/">
 <div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
-<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/posts/wp/2023_04_ctf/9_usb-hacker_write_up/featured.jpg);"></div>
+<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/posts/wp/2023_06_ciscn/featured.jpg);"></div>
 <div class="px-6 py-4">
-<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/wp/2023_04_ctf/9_usb-hacker_write_up/">misc-USB Hacker</div>
+<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/wp/2023_06_ciscn/">2023 ciscn 初赛</div>
 <div class="text-sm text-neutral-500 dark:text-neutral-400">
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-07-05 00:00:00 +0000 UTC">July 5, 2023</time><span class="px-2 text-primary-500">·</span><span>1281 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">3 分钟</span>
+<time datetime="2023-06-30 00:00:00 +0000 UTC">June 30, 2023</time><span class="px-2 text-primary-500">·</span><span>1691 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">4 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
 <span class="mr-2" onclick="window.open(&quot;/categories/wp/&quot;,'_self');" style="margin-top:0.5rem">
@@ -539,17 +539,24 @@
   </span>
 </span>
 </span>
-<span class="mr-2" onclick="window.open(&quot;/tags/misc/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="mr-2" onclick="window.open(&quot;/tags/pwn/&quot;,'_self');" style="margin-top:0.5rem">
 <span class="flex">
 <span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    misc
+    PWN
   </span>
 </span>
 </span>
-<span class="mr-2" onclick="window.open(&quot;/tags/%E6%B5%81%E9%87%8F%E5%8F%96%E8%AF%81/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="mr-2" onclick="window.open(&quot;/tags/reverse/&quot;,'_self');" style="margin-top:0.5rem">
 <span class="flex">
 <span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    流量取证
+    reverse
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/crypto/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    Crypto
   </span>
 </span>
 </span>
@@ -560,14 +567,14 @@
 </div>
 </div>
 </a>
-<a class="min-w-full" href="/posts/wp/2023_04_ctf/11_w4ter-disk_write_up/">
+<a class="min-w-full" href="/posts/wp/2023_04_w4ter/6_gz-rsa_write_up/">
 <div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
-<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/posts/wp/2023_04_ctf/11_w4ter-disk_write_up/featured.jpg);"></div>
+<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/posts/wp/2023_04_w4ter/6_gz-rsa_write_up/featured.jpg);"></div>
 <div class="px-6 py-4">
-<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/wp/2023_04_ctf/11_w4ter-disk_write_up/">misc-W4ter Disk</div>
+<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/wp/2023_04_w4ter/6_gz-rsa_write_up/">Crypto-GZ RSA</div>
 <div class="text-sm text-neutral-500 dark:text-neutral-400">
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-07-05 00:00:00 +0000 UTC">July 5, 2023</time><span class="px-2 text-primary-500">·</span><span>4212 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">9 分钟</span>
+<time datetime="2023-07-05 00:00:00 +0000 UTC">July 5, 2023</time><span class="px-2 text-primary-500">·</span><span>479 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">1 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
 <span class="mr-2" onclick="window.open(&quot;/categories/wp/&quot;,'_self');" style="margin-top:0.5rem">
@@ -584,17 +591,17 @@
   </span>
 </span>
 </span>
-<span class="mr-2" onclick="window.open(&quot;/tags/misc/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="mr-2" onclick="window.open(&quot;/tags/crypto/&quot;,'_self');" style="margin-top:0.5rem">
 <span class="flex">
 <span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    misc
+    Crypto
   </span>
 </span>
 </span>
-<span class="mr-2" onclick="window.open(&quot;/tags/%E7%A3%81%E7%9B%98%E5%8F%96%E8%AF%81/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="mr-2" onclick="window.open(&quot;/tags/rsa/&quot;,'_self');" style="margin-top:0.5rem">
 <span class="flex">
 <span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    磁盘取证
+    RSA
   </span>
 </span>
 </span>
@@ -612,8 +619,8 @@
 <div style="padding-bottom:1em;">
 <p> </p>
 <p>本文作者：<a href="https://ta0lve.github.io/about/" target="_blank">ta0lve</a></p>
-<p>本文链接：<a href="https://ta0lve.github.io/posts/wp/2023_04_ctf/8_shadow_write_up/" target="_blank">misc-Shadow</a></p>
-<p><a href="https://ta0lve.github.io/posts/wp/2023_04_ctf/8_shadow_write_up/" target="_blank">( https://ta0lve.github.io/posts/wp/2023_04_ctf/8_shadow_write_up/ )</a></p>
+<p>本文链接：<a href="https://ta0lve.github.io/posts/wp/2023_04_w4ter/4_lazy-puts_write_up/" target="_blank">reverse-Lazy Puts</a></p>
+<p><a href="https://ta0lve.github.io/posts/wp/2023_04_w4ter/4_lazy-puts_write_up/" target="_blank">( https://ta0lve.github.io/posts/wp/2023_04_w4ter/4_lazy-puts_write_up/ )</a></p>
 <p>版权声明：<a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">「署名-非商业性使用-相同方式共享 4.0 国际」</a></p>
 </div>
 </div>
@@ -622,11 +629,11 @@
 <hr class="border-dotted border-neutral-300 dark:border-neutral-600"/>
 <div class="flex justify-between pt-3">
 <span>
-<a class="flex group mr-3" href="/posts/wp/2023_04_ctf/9_usb-hacker_write_up/">
+<a class="flex group mr-3" href="/posts/wp/2023_04_w4ter/5_oh-my-python_write_up/">
 <span class="mr-3 text-neutral-700 group-hover:text-primary-600 ltr:inline rtl:hidden dark:text-neutral dark:group-hover:text-primary-400">←</span>
 <span class="ml-3 text-neutral-700 group-hover:text-primary-600 ltr:hidden rtl:inline dark:text-neutral dark:group-hover:text-primary-400">→</span>
 <span class="flex flex-col">
-<span class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500">misc-USB Hacker</span>
+<span class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500">reverse-Oh My Python</span>
 <span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
 <time datetime="2023-07-05 00:00:00 +0000 UTC">July 5, 2023</time>
 </span>
@@ -634,9 +641,9 @@
 </a>
 </span>
 <span>
-<a class="flex text-right group ml-3" href="/posts/wp/2023_04_ctf/10_chisato_write_up/">
+<a class="flex text-right group ml-3" href="/posts/wp/2023_04_w4ter/1_what-is-netcat_write_up/">
 <span class="flex flex-col">
-<span class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500">misc-Chisato</span>
+<span class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500">PWN-What is NetCat</span>
 <span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
 <time datetime="2023-07-05 00:00:00 +0000 UTC">July 5, 2023</time>
 </span>

@@ -135,7 +135,7 @@
   
     
       <url>
-            <loc>https://ta0lve.github.io/posts/wp/2023_04_ctf/6_gz-rsa_write_up/</loc>
+            <loc>https://ta0lve.github.io/posts/wp/2023_04_w4ter/6_gz-rsa_write_up/</loc>
             <lastmod>2023-07-05T00:00:00+00:00</lastmod>
             <changefreq>daily</changefreq>
             <priority>0.5</priority>
@@ -146,7 +146,7 @@
   
     
       <url>
-            <loc>https://ta0lve.github.io/posts/wp/2023_04_ctf/10_chisato_write_up/</loc>
+            <loc>https://ta0lve.github.io/posts/wp/2023_04_w4ter/10_chisato_write_up/</loc>
             <lastmod>2023-07-05T00:00:00+00:00</lastmod>
             <changefreq>daily</changefreq>
             <priority>0.5</priority>
@@ -155,7 +155,7 @@
   
     
       <url>
-            <loc>https://ta0lve.github.io/posts/wp/2023_04_ctf/8_shadow_write_up/</loc>
+            <loc>https://ta0lve.github.io/posts/wp/2023_04_w4ter/8_shadow_write_up/</loc>
             <lastmod>2023-07-05T00:00:00+00:00</lastmod>
             <changefreq>daily</changefreq>
             <priority>0.5</priority>
@@ -164,7 +164,7 @@
   
     
       <url>
-            <loc>https://ta0lve.github.io/posts/wp/2023_04_ctf/9_usb-hacker_write_up/</loc>
+            <loc>https://ta0lve.github.io/posts/wp/2023_04_w4ter/9_usb-hacker_write_up/</loc>
             <lastmod>2023-07-05T00:00:00+00:00</lastmod>
             <changefreq>daily</changefreq>
             <priority>0.5</priority>
@@ -173,7 +173,7 @@
   
     
       <url>
-            <loc>https://ta0lve.github.io/posts/wp/2023_04_ctf/11_w4ter-disk_write_up/</loc>
+            <loc>https://ta0lve.github.io/posts/wp/2023_04_w4ter/11_w4ter-disk_write_up/</loc>
             <lastmod>2023-07-05T00:00:00+00:00</lastmod>
             <changefreq>daily</changefreq>
             <priority>0.5</priority>
@@ -182,36 +182,7 @@
   
     
       <url>
-            <loc>https://ta0lve.github.io/posts/wp/2023_04_ctf/7_weird-letter_write_up/</loc>
-            <lastmod>2023-07-05T00:00:00+00:00</lastmod>
-            <changefreq>daily</changefreq>
-            <priority>0.5</priority>
-          </url>
-    
-  
-    
-  
-    
-      <url>
-            <loc>https://ta0lve.github.io/posts/wp/2023_04_ctf/2_tic-tac-toe-level-0_write_up/</loc>
-            <lastmod>2023-07-05T00:00:00+00:00</lastmod>
-            <changefreq>daily</changefreq>
-            <priority>0.5</priority>
-          </url>
-    
-  
-    
-      <url>
-            <loc>https://ta0lve.github.io/posts/wp/2023_04_ctf/3_nimgame-level-1_write_up/</loc>
-            <lastmod>2023-07-05T00:00:00+00:00</lastmod>
-            <changefreq>daily</changefreq>
-            <priority>0.5</priority>
-          </url>
-    
-  
-    
-      <url>
-            <loc>https://ta0lve.github.io/posts/wp/2023_04_ctf/1_what-is-netcat_write_up/</loc>
+            <loc>https://ta0lve.github.io/posts/wp/2023_04_w4ter/7_weird-letter_write_up/</loc>
             <lastmod>2023-07-05T00:00:00+00:00</lastmod>
             <changefreq>daily</changefreq>
             <priority>0.5</priority>
@@ -221,12 +192,8 @@
     
   
     
-  
-    
-  
-    
       <url>
-            <loc>https://ta0lve.github.io/posts/wp/2023_04_ctf/4_lazy-puts_write_up/</loc>
+            <loc>https://ta0lve.github.io/posts/wp/2023_04_w4ter/2_tic-tac-toe-level-0_write_up/</loc>
             <lastmod>2023-07-05T00:00:00+00:00</lastmod>
             <changefreq>daily</changefreq>
             <priority>0.5</priority>
@@ -235,7 +202,16 @@
   
     
       <url>
-            <loc>https://ta0lve.github.io/posts/wp/2023_04_ctf/5_oh-my-python_write_up/</loc>
+            <loc>https://ta0lve.github.io/posts/wp/2023_04_w4ter/3_nimgame-level-1_write_up/</loc>
+            <lastmod>2023-07-05T00:00:00+00:00</lastmod>
+            <changefreq>daily</changefreq>
+            <priority>0.5</priority>
+          </url>
+    
+  
+    
+      <url>
+            <loc>https://ta0lve.github.io/posts/wp/2023_04_w4ter/1_what-is-netcat_write_up/</loc>
             <lastmod>2023-07-05T00:00:00+00:00</lastmod>
             <changefreq>daily</changefreq>
             <priority>0.5</priority>
@@ -249,12 +225,36 @@
     
   
     
+      <url>
+            <loc>https://ta0lve.github.io/posts/wp/2023_04_w4ter/4_lazy-puts_write_up/</loc>
+            <lastmod>2023-07-05T00:00:00+00:00</lastmod>
+            <changefreq>daily</changefreq>
+            <priority>0.5</priority>
+          </url>
+    
+  
+    
+      <url>
+            <loc>https://ta0lve.github.io/posts/wp/2023_04_w4ter/5_oh-my-python_write_up/</loc>
+            <lastmod>2023-07-05T00:00:00+00:00</lastmod>
+            <changefreq>daily</changefreq>
+            <priority>0.5</priority>
+          </url>
+    
+  
+    
+  
+    
+  
+    
+  
+    
   
     
   
     
       <url>
-            <loc>https://ta0lve.github.io/posts/wp/2023_04_ctf/111/</loc>
+            <loc>https://ta0lve.github.io/posts/wp/2023_04_w4ter/111/</loc>
             <lastmod>2023-07-04T00:00:00+00:00</lastmod>
             <changefreq>daily</changefreq>
             <priority>0.5</priority>
