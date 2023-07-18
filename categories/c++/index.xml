@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>C&#43;&#43; on ta0lve</title>
+    <link>https://ta0lve.github.io/categories/c&#43;&#43;/</link>
+    <description>Recent content in C&#43;&#43; on ta0lve</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 30 Jun 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://ta0lve.github.io/categories/c++/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>C&#43;&#43;理论1</title>
+      <link>https://ta0lve.github.io/posts/c&#43;&#43;/homework/c&#43;&#43;%E7%90%86%E8%AE%BA1/</link>
+      <pubDate>Fri, 30 Jun 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ta0lve.github.io/posts/c&#43;&#43;/homework/c&#43;&#43;%E7%90%86%E8%AE%BA1/</guid>
+      <description>cin与cout # 第一周T8，T9，T10 下面语句的输出是？</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43;理论2</title>
+      <link>https://ta0lve.github.io/posts/c&#43;&#43;/homework/c&#43;&#43;%E7%90%86%E8%AE%BA2/</link>
+      <pubDate>Fri, 30 Jun 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ta0lve.github.io/posts/c&#43;&#43;/homework/c&#43;&#43;%E7%90%86%E8%AE%BA2/</guid>
+      <description>构造函数 # 1.构造函数1的参数列表 //以下两个构造函数都是没</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43;理论3</title>
+      <link>https://ta0lve.github.io/posts/c&#43;&#43;/homework/c&#43;&#43;%E7%90%86%E8%AE%BA3/</link>
+      <pubDate>Fri, 30 Jun 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ta0lve.github.io/posts/c&#43;&#43;/homework/c&#43;&#43;%E7%90%86%E8%AE%BA3/</guid>
+      <description>explicit # 当一个类的构造函数有多个参数，除第一个参数外其它都有默认</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43;实验</title>
+      <link>https://ta0lve.github.io/posts/c&#43;&#43;/homework/c&#43;&#43;%E5%AE%9E%E9%AA%8C%E9%A2%98/</link>
+      <pubDate>Fri, 30 Jun 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ta0lve.github.io/posts/c&#43;&#43;/homework/c&#43;&#43;%E5%AE%9E%E9%AA%8C%E9%A2%98/</guid>
+      <description>1.基础知识(:dog:都不看好吧) # 忙里偷闲整理一下上学期</description>
+    </item>
+    
+  </channel>
+</rss>

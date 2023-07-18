@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>pwn入门 on ta0lve</title>
+    <link>https://ta0lve.github.io/categories/pwn%E5%85%A5%E9%97%A8/</link>
+    <description>Recent content in pwn入门 on ta0lve</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 10 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://ta0lve.github.io/categories/pwn%E5%85%A5%E9%97%A8/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>PWN环境搭建记录-Ubuntu 22.04</title>
+      <link>https://ta0lve.github.io/posts/pwn/basic/pwn-_environment/</link>
+      <pubDate>Mon, 10 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ta0lve.github.io/posts/pwn/basic/pwn-_environment/</guid>
+      <description>前言 # 学习pwn已经有一段时间了，但是由于之前自己一直没有注</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Series on ta0lve</title>
+    <link>https://ta0lve.github.io/series/</link>
+    <description>Recent content in Series on ta0lve</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 18 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://ta0lve.github.io/series/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>HWS 2023</title>
+      <link>https://ta0lve.github.io/series/hws-2023/</link>
+      <pubDate>Tue, 18 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ta0lve.github.io/series/hws-2023/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>PWN入门</title>
+      <link>https://ta0lve.github.io/series/pwn%E5%85%A5%E9%97%A8/</link>
+      <pubDate>Fri, 14 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ta0lve.github.io/series/pwn%E5%85%A5%E9%97%A8/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>schedole</title>
+      <link>https://ta0lve.github.io/series/schedole/</link>
+      <pubDate>Wed, 12 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ta0lve.github.io/series/schedole/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>My first series of CTF wp</title>
+      <link>https://ta0lve.github.io/series/my-first-series-of-ctf-wp/</link>
+      <pubDate>Wed, 05 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ta0lve.github.io/series/my-first-series-of-ctf-wp/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

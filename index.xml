@@ -1,0 +1,608 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+<title>ta0lve</title>
+<link>https://ta0lve.github.io/</link>
+<description>Recent content on ta0lve</description>
+<generator>Hugo -- gohugo.io</generator>
+<language>zh-cn</language>
+<lastBuildDate>Tue, 18 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://ta0lve.github.io/index.xml" rel="self" type="application/rss+xml"/>
+<item>
+<title>HWS 2023 fmt wp</title>
+<link>https://ta0lve.github.io/posts/wp/2023_07_hws/fmt/</link>
+<pubDate>Tue, 18 Jul 2023 00:00:00 +0000</pubDate>
+<guid>https://ta0lve.github.io/posts/wp/2023_07_hws/fmt/</guid>
+<description>wp如下: # encoding: utf-8 from pwn import * from LibcSearcher import * is_debug = 1 is_remote = 0 is_ret = 1 if is_debug: context(os=&amp;#39;linux&amp;#39;, arch=&amp;#39;amd64&amp;#39;, log_level=&amp;#39;debug&amp;#39;)</description>
+<media:content url="https://ta0lve.github.io/posts/wp/2023_07_hws/fmt/featured.jpg" xmlns:media="http://search.yahoo.com/mrss/"/>
+</item>
+<item>
+<title>HWS 2023 PWN fmt exp</title>
+<link>https://ta0lve.github.io/posts/wp/2023_07_hws/fmt2/</link>
+<pubDate>Tue, 18 Jul 2023 00:00:00 +0000</pubDate>
+<guid>https://ta0lve.github.io/posts/wp/2023_07_hws/fmt2/</guid>
+<description>比赛时的脚本：（有点乱） # encoding: utf-8 from pwn import * from LibcSearcher import * is_debug = 1 is_remote = 1 is_gdb</description>
+<media:content url="https://ta0lve.github.io/posts/wp/2023_07_hws/fmt2/featured.jpg" xmlns:media="http://search.yahoo.com/mrss/"/>
+</item>
+<item>
+<title>Linux 配置补充</title>
+<link>https://ta0lve.github.io/posts/pwn/basic/linux_/</link>
+<pubDate>Fri, 14 Jul 2023 00:00:00 +0000</pubDate>
+<guid>https://ta0lve.github.io/posts/pwn/basic/linux_/</guid>
+<description>此文章还在施工中， 路过的师傅们看看远处的学习记录吧： New article! 2023 ciscn</description>
+</item>
+<item>
+<title>my schedole</title>
+<link>https://ta0lve.github.io/pointer/schedole/2023_07_12/</link>
+<pubDate>Wed, 12 Jul 2023 00:00:00 +0000</pubDate>
+<guid>https://ta0lve.github.io/pointer/schedole/2023_07_12/</guid>
+<description>此文章还在施工中， 路过的师傅们看看远处的学习记录吧： New article! 2023 ciscn</description>
+<media:content url="https://ta0lve.github.io/pointer/schedole/2023_07_12/featured.jpg" xmlns:media="http://search.yahoo.com/mrss/"/>
+</item>
+<item>
+<title>PWN环境搭建记录-Ubuntu 22.04</title>
+<link>https://ta0lve.github.io/posts/pwn/basic/pwn-_environment/</link>
+<pubDate>Mon, 10 Jul 2023 00:00:00 +0000</pubDate>
+<guid>https://ta0lve.github.io/posts/pwn/basic/pwn-_environment/</guid>
+<description>前言 # 学习pwn已经有一段时间了，但是由于之前自己一直没有注</description>
+<media:content url="https://ta0lve.github.io/posts/pwn/basic/pwn-_environment/featured.jpg" xmlns:media="http://search.yahoo.com/mrss/"/>
+</item>
+<item>
+<title>misc相关-书签</title>
+<link>https://ta0lve.github.io/pointer/%E4%B9%A6%E7%AD%BE/misc%E4%B9%A6%E7%AD%BE/</link>
+<pubDate>Thu, 06 Jul 2023 00:00:00 +0000</pubDate>
+<guid>https://ta0lve.github.io/pointer/%E4%B9%A6%E7%AD%BE/misc%E4%B9%A6%E7%AD%BE/</guid>
+<description>misc学习 # 杂项简介 - CTF Wiki CTF——misc指南【长期更新</description>
+<media:content url="https://ta0lve.github.io/pointer/%E4%B9%A6%E7%AD%BE/misc%E4%B9%A6%E7%AD%BE/featured.jpg" xmlns:media="http://search.yahoo.com/mrss/"/>
+</item>
+<item>
+<title>pwn学习-书签</title>
+<link>https://ta0lve.github.io/pointer/%E4%B9%A6%E7%AD%BE/pwn%E4%B9%A6%E7%AD%BE/</link>
+<pubDate>Thu, 06 Jul 2023 00:00:00 +0000</pubDate>
+<guid>https://ta0lve.github.io/pointer/%E4%B9%A6%E7%AD%BE/pwn%E4%B9%A6%E7%AD%BE/</guid>
+<description>堆回顾与再学习 # 堆溢出_hollk的博客-CSDN博客 基础知</description>
+<media:content url="https://ta0lve.github.io/pointer/%E4%B9%A6%E7%AD%BE/pwn%E4%B9%A6%E7%AD%BE/featured.jpg" xmlns:media="http://search.yahoo.com/mrss/"/>
+</item>
+<item>
+<title>一些没什么大用的工具的链接</title>
+<link>https://ta0lve.github.io/pointer/%E4%B9%A6%E7%AD%BE/%E5%B7%A5%E5%85%B7%E7%BD%91%E5%9D%80/</link>
+<pubDate>Thu, 06 Jul 2023 00:00:00 +0000</pubDate>
+<guid>https://ta0lve.github.io/pointer/%E4%B9%A6%E7%AD%BE/%E5%B7%A5%E5%85%B7%E7%BD%91%E5%9D%80/</guid>
+<description>前排提醒： 该文章中的工具都没什么大用，路过的师傅们可以直接前</description>
+<media:content url="https://ta0lve.github.io/pointer/%E4%B9%A6%E7%AD%BE/%E5%B7%A5%E5%85%B7%E7%BD%91%E5%9D%80/featured.jpg" xmlns:media="http://search.yahoo.com/mrss/"/>
+</item>
+<item>
+<title>Crypto-GZ RSA</title>
+<link>https://ta0lve.github.io/posts/wp/2023_04_ctf/6_gz-rsa_write_up/</link>
+<pubDate>Wed, 05 Jul 2023 00:00:00 +0000</pubDate>
+<guid>https://ta0lve.github.io/posts/wp/2023_04_ctf/6_gz-rsa_write_up/</guid>
+<description>&lt;p&gt;&lt;strong&gt;此文章仅限战队内部成员阅读&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;路过的师傅们看看远处的wp吧：&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://ta0lve.github.io/posts/wp/2023_06_ciscn/"   target="_blank"&gt;
+    2023 ciscn 初赛 · ta0lve&lt;/a&gt;&lt;/p&gt;</description>
+<media:content url="https://ta0lve.github.io/posts/wp/2023_04_ctf/6_gz-rsa_write_up/featured.jpg" xmlns:media="http://search.yahoo.com/mrss/"/>
+</item>
+<item>
+<title>misc-Chisato</title>
+<link>https://ta0lve.github.io/posts/wp/2023_04_ctf/10_chisato_write_up/</link>
+<pubDate>Wed, 05 Jul 2023 00:00:00 +0000</pubDate>
+<guid>https://ta0lve.github.io/posts/wp/2023_04_ctf/10_chisato_write_up/</guid>
+<description>&lt;p&gt;&lt;strong&gt;此文章仅限战队内部成员阅读&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;路过的师傅们看看远处的wp吧：&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://ta0lve.github.io/posts/wp/2023_06_ciscn/"   target="_blank"&gt;
+    2023 ciscn 初赛 · ta0lve&lt;/a&gt;&lt;/p&gt;</description>
+<media:content url="https://ta0lve.github.io/posts/wp/2023_04_ctf/10_chisato_write_up/featured.jpg" xmlns:media="http://search.yahoo.com/mrss/"/>
+</item>
+<item>
+<title>misc-Shadow</title>
+<link>https://ta0lve.github.io/posts/wp/2023_04_ctf/8_shadow_write_up/</link>
+<pubDate>Wed, 05 Jul 2023 00:00:00 +0000</pubDate>
+<guid>https://ta0lve.github.io/posts/wp/2023_04_ctf/8_shadow_write_up/</guid>
+<description>&lt;p&gt;&lt;strong&gt;此文章仅限战队内部成员阅读&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;路过的师傅们看看远处的wp吧：&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://ta0lve.github.io/posts/wp/2023_06_ciscn/"   target="_blank"&gt;
+    2023 ciscn 初赛 · ta0lve&lt;/a&gt;&lt;/p&gt;</description>
+<media:content url="https://ta0lve.github.io/posts/wp/2023_04_ctf/8_shadow_write_up/featured.jpg" xmlns:media="http://search.yahoo.com/mrss/"/>
+</item>
+<item>
+<title>misc-USB Hacker</title>
+<link>https://ta0lve.github.io/posts/wp/2023_04_ctf/9_usb-hacker_write_up/</link>
+<pubDate>Wed, 05 Jul 2023 00:00:00 +0000</pubDate>
+<guid>https://ta0lve.github.io/posts/wp/2023_04_ctf/9_usb-hacker_write_up/</guid>
+<description>&lt;p&gt;&lt;strong&gt;此文章仅限战队内部成员阅读&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;路过的师傅们看看远处的wp吧：&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://ta0lve.github.io/posts/wp/2023_06_ciscn/"   target="_blank"&gt;
+    2023 ciscn 初赛 · ta0lve&lt;/a&gt;&lt;/p&gt;</description>
+<media:content url="https://ta0lve.github.io/posts/wp/2023_04_ctf/9_usb-hacker_write_up/featured.jpg" xmlns:media="http://search.yahoo.com/mrss/"/>
+</item>
+<item>
+<title>misc-W4ter Disk</title>
+<link>https://ta0lve.github.io/posts/wp/2023_04_ctf/11_w4ter-disk_write_up/</link>
+<pubDate>Wed, 05 Jul 2023 00:00:00 +0000</pubDate>
+<guid>https://ta0lve.github.io/posts/wp/2023_04_ctf/11_w4ter-disk_write_up/</guid>
+<description>&lt;p&gt;&lt;strong&gt;此文章仅限战队内部成员阅读&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;路过的师傅们看看远处的wp吧：&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://ta0lve.github.io/posts/wp/2023_06_ciscn/"   target="_blank"&gt;
+    2023 ciscn 初赛 · ta0lve&lt;/a&gt;&lt;/p&gt;</description>
+<media:content url="https://ta0lve.github.io/posts/wp/2023_04_ctf/11_w4ter-disk_write_up/featured.jpg" xmlns:media="http://search.yahoo.com/mrss/"/>
+</item>
+<item>
+<title>misc-Weird Letter</title>
+<link>https://ta0lve.github.io/posts/wp/2023_04_ctf/7_weird-letter_write_up/</link>
+<pubDate>Wed, 05 Jul 2023 00:00:00 +0000</pubDate>
+<guid>https://ta0lve.github.io/posts/wp/2023_04_ctf/7_weird-letter_write_up/</guid>
+<description>&lt;p&gt;&lt;strong&gt;此文章仅限战队内部成员阅读&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;路过的师傅们看看远处的wp吧：&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://ta0lve.github.io/posts/wp/2023_06_ciscn/"   target="_blank"&gt;
+    2023 ciscn 初赛 · ta0lve&lt;/a&gt;&lt;/p&gt;</description>
+<media:content url="https://ta0lve.github.io/posts/wp/2023_04_ctf/7_weird-letter_write_up/featured.jpg" xmlns:media="http://search.yahoo.com/mrss/"/>
+</item>
+<item>
+<title>PWN-Level 0 Tic-Tac-Toe </title>
+<link>https://ta0lve.github.io/posts/wp/2023_04_ctf/2_tic-tac-toe-level-0_write_up/</link>
+<pubDate>Wed, 05 Jul 2023 00:00:00 +0000</pubDate>
+<guid>https://ta0lve.github.io/posts/wp/2023_04_ctf/2_tic-tac-toe-level-0_write_up/</guid>
+<description>&lt;p&gt;&lt;strong&gt;此文章仅限战队内部成员阅读&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;路过的师傅们看看远处的wp吧：&lt;/p&gt;
+
+&lt;section class="space-y-10 w-full"&gt;
+    
+    
+        
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  &lt;a class="flex flex-wrap article border border-neutral-200 dark:border-neutral-700 border-2 rounded-md backdrop-blur" href="https://ta0lve.github.io/posts/wp/2023_06_ciscn/"&gt;
+    
+        
+        &lt;div class="w-full md:w-auto h-full thumbnail nozoom " style="background-image:url(/posts/wp/2023_06_ciscn/featured.jpg);"&gt;&lt;/div&gt;
+        
+      &lt;div class=" p-4"&gt;
+      &lt;div class="items-center text-xl font-semibold"&gt;
+        
+        &lt;div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral"
+          href="https://ta0lve.github.io/posts/wp/2023_06_ciscn/"&gt;2023 ciscn 初赛&lt;/div&gt;
+        
+        
+        
+      &lt;/div&gt;
+      &lt;div class="text-sm text-neutral-500 dark:text-neutral-400"&gt;
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;div class="flex flex-row flex-wrap items-center"&gt;
+  
+  
+  &lt;time datetime="2023-06-30 00:00:00 &amp;#43;0000 UTC"&gt;June 30, 2023&lt;/time&gt;&lt;span class="px-2 text-primary-500"&gt;&amp;middot;&lt;/span&gt;&lt;span&gt;1691 字&lt;/span&gt;&lt;span class="px-2 text-primary-500"&gt;&amp;middot;&lt;/span&gt;&lt;span title="预计阅读"&gt;4 分钟&lt;/span&gt;
+  
+
+  
+  
+&lt;/div&gt;
+
+
+
+
+
+&lt;div class="flex flex-row flex-wrap items-center"&gt;
+  
+  
+  
+  
+  
+  
+  &lt;span style="margin-top:0.5rem" class="mr-2" onclick="window.open(&amp;#34;/categories/wp/&amp;#34;,'_self');"&gt;
+    &lt;span class="flex"&gt;
+  &lt;span
+    class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400"
+  &gt;
+    WP
+  &lt;/span&gt;
+&lt;/span&gt;
+
+  &lt;/span&gt;
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  &lt;span style="margin-top:0.5rem" class="mr-2" onclick="window.open(&amp;#34;/tags/ctf/&amp;#34;,'_self');"&gt;
+    &lt;span class="flex"&gt;
+  &lt;span
+    class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400"
+  &gt;
+    CTF
+  &lt;/span&gt;
+&lt;/span&gt;
+
+  &lt;/span&gt;
+  
+  &lt;span style="margin-top:0.5rem" class="mr-2" onclick="window.open(&amp;#34;/tags/pwn/&amp;#34;,'_self');"&gt;
+    &lt;span class="flex"&gt;
+  &lt;span
+    class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400"
+  &gt;
+    PWN
+  &lt;/span&gt;
+&lt;/span&gt;
+
+  &lt;/span&gt;
+  
+  &lt;span style="margin-top:0.5rem" class="mr-2" onclick="window.open(&amp;#34;/tags/reverse/&amp;#34;,'_self');"&gt;
+    &lt;span class="flex"&gt;
+  &lt;span
+    class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400"
+  &gt;
+    reverse
+  &lt;/span&gt;
+&lt;/span&gt;
+
+  &lt;/span&gt;
+  
+  &lt;span style="margin-top:0.5rem" class="mr-2" onclick="window.open(&amp;#34;/tags/crypto/&amp;#34;,'_self');"&gt;
+    &lt;span class="flex"&gt;
+  &lt;span
+    class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400"
+  &gt;
+    Crypto
+  &lt;/span&gt;
+&lt;/span&gt;
+
+  &lt;/span&gt;
+  
+  
+  
+  
+&lt;/div&gt;
+
+
+
+      &lt;/div&gt;
+      
+    &lt;/div&gt;
+  &lt;/a&gt;
+        
+    
+&lt;/section&gt;
+&lt;hr&gt;</description>
+<media:content url="https://ta0lve.github.io/posts/wp/2023_04_ctf/2_tic-tac-toe-level-0_write_up/featured.jpg" xmlns:media="http://search.yahoo.com/mrss/"/>
+</item>
+<item>
+<title>PWN-Level 1 Nimgame</title>
+<link>https://ta0lve.github.io/posts/wp/2023_04_ctf/3_nimgame-level-1_write_up/</link>
+<pubDate>Wed, 05 Jul 2023 00:00:00 +0000</pubDate>
+<guid>https://ta0lve.github.io/posts/wp/2023_04_ctf/3_nimgame-level-1_write_up/</guid>
+<description>&lt;p&gt;&lt;strong&gt;此文章仅限战队内部成员阅读&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;路过的师傅们看看远处的wp吧：&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://ta0lve.github.io/posts/wp/2023_06_ciscn/"   target="_blank"&gt;
+    2023 ciscn 初赛 · ta0lve&lt;/a&gt;&lt;/p&gt;</description>
+<media:content url="https://ta0lve.github.io/posts/wp/2023_04_ctf/3_nimgame-level-1_write_up/featured.jpg" xmlns:media="http://search.yahoo.com/mrss/"/>
+</item>
+<item>
+<title>PWN-What is NetCat</title>
+<link>https://ta0lve.github.io/posts/wp/2023_04_ctf/1_what-is-netcat_write_up/</link>
+<pubDate>Wed, 05 Jul 2023 00:00:00 +0000</pubDate>
+<guid>https://ta0lve.github.io/posts/wp/2023_04_ctf/1_what-is-netcat_write_up/</guid>
+<description>&lt;p&gt;&lt;strong&gt;此文章仅限战队内部成员阅读&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;路过的师傅们看看远处的wp吧：&lt;/p&gt;
+&lt;hr&gt;
+
+&lt;section class="space-y-10 w-full"&gt;
+    
+    
+        
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  &lt;a class="flex flex-wrap article border border-neutral-200 dark:border-neutral-700 border-2 rounded-md backdrop-blur" href="https://ta0lve.github.io/posts/wp/2023_06_ciscn/"&gt;
+    
+        
+        &lt;div class="w-full md:w-auto h-full thumbnail nozoom " style="background-image:url(/posts/wp/2023_06_ciscn/featured.jpg);"&gt;&lt;/div&gt;
+        
+      &lt;div class=" p-4"&gt;
+      &lt;div class="items-center text-xl font-semibold"&gt;
+        
+        &lt;div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral"
+          href="https://ta0lve.github.io/posts/wp/2023_06_ciscn/"&gt;2023 ciscn 初赛&lt;/div&gt;
+        
+        
+        
+      &lt;/div&gt;
+      &lt;div class="text-sm text-neutral-500 dark:text-neutral-400"&gt;
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;div class="flex flex-row flex-wrap items-center"&gt;
+  
+  
+  &lt;time datetime="2023-06-30 00:00:00 &amp;#43;0000 UTC"&gt;June 30, 2023&lt;/time&gt;&lt;span class="px-2 text-primary-500"&gt;&amp;middot;&lt;/span&gt;&lt;span&gt;1691 字&lt;/span&gt;&lt;span class="px-2 text-primary-500"&gt;&amp;middot;&lt;/span&gt;&lt;span title="预计阅读"&gt;4 分钟&lt;/span&gt;
+  
+
+  
+  
+&lt;/div&gt;
+
+
+
+
+
+&lt;div class="flex flex-row flex-wrap items-center"&gt;
+  
+  
+  
+  
+  
+  
+  &lt;span style="margin-top:0.5rem" class="mr-2" onclick="window.open(&amp;#34;/categories/wp/&amp;#34;,'_self');"&gt;
+    &lt;span class="flex"&gt;
+  &lt;span
+    class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400"
+  &gt;
+    WP
+  &lt;/span&gt;
+&lt;/span&gt;
+
+  &lt;/span&gt;
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  &lt;span style="margin-top:0.5rem" class="mr-2" onclick="window.open(&amp;#34;/tags/ctf/&amp;#34;,'_self');"&gt;
+    &lt;span class="flex"&gt;
+  &lt;span
+    class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400"
+  &gt;
+    CTF
+  &lt;/span&gt;
+&lt;/span&gt;
+
+  &lt;/span&gt;
+  
+  &lt;span style="margin-top:0.5rem" class="mr-2" onclick="window.open(&amp;#34;/tags/pwn/&amp;#34;,'_self');"&gt;
+    &lt;span class="flex"&gt;
+  &lt;span
+    class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400"
+  &gt;
+    PWN
+  &lt;/span&gt;
+&lt;/span&gt;
+
+  &lt;/span&gt;
+  
+  &lt;span style="margin-top:0.5rem" class="mr-2" onclick="window.open(&amp;#34;/tags/reverse/&amp;#34;,'_self');"&gt;
+    &lt;span class="flex"&gt;
+  &lt;span
+    class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400"
+  &gt;
+    reverse
+  &lt;/span&gt;
+&lt;/span&gt;
+
+  &lt;/span&gt;
+  
+  &lt;span style="margin-top:0.5rem" class="mr-2" onclick="window.open(&amp;#34;/tags/crypto/&amp;#34;,'_self');"&gt;
+    &lt;span class="flex"&gt;
+  &lt;span
+    class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400"
+  &gt;
+    Crypto
+  &lt;/span&gt;
+&lt;/span&gt;
+
+  &lt;/span&gt;
+  
+  
+  
+  
+&lt;/div&gt;
+
+
+
+      &lt;/div&gt;
+      
+    &lt;/div&gt;
+  &lt;/a&gt;
+        
+    
+&lt;/section&gt;</description>
+<media:content url="https://ta0lve.github.io/posts/wp/2023_04_ctf/1_what-is-netcat_write_up/featured.jpg" xmlns:media="http://search.yahoo.com/mrss/"/>
+</item>
+<item>
+<title>reverse-Lazy Puts</title>
+<link>https://ta0lve.github.io/posts/wp/2023_04_ctf/4_lazy-puts_write_up/</link>
+<pubDate>Wed, 05 Jul 2023 00:00:00 +0000</pubDate>
+<guid>https://ta0lve.github.io/posts/wp/2023_04_ctf/4_lazy-puts_write_up/</guid>
+<description>&lt;p&gt;&lt;strong&gt;此文章仅限战队内部成员阅读&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;路过的师傅们看看远处的wp吧：&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://ta0lve.github.io/posts/wp/2023_06_ciscn/"   target="_blank"&gt;
+    2023 ciscn 初赛 · ta0lve&lt;/a&gt;&lt;/p&gt;</description>
+<media:content url="https://ta0lve.github.io/posts/wp/2023_04_ctf/4_lazy-puts_write_up/featured.jpg" xmlns:media="http://search.yahoo.com/mrss/"/>
+</item>
+<item>
+<title>reverse-Oh My Python</title>
+<link>https://ta0lve.github.io/posts/wp/2023_04_ctf/5_oh-my-python_write_up/</link>
+<pubDate>Wed, 05 Jul 2023 00:00:00 +0000</pubDate>
+<guid>https://ta0lve.github.io/posts/wp/2023_04_ctf/5_oh-my-python_write_up/</guid>
+<description>&lt;p&gt;&lt;strong&gt;此文章仅限战队内部成员阅读&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;路过的师傅们看看远处的wp吧：&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://ta0lve.github.io/posts/wp/2023_06_ciscn/"   target="_blank"&gt;
+    2023 ciscn 初赛 · ta0lve&lt;/a&gt;&lt;/p&gt;</description>
+<media:content url="https://ta0lve.github.io/posts/wp/2023_04_ctf/5_oh-my-python_write_up/featured.jpg" xmlns:media="http://search.yahoo.com/mrss/"/>
+</item>
+<item>
+<title>An Encrypted Post</title>
+<link>https://ta0lve.github.io/posts/wp/2023_04_ctf/111/</link>
+<pubDate>Tue, 04 Jul 2023 00:00:00 +0000</pubDate>
+<guid>https://ta0lve.github.io/posts/wp/2023_04_ctf/111/</guid>
+<description>&lt;p&gt;Believe it or not , this is just a **test **. [doge]&lt;/p&gt;</description>
+<media:content url="https://ta0lve.github.io/posts/wp/2023_04_ctf/111/featured.jpg" xmlns:media="http://search.yahoo.com/mrss/"/>
+</item>
+<item>
+<title/>
+<link>https://ta0lve.github.io/about/</link>
+<pubDate>Sun, 02 Jul 2023 00:00:00 +0000</pubDate>
+<guid>https://ta0lve.github.io/about/</guid>
+<description>Hi！你好呀！ 欢迎来到我的博客小站！ 这里是ta0lve , 一名</description>
+</item>
+<item>
+<title/>
+<link>https://ta0lve.github.io/link/</link>
+<pubDate>Sun, 02 Jul 2023 00:00:00 +0000</pubDate>
+<guid>https://ta0lve.github.io/link/</guid>
+<description>Dalaos： # GZTime # Walking on the Time Axis.
+TEL # Web king !
+weyung # a Crypto CTFer
+My friends： # Pazuris # a nice Weber and a nice friend</description>
+</item>
+<item>
+<title>2023 ciscn 初赛</title>
+<link>https://ta0lve.github.io/posts/wp/2023_06_ciscn/</link>
+<pubDate>Fri, 30 Jun 2023 00:00:00 +0000</pubDate>
+<guid>https://ta0lve.github.io/posts/wp/2023_06_ciscn/</guid>
+<description>以下为2023信安国赛初赛的pwn，reverse和Cryp</description>
+<media:content url="https://ta0lve.github.io/posts/wp/2023_06_ciscn/featured.jpg" xmlns:media="http://search.yahoo.com/mrss/"/>
+</item>
+<item>
+<title>C++理论1</title>
+<link>https://ta0lve.github.io/posts/c++/homework/c++%E7%90%86%E8%AE%BA1/</link>
+<pubDate>Fri, 30 Jun 2023 00:00:00 +0000</pubDate>
+<guid>https://ta0lve.github.io/posts/c++/homework/c++%E7%90%86%E8%AE%BA1/</guid>
+<description>cin与cout # 第一周T8，T9，T10 下面语句的输出是？</description>
+<media:content url="https://ta0lve.github.io/posts/c++/homework/c++%E7%90%86%E8%AE%BA1/featured.jpg" xmlns:media="http://search.yahoo.com/mrss/"/>
+</item>
+<item>
+<title>C++理论2</title>
+<link>https://ta0lve.github.io/posts/c++/homework/c++%E7%90%86%E8%AE%BA2/</link>
+<pubDate>Fri, 30 Jun 2023 00:00:00 +0000</pubDate>
+<guid>https://ta0lve.github.io/posts/c++/homework/c++%E7%90%86%E8%AE%BA2/</guid>
+<description>构造函数 # 1.构造函数1的参数列表 //以下两个构造函数都是没</description>
+<media:content url="https://ta0lve.github.io/posts/c++/homework/c++%E7%90%86%E8%AE%BA2/featured.jpg" xmlns:media="http://search.yahoo.com/mrss/"/>
+</item>
+<item>
+<title>C++理论3</title>
+<link>https://ta0lve.github.io/posts/c++/homework/c++%E7%90%86%E8%AE%BA3/</link>
+<pubDate>Fri, 30 Jun 2023 00:00:00 +0000</pubDate>
+<guid>https://ta0lve.github.io/posts/c++/homework/c++%E7%90%86%E8%AE%BA3/</guid>
+<description>explicit # 当一个类的构造函数有多个参数，除第一个参数外其它都有默认</description>
+<media:content url="https://ta0lve.github.io/posts/c++/homework/c++%E7%90%86%E8%AE%BA3/featured.jpg" xmlns:media="http://search.yahoo.com/mrss/"/>
+</item>
+<item>
+<title>C++实验</title>
+<link>https://ta0lve.github.io/posts/c++/homework/c++%E5%AE%9E%E9%AA%8C%E9%A2%98/</link>
+<pubDate>Fri, 30 Jun 2023 00:00:00 +0000</pubDate>
+<guid>https://ta0lve.github.io/posts/c++/homework/c++%E5%AE%9E%E9%AA%8C%E9%A2%98/</guid>
+<description>1.基础知识(:dog:都不看好吧) # 忙里偷闲整理一下上学期</description>
+<media:content url="https://ta0lve.github.io/posts/c++/homework/c++%E5%AE%9E%E9%AA%8C%E9%A2%98/featured.jpg" xmlns:media="http://search.yahoo.com/mrss/"/>
+</item>
+</channel>
+</rss>

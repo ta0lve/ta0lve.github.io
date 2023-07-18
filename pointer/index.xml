@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Pointers on ta0lve</title>
+    <link>https://ta0lve.github.io/pointer/</link>
+    <description>Recent content in Pointers on ta0lve</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 12 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://ta0lve.github.io/pointer/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>my schedole</title>
+      <link>https://ta0lve.github.io/pointer/schedole/2023_07_12/</link>
+      <pubDate>Wed, 12 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ta0lve.github.io/pointer/schedole/2023_07_12/</guid>
+      <description>此文章还在施工中， 路过的师傅们看看远处的学习记录吧： New article! 2023 ciscn</description>
+    </item>
+    
+    <item>
+      <title>misc相关-书签</title>
+      <link>https://ta0lve.github.io/pointer/%E4%B9%A6%E7%AD%BE/misc%E4%B9%A6%E7%AD%BE/</link>
+      <pubDate>Thu, 06 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ta0lve.github.io/pointer/%E4%B9%A6%E7%AD%BE/misc%E4%B9%A6%E7%AD%BE/</guid>
+      <description>misc学习 # 杂项简介 - CTF Wiki CTF——misc指南【长期更新</description>
+    </item>
+    
+    <item>
+      <title>pwn学习-书签</title>
+      <link>https://ta0lve.github.io/pointer/%E4%B9%A6%E7%AD%BE/pwn%E4%B9%A6%E7%AD%BE/</link>
+      <pubDate>Thu, 06 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ta0lve.github.io/pointer/%E4%B9%A6%E7%AD%BE/pwn%E4%B9%A6%E7%AD%BE/</guid>
+      <description>堆回顾与再学习 # 堆溢出_hollk的博客-CSDN博客 基础知</description>
+    </item>
+    
+    <item>
+      <title>一些没什么大用的工具的链接</title>
+      <link>https://ta0lve.github.io/pointer/%E4%B9%A6%E7%AD%BE/%E5%B7%A5%E5%85%B7%E7%BD%91%E5%9D%80/</link>
+      <pubDate>Thu, 06 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ta0lve.github.io/pointer/%E4%B9%A6%E7%AD%BE/%E5%B7%A5%E5%85%B7%E7%BD%91%E5%9D%80/</guid>
+      <description>前排提醒： 该文章中的工具都没什么大用，路过的师傅们可以直接前</description>
+    </item>
+    
+  </channel>
+</rss>
