@@ -26,14 +26,16 @@
 <link href="/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="/site.webmanifest" rel="manifest"/>
 <meta content="Linux 配置补充" property="og:title"/>
-<meta content="此文章还在施工中， 路过的师傅们看看远处的学习记录吧： New article! 2023 ciscn" property="og:description"/>
+<meta content="此文章还在施工中，
+路过的师傅们看看远处的学习记录吧！" property="og:description"/>
 <meta content="article" property="og:type"/>
 <meta content="https://ta0lve.github.io/posts/pwn/basic/linux_/" property="og:url"/><meta content="posts" property="article:section"/>
 <meta content="2023-07-14T00:00:00+00:00" property="article:published_time"/>
 <meta content="2023-07-14T00:00:00+00:00" property="article:modified_time"/>
 <meta content="summary" name="twitter:card"/>
 <meta content="Linux 配置补充" name="twitter:title"/>
-<meta content="此文章还在施工中， 路过的师傅们看看远处的学习记录吧： New article! 2023 ciscn" name="twitter:description"/>
+<meta content="此文章还在施工中，
+路过的师傅们看看远处的学习记录吧！" name="twitter:description"/>
 <script type="application/ld+json">
   [{
     "@context": "https://schema.org",
@@ -42,7 +44,7 @@
     "name": "Linux 配置补充",
     "headline": "Linux 配置补充",
     
-    "abstract": "此文章还在施工中， 路过的师傅们看看远处的学习记录吧： New article! 2023 ciscn",
+    "abstract": "\u003cp\u003e\u003cstrong\u003e此文章还在施工中，\u003c\/strong\u003e\u003c\/p\u003e\n\u003cp\u003e路过的师傅们看看远处的学习记录吧！\u003c\/p\u003e",
     "inLanguage": "zh-cn",
     "url" : "https:\/\/ta0lve.github.io\/posts\/pwn\/basic\/linux_\/",
     "author" : {
@@ -58,7 +60,7 @@
     "keywords": ["CTF","PWN","Ubuntu"],
     
     "mainEntityOfPage": "true",
-    "wordCount": "764"
+    "wordCount": "805"
   }]
   </script>
 <meta content="ta0lve" name="author"/>
@@ -262,7 +264,7 @@
     </h1>
 <div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-07-14 00:00:00 +0000 UTC">July 14, 2023</time><span class="px-2 text-primary-500">·</span><span>764 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">2 分钟</span>
+<time datetime="2023-07-14 00:00:00 +0000 UTC">July 14, 2023</time><span class="px-2 text-primary-500">·</span><span>805 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">2 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
 <span class="mr-2" onclick="window.open(&quot;/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/&quot;,'_self');" style="margin-top:0.5rem">
@@ -343,7 +345,7 @@
     </div>
 </details>
 <p><strong>此文章还在施工中，</strong></p>
-<p>路过的师傅们看看远处的学习记录吧：</p>
+<p>路过的师傅们看看远处的学习记录吧！</p>
 <hr/>
 <span class="flex">
 <span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
@@ -353,6 +355,49 @@ New article!
   </span>
 </span>
 <section class="space-y-10 w-full">
+<a class="flex flex-wrap article border border-neutral-200 dark:border-neutral-700 border-2 rounded-md backdrop-blur" href="/posts/pwn/basic/pwn-_environment/">
+<div class="w-full md:w-auto h-full thumbnail nozoom" style="background-image:url(/posts/pwn/basic/pwn-_environment/featured.jpg);"></div>
+<div class="p-4">
+<div class="items-center text-xl font-semibold">
+<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/pwn/basic/pwn-_environment/">PWN环境搭建记录-Ubuntu 22.04</div>
+</div>
+<div class="text-sm text-neutral-500 dark:text-neutral-400">
+<div class="flex flex-row flex-wrap items-center">
+<time datetime="2023-07-10 00:00:00 +0000 UTC">July 10, 2023</time><span class="px-2 text-primary-500">·</span><span>8224 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">17 分钟</span>
+</div>
+<div class="flex flex-row flex-wrap items-center">
+<span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%85%A5%E9%97%A8/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    pwn入门
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/ctf/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    CTF
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/pwn/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    PWN
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/ubuntu/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    Ubuntu
+  </span>
+</span>
+</span>
+</div>
+</div>
+</div>
+</a>
 </section>
 <hr/>
 <section class="space-y-10 w-full">
@@ -490,7 +535,7 @@ New article!
 <div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
 <div class="w-full thumbnail_card_related nozoom" style="background-image:url(/posts/wp/2023_07_hws/fmt2/featured.jpg);"></div>
 <div class="px-6 py-4">
-<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/wp/2023_07_hws/fmt2/">HWS 2023 PWN fmt exp</div>
+<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/wp/2023_07_hws/fmt2/">HWS 2023 fmt exp</div>
 <div class="text-sm text-neutral-500 dark:text-neutral-400">
 <div class="flex flex-row flex-wrap items-center">
 <time datetime="2023-07-18 00:00:00 +0000 UTC">July 18, 2023</time><span class="px-2 text-primary-500">·</span><span>5533 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">12 分钟</span>
@@ -605,9 +650,9 @@ New article!
 </a>
 </span>
 <span>
-<a class="flex text-right group ml-3" href="/posts/wp/2023_07_hws/fmt2/">
+<a class="flex text-right group ml-3" href="/posts/wp/2023_07_hws/fmt/">
 <span class="flex flex-col">
-<span class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500">HWS 2023 PWN fmt exp</span>
+<span class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500">HWS 2023 fmt wp</span>
 <span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
 <time datetime="2023-07-18 00:00:00 +0000 UTC">July 18, 2023</time>
 </span>

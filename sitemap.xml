@@ -5,12 +5,10 @@
     
       <url>
             <loc>https://ta0lve.github.io/</loc>
-            <lastmod>2023-07-18T00:00:00+00:00</lastmod>
+            <lastmod>2023-07-19T00:00:00+00:00</lastmod>
             <changefreq>daily</changefreq>
             <priority>0.5</priority>
           </url>
-    
-  
     
   
     
@@ -19,11 +17,32 @@
   
     
       <url>
-            <loc>https://ta0lve.github.io/posts/wp/2023_07_hws/fmt/</loc>
-            <lastmod>2023-07-18T00:00:00+00:00</lastmod>
+            <loc>https://ta0lve.github.io/posts/</loc>
+            <lastmod>2023-07-19T00:00:00+00:00</lastmod>
             <changefreq>daily</changefreq>
             <priority>0.5</priority>
           </url>
+    
+  
+    
+  
+    
+      <url>
+            <loc>https://ta0lve.github.io/posts/sth/sm.ms/</loc>
+            <lastmod>2023-07-19T00:00:00+00:00</lastmod>
+            <changefreq>daily</changefreq>
+            <priority>0.5</priority>
+          </url>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
     
   
     
@@ -37,15 +56,11 @@
   
     
       <url>
-            <loc>https://ta0lve.github.io/posts/</loc>
+            <loc>https://ta0lve.github.io/posts/wp/2023_07_hws/fmt/</loc>
             <lastmod>2023-07-18T00:00:00+00:00</lastmod>
             <changefreq>daily</changefreq>
             <priority>0.5</priority>
           </url>
-    
-  
-    
-  
     
   
     
