@@ -920,6 +920,27 @@
 </span>
 </div>
 </div>
+<div id="gitalk-container"></div>
+<link href="https://unpkg.com/gitalk/dist/gitalk.css" rel="stylesheet"/>
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+  const gitalk = new Gitalk({
+    clientID: '758aae4fa0b9c7874e09',
+    clientSecret: '9ed8ad96cc99882babccf349fc1c757f32e2ed4d',
+    repo: 'ta0lve.github.io',
+    owner: 'ta0lve',
+    admin: ['ta0lve'],
+    id: location.pathname, 
+    distractionFreeMode: false 
+  });
+  (function() {
+    if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+      document.getElementById('gitalk-container').innerHTML = 'Gitalk comments not available by default when the website is previewed locally.';
+      return;
+    }
+    gitalk.render('gitalk-container');
+  })();
+</script>
 </footer>
 </article>
 <div class="pointer-events-none absolute top-[110vh] bottom-0 w-12 ltr:right-0 rtl:left-0" id="top-scroller">
