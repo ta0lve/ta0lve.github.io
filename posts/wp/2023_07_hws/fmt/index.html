@@ -60,7 +60,7 @@
     "keywords": ["CTF","PWN","格式化字符串漏洞"],
     
     "mainEntityOfPage": "true",
-    "wordCount": "4710"
+    "wordCount": "4709"
   }]
   </script>
 <meta content="ta0lve" name="author"/>
@@ -250,7 +250,7 @@
 <header class="mt-5 max-w-prose" id="single_header">
 <ol class="text-sm text-neutral-500 dark:text-neutral-400 print:hidden">
 <li class="inline hidden">
-<a class="hover:underline decoration-neutral-300 dark:underline-neutral-600" href="/"></a><span class="px-1 text-primary-500">/</span>
+<a class="hover:underline decoration-neutral-300 dark:underline-neutral-600" href="/">ta0lve</a><span class="px-1 text-primary-500">/</span>
 </li>
 <li class="inline">
 <a class="hover:underline decoration-neutral-300 dark:underline-neutral-600" href="/posts/">Posts</a><span class="px-1 text-primary-500">/</span>
@@ -264,7 +264,7 @@
     </h1>
 <div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-07-18 00:00:00 +0000 UTC">July 18, 2023</time><span class="px-2 text-primary-500">·</span><span>4710 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">10 分钟</span>
+<time datetime="2023-07-18 00:00:00 +0000 UTC">July 18, 2023</time><span class="px-2 text-primary-500">·</span><span>4709 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">10 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
 <span class="mr-2" onclick="window.open(&quot;/categories/wp/&quot;,'_self');" style="margin-top:0.5rem">
@@ -472,7 +472,7 @@
 <p>RELRO为” Full RELRO ”时，说明我们对GOT表不具有写权限。</p>
 </blockquote>
 <p>其实就是我们不能够采用<strong>更改got表</strong>指向的函数来达成调用system等函数的getshell方式</p>
-<p>有同学可能会疑惑，好像我们平时getshell也不常用更改got表的方法啊，其实这只是你刚刚好比较少碰到需要用到<strong>got表覆写漏洞</strong>的题目，当我们发现一个让我们能够<strong>任意地址写</strong>的漏洞时，我们就可以直接将puts、printf等函数的got表改为system，然后让他们以**" ;/bin/sh; “**为参数，就可以getshell了，还是比直接构造ROP链来getshell要方便一些的</p>
+<p>有同学可能会疑惑，好像我们平时getshell也不常用更改got表的方法啊，其实这只是你刚刚好比较少碰到需要用到<strong>got表覆写漏洞</strong>的题目，当我们发现一个让我们能够<strong>任意地址写</strong>的漏洞时，我们就可以直接将puts、printf等函数的got表改为system，然后让他们以**" ;/bin/sh; "**为参数，就可以getshell了，还是比直接构造ROP链来getshell要方便一些的</p>
 <div class="anchor" id="ida-查看"></div>
 <h3 class="relative group">IDA 查看 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
