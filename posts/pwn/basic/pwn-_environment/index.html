@@ -59,7 +59,7 @@
     "keywords": ["CTF","PWN","Ubuntu"],
     
     "mainEntityOfPage": "true",
-    "wordCount": "8224"
+    "wordCount": "8083"
   }]
   </script>
 <meta content="ta0lve" name="author"/>
@@ -263,7 +263,7 @@
     </h1>
 <div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-07-10 00:00:00 +0000 UTC">July 10, 2023</time><span class="px-2 text-primary-500">·</span><span>8224 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">17 分钟</span>
+<time datetime="2023-07-10 00:00:00 +0000 UTC">July 10, 2023</time><span class="px-2 text-primary-500">·</span><span>8083 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">17 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
 <span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%85%A5%E9%97%A8/&quot;,'_self');" style="margin-top:0.5rem">
@@ -806,34 +806,19 @@
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#libcsearcher" style="text-decoration-line: none !important;">#</a></span>
 </h2>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 安装步骤一：</span>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 安装方式一：</span>
 </span></span><span class="line"><span class="cl"><span class="n">sudo</span> <span class="n">pip3</span> <span class="n">install</span> <span class="n">LibcSearcher</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 最好先完成步骤一再完成步骤二，不过可能会由于网络问题安装不了，</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># 可以多试几次，实在不行再直接完成步骤二</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># 只完成了步骤二如果在使用时出现“No Moudule Name LibcSearcher”，</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># 可以将py文件复制到LibcSearcher根目录下，</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># 或是将LibcSearcher整个文件夹复制一份到py文件所在的文件夹下</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 可以多试几次，实在不行完成步骤二</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 方式二如果在使用时出现“No Moudule Name LibcSearcher”，</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 可以将exp.py文件复制到LibcSearcher根目录下，</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 或是将LibcSearcher.py复制到exp.py文件所在的文件夹下</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 安装步骤二：</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 安装方式二：</span>
 </span></span><span class="line"><span class="cl"><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">lieanu</span><span class="o">/</span><span class="n">LibcSearcher</span><span class="o">.</span><span class="n">git</span>
 </span></span><span class="line"><span class="cl"><span class="n">cd</span> <span class="n">LibcSearcher</span>
 </span></span><span class="line"><span class="cl"><span class="n">sudo</span> <span class="n">python3</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">install</span>
-</span></span></code></pre></div><p>输入<code>pip list </code>查看我们下载好的库（只完成步骤二可能找不到）</p>
-<p>
-<figure>
-<img alt="image-20230709222103749" class="my-0 rounded-md" src="https://s2.loli.net/2023/07/09/etd2rzSYmgJ4IVy.png"/>
-</figure>
-</p>
-<p>查看 <code>LibcSearcher.egg-link</code>文件可以发现：</p>
-<p>
-<figure>
-<img alt="image-20230709221918923" class="my-0 rounded-md" src="https://s2.loli.net/2023/07/09/5ZghylaCd9HRtSp.png"/>
-</figure>
-</p>
-<p>说明步骤一也是可以使用步骤二的本地仓库的，所以建议两个都使用~</p>
-<p>当然，只完成步骤一也可以正常使用。</p>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 检测是否安装成功</span>
+</span></span></code></pre></div><div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 检测是否安装成功</span>
 </span></span><span class="line"><span class="cl"><span class="n">python3</span>
 </span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">LibcSearcher</span> <span class="kn">import</span> <span class="o">*</span>
 </span></span></code></pre></div><p>
