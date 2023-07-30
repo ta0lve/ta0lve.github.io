@@ -6,7 +6,16 @@
     <description>Recent content in 基础知识 on ta0lve</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 30 Jun 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://ta0lve.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 14 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://ta0lve.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>pwn基础学习书签</title>
+      <link>https://ta0lve.github.io/pointer/%E4%B9%A6%E7%AD%BE/pwn%E4%B9%A6%E7%AD%BE/</link>
+      <pubDate>Fri, 14 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ta0lve.github.io/pointer/%E4%B9%A6%E7%AD%BE/pwn%E4%B9%A6%E7%AD%BE/</guid>
+      <description>&lt;p&gt;一些我在入门pwn时所学习阅读的基础知识相关文章，收集在此处以便于之后的复习和回顾。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>C&#43;&#43;理论1</title>
       <link>https://ta0lve.github.io/posts/c&#43;&#43;/homework/c&#43;&#43;%E7%90%86%E8%AE%BA1/</link>

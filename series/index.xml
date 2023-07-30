@@ -6,16 +6,7 @@
     <description>Recent content in Series on ta0lve</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 19 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://ta0lve.github.io/series/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>关于博客</title>
-      <link>https://ta0lve.github.io/series/%E5%85%B3%E4%BA%8E%E5%8D%9A%E5%AE%A2/</link>
-      <pubDate>Wed, 19 Jul 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://ta0lve.github.io/series/%E5%85%B3%E4%BA%8E%E5%8D%9A%E5%AE%A2/</guid>
-      <description></description>
-    </item>
-    
+    <lastBuildDate>Tue, 18 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://ta0lve.github.io/series/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>HWS 2023</title>
       <link>https://ta0lve.github.io/series/hws-2023/</link>
@@ -28,7 +19,7 @@
     <item>
       <title>PWN入门</title>
       <link>https://ta0lve.github.io/series/pwn%E5%85%A5%E9%97%A8/</link>
-      <pubDate>Fri, 14 Jul 2023 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 18 Jul 2023 00:00:00 +0000</pubDate>
       
       <guid>https://ta0lve.github.io/series/pwn%E5%85%A5%E9%97%A8/</guid>
       <description></description>
@@ -40,6 +31,15 @@
       <pubDate>Wed, 12 Jul 2023 00:00:00 +0000</pubDate>
       
       <guid>https://ta0lve.github.io/series/schedole/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>关于博客</title>
+      <link>https://ta0lve.github.io/series/%E5%85%B3%E4%BA%8E%E5%8D%9A%E5%AE%A2/</link>
+      <pubDate>Mon, 10 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ta0lve.github.io/series/%E5%85%B3%E4%BA%8E%E5%8D%9A%E5%AE%A2/</guid>
       <description></description>
     </item>
     

@@ -26,6 +26,60 @@
     </item>
     
     <item>
+      <title>Kernel Pwn 学习书签</title>
+      <link>https://ta0lve.github.io/pointer/kernel-pwn/pointer1/</link>
+      <pubDate>Tue, 18 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ta0lve.github.io/pointer/kernel-pwn/pointer1/</guid>
+      <description>&lt;p&gt;一些我在入门pwn &lt;strong&gt;Kernel Pwn&lt;/strong&gt; 知识时所学习阅读的文章，收集在此处以便于之后的复习和回顾。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>堆学习书签</title>
+      <link>https://ta0lve.github.io/pointer/heap/pointer1/</link>
+      <pubDate>Sun, 16 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ta0lve.github.io/pointer/heap/pointer1/</guid>
+      <description>&lt;p&gt;一些我在入门pwn&lt;strong&gt;堆&lt;/strong&gt;时所学习阅读的文章，收集在此处以便于之后的复习和回顾。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>fmt学习书签</title>
+      <link>https://ta0lve.github.io/pointer/fmt/pointer1/</link>
+      <pubDate>Sat, 15 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ta0lve.github.io/pointer/fmt/pointer1/</guid>
+      <description>&lt;p&gt;一些我在入门pwn&lt;strong&gt;格式化字符串漏洞&lt;/strong&gt;时所学习阅读的文章，收集在此处以便于之后的复习和回顾。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>wp学习书签</title>
+      <link>https://ta0lve.github.io/pointer/wp/pointer1/</link>
+      <pubDate>Sat, 15 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ta0lve.github.io/pointer/wp/pointer1/</guid>
+      <description>复习回顾 # （书签待整理，挖坑待填） 即将学习 # pwn. college # pwnco</description>
+    </item>
+    
+    <item>
+      <title>栈学习书签</title>
+      <link>https://ta0lve.github.io/pointer/stack/pointer1/</link>
+      <pubDate>Sat, 15 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ta0lve.github.io/pointer/stack/pointer1/</guid>
+      <description>&lt;p&gt;一些我在入门pwn&lt;strong&gt;栈&lt;/strong&gt;时所学习阅读的文章，收集在此处以便于之后的复习和回顾。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>整数溢出漏洞学习书签</title>
+      <link>https://ta0lve.github.io/pointer/intoverflow/pointer1/</link>
+      <pubDate>Sat, 15 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ta0lve.github.io/pointer/intoverflow/pointer1/</guid>
+      <description>&lt;p&gt;一些我在入门pwn&lt;strong&gt;整数溢出漏洞&lt;/strong&gt;时所学习阅读的文章，收集在此处以便于之后的复习和回顾。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>Linux 配置补充</title>
       <link>https://ta0lve.github.io/posts/pwn/basic/linux_/</link>
       <pubDate>Fri, 14 Jul 2023 00:00:00 +0000</pubDate>
@@ -33,6 +87,15 @@
       <guid>https://ta0lve.github.io/posts/pwn/basic/linux_/</guid>
       <description>&lt;p&gt;&lt;strong&gt;此文章还在施工中，&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;路过的师傅们看看远处的学习记录吧！&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>pwn基础学习书签</title>
+      <link>https://ta0lve.github.io/pointer/%E4%B9%A6%E7%AD%BE/pwn%E4%B9%A6%E7%AD%BE/</link>
+      <pubDate>Fri, 14 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ta0lve.github.io/pointer/%E4%B9%A6%E7%AD%BE/pwn%E4%B9%A6%E7%AD%BE/</guid>
+      <description>&lt;p&gt;一些我在入门pwn时所学习阅读的基础知识相关文章，收集在此处以便于之后的复习和回顾。&lt;/p&gt;</description>
     </item>
     
     <item>

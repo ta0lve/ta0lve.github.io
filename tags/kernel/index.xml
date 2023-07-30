@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Kernel on ta0lve</title>
+    <link>https://ta0lve.github.io/tags/kernel/</link>
+    <description>Recent content in Kernel on ta0lve</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 18 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://ta0lve.github.io/tags/kernel/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Kernel Pwn 学习书签</title>
+      <link>https://ta0lve.github.io/pointer/kernel-pwn/pointer1/</link>
+      <pubDate>Tue, 18 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ta0lve.github.io/pointer/kernel-pwn/pointer1/</guid>
+      <description>&lt;p&gt;一些我在入门pwn &lt;strong&gt;Kernel Pwn&lt;/strong&gt; 知识时所学习阅读的文章，收集在此处以便于之后的复习和回顾。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
