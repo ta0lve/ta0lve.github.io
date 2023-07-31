@@ -39,7 +39,7 @@
   [{
     "@context": "https://schema.org",
     "@type": "Article",
-    "articleSection": "归档 Posts",
+    "articleSection": "Posts",
     "name": "PWN环境二次搭建记录-Ubuntu 22.04",
     "headline": "PWN环境二次搭建记录-Ubuntu 22.04",
     
@@ -59,7 +59,7 @@
     "keywords": ["CTF","PWN","Ubuntu"],
     
     "mainEntityOfPage": "true",
-    "wordCount": "8145"
+    "wordCount": "8229"
   }]
   </script>
 <meta content="ta0lve" name="author"/>
@@ -84,7 +84,7 @@
 </nav>
 <nav class="hidden md:flex items-center space-x-5 md:ml-12 h-12">
 <a class="flex items-center" href="/posts/">
-<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="归档 Posts">
+<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="Posts">
         Posts
     </p>
 </a>
@@ -178,7 +178,7 @@
 </li>
 <li class="mt-1">
 <a class="flex items-center" href="/posts/">
-<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="归档 Posts">
+<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="Posts">
             Posts
         </p>
 </a>
@@ -264,7 +264,7 @@
 <a class="hover:underline decoration-neutral-300 dark:underline-neutral-600" href="/"></a><span class="px-1 text-primary-500">/</span>
 </li>
 <li class="inline">
-<a class="hover:underline decoration-neutral-300 dark:underline-neutral-600" href="/posts/">归档 Posts</a><span class="px-1 text-primary-500">/</span>
+<a class="hover:underline decoration-neutral-300 dark:underline-neutral-600" href="/posts/">Posts</a><span class="px-1 text-primary-500">/</span>
 </li>
 <li class="inline hidden">
 <a class="hover:underline decoration-neutral-300 dark:underline-neutral-600" href="/posts/pwn/basic/pwn-_environment/">PWN环境二次搭建记录-Ubuntu 22.04</a><span class="px-1 text-primary-500">/</span>
@@ -275,7 +275,7 @@
     </h1>
 <div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-07-10 00:00:00 +0000 UTC">July 10, 2023</time><span class="px-2 text-primary-500">·</span><span>8145 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">17 分钟</span>
+<time datetime="2023-07-10 00:00:00 +0000 UTC">July 10, 2023</time><span class="px-2 text-primary-500">·</span><span>8229 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">17 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
 <span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%85%A5%E9%97%A8/&quot;,'_self');" style="margin-top:0.5rem">
@@ -356,7 +356,15 @@
 <li><a href="#具体安装">具体安装</a></li>
 </ul>
 </li>
-<li><a href="#基础工具">基础工具</a></li>
+<li><a href="#基础工具">基础工具</a>
+<ul>
+<li>
+<ul>
+<li><a href="#4-qemu-kernel-pwn"><strong>4. qemu （Kernel Pwn）</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li><a href="#gdb-插件">gdb 插件</a></li>
 <li><a href="#pwntools">pwntools</a></li>
 <li><a href="#libcsearcher">LibcSearcher</a></li>
@@ -396,7 +404,15 @@
 <li><a href="#具体安装">具体安装</a></li>
 </ul>
 </li>
-<li><a href="#基础工具">基础工具</a></li>
+<li><a href="#基础工具">基础工具</a>
+<ul>
+<li>
+<ul>
+<li><a href="#4-qemu-kernel-pwn"><strong>4. qemu （Kernel Pwn）</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li><a href="#gdb-插件">gdb 插件</a></li>
 <li><a href="#pwntools">pwntools</a></li>
 <li><a href="#libcsearcher">LibcSearcher</a></li>
@@ -700,13 +716,27 @@
 </span></span><span class="line"><span class="cl"><span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">gcc</span>
 </span></span><span class="line"><span class="cl"><span class="c1"># 检测是否安装成功</span>
 </span></span><span class="line"><span class="cl"><span class="n">gcc</span> <span class="o">-</span><span class="n">v</span>
-</span></span></code></pre></div><p><strong>4. qemu （可跳）</strong></p>
-<p>（目前还不太常用，不过也可以先装着）</p>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 安装</span>
+</span></span></code></pre></div><div class="anchor" id="4-qemu-kernel-pwn"></div>
+<h4 class="relative group"><strong>4. qemu （Kernel Pwn）</strong>
+<span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#4-qemu-kernel-pwn" style="text-decoration-line: none !important;">#</a></span>
+</h4>
+<p>（刚入门pwn的师傅可能不太常用，不过也可以先装着）</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 安装 </span>
+</span></span><span class="line"><span class="cl"><span class="c1"># (这里我直接采用了qemu官方的安装方式，大约有1G的包需要下载，所以网速很重要doge)</span>
 </span></span><span class="line"><span class="cl"><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">qemu</span><span class="o">-</span><span class="n">user</span> <span class="n">qemu</span><span class="o">-</span><span class="n">system</span> 
+</span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1"># 检测是否安装成功</span>
-</span></span><span class="line"><span class="cl"><span class="n">qemu</span><span class="o">-</span>
-</span></span></code></pre></div><p><strong>5. python3 与 pip3</strong></p>
+</span></span><span class="line"><span class="cl"><span class="n">qemu</span><span class="o">-</span><span class="n">system</span><span class="o">-</span><span class="n">arm</span> <span class="o">-</span><span class="n">M</span> <span class="err">?</span>
+</span></span></code></pre></div><p>
+<figure>
+<img alt="image-20230731175337803" class="my-0 rounded-md" src="https://s2.loli.net/2023/07/31/OiVdloquE3S8T2R.png"/>
+</figure>
+</p>
+<p><strong>qemu</strong>的详细安装过程与使用方法可以看：</p>
+<section class="space-y-10 w-full">
+</section>
+<p><strong>5. python3 与 pip3</strong></p>
 <p>ubuntu 已经默认装好了python3，如果想用python2的话可以自己装，不过现在已经不推荐用python2了</p>
 <div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 安装pip3</span>
 </span></span><span class="line"><span class="cl"><span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">python3</span><span class="o">-</span><span class="n">pip</span>
@@ -1565,7 +1595,7 @@
 <div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/pointer/kernel-pwn/pointer1/">Kernel Pwn 学习书签</div>
 <div class="text-sm text-neutral-500 dark:text-neutral-400">
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-07-18 00:00:00 +0000 UTC">July 18, 2023</time><span class="px-2 text-primary-500">·</span><span>107 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">1 分钟</span>
+<time datetime="2023-07-18 00:00:00 +0000 UTC">July 18, 2023</time><span class="px-2 text-primary-500">·</span><span>505 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">2 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
 <span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%85%A5%E9%97%A8/&quot;,'_self');" style="margin-top:0.5rem">
@@ -1721,11 +1751,11 @@
 <hr class="border-dotted border-neutral-300 dark:border-neutral-600"/>
 <div class="flex justify-between pt-3">
 <span>
-<a class="flex group mr-3" href="/posts/sth/sm.ms/">
+<a class="flex group mr-3" href="/posts/pwn/basic/long_long_ago/1/">
 <span class="mr-3 text-neutral-700 group-hover:text-primary-600 ltr:inline rtl:hidden dark:text-neutral dark:group-hover:text-primary-400">←</span>
 <span class="ml-3 text-neutral-700 group-hover:text-primary-600 ltr:hidden rtl:inline dark:text-neutral dark:group-hover:text-primary-400">→</span>
 <span class="flex flex-col">
-<span class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500">SM.MS图床加载失败解决方法</span>
+<span class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500">pwn基础——定位溢出点位置</span>
 <span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
 <time datetime="2023-07-10 00:00:00 +0000 UTC">July 10, 2023</time>
 </span>

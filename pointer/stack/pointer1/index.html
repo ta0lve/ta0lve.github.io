@@ -15,7 +15,7 @@
 <meta content="ie=edge" http-equiv="X-UA-Compatible"/>
 <title>栈学习书签 · ta0lve</title>
 <meta content="栈学习书签 · ta0lve" name="title"/>
-<meta content="CTF, PWN, 栈, " name="keywords"/>
+<meta content="CTF, PWN, 栈, PLT&amp;GOT, 栈迁移, " name="keywords"/>
 <link href="https://ta0lve.github.io/pointer/stack/pointer1/" rel="canonical"/>
 <link href="/css/main.bundle.min.c6116b9ed1c907a8c0eb015f377d3eecc07e448d75729e31fc3de5881465c6c172ba9fa9a6800c030116caf2a110d92242bb816639484ca791f7cd107a8d49b5.css" integrity="sha512-xhFrntHJB6jA6wFfN30+7MB+RI11cp4x/D3liBRlxsFyup+ppoAMAwEWyvKhENkiQruBZjlITKeR980Qeo1JtQ==" rel="stylesheet" type="text/css"/>
 <script integrity="sha512-UWoWdFvqWpvQERONJUzA/TlzzVXObhXz3sdj58fCx0SPj+e1TMqBHLghsMfhLNFhyqzh3XlKw9NNQJN8vMnuEg==" src="/js/appearance.min.516a16745bea5a9bd011138d254cc0fd3973cd55ce6e15f3dec763e7c7c2c7448f8fe7b54cca811cb821b0c7e12cd161caace1dd794ac3d34d40937cbcc9ee12.js" type="text/javascript"></script>
@@ -56,10 +56,10 @@
     
     "dateModified": "2023-07-15T00:00:00\u002b00:00",
     
-    "keywords": ["CTF","PWN","栈"],
+    "keywords": ["CTF","PWN","栈","PLT\u0026GOT","栈迁移"],
     
     "mainEntityOfPage": "true",
-    "wordCount": "497"
+    "wordCount": "724"
   }]
   </script>
 <meta content="ta0lve" name="author"/>
@@ -84,7 +84,7 @@
 </nav>
 <nav class="hidden md:flex items-center space-x-5 md:ml-12 h-12">
 <a class="flex items-center" href="/posts/">
-<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="归档 Posts">
+<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="Posts">
         Posts
     </p>
 </a>
@@ -178,7 +178,7 @@
 </li>
 <li class="mt-1">
 <a class="flex items-center" href="/posts/">
-<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="归档 Posts">
+<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="Posts">
             Posts
         </p>
 </a>
@@ -275,7 +275,7 @@
     </h1>
 <div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-07-15 00:00:00 +0000 UTC">July 15, 2023</time><span class="px-2 text-primary-500">·</span><span>497 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">1 分钟</span>
+<time datetime="2023-07-15 00:00:00 +0000 UTC">July 15, 2023</time><span class="px-2 text-primary-500">·</span><span>724 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">2 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
 <span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%85%A5%E9%97%A8/&quot;,'_self');" style="margin-top:0.5rem">
@@ -303,6 +303,20 @@
 <span class="flex">
 <span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
     栈
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/pltgot/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    PLT&amp;GOT
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/%E6%A0%88%E8%BF%81%E7%A7%BB/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    栈迁移
   </span>
 </span>
 </span>
@@ -351,9 +365,13 @@
 <ul>
 <li>
 <ul>
-<li><a href="#相关知识学习">相关知识学习</a>
+<li>
 <ul>
 <li><a href="#rop">ROP</a></li>
+</ul>
+</li>
+<li><a href="#pltgot">PLT&amp;GOT</a>
+<ul>
 <li><a href="#栈迁移">栈迁移</a></li>
 </ul>
 </li>
@@ -372,9 +390,13 @@
 <ul>
 <li>
 <ul>
-<li><a href="#相关知识学习">相关知识学习</a>
+<li>
 <ul>
 <li><a href="#rop">ROP</a></li>
+</ul>
+</li>
+<li><a href="#pltgot">PLT&amp;GOT</a>
+<ul>
 <li><a href="#栈迁移">栈迁移</a></li>
 </ul>
 </li>
@@ -478,11 +500,6 @@
 </details>
 <p>一些我在入门pwn <strong>栈</strong> 时所学习阅读的文章，收集在此处以便于之后的复习和回顾。</p>
 <hr/>
-<div class="anchor" id="相关知识学习"></div>
-<h3 class="relative group">相关知识学习 
-    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
-<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e7%9b%b8%e5%85%b3%e7%9f%a5%e8%af%86%e5%ad%a6%e4%b9%a0" style="text-decoration-line: none !important;">#</a></span>
-</h3>
 <div class="anchor" id="rop"></div>
 <h4 class="relative group">ROP 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
@@ -500,8 +517,8 @@
     PWN入门系列（四）：栈终结篇-安全客 - 安全资讯平台 (anquanke.com)</a></p>
 <p><a href="https://www.anquanke.com/post/id/205858" target="_blank">
     Mac PWN 入门系列（七）Ret2Csu-安全客 - 安全资讯平台 (anquanke.com)</a></p>
-<p>[<a href="https://bbs.kanxue.com/thread-227034.htm" target="_blank">
-    原创][新手向]ret2dl-resolve详解-Pwn-看雪-安全社区|安全招聘|kanxue.com</a></p>
+<p><a href="https://bbs.kanxue.com/thread-227034.htm" target="_blank">
+    ret2dl-resolve详解-Pwn-看雪-安全社区|安全招聘|kanxue.com</a></p>
 <p><a href="https://www.testzero-wz.com/2022/03/05/Ret2dlresolve%e2%80%94%e2%80%94%e4%bb%8eNo-RELRO%e5%88%b0FULL-RELRO/#%e4%b8%80.-ret2dlresolve%e5%8e%9f%e7%90%86" target="_blank">
     Ret2dlresolve攻击——从No RELRO到FULL RELRO | T3stzer0’s Blog </a></p>
 <p><a href="https://darkwing.moe/2019/04/15/Pwn%e5%ad%a6%e4%b9%a0%e7%ac%94%e8%ae%b014-stack-pivot%e4%b8%8eOff-by-one/" target="_blank">
@@ -514,6 +531,21 @@
     PWN入门进阶篇（五）高级ROP</a></p>
 <p><a href="https://wiki.mrskye.cn/Pwn/stackoverflow/%e8%8a%b1%e5%bc%8f%e6%a0%88%e6%ba%a2%e5%87%ba%e6%8a%80%e5%b7%a7/" target="_blank">
     花式栈溢出技巧 - SkYe Wiki (mrskye.cn)</a></p>
+<div class="anchor" id="pltgot"></div>
+<h3 class="relative group">PLT&amp;GOT 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#pltgot" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<p><a href="https://mp.weixin.qq.com/s?__biz=MzU5OTU3NDEzOQ==&amp;mid=2247484367&amp;idx=1&amp;sn=8303e2efdcc817e43a0973c2768d36d7&amp;chksm=feb390dbc9c419cd89b304489454e52f1d1c82d3725f4a5951af97df72921083055f0be1e890&amp;mpshare=1&amp;scene=23&amp;srcid=0401NIjTxyVk8V4NhJt1nTyW&amp;sharer_sharetime=1585711929327&amp;sharer_shareid=ff83fe2fe7db7fcd8a1fcbc183d841c4#rd" target="_blank">
+    Pwn基础：PLT&amp;GOT表以及延迟绑定机制 (qq.com)</a></p>
+<p><a href="https://linyt.blog.csdn.net/article/details/51635768" target="_blank">
+    聊聊Linux动态链接中的PLT和GOT（１）——何谓PLT与GOT_plt got_海枫的博客-CSDN博客</a></p>
+<p><a href="https://linyt.blog.csdn.net/article/details/51636753" target="_blank">
+    聊聊Linux动态链接中的PLT和GOT（２）——延迟重定位_plt重定位_海枫的博客-CSDN博客</a></p>
+<p><a href="https://linyt.blog.csdn.net/article/details/51637832" target="_blank">
+    聊聊Linux动态链接中的PLT和GOT（３）——公共GOT表项_如何查看got表是否可写_海枫的博客-CSDN博客</a></p>
+<p><a href="https://linyt.blog.csdn.net/article/details/51893258" target="_blank">
+    聊聊Linux动态链接中的PLT和GOT（4）—— 穿针引线_海枫的博客-CSDN博客</a></p>
 <div class="anchor" id="栈迁移"></div>
 <h4 class="relative group">栈迁移 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
@@ -523,6 +555,8 @@
     栈平衡和栈转移(Stack-Pivot) | 偏有宸机 (gitee.io)</a></p>
 <p><a href="https://www.cnblogs.com/ZIKH26/articles/15817337.html" target="_blank">
     栈迁移的原理&amp;&amp;实战运用 - ZikH26 - 博客园 (cnblogs.com)</a></p>
+<p><a href="https://mp.weixin.qq.com/s/ULVdPg-V0v7_GlFg32m1GQ" target="_blank">
+    PWN！栈迁移原理 (qq.com)</a></p>
 <div class="anchor" id="wp学习与复现"></div>
 <h3 class="relative group">wp学习与复现 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
@@ -595,7 +629,7 @@
 <div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/pointer/kernel-pwn/pointer1/">Kernel Pwn 学习书签</div>
 <div class="text-sm text-neutral-500 dark:text-neutral-400">
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-07-18 00:00:00 +0000 UTC">July 18, 2023</time><span class="px-2 text-primary-500">·</span><span>107 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">1 分钟</span>
+<time datetime="2023-07-18 00:00:00 +0000 UTC">July 18, 2023</time><span class="px-2 text-primary-500">·</span><span>505 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">2 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
 <span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%85%A5%E9%97%A8/&quot;,'_self');" style="margin-top:0.5rem">

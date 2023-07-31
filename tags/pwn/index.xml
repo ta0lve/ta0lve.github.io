@@ -108,6 +108,15 @@
     </item>
     
     <item>
+      <title>pwn基础——定位溢出点位置</title>
+      <link>https://ta0lve.github.io/posts/pwn/basic/long_long_ago/1/</link>
+      <pubDate>Mon, 10 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ta0lve.github.io/posts/pwn/basic/long_long_ago/1/</guid>
+      <description>&lt;p&gt;本系列为博主在大一上学期刚入门pwn时所记下的学习记录&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>PWN-Level 0 Tic-Tac-Toe </title>
       <link>https://ta0lve.github.io/posts/wp/2023_04_w4ter/2_tic-tac-toe-level-0_write_up/</link>
       <pubDate>Wed, 05 Jul 2023 00:00:00 +0000</pubDate>

@@ -16,5 +16,14 @@
       <description>&lt;p&gt;一些我在入门pwn &lt;strong&gt;栈&lt;/strong&gt; 时所学习阅读的文章，收集在此处以便于之后的复习和回顾。&lt;/p&gt;</description>
     </item>
     
+    <item>
+      <title>pwn基础——定位溢出点位置</title>
+      <link>https://ta0lve.github.io/posts/pwn/basic/long_long_ago/1/</link>
+      <pubDate>Mon, 10 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ta0lve.github.io/posts/pwn/basic/long_long_ago/1/</guid>
+      <description>&lt;p&gt;本系列为博主在大一上学期刚入门pwn时所记下的学习记录&lt;/p&gt;</description>
+    </item>
+    
   </channel>
 </rss>
