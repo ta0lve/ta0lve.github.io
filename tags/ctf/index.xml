@@ -13,7 +13,7 @@
       <pubDate>Tue, 18 Jul 2023 00:00:00 +0000</pubDate>
       
       <guid>https://ta0lve.github.io/posts/wp/2023_07_hws/fmt2/</guid>
-      <description>前言： 其实这道题本地很早就打通了，但是远程一直出错， 所以我在</description>
+      <description>如果本博客部分文章图片加载失败， 可以点击此处查看解决办法 前言</description>
     </item>
     
     <item>
@@ -22,7 +22,7 @@
       <pubDate>Tue, 18 Jul 2023 00:00:00 +0000</pubDate>
       
       <guid>https://ta0lve.github.io/posts/wp/2023_07_hws/fmt/</guid>
-      <description>前言： # 本文是HWS 线上赛的pwn方向fmt题目的wp，写得</description>
+      <description>如果本博客部分文章图片加载失败， 可以点击此处查看解决办法 前言</description>
     </item>
     
     <item>
@@ -40,7 +40,7 @@
       <pubDate>Sun, 16 Jul 2023 00:00:00 +0000</pubDate>
       
       <guid>https://ta0lve.github.io/pointer/heap/pointer1/</guid>
-      <description>&lt;p&gt;一些我在入门pwn&lt;strong&gt;堆&lt;/strong&gt;时所学习阅读的文章，收集在此处以便于之后的复习和回顾。&lt;/p&gt;</description>
+      <description>&lt;p&gt;一些我在入门pwn &lt;strong&gt;堆&lt;/strong&gt; 时所学习阅读的文章，收集在此处以便于之后的复习和回顾。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -67,16 +67,7 @@
       <pubDate>Sat, 15 Jul 2023 00:00:00 +0000</pubDate>
       
       <guid>https://ta0lve.github.io/pointer/stack/pointer1/</guid>
-      <description>&lt;p&gt;一些我在入门pwn&lt;strong&gt;栈&lt;/strong&gt;时所学习阅读的文章，收集在此处以便于之后的复习和回顾。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>整数溢出漏洞学习书签</title>
-      <link>https://ta0lve.github.io/pointer/intoverflow/pointer1/</link>
-      <pubDate>Sat, 15 Jul 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://ta0lve.github.io/pointer/intoverflow/pointer1/</guid>
-      <description>&lt;p&gt;一些我在入门pwn&lt;strong&gt;整数溢出漏洞&lt;/strong&gt;时所学习阅读的文章，收集在此处以便于之后的复习和回顾。&lt;/p&gt;</description>
+      <description>&lt;p&gt;一些我在入门pwn &lt;strong&gt;栈&lt;/strong&gt; 时所学习阅读的文章，收集在此处以便于之后的复习和回顾。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -99,12 +90,30 @@
     </item>
     
     <item>
-      <title>PWN环境搭建记录-Ubuntu 22.04</title>
+      <title>整数溢出漏洞学习书签</title>
+      <link>https://ta0lve.github.io/pointer/intoverflow/pointer1/</link>
+      <pubDate>Fri, 14 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ta0lve.github.io/pointer/intoverflow/pointer1/</guid>
+      <description>&lt;p&gt;一些我在入门pwn&lt;strong&gt;整数溢出漏洞&lt;/strong&gt;时所学习阅读的文章，收集在此处以便于之后的复习和回顾。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>misc相关-书签</title>
+      <link>https://ta0lve.github.io/pointer/%E4%B9%A6%E7%AD%BE/misc%E4%B9%A6%E7%AD%BE/</link>
+      <pubDate>Thu, 13 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ta0lve.github.io/pointer/%E4%B9%A6%E7%AD%BE/misc%E4%B9%A6%E7%AD%BE/</guid>
+      <description>misc学习 # 杂项简介 - CTF Wiki CTF——misc指南【长期更新</description>
+    </item>
+    
+    <item>
+      <title>PWN环境二次搭建记录-Ubuntu 22.04</title>
       <link>https://ta0lve.github.io/posts/pwn/basic/pwn-_environment/</link>
       <pubDate>Mon, 10 Jul 2023 00:00:00 +0000</pubDate>
       
       <guid>https://ta0lve.github.io/posts/pwn/basic/pwn-_environment/</guid>
-      <description>前言 # 学习pwn已经有一段时间了，但是由于之前自己一直没有注</description>
+      <description>如果本博客部分文章图片加载失败， 可以点击此处查看解决办法 前言</description>
     </item>
     
     <item>

@@ -135,17 +135,6 @@
   
     
       <url>
-            <loc>https://ta0lve.github.io/pointer/intoverflow/pointer1/</loc>
-            <lastmod>2023-07-15T00:00:00+00:00</lastmod>
-            <changefreq>daily</changefreq>
-            <priority>0.5</priority>
-          </url>
-    
-  
-    
-  
-    
-      <url>
             <loc>https://ta0lve.github.io/posts/pwn/basic/linux_/</loc>
             <lastmod>2023-07-14T00:00:00+00:00</lastmod>
             <changefreq>daily</changefreq>
@@ -164,6 +153,19 @@
   
     
   
+    
+  
+    
+  
+    
+  
+    
+      <url>
+            <loc>https://ta0lve.github.io/pointer/intoverflow/pointer1/</loc>
+            <lastmod>2023-07-14T00:00:00+00:00</lastmod>
+            <changefreq>daily</changefreq>
+            <priority>0.5</priority>
+          </url>
     
   
     
@@ -193,6 +195,8 @@
     
   
     
+  
+    
       <url>
             <loc>https://ta0lve.github.io/posts/pwn/basic/pwn-_environment/</loc>
             <lastmod>2023-07-10T00:00:00+00:00</lastmod>
@@ -208,8 +212,6 @@
             <changefreq>daily</changefreq>
             <priority>0.5</priority>
           </url>
-    
-  
     
   
     
@@ -232,8 +234,6 @@
             <changefreq>daily</changefreq>
             <priority>0.5</priority>
           </url>
-    
-  
     
   
     
@@ -354,10 +354,8 @@
     
   
     
-  
-    
       <url>
-            <loc>https://ta0lve.github.io/link/gztime/</loc>
+            <loc>https://ta0lve.github.io/about/</loc>
             <lastmod>2023-07-02T00:00:00+00:00</lastmod>
             <changefreq>daily</changefreq>
             <priority>0.5</priority>
@@ -365,8 +363,10 @@
     
   
     
+  
+    
       <url>
-            <loc>https://ta0lve.github.io/about/</loc>
+            <loc>https://ta0lve.github.io/link/gztime/</loc>
             <lastmod>2023-07-02T00:00:00+00:00</lastmod>
             <changefreq>daily</changefreq>
             <priority>0.5</priority>

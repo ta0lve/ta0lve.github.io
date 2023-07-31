@@ -56,7 +56,17 @@
 <nav class="hidden md:flex items-center space-x-5 md:ml-12 h-12">
 <a class="flex items-center" href="/posts/">
 <p class="text-base font-medium text-gray-500 hover:text-gray-900" title="归档 Posts">
-        归档
+        Posts
+    </p>
+</a>
+<a class="flex items-center" href="/pointer/">
+<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="Pointer">
+        Pointer
+    </p>
+</a>
+<a class="flex items-center" href="/tags/pwn/">
+<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="PWN">
+        Pwn
     </p>
 </a>
 <a class="flex items-center" href="/categories/">
@@ -74,13 +84,8 @@
         友链
     </p>
 </a>
-<a class="flex items-center" href="/pointer/">
-<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="Pointer">
-        Pointer
-    </p>
-</a>
 <a class="flex items-center" href="/about/">
-<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="关于 About">
+<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="About">
         About
     </p>
 </a>
@@ -145,7 +150,21 @@
 <li class="mt-1">
 <a class="flex items-center" href="/posts/">
 <p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="归档 Posts">
-            归档
+            Posts
+        </p>
+</a>
+</li>
+<li class="mt-1">
+<a class="flex items-center" href="/pointer/">
+<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="Pointer">
+            Pointer
+        </p>
+</a>
+</li>
+<li class="mt-1">
+<a class="flex items-center" href="/tags/pwn/">
+<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="PWN">
+            Pwn
         </p>
 </a>
 </li>
@@ -171,15 +190,8 @@
 </a>
 </li>
 <li class="mt-1">
-<a class="flex items-center" href="/pointer/">
-<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="Pointer">
-            Pointer
-        </p>
-</a>
-</li>
-<li class="mt-1">
 <a class="flex items-center" href="/about/">
-<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="关于 About">
+<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="About">
             About
         </p>
 </a>
@@ -209,7 +221,7 @@
 </script>
 <div class="relative flex flex-col grow">
 <main class="grow" id="main-content">
-<div class="fixed inset-x-0 top-0 h-[800px] single_hero_background nozoom" style="background-image:url(/IMAGE_Background.jpg);">
+<div class="fixed inset-x-0 top-0 h-[800px] single_hero_background nozoom" style="background-image:url(/flyx6.jpg);">
 <div class="absolute inset-0 bg-gradient-to-t from-neutral dark:from-neutral-800 to-transparent mix-blend-normal">
 </div>
 <div class="absolute inset-0 opacity-60 bg-gradient-to-t from-neutral dark:from-neutral-800 to-neutral-100 dark:to-neutral-800 mix-blend-normal">
@@ -237,11 +249,10 @@
 </header>
 <section class="mt-0 prose flex max-w-full flex-col dark:prose-invert lg:flex-row">
 <div class="min-w-0 min-h-0 max-w-prose">
-<p><strong>归档 Posts</strong> 是我在学习与生活之旅中的一些记录， 而 <strong>Pointer</strong> 则是我在这一路上做的一个个"标记"与"书签"。</p>
 <div class="flex px-4 py-3 rounded-md bg-primary-100 dark:bg-primary-900">
 <span class="text-primary-400 ltr:pr-3 rtl:pl-3 flex items-center">
 <span class="relative block icon">
-<svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M506.3 417l-213.3-364c-16.33-28-57.54-28-73.98 0l-213.2 364C-10.59 444.9 9.849 480 42.74 480h426.6C502.1 480 522.6 445 506.3 417zM232 168c0-13.25 10.75-24 24-24S280 154.8 280 168v128c0 13.25-10.75 24-23.1 24S232 309.3 232 296V168zM256 416c-17.36 0-31.44-14.08-31.44-31.44c0-17.36 14.07-31.44 31.44-31.44s31.44 14.08 31.44 31.44C287.4 401.9 273.4 416 256 416z" fill="currentColor"></path></svg>
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M48 32H197.5C214.5 32 230.7 38.74 242.7 50.75L418.7 226.7C443.7 251.7 443.7 292.3 418.7 317.3L285.3 450.7C260.3 475.7 219.7 475.7 194.7 450.7L18.75 274.7C6.743 262.7 0 246.5 0 229.5V80C0 53.49 21.49 32 48 32L48 32zM112 176C129.7 176 144 161.7 144 144C144 126.3 129.7 112 112 112C94.33 112 80 126.3 80 144C80 161.7 94.33 176 112 176z" fill="currentColor"></path></svg>
 </span>
 </span>
 <span class="dark:text-neutral-300"><strong>想看看 归档 Posts 里的文章吗？</strong><a href="https://ta0lve.github.io/posts/" target="_blank">
@@ -255,7 +266,7 @@
 <section class="w-full grid gap-4 sm:grid-cols-2 md:grid-cols-3">
 <a class="min-w-full" href="/pointer/nothing/1/">
 <div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
-<div class="w-full thumbnail_card nozoom" style="background-image:url(/IMAGE_Background.jpg);"></div>
+<div class="w-full thumbnail_card nozoom" style="background-image:url(/pointer/nothing/1/featured.jpg);"></div>
 <div class="px-6 py-4">
 <div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/pointer/nothing/1/">一些随手记下的书签</div>
 <div class="text-sm text-neutral-500 dark:text-neutral-400">
@@ -289,7 +300,7 @@
 </a>
 <a class="min-w-full" href="/pointer/kernel-pwn/pointer1/">
 <div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
-<div class="w-full thumbnail_card nozoom" style="background-image:url(/IMAGE_Background.jpg);"></div>
+<div class="w-full thumbnail_card nozoom" style="background-image:url(/pointer/kernel-pwn/pointer1/featured.jpg);"></div>
 <div class="px-6 py-4">
 <div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/pointer/kernel-pwn/pointer1/">Kernel Pwn 学习书签</div>
 <div class="text-sm text-neutral-500 dark:text-neutral-400">
@@ -337,7 +348,7 @@
 </a>
 <a class="min-w-full" href="/pointer/heap/pointer1/">
 <div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
-<div class="w-full thumbnail_card nozoom" style="background-image:url(/IMAGE_Background.jpg);"></div>
+<div class="w-full thumbnail_card nozoom" style="background-image:url(/pointer/heap/pointer1/featured.jpg);"></div>
 <div class="px-6 py-4">
 <div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/pointer/heap/pointer1/">堆学习书签</div>
 <div class="text-sm text-neutral-500 dark:text-neutral-400">
@@ -376,55 +387,7 @@
 </div>
 </div>
 <div class="py-1 prose dark:prose-invert">
-<p>一些我在入门pwn<strong>堆</strong>时所学习阅读的文章，收集在此处以便于之后的复习和回顾。</p>
-</div>
-</div>
-<div class="px-6 pt-4 pb-2">
-</div>
-</div>
-</a>
-<a class="min-w-full" href="/pointer/intoverflow/pointer1/">
-<div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
-<div class="w-full thumbnail_card nozoom" style="background-image:url(/IMAGE_Background.jpg);"></div>
-<div class="px-6 py-4">
-<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/pointer/intoverflow/pointer1/">整数溢出漏洞学习书签</div>
-<div class="text-sm text-neutral-500 dark:text-neutral-400">
-<div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-07-15 00:00:00 +0000 UTC">July 15, 2023</time><span class="px-2 text-primary-500">·</span><span>75 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">1 分钟</span>
-</div>
-<div class="flex flex-row flex-wrap items-center">
-<span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%85%A5%E9%97%A8/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    pwn入门
-  </span>
-</span>
-</span>
-<span class="mr-2" onclick="window.open(&quot;/tags/ctf/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    CTF
-  </span>
-</span>
-</span>
-<span class="mr-2" onclick="window.open(&quot;/tags/pwn/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    PWN
-  </span>
-</span>
-</span>
-<span class="mr-2" onclick="window.open(&quot;/tags/%E6%95%B4%E6%95%B0%E6%BA%A2%E5%87%BA%E6%BC%8F%E6%B4%9E/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    整数溢出漏洞
-  </span>
-</span>
-</span>
-</div>
-</div>
-<div class="py-1 prose dark:prose-invert">
-<p>一些我在入门pwn<strong>整数溢出漏洞</strong>时所学习阅读的文章，收集在此处以便于之后的复习和回顾。</p>
+<p>一些我在入门pwn <strong>堆</strong> 时所学习阅读的文章，收集在此处以便于之后的复习和回顾。</p>
 </div>
 </div>
 <div class="px-6 pt-4 pb-2">
@@ -433,7 +396,7 @@
 </a>
 <a class="min-w-full" href="/pointer/stack/pointer1/">
 <div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
-<div class="w-full thumbnail_card nozoom" style="background-image:url(/IMAGE_Background.jpg);"></div>
+<div class="w-full thumbnail_card nozoom" style="background-image:url(/pointer/stack/pointer1/featured.jpg);"></div>
 <div class="px-6 py-4">
 <div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/pointer/stack/pointer1/">栈学习书签</div>
 <div class="text-sm text-neutral-500 dark:text-neutral-400">
@@ -472,7 +435,7 @@
 </div>
 </div>
 <div class="py-1 prose dark:prose-invert">
-<p>一些我在入门pwn<strong>栈</strong>时所学习阅读的文章，收集在此处以便于之后的复习和回顾。</p>
+<p>一些我在入门pwn <strong>栈</strong> 时所学习阅读的文章，收集在此处以便于之后的复习和回顾。</p>
 </div>
 </div>
 <div class="px-6 pt-4 pb-2">
@@ -481,7 +444,7 @@
 </a>
 <a class="min-w-full" href="/pointer/wp/pointer1/">
 <div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
-<div class="w-full thumbnail_card nozoom" style="background-image:url(/IMAGE_Background.jpg);"></div>
+<div class="w-full thumbnail_card nozoom" style="background-image:url(/pointer/wp/pointer1/featured.jpg);"></div>
 <div class="px-6 py-4">
 <div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/pointer/wp/pointer1/">wp学习书签</div>
 <div class="text-sm text-neutral-500 dark:text-neutral-400">
@@ -529,7 +492,7 @@
 </a>
 <a class="min-w-full" href="/pointer/fmt/pointer1/">
 <div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
-<div class="w-full thumbnail_card nozoom" style="background-image:url(/IMAGE_Background.jpg);"></div>
+<div class="w-full thumbnail_card nozoom" style="background-image:url(/pointer/fmt/pointer1/featured.jpg);"></div>
 <div class="px-6 py-4">
 <div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/pointer/fmt/pointer1/">fmt学习书签</div>
 <div class="text-sm text-neutral-500 dark:text-neutral-400">
@@ -569,6 +532,54 @@
 </div>
 <div class="py-1 prose dark:prose-invert">
 <p>一些我在入门pwn<strong>格式化字符串漏洞</strong>时所学习阅读的文章，收集在此处以便于之后的复习和回顾。</p>
+</div>
+</div>
+<div class="px-6 pt-4 pb-2">
+</div>
+</div>
+</a>
+<a class="min-w-full" href="/pointer/intoverflow/pointer1/">
+<div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
+<div class="w-full thumbnail_card nozoom" style="background-image:url(/pointer/intoverflow/pointer1/featured.jpg);"></div>
+<div class="px-6 py-4">
+<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/pointer/intoverflow/pointer1/">整数溢出漏洞学习书签</div>
+<div class="text-sm text-neutral-500 dark:text-neutral-400">
+<div class="flex flex-row flex-wrap items-center">
+<time datetime="2023-07-14 00:00:00 +0000 UTC">July 14, 2023</time><span class="px-2 text-primary-500">·</span><span>75 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">1 分钟</span>
+</div>
+<div class="flex flex-row flex-wrap items-center">
+<span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%85%A5%E9%97%A8/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    pwn入门
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/ctf/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    CTF
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/pwn/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    PWN
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/%E6%95%B4%E6%95%B0%E6%BA%A2%E5%87%BA%E6%BC%8F%E6%B4%9E/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    整数溢出漏洞
+  </span>
+</span>
+</span>
+</div>
+</div>
+<div class="py-1 prose dark:prose-invert">
+<p>一些我在入门pwn<strong>整数溢出漏洞</strong>时所学习阅读的文章，收集在此处以便于之后的复习和回顾。</p>
 </div>
 </div>
 <div class="px-6 pt-4 pb-2">
@@ -633,6 +644,20 @@
 <time datetime="2023-07-13 00:00:00 +0000 UTC">July 13, 2023</time><span class="px-2 text-primary-500">·</span><span>284 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">1 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
+<span class="mr-2" onclick="window.open(&quot;/tags/ctf/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    CTF
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/misc/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    misc
+  </span>
+</span>
+</span>
 </div>
 </div>
 </div>
@@ -715,7 +740,7 @@
 <nav class="flex flex-row pb-4 text-base font-medium text-neutral-500 dark:text-neutral-400">
 <ul class="flex flex-col list-none sm:flex-row">
 <li class="flex mb-1 ltr:text-right rtl:text-left sm:mb-0 ltr:sm:mr-7 ltr:sm:last:mr-0 rtl:sm:ml-7 rtl:sm:last:ml-0">
-<a class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2" href="/about/" title="关于 About">About</a>
+<a class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2" href="/about/" title="About">About</a>
 </li>
 <li class="flex mb-1 ltr:text-right rtl:text-left sm:mb-0 ltr:sm:mr-7 ltr:sm:last:mr-0 rtl:sm:ml-7 rtl:sm:last:ml-0">
 <a class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2" href="/tags/pwn/" title="PWN">pwn2own , pwn4fun</a>

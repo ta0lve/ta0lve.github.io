@@ -26,14 +26,15 @@
 <link href="/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="/site.webmanifest" rel="manifest"/>
 <meta content="栈学习书签" property="og:title"/>
-<meta content="一些我在入门pwn栈时所学习阅读的文章，收集在此处以便于之后的复习和回顾。" property="og:description"/>
+<meta content="一些我在入门pwn 栈 时所学习阅读的文章，收集在此处以便于之后的复习和回顾。" property="og:description"/>
 <meta content="article" property="og:type"/>
-<meta content="https://ta0lve.github.io/pointer/stack/pointer1/" property="og:url"/><meta content="Pointer" property="article:section"/>
+<meta content="https://ta0lve.github.io/pointer/stack/pointer1/" property="og:url"/><meta content="https://ta0lve.github.io/pointer/stack/pointer1/featured.jpg" property="og:image"/><meta content="Pointer" property="article:section"/>
 <meta content="2023-07-15T00:00:00+00:00" property="article:published_time"/>
 <meta content="2023-07-15T00:00:00+00:00" property="article:modified_time"/>
-<meta content="summary" name="twitter:card"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="https://ta0lve.github.io/pointer/stack/pointer1/featured.jpg" name="twitter:image"/>
 <meta content="栈学习书签" name="twitter:title"/>
-<meta content="一些我在入门pwn栈时所学习阅读的文章，收集在此处以便于之后的复习和回顾。" name="twitter:description"/>
+<meta content="一些我在入门pwn 栈 时所学习阅读的文章，收集在此处以便于之后的复习和回顾。" name="twitter:description"/>
 <script type="application/ld+json">
   [{
     "@context": "https://schema.org",
@@ -42,7 +43,7 @@
     "name": "栈学习书签",
     "headline": "栈学习书签",
     
-    "abstract": "\u003cp\u003e一些我在入门pwn\u003cstrong\u003e栈\u003c\/strong\u003e时所学习阅读的文章，收集在此处以便于之后的复习和回顾。\u003c\/p\u003e",
+    "abstract": "\u003cp\u003e一些我在入门pwn \u003cstrong\u003e栈\u003c\/strong\u003e 时所学习阅读的文章，收集在此处以便于之后的复习和回顾。\u003c\/p\u003e",
     "inLanguage": "zh-cn",
     "url" : "https:\/\/ta0lve.github.io\/pointer\/stack\/pointer1\/",
     "author" : {
@@ -84,7 +85,17 @@
 <nav class="hidden md:flex items-center space-x-5 md:ml-12 h-12">
 <a class="flex items-center" href="/posts/">
 <p class="text-base font-medium text-gray-500 hover:text-gray-900" title="归档 Posts">
-        归档
+        Posts
+    </p>
+</a>
+<a class="flex items-center" href="/pointer/">
+<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="Pointer">
+        Pointer
+    </p>
+</a>
+<a class="flex items-center" href="/tags/pwn/">
+<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="PWN">
+        Pwn
     </p>
 </a>
 <a class="flex items-center" href="/categories/">
@@ -102,13 +113,8 @@
         友链
     </p>
 </a>
-<a class="flex items-center" href="/pointer/">
-<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="Pointer">
-        Pointer
-    </p>
-</a>
 <a class="flex items-center" href="/about/">
-<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="关于 About">
+<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="About">
         About
     </p>
 </a>
@@ -173,7 +179,21 @@
 <li class="mt-1">
 <a class="flex items-center" href="/posts/">
 <p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="归档 Posts">
-            归档
+            Posts
+        </p>
+</a>
+</li>
+<li class="mt-1">
+<a class="flex items-center" href="/pointer/">
+<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="Pointer">
+            Pointer
+        </p>
+</a>
+</li>
+<li class="mt-1">
+<a class="flex items-center" href="/tags/pwn/">
+<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="PWN">
+            Pwn
         </p>
 </a>
 </li>
@@ -199,15 +219,8 @@
 </a>
 </li>
 <li class="mt-1">
-<a class="flex items-center" href="/pointer/">
-<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="Pointer">
-            Pointer
-        </p>
-</a>
-</li>
-<li class="mt-1">
 <a class="flex items-center" href="/about/">
-<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="关于 About">
+<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="About">
             About
         </p>
 </a>
@@ -239,7 +252,7 @@
 <main class="grow" id="main-content">
 <article>
 <div class="h-[150px] md:h-[200px]" id="hero"></div>
-<div class="fixed inset-x-0 top-0 h-[800px] single_hero_background nozoom" style="background-image:url(/IMAGE_Background.jpg);">
+<div class="fixed inset-x-0 top-0 h-[800px] single_hero_background nozoom" style="background-image:url(/pointer/stack/pointer1/featured.jpg);">
 <div class="absolute inset-0 bg-gradient-to-t from-neutral dark:from-neutral-800 to-transparent mix-blend-normal">
 </div>
 <div class="absolute inset-0 opacity-60 bg-gradient-to-t from-neutral dark:from-neutral-800 to-neutral-100 dark:to-neutral-800 mix-blend-normal">
@@ -421,7 +434,7 @@
     </summary>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
 <a href="https://ta0lve.github.io/posts/pwn/basic/pwn-_environment/">
-            Part 1: PWN环境搭建记录-Ubuntu 22.04
+            Part 1: PWN环境二次搭建记录-Ubuntu 22.04
         </a>
 </div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
@@ -463,7 +476,7 @@
         </a>
 </div>
 </details>
-<p>一些我在入门pwn<strong>栈</strong>时所学习阅读的文章，收集在此处以便于之后的复习和回顾。</p>
+<p>一些我在入门pwn <strong>栈</strong> 时所学习阅读的文章，收集在此处以便于之后的复习和回顾。</p>
 <hr/>
 <div class="anchor" id="相关知识学习"></div>
 <h3 class="relative group">相关知识学习 
@@ -523,7 +536,7 @@
     </summary>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
 <a href="https://ta0lve.github.io/posts/pwn/basic/pwn-_environment/">
-            Part 1: PWN环境搭建记录-Ubuntu 22.04
+            Part 1: PWN环境二次搭建记录-Ubuntu 22.04
         </a>
 </div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
@@ -577,7 +590,7 @@
 <section class="w-full grid gap-4 sm:grid-cols-2 md:grid-cols-3">
 <a class="min-w-full" href="/pointer/kernel-pwn/pointer1/">
 <div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
-<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/IMAGE_Background.jpg);"></div>
+<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/pointer/kernel-pwn/pointer1/featured.jpg);"></div>
 <div class="px-6 py-4">
 <div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/pointer/kernel-pwn/pointer1/">Kernel Pwn 学习书签</div>
 <div class="text-sm text-neutral-500 dark:text-neutral-400">
@@ -625,7 +638,7 @@
 </a>
 <a class="min-w-full" href="/pointer/heap/pointer1/">
 <div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
-<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/IMAGE_Background.jpg);"></div>
+<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/pointer/heap/pointer1/featured.jpg);"></div>
 <div class="px-6 py-4">
 <div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/pointer/heap/pointer1/">堆学习书签</div>
 <div class="text-sm text-neutral-500 dark:text-neutral-400">
@@ -664,7 +677,7 @@
 </div>
 </div>
 <div class="py-1 prose dark:prose-invert">
-<p>一些我在入门pwn<strong>堆</strong>时所学习阅读的文章，收集在此处以便于之后的复习和回顾。</p>
+<p>一些我在入门pwn <strong>堆</strong> 时所学习阅读的文章，收集在此处以便于之后的复习和回顾。</p>
 </div>
 </div>
 <div class="px-6 pt-4 pb-2">
@@ -673,7 +686,7 @@
 </a>
 <a class="min-w-full" href="/pointer/fmt/pointer1/">
 <div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
-<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/IMAGE_Background.jpg);"></div>
+<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/pointer/fmt/pointer1/featured.jpg);"></div>
 <div class="px-6 py-4">
 <div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/pointer/fmt/pointer1/">fmt学习书签</div>
 <div class="text-sm text-neutral-500 dark:text-neutral-400">
@@ -738,13 +751,13 @@
 <hr class="border-dotted border-neutral-300 dark:border-neutral-600"/>
 <div class="flex justify-between pt-3">
 <span>
-<a class="flex group mr-3" href="/pointer/intoverflow/pointer1/">
+<a class="flex group mr-3" href="/pointer/%E4%B9%A6%E7%AD%BE/pwn%E4%B9%A6%E7%AD%BE/">
 <span class="mr-3 text-neutral-700 group-hover:text-primary-600 ltr:inline rtl:hidden dark:text-neutral dark:group-hover:text-primary-400">←</span>
 <span class="ml-3 text-neutral-700 group-hover:text-primary-600 ltr:hidden rtl:inline dark:text-neutral dark:group-hover:text-primary-400">→</span>
 <span class="flex flex-col">
-<span class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500">整数溢出漏洞学习书签</span>
+<span class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500">pwn基础学习书签</span>
 <span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
-<time datetime="2023-07-15 00:00:00 +0000 UTC">July 15, 2023</time>
+<time datetime="2023-07-14 00:00:00 +0000 UTC">July 14, 2023</time>
 </span>
 </span>
 </a>
@@ -776,7 +789,7 @@
 <nav class="flex flex-row pb-4 text-base font-medium text-neutral-500 dark:text-neutral-400">
 <ul class="flex flex-col list-none sm:flex-row">
 <li class="flex mb-1 ltr:text-right rtl:text-left sm:mb-0 ltr:sm:mr-7 ltr:sm:last:mr-0 rtl:sm:ml-7 rtl:sm:last:ml-0">
-<a class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2" href="/about/" title="关于 About">About</a>
+<a class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2" href="/about/" title="About">About</a>
 </li>
 <li class="flex mb-1 ltr:text-right rtl:text-left sm:mb-0 ltr:sm:mr-7 ltr:sm:last:mr-0 rtl:sm:ml-7 rtl:sm:last:ml-0">
 <a class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2" href="/tags/pwn/" title="PWN">pwn2own , pwn4fun</a>

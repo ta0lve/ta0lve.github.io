@@ -13,8 +13,8 @@
 <meta content="zh-cn" http-equiv="content-language"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta content="ie=edge" http-equiv="X-UA-Compatible"/>
-<title>PWN环境搭建记录-Ubuntu 22.04 · ta0lve</title>
-<meta content="PWN环境搭建记录-Ubuntu 22.04 · ta0lve" name="title"/>
+<title>PWN环境二次搭建记录-Ubuntu 22.04 · ta0lve</title>
+<meta content="PWN环境二次搭建记录-Ubuntu 22.04 · ta0lve" name="title"/>
 <meta content="CTF, PWN, Ubuntu, " name="keywords"/>
 <link href="https://ta0lve.github.io/posts/pwn/basic/pwn-_environment/" rel="canonical"/>
 <link href="/css/main.bundle.min.c6116b9ed1c907a8c0eb015f377d3eecc07e448d75729e31fc3de5881465c6c172ba9fa9a6800c030116caf2a110d92242bb816639484ca791f7cd107a8d49b5.css" integrity="sha512-xhFrntHJB6jA6wFfN30+7MB+RI11cp4x/D3liBRlxsFyup+ppoAMAwEWyvKhENkiQruBZjlITKeR980Qeo1JtQ==" rel="stylesheet" type="text/css"/>
@@ -25,25 +25,25 @@
 <link href="/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="/site.webmanifest" rel="manifest"/>
-<meta content="PWN环境搭建记录-Ubuntu 22.04" property="og:title"/>
-<meta content="前言 # 学习pwn已经有一段时间了，但是由于之前自己一直没有注" property="og:description"/>
+<meta content="PWN环境二次搭建记录-Ubuntu 22.04" property="og:title"/>
+<meta content="如果本博客部分文章图片加载失败， 可以点击此处查看解决办法 前言" property="og:description"/>
 <meta content="article" property="og:type"/>
 <meta content="https://ta0lve.github.io/posts/pwn/basic/pwn-_environment/" property="og:url"/><meta content="https://ta0lve.github.io/posts/pwn/basic/pwn-_environment/featured.jpg" property="og:image"/><meta content="posts" property="article:section"/>
 <meta content="2023-07-10T00:00:00+00:00" property="article:published_time"/>
 <meta content="2023-07-10T00:00:00+00:00" property="article:modified_time"/>
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="https://ta0lve.github.io/posts/pwn/basic/pwn-_environment/featured.jpg" name="twitter:image"/>
-<meta content="PWN环境搭建记录-Ubuntu 22.04" name="twitter:title"/>
-<meta content="前言 # 学习pwn已经有一段时间了，但是由于之前自己一直没有注" name="twitter:description"/>
+<meta content="PWN环境二次搭建记录-Ubuntu 22.04" name="twitter:title"/>
+<meta content="如果本博客部分文章图片加载失败， 可以点击此处查看解决办法 前言" name="twitter:description"/>
 <script type="application/ld+json">
   [{
     "@context": "https://schema.org",
     "@type": "Article",
     "articleSection": "归档 Posts",
-    "name": "PWN环境搭建记录-Ubuntu 22.04",
-    "headline": "PWN环境搭建记录-Ubuntu 22.04",
+    "name": "PWN环境二次搭建记录-Ubuntu 22.04",
+    "headline": "PWN环境二次搭建记录-Ubuntu 22.04",
     
-    "abstract": "前言 # 学习pwn已经有一段时间了，但是由于之前自己一直没有注",
+    "abstract": "如果本博客部分文章图片加载失败， 可以点击此处查看解决办法 前言",
     "inLanguage": "zh-cn",
     "url" : "https:\/\/ta0lve.github.io\/posts\/pwn\/basic\/pwn-_environment\/",
     "author" : {
@@ -59,7 +59,7 @@
     "keywords": ["CTF","PWN","Ubuntu"],
     
     "mainEntityOfPage": "true",
-    "wordCount": "8117"
+    "wordCount": "8145"
   }]
   </script>
 <meta content="ta0lve" name="author"/>
@@ -85,7 +85,17 @@
 <nav class="hidden md:flex items-center space-x-5 md:ml-12 h-12">
 <a class="flex items-center" href="/posts/">
 <p class="text-base font-medium text-gray-500 hover:text-gray-900" title="归档 Posts">
-        归档
+        Posts
+    </p>
+</a>
+<a class="flex items-center" href="/pointer/">
+<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="Pointer">
+        Pointer
+    </p>
+</a>
+<a class="flex items-center" href="/tags/pwn/">
+<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="PWN">
+        Pwn
     </p>
 </a>
 <a class="flex items-center" href="/categories/">
@@ -103,13 +113,8 @@
         友链
     </p>
 </a>
-<a class="flex items-center" href="/pointer/">
-<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="Pointer">
-        Pointer
-    </p>
-</a>
 <a class="flex items-center" href="/about/">
-<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="关于 About">
+<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="About">
         About
     </p>
 </a>
@@ -174,7 +179,21 @@
 <li class="mt-1">
 <a class="flex items-center" href="/posts/">
 <p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="归档 Posts">
-            归档
+            Posts
+        </p>
+</a>
+</li>
+<li class="mt-1">
+<a class="flex items-center" href="/pointer/">
+<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="Pointer">
+            Pointer
+        </p>
+</a>
+</li>
+<li class="mt-1">
+<a class="flex items-center" href="/tags/pwn/">
+<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="PWN">
+            Pwn
         </p>
 </a>
 </li>
@@ -200,15 +219,8 @@
 </a>
 </li>
 <li class="mt-1">
-<a class="flex items-center" href="/pointer/">
-<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="Pointer">
-            Pointer
-        </p>
-</a>
-</li>
-<li class="mt-1">
 <a class="flex items-center" href="/about/">
-<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="关于 About">
+<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="About">
             About
         </p>
 </a>
@@ -255,15 +267,15 @@
 <a class="hover:underline decoration-neutral-300 dark:underline-neutral-600" href="/posts/">归档 Posts</a><span class="px-1 text-primary-500">/</span>
 </li>
 <li class="inline hidden">
-<a class="hover:underline decoration-neutral-300 dark:underline-neutral-600" href="/posts/pwn/basic/pwn-_environment/">PWN环境搭建记录-Ubuntu 22.04</a><span class="px-1 text-primary-500">/</span>
+<a class="hover:underline decoration-neutral-300 dark:underline-neutral-600" href="/posts/pwn/basic/pwn-_environment/">PWN环境二次搭建记录-Ubuntu 22.04</a><span class="px-1 text-primary-500">/</span>
 </li>
 </ol>
 <h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">
-      PWN环境搭建记录-Ubuntu 22.04
+      PWN环境二次搭建记录-Ubuntu 22.04
     </h1>
 <div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-07-10 00:00:00 +0000 UTC">July 10, 2023</time><span class="px-2 text-primary-500">·</span><span>8117 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">17 分钟</span>
+<time datetime="2023-07-10 00:00:00 +0000 UTC">July 10, 2023</time><span class="px-2 text-primary-500">·</span><span>8145 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">17 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
 <span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%85%A5%E9%97%A8/&quot;,'_self');" style="margin-top:0.5rem">
@@ -502,6 +514,15 @@
         </a>
 </div>
 </details>
+<div class="flex px-4 py-3 rounded-md bg-primary-100 dark:bg-primary-900">
+<span class="text-primary-400 ltr:pr-3 rtl:pl-3 flex items-center">
+<span class="relative block icon">
+<svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M506.3 417l-213.3-364c-16.33-28-57.54-28-73.98 0l-213.2 364C-10.59 444.9 9.849 480 42.74 480h426.6C502.1 480 522.6 445 506.3 417zM232 168c0-13.25 10.75-24 24-24S280 154.8 280 168v128c0 13.25-10.75 24-23.1 24S232 309.3 232 296V168zM256 416c-17.36 0-31.44-14.08-31.44-31.44c0-17.36 14.07-31.44 31.44-31.44s31.44 14.08 31.44 31.44C287.4 401.9 273.4 416 256 416z" fill="currentColor"></path></svg>
+</span>
+</span>
+<span class="dark:text-neutral-300"><strong>如果本博客部分文章图片加载失败，</strong><a href="https://ta0lve.github.io/posts/sth/sm.ms/" target="_blank">
+<strong>可以点击此处查看解决办法</strong></a></span>
+</div>
 <div class="anchor" id="前言"></div>
 <h2 class="relative group">前言 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
@@ -1539,7 +1560,7 @@
 <section class="w-full grid gap-4 sm:grid-cols-2 md:grid-cols-3">
 <a class="min-w-full" href="/pointer/kernel-pwn/pointer1/">
 <div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
-<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/IMAGE_Background.jpg);"></div>
+<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/pointer/kernel-pwn/pointer1/featured.jpg);"></div>
 <div class="px-6 py-4">
 <div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/pointer/kernel-pwn/pointer1/">Kernel Pwn 学习书签</div>
 <div class="text-sm text-neutral-500 dark:text-neutral-400">
@@ -1587,7 +1608,7 @@
 </a>
 <a class="min-w-full" href="/pointer/heap/pointer1/">
 <div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
-<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/IMAGE_Background.jpg);"></div>
+<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/pointer/heap/pointer1/featured.jpg);"></div>
 <div class="px-6 py-4">
 <div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/pointer/heap/pointer1/">堆学习书签</div>
 <div class="text-sm text-neutral-500 dark:text-neutral-400">
@@ -1626,7 +1647,7 @@
 </div>
 </div>
 <div class="py-1 prose dark:prose-invert">
-<p>一些我在入门pwn<strong>堆</strong>时所学习阅读的文章，收集在此处以便于之后的复习和回顾。</p>
+<p>一些我在入门pwn <strong>堆</strong> 时所学习阅读的文章，收集在此处以便于之后的复习和回顾。</p>
 </div>
 </div>
 <div class="px-6 pt-4 pb-2">
@@ -1635,7 +1656,7 @@
 </a>
 <a class="min-w-full" href="/pointer/fmt/pointer1/">
 <div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
-<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/IMAGE_Background.jpg);"></div>
+<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/pointer/fmt/pointer1/featured.jpg);"></div>
 <div class="px-6 py-4">
 <div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/pointer/fmt/pointer1/">fmt学习书签</div>
 <div class="text-sm text-neutral-500 dark:text-neutral-400">
@@ -1689,7 +1710,7 @@
 <div style="padding-bottom:1em;">
 <p> </p>
 <p>本文作者：<a href="https://ta0lve.github.io/about/" target="_blank"><font color="#49b1f5" style="text-decoration: underline">ta0lve</font></a></p>
-<p>本文链接：<a href="https://ta0lve.github.io/posts/pwn/basic/pwn-_environment/" target="_blank"><font color="#49b1f5" style="text-decoration: underline">PWN环境搭建记录-Ubuntu 22.04</font></a></p>
+<p>本文链接：<a href="https://ta0lve.github.io/posts/pwn/basic/pwn-_environment/" target="_blank"><font color="#49b1f5" style="text-decoration: underline">PWN环境二次搭建记录-Ubuntu 22.04</font></a></p>
 <p><a href="https://ta0lve.github.io/posts/pwn/basic/pwn-_environment/" target="_blank"><font color="#49b1f5" style="text-decoration: underline"> https://ta0lve.github.io/posts/pwn/basic/pwn-_environment/ </font></a></p>
 <p>版权声明：本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank"><font color="#49b1f5" style="text-decoration: underline"> CC BY-NC 4.0 </font></a> 许可协议。</p>
 <p>转载请注明来自<a class="redlink" href="https://ta0lve.github.io/" target="_blank"> <font color="#49b1f5" style="text-decoration: underline">ta0lve's Blog</font></a> ！</p>
@@ -1738,7 +1759,7 @@
 <nav class="flex flex-row pb-4 text-base font-medium text-neutral-500 dark:text-neutral-400">
 <ul class="flex flex-col list-none sm:flex-row">
 <li class="flex mb-1 ltr:text-right rtl:text-left sm:mb-0 ltr:sm:mr-7 ltr:sm:last:mr-0 rtl:sm:ml-7 rtl:sm:last:ml-0">
-<a class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2" href="/about/" title="关于 About">About</a>
+<a class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2" href="/about/" title="About">About</a>
 </li>
 <li class="flex mb-1 ltr:text-right rtl:text-left sm:mb-0 ltr:sm:mr-7 ltr:sm:last:mr-0 rtl:sm:ml-7 rtl:sm:last:ml-0">
 <a class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2" href="/tags/pwn/" title="PWN">pwn2own , pwn4fun</a>

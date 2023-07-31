@@ -26,7 +26,7 @@
 <link href="/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="/site.webmanifest" rel="manifest"/>
 <meta content="HWS 2023 fmt exp" property="og:title"/>
-<meta content="前言： 其实这道题本地很早就打通了，但是远程一直出错， 所以我在" property="og:description"/>
+<meta content="如果本博客部分文章图片加载失败， 可以点击此处查看解决办法 前言" property="og:description"/>
 <meta content="article" property="og:type"/>
 <meta content="https://ta0lve.github.io/posts/wp/2023_07_hws/fmt2/" property="og:url"/><meta content="https://ta0lve.github.io/posts/wp/2023_07_hws/fmt2/featured.jpg" property="og:image"/><meta content="posts" property="article:section"/>
 <meta content="2023-07-18T00:00:00+00:00" property="article:published_time"/>
@@ -35,7 +35,7 @@
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="https://ta0lve.github.io/posts/wp/2023_07_hws/fmt2/featured.jpg" name="twitter:image"/>
 <meta content="HWS 2023 fmt exp" name="twitter:title"/>
-<meta content="前言： 其实这道题本地很早就打通了，但是远程一直出错， 所以我在" name="twitter:description"/>
+<meta content="如果本博客部分文章图片加载失败， 可以点击此处查看解决办法 前言" name="twitter:description"/>
 <script type="application/ld+json">
   [{
     "@context": "https://schema.org",
@@ -44,7 +44,7 @@
     "name": "HWS 2023 fmt exp",
     "headline": "HWS 2023 fmt exp",
     
-    "abstract": "前言： 其实这道题本地很早就打通了，但是远程一直出错， 所以我在",
+    "abstract": "如果本博客部分文章图片加载失败， 可以点击此处查看解决办法 前言",
     "inLanguage": "zh-cn",
     "url" : "https:\/\/ta0lve.github.io\/posts\/wp\/2023_07_hws\/fmt2\/",
     "author" : {
@@ -60,7 +60,7 @@
     "keywords": ["CTF","PWN","格式化字符串漏洞"],
     
     "mainEntityOfPage": "true",
-    "wordCount": "5533"
+    "wordCount": "5502"
   }]
   </script>
 <meta content="ta0lve" name="author"/>
@@ -86,7 +86,17 @@
 <nav class="hidden md:flex items-center space-x-5 md:ml-12 h-12">
 <a class="flex items-center" href="/posts/">
 <p class="text-base font-medium text-gray-500 hover:text-gray-900" title="归档 Posts">
-        归档
+        Posts
+    </p>
+</a>
+<a class="flex items-center" href="/pointer/">
+<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="Pointer">
+        Pointer
+    </p>
+</a>
+<a class="flex items-center" href="/tags/pwn/">
+<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="PWN">
+        Pwn
     </p>
 </a>
 <a class="flex items-center" href="/categories/">
@@ -104,13 +114,8 @@
         友链
     </p>
 </a>
-<a class="flex items-center" href="/pointer/">
-<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="Pointer">
-        Pointer
-    </p>
-</a>
 <a class="flex items-center" href="/about/">
-<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="关于 About">
+<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="About">
         About
     </p>
 </a>
@@ -175,7 +180,21 @@
 <li class="mt-1">
 <a class="flex items-center" href="/posts/">
 <p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="归档 Posts">
-            归档
+            Posts
+        </p>
+</a>
+</li>
+<li class="mt-1">
+<a class="flex items-center" href="/pointer/">
+<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="Pointer">
+            Pointer
+        </p>
+</a>
+</li>
+<li class="mt-1">
+<a class="flex items-center" href="/tags/pwn/">
+<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="PWN">
+            Pwn
         </p>
 </a>
 </li>
@@ -201,15 +220,8 @@
 </a>
 </li>
 <li class="mt-1">
-<a class="flex items-center" href="/pointer/">
-<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="Pointer">
-            Pointer
-        </p>
-</a>
-</li>
-<li class="mt-1">
 <a class="flex items-center" href="/about/">
-<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="关于 About">
+<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="About">
             About
         </p>
 </a>
@@ -264,7 +276,7 @@
     </h1>
 <div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-07-18 00:00:00 +0000 UTC">July 18, 2023</time><span class="px-2 text-primary-500">·</span><span>5533 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">12 分钟</span>
+<time datetime="2023-07-18 00:00:00 +0000 UTC">July 18, 2023</time><span class="px-2 text-primary-500">·</span><span>5502 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">11 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
 <span class="mr-2" onclick="window.open(&quot;/categories/wp/&quot;,'_self');" style="margin-top:0.5rem">
@@ -341,8 +353,8 @@
 <li>
 <ul>
 <li><a href="#比赛时的截图">比赛时的截图</a></li>
-<li><a href="#最终exp">最终exp</a></li>
-<li><a href="#比赛时的远古exp有点乱">比赛时的远古exp：（有点乱）</a></li>
+<li><a href="#最后所使用的exp">最后所使用的exp</a></li>
+<li><a href="#一开始的exp有点乱">一开始的exp：（有点乱）</a></li>
 </ul>
 </li>
 </ul>
@@ -358,8 +370,8 @@
 <li>
 <ul>
 <li><a href="#比赛时的截图">比赛时的截图</a></li>
-<li><a href="#最终exp">最终exp</a></li>
-<li><a href="#比赛时的远古exp有点乱">比赛时的远古exp：（有点乱）</a></li>
+<li><a href="#最后所使用的exp">最后所使用的exp</a></li>
+<li><a href="#一开始的exp有点乱">一开始的exp：（有点乱）</a></li>
 </ul>
 </li>
 </ul>
@@ -422,19 +434,26 @@
         Part 2: This Article
     </div>
 </details>
+<div class="flex px-4 py-3 rounded-md bg-primary-100 dark:bg-primary-900">
+<span class="text-primary-400 ltr:pr-3 rtl:pl-3 flex items-center">
+<span class="relative block icon">
+<svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M506.3 417l-213.3-364c-16.33-28-57.54-28-73.98 0l-213.2 364C-10.59 444.9 9.849 480 42.74 480h426.6C502.1 480 522.6 445 506.3 417zM232 168c0-13.25 10.75-24 24-24S280 154.8 280 168v128c0 13.25-10.75 24-23.1 24S232 309.3 232 296V168zM256 416c-17.36 0-31.44-14.08-31.44-31.44c0-17.36 14.07-31.44 31.44-31.44s31.44 14.08 31.44 31.44C287.4 401.9 273.4 416 256 416z" fill="currentColor"></path></svg>
+</span>
+</span>
+<span class="dark:text-neutral-300"><strong>如果本博客部分文章图片加载失败，</strong><a href="https://ta0lve.github.io/posts/sth/sm.ms/" target="_blank">
+<strong>可以点击此处查看解决办法</strong></a></span>
+</div>
 <p>前言：</p>
 <p>其实这道题本地很早就打通了，但是远程一直出错，
 所以我在比赛时将4字节覆数据的方式改为了2字节又改为了1字节，
 结果还是打不通，(悲
 最后想起来还可以通过字符串来打印栈上的值来远程调试
 所以就有了最后这个像打表一样的调试方法</p>
-<p>可惜，最后做完这道题已经没有时间做别的题了(orz</p>
 <div class="anchor" id="比赛时的截图"></div>
 <h3 class="relative group">比赛时的截图 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e6%af%94%e8%b5%9b%e6%97%b6%e7%9a%84%e6%88%aa%e5%9b%be" style="text-decoration-line: none !important;">#</a></span>
 </h3>
-<p>（smms图床好像最近老是容易崩，不知道能不能看到😴）</p>
 <p>
 <figure>
 <img alt="image-20230718204948399" class="my-0 rounded-md" src="https://s2.loli.net/2023/07/18/aym5AYFQGdUjNcn.png"/>
@@ -445,10 +464,10 @@
 <img alt="image-20230716221519650" class="my-0 rounded-md" src="https://s2.loli.net/2023/07/17/3GucKZPwtAlXEB8.png"/>
 </figure>
 </p>
-<div class="anchor" id="最终exp"></div>
-<h3 class="relative group">最终exp 
+<div class="anchor" id="最后所使用的exp"></div>
+<h3 class="relative group">最后所使用的exp 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
-<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e6%9c%80%e7%bb%88exp" style="text-decoration-line: none !important;">#</a></span>
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e6%9c%80%e5%90%8e%e6%89%80%e4%bd%bf%e7%94%a8%e7%9a%84exp" style="text-decoration-line: none !important;">#</a></span>
 </h3>
 <div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># encoding: utf-8</span>
 </span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
@@ -959,10 +978,10 @@
 </span></span><span class="line"><span class="cl"><span class="n">taolve</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">pad</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="n">taolve</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
-</span></span></code></pre></div><div class="anchor" id="比赛时的远古exp有点乱"></div>
-<h3 class="relative group">比赛时的远古exp：（有点乱） 
+</span></span></code></pre></div><div class="anchor" id="一开始的exp有点乱"></div>
+<h3 class="relative group">一开始的exp：（有点乱） 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
-<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e6%af%94%e8%b5%9b%e6%97%b6%e7%9a%84%e8%bf%9c%e5%8f%a4exp%e6%9c%89%e7%82%b9%e4%b9%b1" style="text-decoration-line: none !important;">#</a></span>
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e4%b8%80%e5%bc%80%e5%a7%8b%e7%9a%84exp%e6%9c%89%e7%82%b9%e4%b9%b1" style="text-decoration-line: none !important;">#</a></span>
 </h3>
 <div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># encoding: utf-8</span>
 </span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
@@ -1617,7 +1636,7 @@
 <div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/wp/2023_07_hws/fmt/">HWS 2023 fmt wp</div>
 <div class="text-sm text-neutral-500 dark:text-neutral-400">
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-07-18 00:00:00 +0000 UTC">July 18, 2023</time><span class="px-2 text-primary-500">·</span><span>4709 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">10 分钟</span>
+<time datetime="2023-07-18 00:00:00 +0000 UTC">July 18, 2023</time><span class="px-2 text-primary-500">·</span><span>4733 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">10 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
 <span class="mr-2" onclick="window.open(&quot;/categories/wp/&quot;,'_self');" style="margin-top:0.5rem">
@@ -1657,7 +1676,7 @@
 </a>
 <a class="min-w-full" href="/pointer/fmt/pointer1/">
 <div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
-<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/IMAGE_Background.jpg);"></div>
+<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/pointer/fmt/pointer1/featured.jpg);"></div>
 <div class="px-6 py-4">
 <div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/pointer/fmt/pointer1/">fmt学习书签</div>
 <div class="text-sm text-neutral-500 dark:text-neutral-400">
@@ -1799,7 +1818,7 @@
 <nav class="flex flex-row pb-4 text-base font-medium text-neutral-500 dark:text-neutral-400">
 <ul class="flex flex-col list-none sm:flex-row">
 <li class="flex mb-1 ltr:text-right rtl:text-left sm:mb-0 ltr:sm:mr-7 ltr:sm:last:mr-0 rtl:sm:ml-7 rtl:sm:last:ml-0">
-<a class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2" href="/about/" title="关于 About">About</a>
+<a class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2" href="/about/" title="About">About</a>
 </li>
 <li class="flex mb-1 ltr:text-right rtl:text-left sm:mb-0 ltr:sm:mr-7 ltr:sm:last:mr-0 rtl:sm:ml-7 rtl:sm:last:ml-0">
 <a class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2" href="/tags/pwn/" title="PWN">pwn2own , pwn4fun</a>
