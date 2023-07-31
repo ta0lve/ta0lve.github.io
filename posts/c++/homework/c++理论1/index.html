@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html class="scroll-smooth" data-auto-appearance="false" data-default-appearance="dark" dir="ltr" lang="CN"><head>
-<script>
+<html lang="CN" dir="ltr" class="scroll-smooth" data-default-appearance="dark"
+  data-auto-appearance="false"><head>
+  <script>
     var _hmt = _hmt || [];
     (function() {
       var hm = document.createElement("script");
@@ -9,33 +10,81 @@
       s.parentNode.insertBefore(hm, s);
     })();
     </script>
-<meta charset="utf-8"/>
-<meta content="zh-cn" http-equiv="content-language"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<meta content="ie=edge" http-equiv="X-UA-Compatible"/>
-<title>C++理论1 · ta0lve</title>
-<meta content="C++理论1 · ta0lve" name="title"/>
-<meta content="基础知识, " name="keywords"/>
-<link href="https://ta0lve.github.io/posts/c++/homework/c++%E7%90%86%E8%AE%BA1/" rel="canonical"/>
-<link href="/css/main.bundle.min.c6116b9ed1c907a8c0eb015f377d3eecc07e448d75729e31fc3de5881465c6c172ba9fa9a6800c030116caf2a110d92242bb816639484ca791f7cd107a8d49b5.css" integrity="sha512-xhFrntHJB6jA6wFfN30+7MB+RI11cp4x/D3liBRlxsFyup+ppoAMAwEWyvKhENkiQruBZjlITKeR980Qeo1JtQ==" rel="stylesheet" type="text/css"/>
-<script integrity="sha512-UWoWdFvqWpvQERONJUzA/TlzzVXObhXz3sdj58fCx0SPj+e1TMqBHLghsMfhLNFhyqzh3XlKw9NNQJN8vMnuEg==" src="/js/appearance.min.516a16745bea5a9bd011138d254cc0fd3973cd55ce6e15f3dec763e7c7c2c7448f8fe7b54cca811cb821b0c7e12cd161caace1dd794ac3d34d40937cbcc9ee12.js" type="text/javascript"></script>
-<script data-copied="" data-copy="" defer="" id="script-bundle" integrity="sha512-PdzwT1sNTDL3LnJtPBLuvM2MPJ+dqpoTQUgIiV3grh4c3d2mhJaA1b2W27YNCx4LJMKfXIPlYx5V5+a8AgFUkA==" src="/js/main.bundle.min.3ddcf04f5b0d4c32f72e726d3c12eebccd8c3c9f9daa9a13414808895de0ae1e1cdddda6849680d5bd96dbb60d0b1e0b24c29f5c83e5631e55e7e6bc02015490.js" type="text/javascript"></script>
-<script src="/js/zoom.min.js"></script>
-<link href="/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
-<link href="/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
-<link href="/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
-<link href="/site.webmanifest" rel="manifest"/>
-<meta content="C++理论1" property="og:title"/>
-<meta content="cin与cout # 第一周T8，T9，T10 下面语句的输出是？" property="og:description"/>
-<meta content="article" property="og:type"/>
-<meta content="https://ta0lve.github.io/posts/c++/homework/c++%E7%90%86%E8%AE%BA1/" property="og:url"/><meta content="https://ta0lve.github.io/posts/c++/homework/c++%E7%90%86%E8%AE%BA1/featured.jpg" property="og:image"/><meta content="posts" property="article:section"/>
-<meta content="2023-06-30T00:00:00+00:00" property="article:published_time"/>
-<meta content="2023-06-30T00:00:00+00:00" property="article:modified_time"/>
-<meta content="summary_large_image" name="twitter:card"/>
-<meta content="https://ta0lve.github.io/posts/c++/homework/c++%E7%90%86%E8%AE%BA1/featured.jpg" name="twitter:image"/>
-<meta content="C++理论1" name="twitter:title"/>
-<meta content="cin与cout # 第一周T8，T9，T10 下面语句的输出是？" name="twitter:description"/>
-<script type="application/ld+json">
+  <meta charset="utf-8" />
+  
+  <meta http-equiv="content-language" content="zh-cn" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  
+  <title>C&#43;&#43;理论1 &middot; ta0lve</title>
+  <meta name="title" content="C&#43;&#43;理论1 &middot; ta0lve" />
+  
+  
+  <meta name="keywords" content="基础知识, " />
+  
+  
+  <link rel="canonical" href="https://ta0lve.github.io/posts/c&#43;&#43;/homework/c&#43;&#43;%E7%90%86%E8%AE%BA1/" />
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <link type="text/css" rel="stylesheet" href="/css/main.bundle.min.c6116b9ed1c907a8c0eb015f377d3eecc07e448d75729e31fc3de5881465c6c172ba9fa9a6800c030116caf2a110d92242bb816639484ca791f7cd107a8d49b5.css"
+    integrity="sha512-xhFrntHJB6jA6wFfN30&#43;7MB&#43;RI11cp4x/D3liBRlxsFyup&#43;ppoAMAwEWyvKhENkiQruBZjlITKeR980Qeo1JtQ==" />
+  
+  
+  <script type="text/javascript" src="/js/appearance.min.516a16745bea5a9bd011138d254cc0fd3973cd55ce6e15f3dec763e7c7c2c7448f8fe7b54cca811cb821b0c7e12cd161caace1dd794ac3d34d40937cbcc9ee12.js"
+    integrity="sha512-UWoWdFvqWpvQERONJUzA/TlzzVXObhXz3sdj58fCx0SPj&#43;e1TMqBHLghsMfhLNFhyqzh3XlKw9NNQJN8vMnuEg=="></script>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <script defer type="text/javascript" id="script-bundle" src="/js/main.bundle.min.3ddcf04f5b0d4c32f72e726d3c12eebccd8c3c9f9daa9a13414808895de0ae1e1cdddda6849680d5bd96dbb60d0b1e0b24c29f5c83e5631e55e7e6bc02015490.js"
+    integrity="sha512-PdzwT1sNTDL3LnJtPBLuvM2MPJ&#43;dqpoTQUgIiV3grh4c3d2mhJaA1b2W27YNCx4LJMKfXIPlYx5V5&#43;a8AgFUkA==" data-copy="" data-copied=""></script>
+  
+  <script src="/js/zoom.min.js"></script>
+  
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  
+  
+  
+  
+  
+  
+  
+  <meta property="og:title" content="C&#43;&#43;理论1" />
+<meta property="og:description" content="cin与cout # 第一周T8，T9，T10 下面语句的输出是？" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ta0lve.github.io/posts/c&#43;&#43;/homework/c&#43;&#43;%E7%90%86%E8%AE%BA1/" /><meta property="og:image" content="https://ta0lve.github.io/posts/c&#43;&#43;/homework/c&#43;&#43;%E7%90%86%E8%AE%BA1/featured.jpg"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-06-30T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-06-30T00:00:00+00:00" />
+
+
+  <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://ta0lve.github.io/posts/c&#43;&#43;/homework/c&#43;&#43;%E7%90%86%E8%AE%BA1/featured.jpg"/>
+<meta name="twitter:title" content="C&#43;&#43;理论1"/>
+<meta name="twitter:description" content="cin与cout # 第一周T8，T9，T10 下面语句的输出是？"/>
+
+  
+  <script type="application/ld+json">
   [{
     "@context": "https://schema.org",
     "@type": "Article",
@@ -62,174 +111,394 @@
     "wordCount": "4491"
   }]
   </script>
-<meta content="ta0lve" name="author"/>
-<link href="mailto:hujt25@mail2.sysu.edu.cn" rel="me"/>
-<link href="https://ta0lve.github.io/" rel="me"/>
-<link href="https://github.com/username" rel="me"/>
-<script integrity="" src="/lib/jquery/jquery.slim.min.js"></script>
-<meta name="theme-color"/>
+
+
+  
+  
+  <meta name="author" content="ta0lve" />
+  
+  
+  
+  <link href="mailto:hujt25@mail2.sysu.edu.cn" rel="me" />
+  
+  
+  <link href="https://ta0lve.github.io/" rel="me" />
+  
+  
+  <link href="https://github.com/username" rel="me" />
+  
+  
+  
+  
+
+<script src="/lib/jquery/jquery.slim.min.js" integrity=""></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+  
+  <meta name="theme-color"/>
+  
+  
 </head>
-<body class="flex flex-col h-screen px-6 m-auto text-lg leading-7 max-w-7xl bg-neutral text-neutral-900 dark:bg-neutral-800 dark:text-neutral sm:px-14 md:px-24 lg:px-32">
-<div class="absolute flex self-center" id="the-top">
-<a class="px-3 py-1 text-sm -translate-y-8 rounded-b-lg bg-primary-200 focus:translate-y-0 dark:bg-neutral-600" href="#main-content"><span class="font-bold text-primary-600 ltr:pr-2 rtl:pl-2 dark:text-primary-400">↓</span></a>
-</div>
-<div class="min-h-[148px]"></div>
+<body
+  class="flex flex-col h-screen px-6 m-auto text-lg leading-7 max-w-7xl bg-neutral text-neutral-900 dark:bg-neutral-800 dark:text-neutral sm:px-14 md:px-24 lg:px-32">
+  <div id="the-top" class="absolute flex self-center">
+    <a class="px-3 py-1 text-sm -translate-y-8 rounded-b-lg bg-primary-200 focus:translate-y-0 dark:bg-neutral-600"
+      href="#main-content"><span
+        class="font-bold text-primary-600 ltr:pr-2 rtl:pl-2 dark:text-primary-400">&darr;</span></a>
+  </div>
+  
+  
+  <div class="min-h-[148px]"></div>
 <div class="fixed inset-x-0 pl-[24px] pr-[24px]" style="z-index:100">
-<div class="absolute opacity-0 inset-x-0 top-0 h-full single_hero_background nozoom backdrop-blur-2xl shadow-2xl" id="menu-blur"></div>
-<div class="relative max-w-[64rem] ml-auto mr-auto">
-<div class="main-menu flex items-center justify-between px-4 py-6 sm:px-6 md:justify-start space-x-3" style="padding-left:0;padding-right:0;padding-top:2px;padding-bottom:3px">
-<div class="flex flex-1 items-center justify-between">
-<nav class="flex space-x-3">
-<a class="text-base font-medium text-gray-500 hover:text-gray-900" href="/">ta0lve</a>
-</nav>
-<nav class="hidden md:flex items-center space-x-5 md:ml-12 h-12">
-<a class="flex items-center" href="/posts/">
-<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="Posts">
+  <div id="menu-blur" class="absolute opacity-0 inset-x-0 top-0 h-full single_hero_background nozoom backdrop-blur-2xl shadow-2xl"></div>
+  <div class="relative max-w-[64rem] ml-auto mr-auto">
+    <div style="padding-left:0;padding-right:0;padding-top:2px;padding-bottom:3px"
+    class="main-menu flex items-center justify-between px-4 py-6 sm:px-6 md:justify-start space-x-3">
+    
+    <div class="flex flex-1 items-center justify-between">
+        <nav class="flex space-x-3">
+
+            <a href="/" class="text-base font-medium text-gray-500 hover:text-gray-900">ta0lve</a>
+
+
+        </nav>
+        <nav class="hidden md:flex items-center space-x-5 md:ml-12 h-12">
+
+            
+            
+            
+  <a href="/posts/"  class="flex items-center">
+    
+    <p class="text-base font-medium text-gray-500 hover:text-gray-900" title="Posts">
         Posts
     </p>
 </a>
-<a class="flex items-center" href="/pointer/">
-<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="Pointer">
+
+
+            
+            
+  <a href="/pointer/"  class="flex items-center">
+    
+    <p class="text-base font-medium text-gray-500 hover:text-gray-900" title="Pointer">
         Pointer
     </p>
 </a>
-<a class="flex items-center" href="/tags/pwn/">
-<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="PWN">
+
+
+            
+            
+  <a href="/tags/pwn/"  class="flex items-center">
+    
+    <p class="text-base font-medium text-gray-500 hover:text-gray-900" title="PWN">
         Pwn
     </p>
 </a>
-<a class="flex items-center" href="/categories/">
-<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="Categories">
+
+
+            
+            
+  <a href="/categories/"  class="flex items-center">
+    
+    <p class="text-base font-medium text-gray-500 hover:text-gray-900" title="Categories">
         分类
     </p>
 </a>
-<a class="flex items-center" href="/tags/">
-<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="Tags">
+
+
+            
+            
+  <a href="/tags/"  class="flex items-center">
+    
+    <p class="text-base font-medium text-gray-500 hover:text-gray-900" title="Tags">
         标签
     </p>
 </a>
-<a class="flex items-center" href="/link/">
-<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="友链/links">
+
+
+            
+            
+  <a href="/link/"  class="flex items-center">
+    
+    <p class="text-base font-medium text-gray-500 hover:text-gray-900" title="友链/links">
         友链
     </p>
 </a>
-<a class="flex items-center" href="/about/">
-<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="About">
+
+
+            
+            
+  <a href="/about/"  class="flex items-center">
+    
+    <p class="text-base font-medium text-gray-500 hover:text-gray-900" title="About">
         About
     </p>
 </a>
-<button aria-label="Search" class="text-base hover:text-primary-600 dark:hover:text-primary-400 h-12" id="search-button" title="">
-<span class="relative block icon">
-<svg aria-hidden="true" class="svg-inline--fa fa-search fa-w-16" data-icon="search" data-prefix="fas" focusable="false" role="img" viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z" fill="currentColor"></path></svg>
+
+
+            
+            
+
+            
+
+
+            
+            <button id="search-button" aria-label="Search" class="text-base hover:text-primary-600 dark:hover:text-primary-400 h-12"
+                title="">
+                
+
+  <span class="relative block icon">
+    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+
+  </span>
+
+
+            </button>
+            
+
+
+            
+            
+            <div
+                class="ltr:mr-14 rtl:ml-14 cursor-pointer text-sm text-neutral-700 hover:text-primary-600 dark:text-neutral dark:hover:text-primary-400">
+                <button id="appearance-switcher" aria-label="Dark mode switcher" type="button">
+                    <div class="flex items-center justify-center h-12 dark:hidden">
+                        
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M32 256c0-123.8 100.3-224 223.8-224c11.36 0 29.7 1.668 40.9 3.746c9.616 1.777 11.75 14.63 3.279 19.44C245 86.5 211.2 144.6 211.2 207.8c0 109.7 99.71 193 208.3 172.3c9.561-1.805 16.28 9.324 10.11 16.95C387.9 448.6 324.8 480 255.8 480C132.1 480 32 379.6 32 256z"/></svg>
+
+  </span>
+
+
+                    </div>
+                    <div class="items-center justify-center hidden h-12 dark:flex">
+                        
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 159.1c-53.02 0-95.1 42.98-95.1 95.1S202.1 351.1 256 351.1s95.1-42.98 95.1-95.1S309 159.1 256 159.1zM509.3 347L446.1 255.1l63.15-91.01c6.332-9.125 1.104-21.74-9.826-23.72l-109-19.7l-19.7-109c-1.975-10.93-14.59-16.16-23.72-9.824L256 65.89L164.1 2.736c-9.125-6.332-21.74-1.107-23.72 9.824L121.6 121.6L12.56 141.3C1.633 143.2-3.596 155.9 2.736 164.1L65.89 256l-63.15 91.01c-6.332 9.125-1.105 21.74 9.824 23.72l109 19.7l19.7 109c1.975 10.93 14.59 16.16 23.72 9.824L256 446.1l91.01 63.15c9.127 6.334 21.75 1.107 23.72-9.822l19.7-109l109-19.7C510.4 368.8 515.6 356.1 509.3 347zM256 383.1c-70.69 0-127.1-57.31-127.1-127.1c0-70.69 57.31-127.1 127.1-127.1s127.1 57.3 127.1 127.1C383.1 326.7 326.7 383.1 256 383.1z"/></svg>
+
+  </span>
+
+
+                    </div>
+                </button>
+            </div>
+            
+
+        </nav>
+        <div class="flex md:hidden items-center space-x-5 md:ml-12">
+
+            <span></span>
+
+            
+
+
+            
+            <button id="search-button-mobile" aria-label="Search" class="text-base hover:text-primary-600 dark:hover:text-primary-400"
+                title="">
+                
+
+  <span class="relative block icon">
+    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+
+  </span>
+
+
+            </button>
+            
+
+            
+            
+            <button id="appearance-switcher-mobile" aria-label="Dark mode switcher" type="button" style="margin-right:5px">
+                <div class="flex items-center justify-center h-12 dark:hidden">
+                    
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M32 256c0-123.8 100.3-224 223.8-224c11.36 0 29.7 1.668 40.9 3.746c9.616 1.777 11.75 14.63 3.279 19.44C245 86.5 211.2 144.6 211.2 207.8c0 109.7 99.71 193 208.3 172.3c9.561-1.805 16.28 9.324 10.11 16.95C387.9 448.6 324.8 480 255.8 480C132.1 480 32 379.6 32 256z"/></svg>
+
+  </span>
+
+
+                </div>
+                <div class="items-center justify-center hidden h-12 dark:flex">
+                    
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 159.1c-53.02 0-95.1 42.98-95.1 95.1S202.1 351.1 256 351.1s95.1-42.98 95.1-95.1S309 159.1 256 159.1zM509.3 347L446.1 255.1l63.15-91.01c6.332-9.125 1.104-21.74-9.826-23.72l-109-19.7l-19.7-109c-1.975-10.93-14.59-16.16-23.72-9.824L256 65.89L164.1 2.736c-9.125-6.332-21.74-1.107-23.72 9.824L121.6 121.6L12.56 141.3C1.633 143.2-3.596 155.9 2.736 164.1L65.89 256l-63.15 91.01c-6.332 9.125-1.105 21.74 9.824 23.72l109 19.7l19.7 109c1.975 10.93 14.59 16.16 23.72 9.824L256 446.1l91.01 63.15c9.127 6.334 21.75 1.107 23.72-9.822l19.7-109l109-19.7C510.4 368.8 515.6 356.1 509.3 347zM256 383.1c-70.69 0-127.1-57.31-127.1-127.1c0-70.69 57.31-127.1 127.1-127.1s127.1 57.3 127.1 127.1C383.1 326.7 326.7 383.1 256 383.1z"/></svg>
+
+  </span>
+
+
+                </div>
+            </button>
+            
+
+        </div>
+    </div>
+    <div class="-my-2 -mr-2 md:hidden">
+
+        <label id="menu-button" for="menu-controller" class="block">
+            <input type="checkbox" id="menu-controller" class="hidden" />
+            <div class="cursor-pointer hover:text-primary-600 dark:hover:text-primary-400">
+                
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M0 96C0 78.33 14.33 64 32 64H416C433.7 64 448 78.33 448 96C448 113.7 433.7 128 416 128H32C14.33 128 0 113.7 0 96zM0 256C0 238.3 14.33 224 32 224H416C433.7 224 448 238.3 448 256C448 273.7 433.7 288 416 288H32C14.33 288 0 273.7 0 256zM416 448H32C14.33 448 0 433.7 0 416C0 398.3 14.33 384 32 384H416C433.7 384 448 398.3 448 416C448 433.7 433.7 448 416 448z"/></svg>
+
+  </span>
+
+
+            </div>
+            <div id="menu-wrapper" style="padding-top:5px;"
+                class="fixed inset-0 z-30 invisible w-screen h-screen m-auto overflow-auto transition-opacity opacity-0 cursor-default bg-neutral-100/50 backdrop-blur-sm dark:bg-neutral-900/50">
+                <ul
+                    class="flex space-y-2 mt-3 flex-col items-end w-full px-6 py-6 mx-auto overflow-visible list-none ltr:text-right rtl:text-left max-w-7xl">
+
+                    <li>
+                        <span
+                            class="cursor-pointer inline-block align-text-bottom hover:text-primary-600 dark:hover:text-primary-400">
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/></svg>
+
+  </span>
+
 </span>
-</button>
-<div class="ltr:mr-14 rtl:ml-14 cursor-pointer text-sm text-neutral-700 hover:text-primary-600 dark:text-neutral dark:hover:text-primary-400">
-<button aria-label="Dark mode switcher" id="appearance-switcher" type="button">
-<div class="flex items-center justify-center h-12 dark:hidden">
-<span class="relative block icon">
-<svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M32 256c0-123.8 100.3-224 223.8-224c11.36 0 29.7 1.668 40.9 3.746c9.616 1.777 11.75 14.63 3.279 19.44C245 86.5 211.2 144.6 211.2 207.8c0 109.7 99.71 193 208.3 172.3c9.561-1.805 16.28 9.324 10.11 16.95C387.9 448.6 324.8 480 255.8 480C132.1 480 32 379.6 32 256z" fill="currentColor"></path></svg>
-</span>
-</div>
-<div class="items-center justify-center hidden h-12 dark:flex">
-<span class="relative block icon">
-<svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M256 159.1c-53.02 0-95.1 42.98-95.1 95.1S202.1 351.1 256 351.1s95.1-42.98 95.1-95.1S309 159.1 256 159.1zM509.3 347L446.1 255.1l63.15-91.01c6.332-9.125 1.104-21.74-9.826-23.72l-109-19.7l-19.7-109c-1.975-10.93-14.59-16.16-23.72-9.824L256 65.89L164.1 2.736c-9.125-6.332-21.74-1.107-23.72 9.824L121.6 121.6L12.56 141.3C1.633 143.2-3.596 155.9 2.736 164.1L65.89 256l-63.15 91.01c-6.332 9.125-1.105 21.74 9.824 23.72l109 19.7l19.7 109c1.975 10.93 14.59 16.16 23.72 9.824L256 446.1l91.01 63.15c9.127 6.334 21.75 1.107 23.72-9.822l19.7-109l109-19.7C510.4 368.8 515.6 356.1 509.3 347zM256 383.1c-70.69 0-127.1-57.31-127.1-127.1c0-70.69 57.31-127.1 127.1-127.1s127.1 57.3 127.1 127.1C383.1 326.7 326.7 383.1 256 383.1z" fill="currentColor"></path></svg>
-</span>
-</div>
-</button>
-</div>
-</nav>
-<div class="flex md:hidden items-center space-x-5 md:ml-12">
-<span></span>
-<button aria-label="Search" class="text-base hover:text-primary-600 dark:hover:text-primary-400" id="search-button-mobile" title="">
-<span class="relative block icon">
-<svg aria-hidden="true" class="svg-inline--fa fa-search fa-w-16" data-icon="search" data-prefix="fas" focusable="false" role="img" viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z" fill="currentColor"></path></svg>
-</span>
-</button>
-<button aria-label="Dark mode switcher" id="appearance-switcher-mobile" style="margin-right:5px" type="button">
-<div class="flex items-center justify-center h-12 dark:hidden">
-<span class="relative block icon">
-<svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M32 256c0-123.8 100.3-224 223.8-224c11.36 0 29.7 1.668 40.9 3.746c9.616 1.777 11.75 14.63 3.279 19.44C245 86.5 211.2 144.6 211.2 207.8c0 109.7 99.71 193 208.3 172.3c9.561-1.805 16.28 9.324 10.11 16.95C387.9 448.6 324.8 480 255.8 480C132.1 480 32 379.6 32 256z" fill="currentColor"></path></svg>
-</span>
-</div>
-<div class="items-center justify-center hidden h-12 dark:flex">
-<span class="relative block icon">
-<svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M256 159.1c-53.02 0-95.1 42.98-95.1 95.1S202.1 351.1 256 351.1s95.1-42.98 95.1-95.1S309 159.1 256 159.1zM509.3 347L446.1 255.1l63.15-91.01c6.332-9.125 1.104-21.74-9.826-23.72l-109-19.7l-19.7-109c-1.975-10.93-14.59-16.16-23.72-9.824L256 65.89L164.1 2.736c-9.125-6.332-21.74-1.107-23.72 9.824L121.6 121.6L12.56 141.3C1.633 143.2-3.596 155.9 2.736 164.1L65.89 256l-63.15 91.01c-6.332 9.125-1.105 21.74 9.824 23.72l109 19.7l19.7 109c1.975 10.93 14.59 16.16 23.72 9.824L256 446.1l91.01 63.15c9.127 6.334 21.75 1.107 23.72-9.822l19.7-109l109-19.7C510.4 368.8 515.6 356.1 509.3 347zM256 383.1c-70.69 0-127.1-57.31-127.1-127.1c0-70.69 57.31-127.1 127.1-127.1s127.1 57.3 127.1 127.1C383.1 326.7 326.7 383.1 256 383.1z" fill="currentColor"></path></svg>
-</span>
-</div>
-</button>
-</div>
-</div>
-<div class="-my-2 -mr-2 md:hidden">
-<label class="block" for="menu-controller" id="menu-button">
-<input class="hidden" id="menu-controller" type="checkbox"/>
-<div class="cursor-pointer hover:text-primary-600 dark:hover:text-primary-400">
-<span class="relative block icon">
-<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M0 96C0 78.33 14.33 64 32 64H416C433.7 64 448 78.33 448 96C448 113.7 433.7 128 416 128H32C14.33 128 0 113.7 0 96zM0 256C0 238.3 14.33 224 32 224H416C433.7 224 448 238.3 448 256C448 273.7 433.7 288 416 288H32C14.33 288 0 273.7 0 256zM416 448H32C14.33 448 0 433.7 0 416C0 398.3 14.33 384 32 384H416C433.7 384 448 398.3 448 416C448 433.7 433.7 448 416 448z" fill="currentColor"></path></svg>
-</span>
-</div>
-<div class="fixed inset-0 z-30 invisible w-screen h-screen m-auto overflow-auto transition-opacity opacity-0 cursor-default bg-neutral-100/50 backdrop-blur-sm dark:bg-neutral-900/50" id="menu-wrapper" style="padding-top:5px;">
-<ul class="flex space-y-2 mt-3 flex-col items-end w-full px-6 py-6 mx-auto overflow-visible list-none ltr:text-right rtl:text-left max-w-7xl">
-<li>
-<span class="cursor-pointer inline-block align-text-bottom hover:text-primary-600 dark:hover:text-primary-400">
-<span class="relative block icon">
-<svg viewbox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><path d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z" fill="currentColor"></path></svg>
-</span>
-</span>
-</li>
-<li class="mt-1">
-<a class="flex items-center" href="/posts/">
-<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="Posts">
+                    </li>
+
+                    
+                    
+
+                    
+  <li class="mt-1">
+    <a href="/posts/"  class="flex items-center">
+        
+        <p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="Posts">
             Posts
         </p>
-</a>
+    </a>
 </li>
-<li class="mt-1">
-<a class="flex items-center" href="/pointer/">
-<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="Pointer">
+
+
+
+                    
+
+                    
+  <li class="mt-1">
+    <a href="/pointer/"  class="flex items-center">
+        
+        <p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="Pointer">
             Pointer
         </p>
-</a>
+    </a>
 </li>
-<li class="mt-1">
-<a class="flex items-center" href="/tags/pwn/">
-<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="PWN">
+
+
+
+                    
+
+                    
+  <li class="mt-1">
+    <a href="/tags/pwn/"  class="flex items-center">
+        
+        <p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="PWN">
             Pwn
         </p>
-</a>
+    </a>
 </li>
-<li class="mt-1">
-<a class="flex items-center" href="/categories/">
-<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="Categories">
+
+
+
+                    
+
+                    
+  <li class="mt-1">
+    <a href="/categories/"  class="flex items-center">
+        
+        <p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="Categories">
             分类
         </p>
-</a>
+    </a>
 </li>
-<li class="mt-1">
-<a class="flex items-center" href="/tags/">
-<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="Tags">
+
+
+
+                    
+
+                    
+  <li class="mt-1">
+    <a href="/tags/"  class="flex items-center">
+        
+        <p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="Tags">
             标签
         </p>
-</a>
+    </a>
 </li>
-<li class="mt-1">
-<a class="flex items-center" href="/link/">
-<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="友链/links">
+
+
+
+                    
+
+                    
+  <li class="mt-1">
+    <a href="/link/"  class="flex items-center">
+        
+        <p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="友链/links">
             友链
         </p>
-</a>
+    </a>
 </li>
-<li class="mt-1">
-<a class="flex items-center" href="/about/">
-<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="About">
+
+
+
+                    
+
+                    
+  <li class="mt-1">
+    <a href="/about/"  class="flex items-center">
+        
+        <p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="About">
             About
         </p>
-</a>
+    </a>
 </li>
-</ul>
+
+
+
+                    
+                    
+
+                </ul>
+                
+
+            </div>
+        </label>
+    </div>
 </div>
-</label>
-</div>
-</div>
+
+
+
+
 <script>
     (function () {
         var $mainmenu = $('.main-menu');
@@ -239,7 +508,9 @@
         });
     })();
 </script>
-</div>
+
+
+  </div>
 </div>
 <script>
   window.addEventListener('scroll', function (e) {
@@ -248,147 +519,349 @@
     background_blur.style.opacity = (scroll / 300);
   });
 </script>
-<div class="relative flex flex-col grow">
-<main class="grow" id="main-content">
+
+  
+  <div class="relative flex flex-col grow">
+    <main id="main-content" class="grow">
+      
+
+
 <article>
-<div class="h-[150px] md:h-[200px]" id="hero"></div>
-<div class="fixed inset-x-0 top-0 h-[800px] single_hero_background nozoom" style="background-image:url(/posts/c++/homework/c++%E7%90%86%E8%AE%BA1/featured.jpg);">
-<div class="absolute inset-0 bg-gradient-to-t from-neutral dark:from-neutral-800 to-transparent mix-blend-normal">
+  
+  
+  
+  
+  
+  
+
+
+<div id="hero" class="h-[150px] md:h-[200px]"></div>
+
+
+    
+    <div class="fixed inset-x-0 top-0 h-[800px] single_hero_background nozoom"
+    style="background-image:url(/posts/c&#43;&#43;/homework/c&#43;&#43;%E7%90%86%E8%AE%BA1/featured.jpg);">
+    
+
+
+    <div class="absolute inset-0 bg-gradient-to-t from-neutral dark:from-neutral-800 to-transparent mix-blend-normal">
+    </div>
+    <div
+        class="absolute inset-0 opacity-60 bg-gradient-to-t from-neutral dark:from-neutral-800 to-neutral-100 dark:to-neutral-800 mix-blend-normal">
+    </div>
 </div>
-<div class="absolute inset-0 opacity-60 bg-gradient-to-t from-neutral dark:from-neutral-800 to-neutral-100 dark:to-neutral-800 mix-blend-normal">
-</div>
-</div>
-<header class="mt-5 max-w-prose" id="single_header">
-<ol class="text-sm text-neutral-500 dark:text-neutral-400 print:hidden">
-<li class="inline hidden">
-<a class="hover:underline decoration-neutral-300 dark:underline-neutral-600" href="/"></a><span class="px-1 text-primary-500">/</span>
-</li>
-<li class="inline">
-<a class="hover:underline decoration-neutral-300 dark:underline-neutral-600" href="/posts/">Posts</a><span class="px-1 text-primary-500">/</span>
-</li>
-<li class="inline hidden">
-<a class="hover:underline decoration-neutral-300 dark:underline-neutral-600" href="/posts/c++/homework/c++%E7%90%86%E8%AE%BA1/">C++理论1</a><span class="px-1 text-primary-500">/</span>
-</li>
+
+  
+  
+
+  <header id="single_header" class="mt-5 max-w-prose">
+    
+    <ol class="text-sm text-neutral-500 dark:text-neutral-400 print:hidden">
+  
+  
+    
+  
+    
+  
+  <li class="inline hidden">
+    <a
+      class="hover:underline decoration-neutral-300 dark:underline-neutral-600"
+      href="/"
+      ></a
+    ><span class="px-1 text-primary-500">/</span>
+  </li>
+
+  
+  <li class="inline ">
+    <a
+      class="hover:underline decoration-neutral-300 dark:underline-neutral-600"
+      href="/posts/"
+      >Posts</a
+    ><span class="px-1 text-primary-500">/</span>
+  </li>
+
+  
+  <li class="inline hidden">
+    <a
+      class="hover:underline decoration-neutral-300 dark:underline-neutral-600"
+      href="/posts/c&#43;&#43;/homework/c&#43;&#43;%E7%90%86%E8%AE%BA1/"
+      >C&#43;&#43;理论1</a
+    ><span class="px-1 text-primary-500">/</span>
+  </li>
+
 </ol>
-<h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">
+
+
+    
+    <h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">
       C++理论1
     </h1>
-<div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
+    <div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-06-30 00:00:00 +0000 UTC">June 30, 2023</time><span class="px-2 text-primary-500">·</span><span>4491 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">9 分钟</span>
+  
+  
+  <time datetime="2023-06-30 00:00:00 &#43;0000 UTC">June 30, 2023</time><span class="px-2 text-primary-500">&middot;</span><span>4491 字</span><span class="px-2 text-primary-500">&middot;</span><span title="预计阅读">9 分钟</span>
+  
+
+  
+  
 </div>
+
+
+
+
+
 <div class="flex flex-row flex-wrap items-center">
-<span class="mr-2" onclick="window.open(&quot;/categories/c++/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    C++
+  
+  
+  
+  
+  
+  
+  <span style="margin-top:0.5rem" class="mr-2" onclick="window.open(&#34;/categories/c&#43;&#43;/&#34;,'_self');">
+    <span class="flex">
+  <span
+    class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400"
+  >
+    C&#43;&#43;
   </span>
 </span>
-</span>
-<span class="mr-2" onclick="window.open(&quot;/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+
+  </span>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <span style="margin-top:0.5rem" class="mr-2" onclick="window.open(&#34;/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/&#34;,'_self');">
+    <span class="flex">
+  <span
+    class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400"
+  >
     基础知识
   </span>
 </span>
-</span>
+
+  </span>
+  
+  
+  
+  
 </div>
-</div>
-<div class="flex">
-<div class="place-self-center">
-<div class="text-[0.6rem] uppercase leading-3 text-neutral-500 dark:text-neutral-400">
+
+
+
+    </div>
+
+    
+    
+    
+    
+    
+
+    
+    
+    <div class="flex">
+  
+  <div class="place-self-center">
+    
+    <div class="text-[0.6rem] uppercase leading-3 text-neutral-500 dark:text-neutral-400">
       作者
     </div>
-<div class="font-semibold leading-6 text-neutral-800 dark:text-neutral-300">
+    <div class="font-semibold leading-6 text-neutral-800 dark:text-neutral-300">
       ta0lve
     </div>
-<div class="text-sm text-neutral-700 dark:text-neutral-400">一些记录，一点思考</div>
-<div class="text-2xl sm:text-lg">
-<div class="flex flex-wrap text-neutral-400 dark:text-neutral-500">
-<a aria-label="Email" class="px-1 hover:text-primary-700 dark:hover:text-primary-400" href="mailto:hujt25@mail2.sysu.edu.cn" rel="me noopener noreferrer" target="_blank"><span class="inline-block align-text-bottom">
-<span class="relative block icon">
-<svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M207.8 20.73c-93.45 18.32-168.7 93.66-187 187.1c-27.64 140.9 68.65 266.2 199.1 285.1c19.01 2.888 36.17-12.26 36.17-31.49l.0001-.6631c0-15.74-11.44-28.88-26.84-31.24c-84.35-12.98-149.2-86.13-149.2-174.2c0-102.9 88.61-185.5 193.4-175.4c91.54 8.869 158.6 91.25 158.6 183.2l0 16.16c0 22.09-17.94 40.05-40 40.05s-40.01-17.96-40.01-40.05v-120.1c0-8.847-7.161-16.02-16.01-16.02l-31.98 .0036c-7.299 0-13.2 4.992-15.12 11.68c-24.85-12.15-54.24-16.38-86.06-5.106c-38.75 13.73-68.12 48.91-73.72 89.64c-9.483 69.01 43.81 128 110.9 128c26.44 0 50.43-9.544 69.59-24.88c24 31.3 65.23 48.69 109.4 37.49C465.2 369.3 496 324.1 495.1 277.2V256.3C495.1 107.1 361.2-9.332 207.8 20.73zM239.1 304.3c-26.47 0-48-21.56-48-48.05s21.53-48.05 48-48.05s48 21.56 48 48.05S266.5 304.3 239.1 304.3z" fill="currentColor"></path></svg>
-</span>
-</span></a>
-<a aria-label="Blogger" class="px-1 hover:text-primary-700 dark:hover:text-primary-400" href="https://ta0lve.github.io/" rel="me noopener noreferrer" target="_blank"><span class="inline-block align-text-bottom">
-<span class="relative block icon">
-<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M446.6 222.7c-1.8-8-6.8-15.4-12.5-18.5-1.8-1-13-2.2-25-2.7-20.1-.9-22.3-1.3-28.7-5-10.1-5.9-12.8-12.3-12.9-29.5-.1-33-13.8-63.7-40.9-91.3-19.3-19.7-40.9-33-65.5-40.5-5.9-1.8-19.1-2.4-63.3-2.9-69.4-.8-84.8.6-108.4 10C45.9 59.5 14.7 96.1 3.3 142.9 1.2 151.7.7 165.8.2 246.8c-.6 101.5.1 116.4 6.4 136.5 15.6 49.6 59.9 86.3 104.4 94.3 14.8 2.7 197.3 3.3 216 .8 32.5-4.4 58-17.5 81.9-41.9 17.3-17.7 28.1-36.8 35.2-62.1 4.9-17.6 4.5-142.8 2.5-151.7zm-322.1-63.6c7.8-7.9 10-8.2 58.8-8.2 43.9 0 45.4.1 51.8 3.4 9.3 4.7 13.4 11.3 13.4 21.9 0 9.5-3.8 16.2-12.3 21.6-4.6 2.9-7.3 3.1-50.3 3.3-26.5.2-47.7-.4-50.8-1.2-16.6-4.7-22.8-28.5-10.6-40.8zm191.8 199.8l-14.9 2.4-77.5.9c-68.1.8-87.3-.4-90.9-2-7.1-3.1-13.8-11.7-14.9-19.4-1.1-7.3 2.6-17.3 8.2-22.4 7.1-6.4 10.2-6.6 97.3-6.7 89.6-.1 89.1-.1 97.6 7.8 12.1 11.3 9.5 31.2-4.9 39.4z" fill="currentColor"></path></svg>
-</span>
-</span></a>
-<a aria-label="Github" class="px-1 hover:text-primary-700 dark:hover:text-primary-400" href="https://github.com/username" rel="me noopener noreferrer" target="_blank"><span class="inline-block align-text-bottom">
-<span class="relative block icon">
-<svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z" fill="currentColor"></path></svg>
-</span>
-</span></a>
+    
+    
+    <div class="text-sm text-neutral-700 dark:text-neutral-400">一些记录，一点思考</div>
+    
+    <div class="text-2xl sm:text-lg">
+  <div class="flex flex-wrap text-neutral-400 dark:text-neutral-500">
+    
+      
+        <a
+          class="px-1 hover:text-primary-700 dark:hover:text-primary-400"
+          href="mailto:hujt25@mail2.sysu.edu.cn"
+          target="_blank"
+          aria-label="Email"
+          rel="me noopener noreferrer"
+          ><span class="inline-block align-text-bottom">
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M207.8 20.73c-93.45 18.32-168.7 93.66-187 187.1c-27.64 140.9 68.65 266.2 199.1 285.1c19.01 2.888 36.17-12.26 36.17-31.49l.0001-.6631c0-15.74-11.44-28.88-26.84-31.24c-84.35-12.98-149.2-86.13-149.2-174.2c0-102.9 88.61-185.5 193.4-175.4c91.54 8.869 158.6 91.25 158.6 183.2l0 16.16c0 22.09-17.94 40.05-40 40.05s-40.01-17.96-40.01-40.05v-120.1c0-8.847-7.161-16.02-16.01-16.02l-31.98 .0036c-7.299 0-13.2 4.992-15.12 11.68c-24.85-12.15-54.24-16.38-86.06-5.106c-38.75 13.73-68.12 48.91-73.72 89.64c-9.483 69.01 43.81 128 110.9 128c26.44 0 50.43-9.544 69.59-24.88c24 31.3 65.23 48.69 109.4 37.49C465.2 369.3 496 324.1 495.1 277.2V256.3C495.1 107.1 361.2-9.332 207.8 20.73zM239.1 304.3c-26.47 0-48-21.56-48-48.05s21.53-48.05 48-48.05s48 21.56 48 48.05S266.5 304.3 239.1 304.3z"/></svg>
+
+  </span>
+
+</span></a
+        >
+      
+    
+      
+        <a
+          class="px-1 hover:text-primary-700 dark:hover:text-primary-400"
+          href="https://ta0lve.github.io/"
+          target="_blank"
+          aria-label="Blogger"
+          rel="me noopener noreferrer"
+          ><span class="inline-block align-text-bottom">
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M446.6 222.7c-1.8-8-6.8-15.4-12.5-18.5-1.8-1-13-2.2-25-2.7-20.1-.9-22.3-1.3-28.7-5-10.1-5.9-12.8-12.3-12.9-29.5-.1-33-13.8-63.7-40.9-91.3-19.3-19.7-40.9-33-65.5-40.5-5.9-1.8-19.1-2.4-63.3-2.9-69.4-.8-84.8.6-108.4 10C45.9 59.5 14.7 96.1 3.3 142.9 1.2 151.7.7 165.8.2 246.8c-.6 101.5.1 116.4 6.4 136.5 15.6 49.6 59.9 86.3 104.4 94.3 14.8 2.7 197.3 3.3 216 .8 32.5-4.4 58-17.5 81.9-41.9 17.3-17.7 28.1-36.8 35.2-62.1 4.9-17.6 4.5-142.8 2.5-151.7zm-322.1-63.6c7.8-7.9 10-8.2 58.8-8.2 43.9 0 45.4.1 51.8 3.4 9.3 4.7 13.4 11.3 13.4 21.9 0 9.5-3.8 16.2-12.3 21.6-4.6 2.9-7.3 3.1-50.3 3.3-26.5.2-47.7-.4-50.8-1.2-16.6-4.7-22.8-28.5-10.6-40.8zm191.8 199.8l-14.9 2.4-77.5.9c-68.1.8-87.3-.4-90.9-2-7.1-3.1-13.8-11.7-14.9-19.4-1.1-7.3 2.6-17.3 8.2-22.4 7.1-6.4 10.2-6.6 97.3-6.7 89.6-.1 89.1-.1 97.6 7.8 12.1 11.3 9.5 31.2-4.9 39.4z"/></svg>
+
+  </span>
+
+</span></a
+        >
+      
+    
+      
+        <a
+          class="px-1 hover:text-primary-700 dark:hover:text-primary-400"
+          href="https://github.com/username"
+          target="_blank"
+          aria-label="Github"
+          rel="me noopener noreferrer"
+          ><span class="inline-block align-text-bottom">
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path fill="currentColor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+
+  </span>
+
+</span></a
+        >
+      
+    
+  </div>
+
 </div>
+  </div>
 </div>
-</div>
-</div>
-<div class="mb-5"></div>
-</header>
-<section class="flex flex-col max-w-full mt-0 prose dark:prose-invert lg:flex-row">
-<div class="order-first sm:max-w-prose lg:ml-auto px-0 lg:order-last lg:max-w-xs ltr:lg:pl-8 rtl:lg:pr-8">
-<div class="toc ltr:pl-5 rtl:pr-5 print:hidden lg:sticky lg:top-10">
-<details class="mt-0 overflow-hidden rounded-lg ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 hidden lg:block" open="">
-<summary class="block py-1 text-lg font-semibold cursor-pointer bg-neutral-100 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-neutral-700 dark:text-neutral-100 lg:hidden">
-</summary>
-<div class="min-w-[220px] py-2 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#cin与cout">cin与cout</a></li>
-<li><a href="#this指针-const与constexpr">this指针 const与constexpr</a></li>
-<li><a href="#auto">auto</a></li>
-<li><a href="#c特性">c++特性</a></li>
-<li><a href="#引用">引用</a></li>
-<li><a href="#static">static</a></li>
-<li><a href="#构造函数">构造函数</a></li>
-</ul>
-</li>
-<li><a href="#new与delete">new与delete</a>
-<ul>
-<li><a href="#纯虚函数">纯虚函数</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+    
+
+    
+
+    
+
+    
+    <div class="mb-5"></div>
+    
+  
+  </header>
+  <section class="flex flex-col max-w-full mt-0 prose dark:prose-invert lg:flex-row">
+     <div
+      class="order-first sm:max-w-prose lg:ml-auto px-0 lg:order-last lg:max-w-xs ltr:lg:pl-8 rtl:lg:pr-8">
+      <div class="toc ltr:pl-5 rtl:pr-5 print:hidden lg:sticky  lg:top-10 ">
+
+         <details open class="mt-0 overflow-hidden rounded-lg ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 hidden lg:block">
+  <summary
+    class="block py-1 text-lg font-semibold cursor-pointer bg-neutral-100 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-neutral-700 dark:text-neutral-100 lg:hidden">
+    
+  </summary>
+  <div
+    class="min-w-[220px] py-2 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#cin与cout">cin与cout</a></li>
+            <li><a href="#this指针-const与constexpr">this指针 const与constexpr</a></li>
+            <li><a href="#auto">auto</a></li>
+            <li><a href="#c特性">c++特性</a></li>
+            <li><a href="#引用">引用</a></li>
+            <li><a href="#static">static</a></li>
+            <li><a href="#构造函数">构造函数</a></li>
+          </ul>
+        </li>
+        <li><a href="#new与delete">new与delete</a>
+          <ul>
+            <li><a href="#纯虚函数">纯虚函数</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
 </nav>
-</div>
+  </div>
 </details>
 <details class="mt-0 overflow-hidden rounded-lg ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 lg:hidden">
-<summary class="py-1 text-lg font-semibold cursor-pointer bg-neutral-100 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-neutral-700 dark:text-neutral-100 lg:hidden">
-</summary>
-<div class="py-2 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#cin与cout">cin与cout</a></li>
-<li><a href="#this指针-const与constexpr">this指针 const与constexpr</a></li>
-<li><a href="#auto">auto</a></li>
-<li><a href="#c特性">c++特性</a></li>
-<li><a href="#引用">引用</a></li>
-<li><a href="#static">static</a></li>
-<li><a href="#构造函数">构造函数</a></li>
-</ul>
-</li>
-<li><a href="#new与delete">new与delete</a>
-<ul>
-<li><a href="#纯虚函数">纯虚函数</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+  <summary
+    class="py-1 text-lg font-semibold cursor-pointer bg-neutral-100 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-neutral-700 dark:text-neutral-100 lg:hidden">
+    
+  </summary>
+  <div
+    class="py-2 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#cin与cout">cin与cout</a></li>
+            <li><a href="#this指针-const与constexpr">this指针 const与constexpr</a></li>
+            <li><a href="#auto">auto</a></li>
+            <li><a href="#c特性">c++特性</a></li>
+            <li><a href="#引用">引用</a></li>
+            <li><a href="#static">static</a></li>
+            <li><a href="#构造函数">构造函数</a></li>
+          </ul>
+        </li>
+        <li><a href="#new与delete">new与delete</a>
+          <ul>
+            <li><a href="#纯虚函数">纯虚函数</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
 </nav>
-</div>
+  </div>
 </details>
+
+ 
 <script>
   (function () {
     var $toc = $('#TableOfContents');
@@ -429,36 +902,42 @@
     }
   })();
 </script>
-</div>
-</div>
-<div class="min-w-0 min-h-0 max-w-prose">
-<div class="anchor" id="cin与cout"></div>
+   </div>
+      </div>
+      
+      <div class="min-w-0 min-h-0 max-w-prose">
+        
+
+        <div id="cin与cout" class="anchor"></div>
 <h4 class="relative group">cin与cout 
-    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
-<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#cin%e4%b8%8ecout" style="text-decoration-line: none !important;">#</a></span>
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#cin%e4%b8%8ecout" aria-label="锚点">#</a></span>        
+    
 </h4>
 <p>第一周T8，T9，T10</p>
 <p>下面语句的输出是？</p>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="mf">1.</span>
-</span></span><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="mi">0</span><span class="o">+</span><span class="s">"12.34"</span><span class="o">&lt;&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="o">&lt;&lt;</span><span class="mf">12.34</span><span class="p">;</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="mf">1.</span>
+</span></span><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="mi">0</span><span class="o">+</span><span class="s">&#34;12.34&#34;</span><span class="o">&lt;&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="o">&lt;&lt;</span><span class="mf">12.34</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="c1">// 12.34\n12.34
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="o">+</span><span class="s">"12.34"</span><span class="o">&lt;&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="o">&lt;&lt;</span><span class="mf">12.34</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="o">+</span><span class="s">&#34;12.34&#34;</span><span class="o">&lt;&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="o">&lt;&lt;</span><span class="mf">12.34</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="c1">// 2.34\n12.34
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="mi">8</span><span class="o">+</span><span class="s">"12.34"</span><span class="o">&lt;&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="o">&lt;&lt;</span><span class="mf">12.34</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="mi">8</span><span class="o">+</span><span class="s">&#34;12.34&#34;</span><span class="o">&lt;&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="o">&lt;&lt;</span><span class="mf">12.34</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="c1">// Q)@@u@12.56
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="mi">9</span><span class="o">+</span><span class="s">"12.34"</span><span class="o">&lt;&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="o">&lt;&lt;</span><span class="mf">12.34</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="mi">9</span><span class="o">+</span><span class="s">&#34;12.34&#34;</span><span class="o">&lt;&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="o">&lt;&lt;</span><span class="mf">12.34</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="c1">// Q)@@u@12.56
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="mi">11</span><span class="o">+</span><span class="s">"12.34"</span><span class="o">&lt;&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="o">&lt;&lt;</span><span class="mf">12.34</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="mi">11</span><span class="o">+</span><span class="s">&#34;12.34&#34;</span><span class="o">&lt;&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="o">&lt;&lt;</span><span class="mf">12.34</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="c1">// 无输出？？？
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="mi">12</span><span class="o">+</span><span class="s">"12.34"</span><span class="o">&lt;&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="o">&lt;&lt;</span><span class="mf">12.34</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="mi">12</span><span class="o">+</span><span class="s">&#34;12.34&#34;</span><span class="o">&lt;&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="o">&lt;&lt;</span><span class="mf">12.34</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="c1">// )@@u@12.56
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>
 </span></span><span class="line"><span class="cl"><span class="mf">2.</span>
-</span></span><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="sc">'a'</span><span class="o">&lt;&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="o">&lt;&lt;</span><span class="mf">12.34</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="sc">&#39;a&#39;</span><span class="o">&lt;&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="o">&lt;&lt;</span><span class="mf">12.34</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="c1">// a\n12.34
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="mi">0</span><span class="o">+</span><span class="sc">'a'</span><span class="o">&lt;&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="o">&lt;&lt;</span><span class="mf">12.34</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="mi">0</span><span class="o">+</span><span class="sc">&#39;a&#39;</span><span class="o">&lt;&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="o">&lt;&lt;</span><span class="mf">12.34</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="c1">// 97\n12.34
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="mi">9</span><span class="o">+</span><span class="s">"a"</span><span class="o">&lt;&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="o">&lt;&lt;</span><span class="mf">12.34</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="mi">9</span><span class="o">+</span><span class="s">&#34;a&#34;</span><span class="o">&lt;&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="o">&lt;&lt;</span><span class="mf">12.34</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="c1">// z(@@u@\n12.34
 </span></span></span><span class="line"><span class="cl"><span class="c1">// 字符可以被自动转换成数字，而字符串则是输出其第n个字符开始的字符串（不自动转换）
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>
@@ -466,7 +945,7 @@
 </span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">a</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">a</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="kt">char</span> <span class="n">b</span><span class="o">=</span><span class="sc">'c'</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">char</span> <span class="n">b</span><span class="o">=</span><span class="sc">&#39;c&#39;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="c1">//*1
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">std</span><span class="o">::</span><span class="n">cin</span><span class="o">&gt;&gt;</span><span class="n">b</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">b</span><span class="p">;</span>
@@ -504,16 +983,19 @@
 </span></span><span class="line"><span class="cl"><span class="c1">//1 11
 </span></span></span><span class="line"><span class="cl"><span class="c1">//2 22
 </span></span></span><span class="line"><span class="cl"><span class="c1">//5 55
-</span></span></span></code></pre></div><div class="anchor" id="this指针-const与constexpr"></div>
+</span></span></span></code></pre></div><div id="this指针-const与constexpr" class="anchor"></div>
 <h4 class="relative group">this指针 const与constexpr 
-    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
-<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#this%e6%8c%87%e9%92%88-const%e4%b8%8econstexpr" style="text-decoration-line: none !important;">#</a></span>
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#this%e6%8c%87%e9%92%88-const%e4%b8%8econstexpr" aria-label="锚点">#</a></span>        
+    
 </h4>
 <p>第二周 T2</p>
 <p>1.<strong>成员函数声明为const，就相当于this指针设为了const，从而达到无法修改对象的作用</strong></p>
 <p>2.<strong>静态成员函数没有this指针，在没有创建任何对象时也能调用静态成员函数</strong></p>
 <p>3.<strong>友元函数内没有this指针？</strong></p>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="mf">1.</span><span class="err">引用就是某一变量（目标）的一个别名，对引用的操作与对变量直接操作完全一样</span><span class="p">(</span><span class="err">正确</span><span class="p">)</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="mf">1.</span><span class="err">引用就是某一变量（目标）的一个别名，对引用的操作与对变量直接操作完全一样</span><span class="p">(</span><span class="err">正确</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="mf">2.</span>
@@ -568,10 +1050,13 @@
 </span></span><span class="line"><span class="cl"><span class="err">（</span><span class="mi">1</span><span class="err">）</span><span class="k">const</span> <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">+</span> <span class="mi">4</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="err">（</span><span class="mi">2</span><span class="err">）</span><span class="k">constexpr</span> <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">+</span> <span class="mi">4</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="err">和</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="err">均正确</span>
-</span></span></code></pre></div><div class="anchor" id="auto"></div>
+</span></span></code></pre></div><div id="auto" class="anchor"></div>
 <h4 class="relative group">auto 
-    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
-<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#auto" style="text-decoration-line: none !important;">#</a></span>
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#auto" aria-label="锚点">#</a></span>        
+    
 </h4>
 <p>总述：
 auto的原理就是根据后面的值，来自己推测前面的类型是什么。</p>
@@ -581,7 +1066,7 @@ auto的原理就是根据后面的值，来自己推测前面的类型是什么�
 <p>2.函数和模板参数不能被声明为auto（原因同上）</p>
 <p>3.因为auto是一个占位符，并不是一个他自己的类型，因此不能用于类型转换或其他一些操作，如sizeof和typeid</p>
 <p>4.定义在一个auto序列的变量必须始终推导成同一类型</p>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">auto</span> <span class="n">x1</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">x2</span> <span class="o">=</span> <span class="mf">5.0</span><span class="p">,</span> <span class="n">x3</span><span class="o">=</span><span class="sc">'r'</span><span class="p">;</span>  <span class="c1">// This is too much....we cannot combine like this
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">auto</span> <span class="n">x1</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">x2</span> <span class="o">=</span> <span class="mf">5.0</span><span class="p">,</span> <span class="n">x3</span><span class="o">=</span><span class="sc">&#39;r&#39;</span><span class="p">;</span>  <span class="c1">// This is too much....we cannot combine like this
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>
 </span></span><span class="line"><span class="cl"><span class="err">示例：</span>
 </span></span><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">ve</span><span class="p">;</span>
@@ -598,7 +1083,7 @@ auto的原理就是根据后面的值，来自己推测前面的类型是什么�
 </span></span><span class="line"><span class="cl">    <span class="n">v</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="n">v</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">i</span> <span class="p">:</span> <span class="n">v</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">        <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">i</span><span class="o">&lt;&lt;</span><span class="s">" "</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">i</span><span class="o">&lt;&lt;</span><span class="s">&#34; &#34;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
@@ -614,10 +1099,13 @@ auto的原理就是根据后面的值，来自己推测前面的类型是什么�
 </span></span><span class="line"><span class="cl"><span class="n">C</span><span class="p">.</span><span class="err">因为</span><span class="n">auto</span><span class="err">是一个占位符，并不是一个他自己的类型，因此不能用于类型转换或其他一些操作，如</span><span class="n">sizeof</span><span class="err">和</span><span class="k">typeid</span>
 </span></span><span class="line"><span class="cl"><span class="n">D</span><span class="p">.</span><span class="err">定义在一个</span><span class="n">auto</span><span class="err">序列的变量不必始终推导成同一类型</span>
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="n">D</span><span class="p">)</span>
-</span></span></code></pre></div><div class="anchor" id="c特性"></div>
+</span></span></code></pre></div><div id="c特性" class="anchor"></div>
 <h4 class="relative group">c++特性 
-    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
-<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#c%e7%89%b9%e6%80%a7" style="text-decoration-line: none !important;">#</a></span>
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#c%e7%89%b9%e6%80%a7" aria-label="锚点">#</a></span>        
+    
 </h4>
 <p>1.C/C++面向对象开发的四大特性：封装、抽象、继承、多态</p>
 <p>2.在程序设计中，对于被抽象的数据，称为抽象数据类型（Abstract Data Type, ADT）</p>
@@ -625,39 +1113,48 @@ auto的原理就是根据后面的值，来自己推测前面的类型是什么�
 <p>4.类声明里面public和private可以以任意顺序多次出现</p>
 <p><strong>5.C++中同类的不同对象可以相互访问成员(包括私有成员)</strong></p>
 <p>（比如在拷贝复制构造函数中）</p>
-<div class="anchor" id="引用"></div>
+<div id="引用" class="anchor"></div>
 <h4 class="relative group">引用 
-    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
-<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e5%bc%95%e7%94%a8" style="text-decoration-line: none !important;">#</a></span>
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#%e5%bc%95%e7%94%a8" aria-label="锚点">#</a></span>        
+    
 </h4>
 <p>const常引用</p>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="o">&amp;</span><span class="n">a</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="n">a</span> <span class="o">+=</span> <span class="mi">10</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="kt">int</span> <span class="o">&amp;</span><span class="n">b</span>  <span class="o">=</span> <span class="n">x</span><span class="err">；</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl"><span class="c1">//b可以引用a，但是b只能读取x的值不能通过b去改变x的值。
-</span></span></span></code></pre></div><div class="anchor" id="static"></div>
+</span></span></span></code></pre></div><div id="static" class="anchor"></div>
 <h4 class="relative group">static 
-    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
-<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#static" style="text-decoration-line: none !important;">#</a></span>
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#static" aria-label="锚点">#</a></span>        
+    
 </h4>
 <p>类中静态(static)成员不能在类的定义内初始化，要在类外再写<code>类型 类名::变量名 = a  </code>来初始化定义</p>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="k">class</span><span class="err">::</span><span class="nc">static_count</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="k">class</span><span class="err">::</span><span class="nc">static_count</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 </span></span></code></pre></div><p>静态成员函数 <strong>没有</strong> this指针</p>
 <p>看到<code>static int a;</code>就要找一下看看<strong>有没有在类之外初始化</strong></p>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="err">在</span><span class="n">C</span><span class="o">++</span><span class="err">中，静态成员函数的主要目的是访问静态成员。</span><span class="n">getTotal</span><span class="p">()</span><span class="err">、</span><span class="n">getPoints</span><span class="p">()</span> <span class="err">当然也可以声明为普通成员函数，但是它们都只对静态成员进行操作，加上</span> <span class="k">static</span> <span class="err">语义更加明确。</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="err">在</span><span class="n">C</span><span class="o">++</span><span class="err">中，静态成员函数的主要目的是访问静态成员。</span><span class="n">getTotal</span><span class="p">()</span><span class="err">、</span><span class="n">getPoints</span><span class="p">()</span> <span class="err">当然也可以声明为普通成员函数，但是它们都只对静态成员进行操作，加上</span> <span class="k">static</span> <span class="err">语义更加明确。</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="err">和静态成员变量类似，静态成员函数在声明时要加</span> <span class="k">static</span><span class="err">，在定义时不能加</span> <span class="k">static</span><span class="err">。静态成员函数可以通过类来调用（一般都是这样做），也可以通过对象来调用</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="n">a1</span><span class="p">.</span><span class="n">value_of_a</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl"><span class="n">A</span><span class="o">::</span><span class="n">value_of_a</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl"><span class="c1">//只能对静态成员变量进行操作，不能使用非静态成员变量
-</span></span></span></code></pre></div><div class="anchor" id="构造函数"></div>
+</span></span></span></code></pre></div><div id="构造函数" class="anchor"></div>
 <h4 class="relative group">构造函数 
-    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
-<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e6%9e%84%e9%80%a0%e5%87%bd%e6%95%b0" style="text-decoration-line: none !important;">#</a></span>
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#%e6%9e%84%e9%80%a0%e5%87%bd%e6%95%b0" aria-label="锚点">#</a></span>        
+    
 </h4>
 <p>1.在写了一个有传参的构造函数后，系统就<strong>不会</strong>生成默认的无参构造函数了</p>
 <p>2.下面关于构造函数和成员常量描述正确的是</p>
@@ -668,7 +1165,7 @@ auto的原理就是根据后面的值，来自己推测前面的类型是什么�
 <p><strong>构造函数不能对已经初始化定义的成员常量初始化</strong></p>
 <p>3.</p>
 <p>Pointer C = Pointer(2,4);//等同于Pointer C（2,4）；</p>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Pointer</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Pointer</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">row</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">col</span>
@@ -689,7 +1186,7 @@ auto的原理就是根据后面的值，来自己推测前面的类型是什么�
 </span></span><span class="line"><span class="cl">	<span class="c1">//还可以使用如下的写法：
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">Pointer</span> <span class="n">C</span> <span class="o">=</span> <span class="n">Pointer</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">);</span><span class="c1">//等同于Pointer C（2,4）；
 </span></span></span></code></pre></div><p><strong>采用列表的方式来初始化对象</strong></p>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Object</span><span class="err">：</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Object</span><span class="err">：</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">value</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
@@ -711,7 +1208,7 @@ auto的原理就是根据后面的值，来自己推测前面的类型是什么�
 </span></span></code></pre></div><p><strong>类中成员的构建顺序！！！</strong></p>
 <p>按照设计的顺序，即我们声明的顺序
 看下面的代码：</p>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Object</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Object</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">num</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">sun</span><span class="p">;</span>
@@ -720,7 +1217,7 @@ auto的原理就是根据后面的值，来自己推测前面的类型是什么�
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">	<span class="kt">void</span> <span class="nf">print</span><span class="p">()</span> <span class="k">const</span> 
 </span></span><span class="line"><span class="cl">	<span class="p">{</span>
-</span></span><span class="line"><span class="cl">		<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">num</span><span class="o">&lt;&lt;</span><span class="s">" "</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">num</span><span class="o">&lt;&lt;</span><span class="s">&#34; &#34;</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">	<span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
@@ -734,7 +1231,7 @@ private 的构造函数不能使用以下的定义
 假设A的构造是私有的，
 定义 A a;或者 A*a = new A都是错的。因为A()为私有函数，外部不能直接操作。</p>
 <p>一般方法是另外再定义一个public的函数自动调用A（）</p>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">A</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">A</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>
 </span></span><span class="line"><span class="cl">   <span class="n">A</span><span class="p">();</span>
@@ -748,7 +1245,7 @@ private 的构造函数不能使用以下的定义
 </span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span> 
 </span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">A</span><span class="p">{</span>
 </span></span><span class="line"><span class="cl">	<span class="n">A</span><span class="p">(){</span>
-</span></span><span class="line"><span class="cl">		<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">"hello world"</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;hello world&#34;</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">	<span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
@@ -769,10 +1266,13 @@ private 的构造函数不能使用以下的定义
 ————————————————
 版权声明：本文为CSDN博主「weixin_39530557」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
 原文链接：https://blog.csdn.net/weixin_39530557/article/details/111339796</p>
-<div class="anchor" id="new与delete"></div>
+<div id="new与delete" class="anchor"></div>
 <h3 class="relative group">new与delete 
-    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
-<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#new%e4%b8%8edelete" style="text-decoration-line: none !important;">#</a></span>
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#new%e4%b8%8edelete" aria-label="锚点">#</a></span>        
+    
 </h3>
 <p><strong>一、new和malloc的区别</strong>
 1.都在堆区开辟空间，若堆区空间不足失败，malloc返回一个空指针，new抛出异常<code>throw bad_alloc</code>
@@ -788,15 +1288,15 @@ private 的构造函数不能使用以下的定义
 <p><strong>三、new的三种调动形式</strong></p>
 <p>1.运算符用法（关键字调动）
 开辟空间，调动构造函数构建对象</p>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">Object</span> <span class="o">*</span><span class="n">op</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Object</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">Object</span> <span class="o">*</span><span class="n">op</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Object</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="c1">//Object *op = NULL;
 </span></span></span><span class="line"><span class="cl"><span class="c1">//op = new Object(10);
 </span></span></span></code></pre></div><p>2.函数用法（函数调动）</p>
 <p>和malloc很像，此时不会调动构造函数，只申请空间，
 但区别是：此时申请失败仍然抛出异常<code>throw bad_alloc</code></p>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">Object</span> <span class="o">*</span><span class="n">os</span> <span class="o">=</span> <span class="p">(</span><span class="n">Object</span><span class="o">*</span><span class="p">)</span><span class="o">::</span><span class="k">operator</span> <span class="k">new</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">Object</span><span class="p">));</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">Object</span> <span class="o">*</span><span class="n">os</span> <span class="o">=</span> <span class="p">(</span><span class="n">Object</span><span class="o">*</span><span class="p">)</span><span class="o">::</span><span class="k">operator</span> <span class="k">new</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">Object</span><span class="p">));</span>
 </span></span></code></pre></div><p>3.定位new</p>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">new</span><span class="p">(</span><span class="err">有效地址空间</span><span class="p">)</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">new</span><span class="p">(</span><span class="err">有效地址空间</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="err">并不开辟空间，调动构造函数</span><span class="p">,</span><span class="n">os</span><span class="err">已经申请到空间，在</span><span class="n">os</span><span class="err">指定的空间中创建对象</span>
 </span></span><span class="line"><span class="cl">
@@ -806,7 +1306,7 @@ private 的构造函数不能使用以下的定义
 </span></span><span class="line"><span class="cl"><span class="err">定位</span><span class="n">new</span><span class="err">可以完成对象的二次构建</span>
 </span></span><span class="line"><span class="cl"><span class="k">new</span><span class="p">(</span><span class="o">&amp;</span><span class="n">a</span><span class="p">)</span> <span class="n">Object</span><span class="p">(</span><span class="mi">10000</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="c1">//a.Object(10000);
-</span></span></span></code></pre></div><div class="highlight"><pre class="chroma" tabindex="0"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">new</span><span class="err">申请一个对象和一组对象的语法区别（）</span><span class="p">[</span> <span class="p">]</span>
+</span></span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">new</span><span class="err">申请一个对象和一组对象的语法区别（）</span><span class="p">[</span> <span class="p">]</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">	<span class="n">Object</span> <span class="n">obja</span><span class="p">(</span><span class="mi">20</span><span class="p">);</span><span class="c1">//.stack——&gt;函数开始调动构建，函数结束调动析构
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">Object</span> <span class="n">objb</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span><span class="c1">//.stack——&gt;调动10次构建，函数结束调动10次析构
@@ -817,21 +1317,30 @@ private 的构造函数不能使用以下的定义
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">	<span class="k">delete</span> <span class="n">s</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">	<span class="k">delete</span> <span class="p">[]</span><span class="n">p</span><span class="p">;</span><span class="c1">//编译器会自动计算出销毁多少个对象（已经记录在案）
-</span></span></span></code></pre></div><div class="anchor" id="纯虚函数"></div>
+</span></span></span></code></pre></div><div id="纯虚函数" class="anchor"></div>
 <h4 class="relative group">纯虚函数 
-    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
-<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e7%ba%af%e8%99%9a%e5%87%bd%e6%95%b0" style="text-decoration-line: none !important;">#</a></span>
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#%e7%ba%af%e8%99%9a%e5%87%bd%e6%95%b0" aria-label="锚点">#</a></span>        
+    
 </h4>
-<div class="anchor" id="构造函数不能是虚函数"></div>
-<h5 class="relative group"><strong>构造函数不能是虚函数</strong>
-<span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
-<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e6%9e%84%e9%80%a0%e5%87%bd%e6%95%b0%e4%b8%8d%e8%83%bd%e6%98%af%e8%99%9a%e5%87%bd%e6%95%b0" style="text-decoration-line: none !important;">#</a></span>
+<div id="构造函数不能是虚函数" class="anchor"></div>
+<h5 class="relative group"><strong>构造函数不能是虚函数</strong> 
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#%e6%9e%84%e9%80%a0%e5%87%bd%e6%95%b0%e4%b8%8d%e8%83%bd%e6%98%af%e8%99%9a%e5%87%bd%e6%95%b0" aria-label="锚点">#</a></span>        
+    
 </h5>
 <p>而且，在构造函数中调用虚函数，实际执行的是父类的对应函数，因为自己还没有构造好, 多态是被<code>disable</code>的。</p>
-<div class="anchor" id="析构函数可以是虚函数"></div>
-<h5 class="relative group"><strong>析构函数可以是虚函数</strong>
-<span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
-<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e6%9e%90%e6%9e%84%e5%87%bd%e6%95%b0%e5%8f%af%e4%bb%a5%e6%98%af%e8%99%9a%e5%87%bd%e6%95%b0" style="text-decoration-line: none !important;">#</a></span>
+<div id="析构函数可以是虚函数" class="anchor"></div>
+<h5 class="relative group"><strong>析构函数可以是虚函数</strong> 
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#%e6%9e%90%e6%9e%84%e5%87%bd%e6%95%b0%e5%8f%af%e4%bb%a5%e6%98%af%e8%99%9a%e5%87%bd%e6%95%b0" aria-label="锚点">#</a></span>        
+    
 </h5>
 <ol>
 <li>
@@ -841,7 +1350,7 @@ private 的构造函数不能使用以下的定义
 <p><strong>析构函数可以是纯虚的，但纯虚析构函数必须有定义体，因为析构函数的调用是在子类中隐含的</strong>。</p>
 </li>
 <li>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Base</span>  
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Base</span>  
 </span></span><span class="line"><span class="cl"><span class="p">{</span>  
 </span></span><span class="line"><span class="cl">    <span class="k">public</span><span class="o">:</span>  
 </span></span><span class="line"><span class="cl">        <span class="n">Base</span><span class="p">(){}</span>  
@@ -858,184 +1367,549 @@ private 的构造函数不能使用以下的定义
 <p><strong>虚函数是动态绑定的</strong>，也就是说，使用虚函数的指针和引用能够正确找到实际类的对应函数，而不是执行定义类的函数。这是虚函数的基本功能，就不再解释了。</p>
 </li>
 </ol>
-</div>
-<script>
+
+        </br></br>
+        
+
+      </div>
+     <script>
         var oid = "views_posts\\C\u002b\u002b\\homework\\c\u002b\u002b理论1\\index.md"
         var oid_likes = "likes_posts\\C\u002b\u002b\\homework\\c\u002b\u002b理论1\\index.md"
       </script>
-<script integrity="sha512-DkmXO0rQo4LHxgEti/+CJjFmQtqrxPiiBHe9CGdPPabi+pk7wgrU9R58W7aOb5E6IHp8T+N+oOe4BolK/OCmTg==" src="/js/page.min.0e49973b4ad0a382c7c6012d8bff8226316642daabc4f8a20477bd08674f3da6e2fa993bc20ad4f51e7c5bb68e6f913a207a7c4fe37ea0e7b806894afce0a64e.js" type="text/javascript"></script>
-</section>
-<footer class="pt-8 max-w-prose print:hidden">
+      
+      
+      <script type="text/javascript" src="/js/page.min.0e49973b4ad0a382c7c6012d8bff8226316642daabc4f8a20477bd08674f3da6e2fa993bc20ad4f51e7c5bb68e6f913a207a7c4fe37ea0e7b806894afce0a64e.js" integrity="sha512-DkmXO0rQo4LHxgEti/&#43;CJjFmQtqrxPiiBHe9CGdPPabi&#43;pk7wgrU9R58W7aOb5E6IHp8T&#43;N&#43;oOe4BolK/OCmTg=="></script>
+  
+    </section>
+  <footer class="pt-8 max-w-prose print:hidden">
+
+    
+    
+
+
+    
+
+
 <h2 class="mt-8 text-2xl font-extrabold mb-10">Related</h2>
 <section class="w-full grid gap-4 sm:grid-cols-2 md:grid-cols-3">
-<a class="min-w-full" href="/posts/c++/homework/c++%E7%90%86%E8%AE%BA2/">
-<div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
-<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/posts/c++/homework/c++%E7%90%86%E8%AE%BA2/featured.jpg);"></div>
-<div class="px-6 py-4">
-<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/c++/homework/c++%E7%90%86%E8%AE%BA2/">C++理论2</div>
-<div class="text-sm text-neutral-500 dark:text-neutral-400">
+  
+  
+
+  <a href="/posts/c&#43;&#43;/homework/c&#43;&#43;%E7%90%86%E8%AE%BA2/" class="min-w-full">
+    
+    <div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
+        
+        <div class="w-full thumbnail_card_related nozoom" style="background-image:url(/posts/c&#43;&#43;/homework/c&#43;&#43;%E7%90%86%E8%AE%BA2/featured.jpg);"></div>
+        
+      
+
+      <div class="px-6 py-4">
+
+        
+        <div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral"
+          href="/posts/c&#43;&#43;/homework/c&#43;&#43;%E7%90%86%E8%AE%BA2/">C++理论2</div>
+        
+
+        <div class="text-sm text-neutral-500 dark:text-neutral-400">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-06-30 00:00:00 +0000 UTC">June 30, 2023</time><span class="px-2 text-primary-500">·</span><span>5527 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">12 分钟</span>
+  
+  
+  <time datetime="2023-06-30 00:00:00 &#43;0000 UTC">June 30, 2023</time><span class="px-2 text-primary-500">&middot;</span><span>5527 字</span><span class="px-2 text-primary-500">&middot;</span><span title="预计阅读">12 分钟</span>
+  
+
+  
+  
 </div>
+
+
+
+
+
 <div class="flex flex-row flex-wrap items-center">
-<span class="mr-2" onclick="window.open(&quot;/categories/c++/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    C++
+  
+  
+  
+  
+  
+  
+  <span style="margin-top:0.5rem" class="mr-2" onclick="window.open(&#34;/categories/c&#43;&#43;/&#34;,'_self');">
+    <span class="flex">
+  <span
+    class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400"
+  >
+    C&#43;&#43;
   </span>
 </span>
-</span>
-<span class="mr-2" onclick="window.open(&quot;/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+
+  </span>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <span style="margin-top:0.5rem" class="mr-2" onclick="window.open(&#34;/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/&#34;,'_self');">
+    <span class="flex">
+  <span
+    class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400"
+  >
     基础知识
   </span>
 </span>
-</span>
+
+  </span>
+  
+  
+  
+  
 </div>
-</div>
-</div>
-<div class="px-6 pt-4 pb-2">
-</div>
-</div>
-</a>
-<a class="min-w-full" href="/posts/c++/homework/c++%E5%AE%9E%E9%AA%8C%E9%A2%98/">
-<div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
-<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/posts/c++/homework/c++%E5%AE%9E%E9%AA%8C%E9%A2%98/featured.jpg);"></div>
-<div class="px-6 py-4">
-<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/c++/homework/c++%E5%AE%9E%E9%AA%8C%E9%A2%98/">C++实验</div>
-<div class="text-sm text-neutral-500 dark:text-neutral-400">
+
+
+
+        </div>
+
+        
+      </div>
+      <div class="px-6 pt-4 pb-2">
+
+      </div>
+    </div>
+  </a>
+  
+  
+
+  <a href="/posts/c&#43;&#43;/homework/c&#43;&#43;%E5%AE%9E%E9%AA%8C%E9%A2%98/" class="min-w-full">
+    
+    <div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
+        
+        <div class="w-full thumbnail_card_related nozoom" style="background-image:url(/posts/c&#43;&#43;/homework/c&#43;&#43;%E5%AE%9E%E9%AA%8C%E9%A2%98/featured.jpg);"></div>
+        
+      
+
+      <div class="px-6 py-4">
+
+        
+        <div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral"
+          href="/posts/c&#43;&#43;/homework/c&#43;&#43;%E5%AE%9E%E9%AA%8C%E9%A2%98/">C++实验</div>
+        
+
+        <div class="text-sm text-neutral-500 dark:text-neutral-400">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-06-30 00:00:00 +0000 UTC">June 30, 2023</time><span class="px-2 text-primary-500">·</span><span>8765 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">18 分钟</span>
+  
+  
+  <time datetime="2023-06-30 00:00:00 &#43;0000 UTC">June 30, 2023</time><span class="px-2 text-primary-500">&middot;</span><span>8765 字</span><span class="px-2 text-primary-500">&middot;</span><span title="预计阅读">18 分钟</span>
+  
+
+  
+  
 </div>
+
+
+
+
+
 <div class="flex flex-row flex-wrap items-center">
-<span class="mr-2" onclick="window.open(&quot;/categories/c++/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    C++
+  
+  
+  
+  
+  
+  
+  <span style="margin-top:0.5rem" class="mr-2" onclick="window.open(&#34;/categories/c&#43;&#43;/&#34;,'_self');">
+    <span class="flex">
+  <span
+    class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400"
+  >
+    C&#43;&#43;
   </span>
 </span>
-</span>
-<span class="mr-2" onclick="window.open(&quot;/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+
+  </span>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <span style="margin-top:0.5rem" class="mr-2" onclick="window.open(&#34;/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/&#34;,'_self');">
+    <span class="flex">
+  <span
+    class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400"
+  >
     基础知识
   </span>
 </span>
-</span>
+
+  </span>
+  
+  
+  
+  
 </div>
-</div>
-</div>
-<div class="px-6 pt-4 pb-2">
-</div>
-</div>
-</a>
-<a class="min-w-full" href="/posts/c++/homework/c++%E7%90%86%E8%AE%BA3/">
-<div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
-<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/posts/c++/homework/c++%E7%90%86%E8%AE%BA3/featured.jpg);"></div>
-<div class="px-6 py-4">
-<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/c++/homework/c++%E7%90%86%E8%AE%BA3/">C++理论3</div>
-<div class="text-sm text-neutral-500 dark:text-neutral-400">
+
+
+
+        </div>
+
+        
+      </div>
+      <div class="px-6 pt-4 pb-2">
+
+      </div>
+    </div>
+  </a>
+  
+  
+
+  <a href="/posts/c&#43;&#43;/homework/c&#43;&#43;%E7%90%86%E8%AE%BA3/" class="min-w-full">
+    
+    <div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
+        
+        <div class="w-full thumbnail_card_related nozoom" style="background-image:url(/posts/c&#43;&#43;/homework/c&#43;&#43;%E7%90%86%E8%AE%BA3/featured.jpg);"></div>
+        
+      
+
+      <div class="px-6 py-4">
+
+        
+        <div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral"
+          href="/posts/c&#43;&#43;/homework/c&#43;&#43;%E7%90%86%E8%AE%BA3/">C++理论3</div>
+        
+
+        <div class="text-sm text-neutral-500 dark:text-neutral-400">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-06-30 00:00:00 +0000 UTC">June 30, 2023</time><span class="px-2 text-primary-500">·</span><span>3817 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">8 分钟</span>
+  
+  
+  <time datetime="2023-06-30 00:00:00 &#43;0000 UTC">June 30, 2023</time><span class="px-2 text-primary-500">&middot;</span><span>3817 字</span><span class="px-2 text-primary-500">&middot;</span><span title="预计阅读">8 分钟</span>
+  
+
+  
+  
 </div>
+
+
+
+
+
 <div class="flex flex-row flex-wrap items-center">
-<span class="mr-2" onclick="window.open(&quot;/categories/c++/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    C++
+  
+  
+  
+  
+  
+  
+  <span style="margin-top:0.5rem" class="mr-2" onclick="window.open(&#34;/categories/c&#43;&#43;/&#34;,'_self');">
+    <span class="flex">
+  <span
+    class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400"
+  >
+    C&#43;&#43;
   </span>
 </span>
-</span>
-<span class="mr-2" onclick="window.open(&quot;/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+
+  </span>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <span style="margin-top:0.5rem" class="mr-2" onclick="window.open(&#34;/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/&#34;,'_self');">
+    <span class="flex">
+  <span
+    class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400"
+  >
     基础知识
   </span>
 </span>
-</span>
+
+  </span>
+  
+  
+  
+  
 </div>
-</div>
-</div>
-<div class="px-6 pt-4 pb-2">
-</div>
-</div>
-</a>
+
+
+
+        </div>
+
+        
+      </div>
+      <div class="px-6 pt-4 pb-2">
+
+      </div>
+    </div>
+  </a>
+  
 </section>
-<div class="content" id="content">
-<div style="margin-top:2em;padding:0 0.5em;font-size:.875rem">
-<hr/>
-<br/>
-<div style="padding-bottom:1em;">
-<p> </p>
-<p>本文作者：<a href="https://ta0lve.github.io/about/" target="_blank"><font color="#49b1f5" style="text-decoration: underline">ta0lve</font></a></p>
-<p>本文链接：<a href="https://ta0lve.github.io/posts/c++/homework/c++%E7%90%86%E8%AE%BA1/" target="_blank"><font color="#49b1f5" style="text-decoration: underline">C++理论1</font></a></p>
-<p><a href="https://ta0lve.github.io/posts/c++/homework/c++%E7%90%86%E8%AE%BA1/" target="_blank"><font color="#49b1f5" style="text-decoration: underline"> https://ta0lve.github.io/posts/c++/homework/c++%E7%90%86%E8%AE%BA1/ </font></a></p>
-<p>版权声明：本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank"><font color="#49b1f5" style="text-decoration: underline"> CC BY-NC 4.0 </font></a> 许可协议。</p>
-<p>转载请注明来自<a class="redlink" href="https://ta0lve.github.io/" target="_blank"> <font color="#49b1f5" style="text-decoration: underline">ta0lve's Blog</font></a> ！</p>
+
+
+
+    <div class="content" id="content">
+    
+    <div style="margin-top:2em;padding:0 0.5em;font-size:.875rem">
+        
+        
+        <hr>
+        <br>
+        <div style="padding-bottom:1em;">
+            <p> </p>
+            <p>本文作者：<a href="https://ta0lve.github.io/about/" target="_blank"><font color="#49b1f5" style="text-decoration: underline">ta0lve</font></a></p>
+            <p>本文链接：<a href="https://ta0lve.github.io/posts/c&#43;&#43;/homework/c&#43;&#43;%E7%90%86%E8%AE%BA1/" target="_blank"><font color="#49b1f5" style="text-decoration: underline">C&#43;&#43;理论1</font></a></p>
+            <p><a href="https://ta0lve.github.io/posts/c&#43;&#43;/homework/c&#43;&#43;%E7%90%86%E8%AE%BA1/" target="_blank"><font color="#49b1f5" style="text-decoration: underline"> https://ta0lve.github.io/posts/c&#43;&#43;/homework/c&#43;&#43;%E7%90%86%E8%AE%BA1/ </font></a></p>
+            <p>版权声明：本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank"><font color="#49b1f5" style="text-decoration: underline"> CC BY-NC 4.0 </font></a> 许可协议。</p>
+            <p>转载请注明来自<a href="https://ta0lve.github.io/" target="_blank"  class="redlink"> <font color="#49b1f5" style="text-decoration: underline">ta0lve's Blog</font></a> ！</p>
+        </div>
+    </div>
 </div>
-</div>
-</div>
-<div class="pt-8">
-<hr class="border-dotted border-neutral-300 dark:border-neutral-600"/>
-<div class="flex justify-between pt-3">
-<span>
-<a class="flex group mr-3" href="/posts/c++/homework/c++%E7%90%86%E8%AE%BA2/">
-<span class="mr-3 text-neutral-700 group-hover:text-primary-600 ltr:inline rtl:hidden dark:text-neutral dark:group-hover:text-primary-400">←</span>
-<span class="ml-3 text-neutral-700 group-hover:text-primary-600 ltr:hidden rtl:inline dark:text-neutral dark:group-hover:text-primary-400">→</span>
-<span class="flex flex-col">
-<span class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500">C++理论2</span>
-<span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
-<time datetime="2023-06-30 00:00:00 +0000 UTC">June 30, 2023</time>
-</span>
-</span>
-</a>
-</span>
-<span>
-<a class="flex text-right group ml-3" href="/posts/wp/2023_06_ciscn/">
-<span class="flex flex-col">
-<span class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500">2023 ciscn 初赛</span>
-<span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
-<time datetime="2023-06-30 00:00:00 +0000 UTC">June 30, 2023</time>
-</span>
-</span>
-<span class="ml-3 text-neutral-700 group-hover:text-primary-600 ltr:inline rtl:hidden dark:text-neutral dark:group-hover:text-primary-400">→</span>
-<span class="mr-3 text-neutral-700 group-hover:text-primary-600 ltr:hidden rtl:inline dark:text-neutral dark:group-hover:text-primary-400">←</span>
-</a>
-</span>
-</div>
-</div>
-<script async="" crossorigin="anonymous" data-category="Announcements" data-category-id="DIC_kwDOJ9Vlo84CX_0P" data-emit-metadata="0" data-input-position="bottom" data-lang="zh-CN" data-mapping="pathname" data-reactions-enabled="1" data-repo="ta0lve/blogtalk" data-repo-id="R_kgDOJ9Vlow" data-strict="0" data-theme="dark_dimmed" src="https://giscus.app/client.js">
+</section>
+
+    
+  
+    
+    
+    
+    <div class="pt-8">
+      <hr class="border-dotted border-neutral-300 dark:border-neutral-600" />
+      <div class="flex justify-between pt-3">
+        <span>
+          
+            <a class="flex group mr-3" href="/posts/c&#43;&#43;/homework/c&#43;&#43;%E7%90%86%E8%AE%BA2/">
+              <span
+                class="mr-3 text-neutral-700 group-hover:text-primary-600 ltr:inline rtl:hidden dark:text-neutral dark:group-hover:text-primary-400"
+                >&larr;</span
+              >
+              <span
+                class="ml-3 text-neutral-700 group-hover:text-primary-600 ltr:hidden rtl:inline dark:text-neutral dark:group-hover:text-primary-400"
+                >&rarr;</span
+              >
+              <span class="flex flex-col">
+                <span
+                  class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500"
+                  >C++理论2</span
+                >
+                <span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
+                  
+                    <time datetime="2023-06-30 00:00:00 &#43;0000 UTC">June 30, 2023</time>
+                  
+                </span>
+              </span>
+            </a>
+          
+        </span>
+        <span>
+          
+            <a class="flex text-right group ml-3" href="/posts/wp/2023_06_ciscn/">
+              <span class="flex flex-col">
+                <span
+                  class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500"
+                  >2023 ciscn 初赛</span
+                >
+                <span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
+                  
+                    <time datetime="2023-06-30 00:00:00 &#43;0000 UTC">June 30, 2023</time>
+                  
+                </span>
+              </span>
+              <span
+                class="ml-3 text-neutral-700 group-hover:text-primary-600 ltr:inline rtl:hidden dark:text-neutral dark:group-hover:text-primary-400"
+                >&rarr;</span
+              >
+              <span
+                class="mr-3 text-neutral-700 group-hover:text-primary-600 ltr:hidden rtl:inline dark:text-neutral dark:group-hover:text-primary-400"
+                >&larr;</span
+              >
+            </a>
+          
+        </span>
+      </div>
+    </div>
+  
+
+
+
+    <script src="https://giscus.app/client.js"
+    data-repo="ta0lve/blogtalk"
+    data-repo-id="R_kgDOJ9Vlow"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOJ9Vlo84CX_0P"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="dark_dimmed"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
 </script>
-</footer>
+
+    
+  </footer>
 </article>
-<div class="pointer-events-none absolute top-[110vh] bottom-0 w-12 ltr:right-0 rtl:left-0" id="top-scroller">
-<a aria-label="" class="pointer-events-auto sticky top-[calc(100vh-5.5rem)] flex h-12 w-12 mb-16 items-center justify-center rounded-full bg-neutral/50 text-xl text-neutral-700 backdrop-blur hover:text-primary-600 dark:bg-neutral-800/50 dark:text-neutral dark:hover:text-primary-400" href="#the-top" title="">
-    ↑
+
+      <div id="top-scroller" class="pointer-events-none absolute top-[110vh] bottom-0 w-12 ltr:right-0 rtl:left-0">
+  <a href="#the-top"
+    class="pointer-events-auto sticky top-[calc(100vh-5.5rem)] flex h-12 w-12 mb-16 items-center justify-center rounded-full bg-neutral/50 text-xl text-neutral-700 backdrop-blur hover:text-primary-600 dark:bg-neutral-800/50 dark:text-neutral dark:hover:text-primary-400"
+    aria-label="" title="">
+    &uarr;
   </a>
 </div>
-</main><footer class="py-10 print:hidden" id="site-footer">
-<nav class="flex flex-row pb-4 text-base font-medium text-neutral-500 dark:text-neutral-400">
-<ul class="flex flex-col list-none sm:flex-row">
-<li class="flex mb-1 ltr:text-right rtl:text-left sm:mb-0 ltr:sm:mr-7 ltr:sm:last:mr-0 rtl:sm:ml-7 rtl:sm:last:ml-0">
-<a class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2" href="/about/" title="About">About</a>
-</li>
-<li class="flex mb-1 ltr:text-right rtl:text-left sm:mb-0 ltr:sm:mr-7 ltr:sm:last:mr-0 rtl:sm:ml-7 rtl:sm:last:ml-0">
-<a class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2" href="/tags/pwn/" title="PWN">pwn2own , pwn4fun</a>
-</li>
-</ul>
-</nav>
-<div class="flex items-center justify-between">
-<p class="text-sm text-neutral-500 dark:text-neutral-400">
+    </main><footer id="site-footer" class="py-10 print:hidden">
+  
+  
+    
+    <nav class="flex flex-row pb-4 text-base font-medium text-neutral-500 dark:text-neutral-400">
+      <ul class="flex flex-col list-none sm:flex-row">
+        
+        <li class="flex mb-1 ltr:text-right rtl:text-left sm:mb-0 ltr:sm:mr-7 ltr:sm:last:mr-0 rtl:sm:ml-7 rtl:sm:last:ml-0">
+          <a class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2" href="/about/"
+            title="About">About</a>
+        </li>
+        
+        <li class="flex mb-1 ltr:text-right rtl:text-left sm:mb-0 ltr:sm:mr-7 ltr:sm:last:mr-0 rtl:sm:ml-7 rtl:sm:last:ml-0">
+          <a class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2" href="/tags/pwn/"
+            title="PWN">pwn2own , pwn4fun</a>
+        </li>
+        
+      </ul>
+    </nav>
+    
+  
+  <div class="flex items-center justify-between">
+
+    
+    
+    <p class="text-sm text-neutral-500 dark:text-neutral-400">
       Copyright ©2023 ta0lve, All Rights Reserved.
     </p>
-<p class="text-xs text-neutral-500 dark:text-neutral-400">
+    
+
+    
+    
+    <p class="text-xs text-neutral-500 dark:text-neutral-400">
       
       
-      由 <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500" href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &amp; <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500" href="https://blowfish.page/" rel="noopener noreferrer" target="_blank">Blowfish</a> 强力驱动
+      由 <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500"
+        href="https://gohugo.io/" target="_blank" rel="noopener noreferrer">Hugo</a> &amp; <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500"
+        href="https://blowfish.page/" target="_blank" rel="noopener noreferrer">Blowfish</a> 强力驱动
     </p>
-</div>
-<script>
+    
+
+  </div>
+  <script>
     
     mediumZoom(document.querySelectorAll("img:not(.nozoom)"), {
       margin: 24,
@@ -1044,30 +1918,65 @@ private 的构造函数不能使用以下的定义
     })
     
   </script>
-<script integrity="sha512-NcERO8wWxaWb8DEIL55jgiqpUoBCOIGnhHp/8zoW5imc5qhA2e9OENlH4DChjz8gNZr7LsDzWWdIS5qTYKwxRQ==" src="/js/process.min.35c1113bcc16c5a59bf031082f9e63822aa95280423881a7847a7ff33a16e6299ce6a840d9ef4e10d947e030a18f3f20359afb2ec0f35967484b9a9360ac3145.js" type="text/javascript"></script>
-</footer><div class="invisible fixed inset-0 flex h-screen w-screen cursor-default flex-col bg-neutral-500/50 p-4 backdrop-blur-sm dark:bg-neutral-900/50 sm:p-6 md:p-[10vh] lg:p-[12vh]" data-url="https://ta0lve.github.io/" id="search-wrapper" style="z-index:500">
-<div class="flex flex-col w-full max-w-3xl min-h-0 mx-auto border rounded-md shadow-lg top-20 border-neutral-200 bg-neutral dark:border-neutral-700 dark:bg-neutral-800" id="search-modal">
-<header class="relative z-10 flex items-center justify-between flex-none px-2">
-<form class="flex items-center flex-auto min-w-0">
-<div class="flex items-center justify-center w-8 h-8 text-neutral-400">
-<span class="relative block icon">
-<svg aria-hidden="true" class="svg-inline--fa fa-search fa-w-16" data-icon="search" data-prefix="fas" focusable="false" role="img" viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z" fill="currentColor"></path></svg>
-</span>
+  
+  
+  <script type="text/javascript" src="/js/process.min.35c1113bcc16c5a59bf031082f9e63822aa95280423881a7847a7ff33a16e6299ce6a840d9ef4e10d947e030a18f3f20359afb2ec0f35967484b9a9360ac3145.js" integrity="sha512-NcERO8wWxaWb8DEIL55jgiqpUoBCOIGnhHp/8zoW5imc5qhA2e9OENlH4DChjz8gNZr7LsDzWWdIS5qTYKwxRQ=="></script>
+  
+  
+</footer><div
+  id="search-wrapper"
+  class="invisible fixed inset-0 flex h-screen w-screen cursor-default flex-col bg-neutral-500/50 p-4 backdrop-blur-sm dark:bg-neutral-900/50 sm:p-6 md:p-[10vh] lg:p-[12vh]"
+  data-url="https://ta0lve.github.io/"
+  style="z-index:500"
+>
+  <div
+    id="search-modal"
+    class="flex flex-col w-full max-w-3xl min-h-0 mx-auto border rounded-md shadow-lg top-20 border-neutral-200 bg-neutral dark:border-neutral-700 dark:bg-neutral-800"
+  >
+    <header class="relative z-10 flex items-center justify-between flex-none px-2">
+      <form class="flex items-center flex-auto min-w-0">
+        <div class="flex items-center justify-center w-8 h-8 text-neutral-400">
+          
+
+  <span class="relative block icon">
+    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+
+  </span>
+
+
+        </div>
+        <input
+          type="search"
+          id="search-query"
+          class="flex flex-auto h-12 mx-1 bg-transparent appearance-none focus:outline-dotted focus:outline-2 focus:outline-transparent"
+          placeholder=""
+          tabindex="0"
+        />
+      </form>
+      <button
+        id="close-search-button"
+        class="flex items-center justify-center w-8 h-8 text-neutral-700 hover:text-primary-600 dark:text-neutral dark:hover:text-primary-400"
+        title=""
+      >
+        
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/></svg>
+
+  </span>
+
+
+      </button>
+    </header>
+    <section class="flex-auto px-2 overflow-auto">
+      <ul id="search-results">
+        
+      </ul>
+    </section>
+  </div>
 </div>
-<input class="flex flex-auto h-12 mx-1 bg-transparent appearance-none focus:outline-dotted focus:outline-2 focus:outline-transparent" id="search-query" placeholder="" tabindex="0" type="search"/>
-</form>
-<button class="flex items-center justify-center w-8 h-8 text-neutral-700 hover:text-primary-600 dark:text-neutral dark:hover:text-primary-400" id="close-search-button" title="">
-<span class="relative block icon">
-<svg viewbox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><path d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z" fill="currentColor"></path></svg>
-</span>
-</button>
-</header>
-<section class="flex-auto px-2 overflow-auto">
-<ul id="search-results">
-</ul>
-</section>
-</div>
-</div>
-</div>
+
+  </div>
 </body>
+
 </html>
