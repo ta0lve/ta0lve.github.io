@@ -6,7 +6,15 @@
 <description>Recent content on ta0lve</description>
 <generator>Hugo -- gohugo.io</generator>
 <language>zh-cn</language>
-<lastBuildDate>Tue, 18 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://ta0lve.github.io/index.xml" rel="self" type="application/rss+xml"/>
+<lastBuildDate>Mon, 31 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://ta0lve.github.io/index.xml" rel="self" type="application/rss+xml"/>
+<item>
+<title>堆基础知识学习记录</title>
+<link>https://ta0lve.github.io/posts/pwn/heap/chunk_1/</link>
+<pubDate>Mon, 31 Jul 2023 00:00:00 +0000</pubDate>
+<guid>https://ta0lve.github.io/posts/pwn/heap/chunk_1/</guid>
+<description>堆的概念 # 在程序运行过程中，堆可以提供动态分配的内存，允许程</description>
+<media:content url="https://ta0lve.github.io/posts/pwn/heap/chunk_1/featured.jpg" xmlns:media="http://search.yahoo.com/mrss/"/>
+</item>
 <item>
 <title>HWS 2023 fmt exp</title>
 <link>https://ta0lve.github.io/posts/wp/2023_07_hws/fmt2/</link>
@@ -263,7 +271,6 @@
 <pubDate>Sun, 02 Jul 2023 00:00:00 +0000</pubDate>
 <guid>https://ta0lve.github.io/link/gztime/</guid>
 <description>&lt;p&gt;&lt;strong&gt;Walking on the Time Axis.&lt;/strong&gt;&lt;/p&gt;</description>
-<media:content url="https://ta0lve.github.io/link/gztime/featured.png" xmlns:media="http://search.yahoo.com/mrss/"/>
 </item>
 <item>
 <title>Tel</title>
@@ -271,7 +278,6 @@
 <pubDate>Sat, 01 Jul 2023 00:00:00 +0000</pubDate>
 <guid>https://ta0lve.github.io/link/tel/</guid>
 <description>&lt;p&gt;&lt;strong&gt;Web king !&lt;/strong&gt;&lt;/p&gt;</description>
-<media:content url="https://ta0lve.github.io/link/tel/featured.png" xmlns:media="http://search.yahoo.com/mrss/"/>
 </item>
 <item>
 <title>2023 ciscn 初赛</title>
@@ -319,7 +325,6 @@
 <pubDate>Fri, 30 Jun 2023 00:00:00 +0000</pubDate>
 <guid>https://ta0lve.github.io/link/weyung/</guid>
 <description>&lt;p&gt;&lt;strong&gt;a Crypto CTFer&lt;/strong&gt;&lt;/p&gt;</description>
-<media:content url="https://ta0lve.github.io/link/weyung/featured.png" xmlns:media="http://search.yahoo.com/mrss/"/>
 </item>
 <item>
 <title>pazuris</title>
@@ -327,7 +332,6 @@
 <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
 <guid>https://ta0lve.github.io/link/pazuris/</guid>
 <description>&lt;p&gt;&lt;strong&gt;a nice Weber and a nice friend&lt;/strong&gt;&lt;/p&gt;</description>
-<media:content url="https://ta0lve.github.io/link/pazuris/featured.png" xmlns:media="http://search.yahoo.com/mrss/"/>
 </item>
 </channel>
 </rss>
