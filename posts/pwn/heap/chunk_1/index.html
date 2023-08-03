@@ -59,7 +59,7 @@
     "keywords": ["CTF","PWN","heap"],
     
     "mainEntityOfPage": "true",
-    "wordCount": "3501"
+    "wordCount": "3961"
   }]
   </script>
 <meta content="ta0lve" name="author"/>
@@ -275,7 +275,7 @@
     </h1>
 <div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-07-31 00:00:00 +0000 UTC">July 31, 2023</time><span class="px-2 text-primary-500">·</span><span>3501 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">7 分钟</span>
+<time datetime="2023-07-31 00:00:00 +0000 UTC">July 31, 2023</time><span class="px-2 text-primary-500">·</span><span>3961 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">8 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
 <span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/&quot;,'_self');" style="margin-top:0.5rem">
@@ -363,12 +363,14 @@
 </li>
 <li><a href="#堆的结构">堆的结构</a>
 <ul>
-<li><a href="#1微观结构">1.微观结构</a>
-<ul>
+<li><a href="#1微观结构">1.微观结构</a></li>
 <li><a href="#malloc_chunk">malloc_chunk</a></li>
+<li><a href="#关于-size_sz-与-size_t">关于 SIZE_SZ 与 size_t</a></li>
 <li><a href="#prev_size"><strong>prev_size</strong></a></li>
 <li><a href="#size"><strong>size</strong></a></li>
-<li><a href="#fdbk"><strong>fd，bk</strong></a></li>
+<li><a href="#fdbk"><strong>fd，bk</strong></a>
+<ul>
+<li><a href="#fd_nextsize-bk_nextsize"><strong>fd_nextsize， bk_nextsize</strong></a></li>
 </ul>
 </li>
 <li><a href="#notice">notice</a></li>
@@ -399,12 +401,14 @@
 </li>
 <li><a href="#堆的结构">堆的结构</a>
 <ul>
-<li><a href="#1微观结构">1.微观结构</a>
-<ul>
+<li><a href="#1微观结构">1.微观结构</a></li>
 <li><a href="#malloc_chunk">malloc_chunk</a></li>
+<li><a href="#关于-size_sz-与-size_t">关于 SIZE_SZ 与 size_t</a></li>
 <li><a href="#prev_size"><strong>prev_size</strong></a></li>
 <li><a href="#size"><strong>size</strong></a></li>
-<li><a href="#fdbk"><strong>fd，bk</strong></a></li>
+<li><a href="#fdbk"><strong>fd，bk</strong></a>
+<ul>
+<li><a href="#fd_nextsize-bk_nextsize"><strong>fd_nextsize， bk_nextsize</strong></a></li>
 </ul>
 </li>
 <li><a href="#notice">notice</a></li>
@@ -479,12 +483,52 @@
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e5%a0%86%e7%9a%84%e5%ae%9e%e7%8e%b0" style="text-decoration-line: none !important;">#</a></span>
 </h2>
 <ul>
-<li>dlmalloc : Genral purpose allocator</li>
-<li>jemalloc : Freebsd and Firefox</li>
-<li>tcmalloc : Google</li>
-<li>libumen : Solaris</li>
-<li><strong>ptmalloc2 : glibc</strong></li>
-<li>其中以ptmalloc2中堆的实现为主</li>
+<li>
+<p>dlmalloc : Genral purpose allocator</p>
+</li>
+<li>
+<p>jemalloc : Freebsd and Firefox</p>
+</li>
+<li>
+<p>tcmalloc : Google</p>
+</li>
+<li>
+<p>libumen : Solaris</p>
+</li>
+<li>
+<p><strong>ptmalloc2 : glibc</strong></p>
+<ul>
+<li>
+<p>堆的实现以ptmalloc2中堆的实现为主</p>
+</li>
+<li>
+<p>在 glibc-2.3.x. 之后，glibc 中集成了ptmalloc2，可以<a href="http://ftp.gnu.org/gnu/glibc/" target="_blank">
+    下载glibc源码</a>查看ptmalloc</p>
+</li>
+<li>
+<p><a href="http://ftp.gnu.org/gnu/glibc/" target="_blank">
+    Index of /gnu/glibc</a></p>
+</li>
+<li>
+<p>查看glibc版本</p>
+<ul>
+<li>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># shell:</span>
+</span></span><span class="line"><span class="cl">ldd --version
+</span></span><span class="line"><span class="cl"><span class="c1"># 输出：</span>
+</span></span><span class="line"><span class="cl">ldd <span class="o">(</span>Ubuntu GLIBC 2.35-0ubuntu3.1<span class="o">)</span> 2.35
+</span></span></code></pre></div></li>
+<li>
+<p>
+<figure>
+<img alt="image-20230801184545837" class="my-0 rounded-md" src="https://s2.loli.net/2023/08/01/JIksTPOrmlAKVNQ.png"/>
+</figure>
+</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <div class="anchor" id="堆管理器"></div>
 <h4 class="relative group"><strong>堆管理器</strong>
@@ -586,10 +630,10 @@
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#1%e5%be%ae%e8%a7%82%e7%bb%93%e6%9e%84" style="text-decoration-line: none !important;">#</a></span>
 </h3>
 <div class="anchor" id="malloc_chunk"></div>
-<h4 class="relative group">malloc_chunk 
+<h3 class="relative group">malloc_chunk 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#malloc_chunk" style="text-decoration-line: none !important;">#</a></span>
-</h4>
+</h3>
 <div class="highlight"><pre class="chroma" tabindex="0"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">malloc_chunk</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="n">INTERNAL_SIZE_T</span>      <span class="n">prev_size</span><span class="p">;</span>  <span class="cm">/* 如果前面一个堆块是空闲的则表示前一个堆块的大小,否则无意义  */</span>
@@ -612,28 +656,62 @@
 <p>每个字段的具体的解释如下（from <a href="https://ctf-wiki.org/pwn/linux/user-mode/heap/ptmalloc2/heap-structure/" target="_blank">
     wiki</a> and <a href="https://zhuanlan.zhihu.com/p/77316206" target="_blank">
     zhihu</a>）</p>
+<div class="anchor" id="关于-size_sz-与-size_t"></div>
+<h3 class="relative group">关于 SIZE_SZ 与 size_t 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e5%85%b3%e4%ba%8e-size_sz-%e4%b8%8e-size_t" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<p>下载glibc源码查看ptmalloc可以看到：</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#ifndef INTERNAL_SIZE_T
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define INTERNAL_SIZE_T size_t
+</span></span></span><span class="line"><span class="cl"><span class="cp">#endif
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="cm">/* The corresponding word size. */</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#define SIZE_SZ (sizeof (INTERNAL_SIZE_T))
+</span></span></span></code></pre></div><ul>
+<li>INTERNAL_SIZE_T：size_t，为32/64位整数（8字节/16字节）</li>
+<li>SIZE_SZ：同size_t，8字节/16字节</li>
+</ul>
 <div class="anchor" id="prev_size"></div>
-<h4 class="relative group"><strong>prev_size</strong>
+<h3 class="relative group"><strong>prev_size</strong>
 <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#prev_size" style="text-decoration-line: none !important;">#</a></span>
-</h4>
-<ul>
-<li>如果该 chunk 的<strong>物理相邻</strong>的前一地址 <strong>chunk</strong>（两个指针的地址差值为前一 chunk 大小）是空闲的话，那该字段记录的是前一个 chunk 的大小 (包括 chunk 头)。</li>
-<li>否则，该字段可以用来存储物理相邻的前一个 chunk 的数据。<strong>这里的前一 chunk 指的是较低地址的 chunk</strong> 。</li>
-<li>malloc(0x18)会分配0x20的内存</li>
-<li>malloc(0x19)会分配0x30的内存</li>
-</ul>
-<div class="anchor" id="size"></div>
-<h4 class="relative group"><strong>size</strong>
-<span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
-<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#size" style="text-decoration-line: none !important;">#</a></span>
-</h4>
+</h3>
 <ul>
 <li>
-<p>该 chunk 的大小，大小必须是 2 * SIZE_SZ 的整数倍。64位chunk的size必须是16字节对齐，32位chunk的size必须是8 字节对齐</p>
+<p>如果该 chunk 的<strong>物理相邻</strong>的前一地址 <strong>chunk</strong>（两个指针的地址差值为前一 chunk 大小）是空闲的话，那该字段记录的是前一个 chunk 的大小 (包括 chunk 头)。</p>
+</li>
+<li>
+<p>否则，该字段可以用来存储物理相邻的前一个 chunk 的数据。<strong>这里的前一 chunk 指的是较低地址的 chunk</strong> 。</p>
 <ul>
+<li>当申请的内存大小对 2*SIZE_SZ 取余之后小于等于 size_t 的话就可以用它的下一个 chunk 的 prev_size</li>
+<li>比如：64位下 malloc(0x55)， 0x55 mod 0x10 还差 0x5 &lt; 0x8字节，那他就可以用后面一个 chunk 的 prev_size，最后加上 chunk header 大小是 0x60（所以下图为6行）</li>
+<li>还是 64 位下，如果大小是 0x59 的话 mod 0x10之后还差 0x9 &gt; 0x8字节，那就没法用了，只能多申请一块，最后加上 chunk header 用了 0x70（所以下图为7行）</li>
+<li></li>
+</ul>
+</li>
+<li>
+<p>malloc(0x18)会分配0x20的内存</p>
+</li>
+<li>
+<p>malloc(0x19)会分配0x30的内存</p>
+</li>
+</ul>
+<div class="anchor" id="size"></div>
+<h3 class="relative group"><strong>size</strong>
+<span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#size" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<ul>
+<li>
+<p>该 chunk 的大小，大小必须是 2 * SIZE_SZ 的整数倍。</p>
+<ul>
+<li>SIZE_SZ 在32位系统下是 32位 即4个字节大小，在64位系统下是 64位 即8个字节大小</li>
+<li>所以64位chunk的size必须是16字节对齐，32位chunk的size必须是8 字节对齐</li>
 <li>64位 低4位没用 11110000</li>
 <li>32位 低3位没用 11111000</li>
+<li><strong>关于16字节对齐：</strong></li>
+<li>1字节为8位，即2个16进制位（如 <strong>0xff</strong> ），所以16字节为32个16进制位</li>
+<li>在gdb中体现为 <strong>0x0011223344556677  0x8899aabbccddeeff</strong> 为16字节</li>
 </ul>
 </li>
 <li>
@@ -673,10 +751,10 @@
 </li>
 </ul>
 <div class="anchor" id="fdbk"></div>
-<h4 class="relative group"><strong>fd，bk</strong>
+<h3 class="relative group"><strong>fd，bk</strong>
 <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#fdbk" style="text-decoration-line: none !important;">#</a></span>
-</h4>
+</h3>
 <ul>
 <li>chunk 处于分配状态时，从 fd 字段开始是用户的数据。chunk 空闲时，会被添加到对应的空闲管理链表中，其字段的含义如下</li>
 <li>fd 指向下一个（非物理相邻）空闲的 chunk</li>
@@ -684,10 +762,10 @@
 <li>通过 fd 和 bk 可以将空闲的 chunk 块加入到空闲的 chunk 块链表进行统一管理</li>
 </ul>
 <div class="anchor" id="fd_nextsize-bk_nextsize"></div>
-<h5 class="relative group"><strong>fd_nextsize， bk_nextsize</strong>
+<h4 class="relative group"><strong>fd_nextsize， bk_nextsize</strong>
 <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#fd_nextsize-bk_nextsize" style="text-decoration-line: none !important;">#</a></span>
-</h5>
+</h4>
 <ul>
 <li>也是只有 chunk 空闲的时候才使用，不过其用于较大的 chunk（large chunk）。</li>
 <li>fd_nextsize 指向前一个与当前 chunk 大小不同的第一个空闲块，不包含 bin 的头指针。</li>
