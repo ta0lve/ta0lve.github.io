@@ -59,7 +59,7 @@
     "keywords": ["CTF","PWN","Ubuntu"],
     
     "mainEntityOfPage": "true",
-    "wordCount": "8228"
+    "wordCount": "8779"
   }]
   </script>
 <meta content="ta0lve" name="author"/>
@@ -275,7 +275,7 @@
     </h1>
 <div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-07-10 00:00:00 +0000 UTC">July 10, 2023</time><span class="px-2 text-primary-500">·</span><span>8228 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">17 分钟</span>
+<time datetime="2023-07-10 00:00:00 +0000 UTC">July 10, 2023</time><span class="px-2 text-primary-500">·</span><span>8779 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">18 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
 <span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%85%A5%E9%97%A8/&quot;,'_self');" style="margin-top:0.5rem">
@@ -445,8 +445,8 @@
         if (active.length == 1 && active.eq(0).attr('href') == '#' + id) return true;
 
         active.each(function (i, e) {
-           
-            $(e).removeClass('active').siblings('ul').hide();
+          
+            $(e).removeClass('active');
           
         });
         $toc.find('a[href="#' + id + '"]').addClass('active')
@@ -457,8 +457,6 @@
 
       $window.on('scroll', onScroll);
       $(document).ready(function () {
-         
-          $toc.find('a').parent('li').find('ul').hide();
         
         onScroll();
       });
@@ -472,6 +470,11 @@
 <summary class="py-1 text-lg font-semibold cursor-pointer bg-primary-200 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-primary-800 dark:text-neutral-100">
         PWN入门 - This article is part of a series.
     </summary>
+<div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+<a href="https://ta0lve.github.io/posts/pwn/basic/tutorial1/">
+            Part 0: pwn入门教程
+        </a>
+</div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
         Part 1: This Article
     </div>
@@ -496,11 +499,6 @@
         </a>
 </div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/pointer/wp/pointer1/">
-            Part 5: wp学习书签
-        </a>
-</div>
-<div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
 <a href="https://ta0lve.github.io/pointer/intoverflow/pointer1/">
             Part 6: 整数溢出漏洞学习书签
         </a>
@@ -513,6 +511,11 @@
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
 <a href="https://ta0lve.github.io/pointer/kernel-pwn/pointer1/">
             Part 8: Kernel Pwn 学习书签
+        </a>
+</div>
+<div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+<a href="https://ta0lve.github.io/pointer/wp/pointer1/">
+            Part 9: wp学习书签
         </a>
 </div>
 </details>
@@ -869,6 +872,67 @@
 <p>又注：之前用户名为"pwner"的虚拟机是入门时用到现在的老虚拟机，还是默认背景和配色，用户名为"ta0lve"的虚拟机是今天刚装的新虚拟机，个性化配置见本文的最后：<strong><a href="https://ta0lve.github.io/posts/pwn/%e5%85%a5%e9%97%a8/pwn%e7%8e%af%e5%a2%83%e6%90%ad%e5%bb%ba%e8%ae%b0%e5%bd%95/#terminator-%e5%8f%af%e9%80%89" target="_blank">
     terminator （可选）</a></strong></p>
 <p><strong>基本使用方法：</strong></p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># python3</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span> <span class="c1"># 导入python库</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">### 0x01 环境设置</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 1</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="o">.</span><span class="n">log_level</span> <span class="o">=</span> <span class="s1">'debug'</span> <span class="c1"># 在对漏洞进行故障排除</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="o">.</span><span class="n">arch</span> <span class="o">=</span> <span class="s1">'i386'</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="o">.</span><span class="n">os</span> <span class="o">=</span> <span class="s1">'linux'</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 2</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="p">(</span><span class="n">os</span><span class="o">=</span><span class="s1">'linux'</span><span class="p">,</span> <span class="n">arch</span><span class="o">=</span><span class="s1">'amd64'</span><span class="p">,</span> <span class="n">log_level</span><span class="o">=</span><span class="s1">'debug'</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 3</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="o">.</span><span class="n">binary</span> <span class="o">=</span> <span class="n">pwn_name</span> <span class="c1"># 从二进制文件推断目标架构、位与和字节序</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">### 0x02 建立链接</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="n">ip</span><span class="p">,</span><span class="n">port</span><span class="p">)</span> <span class="c1"># 创建与ip:port的链接</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">=</span> <span class="n">process</span><span class="p">(</span><span class="n">pwn_name</span><span class="p">)</span> <span class="c1"># 执行二进制文件process</span>
+</span></span><span class="line"><span class="cl"><span class="n">gdb</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="c1"># 在当前进程下调试二进制文件</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">### 0x03 利用elf文件</span>
+</span></span><span class="line"><span class="cl"><span class="n">elf</span> <span class="o">=</span> <span class="n">ELF</span><span class="p">(</span><span class="n">pwn_name</span><span class="p">)</span> <span class="c1"># 封装有关 ELF 文件的信息</span>
+</span></span><span class="line"><span class="cl"><span class="n">func_addr</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">sym</span><span class="p">[</span><span class="s2">"func"</span><span class="p">]</span> <span class="c1"># 在ELF文件中查找函数的加载地址</span>
+</span></span><span class="line"><span class="cl"><span class="n">func_got</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">got</span><span class="p">[</span><span class="s2">"func"</span><span class="p">]</span> <span class="c1"># 在ELF文件中查找函数的got表地址</span>
+</span></span><span class="line"><span class="cl"><span class="n">func_plt</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">plt</span><span class="p">[</span><span class="s2">"func"</span><span class="p">]</span> <span class="c1"># 在ELF文件中查找函数的plt表地址</span>
+</span></span><span class="line"><span class="cl"><span class="n">binsh_addr</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">b</span><span class="s1">'/bin/sh'</span><span class="p">)</span><span class="o">.</span><span class="n">__next</span><span class="p">()</span><span class="n">__</span> <span class="c1"># 在ELF文件中查找字符串</span>
+</span></span><span class="line"><span class="cl"><span class="n">binsh_addr</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">libc</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">b</span><span class="s2">"/bin/sh"</span><span class="p">))</span> <span class="c1"># 这个写法也可以</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">### 0x04 利用本地libc文件</span>
+</span></span><span class="line"><span class="cl"><span class="n">libc</span> <span class="o">=</span> <span class="n">ELF</span><span class="p">(</span><span class="s1">'./libc-2.23.so'</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">libc_base</span> <span class="o">=</span> <span class="n">puts_real_addr</span> <span class="o">-</span> <span class="n">libc</span><span class="o">.</span><span class="n">symbols</span><span class="p">[</span><span class="s1">'puts'</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">binsh_addr</span> <span class="o">=</span> <span class="n">libc_base</span> <span class="o">+</span> <span class="n">libc</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">b</span><span class="s2">"/bin/sh"</span><span class="p">)</span><span class="o">.</span><span class="fm">__next__</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># binsh_addr = libc_base + next(libc.search(b"/bin/sh"))</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 这个写法也可以</span>
+</span></span><span class="line"><span class="cl"><span class="n">system_addr</span> <span class="o">=</span> <span class="n">libc_base</span> <span class="o">+</span> <span class="n">libc</span><span class="o">.</span><span class="n">symbols</span><span class="p">[</span><span class="s2">"system"</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">### 0x05 查找libc文件</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">LibcSearcher</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="n">libc</span> <span class="o">=</span> <span class="n">LibcSearcher</span><span class="p">(</span><span class="s1">'puts'</span><span class="p">,</span> <span class="n">puts_real_addr</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">libc_base</span> <span class="o">=</span> <span class="n">puts_real_addr</span> <span class="o">-</span> <span class="n">libc</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="s1">'puts'</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">log</span><span class="o">.</span><span class="n">success</span><span class="p">(</span><span class="s1">'libc_base '</span> <span class="o">+</span> <span class="nb">hex</span><span class="p">(</span><span class="n">libc_base</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">system_addr</span> <span class="o">=</span> <span class="n">libc_base</span> <span class="o">+</span> <span class="n">libc</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="s2">"system"</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">binsh_addr</span> <span class="o">=</span> <span class="n">libc_base</span> <span class="o">+</span> <span class="n">libc</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="s2">"str_bin_sh"</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">### 0x06 生成shellcode</span>
+</span></span><span class="line"><span class="cl"><span class="n">shellcode</span> <span class="o">=</span> <span class="n">shellcraft</span><span class="o">.</span><span class="n">sh</span><span class="p">()</span> <span class="c1"># 生成指定架构的shellcode 汇编语言</span>
+</span></span><span class="line"><span class="cl"><span class="n">shellcode</span> <span class="o">=</span> <span class="n">asm</span><span class="p">(</span><span class="n">shellcode</span><span class="p">)</span> <span class="c1"># 转换为字节</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">### 0x07 接收发送字节</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="n">size</span><span class="p">)</span> <span class="c1"># 接收 size 个字节 默认全部接收</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">recvline</span><span class="p">()</span> <span class="c1"># 接收字节直至遇到b'\n'</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="n">string</span><span class="p">)</span> <span class="c1"># 接受字节直到遇到 string</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="c1"># 发送 data</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="c1"># 发送 data 在后面加 b'\n'</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">sendafter</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="c1"># 在接收 string 后发送data</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="n">string</span><span class="p">,</span><span class="n">data</span><span class="p">)</span> <span class="c1"># 在接收 string 后发送data 在后面加 '\n'</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">p64</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="c1"># 将 data 转换为64位小端序字节 也可以为32/16/8位字节</span>
+</span></span><span class="line"><span class="cl"><span class="n">u64</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="c1"># 将 data 转换为64位大端序字节 也可以为32/16/8位字节</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">### 0x08 创建一个交互shell</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span> 
+</span></span></code></pre></div><p>还可以看看：</p>
 <p><a href="https://blog.csdn.net/weixin_43833642/article/details/104181681" target="_blank">
     pwntools的安装及基本使用</a></p>
 <p><a href="https://docs.pwntools.com/en/stable/" target="_blank">
@@ -1521,6 +1585,11 @@
         PWN入门 - This article is part of a series.
     </summary>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+<a href="https://ta0lve.github.io/posts/pwn/basic/tutorial1/">
+            Part 0: pwn入门教程
+        </a>
+</div>
+<div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
         Part 1: This Article
     </div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
@@ -1544,11 +1613,6 @@
         </a>
 </div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/pointer/wp/pointer1/">
-            Part 5: wp学习书签
-        </a>
-</div>
-<div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
 <a href="https://ta0lve.github.io/pointer/intoverflow/pointer1/">
             Part 6: 整数溢出漏洞学习书签
         </a>
@@ -1563,6 +1627,11 @@
             Part 8: Kernel Pwn 学习书签
         </a>
 </div>
+<div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+<a href="https://ta0lve.github.io/pointer/wp/pointer1/">
+            Part 9: wp学习书签
+        </a>
+</div>
 </details>
 </div>
 <script>
@@ -1574,6 +1643,44 @@
 <footer class="pt-8 max-w-prose print:hidden">
 <h2 class="mt-8 text-2xl font-extrabold mb-10">Related</h2>
 <section class="w-full grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+<a class="min-w-full" href="/posts/pwn/basic/tutorial1/">
+<div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
+<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/posts/pwn/basic/tutorial1/featured.jpg);"></div>
+<div class="px-6 py-4">
+<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/pwn/basic/tutorial1/">pwn入门教程</div>
+<div class="text-sm text-neutral-500 dark:text-neutral-400">
+<div class="flex flex-row flex-wrap items-center">
+<time datetime="2023-08-05 00:00:00 +0000 UTC">August 5, 2023</time><span class="px-2 text-primary-500">·</span><span>4994 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">10 分钟</span>
+</div>
+<div class="flex flex-row flex-wrap items-center">
+<span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%85%A5%E9%97%A8/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    pwn入门
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/ctf/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    CTF
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/pwn/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    PWN
+  </span>
+</span>
+</span>
+</div>
+</div>
+</div>
+<div class="px-6 pt-4 pb-2">
+</div>
+</div>
+</a>
 <a class="min-w-full" href="/pointer/kernel-pwn/pointer1/">
 <div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
 <div class="w-full thumbnail_card_related nozoom" style="background-image:url(/pointer/kernel-pwn/pointer1/featured.jpg);"></div>
@@ -1664,54 +1771,6 @@
 </div>
 <div class="py-1 prose dark:prose-invert">
 <p>一些我在入门pwn <strong>堆</strong> 时所学习阅读的文章，收集在此处以便于之后的复习和回顾。</p>
-</div>
-</div>
-<div class="px-6 pt-4 pb-2">
-</div>
-</div>
-</a>
-<a class="min-w-full" href="/pointer/fmt/pointer1/">
-<div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
-<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/pointer/fmt/pointer1/featured.jpg);"></div>
-<div class="px-6 py-4">
-<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/pointer/fmt/pointer1/">fmt学习书签</div>
-<div class="text-sm text-neutral-500 dark:text-neutral-400">
-<div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-07-15 00:00:00 +0000 UTC">July 15, 2023</time><span class="px-2 text-primary-500">·</span><span>212 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">1 分钟</span>
-</div>
-<div class="flex flex-row flex-wrap items-center">
-<span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%85%A5%E9%97%A8/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    pwn入门
-  </span>
-</span>
-</span>
-<span class="mr-2" onclick="window.open(&quot;/tags/ctf/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    CTF
-  </span>
-</span>
-</span>
-<span class="mr-2" onclick="window.open(&quot;/tags/pwn/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    PWN
-  </span>
-</span>
-</span>
-<span class="mr-2" onclick="window.open(&quot;/tags/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%BC%8F%E6%B4%9E/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    格式化字符串漏洞
-  </span>
-</span>
-</span>
-</div>
-</div>
-<div class="py-1 prose dark:prose-invert">
-<p>一些我在入门pwn<strong>格式化字符串漏洞</strong>时所学习阅读的文章，收集在此处以便于之后的复习和回顾。</p>
 </div>
 </div>
 <div class="px-6 pt-4 pb-2">

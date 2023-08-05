@@ -6,7 +6,16 @@
     <description>Recent content in CTF on ta0lve</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 31 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://ta0lve.github.io/tags/ctf/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 05 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://ta0lve.github.io/tags/ctf/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>pwn入门教程</title>
+      <link>https://ta0lve.github.io/posts/pwn/basic/tutorial1/</link>
+      <pubDate>Sat, 05 Aug 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ta0lve.github.io/posts/pwn/basic/tutorial1/</guid>
+      <description>0x00 概述 # Pwn是一个黑客语法的俚语词，是指攻破设备或者系统。</description>
+    </item>
+    
     <item>
       <title>堆基础知识学习记录</title>
       <link>https://ta0lve.github.io/posts/pwn/heap/chunk_1/</link>
@@ -67,7 +76,7 @@
       <pubDate>Sat, 15 Jul 2023 00:00:00 +0000</pubDate>
       
       <guid>https://ta0lve.github.io/pointer/wp/pointer1/</guid>
-      <description>复习回顾 # （书签待整理，挖坑待填） 即将学习 # pwn. college # pwnco</description>
+      <description>&lt;p&gt;一些我在学习pwn时学习和复现的wp文章，收集在此处以便于之后的复习和回顾。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -150,8 +159,7 @@
       <pubDate>Wed, 05 Jul 2023 00:00:00 +0000</pubDate>
       
       <guid>https://ta0lve.github.io/posts/wp/2023_04_w4ter/10_chisato_write_up/</guid>
-      <description>&lt;p&gt;&lt;strong&gt;此文章仅限战队内部成员阅读&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;路过的师傅们看看远处的wp吧！&lt;/p&gt;</description>
+      <description>0.题目描述 # 据说泷奈拿到了新情报？ 能不能假装千束将情报骗到</description>
     </item>
     
     <item>
@@ -180,8 +188,7 @@
       <pubDate>Wed, 05 Jul 2023 00:00:00 +0000</pubDate>
       
       <guid>https://ta0lve.github.io/posts/wp/2023_04_w4ter/11_w4ter-disk_write_up/</guid>
-      <description>&lt;p&gt;&lt;strong&gt;此文章仅限战队内部成员阅读&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;路过的师傅们看看远处的wp吧！&lt;/p&gt;</description>
+      <description>本题wp的结构如下：（前排提示，该题wp有点多） 题目描述 # ​</description>
     </item>
     
     <item>
@@ -200,8 +207,7 @@
       <pubDate>Wed, 05 Jul 2023 00:00:00 +0000</pubDate>
       
       <guid>https://ta0lve.github.io/posts/wp/2023_04_w4ter/2_tic-tac-toe-level-0_write_up/</guid>
-      <description>&lt;p&gt;&lt;strong&gt;此文章仅限战队内部成员阅读&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;路过的师傅们看看远处的wp吧！&lt;/p&gt;</description>
+      <description>栈溢出利用的基本步骤 # 1.将程序拖入IDA中查看反汇编代码 #</description>
     </item>
     
     <item>
@@ -220,8 +226,7 @@
       <pubDate>Wed, 05 Jul 2023 00:00:00 +0000</pubDate>
       
       <guid>https://ta0lve.github.io/posts/wp/2023_04_w4ter/1_what-is-netcat_write_up/</guid>
-      <description>&lt;p&gt;&lt;strong&gt;此文章仅限战队内部成员阅读&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;路过的师傅们看看远处的wp吧！&lt;/p&gt;</description>
+      <description>1.给出的实例入口为 host:port，则可以使用 nc host port 来连</description>
     </item>
     
     <item>

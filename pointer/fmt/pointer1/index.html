@@ -395,8 +395,8 @@
         if (active.length == 1 && active.eq(0).attr('href') == '#' + id) return true;
 
         active.each(function (i, e) {
-           
-            $(e).removeClass('active').siblings('ul').hide();
+          
+            $(e).removeClass('active');
           
         });
         $toc.find('a[href="#' + id + '"]').addClass('active')
@@ -407,8 +407,6 @@
 
       $window.on('scroll', onScroll);
       $(document).ready(function () {
-         
-          $toc.find('a').parent('li').find('ul').hide();
         
         onScroll();
       });
@@ -422,6 +420,11 @@
 <summary class="py-1 text-lg font-semibold cursor-pointer bg-primary-200 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-primary-800 dark:text-neutral-100">
         PWN入门 - This article is part of a series.
     </summary>
+<div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+<a href="https://ta0lve.github.io/posts/pwn/basic/tutorial1/">
+            Part 0: pwn入门教程
+        </a>
+</div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
 <a href="https://ta0lve.github.io/posts/pwn/basic/pwn-_environment/">
             Part 1: PWN环境二次搭建记录-Ubuntu 22.04
@@ -446,11 +449,6 @@
         Part 5: This Article
     </div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/pointer/wp/pointer1/">
-            Part 5: wp学习书签
-        </a>
-</div>
-<div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
 <a href="https://ta0lve.github.io/pointer/intoverflow/pointer1/">
             Part 6: 整数溢出漏洞学习书签
         </a>
@@ -463,6 +461,11 @@
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
 <a href="https://ta0lve.github.io/pointer/kernel-pwn/pointer1/">
             Part 8: Kernel Pwn 学习书签
+        </a>
+</div>
+<div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+<a href="https://ta0lve.github.io/pointer/wp/pointer1/">
+            Part 9: wp学习书签
         </a>
 </div>
 </details>
@@ -581,6 +584,11 @@
         PWN入门 - This article is part of a series.
     </summary>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+<a href="https://ta0lve.github.io/posts/pwn/basic/tutorial1/">
+            Part 0: pwn入门教程
+        </a>
+</div>
+<div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
 <a href="https://ta0lve.github.io/posts/pwn/basic/pwn-_environment/">
             Part 1: PWN环境二次搭建记录-Ubuntu 22.04
         </a>
@@ -604,11 +612,6 @@
         Part 5: This Article
     </div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/pointer/wp/pointer1/">
-            Part 5: wp学习书签
-        </a>
-</div>
-<div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
 <a href="https://ta0lve.github.io/pointer/intoverflow/pointer1/">
             Part 6: 整数溢出漏洞学习书签
         </a>
@@ -621,6 +624,11 @@
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
 <a href="https://ta0lve.github.io/pointer/kernel-pwn/pointer1/">
             Part 8: Kernel Pwn 学习书签
+        </a>
+</div>
+<div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+<a href="https://ta0lve.github.io/pointer/wp/pointer1/">
+            Part 9: wp学习书签
         </a>
 </div>
 </details>

@@ -26,7 +26,7 @@
 <link href="/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="/site.webmanifest" rel="manifest"/>
 <meta content="wp学习书签" property="og:title"/>
-<meta content="复习回顾 # （书签待整理，挖坑待填） 即将学习 # pwn. college # pwnco" property="og:description"/>
+<meta content="一些我在学习pwn时学习和复现的wp文章，收集在此处以便于之后的复习和回顾。" property="og:description"/>
 <meta content="article" property="og:type"/>
 <meta content="https://ta0lve.github.io/pointer/wp/pointer1/" property="og:url"/><meta content="https://ta0lve.github.io/pointer/wp/pointer1/featured.jpg" property="og:image"/><meta content="Pointer" property="article:section"/>
 <meta content="2023-07-15T00:00:00+00:00" property="article:published_time"/>
@@ -34,7 +34,7 @@
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="https://ta0lve.github.io/pointer/wp/pointer1/featured.jpg" name="twitter:image"/>
 <meta content="wp学习书签" name="twitter:title"/>
-<meta content="复习回顾 # （书签待整理，挖坑待填） 即将学习 # pwn. college # pwnco" name="twitter:description"/>
+<meta content="一些我在学习pwn时学习和复现的wp文章，收集在此处以便于之后的复习和回顾。" name="twitter:description"/>
 <script type="application/ld+json">
   [{
     "@context": "https://schema.org",
@@ -43,7 +43,7 @@
     "name": "wp学习书签",
     "headline": "wp学习书签",
     
-    "abstract": "复习回顾 # （书签待整理，挖坑待填） 即将学习 # pwn. college # pwnco",
+    "abstract": "\u003cp\u003e一些我在学习pwn时学习和复现的wp文章，收集在此处以便于之后的复习和回顾。\u003c\/p\u003e",
     "inLanguage": "zh-cn",
     "url" : "https:\/\/ta0lve.github.io\/pointer\/wp\/pointer1\/",
     "author" : {
@@ -59,7 +59,7 @@
     "keywords": ["CTF","PWN","堆"],
     
     "mainEntityOfPage": "true",
-    "wordCount": "294"
+    "wordCount": "332"
   }]
   </script>
 <meta content="ta0lve" name="author"/>
@@ -275,7 +275,7 @@
     </h1>
 <div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-07-15 00:00:00 +0000 UTC">July 15, 2023</time><span class="px-2 text-primary-500">·</span><span>294 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">1 分钟</span>
+<time datetime="2023-07-15 00:00:00 +0000 UTC">July 15, 2023</time><span class="px-2 text-primary-500">·</span><span>332 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">1 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
 <span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%85%A5%E9%97%A8/&quot;,'_self');" style="margin-top:0.5rem">
@@ -403,8 +403,8 @@
         if (active.length == 1 && active.eq(0).attr('href') == '#' + id) return true;
 
         active.each(function (i, e) {
-           
-            $(e).removeClass('active').siblings('ul').hide();
+          
+            $(e).removeClass('active');
           
         });
         $toc.find('a[href="#' + id + '"]').addClass('active')
@@ -415,8 +415,6 @@
 
       $window.on('scroll', onScroll);
       $(document).ready(function () {
-         
-          $toc.find('a').parent('li').find('ul').hide();
         
         onScroll();
       });
@@ -430,6 +428,11 @@
 <summary class="py-1 text-lg font-semibold cursor-pointer bg-primary-200 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-primary-800 dark:text-neutral-100">
         PWN入门 - This article is part of a series.
     </summary>
+<div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+<a href="https://ta0lve.github.io/posts/pwn/basic/tutorial1/">
+            Part 0: pwn入门教程
+        </a>
+</div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
 <a href="https://ta0lve.github.io/posts/pwn/basic/pwn-_environment/">
             Part 1: PWN环境二次搭建记录-Ubuntu 22.04
@@ -456,9 +459,6 @@
         </a>
 </div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-        Part 5: This Article
-    </div>
-<div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
 <a href="https://ta0lve.github.io/pointer/intoverflow/pointer1/">
             Part 6: 整数溢出漏洞学习书签
         </a>
@@ -473,7 +473,12 @@
             Part 8: Kernel Pwn 学习书签
         </a>
 </div>
+<div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+        Part 9: This Article
+    </div>
 </details>
+<p>一些我在学习pwn时学习和复现的wp文章，收集在此处以便于之后的复习和回顾。</p>
+<hr/>
 <div class="anchor" id="复习回顾"></div>
 <h2 class="relative group">复习回顾 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
@@ -506,6 +511,11 @@
         PWN入门 - This article is part of a series.
     </summary>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+<a href="https://ta0lve.github.io/posts/pwn/basic/tutorial1/">
+            Part 0: pwn入门教程
+        </a>
+</div>
+<div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
 <a href="https://ta0lve.github.io/posts/pwn/basic/pwn-_environment/">
             Part 1: PWN环境二次搭建记录-Ubuntu 22.04
         </a>
@@ -531,9 +541,6 @@
         </a>
 </div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-        Part 5: This Article
-    </div>
-<div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
 <a href="https://ta0lve.github.io/pointer/intoverflow/pointer1/">
             Part 6: 整数溢出漏洞学习书签
         </a>
@@ -548,6 +555,9 @@
             Part 8: Kernel Pwn 学习书签
         </a>
 </div>
+<div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+        Part 9: This Article
+    </div>
 </details>
 </div>
 <script>
@@ -607,6 +617,44 @@
 </div>
 </div>
 </a>
+<a class="min-w-full" href="/posts/pwn/basic/tutorial1/">
+<div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
+<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/posts/pwn/basic/tutorial1/featured.jpg);"></div>
+<div class="px-6 py-4">
+<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/pwn/basic/tutorial1/">pwn入门教程</div>
+<div class="text-sm text-neutral-500 dark:text-neutral-400">
+<div class="flex flex-row flex-wrap items-center">
+<time datetime="2023-08-05 00:00:00 +0000 UTC">August 5, 2023</time><span class="px-2 text-primary-500">·</span><span>4994 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">10 分钟</span>
+</div>
+<div class="flex flex-row flex-wrap items-center">
+<span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%85%A5%E9%97%A8/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    pwn入门
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/ctf/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    CTF
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/pwn/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    PWN
+  </span>
+</span>
+</span>
+</div>
+</div>
+</div>
+<div class="px-6 pt-4 pb-2">
+</div>
+</div>
+</a>
 <a class="min-w-full" href="/pointer/kernel-pwn/pointer1/">
 <div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
 <div class="w-full thumbnail_card_related nozoom" style="background-image:url(/pointer/kernel-pwn/pointer1/featured.jpg);"></div>
@@ -649,54 +697,6 @@
 </div>
 <div class="py-1 prose dark:prose-invert">
 <p>一些我在入门pwn <strong>Kernel Pwn</strong> 知识时所学习阅读的文章，收集在此处以便于之后的复习和回顾。</p>
-</div>
-</div>
-<div class="px-6 pt-4 pb-2">
-</div>
-</div>
-</a>
-<a class="min-w-full" href="/pointer/fmt/pointer1/">
-<div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
-<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/pointer/fmt/pointer1/featured.jpg);"></div>
-<div class="px-6 py-4">
-<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/pointer/fmt/pointer1/">fmt学习书签</div>
-<div class="text-sm text-neutral-500 dark:text-neutral-400">
-<div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-07-15 00:00:00 +0000 UTC">July 15, 2023</time><span class="px-2 text-primary-500">·</span><span>212 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">1 分钟</span>
-</div>
-<div class="flex flex-row flex-wrap items-center">
-<span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%85%A5%E9%97%A8/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    pwn入门
-  </span>
-</span>
-</span>
-<span class="mr-2" onclick="window.open(&quot;/tags/ctf/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    CTF
-  </span>
-</span>
-</span>
-<span class="mr-2" onclick="window.open(&quot;/tags/pwn/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    PWN
-  </span>
-</span>
-</span>
-<span class="mr-2" onclick="window.open(&quot;/tags/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%BC%8F%E6%B4%9E/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    格式化字符串漏洞
-  </span>
-</span>
-</span>
-</div>
-</div>
-<div class="py-1 prose dark:prose-invert">
-<p>一些我在入门pwn<strong>格式化字符串漏洞</strong>时所学习阅读的文章，收集在此处以便于之后的复习和回顾。</p>
 </div>
 </div>
 <div class="px-6 pt-4 pb-2">
