@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html class="scroll-smooth" data-auto-appearance="false" data-default-appearance="dark" dir="ltr" lang="CN"><head>
-<script>
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?f260c483ac9fab4fdd9fd55057878c8c";
-      var s = document.getElementsByTagName("script")[0]; 
-      s.parentNode.insertBefore(hm, s);
-    })();
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?f260c483ac9fab4fdd9fd55057878c8c";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
     </script>
 <meta charset="utf-8"/>
 <meta content="zh-cn" http-equiv="content-language"/>
@@ -35,32 +35,32 @@
 <meta content="https://ta0lve.github.io/pointer/heap/pointer1/featured.jpg" name="twitter:image"/>
 <meta content="堆学习书签" name="twitter:title"/>
 <meta content="一些我在入门pwn 堆 时所学习阅读的文章，收集在此处以便于之后的复习和回顾。" name="twitter:description"/>
-<script type="application/ld+json">
-  [{
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "articleSection": "Pointer",
-    "name": "堆学习书签",
-    "headline": "堆学习书签",
-    
-    "abstract": "\u003cp\u003e一些我在入门pwn \u003cstrong\u003e堆\u003c\/strong\u003e 时所学习阅读的文章，收集在此处以便于之后的复习和回顾。\u003c\/p\u003e",
-    "inLanguage": "zh-cn",
-    "url" : "https:\/\/ta0lve.github.io\/pointer\/heap\/pointer1\/",
-    "author" : {
-      "@type": "Person",
-      "name": "ta0lve"
-    },
-    "copyrightYear": "2023",
-    "dateCreated": "2023-07-16T00:00:00\u002b00:00",
-    "datePublished": "2023-07-16T00:00:00\u002b00:00",
-    
-    "dateModified": "2023-07-16T00:00:00\u002b00:00",
-    
-    "keywords": ["CTF","PWN","堆"],
-    
-    "mainEntityOfPage": "true",
-    "wordCount": "689"
-  }]
+<script type="application/ld+json">
+  [{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "articleSection": "Pointer",
+    "name": "堆学习书签",
+    "headline": "堆学习书签",
+    
+    "abstract": "\u003cp\u003e一些我在入门pwn \u003cstrong\u003e堆\u003c\/strong\u003e 时所学习阅读的文章，收集在此处以便于之后的复习和回顾。\u003c\/p\u003e",
+    "inLanguage": "zh-cn",
+    "url" : "https:\/\/ta0lve.github.io\/pointer\/heap\/pointer1\/",
+    "author" : {
+      "@type": "Person",
+      "name": "ta0lve"
+    },
+    "copyrightYear": "2023",
+    "dateCreated": "2023-07-16T00:00:00\u002b00:00",
+    "datePublished": "2023-07-16T00:00:00\u002b00:00",
+    
+    "dateModified": "2023-07-16T00:00:00\u002b00:00",
+    
+    "keywords": ["CTF","PWN","堆"],
+    
+    "mainEntityOfPage": "true",
+    "wordCount": "689"
+  }]
   </script>
 <meta content="ta0lve" name="author"/>
 <link href="mailto:hujt25@mail2.sysu.edu.cn" rel="me"/>
@@ -84,38 +84,38 @@
 </nav>
 <nav class="hidden md:flex items-center space-x-5 md:ml-12 h-12">
 <a class="flex items-center" href="/posts/">
-<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="Posts">
-        Posts
+<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="Posts">
+        Posts
     </p>
 </a>
 <a class="flex items-center" href="/pointer/">
-<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="Pointer">
-        Pointer
+<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="Pointer">
+        Pointer
     </p>
 </a>
 <a class="flex items-center" href="/tags/pwn/">
-<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="PWN">
-        Pwn
+<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="PWN">
+        Pwn
     </p>
 </a>
 <a class="flex items-center" href="/categories/">
-<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="Categories">
-        分类
+<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="Categories">
+        分类
     </p>
 </a>
 <a class="flex items-center" href="/tags/">
-<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="Tags">
-        标签
+<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="Tags">
+        标签
     </p>
 </a>
 <a class="flex items-center" href="/link/">
-<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="友链/links">
-        友链
+<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="友链/links">
+        友链
     </p>
 </a>
 <a class="flex items-center" href="/about/">
-<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="About">
-        About
+<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="About">
+        About
     </p>
 </a>
 <button aria-label="Search" class="text-base hover:text-primary-600 dark:hover:text-primary-400 h-12" id="search-button" title="">
@@ -178,50 +178,50 @@
 </li>
 <li class="mt-1">
 <a class="flex items-center" href="/posts/">
-<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="Posts">
-            Posts
+<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="Posts">
+            Posts
         </p>
 </a>
 </li>
 <li class="mt-1">
 <a class="flex items-center" href="/pointer/">
-<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="Pointer">
-            Pointer
+<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="Pointer">
+            Pointer
         </p>
 </a>
 </li>
 <li class="mt-1">
 <a class="flex items-center" href="/tags/pwn/">
-<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="PWN">
-            Pwn
+<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="PWN">
+            Pwn
         </p>
 </a>
 </li>
 <li class="mt-1">
 <a class="flex items-center" href="/categories/">
-<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="Categories">
-            分类
+<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="Categories">
+            分类
         </p>
 </a>
 </li>
 <li class="mt-1">
 <a class="flex items-center" href="/tags/">
-<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="Tags">
-            标签
+<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="Tags">
+            标签
         </p>
 </a>
 </li>
 <li class="mt-1">
 <a class="flex items-center" href="/link/">
-<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="友链/links">
-            友链
+<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="友链/links">
+            友链
         </p>
 </a>
 </li>
 <li class="mt-1">
 <a class="flex items-center" href="/about/">
-<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="About">
-            About
+<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="About">
+            About
         </p>
 </a>
 </li>
@@ -230,23 +230,23 @@
 </label>
 </div>
 </div>
-<script>
-    (function () {
-        var $mainmenu = $('.main-menu');
-        var path = window.location.pathname;
-        $mainmenu.find('a[href="' + path + '"]').each(function (i, e) {
-            $(e).children('p').addClass('active');
-        });
-    })();
+<script>
+    (function () {
+        var $mainmenu = $('.main-menu');
+        var path = window.location.pathname;
+        $mainmenu.find('a[href="' + path + '"]').each(function (i, e) {
+            $(e).children('p').addClass('active');
+        });
+    })();
 </script>
 </div>
 </div>
-<script>
-  window.addEventListener('scroll', function (e) {
-    var scroll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-    var background_blur = document.getElementById('menu-blur');
-    background_blur.style.opacity = (scroll / 300);
-  });
+<script>
+  window.addEventListener('scroll', function (e) {
+    var scroll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    var background_blur = document.getElementById('menu-blur');
+    background_blur.style.opacity = (scroll / 300);
+  });
 </script>
 <div class="relative flex flex-col grow">
 <main class="grow" id="main-content">
@@ -270,8 +270,8 @@
 <a class="hover:underline decoration-neutral-300 dark:underline-neutral-600" href="/pointer/heap/pointer1/">堆学习书签</a><span class="px-1 text-primary-500">/</span>
 </li>
 </ol>
-<h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">
-      堆学习书签
+<h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">
+      堆学习书签
     </h1>
 <div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
 <div class="flex flex-row flex-wrap items-center">
@@ -280,29 +280,29 @@
 <div class="flex flex-row flex-wrap items-center">
 <span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%85%A5%E9%97%A8/&quot;,'_self');" style="margin-top:0.5rem">
 <span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    pwn入门
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    pwn入门
   </span>
 </span>
 </span>
 <span class="mr-2" onclick="window.open(&quot;/tags/ctf/&quot;,'_self');" style="margin-top:0.5rem">
 <span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    CTF
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    CTF
   </span>
 </span>
 </span>
 <span class="mr-2" onclick="window.open(&quot;/tags/pwn/&quot;,'_self');" style="margin-top:0.5rem">
 <span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    PWN
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    PWN
   </span>
 </span>
 </span>
 <span class="mr-2" onclick="window.open(&quot;/tags/%E5%A0%86/&quot;,'_self');" style="margin-top:0.5rem">
 <span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    堆
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    堆
   </span>
 </span>
 </span>
@@ -310,11 +310,11 @@
 </div>
 <div class="flex">
 <div class="place-self-center">
-<div class="text-[0.6rem] uppercase leading-3 text-neutral-500 dark:text-neutral-400">
-      作者
+<div class="text-[0.6rem] uppercase leading-3 text-neutral-500 dark:text-neutral-400">
+      作者
     </div>
-<div class="font-semibold leading-6 text-neutral-800 dark:text-neutral-300">
-      ta0lve
+<div class="font-semibold leading-6 text-neutral-800 dark:text-neutral-300">
+      ta0lve
     </div>
 <div class="text-sm text-neutral-700 dark:text-neutral-400">一些记录，一点思考</div>
 <div class="text-2xl sm:text-lg">
@@ -377,238 +377,238 @@
 </nav>
 </div>
 </details>
-<script>
-  (function () {
-    var $toc = $('#TableOfContents');
-    if ($toc.length > 0) {
-      var $window = $(window);
-
-      function onScroll() {
-        var currentScroll = $window.scrollTop();
-        var h = $('.anchor');
-        var id = "";
-        h.each(function (i, e) {
-          e = $(e);
-          if (e.offset().top - $(window).height()/3 <= currentScroll) {
-            id = e.attr('id');
-          }
-        });
-        var active = $toc.find('a.active');      
-        if (active.length == 1 && active.eq(0).attr('href') == '#' + id) return true;
-
-        active.each(function (i, e) {
-          
-            $(e).removeClass('active');
-          
-        });
-        $toc.find('a[href="#' + id + '"]').addClass('active')
-        $toc.find('a[href="#' + id + '"]').parentsUntil('#TableOfContents').each(function (i, e) {
-          $(e).children('a').parents('ul').show();          
-        });
-      }
-
-      $window.on('scroll', onScroll);
-      $(document).ready(function () {
-        
-        onScroll();
-      });
-    }
-  })();
+<script>
+  (function () {
+    var $toc = $('#TableOfContents');
+    if ($toc.length > 0) {
+      var $window = $(window);
+
+      function onScroll() {
+        var currentScroll = $window.scrollTop();
+        var h = $('.anchor');
+        var id = "";
+        h.each(function (i, e) {
+          e = $(e);
+          if (e.offset().top - $(window).height()/3 <= currentScroll) {
+            id = e.attr('id');
+          }
+        });
+        var active = $toc.find('a.active');      
+        if (active.length == 1 && active.eq(0).attr('href') == '#' + id) return true;
+
+        active.each(function (i, e) {
+          
+            $(e).removeClass('active');
+          
+        });
+        $toc.find('a[href="#' + id + '"]').addClass('active')
+        $toc.find('a[href="#' + id + '"]').parentsUntil('#TableOfContents').each(function (i, e) {
+          $(e).children('a').parents('ul').show();          
+        });
+      }
+
+      $window.on('scroll', onScroll);
+      $(document).ready(function () {
+        
+        onScroll();
+      });
+    }
+  })();
 </script>
 </div>
 </div>
 <div class="min-w-0 min-h-0 max-w-prose">
 <details class="mt-2 mb-5 overflow-hidden rounded-lg ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5" open="" style="margin-left:0px">
-<summary class="py-1 text-lg font-semibold cursor-pointer bg-primary-200 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-primary-800 dark:text-neutral-100">
-        PWN入门 - This article is part of a series.
+<summary class="py-1 text-lg font-semibold cursor-pointer bg-primary-200 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-primary-800 dark:text-neutral-100">
+        PWN入门 - This article is part of a series.
     </summary>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/posts/pwn/basic/tutorial1/">
-            Part 0: pwn入门教程
+<a href="https://ta0lve.github.io/posts/pwn/basic/tutorial1/">
+            Part 0: pwn入门教程
         </a>
 </div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/posts/pwn/basic/pwn-_environment/">
-            Part 1: PWN环境二次搭建记录-Ubuntu 22.04
+<a href="https://ta0lve.github.io/posts/pwn/basic/pwn-_environment/">
+            Part 1: PWN环境二次搭建记录-Ubuntu 22.04
         </a>
 </div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/posts/pwn/basic/linux_/">
-            Part 2: Linux基础知识
+<a href="https://ta0lve.github.io/posts/pwn/basic/linux_/">
+            Part 2: Linux基础知识
         </a>
 </div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/pointer/%E4%B9%A6%E7%AD%BE/pwn%E4%B9%A6%E7%AD%BE/">
-            Part 3: pwn基础学习书签
+<a href="https://ta0lve.github.io/pointer/%E4%B9%A6%E7%AD%BE/pwn%E4%B9%A6%E7%AD%BE/">
+            Part 3: pwn基础学习书签
         </a>
 </div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/pointer/stack/pointer1/">
-            Part 4: 栈学习书签
+<a href="https://ta0lve.github.io/pointer/stack/pointer1/">
+            Part 4: 栈学习书签
         </a>
 </div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/pointer/fmt/pointer1/">
-            Part 5: fmt学习书签
+<a href="https://ta0lve.github.io/pointer/fmt/pointer1/">
+            Part 5: fmt学习书签
         </a>
 </div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/pointer/intoverflow/pointer1/">
-            Part 6: 整数溢出漏洞学习书签
+<a href="https://ta0lve.github.io/pointer/intoverflow/pointer1/">
+            Part 6: 整数溢出漏洞学习书签
         </a>
 </div>
-<div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-        Part 7: This Article
+<div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+        Part 7: This Article
     </div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/pointer/kernel-pwn/pointer1/">
-            Part 8: Kernel Pwn 学习书签
+<a href="https://ta0lve.github.io/pointer/kernel-pwn/pointer1/">
+            Part 8: Kernel Pwn 学习书签
         </a>
 </div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/pointer/wp/pointer1/">
-            Part 9: wp学习书签
+<a href="https://ta0lve.github.io/pointer/wp/pointer1/">
+            Part 9: wp学习书签
         </a>
 </div>
 </details>
 <p>一些我在入门pwn <strong>堆</strong> 时所学习阅读的文章，收集在此处以便于之后的复习和回顾。</p>
 <hr/>
 <div class="anchor" id="相关知识学习"></div>
-<h3 class="relative group">相关知识学习 
+<h3 class="relative group">相关知识学习 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e7%9b%b8%e5%85%b3%e7%9f%a5%e8%af%86%e5%ad%a6%e4%b9%a0" style="text-decoration-line: none !important;">#</a></span>
 </h3>
-<p><a href="https://hornos3.github.io/" target="_blank">
+<p><a href="https://hornos3.github.io/" target="_blank">
     CoLin’s BLOG (hornos3.github.io)</a></p>
-<p><a href="https://blog.csdn.net/qq_54218833/category_11475074.html" target="_blank">
+<p><a href="https://blog.csdn.net/qq_54218833/category_11475074.html" target="_blank">
     PWN学习笔记_C0Lin的博客-CSDN博客</a></p>
-<p><a href="https://blog.csdn.net/qq_41202237/category_10328044.html" target="_blank">
+<p><a href="https://blog.csdn.net/qq_41202237/category_10328044.html" target="_blank">
     堆溢出_hollk的博客-CSDN博客</a></p>
-<p><a href="https://sploitfun.wordpress.com/2015/02/10/understanding-glibc-malloc/comment-page-1/" target="_blank">
+<p><a href="https://sploitfun.wordpress.com/2015/02/10/understanding-glibc-malloc/comment-page-1/" target="_blank">
     Understanding glibc malloc – sploitF-U-N (wordpress.com)</a></p>
-<p><a href="https://shoucheng3.github.io/2021/04/10/2021-04-10-%e5%88%9d%e6%8e%a2%e5%a0%86/" target="_blank">
+<p><a href="https://shoucheng3.github.io/2021/04/10/2021-04-10-%e5%88%9d%e6%8e%a2%e5%a0%86/" target="_blank">
     初探堆 - ShouCheng (shoucheng3.github.io)</a></p>
-<p><a href="https://blog.csdn.net/qq_15727809/article/details/89704813" target="_blank">
+<p><a href="https://blog.csdn.net/qq_15727809/article/details/89704813" target="_blank">
      ctf wiki笔记–Linux堆基础</a></p>
-<p><a href="https://blog.csdn.net/qq_39563369/article/details/103943077" target="_blank">
+<p><a href="https://blog.csdn.net/qq_39563369/article/details/103943077" target="_blank">
     堆相关数据结构</a></p>
-<p><a href="https://www.anquanke.com/post/id/163971" target="_blank">
+<p><a href="https://www.anquanke.com/post/id/163971" target="_blank">
     CTF pwn 中最通俗易懂的堆入坑指南-安全客 - 安全资讯平台 (anquanke.com)</a></p>
-<p><a href="https://blog.csdn.net/arttnba3/article/details/114055329" target="_blank">
+<p><a href="https://blog.csdn.net/arttnba3/article/details/114055329" target="_blank">
     【CTF资料-0x0002】PWN简易Linux堆利用入门教程by arttnba3_arttnba3的博客-CSDN博客</a></p>
-<p><a href="https://chumen77.github.io/2020/11/18/Unsorted_Bin_Attack%e5%86%8d%e5%ad%a6%e4%b9%a0/" target="_blank">
+<p><a href="https://chumen77.github.io/2020/11/18/Unsorted_Bin_Attack%e5%86%8d%e5%ad%a6%e4%b9%a0/" target="_blank">
     Unsorted_Bin_Attack再学习 - Chumen77’s Blog</a></p>
-<p><a href="https://blog.csdn.net/qq_35544379/article/details/103660400" target="_blank">
+<p><a href="https://blog.csdn.net/qq_35544379/article/details/103660400" target="_blank">
      理解 glibc malloc_Pz_mstr的博客-CSDN博客</a></p>
 <div class="anchor" id="系列教程学习"></div>
-<h3 class="relative group">系列教程学习 
+<h3 class="relative group">系列教程学习 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e7%b3%bb%e5%88%97%e6%95%99%e7%a8%8b%e5%ad%a6%e4%b9%a0" style="text-decoration-line: none !important;">#</a></span>
 </h3>
-<p><a href="https://ctf-wiki.org/pwn/linux/user-mode/heap/ptmalloc2/heap-overview/" target="_blank">
+<p><a href="https://ctf-wiki.org/pwn/linux/user-mode/heap/ptmalloc2/heap-overview/" target="_blank">
     堆概述 - CTF Wiki (ctf-wiki.org)</a></p>
-<p><a href="https://ciphersaw.me/ctf-wiki/pwn/linux/heap/heap_implementation_details/" target="_blank">
+<p><a href="https://ciphersaw.me/ctf-wiki/pwn/linux/heap/heap_implementation_details/" target="_blank">
     深入理解堆的实现 - CTF Wiki (ciphersaw.me)</a></p>
-<p><a href="https://blog.csdn.net/qq_41202237/category_10328044.html" target="_blank">
+<p><a href="https://blog.csdn.net/qq_41202237/category_10328044.html" target="_blank">
     堆溢出_hollk的博客-CSDN博客</a></p>
-<p><a href="https://blog.csdn.net/qq_54218833/article/details/126082743?spm=1001.2014.3001.5502" target="_blank">
+<p><a href="https://blog.csdn.net/qq_54218833/article/details/126082743?spm=1001.2014.3001.5502" target="_blank">
     pwnhome 个人博客快速索引（持续更新）_C0Lin的博客-CSDN博客</a></p>
-<p><a href="https://blog.csdn.net/qq_54218833/article/details/122868272" target="_blank">
+<p><a href="https://blog.csdn.net/qq_54218833/article/details/122868272" target="_blank">
     how2heap 深入学习(1)_C0Lin的博客-CSDN博客</a></p>
-<p><a href="https://firmianay.gitbook.io/ctf-all-in-one/3_topics/pwn/3.1.6_heap_exploit_1" target="_blank">
+<p><a href="https://firmianay.gitbook.io/ctf-all-in-one/3_topics/pwn/3.1.6_heap_exploit_1" target="_blank">
     3.1.6 Linux 堆利用（一） - CTF-All-In-One (gitbook.io)</a></p>
-<p><a href="https://www.bookstack.cn/read/CTF-All-In-One/SUMMARY.md" target="_blank">
+<p><a href="https://www.bookstack.cn/read/CTF-All-In-One/SUMMARY.md" target="_blank">
     《CTF 竞赛入门指南(CTF All In One)》</a></p>
-<p><a href="https://zhuanlan.zhihu.com/p/77065583" target="_blank">
+<p><a href="https://zhuanlan.zhihu.com/p/77065583" target="_blank">
     二进制安全之堆溢出（系列）——CTF环境配置</a></p>
-<p><a href="https://zhuanlan.zhihu.com/p/77312725" target="_blank">
+<p><a href="https://zhuanlan.zhihu.com/p/77312725" target="_blank">
     二进制安全之堆溢出（系列）——堆基础 &amp; 结构（一）</a></p>
-<p><a href="https://zhuanlan.zhihu.com/p/77316206" target="_blank">
+<p><a href="https://zhuanlan.zhihu.com/p/77316206" target="_blank">
     二进制安全之堆溢出（系列）——堆基础 &amp; 结构（二） </a></p>
-<p><a href="https://zhuanlan.zhihu.com/p/77320388" target="_blank">
+<p><a href="https://zhuanlan.zhihu.com/p/77320388" target="_blank">
     二进制安全之堆溢出（系列）——堆基础 &amp; 结构（三） </a></p>
-<p><a href="https://zhuanlan.zhihu.com/p/77322810" target="_blank">
+<p><a href="https://zhuanlan.zhihu.com/p/77322810" target="_blank">
     二进制安全之堆溢出（系列）——堆基础 &amp; 结构（四）</a></p>
-<p><a href="https://zhuanlan.zhihu.com/p/78557668" target="_blank">
+<p><a href="https://zhuanlan.zhihu.com/p/78557668" target="_blank">
     二进制安全之堆溢出（系列）—— unlink - 知乎 </a></p>
-<p><a href="https://zhuanlan.zhihu.com/p/78306800" target="_blank">
+<p><a href="https://zhuanlan.zhihu.com/p/78306800" target="_blank">
     二进制安全之堆溢出（系列）—— off by one </a></p>
-<p><a href="https://zhuanlan.zhihu.com/p/78556695" target="_blank">
+<p><a href="https://zhuanlan.zhihu.com/p/78556695" target="_blank">
     二进制安全之堆溢出（系列）—— off by null </a></p>
-<p><a href="https://zhuanlan.zhihu.com/p/78557220" target="_blank">
+<p><a href="https://zhuanlan.zhihu.com/p/78557220" target="_blank">
     二进制安全之堆溢出（系列）—— fast bin attack </a></p>
-<p><a href="https://zhuanlan.zhihu.com/p/78905225" target="_blank">
+<p><a href="https://zhuanlan.zhihu.com/p/78905225" target="_blank">
     二进制安全之堆溢出（系列）—— fastbin double free </a></p>
-<p><a href="https://zhuanlan.zhihu.com/p/78901276" target="_blank">
+<p><a href="https://zhuanlan.zhihu.com/p/78901276" target="_blank">
     二进制安全之堆溢出（系列）—— unsorted bin attack </a></p>
-<p><a href="https://zhuanlan.zhihu.com/p/78304033" target="_blank">
+<p><a href="https://zhuanlan.zhihu.com/p/78304033" target="_blank">
     二进制安全之堆溢出（系列）—— house of spirit </a></p>
-<p><a href="https://zhuanlan.zhihu.com/p/78301039" target="_blank">
+<p><a href="https://zhuanlan.zhihu.com/p/78301039" target="_blank">
     二进制安全之堆溢出（系列）—— house of force </a></p>
 <div class="anchor" id="wp学习与复现"></div>
-<h3 class="relative group">wp学习与复现 
+<h3 class="relative group">wp学习与复现 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#wp%e5%ad%a6%e4%b9%a0%e4%b8%8e%e5%a4%8d%e7%8e%b0" style="text-decoration-line: none !important;">#</a></span>
 </h3>
-<p><a href="http://c2yb8er.cn/2023/05/02/0_PWN/Heap%e5%88%b7%e9%a2%98%e8%ae%b0%e5%bd%95/" target="_blank">
+<p><a href="http://c2yb8er.cn/2023/05/02/0_PWN/Heap%e5%88%b7%e9%a2%98%e8%ae%b0%e5%bd%95/" target="_blank">
     Heap刷题记录 | 二十八华生的博客 (c2yb8er.cn)</a></p>
 <details class="mt-2 mb-5 overflow-hidden rounded-lg ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5" style="margin-left:0px">
-<summary class="py-1 text-lg font-semibold cursor-pointer bg-primary-200 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-primary-800 dark:text-neutral-100">
-        PWN入门 - This article is part of a series.
+<summary class="py-1 text-lg font-semibold cursor-pointer bg-primary-200 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-primary-800 dark:text-neutral-100">
+        PWN入门 - This article is part of a series.
     </summary>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/posts/pwn/basic/tutorial1/">
-            Part 0: pwn入门教程
+<a href="https://ta0lve.github.io/posts/pwn/basic/tutorial1/">
+            Part 0: pwn入门教程
         </a>
 </div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/posts/pwn/basic/pwn-_environment/">
-            Part 1: PWN环境二次搭建记录-Ubuntu 22.04
+<a href="https://ta0lve.github.io/posts/pwn/basic/pwn-_environment/">
+            Part 1: PWN环境二次搭建记录-Ubuntu 22.04
         </a>
 </div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/posts/pwn/basic/linux_/">
-            Part 2: Linux基础知识
+<a href="https://ta0lve.github.io/posts/pwn/basic/linux_/">
+            Part 2: Linux基础知识
         </a>
 </div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/pointer/%E4%B9%A6%E7%AD%BE/pwn%E4%B9%A6%E7%AD%BE/">
-            Part 3: pwn基础学习书签
+<a href="https://ta0lve.github.io/pointer/%E4%B9%A6%E7%AD%BE/pwn%E4%B9%A6%E7%AD%BE/">
+            Part 3: pwn基础学习书签
         </a>
 </div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/pointer/stack/pointer1/">
-            Part 4: 栈学习书签
+<a href="https://ta0lve.github.io/pointer/stack/pointer1/">
+            Part 4: 栈学习书签
         </a>
 </div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/pointer/fmt/pointer1/">
-            Part 5: fmt学习书签
+<a href="https://ta0lve.github.io/pointer/fmt/pointer1/">
+            Part 5: fmt学习书签
         </a>
 </div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/pointer/intoverflow/pointer1/">
-            Part 6: 整数溢出漏洞学习书签
+<a href="https://ta0lve.github.io/pointer/intoverflow/pointer1/">
+            Part 6: 整数溢出漏洞学习书签
         </a>
 </div>
-<div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-        Part 7: This Article
+<div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+        Part 7: This Article
     </div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/pointer/kernel-pwn/pointer1/">
-            Part 8: Kernel Pwn 学习书签
+<a href="https://ta0lve.github.io/pointer/kernel-pwn/pointer1/">
+            Part 8: Kernel Pwn 学习书签
         </a>
 </div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/pointer/wp/pointer1/">
-            Part 9: wp学习书签
+<a href="https://ta0lve.github.io/pointer/wp/pointer1/">
+            Part 9: wp学习书签
         </a>
 </div>
 </details>
 </div>
-<script>
-        var oid = "views_Pointer\\heap\\pointer1\\index.md"
-        var oid_likes = "likes_Pointer\\heap\\pointer1\\index.md"
+<script>
+        var oid = "views_Pointer\\heap\\pointer1\\index.md"
+        var oid_likes = "likes_Pointer\\heap\\pointer1\\index.md"
       </script>
 <script integrity="sha512-DkmXO0rQo4LHxgEti/+CJjFmQtqrxPiiBHe9CGdPPabi+pk7wgrU9R58W7aOb5E6IHp8T+N+oOe4BolK/OCmTg==" src="/js/page.min.0e49973b4ad0a382c7c6012d8bff8226316642daabc4f8a20477bd08674f3da6e2fa993bc20ad4f51e7c5bb68e6f913a207a7c4fe37ea0e7b806894afce0a64e.js" type="text/javascript"></script>
 </section>
@@ -627,29 +627,29 @@
 <div class="flex flex-row flex-wrap items-center">
 <span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%85%A5%E9%97%A8/&quot;,'_self');" style="margin-top:0.5rem">
 <span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    pwn入门
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    pwn入门
   </span>
 </span>
 </span>
 <span class="mr-2" onclick="window.open(&quot;/tags/ctf/&quot;,'_self');" style="margin-top:0.5rem">
 <span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    CTF
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    CTF
   </span>
 </span>
 </span>
 <span class="mr-2" onclick="window.open(&quot;/tags/pwn/&quot;,'_self');" style="margin-top:0.5rem">
 <span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    PWN
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    PWN
   </span>
 </span>
 </span>
 <span class="mr-2" onclick="window.open(&quot;/tags/%E5%A0%86/&quot;,'_self');" style="margin-top:0.5rem">
 <span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    堆
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    堆
   </span>
 </span>
 </span>
@@ -675,29 +675,29 @@
 <div class="flex flex-row flex-wrap items-center">
 <span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%85%A5%E9%97%A8/&quot;,'_self');" style="margin-top:0.5rem">
 <span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    pwn入门
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    pwn入门
   </span>
 </span>
 </span>
 <span class="mr-2" onclick="window.open(&quot;/tags/ctf/&quot;,'_self');" style="margin-top:0.5rem">
 <span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    CTF
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    CTF
   </span>
 </span>
 </span>
 <span class="mr-2" onclick="window.open(&quot;/tags/pwn/&quot;,'_self');" style="margin-top:0.5rem">
 <span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    PWN
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    PWN
   </span>
 </span>
 </span>
 <span class="mr-2" onclick="window.open(&quot;/tags/kernel/&quot;,'_self');" style="margin-top:0.5rem">
 <span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    Kernel
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    Kernel
   </span>
 </span>
 </span>
@@ -723,29 +723,29 @@
 <div class="flex flex-row flex-wrap items-center">
 <span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%85%A5%E9%97%A8/&quot;,'_self');" style="margin-top:0.5rem">
 <span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    pwn入门
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    pwn入门
   </span>
 </span>
 </span>
 <span class="mr-2" onclick="window.open(&quot;/tags/ctf/&quot;,'_self');" style="margin-top:0.5rem">
 <span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    CTF
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    CTF
   </span>
 </span>
 </span>
 <span class="mr-2" onclick="window.open(&quot;/tags/pwn/&quot;,'_self');" style="margin-top:0.5rem">
 <span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    PWN
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    PWN
   </span>
 </span>
 </span>
 <span class="mr-2" onclick="window.open(&quot;/tags/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%BC%8F%E6%B4%9E/&quot;,'_self');" style="margin-top:0.5rem">
 <span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    格式化字符串漏洞
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    格式化字符串漏洞
   </span>
 </span>
 </span>
@@ -808,8 +808,8 @@
 </footer>
 </article>
 <div class="pointer-events-none absolute top-[110vh] bottom-0 w-12 ltr:right-0 rtl:left-0" id="top-scroller">
-<a aria-label="" class="pointer-events-auto sticky top-[calc(100vh-5.5rem)] flex h-12 w-12 mb-16 items-center justify-center rounded-full bg-neutral/50 text-xl text-neutral-700 backdrop-blur hover:text-primary-600 dark:bg-neutral-800/50 dark:text-neutral dark:hover:text-primary-400" href="#the-top" title="">
-    ↑
+<a aria-label="" class="pointer-events-auto sticky top-[calc(100vh-5.5rem)] flex h-12 w-12 mb-16 items-center justify-center rounded-full bg-neutral/50 text-xl text-neutral-700 backdrop-blur hover:text-primary-600 dark:bg-neutral-800/50 dark:text-neutral dark:hover:text-primary-400" href="#the-top" title="">
+    ↑
   </a>
 </div>
 </main><footer class="py-10 print:hidden" id="site-footer">
@@ -824,23 +824,23 @@
 </ul>
 </nav>
 <div class="flex items-center justify-between">
-<p class="text-sm text-neutral-500 dark:text-neutral-400">
-      Copyright ©2023 ta0lve, All Rights Reserved.
+<p class="text-sm text-neutral-500 dark:text-neutral-400">
+      Copyright ©2023 ta0lve, All Rights Reserved.
     </p>
-<p class="text-xs text-neutral-500 dark:text-neutral-400">
-      
-      
-      由 <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500" href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &amp; <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500" href="https://blowfish.page/" rel="noopener noreferrer" target="_blank">Blowfish</a> 强力驱动
+<p class="text-xs text-neutral-500 dark:text-neutral-400">
+      
+      
+      由 <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500" href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &amp; <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500" href="https://blowfish.page/" rel="noopener noreferrer" target="_blank">Blowfish</a> 强力驱动
     </p>
 </div>
-<script>
-    
-    mediumZoom(document.querySelectorAll("img:not(.nozoom)"), {
-      margin: 24,
-      background: 'rgba(0,0,0,0.5)',
-      scrollOffset: 0,
-    })
-    
+<script>
+    
+    mediumZoom(document.querySelectorAll("img:not(.nozoom)"), {
+      margin: 24,
+      background: 'rgba(0,0,0,0.5)',
+      scrollOffset: 0,
+    })
+    
   </script>
 <script integrity="sha512-NcERO8wWxaWb8DEIL55jgiqpUoBCOIGnhHp/8zoW5imc5qhA2e9OENlH4DChjz8gNZr7LsDzWWdIS5qTYKwxRQ==" src="/js/process.min.35c1113bcc16c5a59bf031082f9e63822aa95280423881a7847a7ff33a16e6299ce6a840d9ef4e10d947e030a18f3f20359afb2ec0f35967484b9a9360ac3145.js" type="text/javascript"></script>
 </footer><div class="invisible fixed inset-0 flex h-screen w-screen cursor-default flex-col bg-neutral-500/50 p-4 backdrop-blur-sm dark:bg-neutral-900/50 sm:p-6 md:p-[10vh] lg:p-[12vh]" data-url="https://ta0lve.github.io/" id="search-wrapper" style="z-index:500">
