@@ -163,8 +163,7 @@
 <link>https://ta0lve.github.io/posts/wp/2023_04_w4ter/6_gz-rsa_write_up/</link>
 <pubDate>Wed, 05 Jul 2023 00:00:00 +0000</pubDate>
 <guid>https://ta0lve.github.io/posts/wp/2023_04_w4ter/6_gz-rsa_write_up/</guid>
-<description>&lt;p&gt;&lt;strong&gt;此文章仅限战队内部成员阅读&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;路过的师傅们看看远处的wp吧！&lt;/p&gt;</description>
+<description>题目描述 # 在RSA中，素数的选择和保密性非常重要。 只要不泄露</description>
 <media:content url="https://ta0lve.github.io/posts/wp/2023_04_w4ter/6_gz-rsa_write_up/featured.jpg" xmlns:media="http://search.yahoo.com/mrss/"/>
 </item>
 <item>
@@ -180,8 +179,7 @@
 <link>https://ta0lve.github.io/posts/wp/2023_04_w4ter/8_shadow_write_up/</link>
 <pubDate>Wed, 05 Jul 2023 00:00:00 +0000</pubDate>
 <guid>https://ta0lve.github.io/posts/wp/2023_04_w4ter/8_shadow_write_up/</guid>
-<description>&lt;p&gt;&lt;strong&gt;此文章仅限战队内部成员阅读&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;路过的师傅们看看远处的wp吧！&lt;/p&gt;</description>
+<description>先 nc 一下，提示在shadow中寻找flag 第一反应是写一个r</description>
 <media:content url="https://ta0lve.github.io/posts/wp/2023_04_w4ter/8_shadow_write_up/featured.jpg" xmlns:media="http://search.yahoo.com/mrss/"/>
 </item>
 <item>
@@ -189,8 +187,7 @@
 <link>https://ta0lve.github.io/posts/wp/2023_04_w4ter/9_usb-hacker_write_up/</link>
 <pubDate>Wed, 05 Jul 2023 00:00:00 +0000</pubDate>
 <guid>https://ta0lve.github.io/posts/wp/2023_04_w4ter/9_usb-hacker_write_up/</guid>
-<description>&lt;p&gt;&lt;strong&gt;此文章仅限战队内部成员阅读&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;路过的师傅们看看远处的wp吧！&lt;/p&gt;</description>
+<description>用wireshark分析了一下流量包后发现是usb的键盘流量</description>
 <media:content url="https://ta0lve.github.io/posts/wp/2023_04_w4ter/9_usb-hacker_write_up/featured.jpg" xmlns:media="http://search.yahoo.com/mrss/"/>
 </item>
 <item>
@@ -206,8 +203,7 @@
 <link>https://ta0lve.github.io/posts/wp/2023_04_w4ter/7_weird-letter_write_up/</link>
 <pubDate>Wed, 05 Jul 2023 00:00:00 +0000</pubDate>
 <guid>https://ta0lve.github.io/posts/wp/2023_04_w4ter/7_weird-letter_write_up/</guid>
-<description>&lt;p&gt;&lt;strong&gt;此文章仅限战队内部成员阅读&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;路过的师傅们看看远处的wp吧！&lt;/p&gt;</description>
+<description>先在浏览器上访问实例，可以得到密文： Okze WEYng, D eixy jgty lrmdtpt afhlm onf cdyf lgm icxn gik&amp;rsquo;qp</description>
 <media:content url="https://ta0lve.github.io/posts/wp/2023_04_w4ter/7_weird-letter_write_up/featured.jpg" xmlns:media="http://search.yahoo.com/mrss/"/>
 </item>
 <item>
@@ -223,8 +219,7 @@
 <link>https://ta0lve.github.io/posts/wp/2023_04_w4ter/3_nimgame-level-1_write_up/</link>
 <pubDate>Wed, 05 Jul 2023 00:00:00 +0000</pubDate>
 <guid>https://ta0lve.github.io/posts/wp/2023_04_w4ter/3_nimgame-level-1_write_up/</guid>
-<description>&lt;p&gt;&lt;strong&gt;此文章仅限战队内部成员阅读&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;路过的师傅们看看远处的wp吧！&lt;/p&gt;</description>
+<description>由canary的结构我们可以得知当我们输入的填充字符覆盖掉c</description>
 <media:content url="https://ta0lve.github.io/posts/wp/2023_04_w4ter/3_nimgame-level-1_write_up/featured.jpg" xmlns:media="http://search.yahoo.com/mrss/"/>
 </item>
 <item>
@@ -240,8 +235,7 @@
 <link>https://ta0lve.github.io/posts/wp/2023_04_w4ter/4_lazy-puts_write_up/</link>
 <pubDate>Wed, 05 Jul 2023 00:00:00 +0000</pubDate>
 <guid>https://ta0lve.github.io/posts/wp/2023_04_w4ter/4_lazy-puts_write_up/</guid>
-<description>&lt;p&gt;&lt;strong&gt;此文章仅限战队内部成员阅读&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;路过的师傅们看看远处的wp吧！&lt;/p&gt;</description>
+<description>直接将程序拖入IDA，shift+F12查看字符串，即可看到</description>
 <media:content url="https://ta0lve.github.io/posts/wp/2023_04_w4ter/4_lazy-puts_write_up/featured.jpg" xmlns:media="http://search.yahoo.com/mrss/"/>
 </item>
 <item>
@@ -249,8 +243,7 @@
 <link>https://ta0lve.github.io/posts/wp/2023_04_w4ter/5_oh-my-python_write_up/</link>
 <pubDate>Wed, 05 Jul 2023 00:00:00 +0000</pubDate>
 <guid>https://ta0lve.github.io/posts/wp/2023_04_w4ter/5_oh-my-python_write_up/</guid>
-<description>&lt;p&gt;&lt;strong&gt;此文章仅限战队内部成员阅读&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;路过的师傅们看看远处的wp吧！&lt;/p&gt;</description>
+<description>下载题目附件后发现是pyc程序，所以我们先将pyc程序用在线</description>
 <media:content url="https://ta0lve.github.io/posts/wp/2023_04_w4ter/5_oh-my-python_write_up/featured.jpg" xmlns:media="http://search.yahoo.com/mrss/"/>
 </item>
 <item>
