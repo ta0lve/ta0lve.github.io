@@ -59,7 +59,7 @@
     "keywords": ["CTF","PWN","Ubuntu"],
     
     "mainEntityOfPage": "true",
-    "wordCount": "8779"
+    "wordCount": "8761"
   }]
   </script>
 <meta content="ta0lve" name="author"/>
@@ -275,7 +275,7 @@
     </h1>
 <div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-07-10 00:00:00 +0000 UTC">July 10, 2023</time><span class="px-2 text-primary-500">·</span><span>8779 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">18 分钟</span>
+<time datetime="2023-07-10 00:00:00 +0000 UTC">July 10, 2023</time><span class="px-2 text-primary-500">·</span><span>8761 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">18 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
 <span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%85%A5%E9%97%A8/&quot;,'_self');" style="margin-top:0.5rem">
@@ -784,14 +784,14 @@
 </span></span><span class="line"><span class="cl"><span class="c1">#（注意每个人的路径是不同的，所以要输入的内容也是不同的）</span>
 </span></span><span class="line"><span class="cl"><span class="c1"># 选择你要用的一个，另外两个注释掉，保存退出</span>
 </span></span><span class="line"><span class="cl"><span class="c1"># 原来：</span>
-</span></span><span class="line"><span class="cl"><span class="n">echo</span> <span class="s2">"source ~/peda/peda.py"</span> <span class="o">&gt;&gt;</span> <span class="o">~/.</span><span class="n">gdbinit</span>
-</span></span><span class="line"><span class="cl"><span class="n">echo</span> <span class="s2">"source ~/pwndbg/gdbinit.py"</span> <span class="o">&gt;</span> <span class="o">~/.</span><span class="n">gdbinit</span>
-</span></span><span class="line"><span class="cl"><span class="n">echo</span> <span class="s2">"source ~/gef/gef.py"</span> <span class="o">&gt;</span> <span class="o">~/.</span><span class="n">gdbinit</span>
+</span></span><span class="line"><span class="cl"><span class="n">source</span> <span class="o">~/</span><span class="n">peda</span><span class="o">/</span><span class="n">peda</span><span class="o">.</span><span class="n">py</span>
+</span></span><span class="line"><span class="cl"><span class="n">source</span> <span class="o">~/</span><span class="n">pwndbg</span><span class="o">/</span><span class="n">gdbinit</span><span class="o">.</span><span class="n">py</span>
+</span></span><span class="line"><span class="cl"><span class="n">source</span> <span class="o">~/</span><span class="n">gef</span><span class="o">/</span><span class="n">gef</span><span class="o">.</span><span class="n">py</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">### 使用pwndbg:</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># echo "source ~/peda/peda.py" &gt;&gt; ~/.gdbinit</span>
-</span></span><span class="line"><span class="cl"><span class="n">echo</span> <span class="s2">"source ~/pwndbg/gdbinit.py"</span> <span class="o">&gt;</span> <span class="o">~/.</span><span class="n">gdbinit</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># echo "source ~/gef/gef.py" &gt; ~/.gdbinit</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># source ~/peda/peda.py</span>
+</span></span><span class="line"><span class="cl"><span class="n">source</span> <span class="o">~/</span><span class="n">pwndbg</span><span class="o">/</span><span class="n">gdbinit</span><span class="o">.</span><span class="n">py</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># source ~/gef/gef.py</span>
 </span></span></code></pre></div><p>平时使用方式二：（多打一行命令法：）</p>
 <div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 使用前多打一行命令</span>
 </span></span><span class="line"><span class="cl"><span class="c1"># 路径需要根据自己的安装路径更改</span>

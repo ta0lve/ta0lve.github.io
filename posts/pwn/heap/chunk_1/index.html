@@ -59,7 +59,7 @@
     "keywords": ["CTF","PWN","heap"],
     
     "mainEntityOfPage": "true",
-    "wordCount": "3961"
+    "wordCount": "3954"
   }]
   </script>
 <meta content="ta0lve" name="author"/>
@@ -275,7 +275,7 @@
     </h1>
 <div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-07-31 00:00:00 +0000 UTC">July 31, 2023</time><span class="px-2 text-primary-500">·</span><span>3961 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">8 分钟</span>
+<time datetime="2023-07-31 00:00:00 +0000 UTC">July 31, 2023</time><span class="px-2 text-primary-500">·</span><span>3954 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">8 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
 <span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/&quot;,'_self');" style="margin-top:0.5rem">
@@ -361,16 +361,15 @@
 </li>
 </ul>
 </li>
-<li><a href="#堆的结构">堆的结构</a>
+<li><a href="#堆的微观结构">堆的微观结构</a>
 <ul>
-<li><a href="#1微观结构">1.微观结构</a></li>
 <li><a href="#malloc_chunk">malloc_chunk</a></li>
-<li><a href="#关于-size_sz-与-size_t">关于 SIZE_SZ 与 size_t</a></li>
-<li><a href="#prev_size"><strong>prev_size</strong></a></li>
-<li><a href="#size"><strong>size</strong></a></li>
-<li><a href="#fdbk"><strong>fd，bk</strong></a>
+<li><a href="#size_sz-与-size_t">SIZE_SZ 与 size_t</a></li>
+<li><a href="#prev_size">prev_size</a></li>
+<li><a href="#size">size</a></li>
+<li><a href="#fdbk">fd，bk</a>
 <ul>
-<li><a href="#fd_nextsize-bk_nextsize"><strong>fd_nextsize， bk_nextsize</strong></a></li>
+<li><a href="#fd_nextsize-bk_nextsize">fd_nextsize， bk_nextsize</a></li>
 </ul>
 </li>
 <li><a href="#notice">notice</a></li>
@@ -399,16 +398,15 @@
 </li>
 </ul>
 </li>
-<li><a href="#堆的结构">堆的结构</a>
+<li><a href="#堆的微观结构">堆的微观结构</a>
 <ul>
-<li><a href="#1微观结构">1.微观结构</a></li>
 <li><a href="#malloc_chunk">malloc_chunk</a></li>
-<li><a href="#关于-size_sz-与-size_t">关于 SIZE_SZ 与 size_t</a></li>
-<li><a href="#prev_size"><strong>prev_size</strong></a></li>
-<li><a href="#size"><strong>size</strong></a></li>
-<li><a href="#fdbk"><strong>fd，bk</strong></a>
+<li><a href="#size_sz-与-size_t">SIZE_SZ 与 size_t</a></li>
+<li><a href="#prev_size">prev_size</a></li>
+<li><a href="#size">size</a></li>
+<li><a href="#fdbk">fd，bk</a>
 <ul>
-<li><a href="#fd_nextsize-bk_nextsize"><strong>fd_nextsize， bk_nextsize</strong></a></li>
+<li><a href="#fd_nextsize-bk_nextsize">fd_nextsize， bk_nextsize</a></li>
 </ul>
 </li>
 <li><a href="#notice">notice</a></li>
@@ -617,16 +615,11 @@
 </ul>
 <p>详见 <a href="https://ctf-wiki.org/pwn/linux/user-mode/heap/ptmalloc2/heap-overview/#_5" target="_blank">
     wiki</a></p>
-<div class="anchor" id="堆的结构"></div>
-<h2 class="relative group">堆的结构 
+<div class="anchor" id="堆的微观结构"></div>
+<h2 class="relative group">堆的微观结构 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
-<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e5%a0%86%e7%9a%84%e7%bb%93%e6%9e%84" style="text-decoration-line: none !important;">#</a></span>
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e5%a0%86%e7%9a%84%e5%be%ae%e8%a7%82%e7%bb%93%e6%9e%84" style="text-decoration-line: none !important;">#</a></span>
 </h2>
-<div class="anchor" id="1微观结构"></div>
-<h3 class="relative group">1.微观结构 
-    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
-<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#1%e5%be%ae%e8%a7%82%e7%bb%93%e6%9e%84" style="text-decoration-line: none !important;">#</a></span>
-</h3>
 <div class="anchor" id="malloc_chunk"></div>
 <h3 class="relative group">malloc_chunk 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
@@ -654,10 +647,10 @@
 <p>每个字段的具体的解释如下（from <a href="https://ctf-wiki.org/pwn/linux/user-mode/heap/ptmalloc2/heap-structure/" target="_blank">
     wiki</a> and <a href="https://zhuanlan.zhihu.com/p/77316206" target="_blank">
     zhihu</a>）</p>
-<div class="anchor" id="关于-size_sz-与-size_t"></div>
-<h3 class="relative group">关于 SIZE_SZ 与 size_t 
+<div class="anchor" id="size_sz-与-size_t"></div>
+<h3 class="relative group">SIZE_SZ 与 size_t 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
-<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e5%85%b3%e4%ba%8e-size_sz-%e4%b8%8e-size_t" style="text-decoration-line: none !important;">#</a></span>
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#size_sz-%e4%b8%8e-size_t" style="text-decoration-line: none !important;">#</a></span>
 </h3>
 <p>下载glibc源码查看ptmalloc可以看到：</p>
 <div class="highlight"><pre class="chroma" tabindex="0"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#ifndef INTERNAL_SIZE_T
@@ -670,8 +663,8 @@
 <li>SIZE_SZ：同size_t，8字节/16字节</li>
 </ul>
 <div class="anchor" id="prev_size"></div>
-<h3 class="relative group"><strong>prev_size</strong>
-<span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<h3 class="relative group">prev_size 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#prev_size" style="text-decoration-line: none !important;">#</a></span>
 </h3>
 <ul>
@@ -694,9 +687,10 @@
 <p>malloc(0x19)会分配0x30的内存</p>
 </li>
 </ul>
+<hr/>
 <div class="anchor" id="size"></div>
-<h3 class="relative group"><strong>size</strong>
-<span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<h3 class="relative group">size 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#size" style="text-decoration-line: none !important;">#</a></span>
 </h3>
 <ul>
@@ -748,9 +742,10 @@
 <p><strong>最小堆原则</strong> : malloc(0)会分配0x20的空间,prev_size + size + 数据对齐的0x10字节</p>
 </li>
 </ul>
+<hr/>
 <div class="anchor" id="fdbk"></div>
-<h3 class="relative group"><strong>fd，bk</strong>
-<span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<h3 class="relative group">fd，bk 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#fdbk" style="text-decoration-line: none !important;">#</a></span>
 </h3>
 <ul>
@@ -759,9 +754,10 @@
 <li>bk 指向上一个（非物理相邻）空闲的 chunk</li>
 <li>通过 fd 和 bk 可以将空闲的 chunk 块加入到空闲的 chunk 块链表进行统一管理</li>
 </ul>
+<hr/>
 <div class="anchor" id="fd_nextsize-bk_nextsize"></div>
-<h4 class="relative group"><strong>fd_nextsize， bk_nextsize</strong>
-<span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<h4 class="relative group">fd_nextsize， bk_nextsize 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#fd_nextsize-bk_nextsize" style="text-decoration-line: none !important;">#</a></span>
 </h4>
 <ul>
@@ -770,6 +766,7 @@
 <li>bk_nextsize 指向后一个与当前 chunk 大小不同的第一个空闲块，不包含 bin 的头指针。</li>
 <li>一般空闲的 large chunk 在 fd 的遍历顺序中，按照由大到小的顺序排列。<strong>这样做可以避免在寻找合适 chunk 时挨个遍历。</strong></li>
 </ul>
+<hr/>
 <div class="anchor" id="notice"></div>
 <h3 class="relative group">notice 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
@@ -922,7 +919,7 @@
 <div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/pwn/basic/pwn-_environment/">PWN环境二次搭建记录-Ubuntu 22.04</div>
 <div class="text-sm text-neutral-500 dark:text-neutral-400">
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-07-10 00:00:00 +0000 UTC">July 10, 2023</time><span class="px-2 text-primary-500">·</span><span>8779 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">18 分钟</span>
+<time datetime="2023-07-10 00:00:00 +0000 UTC">July 10, 2023</time><span class="px-2 text-primary-500">·</span><span>8761 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">18 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
 <span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%85%A5%E9%97%A8/&quot;,'_self');" style="margin-top:0.5rem">
