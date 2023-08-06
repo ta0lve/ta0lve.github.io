@@ -59,7 +59,7 @@
     "keywords": ["CTF","PWN","Ubuntu"],
     
     "mainEntityOfPage": "true",
-    "wordCount": "8761"
+    "wordCount": "8907"
   }]
   </script>
 <meta content="ta0lve" name="author"/>
@@ -275,7 +275,7 @@
     </h1>
 <div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-07-10 00:00:00 +0000 UTC">July 10, 2023</time><span class="px-2 text-primary-500">·</span><span>8761 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">18 分钟</span>
+<time datetime="2023-07-10 00:00:00 +0000 UTC">July 10, 2023</time><span class="px-2 text-primary-500">·</span><span>8907 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">18 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
 <span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%85%A5%E9%97%A8/&quot;,'_self');" style="margin-top:0.5rem">
@@ -743,9 +743,14 @@
 <p>前排提示：PWNer 必须学会使用 gdb！！！</p>
 <p>（ubuntu默认装有普通的gdb，其实也不是不能直接用，不过还是安装一些插件比较好）</p>
 <p><strong>1. peda</strong></p>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># git</span>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 原版</span>
 </span></span><span class="line"><span class="cl"><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">longld</span><span class="o">/</span><span class="n">peda</span><span class="o">.</span><span class="n">git</span>
 </span></span><span class="line"><span class="cl"><span class="n">echo</span> <span class="s2">"source ~/peda/peda.py"</span> <span class="o">&gt;&gt;</span> <span class="o">~/.</span><span class="n">gdbinit</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 带heap插件版</span>
+</span></span><span class="line"><span class="cl"><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">gitee</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">AC_ddme</span><span class="o">/</span><span class="n">peda</span><span class="o">-</span><span class="n">heap</span><span class="o">.</span><span class="n">git</span>
+</span></span><span class="line"><span class="cl"><span class="n">echo</span> <span class="s2">"source ~/peda-heap/peda.py"</span> <span class="o">&gt;&gt;</span> <span class="o">~/.</span><span class="n">gdbinit</span>
+</span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1"># 测试：</span>
 </span></span><span class="line"><span class="cl"><span class="n">gdb</span>
 </span></span></code></pre></div><p>
@@ -753,6 +758,23 @@
 <img alt="image-20230710145853104" class="my-0 rounded-md" src="https://s2.loli.net/2023/07/10/kfZt7AhM5Q6NsFg.png"/>
 </figure>
 </p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">### peda-heap 使用方法</span>
+</span></span><span class="line"><span class="cl">heap set_mainarena <span class="o">[</span>new_addr<span class="o">]</span> <span class="c1"># -- set main_arena = newvalue</span>
+</span></span><span class="line"><span class="cl">heap all <span class="c1"># -- print heap info (mmap + sbrk)</span>
+</span></span><span class="line"><span class="cl">heap freed <span class="o">[</span>main_arena<span class="o">]</span> <span class="c1"># -- print freed chunks (tcache + fastbinY + bins)</span>
+</span></span><span class="line"><span class="cl">heap fastbin <span class="o">[</span>main_arena<span class="o">]</span> <span class="c1"># -- print freed chunks(fastbinY)</span>
+</span></span><span class="line"><span class="cl">heap bins <span class="o">[</span>main_arena<span class="o">]</span> <span class="c1"># -- print freed chunks (bins)</span>
+</span></span><span class="line"><span class="cl">heap trace <span class="c1"># -- print (arg + return_value) of malloc,free,realloc</span>
+</span></span><span class="line"><span class="cl">heap checkfree address <span class="c1"># -- try free chunk at address and print some info</span>
+</span></span><span class="line"><span class="cl">heap debug + heap restore <span class="c1"># -- try restore heap state before it was overlapped</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">### heap all 如下图：</span>
+</span></span></code></pre></div><p>
+<figure>
+<img alt="image-20230807000723376" class="my-0 rounded-md" src="https://s2.loli.net/2023/08/07/QCdSHA7icRvF9oh.png"/>
+</figure>
+</p>
+<hr/>
 <p><strong>2. pwndbg</strong></p>
 <div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># (时间较长)</span>
 </span></span><span class="line"><span class="cl"><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">pwndbg</span><span class="o">/</span><span class="n">pwndbg</span><span class="o">.</span><span class="n">git</span>
@@ -766,6 +788,7 @@
 <img alt="image-20230710144926373" class="my-0 rounded-md" src="https://s2.loli.net/2023/07/10/6LeSZhsfQTqw93z.png"/>
 </figure>
 </p>
+<hr/>
 <p><strong>3. gef</strong></p>
 <div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># git</span>
 </span></span><span class="line"><span class="cl"><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">hugsy</span><span class="o">/</span><span class="n">gef</span><span class="o">.</span><span class="n">git</span>
@@ -777,6 +800,7 @@
 <img alt="image-20230710145040108" class="my-0 rounded-md" src="https://s2.loli.net/2023/07/10/msJfaKZ2EpwSe5t.png"/>
 </figure>
 </p>
+<hr/>
 <p><strong>三个插件使用指南</strong></p>
 <p>平时使用方式一：（注释法）</p>
 <div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">sudo</span> <span class="n">vim</span> <span class="o">~/.</span><span class="n">gdbinit</span>
@@ -784,28 +808,33 @@
 </span></span><span class="line"><span class="cl"><span class="c1">#（注意每个人的路径是不同的，所以要输入的内容也是不同的）</span>
 </span></span><span class="line"><span class="cl"><span class="c1"># 选择你要用的一个，另外两个注释掉，保存退出</span>
 </span></span><span class="line"><span class="cl"><span class="c1"># 原来：</span>
-</span></span><span class="line"><span class="cl"><span class="n">source</span> <span class="o">~/</span><span class="n">peda</span><span class="o">/</span><span class="n">peda</span><span class="o">.</span><span class="n">py</span>
 </span></span><span class="line"><span class="cl"><span class="n">source</span> <span class="o">~/</span><span class="n">pwndbg</span><span class="o">/</span><span class="n">gdbinit</span><span class="o">.</span><span class="n">py</span>
 </span></span><span class="line"><span class="cl"><span class="n">source</span> <span class="o">~/</span><span class="n">gef</span><span class="o">/</span><span class="n">gef</span><span class="o">.</span><span class="n">py</span>
+</span></span><span class="line"><span class="cl"><span class="n">source</span> <span class="o">~/</span><span class="n">peda</span><span class="o">/</span><span class="n">peda</span><span class="o">.</span><span class="n">py</span>
+</span></span><span class="line"><span class="cl"><span class="n">source</span> <span class="o">~/</span><span class="n">peda</span><span class="o">-</span><span class="n">heap</span><span class="o">/</span><span class="n">peda</span><span class="o">.</span><span class="n">py</span><span class="s2">"</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">### 使用pwndbg:</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># source ~/peda/peda.py</span>
 </span></span><span class="line"><span class="cl"><span class="n">source</span> <span class="o">~/</span><span class="n">pwndbg</span><span class="o">/</span><span class="n">gdbinit</span><span class="o">.</span><span class="n">py</span>
 </span></span><span class="line"><span class="cl"><span class="c1"># source ~/gef/gef.py</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># source ~/peda/peda.py</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># source ~/peda-heap/peda.py"</span>
 </span></span></code></pre></div><p>平时使用方式二：（多打一行命令法：）</p>
 <div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 使用前多打一行命令</span>
 </span></span><span class="line"><span class="cl"><span class="c1"># 路径需要根据自己的安装路径更改</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">### 使用peda:</span>
-</span></span><span class="line"><span class="cl"><span class="n">echo</span> <span class="s2">"source ~/peda/peda.py"</span> <span class="o">&gt;&gt;</span> <span class="o">~/.</span><span class="n">gdbinit</span>
-</span></span><span class="line"><span class="cl"><span class="n">gdb</span>
 </span></span><span class="line"><span class="cl"><span class="c1">### 使用pwndbg:</span>
 </span></span><span class="line"><span class="cl"><span class="n">echo</span> <span class="s2">"source ~/pwndbg/gdbinit.py"</span> <span class="o">&gt;</span> <span class="o">~/.</span><span class="n">gdbinit</span>
 </span></span><span class="line"><span class="cl"><span class="n">gdb</span>
 </span></span><span class="line"><span class="cl"><span class="c1">### 使用gef:</span>
 </span></span><span class="line"><span class="cl"><span class="n">echo</span> <span class="s2">"source ~/gef/gef.py"</span> <span class="o">&gt;</span> <span class="o">~/.</span><span class="n">gdbinit</span>
 </span></span><span class="line"><span class="cl"><span class="n">gdb</span>
-</span></span></code></pre></div><p>在exp脚本中调用gdb调试时，可以自己写一个函数来解决：</p>
+</span></span><span class="line"><span class="cl"><span class="c1">### 使用peda:</span>
+</span></span><span class="line"><span class="cl"><span class="n">echo</span> <span class="s2">"source ~/peda/peda.py"</span> <span class="o">&gt;&gt;</span> <span class="o">~/.</span><span class="n">gdbinit</span>
+</span></span><span class="line"><span class="cl"><span class="n">gdb</span>
+</span></span><span class="line"><span class="cl"><span class="c1">### 使用peda-heap:</span>
+</span></span><span class="line"><span class="cl"><span class="n">echo</span> <span class="s2">"source ~/peda-heap/peda.py"</span> <span class="o">&gt;&gt;</span> <span class="o">~/.</span><span class="n">gdbinit</span>
+</span></span><span class="line"><span class="cl"><span class="n">gdb</span>
+</span></span></code></pre></div><p>在exp脚本中调用gdb调试时，可以自己写一个函数来解决，比如：</p>
 <div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="n">taolve</span> <span class="o">=</span> <span class="n">process</span><span class="p">(</span><span class="s1">'./pwn'</span><span class="p">)</span>

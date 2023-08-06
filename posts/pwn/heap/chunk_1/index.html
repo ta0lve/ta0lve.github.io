@@ -59,7 +59,7 @@
     "keywords": ["CTF","PWN","heap"],
     
     "mainEntityOfPage": "true",
-    "wordCount": "3954"
+    "wordCount": "3945"
   }]
   </script>
 <meta content="ta0lve" name="author"/>
@@ -275,7 +275,7 @@
     </h1>
 <div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-07-31 00:00:00 +0000 UTC">July 31, 2023</time><span class="px-2 text-primary-500">·</span><span>3954 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">8 分钟</span>
+<time datetime="2023-07-31 00:00:00 +0000 UTC">July 31, 2023</time><span class="px-2 text-primary-500">·</span><span>3945 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">8 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
 <span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/&quot;,'_self');" style="margin-top:0.5rem">
@@ -526,6 +526,7 @@
 </ul>
 </li>
 </ul>
+<hr/>
 <div class="anchor" id="堆管理器"></div>
 <h4 class="relative group"><strong>堆管理器</strong>
 <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
@@ -555,6 +556,7 @@
 </ul>
 </li>
 </ul>
+<hr/>
 <div class="anchor" id="系统所调用的函数"></div>
 <h4 class="relative group"><strong>系统所调用的函数</strong>
 <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
@@ -594,6 +596,7 @@
 </ul>
 </li>
 </ul>
+<hr/>
 <ol start="2">
 <li><strong>mmap函数</strong>机制</li>
 </ol>
@@ -675,16 +678,20 @@
 <p>否则，该字段可以用来存储物理相邻的前一个 chunk 的数据。<strong>这里的前一 chunk 指的是较低地址的 chunk</strong> 。</p>
 <ul>
 <li>当申请的内存大小对 2*SIZE_SZ 取余之后小于等于 size_t 的话就可以用它的下一个 chunk 的 prev_size</li>
-<li>比如：64位下 malloc(0x55)， 0x55 mod 0x10 还差 0x5 &lt; 0x8字节，那他就可以用后面一个 chunk 的 prev_size，最后加上 chunk header 大小是 0x60（所以下图为6行）</li>
-<li>还是 64 位下，如果大小是 0x59 的话 mod 0x10之后还差 0x9 &gt; 0x8字节，那就没法用了，只能多申请一块，最后加上 chunk header 用了 0x70（所以下图为7行）</li>
-<li></li>
+<li>比如：64位下 malloc(0x55)， 0x58 mod 0x10 还差 0x8 &lt;= 0x8字节，那他就可以用后面一个 chunk 的 prev_size，最后加上 chunk header 大小是 0x60（所以下图为6行）</li>
+<li>还是 64 位下，如果大小是 0x59 的话 mod 0x10之后还差 0x9 &gt; 0x8字节，那就不够用了，只能多申请一块，最后加上 chunk header 用了 0x70（所以下图为7行）</li>
+<li>
+<figure>
+<img alt="image-20230807000723376" class="my-0 rounded-md" src="https://s2.loli.net/2023/08/07/SYZMpQOAoaX6BKc.png"/>
+</figure>
+</li>
 </ul>
 </li>
 <li>
-<p>malloc(0x18)会分配0x20的内存</p>
+<p>malloc(0x58)会分配0x60的内存</p>
 </li>
 <li>
-<p>malloc(0x19)会分配0x30的内存</p>
+<p>malloc(0x59)会分配0x70的内存</p>
 </li>
 </ul>
 <hr/>
@@ -721,7 +728,7 @@
 </ul>
 </li>
 <li>
-<p>#####<strong>以下为一些基础的攻击思路</strong>#####</p>
+<p><strong>以下为一些基础的攻击思路</strong>：</p>
 </li>
 <li>
 <p>chunk1的数据有效区域覆盖到chunk2的prev_size位,并且chunk2的size位的prev_inuse被覆盖为0。系统认为chunk2之前的chunk1已经未在使用了。</p>
@@ -838,6 +845,7 @@
 </ul>
 </li>
 </ul>
+<hr/>
 <div class="anchor" id="附录"></div>
 <h3 class="relative group">附录 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
@@ -919,7 +927,7 @@
 <div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/pwn/basic/pwn-_environment/">PWN环境二次搭建记录-Ubuntu 22.04</div>
 <div class="text-sm text-neutral-500 dark:text-neutral-400">
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-07-10 00:00:00 +0000 UTC">July 10, 2023</time><span class="px-2 text-primary-500">·</span><span>8761 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">18 分钟</span>
+<time datetime="2023-07-10 00:00:00 +0000 UTC">July 10, 2023</time><span class="px-2 text-primary-500">·</span><span>8907 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">18 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
 <span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%85%A5%E9%97%A8/&quot;,'_self');" style="margin-top:0.5rem">
