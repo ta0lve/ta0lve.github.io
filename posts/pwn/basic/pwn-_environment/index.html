@@ -59,7 +59,7 @@
     "keywords": ["CTF","PWN","Ubuntu"],
     
     "mainEntityOfPage": "true",
-    "wordCount": "8907"
+    "wordCount": "8908"
   }]
   </script>
 <meta content="ta0lve" name="author"/>
@@ -275,7 +275,7 @@
     </h1>
 <div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-07-10 00:00:00 +0000 UTC">July 10, 2023</time><span class="px-2 text-primary-500">·</span><span>8907 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">18 分钟</span>
+<time datetime="2023-07-10 00:00:00 +0000 UTC">July 10, 2023</time><span class="px-2 text-primary-500">·</span><span>8908 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">18 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
 <span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%85%A5%E9%97%A8/&quot;,'_self');" style="margin-top:0.5rem">
@@ -353,7 +353,6 @@
 <li><a href="#虚拟机安装">虚拟机安装</a>
 <ul>
 <li><a href="#可能会遇到的问题">可能会遇到的问题：</a></li>
-<li><a href="#具体安装">具体安装</a></li>
 </ul>
 </li>
 <li><a href="#基础工具">基础工具</a></li>
@@ -394,7 +393,6 @@
 <li><a href="#虚拟机安装">虚拟机安装</a>
 <ul>
 <li><a href="#可能会遇到的问题">可能会遇到的问题：</a></li>
-<li><a href="#具体安装">具体安装</a></li>
 </ul>
 </li>
 <li><a href="#基础工具">基础工具</a></li>
@@ -598,6 +596,10 @@
 <p>关于linux操作系统的选择，打pwn的师傅们一般都是使用ubuntu，版本的选择则是最新的长期支持版本 22.04（ubuntu 23并不是长期支持的版本）。虽然之前的很多题目都是在Ubuntu 20 或者18 甚至是16 的环境下，不过我们可以使用 patchelf 工具等方法来完成题目，而随着时间的推移，后面新出的pwn题都是会逐渐在较新的环境在运行，所以推荐大家直接安装最新的长期支持的版本——ubuntu 22.04：</p>
 <p><a href="https://releases.ubuntu.com/22.04/ubuntu-22.04.2-desktop-amd64.iso" target="_blank">
     ubuntu-22.04.2-desktop-amd64.iso</a></p>
+<p>关于虚拟机的具体安装过程，这里就不多说了，可以直接在网上搜现成的教程，网上的师傅们都写的非常详细了，这里也给大家放上一篇比较详细的教程，师傅们可以直接点击跳转：</p>
+<p><a href="https://blog.csdn.net/weixin_45673283/article/details/126563001" target="_blank">
+    在VMware16虚拟机安装Ubuntu详细教程</a></p>
+<p>（因为怕有些坑大家先跳进去了，所以建议大家可以先看看后面的注意事项，大家遇到问题可以先往后翻一翻看看，也可以直接上搜索引擎搜）</p>
 <div class="anchor" id="可能会遇到的问题"></div>
 <h3 class="relative group">可能会遇到的问题： 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
@@ -629,7 +631,7 @@
 </span></span><span class="line"><span class="cl"><span class="n">ping</span> <span class="n">baidu</span><span class="o">.</span><span class="n">com</span>
 </span></span></code></pre></div><p>如果连不上网的话可能需要自己查博客排查原因，实在不行就删掉重新再安装一次，第一次安装出一些小问题很正常，所以看教程的时候一定要做好每一步。</p>
 <p><strong>4.关于软件源更换：</strong></p>
-<p>不想在下安装/更新软件时等比较长的时间的话最好还是换成国内的软件源吧。当然如果不想换的话也可以。我个人感觉换不换都没关系，大不了安装/更新软件时找一些其他的事干，比如看番/写博客文章的时候挂后台下载。</p>
+<p>不想在下载安装/更新软件时等比较长的时间的话最好还是换成国内的软件源吧。当然如果不想换的话也可以。我个人感觉换不换都没关系，大不了安装/更新软件时找一些其他的事干，比如看番/写博客文章的时候挂后台下载。</p>
 <p>（补充：“之前踩过阿里源的坑，官方源虽然慢了点，但是没有什么问题”——某师傅如是说）</p>
 <p><strong>5.关于root：</strong></p>
 <p>ubuntu安装完之后root是需要我们手动设置密码的，不然不能切换为root用户。步骤如下：</p>
@@ -652,15 +654,6 @@
 </span></span><span class="line"><span class="cl"><span class="c1"># 进入共享文件夹</span>
 </span></span><span class="line"><span class="cl"><span class="n">cd</span> <span class="o">/</span><span class="n">mnt</span><span class="o">/</span><span class="n">hgfs</span><span class="o">/</span><span class="n">your_shareDir_name</span>
 </span></span></code></pre></div>
-<div class="anchor" id="具体安装"></div>
-<h3 class="relative group">具体安装 
-    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
-<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e5%85%b7%e4%bd%93%e5%ae%89%e8%a3%85" style="text-decoration-line: none !important;">#</a></span>
-</h3>
-<p>（因为怕有些坑大家先跳进去了，所以就把注意事项放在前面了，大家遇到问题可以先往前翻一翻看看，也可以直接上搜索引擎搜）</p>
-<p>关于虚拟机的具体安装过程，这里就不多说了，可以直接在网上搜现成的教程，网上的师傅们都写的非常详细了，这里也给大家放上一篇比较详细的教程，师傅们可以直接点击跳转：</p>
-<p><a href="https://blog.csdn.net/weixin_45673283/article/details/126563001" target="_blank">
-    在VMware16虚拟机安装Ubuntu详细教程</a></p>
 <p><strong>关于工具安装的提醒：</strong></p>
 <ol>
 <li>第一次接触 linux 的师傅们可以先去学习一些 linux 的基本操作再回来接着看</li>
