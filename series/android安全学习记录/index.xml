@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Android安全学习记录 on ta0lve</title>
+    <link>https://ta0lve.github.io/series/android%E5%AE%89%E5%85%A8%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</link>
+    <description>Recent content in Android安全学习记录 on ta0lve</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 06 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://ta0lve.github.io/series/android%E5%AE%89%E5%85%A8%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>安卓安全-工具篇</title>
+      <link>https://ta0lve.github.io/pointer/android/tools1/</link>
+      <pubDate>Sun, 06 Aug 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ta0lve.github.io/pointer/android/tools1/</guid>
+      <description>解包: # apktool: # https://apktool.org/ Android逆向之旅—反编译利器Apktoo</description>
+    </item>
+    
+  </channel>
+</rss>

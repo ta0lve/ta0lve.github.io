@@ -6,7 +6,16 @@
     <description>Recent content in reverse on ta0lve</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 05 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://ta0lve.github.io/tags/reverse/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 06 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://ta0lve.github.io/tags/reverse/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>安卓安全-工具篇</title>
+      <link>https://ta0lve.github.io/pointer/android/tools1/</link>
+      <pubDate>Sun, 06 Aug 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ta0lve.github.io/pointer/android/tools1/</guid>
+      <description>解包: # apktool: # https://apktool.org/ Android逆向之旅—反编译利器Apktoo</description>
+    </item>
+    
     <item>
       <title>reverse-Lazy Puts</title>
       <link>https://ta0lve.github.io/posts/wp/2023_04_w4ter/4_lazy-puts_write_up/</link>
