@@ -55,6 +55,7 @@
 <link href="https://ta0lve.github.io/" rel="me"/>
 <link href="https://github.com/username" rel="me"/>
 <script integrity="" src="/lib/jquery/jquery.slim.min.js"></script>
+<script defer="" integrity="" src="/lib/typeit/typeit.umd.js"></script>
 <meta name="theme-color"/>
 </head>
 <body class="flex flex-col h-screen px-6 m-auto text-lg leading-7 max-w-7xl bg-neutral text-neutral-900 dark:bg-neutral-800 dark:text-neutral sm:px-14 md:px-24 lg:px-32">
@@ -292,6 +293,20 @@
 <span class="dark:text-neutral-300"><strong>如果本博客部分文章图片加载失败，</strong><a href="https://ta0lve.github.io/posts/sth/sm.ms/" target="_blank">
 <strong>可以点击此处查看解决办法</strong></a></span>
 </div>
+<h2 id="typeit-1691342696760573400"></h2>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+      new TypeIt("#typeit-1691342696760573400", {
+        strings: ["","人的一生应当这样度过： 当回忆往事的时候，他不会因为虚度年华而悔恨，也不会因为碌碌无为而羞愧","","He must live so as to feel no torturing regrets for years without purpose, never know the burning shame of a mean and petty past","","чтобы не была мучительно больно за бесцельно прожитые годы, чтобы не жег позор за подленькое и мелочное прошлое","",""],
+        speed:  80 ,
+        lifeLike:  false ,
+        startDelay:  0 ,
+        breakLines:  false ,
+        waitUntilVisible:  true ,
+        loop:  true 
+      }).go();
+    });
+</script>
 <hr/>
 <section class="space-y-10 w-full">
 <a class="flex flex-wrap article border border-neutral-200 dark:border-neutral-700 border-2 rounded-md backdrop-blur" href="/posts/pwn/basic/pwn-_environment/">
