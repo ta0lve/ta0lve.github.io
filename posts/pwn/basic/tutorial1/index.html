@@ -59,7 +59,7 @@
     "keywords": ["CTF","PWN"],
     
     "mainEntityOfPage": "true",
-    "wordCount": "4996"
+    "wordCount": "5000"
   }]
   </script>
 <meta content="ta0lve" name="author"/>
@@ -275,7 +275,7 @@
     </h1>
 <div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-08-05 00:00:00 +0000 UTC">August 5, 2023</time><span class="px-2 text-primary-500">·</span><span>4996 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">10 分钟</span>
+<time datetime="2023-08-05 00:00:00 +0000 UTC">August 5, 2023</time><span class="px-2 text-primary-500">·</span><span>5000 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">10 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
 <span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%85%A5%E9%97%A8/&quot;,'_self');" style="margin-top:0.5rem">
@@ -616,6 +616,7 @@
 <p><a href="https://pwn.college/" target="_blank">
     pwn.college</a></p>
 <p>基础知识讲解得很好，可以在实践中夯实计算机安全基础，不过对于CTF来说可能学习进程有慢，还是建议直接从前三个平台开始做题</p>
+<hr/>
 <div class="anchor" id="附录"></div>
 <h3 class="relative group">附录 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
@@ -762,14 +763,15 @@ $
 [*] Process './stack_example' stopped with exit code -11 (SIGSEGV) (pid 61936)
 [*] Got EOF while sending in interactive
 </code></pre><p>可以看到我们确实已经执行 success 函数。</p>
-<p>2.小总结 <a href="https://ctf-wiki.org/pwn/linux/user-mode/stackoverflow/x86/stackoverflow-basic/#_4" target="_blank">
+<hr/>
+<p>小总结 <a href="https://ctf-wiki.org/pwn/linux/user-mode/stackoverflow/x86/stackoverflow-basic/#_4" target="_blank">
     ¶</a></p>
 <p>上面的示例其实也展示了栈溢出中比较重要的几个步骤。</p>
-<div class="anchor" id="寻找危险函数-httpsctf-wikiorgpwnlinuxuser-modestackoverflowx86stackoverflow-basic_5"></div>
-<h5 class="relative group">寻找危险函数 <a href="https://ctf-wiki.org/pwn/linux/user-mode/stackoverflow/x86/stackoverflow-basic/#_5" target="_blank">
+<div class="anchor" id="1寻找危险函数-httpsctf-wikiorgpwnlinuxuser-modestackoverflowx86stackoverflow-basic_5"></div>
+<h5 class="relative group">（1）寻找危险函数 <a href="https://ctf-wiki.org/pwn/linux/user-mode/stackoverflow/x86/stackoverflow-basic/#_5" target="_blank">
     ¶</a>
 <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
-<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e5%af%bb%e6%89%be%e5%8d%b1%e9%99%a9%e5%87%bd%e6%95%b0-httpsctf-wikiorgpwnlinuxuser-modestackoverflowx86stackoverflow-basic_5" style="text-decoration-line: none !important;">#</a></span>
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#1%e5%af%bb%e6%89%be%e5%8d%b1%e9%99%a9%e5%87%bd%e6%95%b0-httpsctf-wikiorgpwnlinuxuser-modestackoverflowx86stackoverflow-basic_5" style="text-decoration-line: none !important;">#</a></span>
 </h5>
 <p>通过寻找危险函数，我们快速确定程序是否可能有栈溢出，以及有的话，栈溢出的位置在哪里。常见的危险函数如下</p>
 <ul>
@@ -793,11 +795,11 @@ $
 </ul>
 </li>
 </ul>
-<div class="anchor" id="确定填充长度-httpsctf-wikiorgpwnlinuxuser-modestackoverflowx86stackoverflow-basic_6"></div>
-<h5 class="relative group">确定填充长度 <a href="https://ctf-wiki.org/pwn/linux/user-mode/stackoverflow/x86/stackoverflow-basic/#_6" target="_blank">
+<div class="anchor" id="2确定填充长度-httpsctf-wikiorgpwnlinuxuser-modestackoverflowx86stackoverflow-basic_6"></div>
+<h5 class="relative group">（2）确定填充长度 <a href="https://ctf-wiki.org/pwn/linux/user-mode/stackoverflow/x86/stackoverflow-basic/#_6" target="_blank">
     ¶</a>
 <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
-<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e7%a1%ae%e5%ae%9a%e5%a1%ab%e5%85%85%e9%95%bf%e5%ba%a6-httpsctf-wikiorgpwnlinuxuser-modestackoverflowx86stackoverflow-basic_6" style="text-decoration-line: none !important;">#</a></span>
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#2%e7%a1%ae%e5%ae%9a%e5%a1%ab%e5%85%85%e9%95%bf%e5%ba%a6-httpsctf-wikiorgpwnlinuxuser-modestackoverflowx86stackoverflow-basic_6" style="text-decoration-line: none !important;">#</a></span>
 </h5>
 <p>这一部分主要是计算<strong>我们所要操作的地址与我们所要覆盖的地址的距离</strong>。常见的操作方法就是打开 IDA，根据其给定的地址计算偏移。一般变量会有以下几种索引模式</p>
 <ul>
@@ -813,6 +815,7 @@ $
 <li>根据现实执行情况，覆盖特定的变量或地址的内容。</li>
 </ul>
 <p>之所以我们想要覆盖某个地址，是因为我们想通过覆盖地址的方法来<strong>直接或者间接地控制程序执行流程</strong>。</p>
+<hr/>
 <div class="anchor" id="2基础栈溢出示例"></div>
 <h4 class="relative group">2.基础栈溢出示例： 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
@@ -918,6 +921,7 @@ s 离返回地址的距离为0x14 - 0x0 = 20
 <img alt="image.png" class="my-0 rounded-md" src="https://s2.loli.net/2023/07/05/E1VcBMJg4zmoXpF.png"/>
 </figure>
 </p>
+<hr/>
 <div class="anchor" id="3-pwntools的基本使用"></div>
 <h4 class="relative group">3. pwntools的基本使用 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
@@ -986,6 +990,7 @@ s 离返回地址的距离为0x14 - 0x0 = 20
 </span></span></code></pre></div><p>还可以看看：</p>
 <p><a href="https://docs.pwntools.com/en/stable/" target="_blank">
     pwntools — pwntools 4.10.0 documentation</a></p>
+<hr/>
 <div class="anchor" id="4-学习路线"></div>
 <h4 class="relative group">4. 学习路线 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
@@ -996,6 +1001,7 @@ s 离返回地址的距离为0x14 - 0x0 = 20
 <p><a href="https://hornos3.github.io/2023/02/28/ARM-pwn-%e5%85%a5%e9%97%a8-1/pwn%e5%ad%a6%e4%b9%a0%e8%b7%af%e7%ba%bf.png" target="_blank">
 <strong>pwn学习路线图</strong></a></p>
 <p>同学们可以按照图中的<strong>绿色→黄色→红色</strong>的顺序学习pwn</p>
+<hr/>
 <div class="anchor" id="5参考链接"></div>
 <h4 class="relative group">5.参考链接 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
