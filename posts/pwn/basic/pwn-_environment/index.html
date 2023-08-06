@@ -651,7 +651,8 @@
 </span></span><span class="line"><span class="cl"><span class="n">vmware</span><span class="o">-</span><span class="n">hgfsclient</span>
 </span></span><span class="line"><span class="cl"><span class="c1"># 进入共享文件夹</span>
 </span></span><span class="line"><span class="cl"><span class="n">cd</span> <span class="o">/</span><span class="n">mnt</span><span class="o">/</span><span class="n">hgfs</span><span class="o">/</span><span class="n">your_shareDir_name</span>
-</span></span></code></pre></div><div class="anchor" id="具体安装"></div>
+</span></span></code></pre></div>
+<div class="anchor" id="具体安装"></div>
 <h3 class="relative group">具体安装 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e5%85%b7%e4%bd%93%e5%ae%89%e8%a3%85" style="text-decoration-line: none !important;">#</a></span>
@@ -698,14 +699,16 @@
 </span></span><span class="line"><span class="cl"><span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">git</span>
 </span></span><span class="line"><span class="cl"><span class="c1"># 检测是否安装成功</span>
 </span></span><span class="line"><span class="cl"><span class="n">git</span> <span class="o">--</span><span class="n">version</span>
-</span></span></code></pre></div><p><strong>3. gcc</strong></p>
+</span></span></code></pre></div>
+<p><strong>3. gcc</strong></p>
 <p>这个也是必装的</p>
 <p>（学pwn的话是必须要学C语言的）</p>
 <div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 安装</span>
 </span></span><span class="line"><span class="cl"><span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">gcc</span>
 </span></span><span class="line"><span class="cl"><span class="c1"># 检测是否安装成功</span>
 </span></span><span class="line"><span class="cl"><span class="n">gcc</span> <span class="o">-</span><span class="n">v</span>
-</span></span></code></pre></div><div class="anchor" id="qemu-kernel-pwn"></div>
+</span></span></code></pre></div>
+<div class="anchor" id="qemu-kernel-pwn"></div>
 <h2 class="relative group"><strong>qemu （Kernel Pwn）</strong>
 <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#qemu-kernel-pwn" style="text-decoration-line: none !important;">#</a></span>
@@ -869,6 +872,7 @@
 <li>ARM PWN —— ARM软件包</li>
 <li>MIPS PWN —— MIPS软件包</li>
 </ul>
+<hr/>
 <p>python PWN 相关库</p>
 <div class="anchor" id="pwntools"></div>
 <h2 class="relative group">pwntools 
@@ -1087,7 +1091,7 @@
 </span></span><span class="line"><span class="cl"><span class="n">ROPgadget</span> <span class="o">--</span><span class="n">binary</span> <span class="n">pwn</span> <span class="o">--</span><span class="n">only</span> <span class="s2">"ret"</span> <span class="c1"># 只含有ret指令的</span>
 </span></span></code></pre></div><p>
 <figure>
-<img alt="image-20230710163347644" class="my-0 rounded-md" src="#ZgotmplZ"/>
+<img alt="image-20230710163347644" class="my-0 rounded-md" src="https://s2.loli.net/2023/08/07/wHFtfrdgo153cOa.png"/>
 </figure>
 </p>
 <div class="anchor" id="one_gadget"></div>
@@ -1578,7 +1582,6 @@
 <img alt="070907" class="my-0 rounded-md" src="https://s2.loli.net/2023/07/10/lXNZYFKeTIt1Pm2.jpg"/>
 </figure>
 </p>
-<hr/>
 <p>参考链接：</p>
 <p><a href="https://blog.csdn.net/learning_tortosie/article/details/102581261" target="_blank">
     Ubuntu中终端分屏工具terminator的安装和使用</a></p>
@@ -1588,6 +1591,7 @@
     terminator安装、美化、使用及闪退解决</a></p>
 <p><a href="https://www.jianshu.com/p/fe4b1088ada4" target="_blank">
     Terminator终端的安装，配置以及如何修改默认终端</a></p>
+<hr/>
 <div class="anchor" id="附录"></div>
 <h2 class="relative group">附录 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
