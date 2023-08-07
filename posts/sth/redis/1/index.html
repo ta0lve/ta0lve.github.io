@@ -13,9 +13,10 @@
 <meta content="zh-cn" http-equiv="content-language"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta content="ie=edge" http-equiv="X-UA-Compatible"/>
-<title>About · ta0lve</title>
-<meta content="About · ta0lve" name="title"/>
-<link href="https://ta0lve.github.io/about/" rel="canonical"/>
+<title>Redis学习记录 · ta0lve</title>
+<meta content="Redis学习记录 · ta0lve" name="title"/>
+<meta content="Redis, 后端, 数据库, " name="keywords"/>
+<link href="https://ta0lve.github.io/posts/sth/redis/1/" rel="canonical"/>
 <link href="/css/main.bundle.min.c6116b9ed1c907a8c0eb015f377d3eecc07e448d75729e31fc3de5881465c6c172ba9fa9a6800c030116caf2a110d92242bb816639484ca791f7cd107a8d49b5.css" integrity="sha512-xhFrntHJB6jA6wFfN30+7MB+RI11cp4x/D3liBRlxsFyup+ppoAMAwEWyvKhENkiQruBZjlITKeR980Qeo1JtQ==" rel="stylesheet" type="text/css"/>
 <script integrity="sha512-UWoWdFvqWpvQERONJUzA/TlzzVXObhXz3sdj58fCx0SPj+e1TMqBHLghsMfhLNFhyqzh3XlKw9NNQJN8vMnuEg==" src="/js/appearance.min.516a16745bea5a9bd011138d254cc0fd3973cd55ce6e15f3dec763e7c7c2c7448f8fe7b54cca811cb821b0c7e12cd161caace1dd794ac3d34d40937cbcc9ee12.js" type="text/javascript"></script>
 <script data-copied="" data-copy="" defer="" id="script-bundle" integrity="sha512-PdzwT1sNTDL3LnJtPBLuvM2MPJ+dqpoTQUgIiV3grh4c3d2mhJaA1b2W27YNCx4LJMKfXIPlYx5V5+a8AgFUkA==" src="/js/main.bundle.min.3ddcf04f5b0d4c32f72e726d3c12eebccd8c3c9f9daa9a13414808895de0ae1e1cdddda6849680d5bd96dbb60d0b1e0b24c29f5c83e5631e55e7e6bc02015490.js" type="text/javascript"></script>
@@ -24,40 +25,41 @@
 <link href="/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="/site.webmanifest" rel="manifest"/>
-<meta content="About" property="og:title"/>
-<meta content="Hi！你好呀！ 欢迎来到我的博客小站！ 这里是ta0lve , 一名" property="og:description"/>
+<meta content="Redis学习记录" property="og:title"/>
+<meta content="安装（Ubuntu） # # apt 安装 sudo apt install redis-server # 检测 redis-server 使用 # clear 清空屏" property="og:description"/>
 <meta content="article" property="og:type"/>
-<meta content="https://ta0lve.github.io/about/" property="og:url"/><meta content="" property="article:section"/>
-<meta content="2023-07-02T00:00:00+00:00" property="article:published_time"/>
-<meta content="2023-07-02T00:00:00+00:00" property="article:modified_time"/>
-<meta content="summary" name="twitter:card"/>
-<meta content="About" name="twitter:title"/>
-<meta content="Hi！你好呀！ 欢迎来到我的博客小站！ 这里是ta0lve , 一名" name="twitter:description"/>
+<meta content="https://ta0lve.github.io/posts/sth/redis/1/" property="og:url"/><meta content="https://ta0lve.github.io/posts/sth/redis/1/featured.png" property="og:image"/><meta content="posts" property="article:section"/>
+<meta content="2023-08-07T00:00:00+00:00" property="article:published_time"/>
+<meta content="2023-08-07T00:00:00+00:00" property="article:modified_time"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="https://ta0lve.github.io/posts/sth/redis/1/featured.png" name="twitter:image"/>
+<meta content="Redis学习记录" name="twitter:title"/>
+<meta content="安装（Ubuntu） # # apt 安装 sudo apt install redis-server # 检测 redis-server 使用 # clear 清空屏" name="twitter:description"/>
 <script type="application/ld+json">
   [{
     "@context": "https://schema.org",
     "@type": "Article",
-    "articleSection": "",
-    "name": "About",
-    "headline": "About",
+    "articleSection": "Posts",
+    "name": "Redis学习记录",
+    "headline": "Redis学习记录",
     
-    "abstract": "Hi！你好呀！ 欢迎来到我的博客小站！ 这里是ta0lve , 一名",
+    "abstract": "安装（Ubuntu） # # apt 安装 sudo apt install redis-server # 检测 redis-server 使用 # clear 清空屏",
     "inLanguage": "zh-cn",
-    "url" : "https:\/\/ta0lve.github.io\/about\/",
+    "url" : "https:\/\/ta0lve.github.io\/posts\/sth\/redis\/1\/",
     "author" : {
       "@type": "Person",
       "name": "ta0lve"
     },
     "copyrightYear": "2023",
-    "dateCreated": "2023-07-02T00:00:00\u002b00:00",
-    "datePublished": "2023-07-02T00:00:00\u002b00:00",
+    "dateCreated": "2023-08-07T00:00:00\u002b00:00",
+    "datePublished": "2023-08-07T00:00:00\u002b00:00",
     
-    "dateModified": "2023-07-02T00:00:00\u002b00:00",
+    "dateModified": "2023-08-07T00:00:00\u002b00:00",
     
-    
+    "keywords": ["Redis","后端","数据库"],
     
     "mainEntityOfPage": "true",
-    "wordCount": "1154"
+    "wordCount": "1852"
   }]
   </script>
 <meta content="ta0lve" name="author"/>
@@ -250,7 +252,7 @@
 <main class="grow" id="main-content">
 <article>
 <div class="h-[150px] md:h-[200px]" id="hero"></div>
-<div class="fixed inset-x-0 top-0 h-[800px] single_hero_background nozoom" style="background-image:url(/flyx6.jpg);">
+<div class="fixed inset-x-0 top-0 h-[800px] single_hero_background nozoom" style="background-image:url(/posts/sth/redis/1/featured.png);">
 <div class="absolute inset-0 bg-gradient-to-t from-neutral dark:from-neutral-800 to-transparent mix-blend-normal">
 </div>
 <div class="absolute inset-0 opacity-60 bg-gradient-to-t from-neutral dark:from-neutral-800 to-neutral-100 dark:to-neutral-800 mix-blend-normal">
@@ -261,18 +263,49 @@
 <li class="inline hidden">
 <a class="hover:underline decoration-neutral-300 dark:underline-neutral-600" href="/"></a><span class="px-1 text-primary-500">/</span>
 </li>
+<li class="inline">
+<a class="hover:underline decoration-neutral-300 dark:underline-neutral-600" href="/posts/">Posts</a><span class="px-1 text-primary-500">/</span>
+</li>
 <li class="inline hidden">
-<a class="hover:underline decoration-neutral-300 dark:underline-neutral-600" href="/about/">About</a><span class="px-1 text-primary-500">/</span>
+<a class="hover:underline decoration-neutral-300 dark:underline-neutral-600" href="/posts/sth/redis/1/">Redis学习记录</a><span class="px-1 text-primary-500">/</span>
 </li>
 </ol>
 <h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">
-      About
+      Redis学习记录
     </h1>
 <div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-07-02 00:00:00 +0000 UTC">July 2, 2023</time><span class="px-2 text-primary-500">·</span><span>1154 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">3 分钟</span>
+<time datetime="2023-08-07 00:00:00 +0000 UTC">August 7, 2023</time><span class="px-2 text-primary-500">·</span><span>1852 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">4 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
+<span class="mr-2" onclick="window.open(&quot;/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    后端开发
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/redis/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    Redis
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/%E5%90%8E%E7%AB%AF/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    后端
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    数据库
+  </span>
+</span>
+</span>
 </div>
 </div>
 <div class="flex">
@@ -316,9 +349,25 @@
 <div class="min-w-[220px] py-2 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
 <nav id="TableOfContents">
 <ul>
-<li><a href="#关于我">关于我</a></li>
-<li><a href="#关于博客">关于博客</a></li>
-<li><a href="#关于版权">关于版权</a></li>
+<li><a href="#安装ubuntu">安装（Ubuntu）</a></li>
+<li><a href="#使用">使用</a>
+<ul>
+<li><a href="#字符串-string">字符串 String</a></li>
+</ul>
+</li>
+<li><a href="#get-name">GET name</a></li>
+<li><a href="#keys-name">KEYS name</a>
+<ul>
+<li><a href="#列表-list">列表 List</a></li>
+<li><a href="#集合-set">集合 Set</a></li>
+<li><a href="#有序集合-sortedset">有序集合 SortedSet</a></li>
+<li><a href="#哈希-hash">哈希 Hash</a></li>
+<li><a href="#发布订阅模式">发布订阅模式</a></li>
+<li><a href="#消息队列-stream">消息队列 Stream</a></li>
+<li><a href="#未完待续">未完待续</a></li>
+</ul>
+</li>
+<li><a href="#附录">附录</a></li>
 </ul>
 </nav>
 </div>
@@ -329,9 +378,25 @@
 <div class="py-2 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
 <nav id="TableOfContents">
 <ul>
-<li><a href="#关于我">关于我</a></li>
-<li><a href="#关于博客">关于博客</a></li>
-<li><a href="#关于版权">关于版权</a></li>
+<li><a href="#安装ubuntu">安装（Ubuntu）</a></li>
+<li><a href="#使用">使用</a>
+<ul>
+<li><a href="#字符串-string">字符串 String</a></li>
+</ul>
+</li>
+<li><a href="#get-name">GET name</a></li>
+<li><a href="#keys-name">KEYS name</a>
+<ul>
+<li><a href="#列表-list">列表 List</a></li>
+<li><a href="#集合-set">集合 Set</a></li>
+<li><a href="#有序集合-sortedset">有序集合 SortedSet</a></li>
+<li><a href="#哈希-hash">哈希 Hash</a></li>
+<li><a href="#发布订阅模式">发布订阅模式</a></li>
+<li><a href="#消息队列-stream">消息队列 Stream</a></li>
+<li><a href="#未完待续">未完待续</a></li>
+</ul>
+</li>
+<li><a href="#附录">附录</a></li>
 </ul>
 </nav>
 </div>
@@ -377,165 +442,709 @@
 </div>
 </div>
 <div class="min-w-0 min-h-0 max-w-prose">
-<p><strong>Hi！你好呀！</strong></p>
-<p>欢迎来到我的博客小站！</p>
-<p>这里是ta0lve , 一名普通的在校大学生。</p>
-<p>ta0lve 这个名字，即韬略的拼音。</p>
-<p>或许是由于曾经读过《六韬》、《三略》和《韬略元机》，当我为自己另取一个名字时冒出的第一个想法便是这个词，所以选择用拼音转换为名字。</p>
-<p>或许这个名字本身可以有着一些含义，但我并不想在其上外加什么深层内涵，仅仅将其当作一个名字即可。</p>
-<div class="anchor" id="关于我"></div>
-<h2 class="relative group">关于我 
+<details class="mt-2 mb-5 overflow-hidden rounded-lg ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5" open="" style="margin-left:0px">
+<summary class="py-1 text-lg font-semibold cursor-pointer bg-primary-200 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-primary-800 dark:text-neutral-100">
+        后端开发项目学习记录 - This article is part of a series.
+    </summary>
+<div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+        Part 3: This Article
+    </div>
+</details>
+<div class="anchor" id="安装ubuntu"></div>
+<h2 class="relative group">安装（Ubuntu） 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
-<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e5%85%b3%e4%ba%8e%e6%88%91" style="text-decoration-line: none !important;">#</a></span>
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e5%ae%89%e8%a3%85ubuntu" style="text-decoration-line: none !important;">#</a></span>
 </h2>
-<ul>
-<li>SYSU W4terDr0p 战队成员，pwn新手，还在学习的征途中</li>
-<li>常常和舍友一起打CTF，在小队里负责 pwn &amp; reverse &amp; Crypto ，也会打一打misc</li>
-<li>网安专业在读准大二，二进制安全爱好者</li>
-<li>正在学习Kernel Pwn，也在一点点地了解 iot 安全和硬件安全</li>
-<li>不午休星人，常年中午不回宿舍，随机出现在实验室、教学楼、图书馆，晚上8点还可能出现在四百米跑道上</li>
-<li>乐于尝试各种各样的知识，包括但不限于 信息安全，后端开发，机器学习，数学建模，动物生理学，分类学 等等</li>
-<li>喜欢中土世界，三刷《魔戒》，高中时连续几天读完《精灵宝钻》</li>
-<li>国际象棋、四国军棋、中国象棋爱好者</li>
-<li>半个二次元，n刷《冰菓》、《你的名字》、《声之形》，为了看《罗小黑》和《风灵玉秀》加入了长生宗天天泡枸杞</li>
-</ul>
-<div class="anchor" id="关于博客"></div>
-<h2 class="relative group">关于博客 
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># apt 安装</span>
+</span></span><span class="line"><span class="cl">sudo apt install redis-server
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 检测</span>
+</span></span><span class="line"><span class="cl">redis-server
+</span></span></code></pre></div><div class="anchor" id="使用"></div>
+<h2 class="relative group">使用 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
-<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e5%85%b3%e4%ba%8e%e5%8d%9a%e5%ae%a2" style="text-decoration-line: none !important;">#</a></span>
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e4%bd%bf%e7%94%a8" style="text-decoration-line: none !important;">#</a></span>
 </h2>
-<p>此博客搭建于2023年7月2日，希望能够在这个blog里记录自己的学习过程与思考，希望自己能和这个blog一起成长</p>
-<p>此博客分为以下几个部分（可以看看博客的右上角）</p>
-<ul>
-<li><a href="https://ta0lve.github.io/posts/" target="_blank">
-<strong>Posts</strong></a>：除了<strong>Pointer</strong>以外的所有博客文章都在此归档，部分文章有加密（前端可能有点简陋，不过应该不碍事吧😴）</li>
-<li><a href="https://ta0lve.github.io/Pointer/" target="_blank">
-<strong>Pointer</strong></a>：借用了C语言里指针的名字，其实只是自己在学习途中参考的一些大佬的博客或是看到的一些有趣文章，将链接收集在此处，就当是一个书签了，方便以后快速复习和回顾。还会放一些自己常用的在线工具&amp;在线网站，使得自己以后能快速找到</li>
-<li><strong><a href="https://ta0lve.github.io/tags/pwn/" target="_blank">
-    Pwn</a></strong>：本博客中所有与pwn有关的文章都收集在这里，使自己与读者能够更加快捷地查看pwn文章</li>
-<li><a href="https://ta0lve.github.io/categories/" target="_blank">
-    分类 <strong>Categories</strong></a>：一些大的方向上的文章分类，如CTF笔记、WP、编程语言的学习、生活记录等</li>
-<li><a href="https://ta0lve.github.io/tags/" target="_blank">
-    标签 <strong>Tags</strong></a>：通过某些关键词来寻找相关的文章，如查看与pwn、reverse、栈溢出这些相关的文章</li>
-<li><a href="https://ta0lve.github.io/link/" target="_blank">
-    友链 <strong>link</strong></a>：一些优秀师傅、朋友的博客链接，方便大家去围观大佬博客</li>
-<li><a href="https://ta0lve.github.io/about/" target="_blank">
-<strong>About</strong></a>：即本页面，简单介绍一下自己与这个博客</li>
-<li>搜索框：可以搜索本博客的文章内容（位于博客界面的右上角）</li>
-<li>小太阳/月亮标志：点击转换白天和黑夜模式（位于博客界面的右上角）</li>
-</ul>
-<div class="anchor" id="关于版权"></div>
-<h2 class="relative group">关于版权 
-    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
-<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e5%85%b3%e4%ba%8e%e7%89%88%e6%9d%83" style="text-decoration-line: none !important;">#</a></span>
-</h2>
-<p>本博客所有文章均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">
-    「署名-非商业性使用-相同方式共享 4.0 国际」</a>许可协议进行许可。如有转载、二次创作，及想用于其他目的，欢迎联系我获取授权。</p>
-<p>若只是引用学习记录中的内容且是非盈利目的的使用，只需要在文章内附带原文链接即可。</p>
-<p>网站大多插图均来自网络，侵删致歉</p>
 <hr/>
-<div class="flex px-4 py-3 rounded-md bg-primary-100 dark:bg-primary-900">
-<span class="text-primary-400 ltr:pr-3 rtl:pl-3 flex items-center">
-<span class="relative block icon">
-<svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M506.3 417l-213.3-364c-16.33-28-57.54-28-73.98 0l-213.2 364C-10.59 444.9 9.849 480 42.74 480h426.6C502.1 480 522.6 445 506.3 417zM232 168c0-13.25 10.75-24 24-24S280 154.8 280 168v128c0 13.25-10.75 24-23.1 24S232 309.3 232 296V168zM256 416c-17.36 0-31.44-14.08-31.44-31.44c0-17.36 14.07-31.44 31.44-31.44s31.44 14.08 31.44 31.44C287.4 401.9 273.4 416 256 416z" fill="currentColor"></path></svg>
-</span>
-</span>
-<span class="dark:text-neutral-300"><strong>如果本博客部分文章图片加载失败，</strong><a href="https://ta0lve.github.io/posts/sth/sm.ms/" target="_blank">
-    可以点击这里查看解决办法</a></span>
-</div>
+<ul>
+<li>clear
+<ul>
+<li>清空屏幕</li>
+</ul>
+</li>
+<li>quit
+<ul>
+<li>退出redis客户端</li>
+</ul>
+</li>
+</ul>
+<hr/>
+<div class="anchor" id="字符串-string"></div>
+<h3 class="relative group">字符串 String 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e5%ad%97%e7%ac%a6%e4%b8%b2-string" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<ul>
+<li>SET 命令
+<ul>
+<li>设置一个键值对，中间以空格相隔</li>
+<li>SET name ta0lve
+<ul>
+<li>OK</li>
+</ul>
+</li>
+<li>SET Name Ta0lve
+<ul>
+<li>OK</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>GET 命令
+<ul>
+<li>读取一个键对应的值</li>
+<li>GET name
+<ul>
+<li>“ta0lve”</li>
+</ul>
+</li>
+<li>GET Name
+<ul>
+<li>“Ta0lve”</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>DEL 命令
+<ul>
+<li>删除一个键值对</li>
+<li>DEL name
+<ul>
+<li>(integer) 1</li>
+</ul>
+</li>
+<li>GET name
+<ul>
+<li>(nil)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>EXISTS 命令
+<ul>
+<li>判断一个键值对是否存在</li>
+<li>EXISTS name
+<ul>
+<li>(integer) 0</li>
+</ul>
+</li>
+<li>EXISTS Name
+<ul>
+<li>(integer) 1</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>KEYS 命令
+<ul>
+<li>查找符合条件的键</li>
+<li>KEYS *
+<ul>
+<li>查找所有的键</li>
+</ul>
+</li>
+<li>KEYS *me
+<ul>
+<li>查找所有以me结尾的键</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>FLUSHALL 命令 （flush all）
+<ul>
+<li>FLUSHALL
+<ul>
+<li>OK</li>
+</ul>
+</li>
+<li>KEYS *
+<ul>
+<li>(empty array)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>EXPIPE 命令
+<ul>
+<li>设置一个键的过期时间</li>
+<li>EXPIPE name 10</li>
+</ul>
+</li>
+<li>TTL 命令（time to live）
+<ul>
+<li>查看一个键的过期时间</li>
+<li>TTL Name
+<ul>
+<li>-1（未设置过期时间）</li>
+</ul>
+</li>
+<li>TTL name
+<ul>
+<li>9（还有9秒过期）</li>
+</ul>
+</li>
+<li>
+<div class="anchor" id="get-name"></div>
+<h2 class="relative group">GET name 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#get-name" style="text-decoration-line: none !important;">#</a></span>
+</h2>
+<ul>
+<li>（过期之后再GET值为空）</li>
+</ul>
+</li>
+<li>
+<div class="anchor" id="keys-name"></div>
+<h2 class="relative group">KEYS name 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#keys-name" style="text-decoration-line: none !important;">#</a></span>
+</h2>
+<ul>
+<li>（使用KEYS命令也看不到这个键）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>SETEX 命令
+<ul>
+<li>SETEX + 键 + 过期时间 + 值</li>
+<li>SETEX name 5 ta0lve</li>
+<li>当键不存在是才会设置过期时间与值</li>
+<li>如果键已经存在则不会做任何动作</li>
+</ul>
+</li>
+</ul>
+<p>Redis 默认是使用字符串来存储数据的，且是以二进制的形式存储的，所以可以存储许多类型的数据，但是默认是不支持中文的</p>
+<p>想要显示中文需要重新登陆redis，并且加上 –raw 参数，表示以原始的形式显示内容。</p>
+<hr/>
+<div class="anchor" id="列表-list"></div>
+<h3 class="relative group">列表 List 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e5%88%97%e8%a1%a8-list" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<p>可以看做是一个双向队列，也可以实现一个栈</p>
+<ul>
+<li>LPUSH
+<ul>
+<li>LPUSH letter 1
+<ul>
+<li>(integer) 1</li>
+<li>push 一个元素 1</li>
+</ul>
+</li>
+<li>像栈一样是头部添加，新添加的元素在头部
+<ul>
+<li><strong>头插法</strong>，后进的元素在前面，“后来居上”</li>
+</ul>
+</li>
+<li>可以一次push多个元素
+<ul>
+<li>LPUSH 2 3 4</li>
+<li>从左到右添加，所以4最后进</li>
+<li>此时排序为 “4” “3” “2” “1”</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>LRANGE
+<ul>
+<li>LRANGE letter 0 -1
+<ul>
+<li>1)“a”</li>
+<li>0 -1表示从第一个元素到最后一个元素</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>RPUSH
+<ul>
+<li>从尾部插入，<strong>尾插法</strong></li>
+</ul>
+</li>
+<li>LPOP
+<ul>
+<li>从列表的头部删除元素
+<ul>
+<li>返回被删除的元素</li>
+</ul>
+</li>
+<li>LPOP letter 2
+<ul>
+<li>一次删除多个元素（这里是两个）</li>
+<li>（过老版本的redis可能会报错，忽略即可）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>RPOP
+<ul>
+<li>从列表的尾部删除元素</li>
+</ul>
+</li>
+<li>LIEN
+<ul>
+<li>查看列表的长度</li>
+<li>LIEN letter
+<ul>
+<li>(integer) 3</li>
+<li>表示列表中现在还有三个元素</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>LTRIM
+<ul>
+<li>删除列表中指定范围<strong>以外</strong>的元素</li>
+<li>trim 修剪，只保留start和stop之间的元素</li>
+</ul>
+</li>
+<li>flushall
+<ul>
+<li>清空所有数据</li>
+</ul>
+</li>
+</ul>
+<hr/>
+<div class="anchor" id="集合-set"></div>
+<h3 class="relative group">集合 Set 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e9%9b%86%e5%90%88-set" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<p>set 是一种无序集合，其内部的元素不可重复</p>
+<p>list 中的元素则具有顺序，且是可以重复的</p>
+<ul>
+<li>SADD
+<ul>
+<li>SADD course Redis
+<ul>
+<li>(integer) 1</li>
+</ul>
+</li>
+<li>SADD course Redis
+<ul>
+<li>(integer) 0</li>
+<li>重复添加，添加失败</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>SMEMBERS
+<ul>
+<li>members 查看该集合中的元素</li>
+<li>SMEMBERS course
+<ul>
+<li>1)“Redis”</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>SISMEMBER
+<ul>
+<li>判断一个元素是否在集合中</li>
+<li>SISMEMBERS course Redis
+<ul>
+<li>(integer) 1</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>SREM
+<ul>
+<li>删除集合中的元素</li>
+<li>SREM course Redis
+<ul>
+<li>(integer) 1</li>
+</ul>
+</li>
+<li>SMEMBERS course
+<ul>
+<li>(empty list or set)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>在Redis中支持集合的相关运算
+<ul>
+<li>SINTER
+<ul>
+<li>inter</li>
+</ul>
+</li>
+<li>SUNION
+<ul>
+<li>union</li>
+</ul>
+</li>
+<li>SDIFF
+<ul>
+<li>diff</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="anchor" id="有序集合-sortedset"></div>
+<h3 class="relative group">有序集合 SortedSet 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e6%9c%89%e5%ba%8f%e9%9b%86%e5%90%88-sortedset" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<p>有序集合（ZSet）的每个元素都会关联一个浮点类型的分数，然后按照这个分数来对集合中的元素进行从小到大的排序（有点像优先级队列）</p>
+<p>有序集合的元素都是唯一的，但是有序集合元素所关联的分数是可以重复的</p>
+<p>有序集合的命令都是以 <strong>Z</strong> 开头</p>
+<ul>
+<li>
+<p>ZADD</p>
+<ul>
+<li>ZADD + 集合的名字 + 集合的元素（分数+成员）</li>
+<li>ZADD result 680 华清 670 大北 660 旦复 650 大浙
+<ul>
+<li>4</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>ZRANGE</p>
+<ul>
+<li>ZRANGE 0 -1
+<ul>
+<li>大浙</li>
+<li>旦复</li>
+<li>大北</li>
+<li>华清</li>
+</ul>
+</li>
+<li>ZRANGE 0 -1 WITHSCORES
+<ul>
+<li>大浙</li>
+<li>650</li>
+<li>旦复</li>
+<li>660</li>
+<li>大北</li>
+<li>670</li>
+<li>华清</li>
+<li>680</li>
+<li>(withscores)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>ZSCORE</p>
+<ul>
+<li>查看某个成员的分数</li>
+<li>ZSCORE result 华清
+<ul>
+<li>680</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>ZRANK</p>
+<ul>
+<li>查看某个成员的排名</li>
+<li>ZRANK result 华清
+<ul>
+<li>3</li>
+<li>index = 3，即从小到大排是第4位</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>ZREVRANK</p>
+<ul>
+<li>查看某个成员在从大到小的顺序中的排名</li>
+<li>ZREVRANK result 华清
+<ul>
+<li>0</li>
+<li>index = 0</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>ZREM</p>
+<ul>
+<li>删除某个成员</li>
+</ul>
+</li>
+</ul>
+<div class="anchor" id="哈希-hash"></div>
+<h3 class="relative group">哈希 Hash 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e5%93%88%e5%b8%8c-hash" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<p>哈希是一个字符类型的字段和值的映射表，简单来说就是一个键值对的集合，十分适合用来存储对象。</p>
+<p>哈希相关的命令都是以 <strong>H</strong> 开头</p>
+<ul>
+<li>HSET
+<ul>
+<li>HSET person name laoyang</li>
+<li>HSET person age 100</li>
+</ul>
+</li>
+<li>HGET
+<ul>
+<li>HGET person name
+<ul>
+<li>laoyang</li>
+</ul>
+</li>
+<li>HGET person age
+<ul>
+<li>100</li>
+</ul>
+</li>
+<li>HGETALL person
+<ul>
+<li>name</li>
+<li>laoyang</li>
+<li>age</li>
+<li>100</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>HDEL
+<ul>
+<li>删除某个键值对</li>
+</ul>
+</li>
+<li>HEXISTS
+<ul>
+<li>exists 判断某个键值对是否存在</li>
+</ul>
+</li>
+<li>HKEYS
+<ul>
+<li>获取哈希中的所有键</li>
+</ul>
+</li>
+<li>HLENS
+<ul>
+<li>获取哈希中的所有键值对的数量</li>
+</ul>
+</li>
+</ul>
+<hr/>
+<div class="anchor" id="发布订阅模式"></div>
+<h3 class="relative group">发布订阅模式 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e5%8f%91%e5%b8%83%e8%ae%a2%e9%98%85%e6%a8%a1%e5%bc%8f" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<ul>
+<li>SUBSCRIBE
+<ul>
+<li>subscribe 订阅</li>
+<li>SUBSCRIBE Ta0lve</li>
+<li>订阅一个频道</li>
+</ul>
+</li>
+<li>publish
+<ul>
+<li>publish Ta0lve git</li>
+<li>在频道上发布消息"git"</li>
+</ul>
+</li>
+<li>一个频道可以有多个终端订阅</li>
+<li>局限性
+<ul>
+<li>消息无法持久化</li>
+<li>无法记录历史消息</li>
+<li>可以通过 stream流 数据结构来解决</li>
+</ul>
+</li>
+</ul>
+<hr/>
+<div class="anchor" id="消息队列-stream"></div>
+<h3 class="relative group">消息队列 Stream 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e6%b6%88%e6%81%af%e9%98%9f%e5%88%97-stream" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<p>Stream 相关的命令1都以 <strong>X</strong> 开头</p>
+<ul>
+<li>
+<p>XADD</p>
+<ul>
+<li>向Stream中添加消息</li>
+<li>XADD geekhour * course redis
+<ul>
+<li>“168645710450-0”</li>
+<li>回显消息即为消息的ID</li>
+<li>命令中的"*“表示自动生成一个消息ID，不同消息 ID不同</li>
+<li>自动生成的ID是保持递增的</li>
+</ul>
+</li>
+<li>XADD geekhour * course redis
+<ul>
+<li>消息ID格式为 1-0
+<ul>
+<li>第一个整数表示一个时间戳，第二个整数表示一个序列号</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>XLEN</p>
+<ul>
+<li>查看Stream中消息的数量</li>
+</ul>
+</li>
+<li>
+<p>XRANGE</p>
+<ul>
+<li>查看Stream中消息的详细内容</li>
+<li>XRANGE geekhour - +
+<ul>
+<li>减号与加号表示所有信息</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>XDEL</p>
+<ul>
+<li>删除消息，后加消息的ID</li>
+<li>XDEL geekhour  168645710450-0
+<ul>
+<li>(integer) 1</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>XTRIM</p>
+<ul>
+<li>XTRIM geekhour MAXLEN 0
+<ul>
+<li>删除所有信息</li>
+<li>2</li>
+<li>表示一共删除了两条信息</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>XREAD</p>
+<ul>
+<li>
+<p>XREAD COUNT 2 BLOCK  1000  STREAMS geekhour 0</p>
+<ul>
+<li>
+<p>COUNT 2 表示一次读取两条消息</p>
+</li>
+<li>
+<p>BLOCK 1000 表示如果没有消息的话就阻塞1000毫秒，即1秒</p>
+</li>
+<li>
+<p>STREAMS 后加上消息队列的名称</p>
+</li>
+<li>
+<p>0 表示从 index = 0 开始读取</p>
+</li>
+</ul>
+</li>
+<li>
+<p>XREAD COUNT 2 BLOCK  1000  STREAMS geekhour $</p>
+<ul>
+<li>$ 表示获取从现在开始的最新消息</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>XGROUP</p>
+<ul>
+<li>XGROUP CREATE geekhour group1 0</li>
+<li>创建一个名称为 group1的消费者组</li>
+</ul>
+</li>
+<li>
+<p>XINFO</p>
+<ul>
+<li>XINFO GROUPS geekhour
+<ul>
+<li>返回组的名称，消费者的数量，待处理的消息数等等</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>XGROUP</p>
+<ul>
+<li>XGROUP CREATECONSUMER geekhour group1 cousumer1
+<ul>
+<li>create consumer 添加消费者</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>XREADDROUP</p>
+<ul>
+<li>XREADDROUP GROUP group1 consumer1 COUNT 2 BLOCK 3000 STREAMS geekhour &gt;
+<ul>
+<li>“&gt;“表示从这个消息中读取最新的消息</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="anchor" id="未完待续"></div>
+<h3 class="relative group">未完待续 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e6%9c%aa%e5%ae%8c%e5%be%85%e7%bb%ad" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<ul>
+<li>地理空间Geospatial</li>
+<li>HyperLogLog</li>
+<li>位图Bitmap</li>
+<li>位域Bitfield</li>
+<li>事务</li>
+<li>持久化</li>
+<li>主从复制</li>
+<li>哨兵模式</li>
+</ul>
+<div class="anchor" id="附录"></div>
+<h2 class="relative group">附录 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e9%99%84%e5%bd%95" style="text-decoration-line: none !important;">#</a></span>
+</h2>
+<p>参考链接：</p>
+<p><a href="https://www.bilibili.com/video/BV1Jj411D7oG/" target="_blank">
+    【GeekHour】一小时Redis教程_ 哔哩哔哩_ bilibili</a></p>
+<details class="mt-2 mb-5 overflow-hidden rounded-lg ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5" style="margin-left:0px">
+<summary class="py-1 text-lg font-semibold cursor-pointer bg-primary-200 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-primary-800 dark:text-neutral-100">
+        后端开发项目学习记录 - This article is part of a series.
+    </summary>
+<div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+        Part 3: This Article
+    </div>
+</details>
 </div>
 <script>
-        var oid = "views_about.md"
-        var oid_likes = "likes_about.md"
+        var oid = "views_posts\\sth\\Redis\\1\\index.md"
+        var oid_likes = "likes_posts\\sth\\Redis\\1\\index.md"
       </script>
 <script integrity="sha512-DkmXO0rQo4LHxgEti/+CJjFmQtqrxPiiBHe9CGdPPabi+pk7wgrU9R58W7aOb5E6IHp8T+N+oOe4BolK/OCmTg==" src="/js/page.min.0e49973b4ad0a382c7c6012d8bff8226316642daabc4f8a20477bd08674f3da6e2fa993bc20ad4f51e7c5bb68e6f913a207a7c4fe37ea0e7b806894afce0a64e.js" type="text/javascript"></script>
 </section>
 <footer class="pt-8 max-w-prose print:hidden">
 <h2 class="mt-8 text-2xl font-extrabold mb-10">Related</h2>
 <section class="w-full grid gap-4 sm:grid-cols-2 md:grid-cols-3">
-<a class="min-w-full" href="/posts/sth/redis/1/">
-<div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
-<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/posts/sth/redis/1/featured.png);"></div>
-<div class="px-6 py-4">
-<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/sth/redis/1/">Redis学习记录</div>
-<div class="text-sm text-neutral-500 dark:text-neutral-400">
-<div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-08-07 00:00:00 +0000 UTC">August 7, 2023</time><span class="px-2 text-primary-500">·</span><span>1852 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">4 分钟</span>
-</div>
-<div class="flex flex-row flex-wrap items-center">
-<span class="mr-2" onclick="window.open(&quot;/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    后端开发
-  </span>
-</span>
-</span>
-<span class="mr-2" onclick="window.open(&quot;/tags/redis/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    Redis
-  </span>
-</span>
-</span>
-<span class="mr-2" onclick="window.open(&quot;/tags/%E5%90%8E%E7%AB%AF/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    后端
-  </span>
-</span>
-</span>
-<span class="mr-2" onclick="window.open(&quot;/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    数据库
-  </span>
-</span>
-</span>
-</div>
-</div>
-</div>
-<div class="px-6 pt-4 pb-2">
-</div>
-</div>
-</a>
-<a class="min-w-full" href="/posts/iot/0x01/">
-<div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
-<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/posts/iot/0x01/featured.jpg);"></div>
-<div class="px-6 py-4">
-<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/iot/0x01/">IoT 学习记录1</div>
-<div class="text-sm text-neutral-500 dark:text-neutral-400">
-<div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-08-06 00:00:00 +0000 UTC">August 6, 2023</time><span class="px-2 text-primary-500">·</span><span>113 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">1 分钟</span>
-</div>
-<div class="flex flex-row flex-wrap items-center">
-<span class="mr-2" onclick="window.open(&quot;/categories/%E7%A1%AC%E4%BB%B6%E5%AE%89%E5%85%A8/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    硬件安全
-  </span>
-</span>
-</span>
-<span class="mr-2" onclick="window.open(&quot;/tags/%E7%89%A9%E8%81%94%E7%BD%91%E5%AE%89%E5%85%A8/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    物联网安全
-  </span>
-</span>
-</span>
-<span class="mr-2" onclick="window.open(&quot;/tags/iot/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    IoT
-  </span>
-</span>
-</span>
-</div>
-</div>
-</div>
-<div class="px-6 pt-4 pb-2">
-</div>
-</div>
-</a>
 <a class="min-w-full" href="/posts/android/tools/apktool/">
 <div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
 <div class="w-full thumbnail_card_related nozoom" style="background-image:url(/posts/android/tools/apktool/featured.png);"></div>
@@ -574,6 +1183,89 @@
 </div>
 </div>
 </a>
+<a class="min-w-full" href="/posts/pwn/basic/tutorial1/">
+<div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
+<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/posts/pwn/basic/tutorial1/featured.jpg);"></div>
+<div class="px-6 py-4">
+<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/pwn/basic/tutorial1/">pwn入门教程</div>
+<div class="text-sm text-neutral-500 dark:text-neutral-400">
+<div class="flex flex-row flex-wrap items-center">
+<time datetime="2023-08-05 00:00:00 +0000 UTC">August 5, 2023</time><span class="px-2 text-primary-500">·</span><span>5000 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">10 分钟</span>
+</div>
+<div class="flex flex-row flex-wrap items-center">
+<span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%85%A5%E9%97%A8/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    pwn入门
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/ctf/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    CTF
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/pwn/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    PWN
+  </span>
+</span>
+</span>
+</div>
+</div>
+</div>
+<div class="px-6 pt-4 pb-2">
+</div>
+</div>
+</a>
+<a class="min-w-full" href="/posts/pwn/heap/chunk_1/">
+<div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
+<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/posts/pwn/heap/chunk_1/featured.png);"></div>
+<div class="px-6 py-4">
+<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/pwn/heap/chunk_1/">堆基础知识学习记录</div>
+<div class="text-sm text-neutral-500 dark:text-neutral-400">
+<div class="flex flex-row flex-wrap items-center">
+<time datetime="2023-07-31 00:00:00 +0000 UTC">July 31, 2023</time><span class="px-2 text-primary-500">·</span><span>3945 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">8 分钟</span>
+</div>
+<div class="flex flex-row flex-wrap items-center">
+<span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    PWN学习记录
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/ctf/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    CTF
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/pwn/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    PWN
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/heap/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    heap
+  </span>
+</span>
+</span>
+</div>
+</div>
+</div>
+<div class="px-6 pt-4 pb-2">
+</div>
+</div>
+</a>
 </section>
 <div class="content" id="content">
 <div style="margin-top:2em;padding:0 0.5em;font-size:.875rem">
@@ -582,11 +1274,30 @@
 <div style="padding-bottom:1em;">
 <p> </p>
 <p>本文作者：<a href="https://ta0lve.github.io/about/" target="_blank"><font color="#49b1f5" style="text-decoration: underline">ta0lve</font></a></p>
-<p>本文链接：<a href="https://ta0lve.github.io/about/" target="_blank"><font color="#49b1f5" style="text-decoration: underline">About</font></a></p>
-<p><a href="https://ta0lve.github.io/about/" target="_blank"><font color="#49b1f5" style="text-decoration: underline"> https://ta0lve.github.io/about/ </font></a></p>
+<p>本文链接：<a href="https://ta0lve.github.io/posts/sth/redis/1/" target="_blank"><font color="#49b1f5" style="text-decoration: underline">Redis学习记录</font></a></p>
+<p><a href="https://ta0lve.github.io/posts/sth/redis/1/" target="_blank"><font color="#49b1f5" style="text-decoration: underline"> https://ta0lve.github.io/posts/sth/redis/1/ </font></a></p>
 <p>版权声明：本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank"><font color="#49b1f5" style="text-decoration: underline"> CC BY-NC 4.0 </font></a> 许可协议。</p>
 <p>转载请注明来自<a class="redlink" href="https://ta0lve.github.io/" target="_blank"> <font color="#49b1f5" style="text-decoration: underline">ta0lve's Blog</font></a> ！</p>
 </div>
+</div>
+</div>
+<div class="pt-8">
+<hr class="border-dotted border-neutral-300 dark:border-neutral-600"/>
+<div class="flex justify-between pt-3">
+<span>
+<a class="flex group mr-3" href="/posts/android/tools/apktool/">
+<span class="mr-3 text-neutral-700 group-hover:text-primary-600 ltr:inline rtl:hidden dark:text-neutral dark:group-hover:text-primary-400">←</span>
+<span class="ml-3 text-neutral-700 group-hover:text-primary-600 ltr:hidden rtl:inline dark:text-neutral dark:group-hover:text-primary-400">→</span>
+<span class="flex flex-col">
+<span class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500">apktool安装与使用</span>
+<span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
+<time datetime="2023-08-06 00:00:00 +0000 UTC">August 6, 2023</time>
+</span>
+</span>
+</a>
+</span>
+<span>
+</span>
 </div>
 </div>
 <script async="" crossorigin="anonymous" data-category="Announcements" data-category-id="DIC_kwDOJ9Vlo84CX_0P" data-emit-metadata="0" data-input-position="bottom" data-lang="zh-CN" data-mapping="pathname" data-reactions-enabled="1" data-repo="ta0lve/blogtalk" data-repo-id="R_kgDOJ9Vlow" data-strict="0" data-theme="dark_dimmed" src="https://giscus.app/client.js">
