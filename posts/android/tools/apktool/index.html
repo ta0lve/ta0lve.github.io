@@ -59,7 +59,7 @@
     "keywords": ["Android","reverse"],
     
     "mainEntityOfPage": "true",
-    "wordCount": "1079"
+    "wordCount": "2408"
   }]
   </script>
 <meta content="ta0lve" name="author"/>
@@ -275,7 +275,7 @@
     </h1>
 <div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-08-06 00:00:00 +0000 UTC">August 6, 2023</time><span class="px-2 text-primary-500">·</span><span>1079 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">3 分钟</span>
+<time datetime="2023-08-06 00:00:00 +0000 UTC">August 6, 2023</time><span class="px-2 text-primary-500">·</span><span>2408 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">5 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
 <span class="mr-2" onclick="window.open(&quot;/categories/%E7%A7%BB%E5%8A%A8%E5%AE%89%E5%85%A8/&quot;,'_self');" style="margin-top:0.5rem">
@@ -349,9 +349,20 @@
 <li><a href="#windows">Windows</a></li>
 <li><a href="#linux">Linux</a></li>
 <li><a href="#mac">Mac</a></li>
+<li><a href="#ubuntu-apt-安装-">Ubuntu( apt 安装 )</a></li>
 </ul>
 </li>
-<li><a href="#使用">使用</a></li>
+<li><a href="#heading"></a></li>
+<li><a href="#使用">使用</a>
+<ul>
+<li><a href="#utility-实用选项">Utility 实用选项</a></li>
+<li><a href="#decode-反编译选项">decode 反编译选项</a></li>
+<li><a href="#build-回编译选项">build 回编译选项</a></li>
+<li><a href="#空框架目录选项">空框架目录选项</a></li>
+<li><a href="#列表框架目录选项">列表框架目录选项</a></li>
+<li><a href="#常用选项">常用选项</a></li>
+</ul>
+</li>
 <li><a href="#附录">附录</a></li>
 </ul>
 </li>
@@ -372,9 +383,20 @@
 <li><a href="#windows">Windows</a></li>
 <li><a href="#linux">Linux</a></li>
 <li><a href="#mac">Mac</a></li>
+<li><a href="#ubuntu-apt-安装-">Ubuntu( apt 安装 )</a></li>
 </ul>
 </li>
-<li><a href="#使用">使用</a></li>
+<li><a href="#heading"></a></li>
+<li><a href="#使用">使用</a>
+<ul>
+<li><a href="#utility-实用选项">Utility 实用选项</a></li>
+<li><a href="#decode-反编译选项">decode 反编译选项</a></li>
+<li><a href="#build-回编译选项">build 回编译选项</a></li>
+<li><a href="#空框架目录选项">空框架目录选项</a></li>
+<li><a href="#列表框架目录选项">列表框架目录选项</a></li>
+<li><a href="#常用选项">常用选项</a></li>
+</ul>
+</li>
 <li><a href="#附录">附录</a></li>
 </ul>
 </li>
@@ -505,16 +527,44 @@
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#linux" style="text-decoration-line: none !important;">#</a></span>
 </h4>
 <ol>
-<li>下载 Linux <a href="https://raw.githubusercontent.com/iBotPeaches/Apktool/master/scripts/linux/apktool" target="_blank">
-    包装器脚本</a>（右键单击，将链接另存为<code>apktool</code>)</li>
-<li>下载<a href="https://bitbucket.org/iBotPeaches/apktool/downloads" target="_blank">
-    最新的Apktool</a> 。</li>
-<li>将下载的 jar 重命名为<code>apktool.jar</code></li>
-<li>将两个文件 (<code>apktool.jar</code> &amp; <code>apktool.bat</code>) 移动到  <code>/usr/local/bin</code> (需要 root 权限)</li>
-<li>Make sure both files are executable (<code>chmod +x</code>)</li>
-<li>尝试通过 <strong>cli</strong> （command-line interface，<a href="http://baike.baidu.com/view/5483485.htm" target="_blank">
-    命令行界面</a>）运行<code>apktool</code></li>
-<li>第一步包装器脚本也可以直接复制以下代码到apktool.txt再改名为apktool.bat文件</li>
+<li>
+<p>下载 Linux <a href="https://raw.githubusercontent.com/iBotPeaches/Apktool/master/scripts/linux/apktool" target="_blank">
+    包装器脚本</a>（右键单击，将链接另存为<code>apktool</code>)</p>
+</li>
+<li>
+<p>下载<a href="https://bitbucket.org/iBotPeaches/apktool/downloads" target="_blank">
+    最新的Apktool</a> 。</p>
+</li>
+<li>
+<p>将下载的 jar 重命名为<code>apktool.jar</code></p>
+</li>
+<li>
+<p>将两个文件 (<code>apktool.jar</code> &amp; <code>apktool) 移动到  </code>/usr/local/bin` (需要 root 权限)</p>
+</li>
+<li>
+<p>Make sure both files are executable (<code>chmod +x</code>)</p>
+</li>
+<li>
+<p>尝试通过 <strong>cli</strong> （command-line interface，<a href="http://baike.baidu.com/view/5483485.htm" target="_blank">
+    命令行界面</a>）运行<code>apktool</code></p>
+<ul>
+<li>
+<p>
+<figure>
+<img alt="image-20230807225031626" class="my-0 rounded-md" src="https://s2.loli.net/2023/08/07/mtDk854of1dMr2O.png"/>
+</figure>
+</p>
+</li>
+<li>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 要求java的版本大于等于1.8</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 若之前没有配置过java环境则需要先安装java-1.8</span>
+</span></span><span class="line"><span class="cl">sudo apt install openjdk-8-jre-headless
+</span></span></code></pre></div></li>
+</ul>
+</li>
+<li>
+<p>第一步包装器脚本也可以直接复制以下代码到apktool.txt再改名为apktool.bat文件</p>
+</li>
 </ol>
 <div class="highlight"><pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
 </span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="c1">#</span>
@@ -605,16 +655,220 @@
 <li>下载<a href="https://bitbucket.org/iBotPeaches/apktool/downloads" target="_blank">
     最新的Apktool</a> 。</li>
 <li>将下载的 jar 重命名为<code>apktool.jar</code></li>
-<li>将两个文件 (<code>apktool.jar</code> &amp; <code>apktool.bat</code>) 移动到  <code>/usr/local/bin</code> (需要 root 权限)</li>
+<li>将两个文件 (<code>apktool.jar</code> &amp; <code>apktool) 移动到  </code>/usr/local/bin` (需要 root 权限)</li>
 <li>尝试通过 cli 运行<code>apktool</code></li>
 <li>第一步包装器脚本也可以直接复制 Linux 的安装代码到apktool.txt再改名为apktool.bat文件</li>
 </ol>
+<div class="anchor" id="ubuntu-apt-安装-"></div>
+<h4 class="relative group">Ubuntu( apt 安装 ) 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#ubuntu-apt-%e5%ae%89%e8%a3%85-" style="text-decoration-line: none !important;">#</a></span>
+</h4>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># apt 安装，非官方方法</span>
+</span></span><span class="line"><span class="cl">sudo apt install apktool
+</span></span><span class="line"><span class="cl"><span class="c1"># 检查安装是否成功</span>
+</span></span><span class="line"><span class="cl">apktool -version
+</span></span><span class="line"><span class="cl">apktool
+</span></span><span class="line"><span class="cl"><span class="c1"># 可以看到版本比较低，使用建议还是用前面的官方方法来安装</span>
+</span></span></code></pre></div><p>
+<figure>
+<img alt="image-20230807223048918" class="my-0 rounded-md" src="https://s2.loli.net/2023/08/07/qA8GLTMIWtw2z6y.png"/>
+</figure>
+</p>
+<div class="anchor" id="heading"></div>
+<h3 class="relative group">
+<span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#heading" style="text-decoration-line: none !important;">#</a></span>
+</h3>
 <hr/>
 <div class="anchor" id="使用"></div>
 <h3 class="relative group">使用 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e4%bd%bf%e7%94%a8" style="text-decoration-line: none !important;">#</a></span>
 </h3>
+<div class="anchor" id="utility-实用选项"></div>
+<h4 class="relative group">Utility 实用选项 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#utility-%e5%ae%9e%e7%94%a8%e9%80%89%e9%a1%b9" style="text-decoration-line: none !important;">#</a></span>
+</h4>
+<p><em>用于实用命令的选项 （<code>apktool {options}</code>）</em></p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-text" data-lang="text"><span class="line"><span class="cl">-advance, --advanced
+</span></span></code></pre></div><ul>
+<li>转储高级使用情况输出。</li>
+</ul>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-text" data-lang="text"><span class="line"><span class="cl">-version, --version
+</span></span></code></pre></div><ul>
+<li>输出当前版本。（例如：1.5.2</li>
+</ul>
+<div class="anchor" id="decode-反编译选项"></div>
+<h4 class="relative group">decode 反编译选项 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#decode-%e5%8f%8d%e7%bc%96%e8%af%91%e9%80%89%e9%a1%b9" style="text-decoration-line: none !important;">#</a></span>
+</h4>
+<p>即我们常说的<strong>解包</strong>，简要说明：</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">apktool d<span class="o">[</span>ecode<span class="o">]</span> <span class="o">[</span>options<span class="o">]</span> &lt;file_apk&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">-f,–force ,覆盖之前的文件
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">-o,–output ,输出路径<span class="o">(</span>dir<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">-p,–frame-path ,指定 framework 文件路径（dir）
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">-r,–no-res , 不解释 resources 资源
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">-s,–no-src ,不把dex 解释成smail
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">-t,–frame-tag , framework 标签
+</span></span></code></pre></div><hr/>
+<p><strong>详细使用说明：</strong></p>
+<p><em>用于反编译命令的选项（<code>apktool d 文件.apk {选项}</code>）</em></p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-text" data-lang="text"><span class="line"><span class="cl">-api, --api-level &lt;API&gt;
+</span></span></code></pre></div><ul>
+<li>要生成的 smali 文件的数字 API 级别（默认为 targetSdkVersion）</li>
+</ul>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-text" data-lang="text"><span class="line"><span class="cl">-b, --no-debug-info
+</span></span></code></pre></div><ul>
+<li>防止 baksmali 写出调试信息（.local、.param、.line 等）。</li>
+</ul>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-text" data-lang="text"><span class="line"><span class="cl">-f, --force
+</span></span></code></pre></div><ul>
+<li>强制删除目标目录。</li>
+</ul>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-text" data-lang="text"><span class="line"><span class="cl">--force-manifest
+</span></span></code></pre></div><ul>
+<li>强制解码，而不考虑资源的解码参数。<code>AndroidManifest.xml</code></li>
+</ul>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-text" data-lang="text"><span class="line"><span class="cl">--keep-broken-res
+</span></span></code></pre></div><ul>
+<li>如果出现错误并且某些资源被删除，例如“检测到无效的配置标志。丢弃资源“，但您无论如何都想解码它们，即使有错误。</li>
+<li>您必须在构建之前手动修复它们。</li>
+</ul>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-text" data-lang="text"><span class="line"><span class="cl">-m, --match-original
+</span></span></code></pre></div><ul>
+<li>匹配尽可能接近原始文件的文件，但代价是防止重建。</li>
+</ul>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-text" data-lang="text"><span class="line"><span class="cl">--no-assets
+</span></span></code></pre></div><ul>
+<li>防止解码/复制未知资产文件。</li>
+</ul>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-text" data-lang="text"><span class="line"><span class="cl">--only-main-classes
+</span></span></code></pre></div><ul>
+<li>仅在应用程序的根目录中反汇编 dex 类。</li>
+</ul>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-text" data-lang="text"><span class="line"><span class="cl">-p, --frame-path &lt;DIR&gt;
+</span></span></code></pre></div><ul>
+<li>应存储/读取框架文件的文件夹位置。</li>
+</ul>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-text" data-lang="text"><span class="line"><span class="cl">-r, --no-res
+</span></span></code></pre></div><ul>
+<li>这将防止资源的反编译。这保持<code>resources.arsc</code></li>
+</ul>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-text" data-lang="text"><span class="line"><span class="cl">-s, --no-src
+</span></span></code></pre></div><ul>
+<li>这将防止 dex 文件的反汇编。这会保留 apk dex 文件，并在构建过程中简单地移动它。</li>
+</ul>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-text" data-lang="text"><span class="line"><span class="cl">-t, --frame-tag &lt;TAG&gt;
+</span></span></code></pre></div><ul>
+<li>使用由 标记的框架文件。<code>TAG</code></li>
+</ul>
+<div class="anchor" id="build-回编译选项"></div>
+<h4 class="relative group">build 回编译选项 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#build-%e5%9b%9e%e7%bc%96%e8%af%91%e9%80%89%e9%a1%b9" style="text-decoration-line: none !important;">#</a></span>
+</h4>
+<p><strong>其实就是把apk反汇编形成的目录回编译为apk，且得到的apk是未签名的apk</strong></p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">apktool b<span class="o">[</span>uild<span class="o">]</span> <span class="o">[</span>options<span class="o">]</span> &lt;app_path&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">-f,–force-all ,覆盖之前的文件
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">-o,–output ,输出路径<span class="o">(</span>dir<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">-p,–frame-path , 指定 framework 文件路径<span class="o">(</span>dir<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 例子：</span>
+</span></span><span class="line"><span class="cl">apktool b &lt;dir&gt;  <span class="c1"># apk文件默认在dir/dist目录下 </span>
+</span></span><span class="line"><span class="cl">apktool b &lt;dir&gt; -o &lt;file.apk&gt;  <span class="c1"># 自己指定apk位置</span>
+</span></span></code></pre></div><hr/>
+<p><strong>详细说明：</strong></p>
+<p><em>用于构建命令的选项（<code>apktool b 文件夹 {选项}</code>）</em></p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-text" data-lang="text"><span class="line"><span class="cl">-a, --aapt &lt;FILE&gt;
+</span></span></code></pre></div><ul>
+<li>从指定位置加载 aapt/aapt2 二进制文件，而不是依赖于内部版本。</li>
+</ul>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-text" data-lang="text"><span class="line"><span class="cl">-api, --api-level &lt;API&gt;
+</span></span></code></pre></div><ul>
+<li>要针对其构建的 smali 文件的数字 API 级别（默认为<code>minSdkVersion</code>)</li>
+</ul>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-text" data-lang="text"><span class="line"><span class="cl">-c, --copy-original
+</span></span></code></pre></div><ul>
+<li>复制原件和 .<code>AndroidManifest.xml``META-INF</code></li>
+</ul>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-text" data-lang="text"><span class="line"><span class="cl">-d, --debug
+</span></span></code></pre></div><ul>
+<li>添加到 。<code>debuggable="true"``AndroidManifest.xml</code></li>
+</ul>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-text" data-lang="text"><span class="line"><span class="cl">-f, --force-all
+</span></span></code></pre></div><ul>
+<li>在生成过程中覆盖现有文件，包括资源和源。</li>
+</ul>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-text" data-lang="text"><span class="line"><span class="cl">-n, --net-sec-conf
+</span></span></code></pre></div><ul>
+<li>在 apk 中添加通用网络安全配置文件。</li>
+</ul>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-text" data-lang="text"><span class="line"><span class="cl">-nc, --no-crunch
+</span></span></code></pre></div><ul>
+<li>在生成期间禁用资源文件的处理。</li>
+</ul>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-text" data-lang="text"><span class="line"><span class="cl">-o, --output &lt;FILE&gt;
+</span></span></code></pre></div><ul>
+<li>写入的 apk 的名称。默认值为 。<code>dist/{apkname}.apk</code></li>
+</ul>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-text" data-lang="text"><span class="line"><span class="cl">-p, --frame-path &lt;DIR&gt;
+</span></span></code></pre></div><ul>
+<li>存储/读取框架文件的位置。</li>
+</ul>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-text" data-lang="text"><span class="line"><span class="cl">--use-aapt2
+</span></span></code></pre></div><ul>
+<li>使用 aapt2 而不是 aapt。</li>
+</ul>
+<div class="anchor" id="空框架目录选项"></div>
+<h4 class="relative group">空框架目录选项 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e7%a9%ba%e6%a1%86%e6%9e%b6%e7%9b%ae%e5%bd%95%e9%80%89%e9%a1%b9" style="text-decoration-line: none !important;">#</a></span>
+</h4>
+<p><em>用于 empty-framework-dir 命令的选项 （<code>apktool empty-framework-dir {options}</code>）</em></p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-text" data-lang="text"><span class="line"><span class="cl">-f, --force
+</span></span></code></pre></div><ul>
+<li>强制删除目标目录。</li>
+</ul>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-text" data-lang="text"><span class="line"><span class="cl">-p, --frame-path &lt;DIR&gt;
+</span></span></code></pre></div><ul>
+<li>应存储/读取框架文件的文件夹位置。</li>
+</ul>
+<div class="anchor" id="列表框架目录选项"></div>
+<h4 class="relative group">列表框架目录选项 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e5%88%97%e8%a1%a8%e6%a1%86%e6%9e%b6%e7%9b%ae%e5%bd%95%e9%80%89%e9%a1%b9" style="text-decoration-line: none !important;">#</a></span>
+</h4>
+<p><em>用于列表框架命令的选项（<code>apktool list-frameworks {options}</code>）</em></p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-text" data-lang="text"><span class="line"><span class="cl">-p, --frame-path &lt;DIR&gt;
+</span></span></code></pre></div><ul>
+<li>应存储/读取框架文件的文件夹位置。</li>
+</ul>
+<div class="anchor" id="常用选项"></div>
+<h4 class="relative group">常用选项 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e5%b8%b8%e7%94%a8%e9%80%89%e9%a1%b9" style="text-decoration-line: none !important;">#</a></span>
+</h4>
+<p><em>可与任何命令一起使用的选项</em></p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-text" data-lang="text"><span class="line"><span class="cl">-v, --verbose
+</span></span></code></pre></div><ul>
+<li>详细输出。包括记录器中标记的任何消息。<code>FINE</code></li>
+</ul>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-text" data-lang="text"><span class="line"><span class="cl">-q, --quiet
+</span></span></code></pre></div><ul>
+<li>快速的输出。</li>
+</ul>
 <div class="anchor" id="附录"></div>
 <h3 class="relative group">附录 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
@@ -623,6 +877,8 @@
 <p>参考链接：</p>
 <p><a href="https://apktool.org/docs/install" target="_blank">
     Install Guide | Apktool</a></p>
+<p><a href="https://apktool.org/docs/cli-parameters" target="_blank">
+    CLI Parameters | Apktool</a></p>
 <details class="mt-2 mb-5 overflow-hidden rounded-lg ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5" style="margin-left:0px">
 <summary class="py-1 text-lg font-semibold cursor-pointer bg-primary-200 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-primary-800 dark:text-neutral-100">
         Android安全学习记录 - This article is part of a series.
