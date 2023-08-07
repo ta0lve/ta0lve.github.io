@@ -671,28 +671,21 @@
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#prev_size" style="text-decoration-line: none !important;">#</a></span>
 </h3>
 <ul>
-<li>
-<p>如果该 chunk 的<strong>物理相邻</strong>的前一地址 <strong>chunk</strong>（两个指针的地址差值为前一 chunk 大小）是空闲的话，那该字段记录的是前一个 chunk 的大小 (包括 chunk 头)。</p>
-</li>
-<li>
-<p>否则，该字段可以用来存储物理相邻的前一个 chunk 的数据。<strong>这里的前一 chunk 指的是较低地址的 chunk</strong> 。</p>
+<li>如果该 chunk 的<strong>物理相邻</strong>的前一地址 <strong>chunk</strong>（两个指针的地址差值为前一 chunk 大小）是空闲的话，那该字段记录的是前一个 chunk 的大小 (包括 chunk 头)。</li>
+<li>否则，该字段可以用来存储物理相邻的前一个 chunk 的数据。<strong>这里的前一 chunk 指的是较低地址的 chunk</strong> 。
 <ul>
 <li>当申请的内存大小对 2*SIZE_SZ 取余之后小于等于 size_t 的话就可以用它的下一个 chunk 的 prev_size</li>
 <li>比如：64位下 malloc(0x55)， 0x58 mod 0x10 还差 0x8 &lt;= 0x8字节，那他就可以用后面一个 chunk 的 prev_size，最后加上 chunk header 大小是 0x60（所以下图为6行）</li>
 <li>还是 64 位下，如果大小是 0x59 的话 mod 0x10之后还差 0x9 &gt; 0x8字节，那就不够用了，只能多申请一块，最后加上 chunk header 用了 0x70（所以下图为7行）</li>
 <li>
 <figure>
-<img alt="image-20230807000723376" class="my-0 rounded-md" src="https://s2.loli.net/2023/08/07/SYZMpQOAoaX6BKc.png"/>
+<img alt="image-20230807000723376.png" class="my-0 rounded-md" src="https://s2.loli.net/2023/08/07/7EtxpCK6egOlbHT.png"/>
 </figure>
 </li>
 </ul>
 </li>
-<li>
-<p>malloc(0x58)会分配0x60的内存</p>
-</li>
-<li>
-<p>malloc(0x59)会分配0x70的内存</p>
-</li>
+<li>malloc(0x58)会分配0x60的内存</li>
+<li>malloc(0x59)会分配0x70的内存</li>
 </ul>
 <hr/>
 <div class="anchor" id="size"></div>
