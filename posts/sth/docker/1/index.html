@@ -13,10 +13,10 @@
 <meta content="zh-cn" http-equiv="content-language"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta content="ie=edge" http-equiv="X-UA-Compatible"/>
-<title>IoT 学习记录1 · ta0lve</title>
-<meta content="IoT 学习记录1 · ta0lve" name="title"/>
-<meta content="物联网安全, IoT, " name="keywords"/>
-<link href="https://ta0lve.github.io/posts/iot/0x01/" rel="canonical"/>
+<title>Docker学习记录 · ta0lve</title>
+<meta content="Docker学习记录 · ta0lve" name="title"/>
+<meta content="docker, " name="keywords"/>
+<link href="https://ta0lve.github.io/posts/sth/docker/1/" rel="canonical"/>
 <link href="/css/main.bundle.min.c6116b9ed1c907a8c0eb015f377d3eecc07e448d75729e31fc3de5881465c6c172ba9fa9a6800c030116caf2a110d92242bb816639484ca791f7cd107a8d49b5.css" integrity="sha512-xhFrntHJB6jA6wFfN30+7MB+RI11cp4x/D3liBRlxsFyup+ppoAMAwEWyvKhENkiQruBZjlITKeR980Qeo1JtQ==" rel="stylesheet" type="text/css"/>
 <script integrity="sha512-UWoWdFvqWpvQERONJUzA/TlzzVXObhXz3sdj58fCx0SPj+e1TMqBHLghsMfhLNFhyqzh3XlKw9NNQJN8vMnuEg==" src="/js/appearance.min.516a16745bea5a9bd011138d254cc0fd3973cd55ce6e15f3dec763e7c7c2c7448f8fe7b54cca811cb821b0c7e12cd161caace1dd794ac3d34d40937cbcc9ee12.js" type="text/javascript"></script>
 <script data-copied="" data-copy="" defer="" id="script-bundle" integrity="sha512-PdzwT1sNTDL3LnJtPBLuvM2MPJ+dqpoTQUgIiV3grh4c3d2mhJaA1b2W27YNCx4LJMKfXIPlYx5V5+a8AgFUkA==" src="/js/main.bundle.min.3ddcf04f5b0d4c32f72e726d3c12eebccd8c3c9f9daa9a13414808895de0ae1e1cdddda6849680d5bd96dbb60d0b1e0b24c29f5c83e5631e55e7e6bc02015490.js" type="text/javascript"></script>
@@ -25,43 +25,41 @@
 <link href="/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="/site.webmanifest" rel="manifest"/>
-<meta content="IoT 学习记录1" property="og:title"/>
-<meta content="此文章还在施工中，
-路过的师傅们看看远处的学习记录吧" property="og:description"/>
+<meta content="Docker学习记录" property="og:title"/>
+<meta content="什么是Docker？ (answer from Linux中国) Docker 是一个快捷、轻便的" property="og:description"/>
 <meta content="article" property="og:type"/>
-<meta content="https://ta0lve.github.io/posts/iot/0x01/" property="og:url"/><meta content="https://ta0lve.github.io/posts/iot/0x01/featured.jpg" property="og:image"/><meta content="posts" property="article:section"/>
-<meta content="2023-08-06T00:00:00+00:00" property="article:published_time"/>
-<meta content="2023-08-06T00:00:00+00:00" property="article:modified_time"/>
+<meta content="https://ta0lve.github.io/posts/sth/docker/1/" property="og:url"/><meta content="https://ta0lve.github.io/posts/sth/docker/1/featured.png" property="og:image"/><meta content="posts" property="article:section"/>
+<meta content="2023-08-07T00:00:00+00:00" property="article:published_time"/>
+<meta content="2023-08-07T00:00:00+00:00" property="article:modified_time"/>
 <meta content="summary_large_image" name="twitter:card"/>
-<meta content="https://ta0lve.github.io/posts/iot/0x01/featured.jpg" name="twitter:image"/>
-<meta content="IoT 学习记录1" name="twitter:title"/>
-<meta content="此文章还在施工中，
-路过的师傅们看看远处的学习记录吧" name="twitter:description"/>
+<meta content="https://ta0lve.github.io/posts/sth/docker/1/featured.png" name="twitter:image"/>
+<meta content="Docker学习记录" name="twitter:title"/>
+<meta content="什么是Docker？ (answer from Linux中国) Docker 是一个快捷、轻便的" name="twitter:description"/>
 <script type="application/ld+json">
   [{
     "@context": "https://schema.org",
     "@type": "Article",
     "articleSection": "Posts",
-    "name": "IoT 学习记录1",
-    "headline": "IoT 学习记录1",
+    "name": "Docker学习记录",
+    "headline": "Docker学习记录",
     
-    "abstract": "\u003cp\u003e\u003cstrong\u003e此文章还在施工中\u003c\/strong\u003e，\u003c\/p\u003e\n\u003cp\u003e路过的师傅们看看远处的学习记录吧\u003c\/p\u003e",
+    "abstract": "什么是Docker？ (answer from Linux中国) Docker 是一个快捷、轻便的",
     "inLanguage": "zh-cn",
-    "url" : "https:\/\/ta0lve.github.io\/posts\/iot\/0x01\/",
+    "url" : "https:\/\/ta0lve.github.io\/posts\/sth\/docker\/1\/",
     "author" : {
       "@type": "Person",
       "name": "ta0lve"
     },
     "copyrightYear": "2023",
-    "dateCreated": "2023-08-06T00:00:00\u002b00:00",
-    "datePublished": "2023-08-06T00:00:00\u002b00:00",
+    "dateCreated": "2023-08-07T00:00:00\u002b00:00",
+    "datePublished": "2023-08-07T00:00:00\u002b00:00",
     
-    "dateModified": "2023-08-06T00:00:00\u002b00:00",
+    "dateModified": "2023-08-07T00:00:00\u002b00:00",
     
-    "keywords": ["物联网安全","IoT"],
+    "keywords": ["docker"],
     
     "mainEntityOfPage": "true",
-    "wordCount": "113"
+    "wordCount": "2141"
   }]
   </script>
 <meta content="ta0lve" name="author"/>
@@ -254,7 +252,7 @@
 <main class="grow" id="main-content">
 <article>
 <div class="h-[150px] md:h-[200px]" id="hero"></div>
-<div class="fixed inset-x-0 top-0 h-[800px] single_hero_background nozoom" style="background-image:url(/posts/iot/0x01/featured.jpg);">
+<div class="fixed inset-x-0 top-0 h-[800px] single_hero_background nozoom" style="background-image:url(/posts/sth/docker/1/featured.png);">
 <div class="absolute inset-0 bg-gradient-to-t from-neutral dark:from-neutral-800 to-transparent mix-blend-normal">
 </div>
 <div class="absolute inset-0 opacity-60 bg-gradient-to-t from-neutral dark:from-neutral-800 to-neutral-100 dark:to-neutral-800 mix-blend-normal">
@@ -269,35 +267,28 @@
 <a class="hover:underline decoration-neutral-300 dark:underline-neutral-600" href="/posts/">Posts</a><span class="px-1 text-primary-500">/</span>
 </li>
 <li class="inline hidden">
-<a class="hover:underline decoration-neutral-300 dark:underline-neutral-600" href="/posts/iot/0x01/">IoT 学习记录1</a><span class="px-1 text-primary-500">/</span>
+<a class="hover:underline decoration-neutral-300 dark:underline-neutral-600" href="/posts/sth/docker/1/">Docker学习记录</a><span class="px-1 text-primary-500">/</span>
 </li>
 </ol>
 <h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">
-      IoT 学习记录1
+      Docker学习记录
     </h1>
 <div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-08-06 00:00:00 +0000 UTC">August 6, 2023</time><span class="px-2 text-primary-500">·</span><span>113 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">1 分钟</span>
+<time datetime="2023-08-07 00:00:00 +0000 UTC">August 7, 2023</time><span class="px-2 text-primary-500">·</span><span>2141 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">5 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
-<span class="mr-2" onclick="window.open(&quot;/categories/%E7%A1%AC%E4%BB%B6%E5%AE%89%E5%85%A8/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="mr-2" onclick="window.open(&quot;/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/&quot;,'_self');" style="margin-top:0.5rem">
 <span class="flex">
 <span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    硬件安全
+    基础知识
   </span>
 </span>
 </span>
-<span class="mr-2" onclick="window.open(&quot;/tags/%E7%89%A9%E8%81%94%E7%BD%91%E5%AE%89%E5%85%A8/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="mr-2" onclick="window.open(&quot;/tags/docker/&quot;,'_self');" style="margin-top:0.5rem">
 <span class="flex">
 <span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    物联网安全
-  </span>
-</span>
-</span>
-<span class="mr-2" onclick="window.open(&quot;/tags/iot/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    IoT
+    docker
   </span>
 </span>
 </span>
@@ -336,41 +327,404 @@
 <div class="mb-5"></div>
 </header>
 <section class="flex flex-col max-w-full mt-0 prose dark:prose-invert lg:flex-row">
-<div class="min-w-0 min-h-0 max-w-prose">
-<details class="mt-2 mb-5 overflow-hidden rounded-lg ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5" open="" style="margin-left:0px">
-<summary class="py-1 text-lg font-semibold cursor-pointer bg-primary-200 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-primary-800 dark:text-neutral-100">
-        HWS 2023 学习记录 - This article is part of a series.
-    </summary>
-<div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-        Part 1: This Article
-    </div>
-</details>
-<p><strong>此文章还在施工中</strong>，</p>
-<p>路过的师傅们看看远处的学习记录吧</p>
-<hr/>
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    
-New article!
-
-  </span>
-</span>
-<section class="space-y-10 w-full">
-<a class="flex flex-wrap article border border-neutral-200 dark:border-neutral-700 border-2 rounded-md backdrop-blur" href="/posts/pwn/basic/pwn-_environment/">
-<div class="w-full md:w-auto h-full thumbnail nozoom" style="background-image:url(/posts/pwn/basic/pwn-_environment/featured.jpg);"></div>
-<div class="p-4">
-<div class="items-center text-xl font-semibold">
-<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/pwn/basic/pwn-_environment/">PWN环境二次搭建记录-Ubuntu 22.04</div>
+<div class="order-first sm:max-w-prose lg:ml-auto px-0 lg:order-last lg:max-w-xs ltr:lg:pl-8 rtl:lg:pr-8">
+<div class="toc ltr:pl-5 rtl:pr-5 print:hidden lg:sticky lg:top-10">
+<details class="mt-0 overflow-hidden rounded-lg ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 hidden lg:block" open="">
+<summary class="block py-1 text-lg font-semibold cursor-pointer bg-neutral-100 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-neutral-700 dark:text-neutral-100 lg:hidden">
+</summary>
+<div class="min-w-[220px] py-2 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+<nav id="TableOfContents">
+<ul>
+<li><a href="#安装">安装</a>
+<ul>
+<li><a href="#安装-dockerubuntu">安装 Docker（Ubuntu）</a></li>
+<li><a href="#安装-docker-compose">安装 Docker Compose</a></li>
+<li><a href="#安装-docker-desktop">安装 Docker-desktop</a></li>
+</ul>
+</li>
+<li><a href="#使用">使用</a>
+<ul>
+<li><a href="#常用的管理命令">常用的管理命令</a></li>
+<li><a href="#run-命令">run 命令</a></li>
+<li><a href="#ps-命令">ps 命令</a></li>
+<li><a href="#ps-过滤">ps 过滤</a></li>
+</ul>
+</li>
+<li><a href="#附录">附录</a></li>
+</ul>
+</nav>
 </div>
+</details>
+<details class="mt-0 overflow-hidden rounded-lg ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 lg:hidden">
+<summary class="py-1 text-lg font-semibold cursor-pointer bg-neutral-100 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-neutral-700 dark:text-neutral-100 lg:hidden">
+</summary>
+<div class="py-2 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+<nav id="TableOfContents">
+<ul>
+<li><a href="#安装">安装</a>
+<ul>
+<li><a href="#安装-dockerubuntu">安装 Docker（Ubuntu）</a></li>
+<li><a href="#安装-docker-compose">安装 Docker Compose</a></li>
+<li><a href="#安装-docker-desktop">安装 Docker-desktop</a></li>
+</ul>
+</li>
+<li><a href="#使用">使用</a>
+<ul>
+<li><a href="#常用的管理命令">常用的管理命令</a></li>
+<li><a href="#run-命令">run 命令</a></li>
+<li><a href="#ps-命令">ps 命令</a></li>
+<li><a href="#ps-过滤">ps 过滤</a></li>
+</ul>
+</li>
+<li><a href="#附录">附录</a></li>
+</ul>
+</nav>
+</div>
+</details>
+<script>
+  (function () {
+    var $toc = $('#TableOfContents');
+    if ($toc.length > 0) {
+      var $window = $(window);
+
+      function onScroll() {
+        var currentScroll = $window.scrollTop();
+        var h = $('.anchor');
+        var id = "";
+        h.each(function (i, e) {
+          e = $(e);
+          if (e.offset().top - $(window).height()/3 <= currentScroll) {
+            id = e.attr('id');
+          }
+        });
+        var active = $toc.find('a.active');      
+        if (active.length == 1 && active.eq(0).attr('href') == '#' + id) return true;
+
+        active.each(function (i, e) {
+          
+            $(e).removeClass('active');
+          
+        });
+        $toc.find('a[href="#' + id + '"]').addClass('active')
+        $toc.find('a[href="#' + id + '"]').parentsUntil('#TableOfContents').each(function (i, e) {
+          $(e).children('a').parents('ul').show();          
+        });
+      }
+
+      $window.on('scroll', onScroll);
+      $(document).ready(function () {
+        
+        onScroll();
+      });
+    }
+  })();
+</script>
+</div>
+</div>
+<div class="min-w-0 min-h-0 max-w-prose">
+<hr/>
+<p>什么是Docker？</p>
+<p>(answer from <a href="https://linux.cn/article-14871-1.html" target="_blank">
+    Linux中国</a>)</p>
+<p><strong>Docker</strong> 是一个快捷、轻便的系统级虚拟化技术，开发者和系统管理员可以使用它构建具备所有必要依赖项的应用程序，并将其作为一个包发布。</p>
+<p>Docker 与其他如 VMWare 、Xen 、以及 VirtualBox 等工具的虚拟化方式不同，每个虚拟机不需要单独的客户操作系统。</p>
+<p>所有的 Docker 容器有效地共享同一个主机系统内核。每个容器都在同一个操作系统中的隔离用户空间中运行。</p>
+<p>Docker 容器可以在任何 Linux 版本上运行。比如说你使用 Fedora ，我用 Ubuntu 。我们能相互开发、共享并分发 Docker 镜像。</p>
+<p>你无需担心操作系统、软件以及自定义设置，任何事都不用担心。只要我们的主机安装了 Docker ，就能持续开发。简言之，Docker 能够在任何地方运行！</p>
+<p>前文中你读到了两个词：<strong>Docker 镜像</strong> 和 <strong>Docker 容器</strong> ，或许你在想它们的区别。</p>
+<p>通俗地说，Docker 镜像是一个描述容器应该如何表现的文件，而 Docker 容器是 Docker 镜像的运行（或停止）状态。</p>
+<p>希望你能够理解 Docker 的基础概念。更多细节，你可以参考 <a href="https://docs.docker.com/get-started/overview/" target="_blank">
+    Docker 官方指导手册</a>。</p>
+<hr/>
+<div class="anchor" id="安装"></div>
+<h2 class="relative group">安装 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e5%ae%89%e8%a3%85" style="text-decoration-line: none !important;">#</a></span>
+</h2>
+<div class="anchor" id="安装-dockerubuntu"></div>
+<h3 class="relative group">安装 Docker（Ubuntu） 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e5%ae%89%e8%a3%85-dockerubuntu" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">### 更新</span>
+</span></span><span class="line"><span class="cl">sudo apt update
+</span></span><span class="line"><span class="cl">sudo apt upgrade
+</span></span><span class="line"><span class="cl">sudo apt full-upgrade
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">### 添加 Docker 库</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 安装必要的证书并允许 apt 包管理器使用以下命令通过 HTTPS 使用存储库</span>
+</span></span><span class="line"><span class="cl">sudo apt install apt-transport-https ca-certificates curl software-properties-common gnupg lsb-release
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 运行下列命令添加 Docker 的官方 GPG 密钥</span>
+</span></span><span class="line"><span class="cl">curl -fsSL https://download.docker.com/linux/ubuntu/gpg <span class="p">|</span> sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 添加 Docker 官方库</span>
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">"deb [arch=</span><span class="k">$(</span>dpkg --print-architecture<span class="k">)</span><span class="s2"> signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu </span><span class="k">$(</span>lsb_release -cs<span class="k">)</span><span class="s2"> stable"</span> <span class="p">|</span> sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 使用命令更新 Ubuntu 源列表</span>
+</span></span><span class="line"><span class="cl">sudo apt update
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">### 安装 Docker</span>
+</span></span><span class="line"><span class="cl">sudo apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">### 检测</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 验证 Docker 服务是否在运行</span>
+</span></span><span class="line"><span class="cl">systemctl status docker
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#运行 Docker 服务</span>
+</span></span><span class="line"><span class="cl">sudo systemctl start docker
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 使 Docker 服务在每次重启时自动启动</span>
+</span></span><span class="line"><span class="cl">sudo systemctl <span class="nb">enable</span> docker
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 查看已安装的 Docker 版本</span>
+</span></span><span class="line"><span class="cl">sudo docker version
+</span></span></code></pre></div><hr/>
+<div class="anchor" id="安装-docker-compose"></div>
+<h3 class="relative group">安装 Docker Compose 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e5%ae%89%e8%a3%85-docker-compose" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 使用 Pip 安装 Docker Compose</span>
+</span></span><span class="line"><span class="cl">pip install docker-compose
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 检测</span>
+</span></span><span class="line"><span class="cl">docker-compose --version
+</span></span></code></pre></div><hr/>
+<div class="anchor" id="安装-docker-desktop"></div>
+<h3 class="relative group">安装 Docker-desktop 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e5%ae%89%e8%a3%85-docker-desktop" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<p>点击查看官方下载指南：</p>
+<p><a href="https://docs.docker.com/desktop/install/ubuntu/" target="_blank">
+    Install Docker Desktop on Ubuntu | Docker Documentation</a></p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 下载完deb文件后打开终端安装软件</span>
+</span></span><span class="line"><span class="cl">sudo apt-get update
+</span></span><span class="line"><span class="cl">sudo apt-get install ./docker-desktop-&lt;version&gt;-
+</span></span><span class="line"><span class="cl">&lt;arch&gt;.deb
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 举例：docker-desktop-4.22.0-amd64.deb</span>
+</span></span><span class="line"><span class="cl">sudo apt-get install ./docker-desktop-4.22.0-amd64.deb
+</span></span></code></pre></div><hr/>
+<div class="anchor" id="使用"></div>
+<h2 class="relative group">使用 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e4%bd%bf%e7%94%a8" style="text-decoration-line: none !important;">#</a></span>
+</h2>
+<div class="anchor" id="常用的管理命令"></div>
+<h3 class="relative group">常用的管理命令 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e5%b8%b8%e7%94%a8%e7%9a%84%e7%ae%a1%e7%90%86%e5%91%bd%e4%bb%a4" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-SHELL" data-lang="SHELL"><span class="line"><span class="cl">sudo docker ps <span class="c1"># 查看所有正在运行容器</span>
+</span></span><span class="line"><span class="cl">sudo docker ps -a    <span class="c1"># 查看所有容器</span>
+</span></span><span class="line"><span class="cl">sudo docker ps -a -q <span class="c1">#  查看所有容器ID</span>
+</span></span><span class="line"><span class="cl">sudo docker container ls -a <span class="c1"># 查看所有容器</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sudo docker start &lt;container_Id&gt; <span class="c1"># 启动指定的已被停止的容器</span>
+</span></span><span class="line"><span class="cl">sudo docker stop  &lt;container_Id&gt; <span class="c1"># 停止指定容器</span>
+</span></span><span class="line"><span class="cl">sudo docker restart &lt;container_Id&gt; <span class="c1"># 重启指定容器</span>
+</span></span><span class="line"><span class="cl">sudo docker  rm   &lt;container_Id&gt; <span class="c1"># 删除指定容器</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sudo docker ps -a -q <span class="c1"># 停止所有容器</span>
+</span></span><span class="line"><span class="cl">sudo docker ps -a -q <span class="c1"># 删除所有容器</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sudo docker images <span class="c1"># 查看所有镜像</span>
+</span></span><span class="line"><span class="cl">sudo docker image ls <span class="c1"># 查看所有镜像</span>
+</span></span><span class="line"><span class="cl">sudo docker search &lt;IMAGE_ID/NAME&gt; <span class="c1"># 查找image</span>
+</span></span><span class="line"><span class="cl">sudo docker pull  &lt;IMAGE_ID&gt; <span class="c1"># 下载镜像</span>
+</span></span><span class="line"><span class="cl">sudo docker push &lt;IMAGE_ID&gt;  <span class="c1"># 上传镜像</span>
+</span></span><span class="line"><span class="cl">sudo docker rmi  &lt;IMAGE_ID&gt; <span class="c1"># 删除指定容器</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sudo docker info <span class="c1"># 显示 Docker 系统信息，包括镜像和容器数</span>
+</span></span><span class="line"><span class="cl">sudo docker version <span class="c1"># 显示 Docker 版本信息</span>
+</span></span></code></pre></div><hr/>
+<div class="anchor" id="run-命令"></div>
+<h3 class="relative group">run 命令 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#run-%e5%91%bd%e4%bb%a4" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">docker run <span class="o">[</span>OPTIONS<span class="o">]</span> IMAGE <span class="o">[</span>COMMAND<span class="o">]</span> <span class="o">[</span>ARG...<span class="o">]</span>
+</span></span></code></pre></div><p>OPTIONS说明：</p>
+<ul>
+<li><strong>-a stdin:</strong> 指定标准输入输出内容类型，可选 STDIN/STDOUT/STDERR 三项；</li>
+<li><strong>-d:</strong> 后台运行容器，并返回容器ID；</li>
+<li><strong>-i:</strong> 以交互模式运行容器，通常与 -t 同时使用；</li>
+<li><strong>-P:</strong> 随机端口映射，容器内部端口<strong>随机</strong>映射到主机的端口</li>
+<li><strong>-p:</strong> 指定端口映射，格式为：<strong>主机(宿主)端口:容器端口</strong></li>
+<li><strong>-t:</strong> 为容器重新分配一个伪输入终端，通常与 -i 同时使用；</li>
+<li><strong>–name=“nginx-lb”:</strong> 为容器指定一个名称；</li>
+<li><strong>–dns 8.8.8.8:</strong> 指定容器使用的DNS服务器，默认和宿主一致；</li>
+<li><strong>–dns-search example.com:</strong> 指定容器DNS搜索域名，默认和宿主一致；</li>
+<li><strong>-h “mars”:</strong> 指定容器的hostname；</li>
+<li><strong>-e username=“ritchie”:</strong> 设置环境变量；</li>
+<li><strong>–env-file=[]:</strong> 从指定文件读入环境变量；</li>
+<li><strong>–cpuset=“0-2” or –cpuset=“0,1,2”:</strong> 绑定容器到指定CPU运行；</li>
+<li>**-m :**设置容器使用内存最大值；</li>
+<li><strong>–net=“bridge”:</strong> 指定容器的网络连接类型，支持 bridge/host/none/container: 四种类型；</li>
+<li><strong>–link=[]:</strong> 添加链接到另一个容器；</li>
+<li><strong>–expose=[]:</strong> 开放一个端口或一组端口；</li>
+<li><strong>–volume , -v:</strong> 绑定一个卷</li>
+</ul>
+<hr/>
+<p><strong>实例</strong>:</p>
+<p>使用docker镜像nginx:latest以后台模式启动一个容器,并将容器命名为mynginx。</p>
+<pre tabindex="0"><code>docker run --name mynginx -d nginx:latest
+</code></pre><p>使用镜像nginx:latest以后台模式启动一个容器,并将容器的80端口映射到主机随机端口。</p>
+<pre tabindex="0"><code>docker run -P -d nginx:latest
+</code></pre><p>使用镜像 nginx:latest，以后台模式启动一个容器,将容器的 80 端口映射到主机的 80 端口,主机的目录 /data 映射到容器的 /data。</p>
+<pre tabindex="0"><code>docker run -p 80:80 -v /data:/data -d nginx:latest
+</code></pre><p>绑定容器的 8080 端口，并将其映射到本地主机 127.0.0.1 的 80 端口上。</p>
+<pre tabindex="0"><code>$ docker run -p 127.0.0.1:80:8080/tcp ubuntu bash
+</code></pre><p>使用镜像nginx:latest以交互模式启动一个容器,在容器内执行/bin/bash命令。</p>
+<pre tabindex="0"><code>runoob@runoob:~$ docker run -it nginx:latest /bin/bash
+root@b8573233d675:/# 
+</code></pre><hr/>
+<div class="anchor" id="ps-命令"></div>
+<h3 class="relative group">ps 命令 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#ps-%e5%91%bd%e4%bb%a4" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">docker ps <span class="o">[</span>OPTIONS<span class="o">]</span>
+</span></span></code></pre></div><p>OPTIONS说明：</p>
+<ul>
+<li>
+<p>**-a :**显示所有的容器，包括未运行的。</p>
+</li>
+<li>
+<p>**-f :**根据条件过滤显示的内容。</p>
+</li>
+<li>
+<p>**–format :**指定返回值的模板文件。</p>
+</li>
+<li>
+<p>**-l :**显示最近创建的容器。</p>
+</li>
+<li>
+<p>**-n :**列出最近创建的n个容器。</p>
+</li>
+<li>
+<p>**–no-trunc :**不截断输出。</p>
+</li>
+<li>
+<p>**-q :**静默模式，只显示容器编号。</p>
+</li>
+<li>
+<p>**-s :**显示总的文件大小。</p>
+</li>
+</ul>
+<hr/>
+<p><strong>实例:</strong></p>
+<p>列出所有在运行的容器信息。</p>
+<pre tabindex="0"><code>runoob@runoob:~$ docker ps
+CONTAINER ID   IMAGE          COMMAND                ...  PORTS                    NAMES
+09b93464c2f7   nginx:latest   "nginx -g 'daemon off" ...  80/tcp, 443/tcp          myrunoob
+96f7f14e99ab   mysql:5.6      "docker-entrypoint.sh" ...  0.0.0.0:3306-&gt;3306/tcp   mymysql
+</code></pre><p>输出详情介绍：</p>
+<p><strong>CONTAINER ID:</strong> 容器 ID。</p>
+<p><strong>IMAGE:</strong> 使用的镜像。</p>
+<p><strong>COMMAND:</strong> 启动容器时运行的命令。</p>
+<p><strong>CREATED:</strong> 容器的创建时间。</p>
+<p><strong>STATUS:</strong> 容器状态。</p>
+<p>状态有7种：</p>
+<ul>
+<li>created（已创建）</li>
+<li>restarting（重启中）</li>
+<li>running（运行中）</li>
+<li>removing（迁移中）</li>
+<li>paused（暂停）</li>
+<li>exited（停止）</li>
+<li>dead（死亡）</li>
+</ul>
+<p><strong>PORTS:</strong> 容器的端口信息和使用的连接类型（tcp\udp）。</p>
+<p><strong>NAMES:</strong> 自动分配的容器名称。</p>
+<p>列出最近创建的5个容器信息。</p>
+<pre tabindex="0"><code>runoob@runoob:~$ docker ps -n 5
+CONTAINER ID        IMAGE               COMMAND                   CREATED           
+09b93464c2f7        nginx:latest        "nginx -g 'daemon off"    2 days ago   ...     
+b8573233d675        nginx:latest        "/bin/bash"               2 days ago   ...     
+b1a0703e41e7        nginx:latest        "nginx -g 'daemon off"    2 days ago   ...    
+f46fb1dec520        5c6e1090e771        "/bin/sh -c 'set -x \t"   2 days ago   ...   
+a63b4a5597de        860c279d2fec        "bash"                    2 days ago   ...
+</code></pre><p>列出所有创建的容器ID。</p>
+<pre tabindex="0"><code>runoob@runoob:~$ docker ps -a -q
+09b93464c2f7
+b8573233d675
+b1a0703e41e7
+f46fb1dec520
+a63b4a5597de
+6a4aa42e947b
+de7bb36e7968
+43a432b73776
+664a8ab1a585
+ba52eb632bbd
+...
+</code></pre><hr/>
+<div class="anchor" id="ps-过滤"></div>
+<h3 class="relative group">ps 过滤 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#ps-%e8%bf%87%e6%bb%a4" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<p>根据条件过滤显示的内容</p>
+<pre tabindex="0"><code>$ docker run -d --name=test-nginx --label color=blue nginx
+$ docker ps --filter "label=color"
+$ docker ps --filter "label=color=blue"
+</code></pre><p>根据名称过滤</p>
+<pre tabindex="0"><code>$ docker ps --filter"name=test-nginx"
+</code></pre><p>根据状态过滤</p>
+<pre tabindex="0"><code>$ docker ps -a --filter 'exited=0'
+$ docker ps --filter status=running
+$ docker ps --filter status=paused
+</code></pre><p>根据镜像过滤</p>
+<pre tabindex="0"><code>#镜像名称
+$ docker ps --filter ancestor=nginx
+
+#镜像ID
+$ docker ps --filter ancestor=d0e008c6cf02
+</code></pre><p>根据启动顺序过滤</p>
+<pre tabindex="0"><code>$ docker ps -f before=9c3527ed70ce
+$ docker ps -f since=6e63f6ff38b0
+</code></pre><hr/>
+<div class="anchor" id="附录"></div>
+<h2 class="relative group">附录 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e9%99%84%e5%bd%95" style="text-decoration-line: none !important;">#</a></span>
+</h2>
+<p>参考链接：</p>
+<p><a href="https://linux.cn/article-14871-1.html" target="_blank">
+    容器与云|如何在 Ubuntu 22.04 LTS 中安装 Docker 和 Docker Compose (linux.cn)</a></p>
+<p><a href="https://docs.docker.com/get-started/overview/" target="_blank">
+    Docker overview | Docker Documentation</a></p>
+<p><a href="https://www.runoob.com/docker/docker-tutorial.html" target="_blank">
+    Docker 教程 | 菜鸟教程 (runoob.com)</a></p>
+</div>
+<script>
+        var oid = "views_posts\\sth\\docker\\1\\index.md"
+        var oid_likes = "likes_posts\\sth\\docker\\1\\index.md"
+      </script>
+<script integrity="sha512-DkmXO0rQo4LHxgEti/+CJjFmQtqrxPiiBHe9CGdPPabi+pk7wgrU9R58W7aOb5E6IHp8T+N+oOe4BolK/OCmTg==" src="/js/page.min.0e49973b4ad0a382c7c6012d8bff8226316642daabc4f8a20477bd08674f3da6e2fa993bc20ad4f51e7c5bb68e6f913a207a7c4fe37ea0e7b806894afce0a64e.js" type="text/javascript"></script>
+</section>
+<footer class="pt-8 max-w-prose print:hidden">
+<h2 class="mt-8 text-2xl font-extrabold mb-10">Related</h2>
+<section class="w-full grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+<a class="min-w-full" href="/posts/pwn/basic/linux_/">
+<div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
+<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/IMAGE_Background.jpg);"></div>
+<div class="px-6 py-4">
+<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/pwn/basic/linux_/">Linux基础知识</div>
 <div class="text-sm text-neutral-500 dark:text-neutral-400">
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-07-10 00:00:00 +0000 UTC">July 10, 2023</time><span class="px-2 text-primary-500">·</span><span>8908 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">18 分钟</span>
+<time datetime="2023-07-14 00:00:00 +0000 UTC">July 14, 2023</time><span class="px-2 text-primary-500">·</span><span>807 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">2 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
-<span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%85%A5%E9%97%A8/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="mr-2" onclick="window.open(&quot;/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/&quot;,'_self');" style="margin-top:0.5rem">
 <span class="flex">
 <span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    pwn入门
+    基础知识
   </span>
 </span>
 </span>
@@ -395,28 +749,34 @@ New article!
   </span>
 </span>
 </span>
+<span class="mr-2" onclick="window.open(&quot;/tags/linux/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    Linux
+  </span>
+</span>
+</span>
 </div>
+</div>
+</div>
+<div class="px-6 pt-4 pb-2">
 </div>
 </div>
 </a>
-</section>
-<hr/>
-<section class="space-y-10 w-full">
-<a class="flex flex-wrap article border border-neutral-200 dark:border-neutral-700 border-2 rounded-md backdrop-blur" href="/posts/wp/2023_06_ciscn/">
-<div class="w-full md:w-auto h-full thumbnail nozoom" style="background-image:url(/posts/wp/2023_06_ciscn/featured.jpg);"></div>
-<div class="p-4">
-<div class="items-center text-xl font-semibold">
-<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/wp/2023_06_ciscn/">2023 ciscn 初赛</div>
-</div>
+<a class="min-w-full" href="/posts/pwn/basic/long_long_ago/1/">
+<div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
+<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/IMAGE_Background.jpg);"></div>
+<div class="px-6 py-4">
+<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/pwn/basic/long_long_ago/1/">pwn基础——定位溢出点位置</div>
 <div class="text-sm text-neutral-500 dark:text-neutral-400">
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-06-30 00:00:00 +0000 UTC">June 30, 2023</time><span class="px-2 text-primary-500">·</span><span>1691 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">4 分钟</span>
+<time datetime="2023-07-10 00:00:00 +0000 UTC">July 10, 2023</time><span class="px-2 text-primary-500">·</span><span>1399 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">3 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
-<span class="mr-2" onclick="window.open(&quot;/categories/wp/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="mr-2" onclick="window.open(&quot;/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/&quot;,'_self');" style="margin-top:0.5rem">
 <span class="flex">
 <span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    WP
+    基础知识
   </span>
 </span>
 </span>
@@ -434,124 +794,17 @@ New article!
   </span>
 </span>
 </span>
-<span class="mr-2" onclick="window.open(&quot;/tags/reverse/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="mr-2" onclick="window.open(&quot;/tags/%E6%A0%88/&quot;,'_self');" style="margin-top:0.5rem">
 <span class="flex">
 <span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    reverse
-  </span>
-</span>
-</span>
-<span class="mr-2" onclick="window.open(&quot;/tags/crypto/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    Crypto
+    栈
   </span>
 </span>
 </span>
 </div>
 </div>
-</div>
-</a>
-</section>
-<hr/>
-<div class="hugo-encryptor-container">
-<div class="hugo-encryptor-prompt">
-<p>文章的部分内容被密码保护：</p>
-</div>
-<div class="hugo-encryptor-form">
-<input class="hugo-encryptor-input" placeholder="请输入密码"/>
-<input class="hugo-encryptor-button" onclick="_click_handler(this)" type="button" value="点击验证"/>
-</div>
-<div class="hugo-encryptor-cipher-text" style="display: none;">l2JPLEO32BC9w43tsqtzGeyRiUtbA9EMLpcL3Q96nPyVyh45ujWW3pgIaKEkA+jNooZUjWBDe85luqjq5q9UEfXjDS8VpMf/zQ4+PPBoNvwRHn3cnnUqLnwPt194fJ2+</div>
-</div>
-<details class="mt-2 mb-5 overflow-hidden rounded-lg ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5" style="margin-left:0px">
-<summary class="py-1 text-lg font-semibold cursor-pointer bg-primary-200 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-primary-800 dark:text-neutral-100">
-        HWS 2023 学习记录 - This article is part of a series.
-    </summary>
-<div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-        Part 1: This Article
-    </div>
-</details>
-</div>
-<script>
-        var oid = "views_posts\\IoT\\0x01\\index.md"
-        var oid_likes = "likes_posts\\IoT\\0x01\\index.md"
-      </script>
-<script integrity="sha512-DkmXO0rQo4LHxgEti/+CJjFmQtqrxPiiBHe9CGdPPabi+pk7wgrU9R58W7aOb5E6IHp8T+N+oOe4BolK/OCmTg==" src="/js/page.min.0e49973b4ad0a382c7c6012d8bff8226316642daabc4f8a20477bd08674f3da6e2fa993bc20ad4f51e7c5bb68e6f913a207a7c4fe37ea0e7b806894afce0a64e.js" type="text/javascript"></script>
-</section>
-<footer class="pt-8 max-w-prose print:hidden">
-<h2 class="mt-8 text-2xl font-extrabold mb-10">Related</h2>
-<section class="w-full grid gap-4 sm:grid-cols-2 md:grid-cols-3">
-<a class="min-w-full" href="/posts/sth/docker/1/">
-<div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
-<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/posts/sth/docker/1/featured.png);"></div>
-<div class="px-6 py-4">
-<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/sth/docker/1/">Docker学习记录</div>
-<div class="text-sm text-neutral-500 dark:text-neutral-400">
-<div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-08-07 00:00:00 +0000 UTC">August 7, 2023</time><span class="px-2 text-primary-500">·</span><span>2141 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">5 分钟</span>
-</div>
-<div class="flex flex-row flex-wrap items-center">
-<span class="mr-2" onclick="window.open(&quot;/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    基础知识
-  </span>
-</span>
-</span>
-<span class="mr-2" onclick="window.open(&quot;/tags/docker/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    docker
-  </span>
-</span>
-</span>
-</div>
-</div>
-</div>
-<div class="px-6 pt-4 pb-2">
-</div>
-</div>
-</a>
-<a class="min-w-full" href="/posts/sth/redis/1/">
-<div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
-<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/posts/sth/redis/1/featured.png);"></div>
-<div class="px-6 py-4">
-<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/sth/redis/1/">Redis学习记录</div>
-<div class="text-sm text-neutral-500 dark:text-neutral-400">
-<div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-08-07 00:00:00 +0000 UTC">August 7, 2023</time><span class="px-2 text-primary-500">·</span><span>1852 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">4 分钟</span>
-</div>
-<div class="flex flex-row flex-wrap items-center">
-<span class="mr-2" onclick="window.open(&quot;/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    后端开发
-  </span>
-</span>
-</span>
-<span class="mr-2" onclick="window.open(&quot;/tags/redis/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    Redis
-  </span>
-</span>
-</span>
-<span class="mr-2" onclick="window.open(&quot;/tags/%E5%90%8E%E7%AB%AF/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    后端
-  </span>
-</span>
-</span>
-<span class="mr-2" onclick="window.open(&quot;/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    数据库
-  </span>
-</span>
-</span>
-</div>
+<div class="py-1 prose dark:prose-invert">
+<p>本系列为博主在大一上学期刚入门pwn时所记下的学习记录</p>
 </div>
 </div>
 <div class="px-6 pt-4 pb-2">
@@ -604,8 +857,8 @@ New article!
 <div style="padding-bottom:1em;">
 <p> </p>
 <p>本文作者：<a href="https://ta0lve.github.io/about/" target="_blank"><font color="#49b1f5" style="text-decoration: underline">ta0lve</font></a></p>
-<p>本文链接：<a href="https://ta0lve.github.io/posts/iot/0x01/" target="_blank"><font color="#49b1f5" style="text-decoration: underline">IoT 学习记录1</font></a></p>
-<p><a href="https://ta0lve.github.io/posts/iot/0x01/" target="_blank"><font color="#49b1f5" style="text-decoration: underline"> https://ta0lve.github.io/posts/iot/0x01/ </font></a></p>
+<p>本文链接：<a href="https://ta0lve.github.io/posts/sth/docker/1/" target="_blank"><font color="#49b1f5" style="text-decoration: underline">Docker学习记录</font></a></p>
+<p><a href="https://ta0lve.github.io/posts/sth/docker/1/" target="_blank"><font color="#49b1f5" style="text-decoration: underline"> https://ta0lve.github.io/posts/sth/docker/1/ </font></a></p>
 <p>版权声明：本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank"><font color="#49b1f5" style="text-decoration: underline"> CC BY-NC 4.0 </font></a> 许可协议。</p>
 <p>转载请注明来自<a class="redlink" href="https://ta0lve.github.io/" target="_blank"> <font color="#49b1f5" style="text-decoration: underline">ta0lve's Blog</font></a> ！</p>
 </div>
@@ -615,28 +868,18 @@ New article!
 <hr class="border-dotted border-neutral-300 dark:border-neutral-600"/>
 <div class="flex justify-between pt-3">
 <span>
-<a class="flex group mr-3" href="/posts/pwn/basic/tutorial1/">
+<a class="flex group mr-3" href="/posts/sth/redis/1/">
 <span class="mr-3 text-neutral-700 group-hover:text-primary-600 ltr:inline rtl:hidden dark:text-neutral dark:group-hover:text-primary-400">←</span>
 <span class="ml-3 text-neutral-700 group-hover:text-primary-600 ltr:hidden rtl:inline dark:text-neutral dark:group-hover:text-primary-400">→</span>
 <span class="flex flex-col">
-<span class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500">pwn入门教程</span>
+<span class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500">Redis学习记录</span>
 <span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
-<time datetime="2023-08-05 00:00:00 +0000 UTC">August 5, 2023</time>
+<time datetime="2023-08-07 00:00:00 +0000 UTC">August 7, 2023</time>
 </span>
 </span>
 </a>
 </span>
 <span>
-<a class="flex text-right group ml-3" href="/posts/android/tools/apktool/">
-<span class="flex flex-col">
-<span class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500">apktool安装与使用</span>
-<span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
-<time datetime="2023-08-06 00:00:00 +0000 UTC">August 6, 2023</time>
-</span>
-</span>
-<span class="ml-3 text-neutral-700 group-hover:text-primary-600 ltr:inline rtl:hidden dark:text-neutral dark:group-hover:text-primary-400">→</span>
-<span class="mr-3 text-neutral-700 group-hover:text-primary-600 ltr:hidden rtl:inline dark:text-neutral dark:group-hover:text-primary-400">←</span>
-</a>
 </span>
 </div>
 </div>
@@ -704,5 +947,5 @@ New article!
 </div>
 </div>
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script><script src="/decrypt.js"></script></body>
+</body>
 </html>
