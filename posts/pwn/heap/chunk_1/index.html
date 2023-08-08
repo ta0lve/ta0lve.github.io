@@ -350,12 +350,12 @@
 <nav id="TableOfContents">
 <ul>
 <li><a href="#堆的概念">堆的概念</a></li>
-<li><a href="#堆的实现"><strong>堆的实现</strong></a>
+<li><a href="#堆的实现">堆的实现</a>
 <ul>
 <li>
 <ul>
 <li><a href="#堆管理器"><strong>堆管理器</strong></a></li>
-<li><a href="#系统所调用的函数"><strong>系统所调用的函数</strong></a></li>
+<li><a href="#系统所调用的函数">系统所调用的函数</a></li>
 <li><a href="#多线程支持">多线程支持</a></li>
 </ul>
 </li>
@@ -387,12 +387,12 @@
 <nav id="TableOfContents">
 <ul>
 <li><a href="#堆的概念">堆的概念</a></li>
-<li><a href="#堆的实现"><strong>堆的实现</strong></a>
+<li><a href="#堆的实现">堆的实现</a>
 <ul>
 <li>
 <ul>
 <li><a href="#堆管理器"><strong>堆管理器</strong></a></li>
-<li><a href="#系统所调用的函数"><strong>系统所调用的函数</strong></a></li>
+<li><a href="#系统所调用的函数">系统所调用的函数</a></li>
 <li><a href="#多线程支持">多线程支持</a></li>
 </ul>
 </li>
@@ -474,8 +474,8 @@
 <p>在程序运行过程中，堆可以提供动态分配的内存，允许程序申请大小未知的内存。堆其实就是程序虚拟地址空间的一块<strong>连续的线性区域</strong>，它<strong>由低地址向高地址</strong>方向增长。我们一般称管理堆的那部分程序为堆管理器。（from <a href="https://ctf-wiki.org/pwn/linux/user-mode/heap/ptmalloc2/heap-overview/" target="_blank">
     wiki</a>）</p>
 <div class="anchor" id="堆的实现"></div>
-<h2 class="relative group"><strong>堆的实现</strong>
-<span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<h2 class="relative group">堆的实现 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e5%a0%86%e7%9a%84%e5%ae%9e%e7%8e%b0" style="text-decoration-line: none !important;">#</a></span>
 </h2>
 <ul>
@@ -558,8 +558,8 @@
 </ul>
 <hr/>
 <div class="anchor" id="系统所调用的函数"></div>
-<h4 class="relative group"><strong>系统所调用的函数</strong>
-<span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<h4 class="relative group">系统所调用的函数 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e7%b3%bb%e7%bb%9f%e6%89%80%e8%b0%83%e7%94%a8%e7%9a%84%e5%87%bd%e6%95%b0" style="text-decoration-line: none !important;">#</a></span>
 </h4>
 <p>malloc和free在动态申请或释放内存时，主要是调用(s)brk和mmap,unmmap函数实现的。</p>
