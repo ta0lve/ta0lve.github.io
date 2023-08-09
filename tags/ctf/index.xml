@@ -6,7 +6,16 @@
     <description>Recent content in CTF on ta0lve</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 05 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://ta0lve.github.io/tags/ctf/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 09 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://ta0lve.github.io/tags/ctf/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Kernel PWN 基础知识学习记录</title>
+      <link>https://ta0lve.github.io/posts/pwn/kernel/basic1/</link>
+      <pubDate>Wed, 09 Aug 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ta0lve.github.io/posts/pwn/kernel/basic1/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>pwn入门教程</title>
       <link>https://ta0lve.github.io/posts/pwn/basic/tutorial1/</link>
