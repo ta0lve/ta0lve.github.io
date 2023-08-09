@@ -18,6 +18,8 @@
     
   
     
+  
+    
       <url>
             <loc>https://ta0lve.github.io/posts/pwn/kernel/basic1/</loc>
             <lastmod>2023-08-09T00:00:00+00:00</lastmod>
@@ -41,6 +43,17 @@
   
     
   
+    
+  
+    
+  
+    
+      <url>
+            <loc>https://ta0lve.github.io/posts/pwn/heap/chunk_2/</loc>
+            <lastmod>2023-08-09T00:00:00+00:00</lastmod>
+            <changefreq>daily</changefreq>
+            <priority>0.5</priority>
+          </url>
     
   
     
@@ -145,16 +158,12 @@
     
   
     
-  
-    
       <url>
             <loc>https://ta0lve.github.io/posts/pwn/heap/chunk_1/</loc>
             <lastmod>2023-07-31T00:00:00+00:00</lastmod>
             <changefreq>daily</changefreq>
             <priority>0.5</priority>
           </url>
-    
-  
     
   
     

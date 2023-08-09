@@ -18,6 +18,15 @@
     </item>
     
     <item>
+      <title>堆分配过程学习记录</title>
+      <link>https://ta0lve.github.io/posts/pwn/heap/chunk_2/</link>
+      <pubDate>Wed, 09 Aug 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ta0lve.github.io/posts/pwn/heap/chunk_2/</guid>
+      <description>以下内容复制自： malloc内存管理总结_g_malloc是</description>
+    </item>
+    
+    <item>
       <title>Docker学习记录</title>
       <link>https://ta0lve.github.io/posts/sth/docker/1/</link>
       <pubDate>Mon, 07 Aug 2023 00:00:00 +0000</pubDate>
