@@ -26,7 +26,8 @@
 <link href="/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="/site.webmanifest" rel="manifest"/>
 <meta content="Kernel PWN 基础知识学习记录" property="og:title"/>
-<meta content="" property="og:description"/>
+<meta content="此文章还在施工中，
+路过的师傅们看看远处的学习记录吧！" property="og:description"/>
 <meta content="article" property="og:type"/>
 <meta content="https://ta0lve.github.io/posts/pwn/kernel/basic1/" property="og:url"/><meta content="https://ta0lve.github.io/posts/pwn/kernel/basic1/featured.jpg" property="og:image"/><meta content="posts" property="article:section"/>
 <meta content="2023-08-09T00:00:00+00:00" property="article:published_time"/>
@@ -34,7 +35,8 @@
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="https://ta0lve.github.io/posts/pwn/kernel/basic1/featured.jpg" name="twitter:image"/>
 <meta content="Kernel PWN 基础知识学习记录" name="twitter:title"/>
-<meta content="" name="twitter:description"/>
+<meta content="此文章还在施工中，
+路过的师傅们看看远处的学习记录吧！" name="twitter:description"/>
 <script type="application/ld+json">
   [{
     "@context": "https://schema.org",
@@ -43,7 +45,7 @@
     "name": "Kernel PWN 基础知识学习记录",
     "headline": "Kernel PWN 基础知识学习记录",
     
-    
+    "abstract": "\u003cp\u003e\u003cstrong\u003e此文章还在施工中，\u003c\/strong\u003e\u003c\/p\u003e\n\u003cp\u003e路过的师傅们看看远处的学习记录吧！\u003c\/p\u003e",
     "inLanguage": "zh-cn",
     "url" : "https:\/\/ta0lve.github.io\/posts\/pwn\/kernel\/basic1\/",
     "author" : {
@@ -59,7 +61,7 @@
     "keywords": ["CTF","PWN","Kernel"],
     
     "mainEntityOfPage": "true",
-    "wordCount": "0"
+    "wordCount": "167"
   }]
   </script>
 <meta content="ta0lve" name="author"/>
@@ -283,7 +285,7 @@
     </h1>
 <div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-08-09 00:00:00 +0000 UTC">August 9, 2023</time>
+<time datetime="2023-08-09 00:00:00 +0000 UTC">August 9, 2023</time><span class="px-2 text-primary-500">·</span><span>167 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">1 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
 <span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/&quot;,'_self');" style="margin-top:0.5rem">
@@ -358,6 +360,125 @@
         Part 1: This Article
     </div>
 </details>
+<p><strong>此文章还在施工中，</strong></p>
+<p>路过的师傅们看看远处的学习记录吧！</p>
+<hr/>
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    
+New article!
+
+  </span>
+</span>
+<section class="space-y-10 w-full">
+<a class="flex flex-wrap article border border-neutral-200 dark:border-neutral-700 border-2 rounded-md backdrop-blur" href="/posts/pwn/basic/pwn-_environment/">
+<div class="w-full md:w-auto h-full thumbnail nozoom" style="background-image:url(/posts/pwn/basic/pwn-_environment/featured.jpg);"></div>
+<div class="p-4">
+<div class="items-center text-xl font-semibold">
+<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/pwn/basic/pwn-_environment/">PWN环境二次搭建记录-Ubuntu 22.04</div>
+</div>
+<div class="text-sm text-neutral-500 dark:text-neutral-400">
+<div class="flex flex-row flex-wrap items-center">
+<time datetime="2023-07-10 00:00:00 +0000 UTC">July 10, 2023</time><span class="px-2 text-primary-500">·</span><span>8908 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">18 分钟</span>
+</div>
+<div class="flex flex-row flex-wrap items-center">
+<span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%85%A5%E9%97%A8/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    pwn入门
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/ctf/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    CTF
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/pwn/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    PWN
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/ubuntu/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    Ubuntu
+  </span>
+</span>
+</span>
+</div>
+</div>
+</div>
+</a>
+</section>
+<hr/>
+<section class="space-y-10 w-full">
+<a class="flex flex-wrap article border border-neutral-200 dark:border-neutral-700 border-2 rounded-md backdrop-blur" href="/posts/wp/2023_06_ciscn/">
+<div class="w-full md:w-auto h-full thumbnail nozoom" style="background-image:url(/posts/wp/2023_06_ciscn/featured.jpg);"></div>
+<div class="p-4">
+<div class="items-center text-xl font-semibold">
+<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/wp/2023_06_ciscn/">2023 ciscn 初赛</div>
+</div>
+<div class="text-sm text-neutral-500 dark:text-neutral-400">
+<div class="flex flex-row flex-wrap items-center">
+<time datetime="2023-06-30 00:00:00 +0000 UTC">June 30, 2023</time><span class="px-2 text-primary-500">·</span><span>1691 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">4 分钟</span>
+</div>
+<div class="flex flex-row flex-wrap items-center">
+<span class="mr-2" onclick="window.open(&quot;/categories/wp/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    WP
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/ctf/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    CTF
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/pwn/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    PWN
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/reverse/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    reverse
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/crypto/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    Crypto
+  </span>
+</span>
+</span>
+</div>
+</div>
+</div>
+</a>
+</section>
+<hr/>
+<div class="hugo-encryptor-container">
+<div class="hugo-encryptor-prompt">
+<p>文章的部分内容被密码保护：</p>
+</div>
+<div class="hugo-encryptor-form">
+<input class="hugo-encryptor-input" placeholder="请输入密码"/>
+<input class="hugo-encryptor-button" onclick="_click_handler(this)" type="button" value="点击验证"/>
+</div>
+<div class="hugo-encryptor-cipher-text" style="display: none;">l2JPLEO32BC9w43tsqtzGeyRiUtbA9EMLpcL3Q96nPyVyh45ujWW3pgIaKEkA+jNooZUjWBDe85luqjq5q9UESO4IS6tvX4TsUyogwAYXXRn7eBunvqWDZJD7vyMSuk/cCkk5XWgXYxi6ols4R48hyWn5Y3JupgP4RDjfVnLU2RdGCDubcaijpk6RWwttV5WJWxdSeMvZJUNSuMQcXwgcRP1lCjOBRvfkxcAv2QMnTF6XOUNL0AyzzBcpKdciGynJw5KsMsXRMy+ufVZ1nGU/ACRO798Pg5boshSEB84L0aup6YTKssbUOdbBlSdtSKJBBD/gaLmPYNTVg426YGp5QrvYbQKIR+Jtyb4smM2SwQvNOyLMmRNsysUOHdRUMSj39onYYgSlR4F96aG+xh9IyTgSC8ZzXlIMST3HExmKDCWZsuh9Th3bUr1tKi75Axg3US6Ifi1nYd6kk8zp5Cgz3nGZalAlHcRmFPheqYd2CTsMCWof/mHLNOPcx3qPLAssYCD8l6YxDi8hYkVMTkz6dvsLGb95h1gIAAK5NhJm5CAwOq6VUK3cMTTFSQ2twT5r7A5jTjCD2rGsVeVpwD3Su716wr81ngdb1H1F71yxAWFEfOTvYPR+IZO91vc0Q1/</div>
+</div>
 <details class="mt-2 mb-5 overflow-hidden rounded-lg ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5" style="margin-left:0px">
 <summary class="py-1 text-lg font-semibold cursor-pointer bg-primary-200 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-primary-800 dark:text-neutral-100">
         Kernel PWN 学习 - This article is part of a series.
@@ -545,6 +666,11 @@
 </script>
 </footer>
 </article>
+<div class="pointer-events-none absolute top-[110vh] bottom-0 w-12 ltr:right-0 rtl:left-0" id="top-scroller">
+<a aria-label="" class="pointer-events-auto sticky top-[calc(100vh-5.5rem)] flex h-12 w-12 mb-16 items-center justify-center rounded-full bg-neutral/50 text-xl text-neutral-700 backdrop-blur hover:text-primary-600 dark:bg-neutral-800/50 dark:text-neutral dark:hover:text-primary-400" href="#the-top" title="">
+    ↑
+  </a>
+</div>
 </main><footer class="py-10 print:hidden" id="site-footer">
 <nav class="flex flex-row pb-4 text-base font-medium text-neutral-500 dark:text-neutral-400">
 <ul class="flex flex-col list-none sm:flex-row">
@@ -600,5 +726,5 @@
 </div>
 </div>
 </div>
-</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script><script src="/decrypt.js"></script></body>
 </html>
