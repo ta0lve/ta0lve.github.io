@@ -59,7 +59,7 @@
     "keywords": ["CTF","PWN","heap"],
     
     "mainEntityOfPage": "true",
-    "wordCount": "7179"
+    "wordCount": "7606"
   }]
   </script>
 <meta content="ta0lve" name="author"/>
@@ -283,7 +283,7 @@
     </h1>
 <div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-07-31 00:00:00 +0000 UTC">July 31, 2023</time><span class="px-2 text-primary-500">·</span><span>7179 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">15 分钟</span>
+<time datetime="2023-07-31 00:00:00 +0000 UTC">July 31, 2023</time><span class="px-2 text-primary-500">·</span><span>7606 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">16 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
 <span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/&quot;,'_self');" style="margin-top:0.5rem">
@@ -916,6 +916,14 @@
 64bit –&gt; arena_num = 8 * core</p>
 </blockquote>
 </li>
+</ul>
+</li>
+<li>
+<p>主线程的 main arena和其他线程的 arena 可以看作是<strong>主分配区和非主分配区</strong></p>
+<ul>
+<li>ps：ptmalloc为什么要增加非主分配区？（问题与回答<strong>复制自</strong>：<a href="https://blog.csdn.net/sinat_19596835/article/details/81665095" target="_blank">
+    malloc内存管理总结_</a>）</li>
+<li>答：如果没有非主分配区，所有的线程在主分配区上操作，互相竞争锁的过程十分影响分配效率。ptmalloc中增加了非主分配区支持，主分配区和非主分配区用环形链表进行管理，提高malloc的分配效率。 申请小块内存时会产生很多内存碎片，ptmalloc在整理时也需要对分配区做加锁操作。每个加锁操作大概需要5～10个cpu指令，而且程序线程很多的情况下，锁等待的时间就会延长，导致malloc性能下降。一次加锁操作需要消耗100ns左右，正是锁的缘故，导致ptmalloc在多线程竞争情况下性能远远落后于tcmalloc。最新版的ptmalloc对锁进行了优化，加入了PER_THREAD和ATOMIC_FASTBINS优化，但默认编译不会启用该优化，这两个对锁的优化应该能够提升多线程内存的分配的效率。</li>
 </ul>
 </li>
 <li>
