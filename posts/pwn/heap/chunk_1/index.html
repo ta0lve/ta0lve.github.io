@@ -59,7 +59,7 @@
     "keywords": ["CTF","PWN","heap"],
     
     "mainEntityOfPage": "true",
-    "wordCount": "3945"
+    "wordCount": "7179"
   }]
   </script>
 <meta content="ta0lve" name="author"/>
@@ -283,7 +283,7 @@
     </h1>
 <div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-07-31 00:00:00 +0000 UTC">July 31, 2023</time><span class="px-2 text-primary-500">·</span><span>3945 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">8 分钟</span>
+<time datetime="2023-07-31 00:00:00 +0000 UTC">July 31, 2023</time><span class="px-2 text-primary-500">·</span><span>7179 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">15 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
 <span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/&quot;,'_self');" style="margin-top:0.5rem">
@@ -358,29 +358,34 @@
 <nav id="TableOfContents">
 <ul>
 <li><a href="#堆的概念">堆的概念</a></li>
-<li><a href="#堆的实现">堆的实现</a>
-<ul>
-<li>
-<ul>
-<li><a href="#堆管理器"><strong>堆管理器</strong></a></li>
-<li><a href="#系统所调用的函数">系统所调用的函数</a></li>
-<li><a href="#多线程支持">多线程支持</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li><a href="#堆的实现">堆的实现</a></li>
 <li><a href="#堆的微观结构">堆的微观结构</a>
 <ul>
-<li><a href="#malloc_chunk">malloc_chunk</a></li>
-<li><a href="#size_sz-与-size_t">SIZE_SZ 与 size_t</a></li>
-<li><a href="#prev_size">prev_size</a></li>
-<li><a href="#size">size</a></li>
-<li><a href="#fdbk">fd，bk</a>
+<li><a href="#size_sz-与-size_t"><strong>SIZE_SZ 与 size_t</strong></a></li>
+<li><a href="#malloc_chunk"><strong>malloc_chunk</strong></a></li>
+<li><a href="#prev_size"><strong>prev_size</strong></a></li>
+<li><a href="#size"><strong>size</strong></a>
 <ul>
-<li><a href="#fd_nextsize-bk_nextsize">fd_nextsize， bk_nextsize</a></li>
+<li><a href="#一些基础的攻击思路">一些基础的攻击思路：</a></li>
 </ul>
 </li>
-<li><a href="#notice">notice</a></li>
+<li><a href="#fdbk"><strong>fd，bk</strong></a></li>
+<li><a href="#fd_nextsize-bk_nextsize"><strong>fd_nextsize， bk_nextsize</strong></a></li>
+<li><a href="#一些细节">一些细节</a></li>
+</ul>
+</li>
+<li><a href="#堆的宏观结构">堆的宏观结构</a>
+<ul>
+<li><a href="#arena--main_arena"><strong>arena &amp; main_arena</strong></a></li>
+<li><a href="#malloc_state"><strong>malloc_state</strong></a></li>
+<li><a href="#bin"><strong>bin</strong></a>
+<ul>
+<li><a href="#fastbin"><strong>fastbin</strong></a></li>
+<li><a href="#smallbin"><strong>smallbin</strong></a></li>
+<li><a href="#unsortedbin"><strong>unsortedbin</strong></a></li>
+<li><a href="#largebin"><strong>largebin</strong></a></li>
+</ul>
+</li>
 <li><a href="#附录">附录</a></li>
 </ul>
 </li>
@@ -395,29 +400,34 @@
 <nav id="TableOfContents">
 <ul>
 <li><a href="#堆的概念">堆的概念</a></li>
-<li><a href="#堆的实现">堆的实现</a>
-<ul>
-<li>
-<ul>
-<li><a href="#堆管理器"><strong>堆管理器</strong></a></li>
-<li><a href="#系统所调用的函数">系统所调用的函数</a></li>
-<li><a href="#多线程支持">多线程支持</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li><a href="#堆的实现">堆的实现</a></li>
 <li><a href="#堆的微观结构">堆的微观结构</a>
 <ul>
-<li><a href="#malloc_chunk">malloc_chunk</a></li>
-<li><a href="#size_sz-与-size_t">SIZE_SZ 与 size_t</a></li>
-<li><a href="#prev_size">prev_size</a></li>
-<li><a href="#size">size</a></li>
-<li><a href="#fdbk">fd，bk</a>
+<li><a href="#size_sz-与-size_t"><strong>SIZE_SZ 与 size_t</strong></a></li>
+<li><a href="#malloc_chunk"><strong>malloc_chunk</strong></a></li>
+<li><a href="#prev_size"><strong>prev_size</strong></a></li>
+<li><a href="#size"><strong>size</strong></a>
 <ul>
-<li><a href="#fd_nextsize-bk_nextsize">fd_nextsize， bk_nextsize</a></li>
+<li><a href="#一些基础的攻击思路">一些基础的攻击思路：</a></li>
 </ul>
 </li>
-<li><a href="#notice">notice</a></li>
+<li><a href="#fdbk"><strong>fd，bk</strong></a></li>
+<li><a href="#fd_nextsize-bk_nextsize"><strong>fd_nextsize， bk_nextsize</strong></a></li>
+<li><a href="#一些细节">一些细节</a></li>
+</ul>
+</li>
+<li><a href="#堆的宏观结构">堆的宏观结构</a>
+<ul>
+<li><a href="#arena--main_arena"><strong>arena &amp; main_arena</strong></a></li>
+<li><a href="#malloc_state"><strong>malloc_state</strong></a></li>
+<li><a href="#bin"><strong>bin</strong></a>
+<ul>
+<li><a href="#fastbin"><strong>fastbin</strong></a></li>
+<li><a href="#smallbin"><strong>smallbin</strong></a></li>
+<li><a href="#unsortedbin"><strong>unsortedbin</strong></a></li>
+<li><a href="#largebin"><strong>largebin</strong></a></li>
+</ul>
+</li>
 <li><a href="#附录">附录</a></li>
 </ul>
 </li>
@@ -535,11 +545,7 @@
 </li>
 </ul>
 <hr/>
-<div class="anchor" id="堆管理器"></div>
-<h4 class="relative group"><strong>堆管理器</strong>
-<span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
-<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e5%a0%86%e7%ae%a1%e7%90%86%e5%99%a8" style="text-decoration-line: none !important;">#</a></span>
-</h4>
+<p><strong>堆管理器</strong></p>
 <p>堆管理器位于程序与内核之间，主要做两件事：</p>
 <ul>
 <li>响应用户申请内存的请求 （<strong>请求堆</strong>）
@@ -565,11 +571,7 @@
 </li>
 </ul>
 <hr/>
-<div class="anchor" id="系统所调用的函数"></div>
-<h4 class="relative group">系统所调用的函数 
-    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
-<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e7%b3%bb%e7%bb%9f%e6%89%80%e8%b0%83%e7%94%a8%e7%9a%84%e5%87%bd%e6%95%b0" style="text-decoration-line: none !important;">#</a></span>
-</h4>
+<p><strong>系统所调用的函数</strong></p>
 <p>malloc和free在动态申请或释放内存时，主要是调用(s)brk和mmap,unmmap函数实现的。</p>
 <ol>
 <li><strong>(s)brk函数</strong>机制</li>
@@ -604,7 +606,6 @@
 </ul>
 </li>
 </ul>
-<hr/>
 <ol start="2">
 <li><strong>mmap函数</strong>机制</li>
 </ol>
@@ -614,11 +615,8 @@
 <li>munmap用于释放内存。</li>
 <li>mmap创建的chunk紧邻libc</li>
 </ul>
-<div class="anchor" id="多线程支持"></div>
-<h4 class="relative group">多线程支持 
-    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
-<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e5%a4%9a%e7%ba%bf%e7%a8%8b%e6%94%af%e6%8c%81" style="text-decoration-line: none !important;">#</a></span>
-</h4>
+<hr/>
+<p><strong>多线程支持</strong></p>
 <ul>
 <li>在原来的dlmalloc实现中，当两个线程同时要申请内存时，只有一个线程可以进入临界区申请内存，而另外一个线程必须等待直到临界区中不再有线程。</li>
 <li>这是因为所有的线程共享一个堆。</li>
@@ -626,14 +624,57 @@
 </ul>
 <p>详见 <a href="https://ctf-wiki.org/pwn/linux/user-mode/heap/ptmalloc2/heap-overview/#_5" target="_blank">
     wiki</a></p>
+<hr/>
 <div class="anchor" id="堆的微观结构"></div>
 <h2 class="relative group">堆的微观结构 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e5%a0%86%e7%9a%84%e5%be%ae%e8%a7%82%e7%bb%93%e6%9e%84" style="text-decoration-line: none !important;">#</a></span>
 </h2>
+<p>先补充两句，个人认为从总体上看可以把堆的数据结构分为微观结构和宏观结构：</p>
+<ul>
+<li>微观结构主要是<strong>malloc_chunk</strong>的数据与结构：
+<ul>
+<li>prev_size</li>
+<li>size</li>
+<li>fd，bk</li>
+<li>fd_nextsize， bk_nextsize</li>
+</ul>
+</li>
+<li>宏观结构包括堆块的宏观信息，可以使我们更好地了解glibc的堆管理实现，宏观结构分为以下几个部分：
+<ul>
+<li><strong>arena &amp; main_arena</strong>：可以看作是堆块的管理器，但其实就是<strong>堆内存本身</strong></li>
+<li><strong>bin</strong>：用<strong>链表结构</strong>管理被free的malloc_chunk（堆块）</li>
+<li><strong>top_chunk</strong>：处于一个arena的最顶部(即最高内存地址处)、不属于任何<strong>bin</strong>的一片内存</li>
+<li><strong>malloc_state</strong>：管理 arena 的核心结构，包含堆的状态信息、bins 链表等
+<ul>
+<li>main arena 对应的 malloc state 结构存储在 glibc 全局变量中</li>
+<li>其他线程 arena 对应的 malloc_state 存储在 arena 本身中</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr/>
+<div class="anchor" id="size_sz-与-size_t"></div>
+<h3 class="relative group"><strong>SIZE_SZ 与 size_t</strong>
+<span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#size_sz-%e4%b8%8e-size_t" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<p>先补充一个小知识，关于堆中结构我们常常会看到<strong>SIZE_SZ</strong> 与 <strong>size_t</strong>，但实际上，在一般场景里他们两个的值是一样的，即在32位系统中是8字节，在64位系统中是16字节。</p>
+<p>下载glibc源码查看ptmalloc可以看到：</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#ifndef INTERNAL_SIZE_T
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define INTERNAL_SIZE_T size_t
+</span></span></span><span class="line"><span class="cl"><span class="cp">#endif
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="cm">/* The corresponding word size. */</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#define SIZE_SZ (sizeof (INTERNAL_SIZE_T))
+</span></span></span></code></pre></div><ul>
+<li>INTERNAL_SIZE_T：size_t，为32/64位整数（8字节/16字节）</li>
+<li>SIZE_SZ：同size_t，8字节/16字节</li>
+</ul>
+<hr/>
 <div class="anchor" id="malloc_chunk"></div>
-<h3 class="relative group">malloc_chunk 
-    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<h3 class="relative group"><strong>malloc_chunk</strong>
+<span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#malloc_chunk" style="text-decoration-line: none !important;">#</a></span>
 </h3>
 <div class="highlight"><pre class="chroma" tabindex="0"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">malloc_chunk</span> <span class="p">{</span>
@@ -658,24 +699,10 @@
 <p>每个字段的具体的解释如下（from <a href="https://ctf-wiki.org/pwn/linux/user-mode/heap/ptmalloc2/heap-structure/" target="_blank">
     wiki</a> and <a href="https://zhuanlan.zhihu.com/p/77316206" target="_blank">
     zhihu</a>）</p>
-<div class="anchor" id="size_sz-与-size_t"></div>
-<h3 class="relative group">SIZE_SZ 与 size_t 
-    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
-<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#size_sz-%e4%b8%8e-size_t" style="text-decoration-line: none !important;">#</a></span>
-</h3>
-<p>下载glibc源码查看ptmalloc可以看到：</p>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#ifndef INTERNAL_SIZE_T
-</span></span></span><span class="line"><span class="cl"><span class="cp">#define INTERNAL_SIZE_T size_t
-</span></span></span><span class="line"><span class="cl"><span class="cp">#endif
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="cm">/* The corresponding word size. */</span>
-</span></span><span class="line"><span class="cl"><span class="cp">#define SIZE_SZ (sizeof (INTERNAL_SIZE_T))
-</span></span></span></code></pre></div><ul>
-<li>INTERNAL_SIZE_T：size_t，为32/64位整数（8字节/16字节）</li>
-<li>SIZE_SZ：同size_t，8字节/16字节</li>
-</ul>
+<hr/>
 <div class="anchor" id="prev_size"></div>
-<h3 class="relative group">prev_size 
-    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<h3 class="relative group"><strong>prev_size</strong>
+<span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#prev_size" style="text-decoration-line: none !important;">#</a></span>
 </h3>
 <ul>
@@ -697,13 +724,12 @@
 </ul>
 <hr/>
 <div class="anchor" id="size"></div>
-<h3 class="relative group">size 
-    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<h3 class="relative group"><strong>size</strong>
+<span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#size" style="text-decoration-line: none !important;">#</a></span>
 </h3>
 <ul>
-<li>
-<p>该 chunk 的大小，大小必须是 2 * SIZE_SZ 的整数倍。</p>
+<li>该 chunk 的大小，大小必须是 2 * SIZE_SZ 的整数倍。
 <ul>
 <li>SIZE_SZ 在32位系统下是 32位 即4个字节大小，在64位系统下是 64位 即8个字节大小</li>
 <li>所以64位chunk的size必须是16字节对齐，32位chunk的size必须是8 字节对齐</li>
@@ -714,46 +740,33 @@
 <li>在gdb中体现为 <strong>0x0011223344556677  0x8899aabbccddeeff</strong> 为16字节</li>
 </ul>
 </li>
-<li>
-<p>NON_MAIN_ARENA，<strong>A</strong>：倒数第三位表示当前chunk属于主分配区(0)还是非主分配区(1)</p>
-</li>
-<li>
-<p>IS_MAPPED，<strong>M</strong>：倒数第二位表示当前chunk是从mmap(1)[多线程]分配的，还是从brk(0)[子线程]分配的</p>
-</li>
-<li>
-<p>PREV_INUSE， <strong>P</strong>：最低位表示前一个 chunk 块是否被分配。</p>
+<li>NON_MAIN_ARENA，<strong>A</strong>：倒数第三位表示当前chunk属于主分配区(0)还是非主分配区(1)</li>
+<li>IS_MAPPED，<strong>M</strong>：倒数第二位表示当前chunk是从mmap(1)[多线程]分配的，还是从brk(0)[子线程]分配的</li>
+<li>PREV_INUSE， <strong>P</strong>：最低位表示前一个 chunk 块是否被分配。
 <ul>
 <li>一般来说，堆中第一个被分配的内存块的 size 字段的 P 位都会被设置为 1，以便于防止访问前面的非法内存。</li>
 <li>当一个 chunk 的 size 的 P 位为 0 时，我们能通过 prev_size 字段来获取上一个 chunk 的大小以及地址。这也方便进行空闲 chunk 之间的合并。</li>
-<li>对于<strong>fastbin</strong>的堆块,不管前面还有没有被分配的chunk，<strong>P</strong>位都为1。</li>
+<li>对于<strong>fastbin</strong>的堆块,不管前面还有没有被分配的chunk，<strong>P</strong>位都为1 。</li>
 </ul>
 </li>
-<li>
-<p><strong>以下为一些基础的攻击思路</strong>：</p>
-</li>
-<li>
-<p>chunk1的数据有效区域覆盖到chunk2的prev_size位,并且chunk2的size位的prev_inuse被覆盖为0。系统认为chunk2之前的chunk1已经未在使用了。</p>
-</li>
-<li>
-<p>当free(chunk2)的时候,系统会将chunk2与chunk2中prev_size大小的空间合并到bins。</p>
-</li>
-<li>
-<p>我们可以通过改变chunk2的prev_size的内容,操纵向前合并的大小。</p>
-</li>
-<li>
-<p>造成的问题：overlap(堆块重叠)，chunk1被释放了，但是我们可以操纵修改它(堆利用的核心思想)，从而修改bins链的内容，泄露其中的地址。</p>
-</li>
-<li>
-<p>形成的攻击：fastbin —&gt; fd —&gt; main_arena —&gt; 分配新的堆块，我们通过修改chunk1的fd内容，达到分配任意内存的目的，造成<strong>fastbin attack</strong>。</p>
-</li>
-<li>
-<p><strong>最小堆原则</strong> : malloc(0)会分配0x20的空间,prev_size + size + 数据对齐的0x10字节</p>
-</li>
+</ul>
+<div class="anchor" id="一些基础的攻击思路"></div>
+<h4 class="relative group">一些基础的攻击思路： 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e4%b8%80%e4%ba%9b%e5%9f%ba%e7%a1%80%e7%9a%84%e6%94%bb%e5%87%bb%e6%80%9d%e8%b7%af" style="text-decoration-line: none !important;">#</a></span>
+</h4>
+<ul>
+<li>chunk1的数据有效区域覆盖到chunk2的prev_size位,并且chunk2的size位的prev_inuse被覆盖为0。系统认为chunk2之前的chunk1已经未在使用了。</li>
+<li>当free(chunk2)的时候,系统会将chunk2与chunk2中prev_size大小的空间合并到bins。</li>
+<li>我们可以通过改变chunk2的prev_size的内容,操纵向前合并的大小。</li>
+<li>造成的问题：overlap(堆块重叠)，chunk1被释放了，但是我们可以操纵修改它(堆利用的核心思想)，从而修改bins链的内容，泄露其中的地址。</li>
+<li>形成的攻击：fastbin —&gt; fd —&gt; main_arena —&gt; 分配新的堆块，我们通过修改chunk1的fd内容，达到分配任意内存的目的，造成<strong>fastbin attack</strong>。</li>
+<li><strong>最小堆原则</strong> : malloc(0)会分配0x20的空间,prev_size + size + 数据对齐的0x10字节</li>
 </ul>
 <hr/>
 <div class="anchor" id="fdbk"></div>
-<h3 class="relative group">fd，bk 
-    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<h3 class="relative group"><strong>fd，bk</strong>
+<span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#fdbk" style="text-decoration-line: none !important;">#</a></span>
 </h3>
 <ul>
@@ -764,10 +777,10 @@
 </ul>
 <hr/>
 <div class="anchor" id="fd_nextsize-bk_nextsize"></div>
-<h4 class="relative group">fd_nextsize， bk_nextsize 
-    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<h3 class="relative group"><strong>fd_nextsize， bk_nextsize</strong>
+<span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#fd_nextsize-bk_nextsize" style="text-decoration-line: none !important;">#</a></span>
-</h4>
+</h3>
 <ul>
 <li>也是只有 chunk 空闲的时候才使用，不过其用于较大的 chunk（large chunk）。</li>
 <li>fd_nextsize 指向前一个与当前 chunk 大小不同的第一个空闲块，不包含 bin 的头指针。</li>
@@ -775,10 +788,10 @@
 <li>一般空闲的 large chunk 在 fd 的遍历顺序中，按照由大到小的顺序排列。<strong>这样做可以避免在寻找合适 chunk 时挨个遍历。</strong></li>
 </ul>
 <hr/>
-<div class="anchor" id="notice"></div>
-<h3 class="relative group">notice 
+<div class="anchor" id="一些细节"></div>
+<h3 class="relative group">一些细节 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
-<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#notice" style="text-decoration-line: none !important;">#</a></span>
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e4%b8%80%e4%ba%9b%e7%bb%86%e8%8a%82" style="text-decoration-line: none !important;">#</a></span>
 </h3>
 <p>一个已经分配的 chunk 的样子如下。我们称前两个字段称为 <strong>chunk header</strong>，后面的部分称为 <strong>user data</strong>。每次 malloc 申请得到的内存指针，其实指向 user data 的起始处。</p>
 <p>当一个 chunk 处于使用状态时，它的下一个 chunk 的 prev_size 域无效，所以下一个 chunk 的该部分也可以被当前 chunk 使用。这就是 chunk 中的<strong>空间复用</strong>。</p>
@@ -845,6 +858,344 @@
 </li>
 </ul>
 </li>
+</ul>
+<hr/>
+<div class="anchor" id="堆的宏观结构"></div>
+<h2 class="relative group">堆的宏观结构 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e5%a0%86%e7%9a%84%e5%ae%8f%e8%a7%82%e7%bb%93%e6%9e%84" style="text-decoration-line: none !important;">#</a></span>
+</h2>
+<p>~~复习一下，~~从总体上看可以把堆的数据结构分为微观结构和宏观结构：</p>
+<ul>
+<li>微观结构主要是<strong>malloc_chunk</strong>的数据与结构：
+<ul>
+<li>prev_size</li>
+<li>size</li>
+<li>fd，bk</li>
+<li>fd_nextsize， bk_nextsize</li>
+</ul>
+</li>
+<li>宏观结构包括堆块的宏观信息，可以使我们更好地了解glibc的堆管理实现，宏观结构分为以下几个部分：
+<ul>
+<li><strong>arena &amp; main_arena</strong>：可以看作是堆块的管理器，但其实就是<strong>堆内存本身</strong></li>
+<li><strong>bin</strong>：用<strong>链表结构</strong>管理被free的malloc_chunk（堆块）</li>
+<li><strong>top_chunk</strong>：处于一个arena的最顶部(即最高内存地址处)、不属于任何<strong>bin</strong>的一片内存</li>
+<li><strong>malloc_state</strong>：管理 arena 的核心结构，包含堆的状态信息、bins 链表等
+<ul>
+<li>main arena 对应的 malloc state 结构存储在 glibc 全局变量中</li>
+<li>其他线程 arena 对应的 malloc_state 存储在 arena 本身中</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr/>
+<div class="anchor" id="arena--main_arena"></div>
+<h3 class="relative group"><strong>arena &amp; main_arena</strong>
+<span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#arena--main_arena" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<ul>
+<li>
+<p>区分二者</p>
+<ul>
+<li>
+<p><strong>arena</strong> 指的是堆内存区域本身，并不是结构；</p>
+</li>
+<li>
+<p>主线程的 main arena 通过 sbrk 创建，管理所有堆块的结构体</p>
+</li>
+<li>
+<p>其他线程的 arena 通过 mmap 创建，有时可能或会被<del>不恰当地</del>称为arena，存在于线程的控制块<strong>plt</strong>中</p>
+</li>
+<li>
+<blockquote>
+<p>不是每个线程都会有对应的arena
+因为每个系统的核数有限，当线程数大于核数的二倍时，就必然有线程处于等待状态，所以没有必要为每个线程分配一个arena
+32bit –&gt; arena_num = 2 * core
+64bit –&gt; arena_num = 8 * core</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>
+<p>如何标志</p>
+<ul>
+<li>在malloc_chunk 中的  size 的倒数第三个标志位 A，多线程时为1，主线程为0</li>
+<li>NON_MAIN_ARENA，<strong>A</strong>：size的倒数第三位表示当前chunk属于主分配区(0)还是非主分配区(1)</li>
+</ul>
+</li>
+<li>
+<p>子线程的堆和主线程的堆是不一样的</p>
+<ul>
+<li>每个线程都会预分配一个堆空间</li>
+<li>线程会从这个对空间创建<strong>top_chunk</strong>和堆块</li>
+<li>当malloc的空间超过预分配的大小，会回到main_arena之前再次分配一个空间</li>
+<li>如果线程的堆存在溢出，可以用之前的chunk越界写堆的arena结构</li>
+</ul>
+</li>
+</ul>
+<p><strong>一些 tips</strong></p>
+<ul>
+<li>定位子线程的chunk的技巧</li>
+</ul>
+<ol>
+<li>向子线程的堆块输入特殊值:“0xdeadbeef”</li>
+<li>在gdb使用 <strong>search -4 0xdeadbeef</strong></li>
+<li>搜索出来的地址即堆的地址</li>
+</ol>
+<ul>
+<li>多线程利用思路</li>
+</ul>
+<ol>
+<li>在子线程中找到堆空间的地址空间A</li>
+<li>在A中找到恢复线程的arena的结构</li>
+<li>通过arena的结构尝试堆利用</li>
+</ol>
+<div class="anchor" id="malloc_state"></div>
+<h3 class="relative group"><strong>malloc_state</strong>
+<span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#malloc_state" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<p>管理 arena 的核心结构，包含堆的状态信息、bins 链表等</p>
+<ul>
+<li>main arena 对应的 malloc state 结构存储在 glibc 全局变量中</li>
+<li>其他线程 arena 对应的 malloc_state 存储在 arena 本身中</li>
+</ul>
+<p>Arena 头部结构：malloc_state 存储了 arena 的状态，其中的 bins[] 用于管理空闲块的 bins</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">struct</span> <span class="n">malloc_state</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="cm">/* Serialize access.  */</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">mutex_t</span> <span class="n">mutex</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="cm">/* Flags (formerly in max_fast).  */</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">flags</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="cm">/* Fastbins */</span>
+</span></span><span class="line"><span class="cl">  <span class="n">mfastbinptr</span> <span class="n">fastbinsY</span><span class="p">[</span><span class="n">NFASTBINS</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">  <span class="cm">/* Base of the topmost chunk -- not otherwise kept in a bin */</span>
+</span></span><span class="line"><span class="cl">  <span class="n">mchunkptr</span> <span class="n">top</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="cm">/* The remainder from the most recent split of a small request */</span>
+</span></span><span class="line"><span class="cl">  <span class="n">mchunkptr</span> <span class="n">last_remainder</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="cm">/* Normal bins packed as described above */</span>
+</span></span><span class="line"><span class="cl">  <span class="n">mchunkptr</span> <span class="n">bins</span><span class="p">[</span><span class="n">NBINS</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">2</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">  <span class="cm">/* Bitmap of bins */</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">binmap</span><span class="p">[</span><span class="n">BINMAPSIZE</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">  <span class="cm">/* Linked list */</span>
+</span></span><span class="line"><span class="cl">  <span class="k">struct</span> <span class="n">malloc_state</span> <span class="o">*</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="cm">/* Linked list for free arenas.  */</span>
+</span></span><span class="line"><span class="cl">  <span class="k">struct</span> <span class="n">malloc_state</span> <span class="o">*</span><span class="n">next_free</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="cm">/* Memory allocated from the system in this arena.  */</span>
+</span></span><span class="line"><span class="cl">  <span class="n">INTERNAL_SIZE_T</span> <span class="n">system_mem</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">INTERNAL_SIZE_T</span> <span class="n">max_system_mem</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><p>主要关心这么几个：</p>
+<ul>
+<li><strong>mfastbinptr fastbinsY[NFASTBINS]</strong>，保存了 fastbins 各个链表的数组的头，大小为10 记录的是fast bin链</li>
+<li><strong>mchunkptr top</strong>，指向了 top chunk</li>
+<li><strong>mchunkptr bins[NBINS * 2 - 2]</strong>，大小为129。记录的是unsorted bin（1）、small bin（2~63）、large bin链（64~126）</li>
+</ul>
+<hr/>
+<div class="anchor" id="bin"></div>
+<h3 class="relative group"><strong>bin</strong>
+<span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#bin" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<p>bin负责管理free的malloc_chunk，按照free的chunk大小划分为以下几种：</p>
+<ul>
+<li>
+<p>fast bins，用于管理较小的 chunk</p>
+</li>
+<li>
+<p>small bins，用于管理中等大小的 chunk</p>
+</li>
+<li>
+<p>large bins，用于管理较大的 chunk</p>
+</li>
+<li>
+<p>unsorted bin，用于存放未整理的 chunk</p>
+</li>
+<li>
+<p><strong>tcache</strong></p>
+<ul>
+<li>是 glibc 2.26 (ubuntu 17.10) 之后引入的一种技术（see <a href="https://sourceware.org/git/?p=glibc.git;a=commitdiff;h=d5c3fafc4307c9b7a4c7d5cb381fcdbfad340bcc" target="_blank">
+    commit</a>），目的是提升堆管理的性能。但提升性能的同时舍弃了很多安全检查，也因此有了很多新的利用方式。</li>
+</ul>
+</li>
+<li>
+<p>管理流程</p>
+</li>
+</ul>
+<ol>
+<li>malloc/free –&gt; glibc –&gt; arena –&gt; fastbin/bins –&gt;smallbin/largebin/unsortedbin</li>
+<li>从glibc找到main_arena</li>
+<li>在main_arena的管理结构体malloc_state通过固定偏移中找到fastbinsY[NFASTBINS]，用以管理fastbin。</li>
+<li>找到bins[NBINS * 2 - 2]，用以管理unsortedbin。</li>
+</ol>
+<ul>
+<li>bin的放置顺序</li>
+</ul>
+<blockquote>
+<p>索引为1的是unsortedbin，这里面的chunk没有进行排序，比较杂乱。
+索引从2到63的bin称为small bin，同一个small bin链表中的chunk的大小相同。两个相邻索引的small bin链表中的chunk大小为2个机器字节，即32–&gt;4字节，64–&gt;8字节。
+索引从64到126的bin被称为large bin。large bins中的每一个bin都包含一定范围内的chunk，其中的chunk按fd指针的顺序从大到小排列，最靠近bin头的越大，相同大小的chunk按照最近使用顺序排列。</p>
+</blockquote>
+<ul>
+<li>
+<p>任意两个物理相邻的空闲chunk不能在一起，否则会合并。</p>
+</li>
+<li>
+<p>free之后的chunk,与top_chunk相邻的,会与top_chunk合并，不与之相邻的,会根据其大小进入到不同的bin</p>
+</li>
+</ul>
+<blockquote>
+<p>小的进入fastbin，大的进入unsortedbin
+此时，释放掉的chunk不会马上归还系统，ptmalloc会统一管理heap和mmap映射区域的空闲的chunk。
+当用户再一次请求分配内存时，ptmalloc分配器会试图在空闲的chunk中挑选一块合适的给用户，这样可以避免频繁的系统调用，减少内存分配的开销。</p>
+</blockquote>
+<ul>
+<li>需要注意的是，并不是所有的chunk被释放之后立即放到bin中。ptmalloc为了提高分配的速度，会把一些小的堆块先放到fast bin的容器内。而且fast bin容器中的chunk的使用标记总是被置为1的，所以不会自动合并。</li>
+</ul>
+<hr/>
+<div class="anchor" id="fastbin"></div>
+<h4 class="relative group"><strong>fastbin</strong>
+<span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#fastbin" style="text-decoration-line: none !important;">#</a></span>
+</h4>
+<p><strong>单向链表后进先出</strong>，同时 p 位被保留（设置值为1）防止合并，同一大小的 chunk 会在同一条链上，不同大小的 chunk 在不同的链上</p>
+<p>不同平台大小不同，列一个索引，当 malloc 的大小在这个范围内的时候会首先去 fastbin 中找</p>
+<table>
+<thead>
+<tr>
+<th>fastbinsY[]（下标）</th>
+<th>x86（size_t=4）</th>
+<th>x64（size_t=8）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0x10</td>
+<td>0x20</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0x18</td>
+<td>0x30</td>
+</tr>
+<tr>
+<td>2</td>
+<td>0x20</td>
+<td>0x40</td>
+</tr>
+<tr>
+<td>3</td>
+<td>0x28</td>
+<td>0x50</td>
+</tr>
+<tr>
+<td>4</td>
+<td>0x30</td>
+<td>0x60</td>
+</tr>
+<tr>
+<td>5</td>
+<td>0x38</td>
+<td>0x70</td>
+</tr>
+<tr>
+<td>6</td>
+<td>0x40</td>
+<td>0x80</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>注意fastbin不属于bins，不是bins管理的</li>
+<li>fashbin是ptmalloc单独用来管理<strong>0x20-0x80</strong>（64位平台）的堆块的数据结构，如果free的chunk大小在0x20-0x80之间，会优先进入fashbin，</li>
+</ul>
+<hr/>
+<div class="anchor" id="smallbin"></div>
+<h4 class="relative group"><strong>smallbin</strong>
+<span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#smallbin" style="text-decoration-line: none !important;">#</a></span>
+</h4>
+<ul>
+<li>大小在0x20-0x400（64位）</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>下标</th>
+<th>x86（size_t=4）</th>
+<th>x64（size_t=8）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td>0x10</td>
+<td>0x20</td>
+</tr>
+<tr>
+<td>3</td>
+<td>0x18</td>
+<td>0x30</td>
+</tr>
+<tr>
+<td>4</td>
+<td>0x20</td>
+<td>0x40</td>
+</tr>
+<tr>
+<td>5</td>
+<td>0x28（40）</td>
+<td>0x50（80）</td>
+</tr>
+<tr>
+<td>x</td>
+<td>2 * 4 * x</td>
+<td>2 * 8 * x</td>
+</tr>
+<tr>
+<td>63</td>
+<td>0x1F8（504）</td>
+<td>0x3F0（1008）</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>双向链表，先进先出</strong></li>
+<li>释放的时候会检查相邻的是不是 free 的，如果是进行<strong>合并</strong>然后放到 <strong>unsortedbin</strong></li>
+</ul>
+<hr/>
+<div class="anchor" id="unsortedbin"></div>
+<h4 class="relative group"><strong>unsortedbin</strong>
+<span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#unsortedbin" style="text-decoration-line: none !important;">#</a></span>
+</h4>
+<p>堆块中转站</p>
+<ul>
+<li><strong>双向循环链表，先进先出</strong></li>
+<li>存放所有不满足 fastbin，未被整理的 chunk
+<ul>
+<li>除了fastbin管理的<strong>小</strong>堆块，free掉的chunk都是先进入到unsortedbin里再进行整理</li>
+</ul>
+</li>
+<li>malloc 的时候在其他 bin 没找到合适的就会遍历 unsortedbin 同时根据大小放到对应的 bin 里</li>
+<li>在整理过程中，先将所有放在unsortedbin链上的堆块按照大小整理到其它链上</li>
+<li>将fastbin上的碎片整理到unsorted,再由unsorted整理到其他bin链</li>
+</ul>
+<hr/>
+<div class="anchor" id="largebin"></div>
+<h4 class="relative group"><strong>largebin</strong>
+<span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#largebin" style="text-decoration-line: none !important;">#</a></span>
+</h4>
+<ul>
+<li>管理大于0x400的堆块（64位），大于0x200的堆块（32位）</li>
+</ul>
+<ul>
+<li><strong>双向链表，先进先出</strong></li>
+<li>需要根据 fd_nextsize 和 bk_nextsize 指针从大到小排序</li>
 </ul>
 <hr/>
 <div class="anchor" id="附录"></div>
