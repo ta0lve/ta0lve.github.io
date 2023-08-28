@@ -59,7 +59,7 @@
     "keywords": ["CTF","PWN","heap"],
     
     "mainEntityOfPage": "true",
-    "wordCount": "7606"
+    "wordCount": "7669"
   }]
   </script>
 <meta content="ta0lve" name="author"/>
@@ -283,7 +283,7 @@
     </h1>
 <div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-07-31 00:00:00 +0000 UTC">July 31, 2023</time><span class="px-2 text-primary-500">·</span><span>7606 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">16 分钟</span>
+<time datetime="2023-07-31 00:00:00 +0000 UTC">July 31, 2023</time><span class="px-2 text-primary-500">·</span><span>7669 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">16 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
 <span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/&quot;,'_self');" style="margin-top:0.5rem">
@@ -522,7 +522,7 @@
 </li>
 <li>
 <p>在 glibc-2.3.x. 之后，glibc 中集成了ptmalloc2，可以<a href="http://ftp.gnu.org/gnu/glibc/" target="_blank">
-    下载glibc源码</a>查看ptmalloc</p>
+     下载glibc源码 </a> 查看ptmalloc</p>
 </li>
 <li>
 <p><a href="http://ftp.gnu.org/gnu/glibc/" target="_blank">
@@ -563,7 +563,7 @@
 </li>
 <li>只有当出现了堆空间不足的情况，堆管理器才会再次与操作系统进行交互
 <ul>
-<li>新创建一个<strong>top_chunk</strong>，并且把原来的t<strong>op_chunk</strong>分配到<strong>unsorted_bin</strong> 里面</li>
+<li>新创建一个<strong>top_chunk</strong>，并且把原来的<strong>top_chunk</strong>分配到<strong>unsorted_bin</strong> 里面</li>
 </ul>
 </li>
 </ul>
@@ -583,15 +583,15 @@
 </ol>
 <div class="highlight"><pre class="chroma" tabindex="0"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp"># include &lt;stdio.h&gt;
 </span></span></span><span class="line"><span class="cl"><span class="cp"># include &lt;unistd.h&gt;
-</span></span></span><span class="line"><span class="cl"><span class="cp"># icclude &lt;sys/types.h&gt;
+</span></span></span><span class="line"><span class="cl"><span class="cp"># include &lt;sys/types.h&gt;
 </span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl"> <span class="kt">void</span> <span class="o">*</span><span class="n">cuur_bkr</span><span class="p">,</span><span class="o">*</span><span class="n">tmp_brk</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"> <span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">getid</span><span class="p">());</span>
-</span></span><span class="line"><span class="cl"> <span class="n">tm_brk</span> <span class="o">=</span> <span class="n">curr_brk</span> <span class="o">=</span> <span class="n">sbrk</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="c1">//给当前程序一个brk
+</span></span><span class="line"><span class="cl"> <span class="n">tm_brk</span> <span class="o">=</span> <span class="n">curr_brk</span> <span class="o">=</span> <span class="n">sbrk</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span> <span class="c1">//给当前程序一个brk
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span> <span class="n">printf</span><span class="p">(</span><span class="s">"%p</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">curr_brk</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"> <span class="n">getchar</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl"><span class="n">brk</span><span class="p">(</span><span class="n">curr_brk</span><span class="o">+</span><span class="mi">4096</span><span class="p">);</span><span class="c1">//设置结尾位置,即分配了4096字节的堆块
+</span></span><span class="line"><span class="cl"> <span class="n">brk</span><span class="p">(</span><span class="n">curr_brk</span><span class="o">+</span><span class="mi">4096</span><span class="p">);</span> <span class="c1">//设置结尾位置,即分配了4096字节的堆块
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span> <span class="n">curr_brk</span><span class="o">=</span><span class="n">sbrk</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"> <span class="n">printf</span><span class="p">(</span><span class="s">"%p</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">curr_brk</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"> <span class="n">getchar</span><span class="p">();</span>
@@ -602,12 +602,20 @@
 </span></span><span class="line"><span class="cl"> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><ul>
-<li>
-<p>初始时，堆的起始地址start_brk以及堆的当前末尾brk指向同一地址。根据是否开启ALSR，两者的具体位置会有所不同。</p>
+<li>初始时，堆的起始地址start_brk以及堆的当前末尾brk指向同一地址。根据是否开启ASLR，两者的具体位置会有所不同
 <ul>
-<li>不开启ASMR时，start_brk以及brk会指向data/bss段的结尾。</li>
-<li>开启ASMR时,start_brk以及brk也会指向同一位置,只是这个位置是在data/bss段结尾后的随机偏移处。</li>
-<li>sbrk创建的chunk紧邻数据段</li>
+<li>
+<p>开启ASLR后，BSS segment和heap间存在Random brk offset</p>
+</li>
+<li>
+<p>关闭ASLR后，堆开始地址和数据段结束地址重合</p>
+<ul>
+<li>不开启ASLR时，start_brk以及brk会指向data/bss段的结尾</li>
+</ul>
+</li>
+<li>
+<p>sbrk创建的chunk紧邻数据段</p>
+</li>
 </ul>
 </li>
 </ul>
@@ -685,7 +693,7 @@
 <div class="highlight"><pre class="chroma" tabindex="0"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">malloc_chunk</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="n">INTERNAL_SIZE_T</span>      <span class="n">prev_size</span><span class="p">;</span>  <span class="cm">/* 如果前面一个堆块是空闲的则表示前一个堆块的大小,否则无意义  */</span>
-</span></span><span class="line"><span class="cl">  <span class="n">INTERNAL_SIZE_T</span>      <span class="n">size</span><span class="p">;</span>       <span class="cm">/* 当前chunk的大小，由于对齐的原因所以低三位作为flag*/</span>
+</span></span><span class="line"><span class="cl">  <span class="n">INTERNAL_SIZE_T</span>      <span class="n">size</span><span class="p">;</span>       <span class="cm">/* 当前chunk的大小，由于对齐的原因所以低三位作为标志位*/</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="cm">/*######################
 </span></span></span><span class="line"><span class="cl"><span class="cm"> 1.真正的内存从这里开始分配
@@ -693,17 +701,17 @@
 </span></span></span><span class="line"><span class="cl"><span class="cm"> 3.只有在free之后才有效。
 </span></span></span><span class="line"><span class="cl"><span class="cm">########################*/</span>
 </span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">  <span class="k">struct</span> <span class="nc">malloc_chunk</span><span class="o">*</span> <span class="n">fd</span><span class="p">;</span>         <span class="cm">/* 当chunk空闲时才有意义,记录后一个空闲chunk的地址 */</span>
+</span></span><span class="line"><span class="cl">  <span class="k">struct</span> <span class="nc">malloc_chunk</span><span class="o">*</span> <span class="n">fd</span><span class="p">;</span> <span class="cm">/* 当chunk空闲时才有意义,记录后一个空闲chunk的地址 */</span>
 </span></span><span class="line"><span class="cl">  <span class="k">struct</span> <span class="nc">malloc_chunk</span><span class="o">*</span> <span class="n">bk</span><span class="p">;</span> <span class="cm">/* 同上,记录前一个空闲chunk的地址  */</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">  <span class="cm">/* Only used for large blocks: pointer to next larger size. */</span>
-</span></span><span class="line"><span class="cl">  <span class="k">struct</span> <span class="nc">malloc_chunk</span><span class="o">*</span> <span class="n">fd_nextsize</span><span class="p">;</span> <span class="cm">/*当前chunk为largebin时才有意义，指向比当前chunk大的第一个空闲chunk */</span>
-</span></span><span class="line"><span class="cl">  <span class="k">struct</span> <span class="nc">malloc_chunk</span><span class="o">*</span> <span class="n">bk_nextsize</span><span class="p">;</span><span class="cm">/*指向比当前chunk小的第一个空闲堆块*/</span>
+</span></span><span class="line"><span class="cl">  <span class="k">struct</span> <span class="nc">malloc_chunk</span><span class="o">*</span> <span class="n">fd_nextsize</span><span class="p">;</span> <span class="cm">/*当前chunk为largebin时才有意义，指向下一个与当前chunk大小不同的第一个空闲块*/</span>
+</span></span><span class="line"><span class="cl">  <span class="k">struct</span> <span class="nc">malloc_chunk</span><span class="o">*</span> <span class="n">bk_nextsize</span><span class="p">;</span><span class="cm">/*指向上一个与当前chunk大小不同的第一个空闲块*/</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span>
-</span></span></code></pre></div>
-<p>每个字段的具体的解释如下（from <a href="https://ctf-wiki.org/pwn/linux/user-mode/heap/ptmalloc2/heap-structure/" target="_blank">
+</span></span></code></pre></div><p>每个字段的具体的解释如下（from <a href="https://ctf-wiki.org/pwn/linux/user-mode/heap/ptmalloc2/heap-structure/" target="_blank">
     wiki</a> and <a href="https://zhuanlan.zhihu.com/p/77316206" target="_blank">
     zhihu</a>）</p>
+<br/>
 <hr/>
 <div class="anchor" id="prev_size"></div>
 <h3 class="relative group"><strong>prev_size</strong>
@@ -776,8 +784,8 @@
 </h3>
 <ul>
 <li>chunk 处于分配状态时，从 fd 字段开始是用户的数据。chunk 空闲时，会被添加到对应的空闲管理链表中，其字段的含义如下</li>
-<li>fd 指向下一个（非物理相邻）空闲的 chunk</li>
-<li>bk 指向上一个（非物理相邻）空闲的 chunk</li>
+<li>fd（forward） 指向前一个（非物理相邻）空闲的 chunk</li>
+<li>bk （backward）指向后一个（非物理相邻）空闲的 chunk</li>
 <li>通过 fd 和 bk 可以将空闲的 chunk 块加入到空闲的 chunk 块链表进行统一管理</li>
 </ul>
 <hr/>
@@ -822,7 +830,7 @@
 </span></span><span class="line"><span class="cl">        <span class="o">+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span>
 </span></span><span class="line"><span class="cl"><span class="err">`</span><span class="n">head</span><span class="p">:</span><span class="s1">' |             Size of chunk, in bytes                     |A|0|P|</span>
 </span></span><span class="line"><span class="cl">  <span class="n">mem</span><span class="o">-&gt;</span> <span class="o">+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span>
-</span></span><span class="line"><span class="cl">        <span class="o">|</span>             <span class="n">Forward</span> <span class="n">pointer</span> <span class="n">to</span> <span class="nb">next</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="nb">list</span>             <span class="o">|</span> <span class="c1"># fd指针(chunk块链表的下一个空闲块)</span>
+</span></span><span class="line"><span class="cl">        <span class="o">|</span>             <span class="n">Forward</span> <span class="n">pointer</span> <span class="n">to</span> <span class="nb">next</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="nb">list</span>             <span class="o">|</span> <span class="c1"># fd指针(指向chunk链表的前一个空闲块)</span>
 </span></span><span class="line"><span class="cl">        <span class="o">+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span>
 </span></span><span class="line"><span class="cl">        <span class="o">|</span>             <span class="n">Back</span> <span class="n">pointer</span> <span class="n">to</span> <span class="n">previous</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="nb">list</span>            <span class="o">|</span> <span class="c1"># bk指针</span>
 </span></span><span class="line"><span class="cl">        <span class="o">+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span>
@@ -845,7 +853,7 @@
 <p>关于n的一些异常情况：</p>
 <ul>
 <li>
-<p>当 n=0 时，返回当前系统允许的堆的最小内存块。（一般分配0x20的空间,prev_size + size + 数据对齐的0x10字节）</p>
+<p>当 n=0 时，返回当前系统允许的堆的最小内存块。（一般分配0x20的空间，prev_size + size + 数据对齐的0x10字节）</p>
 </li>
 <li>
 <p>当 n 为负数时，由于在大多数系统上，<strong>size_t 是无符号数（这一点很重要）</strong>，所以程序就会申请很大的内存空间，但通常来说都会失败，因为系统没有那么多的内存可以分配。</p>
@@ -1014,28 +1022,20 @@
 </h3>
 <p>bin负责管理free的malloc_chunk，按照free的chunk大小划分为以下几种：</p>
 <ul>
-<li>
-<p>fast bins，用于管理较小的 chunk</p>
-</li>
-<li>
-<p>small bins，用于管理中等大小的 chunk</p>
-</li>
-<li>
-<p>large bins，用于管理较大的 chunk</p>
-</li>
-<li>
-<p>unsorted bin，用于存放未整理的 chunk</p>
-</li>
-<li>
-<p><strong>tcache</strong></p>
+<li>fast bins，用于管理较小的 chunk</li>
+<li>small bins，用于管理中等大小的 chunk</li>
+<li>large bins，用于管理较大的 chunk</li>
+<li>unsorted bin，用于存放未整理的 chunk</li>
+<li><strong>tcache</strong>
 <ul>
 <li>是 glibc 2.26 (ubuntu 17.10) 之后引入的一种技术（see <a href="https://sourceware.org/git/?p=glibc.git;a=commitdiff;h=d5c3fafc4307c9b7a4c7d5cb381fcdbfad340bcc" target="_blank">
     commit</a>），目的是提升堆管理的性能。但提升性能的同时舍弃了很多安全检查，也因此有了很多新的利用方式。</li>
 </ul>
 </li>
-<li>
-<p>管理流程</p>
-</li>
+</ul>
+<br/>
+<ul>
+<li>管理流程</li>
 </ul>
 <ol>
 <li>malloc/free –&gt; glibc –&gt; arena –&gt; fastbin/bins –&gt;smallbin/largebin/unsortedbin</li>
@@ -1043,6 +1043,7 @@
 <li>在main_arena的管理结构体malloc_state通过固定偏移中找到fastbinsY[NFASTBINS]，用以管理fastbin。</li>
 <li>找到bins[NBINS * 2 - 2]，用以管理unsortedbin。</li>
 </ol>
+<br/>
 <ul>
 <li>bin的放置顺序</li>
 </ul>
@@ -1051,19 +1052,20 @@
 索引从2到63的bin称为small bin，同一个small bin链表中的chunk的大小相同。两个相邻索引的small bin链表中的chunk大小为2个机器字节，即32–&gt;4字节，64–&gt;8字节。
 索引从64到126的bin被称为large bin。large bins中的每一个bin都包含一定范围内的chunk，其中的chunk按fd指针的顺序从大到小排列，最靠近bin头的越大，相同大小的chunk按照最近使用顺序排列。</p>
 </blockquote>
+<br/>
 <ul>
-<li>
-<p>任意两个物理相邻的空闲chunk不能在一起，否则会合并。</p>
-</li>
-<li>
-<p>free之后的chunk,与top_chunk相邻的,会与top_chunk合并，不与之相邻的,会根据其大小进入到不同的bin</p>
-</li>
+<li>任意两个物理相邻的空闲chunk不能在一起，否则会合并。</li>
+</ul>
+<br/>
+<ul>
+<li>free之后的chunk,与top_chunk相邻的,会与top_chunk合并，不与之相邻的,会根据其大小进入到不同的bin</li>
 </ul>
 <blockquote>
 <p>小的进入fastbin，大的进入unsortedbin
 此时，释放掉的chunk不会马上归还系统，ptmalloc会统一管理heap和mmap映射区域的空闲的chunk。
 当用户再一次请求分配内存时，ptmalloc分配器会试图在空闲的chunk中挑选一块合适的给用户，这样可以避免频繁的系统调用，减少内存分配的开销。</p>
 </blockquote>
+<br/>
 <ul>
 <li>需要注意的是，并不是所有的chunk被释放之后立即放到bin中。ptmalloc为了提高分配的速度，会把一些小的堆块先放到fast bin的容器内。而且fast bin容器中的chunk的使用标记总是被置为1的，所以不会自动合并。</li>
 </ul>
@@ -1073,7 +1075,8 @@
 <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#fastbin" style="text-decoration-line: none !important;">#</a></span>
 </h4>
-<p><strong>单向链表后进先出</strong>，同时 p 位被保留（设置值为1）防止合并，同一大小的 chunk 会在同一条链上，不同大小的 chunk 在不同的链上</p>
+<p><strong>单向链表后进先出</strong>（LIFO），同时 p 位被保留（设置值为1）防止合并，同一大小的 chunk 会在同一条链上，不同大小的 chunk 在不同的链上</p>
+<br/>
 <p>不同平台大小不同，列一个索引，当 malloc 的大小在这个范围内的时候会首先去 fastbin 中找</p>
 <table>
 <thead>
@@ -1123,7 +1126,12 @@
 </table>
 <ul>
 <li>注意fastbin不属于bins，不是bins管理的</li>
-<li>fashbin是ptmalloc单独用来管理<strong>0x20-0x80</strong>（64位平台）的堆块的数据结构，如果free的chunk大小在0x20-0x80之间，会优先进入fashbin，</li>
+<li>fashbin是ptmalloc单独用来管理<strong>0x20-0x80</strong>（64位平台）的堆块的数据结构，如果free的chunk大小在0x20-0x80之间，会优先进入fashbin</li>
+<li>fastbin 为单向链表，只有fd指针，没有bk指针
+<ul>
+<li>0x602080 –&gt; 0x602040 –&gt; 0x602000 –&gt; 0x0</li>
+</ul>
+</li>
 </ul>
 <hr/>
 <div class="anchor" id="smallbin"></div>
@@ -1229,6 +1237,8 @@
     二进制安全之堆溢出（系列）——堆基础 &amp; 结构（四）</a></p>
 <p><a href="https://www.yuque.com/hxfqg9/bin/nvrgrs#ZQEAX" target="_blank">
     堆相关知识 (yuque.com)</a></p>
+<p><a href="https://blog.csdn.net/sinat_19596835/article/details/81665095" target="_blank">
+    malloc内存管理总结_g_malloc是怎么进行内存管理的</a></p>
 <details class="mt-2 mb-5 overflow-hidden rounded-lg ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5" style="margin-left:0px">
 <summary class="py-1 text-lg font-semibold cursor-pointer bg-primary-200 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-primary-800 dark:text-neutral-100">
         堆学习记录 - This article is part of a series.
@@ -1297,6 +1307,44 @@
 </div>
 </div>
 </a>
+<a class="min-w-full" href="/posts/pwn/basic/tools/ropper_/">
+<div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
+<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/flyx6.jpg);"></div>
+<div class="px-6 py-4">
+<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/pwn/basic/tools/ropper_/">Ubuntu Ropper安装与使用</div>
+<div class="text-sm text-neutral-500 dark:text-neutral-400">
+<div class="flex flex-row flex-wrap items-center">
+<time datetime="2023-08-28 00:00:00 +0000 UTC">August 28, 2023</time><span class="px-2 text-primary-500">·</span><span>1612 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">4 分钟</span>
+</div>
+<div class="flex flex-row flex-wrap items-center">
+<span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    PWN学习记录
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/ctf/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    CTF
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/pwn/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    PWN
+  </span>
+</span>
+</span>
+</div>
+</div>
+</div>
+<div class="px-6 pt-4 pb-2">
+</div>
+</div>
+</a>
 <a class="min-w-full" href="/posts/pwn/kernel/basic1/">
 <div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
 <div class="w-full thumbnail_card_related nozoom" style="background-image:url(/posts/pwn/kernel/basic1/featured.jpg);"></div>
@@ -1332,44 +1380,6 @@
 <span class="flex">
 <span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
     Kernel
-  </span>
-</span>
-</span>
-</div>
-</div>
-</div>
-<div class="px-6 pt-4 pb-2">
-</div>
-</div>
-</a>
-<a class="min-w-full" href="/posts/pwn/basic/tutorial1/">
-<div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
-<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/posts/pwn/basic/tutorial1/featured.jpg);"></div>
-<div class="px-6 py-4">
-<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/pwn/basic/tutorial1/">pwn入门教程</div>
-<div class="text-sm text-neutral-500 dark:text-neutral-400">
-<div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-08-05 00:00:00 +0000 UTC">August 5, 2023</time><span class="px-2 text-primary-500">·</span><span>5000 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">10 分钟</span>
-</div>
-<div class="flex flex-row flex-wrap items-center">
-<span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%85%A5%E9%97%A8/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    pwn入门
-  </span>
-</span>
-</span>
-<span class="mr-2" onclick="window.open(&quot;/tags/ctf/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    CTF
-  </span>
-</span>
-</span>
-<span class="mr-2" onclick="window.open(&quot;/tags/pwn/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    PWN
   </span>
 </span>
 </span>

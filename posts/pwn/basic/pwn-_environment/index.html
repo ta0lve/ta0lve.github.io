@@ -59,7 +59,7 @@
     "keywords": ["CTF","PWN","Ubuntu"],
     
     "mainEntityOfPage": "true",
-    "wordCount": "8908"
+    "wordCount": "8934"
   }]
   </script>
 <meta content="ta0lve" name="author"/>
@@ -283,7 +283,7 @@
     </h1>
 <div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-07-10 00:00:00 +0000 UTC">July 10, 2023</time><span class="px-2 text-primary-500">·</span><span>8908 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">18 分钟</span>
+<time datetime="2023-07-10 00:00:00 +0000 UTC">July 10, 2023</time><span class="px-2 text-primary-500">·</span><span>8934 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">18 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
 <span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%85%A5%E9%97%A8/&quot;,'_self');" style="margin-top:0.5rem">
@@ -749,11 +749,11 @@
 <p><strong>1. peda</strong></p>
 <div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 原版</span>
 </span></span><span class="line"><span class="cl"><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">longld</span><span class="o">/</span><span class="n">peda</span><span class="o">.</span><span class="n">git</span>
-</span></span><span class="line"><span class="cl"><span class="n">echo</span> <span class="s2">"source ~/peda/peda.py"</span> <span class="o">&gt;&gt;</span> <span class="o">~/.</span><span class="n">gdbinit</span>
+</span></span><span class="line"><span class="cl"><span class="n">echo</span> <span class="s2">"source ~/peda/peda.py"</span> <span class="o">&gt;</span> <span class="o">~/.</span><span class="n">gdbinit</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1"># 带heap插件版</span>
 </span></span><span class="line"><span class="cl"><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">gitee</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">AC_ddme</span><span class="o">/</span><span class="n">peda</span><span class="o">-</span><span class="n">heap</span><span class="o">.</span><span class="n">git</span>
-</span></span><span class="line"><span class="cl"><span class="n">echo</span> <span class="s2">"source ~/peda-heap/peda.py"</span> <span class="o">&gt;&gt;</span> <span class="o">~/.</span><span class="n">gdbinit</span>
+</span></span><span class="line"><span class="cl"><span class="n">echo</span> <span class="s2">"source ~/peda-heap/peda.py"</span> <span class="o">&gt;</span> <span class="o">~/.</span><span class="n">gdbinit</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1"># 测试：</span>
 </span></span><span class="line"><span class="cl"><span class="n">gdb</span>
@@ -1090,6 +1090,9 @@
 </span></span><span class="line"><span class="cl"><span class="c1"># 辨析：</span>
 </span></span><span class="line"><span class="cl"><span class="n">ROPgadget</span> <span class="o">--</span><span class="n">binary</span> <span class="n">pwn</span> <span class="o">|</span> <span class="n">grep</span> <span class="n">ret</span>  <span class="c1"># 含有ret指令的都符合</span>
 </span></span><span class="line"><span class="cl"><span class="n">ROPgadget</span> <span class="o">--</span><span class="n">binary</span> <span class="n">pwn</span> <span class="o">--</span><span class="n">only</span> <span class="s2">"ret"</span> <span class="c1"># 只含有ret指令的</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># ROPgadget自动生成ropchain</span>
+</span></span><span class="line"><span class="cl"><span class="n">ROPgadget</span> <span class="o">--</span><span class="n">binary</span> <span class="n">pwn</span> <span class="o">--</span><span class="n">ropchain</span>
 </span></span></code></pre></div><p>
 <figure>
 <img alt="image-20230710163347644" class="my-0 rounded-md" src="https://s2.loli.net/2023/08/07/wHFtfrdgo153cOa.png"/>
@@ -1593,6 +1596,7 @@
 <p><a href="https://www.jianshu.com/p/fe4b1088ada4" target="_blank">
     Terminator终端的安装，配置以及如何修改默认终端</a></p>
 <hr/>
+<br/>
 <div class="anchor" id="附录"></div>
 <h2 class="relative group">附录 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
