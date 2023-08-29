@@ -59,7 +59,7 @@
     "keywords": ["CTF","PWN","heap"],
     
     "mainEntityOfPage": "true",
-    "wordCount": "7669"
+    "wordCount": "7845"
   }]
   </script>
 <meta content="ta0lve" name="author"/>
@@ -283,7 +283,7 @@
     </h1>
 <div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-07-31 00:00:00 +0000 UTC">July 31, 2023</time><span class="px-2 text-primary-500">·</span><span>7669 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">16 分钟</span>
+<time datetime="2023-07-31 00:00:00 +0000 UTC">July 31, 2023</time><span class="px-2 text-primary-500">·</span><span>7845 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">16 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
 <span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/&quot;,'_self');" style="margin-top:0.5rem">
@@ -386,6 +386,7 @@
 <li><a href="#largebin"><strong>largebin</strong></a></li>
 </ul>
 </li>
+<li><a href="#top-chunk">top chunk</a></li>
 <li><a href="#附录">附录</a></li>
 </ul>
 </li>
@@ -428,6 +429,7 @@
 <li><a href="#largebin"><strong>largebin</strong></a></li>
 </ul>
 </li>
+<li><a href="#top-chunk">top chunk</a></li>
 <li><a href="#附录">附录</a></li>
 </ul>
 </li>
@@ -842,7 +844,8 @@
 </span></span><span class="line"><span class="cl">        <span class="o">+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span>
 </span></span><span class="line"><span class="cl">        <span class="o">|</span>             <span class="n">Size</span> <span class="n">of</span> <span class="nb">next</span> <span class="n">chunk</span><span class="p">,</span> <span class="ow">in</span> <span class="nb">bytes</span>                <span class="o">|</span><span class="n">A</span><span class="o">|</span><span class="mi">0</span><span class="o">|</span><span class="mi">0</span><span class="o">|</span> <span class="c1"># P位 置0</span>
 </span></span><span class="line"><span class="cl">        <span class="o">+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</span>
-</span></span></code></pre></div><ul>
+</span></span></code></pre></div><br/>
+<ul>
 <li>
 <p>当我们向malloc申请一片内存区域时，这块内存区域就会在内存管理器 <strong>ptmalloc</strong> 以malloc_chunk结构体来表示，而且当我们释放这个堆块时，这个堆的数据结构依然是同一个，只是表现形式不同。</p>
 </li>
@@ -965,6 +968,7 @@
 <li>在gdb使用 <strong>search -4 0xdeadbeef</strong></li>
 <li>搜索出来的地址即堆的地址</li>
 </ol>
+<br/>
 <ul>
 <li>多线程利用思路</li>
 </ul>
@@ -973,6 +977,7 @@
 <li>在A中找到恢复线程的arena的结构</li>
 <li>通过arena的结构尝试堆利用</li>
 </ol>
+<br/>
 <div class="anchor" id="malloc_state"></div>
 <h3 class="relative group"><strong>malloc_state</strong>
 <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
@@ -1213,10 +1218,21 @@
 </h4>
 <ul>
 <li>管理大于0x400的堆块（64位），大于0x200的堆块（32位）</li>
-</ul>
-<ul>
 <li><strong>双向链表，先进先出</strong></li>
 <li>需要根据 fd_nextsize 和 bk_nextsize 指针从大到小排序</li>
+</ul>
+<br/>
+<hr/>
+<div class="anchor" id="top-chunk"></div>
+<h3 class="relative group">top chunk 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#top-chunk" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<p>当我们分配一块堆内存时，top chunk是处于地址的<strong>最高处的</strong>，其前面就是我们所申请的chunk。</p>
+<p>top chunk的合并操作</p>
+<ul>
+<li>如果top chunk前面的chunk不是fast chunk并且处于空闲，那么top chunk就会合并这个chunk。</li>
+<li>如果top chunk前面的chunk是fast chunk，不论是否空闲，top chunk都不会合并这个chunk</li>
 </ul>
 <hr/>
 <div class="anchor" id="附录"></div>

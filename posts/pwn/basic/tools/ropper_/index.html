@@ -456,7 +456,8 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1"># 安装 Keystone:</span>
 </span></span><span class="line"><span class="cl">pip3 install keystone-engine
-</span></span></code></pre></div><p>安装Ropper：</p>
+</span></span></code></pre></div><br/>
+<p>安装Ropper：</p>
 <div class="highlight"><pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># pip直接安装:</span>
 </span></span><span class="line"><span class="cl">pip3 install ropper
 </span></span><span class="line"><span class="cl">
@@ -609,7 +610,7 @@
 </span></span><span class="line"><span class="cl">Examples:
 </span></span><span class="line"><span class="cl">ropchain execve
 </span></span><span class="line"><span class="cl">ropchain mprotect <span class="nv">address</span><span class="o">=</span>0xbfff0000 <span class="nv">size</span><span class="o">=</span>0x21000
-</span></span></code></pre></div><p>示例：</p>
+</span></span></code></pre></div><p><strong>示例：</strong></p>
 <div class="highlight"><pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 注意：这里的rop_payload含有\x20字节</span>
 </span></span><span class="line"><span class="cl"><span class="c1"># 会导致字节发送时被截断导致getshell失败</span>
 </span></span><span class="line"><span class="cl"><span class="c1"># 而且ropchain一般在get函数接受大量的字符、且存在溢出漏洞时才使用</span>
@@ -795,7 +796,9 @@
 </h3>
 <div class="highlight"><pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">(</span>pwn/ELF/x86_64<span class="o">)</span>&gt; quit
 </span></span><span class="line"><span class="cl"><span class="c1"># 退出 ropper</span>
-</span></span></code></pre></div><div class="anchor" id="附录"></div>
+</span></span></code></pre></div><br/>
+<hr/>
+<div class="anchor" id="附录"></div>
 <h2 class="relative group">附录 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e9%99%84%e5%bd%95" style="text-decoration-line: none !important;">#</a></span>
@@ -869,7 +872,7 @@
 <div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/pwn/heap/chunk_1/">堆基础知识学习记录</div>
 <div class="text-sm text-neutral-500 dark:text-neutral-400">
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-07-31 00:00:00 +0000 UTC">July 31, 2023</time><span class="px-2 text-primary-500">·</span><span>7669 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">16 分钟</span>
+<time datetime="2023-07-31 00:00:00 +0000 UTC">July 31, 2023</time><span class="px-2 text-primary-500">·</span><span>7845 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">16 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
 <span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/&quot;,'_self');" style="margin-top:0.5rem">
