@@ -24,11 +24,11 @@
 <media:content url="https://ta0lve.github.io/posts/pwn/kernel/basic1/featured.jpg" xmlns:media="http://search.yahoo.com/mrss/"/>
 </item>
 <item>
-<title>堆分配过程学习记录</title>
+<title>堆管理过程学习记录</title>
 <link>https://ta0lve.github.io/posts/pwn/heap/chunk_2/</link>
 <pubDate>Wed, 09 Aug 2023 00:00:00 +0000</pubDate>
 <guid>https://ta0lve.github.io/posts/pwn/heap/chunk_2/</guid>
-<description>以下内容复制自： malloc内存管理总结_g_malloc是</description>
+<description>glibc内存管理流程图 # （看不清楚可以保存下来放大）： gl</description>
 <media:content url="https://ta0lve.github.io/posts/pwn/heap/chunk_2/featured.jpg" xmlns:media="http://search.yahoo.com/mrss/"/>
 </item>
 <item>
@@ -85,7 +85,7 @@
 <link>https://ta0lve.github.io/posts/pwn/heap/chunk_1/</link>
 <pubDate>Mon, 31 Jul 2023 00:00:00 +0000</pubDate>
 <guid>https://ta0lve.github.io/posts/pwn/heap/chunk_1/</guid>
-<description>堆的概念 # 在程序运行过程中，堆可以提供动态分配的内存，允许程</description>
+<description>如果本博客部分文章图片加载失败， 可以点击此处查看解决办法 堆的</description>
 <media:content url="https://ta0lve.github.io/posts/pwn/heap/chunk_1/featured.png" xmlns:media="http://search.yahoo.com/mrss/"/>
 </item>
 <item>

@@ -13,8 +13,8 @@
 <meta content="zh-cn" http-equiv="content-language"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta content="ie=edge" http-equiv="X-UA-Compatible"/>
-<title>堆分配过程学习记录 · ta0lve</title>
-<meta content="堆分配过程学习记录 · ta0lve" name="title"/>
+<title>堆管理过程学习记录 · ta0lve</title>
+<meta content="堆管理过程学习记录 · ta0lve" name="title"/>
 <meta content="CTF, PWN, heap, " name="keywords"/>
 <link href="https://ta0lve.github.io/posts/pwn/heap/chunk_2/" rel="canonical"/>
 <link href="/css/main.bundle.min.c6116b9ed1c907a8c0eb015f377d3eecc07e448d75729e31fc3de5881465c6c172ba9fa9a6800c030116caf2a110d92242bb816639484ca791f7cd107a8d49b5.css" integrity="sha512-xhFrntHJB6jA6wFfN30+7MB+RI11cp4x/D3liBRlxsFyup+ppoAMAwEWyvKhENkiQruBZjlITKeR980Qeo1JtQ==" rel="stylesheet" type="text/css"/>
@@ -25,25 +25,25 @@
 <link href="/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="/site.webmanifest" rel="manifest"/>
-<meta content="堆分配过程学习记录" property="og:title"/>
-<meta content="以下内容复制自： malloc内存管理总结_g_malloc是" property="og:description"/>
+<meta content="堆管理过程学习记录" property="og:title"/>
+<meta content="glibc内存管理流程图 # （看不清楚可以保存下来放大）： gl" property="og:description"/>
 <meta content="article" property="og:type"/>
 <meta content="https://ta0lve.github.io/posts/pwn/heap/chunk_2/" property="og:url"/><meta content="https://ta0lve.github.io/posts/pwn/heap/chunk_2/featured.jpg" property="og:image"/><meta content="posts" property="article:section"/>
 <meta content="2023-08-09T00:00:00+00:00" property="article:published_time"/>
 <meta content="2023-08-09T00:00:00+00:00" property="article:modified_time"/>
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="https://ta0lve.github.io/posts/pwn/heap/chunk_2/featured.jpg" name="twitter:image"/>
-<meta content="堆分配过程学习记录" name="twitter:title"/>
-<meta content="以下内容复制自： malloc内存管理总结_g_malloc是" name="twitter:description"/>
+<meta content="堆管理过程学习记录" name="twitter:title"/>
+<meta content="glibc内存管理流程图 # （看不清楚可以保存下来放大）： gl" name="twitter:description"/>
 <script type="application/ld+json">
   [{
     "@context": "https://schema.org",
     "@type": "Article",
     "articleSection": "Posts",
-    "name": "堆分配过程学习记录",
-    "headline": "堆分配过程学习记录",
+    "name": "堆管理过程学习记录",
+    "headline": "堆管理过程学习记录",
     
-    "abstract": "以下内容复制自： malloc内存管理总结_g_malloc是",
+    "abstract": "glibc内存管理流程图 # （看不清楚可以保存下来放大）： gl",
     "inLanguage": "zh-cn",
     "url" : "https:\/\/ta0lve.github.io\/posts\/pwn\/heap\/chunk_2\/",
     "author" : {
@@ -59,7 +59,7 @@
     "keywords": ["CTF","PWN","heap"],
     
     "mainEntityOfPage": "true",
-    "wordCount": "3364"
+    "wordCount": "3424"
   }]
   </script>
 <meta content="ta0lve" name="author"/>
@@ -275,15 +275,15 @@
 <a class="hover:underline decoration-neutral-300 dark:underline-neutral-600" href="/posts/">Posts</a><span class="px-1 text-primary-500">/</span>
 </li>
 <li class="inline hidden">
-<a class="hover:underline decoration-neutral-300 dark:underline-neutral-600" href="/posts/pwn/heap/chunk_2/">堆分配过程学习记录</a><span class="px-1 text-primary-500">/</span>
+<a class="hover:underline decoration-neutral-300 dark:underline-neutral-600" href="/posts/pwn/heap/chunk_2/">堆管理过程学习记录</a><span class="px-1 text-primary-500">/</span>
 </li>
 </ol>
 <h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">
-      堆分配过程学习记录
+      堆管理过程学习记录
     </h1>
 <div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-08-09 00:00:00 +0000 UTC">August 9, 2023</time><span class="px-2 text-primary-500">·</span><span>3364 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">7 分钟</span>
+<time datetime="2023-08-09 00:00:00 +0000 UTC">August 9, 2023</time><span class="px-2 text-primary-500">·</span><span>3424 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">7 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
 <span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/&quot;,'_self');" style="margin-top:0.5rem">
@@ -359,7 +359,8 @@
 <ul>
 <li>
 <ul>
-<li><a href="#分配过程">分配过程：</a></li>
+<li><a href="#glibc内存管理流程图">glibc内存管理流程图</a></li>
+<li><a href="#分配过程">分配过程</a></li>
 <li><a href="#释放过程">释放过程</a></li>
 <li><a href="#附录">附录</a></li>
 </ul>
@@ -376,7 +377,8 @@
 <ul>
 <li>
 <ul>
-<li><a href="#分配过程">分配过程：</a></li>
+<li><a href="#glibc内存管理流程图">glibc内存管理流程图</a></li>
+<li><a href="#分配过程">分配过程</a></li>
 <li><a href="#释放过程">释放过程</a></li>
 <li><a href="#附录">附录</a></li>
 </ul>
@@ -439,11 +441,32 @@
         Part 2: This Article
     </div>
 </details>
+<div class="anchor" id="glibc内存管理流程图"></div>
+<h3 class="relative group">glibc内存管理流程图 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#glibc%e5%86%85%e5%ad%98%e7%ae%a1%e7%90%86%e6%b5%81%e7%a8%8b%e5%9b%be" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<p>（看不清楚可以保存下来放大）：</p>
+<p>
+<figure>
+<img alt="img" class="my-0 rounded-md" src="https://s2.loli.net/2023/08/30/AGoXQ812wfMRDeS.png"/>
+</figure>
+</p>
+<br/>
+<p>glibc运行时库分配动态内存，底层用的是malloc来实现(new 最终也是调用malloc)，下面是malloc函数调用流程图：</p>
+<p>
+<figure>
+<img alt="image-20230830005928014" class="my-0 rounded-md" src="https://s2.loli.net/2023/08/30/PFf8du9DlKEGApX.png"/>
+</figure>
+</p>
+<br/>
 <p><strong>以下内容复制自：</strong></p>
 <p><a href="https://blog.csdn.net/sinat_19596835/article/details/81665095" target="_blank">
     malloc内存管理总结_g_malloc是怎么进行内存管理的</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/428216764" target="_blank">
+    2万字|带你领略glibc内存管理精髓 - 知乎 (zhihu.com)</a></p>
 <div class="anchor" id="分配过程"></div>
-<h3 class="relative group">分配过程： 
+<h3 class="relative group">分配过程 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e5%88%86%e9%85%8d%e8%bf%87%e7%a8%8b" style="text-decoration-line: none !important;">#</a></span>
 </h3>
@@ -465,6 +488,11 @@
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e9%87%8a%e6%94%be%e8%bf%87%e7%a8%8b" style="text-decoration-line: none !important;">#</a></span>
 </h3>
+<p>
+<figure>
+<img alt="image-20230830010351627" class="my-0 rounded-md" src="https://s2.loli.net/2023/08/30/5ng8VLkwlMz7c3U.png"/>
+</figure>
+</p>
 <ol>
 <li>判断传入的指针是否为0，如果为0，则什么都不做，直接return。否则转下一步。</li>
 <li>判断所需释放的chunk是否为mmaped chunk，如果是，则调用munmap()释放mmaped chunk，解除内存空间映射，该该空间不再有效，访问该区域会报错。如果开启了mmap分配阈值的动态调整机制，并且当前回收的chunk大小大于mmap分配阈值，将mmap分配阈值设置为该chunk的大小，将mmap收缩阈值设定为mmap分配阈值的2倍（？？没看懂为什么），释放完成，否则跳到下一步。</li>
@@ -488,14 +516,8 @@
     malloc内存管理总结_g_malloc是怎么进行内存管理的</a></p>
 <p><a href="https://ctf-wiki.org/pwn/linux/user-mode/heap/ptmalloc2/heap-structure/" target="_blank">
     堆相关数据结构 - CTF Wiki (ctf-wiki.org)</a></p>
-<p><a href="https://zhuanlan.zhihu.com/p/77316206" target="_blank">
-    二进制安全之堆溢出（系列）——堆基础 &amp; 结构（二）</a></p>
-<p><a href="https://zhuanlan.zhihu.com/p/77320388" target="_blank">
-    二进制安全之堆溢出（系列）——堆基础 &amp; 结构（三）</a></p>
-<p><a href="https://zhuanlan.zhihu.com/p/77322810" target="_blank">
-    二进制安全之堆溢出（系列）——堆基础 &amp; 结构（四）</a></p>
-<p><a href="https://www.yuque.com/hxfqg9/bin/nvrgrs#ZQEAX" target="_blank">
-    堆相关知识 (yuque.com)</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/428216764" target="_blank">
+    2万字|带你领略glibc内存管理精髓 - 知乎 (zhihu.com)</a></p>
 <details class="mt-2 mb-5 overflow-hidden rounded-lg ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5" style="margin-left:0px">
 <summary class="py-1 text-lg font-semibold cursor-pointer bg-primary-200 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-primary-800 dark:text-neutral-100">
         堆学习记录 - This article is part of a series.
@@ -526,7 +548,7 @@
 <div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/pwn/heap/chunk_1/">堆基础知识学习记录</div>
 <div class="text-sm text-neutral-500 dark:text-neutral-400">
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-07-31 00:00:00 +0000 UTC">July 31, 2023</time><span class="px-2 text-primary-500">·</span><span>7845 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">16 分钟</span>
+<time datetime="2023-07-31 00:00:00 +0000 UTC">July 31, 2023</time><span class="px-2 text-primary-500">·</span><span>9037 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">19 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
 <span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/&quot;,'_self');" style="margin-top:0.5rem">
@@ -655,7 +677,7 @@
 <div style="padding-bottom:1em;">
 <p> </p>
 <p>本文作者：<a href="https://ta0lve.github.io/about/" target="_blank"><font color="#49b1f5" style="text-decoration: underline">ta0lve</font></a></p>
-<p>本文链接：<a href="https://ta0lve.github.io/posts/pwn/heap/chunk_2/" target="_blank"><font color="#49b1f5" style="text-decoration: underline">堆分配过程学习记录</font></a></p>
+<p>本文链接：<a href="https://ta0lve.github.io/posts/pwn/heap/chunk_2/" target="_blank"><font color="#49b1f5" style="text-decoration: underline">堆管理过程学习记录</font></a></p>
 <p><a href="https://ta0lve.github.io/posts/pwn/heap/chunk_2/" target="_blank"><font color="#49b1f5" style="text-decoration: underline"> https://ta0lve.github.io/posts/pwn/heap/chunk_2/ </font></a></p>
 <p>版权声明：本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank"><font color="#49b1f5" style="text-decoration: underline"> CC BY-NC 4.0 </font></a> 许可协议。</p>
 <p>转载请注明来自<a class="redlink" href="https://ta0lve.github.io/" target="_blank"> <font color="#49b1f5" style="text-decoration: underline">ta0lve's Blog</font></a> ！</p>

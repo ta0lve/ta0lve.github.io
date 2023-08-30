@@ -364,10 +364,14 @@
 <div class="min-w-[220px] py-2 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
 <nav id="TableOfContents">
 <ul>
+<li><a href="#基础知识入门向">基础知识（入门向）</a>
+<ul>
 <li><a href="#linux-常用命令">Linux 常用命令</a></li>
 <li><a href="#常用快捷键">常用快捷键</a></li>
 <li><a href="#一些根目录的知识">一些根目录的知识</a></li>
 </ul>
+</li>
+<li><a href="#linux命令执行小结">Linux命令执行小结</a>
 <ul>
 <li><a href="#读取文件命令">读取文件命令</a></li>
 <li><a href="#目录读取命令">目录读取命令</a></li>
@@ -389,6 +393,9 @@
 <li><a href="#命令替换">命令替换</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li><a href="#附录">附录</a></li>
 </ul>
 </nav>
 </div>
@@ -399,10 +406,14 @@
 <div class="py-2 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
 <nav id="TableOfContents">
 <ul>
+<li><a href="#基础知识入门向">基础知识（入门向）</a>
+<ul>
 <li><a href="#linux-常用命令">Linux 常用命令</a></li>
 <li><a href="#常用快捷键">常用快捷键</a></li>
 <li><a href="#一些根目录的知识">一些根目录的知识</a></li>
 </ul>
+</li>
+<li><a href="#linux命令执行小结">Linux命令执行小结</a>
 <ul>
 <li><a href="#读取文件命令">读取文件命令</a></li>
 <li><a href="#目录读取命令">目录读取命令</a></li>
@@ -424,6 +435,9 @@
 <li><a href="#命令替换">命令替换</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li><a href="#附录">附录</a></li>
 </ul>
 </nav>
 </div>
@@ -524,18 +538,18 @@
 </details>
 <p>个人比较常用的Linux命令</p>
 <div class="anchor" id="基础知识入门向"></div>
-<h1 class="relative group">基础知识（入门向） 
+<h2 class="relative group">基础知识（入门向） 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e5%9f%ba%e7%a1%80%e7%9f%a5%e8%af%86%e5%85%a5%e9%97%a8%e5%90%91" style="text-decoration-line: none !important;">#</a></span>
-</h1>
+</h2>
 <p>大部分内容都是copy自 珠天PearlSky-sevenG0师傅的<a href="https://mp.weixin.qq.com/s/mRPxdDJnS8boa7BNyxME3w" target="_blank">
     文章</a>，师傅太强啦！</p>
 <p>原文链接：https://mp.weixin.qq.com/s/mRPxdDJnS8boa7BNyxME3w</p>
 <div class="anchor" id="linux-常用命令"></div>
-<h2 class="relative group">Linux 常用命令 
+<h3 class="relative group">Linux 常用命令 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#linux-%e5%b8%b8%e7%94%a8%e5%91%bd%e4%bb%a4" style="text-decoration-line: none !important;">#</a></span>
-</h2>
+</h3>
 <div class="highlight"><pre class="chroma" tabindex="0"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Linux 常用命令</span>
 </span></span><span class="line"><span class="cl"><span class="c1"># &lt;------这个符号的内容后面是注释</span>
 </span></span><span class="line"><span class="cl"><span class="c1"># 下面的命令只做简单解释，不明白的可以自行百度</span>
@@ -625,10 +639,10 @@
 </span></span><span class="line"><span class="cl">/bin/bash
 </span></span></code></pre></div><br/>
 <div class="anchor" id="常用快捷键"></div>
-<h2 class="relative group">常用快捷键 
+<h3 class="relative group">常用快捷键 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e5%b8%b8%e7%94%a8%e5%bf%ab%e6%8d%b7%e9%94%ae" style="text-decoration-line: none !important;">#</a></span>
-</h2>
+</h3>
 <div class="highlight"><pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># Bash 快捷键</span>
 </span></span><span class="line"><span class="cl">Up<span class="o">(</span>Down<span class="o">)</span> <span class="c1"># 上（下）一条指令</span>
 </span></span><span class="line"><span class="cl">
@@ -653,10 +667,10 @@
 </span></span><span class="line"><span class="cl">Ctrl + Shift + v <span class="c1"># 粘贴</span>
 </span></span></code></pre></div><br/>
 <div class="anchor" id="一些根目录的知识"></div>
-<h2 class="relative group">一些根目录的知识 
+<h3 class="relative group">一些根目录的知识 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e4%b8%80%e4%ba%9b%e6%a0%b9%e7%9b%ae%e5%bd%95%e7%9a%84%e7%9f%a5%e8%af%86" style="text-decoration-line: none !important;">#</a></span>
-</h2>
+</h3>
 <ul>
 <li><code>/bin</code>、<code>/sbin</code>：链接到 <code>/usr/bin</code>，存放 Linux 一些核心的二进制文件，其包含的命令可在 shell 上运行。</li>
 <li><code>/boot</code>：操作系统启动时要用到的程序。</li>
@@ -675,19 +689,19 @@
 <li><code>/var</code>：存放了很多服务的日志信息</li>
 </ul>
 <div class="anchor" id="linux命令执行小结"></div>
-<h1 class="relative group">Linux命令执行小结 
+<h2 class="relative group">Linux命令执行小结 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#linux%e5%91%bd%e4%bb%a4%e6%89%a7%e8%a1%8c%e5%b0%8f%e7%bb%93" style="text-decoration-line: none !important;">#</a></span>
-</h1>
+</h2>
 <p>参考学习自lexsd6师傅的<a href="https://lexsd6.github.io/2020/09/10/%E5%AF%B9linux%20%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E7%9A%84%E6%80%BB%E7%BB%93/" target="_blank">
     文章</a>，师傅太强啦！</p>
 <p>文章链接：[对linux 命令执行的总结 | lexsd6’s home](<a href="https://lexsd6.github.io/2020/09/10/" target="_blank">
     https://lexsd6.github.io/2020/09/10/</a>对linux 命令执行的总结/)</p>
 <div class="anchor" id="读取文件命令"></div>
-<h2 class="relative group">读取文件命令 
+<h3 class="relative group">读取文件命令 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e8%af%bb%e5%8f%96%e6%96%87%e4%bb%b6%e5%91%bd%e4%bb%a4" style="text-decoration-line: none !important;">#</a></span>
-</h2>
+</h3>
 <div class="highlight"><pre class="chroma" tabindex="0"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cat <span class="c1"># 由第一行开始显示内容，并将所有内容输出</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">tac <span class="c1"># 从最后一行倒序显示内容，并将所有内容输出</span>
@@ -731,42 +745,42 @@
 </span></span><span class="line"><span class="cl">curl file:///home/flag
 </span></span></code></pre></div><br/>
 <div class="anchor" id="目录读取命令"></div>
-<h2 class="relative group">目录读取命令 
+<h3 class="relative group">目录读取命令 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e7%9b%ae%e5%bd%95%e8%af%bb%e5%8f%96%e5%91%bd%e4%bb%a4" style="text-decoration-line: none !important;">#</a></span>
-</h2>
+</h3>
 <div class="highlight"><pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">ls <span class="c1"># ls 用于查看参数目录下的文件</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">dir <span class="c1"># 与ls类似，用于查看参数目录下的文件</span>
 </span></span></code></pre></div><br/>
 <div class="anchor" id="linux命令分割符"></div>
-<h2 class="relative group">linux命令分割符 
+<h3 class="relative group">linux命令分割符 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#linux%e5%91%bd%e4%bb%a4%e5%88%86%e5%89%b2%e7%ac%a6" style="text-decoration-line: none !important;">#</a></span>
-</h2>
+</h3>
 <p>用linux命令时候,我们想用一行来执行多条命令时我们可以用命令分割符来操作。</p>
 <div class="anchor" id="-符号"></div>
-<h3 class="relative group">‘;’ 符号 
+<h4 class="relative group">‘;’ 符号 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#-%e7%ac%a6%e5%8f%b7" style="text-decoration-line: none !important;">#</a></span>
-</h3>
+</h4>
 <p>用;号隔开每个命令, 每个命令按照从左到右的顺序,顺序执行， 彼此之间不关心是否失败， 所有命令都会执行.用法:</p>
 <div class="highlight"><pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">command1 <span class="p">;</span> command2
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1"># 在做pwn题目时我们可能会用到利用这个`;`的特性</span>
 </span></span><span class="line"><span class="cl"><span class="c1"># 比如执行system("xxx;/bin/sh")来getshell</span>
 </span></span></code></pre></div><div class="anchor" id="单--符号"></div>
-<h3 class="relative group">单 ’|’ 符号 
+<h4 class="relative group">单 ’|’ 符号 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e5%8d%95--%e7%ac%a6%e5%8f%b7" style="text-decoration-line: none !important;">#</a></span>
-</h3>
+</h4>
 <p>Linux所提供的管道符“|”将两个命令隔开，管道符左边命令的输出就会作为管道符右边命令的输入。连续使用管道意味着第一个命令的输出会作为 第二个命令的输入，第二个命令的输出又会作为第三个命令的输入，依此类推.</p>
 <div class="highlight"><pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">command1 <span class="p">|</span> command2
 </span></span></code></pre></div><div class="anchor" id="单符号"></div>
-<h3 class="relative group">单’&amp;’符号 
+<h4 class="relative group">单’&amp;’符号 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e5%8d%95%e7%ac%a6%e5%8f%b7" style="text-decoration-line: none !important;">#</a></span>
-</h3>
+</h4>
 <p>默认情况下，我们命令行执行的进程是前台进程，这时就把Shell给占据了，我们无法进行其他操作，对于那些没有交互的进程，很多时候，我们希望将其在后台启动，可以在启动参数的时候加一个’&amp;’实现这个目的。用法:</p>
 <div class="highlight"><pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">command1 <span class="p">&amp;</span> command2      <span class="c1">#commond1 命令将会在后台进行</span>
 </span></span></code></pre></div><ul>
@@ -779,32 +793,32 @@
 </li>
 </ul>
 <div class="anchor" id="双符号"></div>
-<h3 class="relative group">双’&amp;’符号（’&amp;&amp;’） 
+<h4 class="relative group">双’&amp;’符号（’&amp;&amp;’） 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e5%8f%8c%e7%ac%a6%e5%8f%b7" style="text-decoration-line: none !important;">#</a></span>
-</h3>
+</h4>
 <p>与c语言的’&amp;&amp;’类似，’&amp;&amp;’表时逻辑且的意思。只有在 &amp;&amp; 左边的命令返回真（命令返回值 $? == 0），&amp;&amp; 右边的命令才会被执行。用法：</p>
 <div class="highlight"><pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">command1 <span class="o">&amp;&amp;</span> command2
 </span></span></code></pre></div><div class="anchor" id="双符号-1"></div>
-<h3 class="relative group">双’|’符号（’||’） 
+<h4 class="relative group">双’|’符号（’||’） 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e5%8f%8c%e7%ac%a6%e5%8f%b7-1" style="text-decoration-line: none !important;">#</a></span>
-</h3>
+</h4>
 <p>与’&amp;&amp;’相反，’||’表示逻辑或的意思。只有在 || 左边的命令返回假，|| 右边的命令才会被执行。这和 c 语言中的逻辑或语法功能相同，即实现短路逻辑或操作</p>
 <div class="highlight"><pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">command1 <span class="o">||</span> command2
 </span></span></code></pre></div><br/>
 <div class="anchor" id="i--o重定向"></div>
-<h2 class="relative group">I / O重定向 
+<h3 class="relative group">I / O重定向 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#i--o%e9%87%8d%e5%ae%9a%e5%90%91" style="text-decoration-line: none !important;">#</a></span>
-</h2>
+</h3>
 <p>I / O重定向通俗的讲就是就是我们平时用到的那些就是经典的输出重定向<code>&gt;</code>和输入重定向<code>&lt;</code>.</p>
 <p>但如过要深入点了解I / O重定向，还需要了解<strong>文件描述符。</strong></p>
 <div class="anchor" id="文件描述符"></div>
-<h3 class="relative group">文件描述符 
+<h4 class="relative group">文件描述符 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e6%96%87%e4%bb%b6%e6%8f%8f%e8%bf%b0%e7%ac%a6" style="text-decoration-line: none !important;">#</a></span>
-</h3>
+</h4>
 <p>在linux中，每个打开的文件都分配有一个文件描述符。但会保留描述符1到9。其中0、1、2是默认打开文件stdin， stdout和stderr的 文件描述符。</p>
 <ul>
 <li>0  是stdin（键盘设备文件） 又称为标准输入 ，是我们从键盘输入信息所在的文件</li>
@@ -825,10 +839,10 @@
 </ul>
 <br/>
 <div class="anchor" id="输入重定向"></div>
-<h3 class="relative group">输入重定向 
+<h4 class="relative group">输入重定向 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e8%be%93%e5%85%a5%e9%87%8d%e5%ae%9a%e5%90%91" style="text-decoration-line: none !important;">#</a></span>
-</h3>
+</h4>
 <blockquote>
 <p>输入重定向是指把命令（或可执行程序）的标准输入重定向到指定的文件中。也就是说，输入可以不来自键盘，而来自一个指定的文件。所以说，输入重定向主要用于改变一个命令的输入源，特别是改变那些需要大量输入的输入源。</p>
 </blockquote>
@@ -842,10 +856,10 @@
 </span></span></span><span class="line"><span class="cl"><span class="s">flag</span>
 </span></span></code></pre></div><br/>
 <div class="anchor" id="输出重定向"></div>
-<h3 class="relative group">输出重定向 
+<h4 class="relative group">输出重定向 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e8%be%93%e5%87%ba%e9%87%8d%e5%ae%9a%e5%90%91" style="text-decoration-line: none !important;">#</a></span>
-</h3>
+</h4>
 <blockquote>
 <p>输出重定向是指把命令（或可执行程序）的标准输出或标准错误输出重新定向到指定文件中。这样，该命令的输出就不显示在屏幕上，而是写入到指定文件。</p>
 </blockquote>
@@ -885,10 +899,10 @@
 </span></span><span class="line"><span class="cl"><span class="c1"># 这用法会不会覆盖文件里的内容</span>
 </span></span></code></pre></div><br/>
 <div class="anchor" id="-与-"></div>
-<h3 class="relative group">&amp;&gt; 与 &gt;&amp; 
+<h4 class="relative group">&amp;&gt; 与 &gt;&amp; 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#-%e4%b8%8e-" style="text-decoration-line: none !important;">#</a></span>
-</h3>
+</h4>
 <p><code>&amp;&gt;</code>与<code>&gt;&amp;</code>都允许将标准输出（文件描述符1）和标准错误输出（文件描述符2）都重定向到的文件里.如下图所示：</p>
 <p>
 <figure>
@@ -908,10 +922,10 @@
 <p>我们在执行<code>ls 1&gt;&amp;flag2</code>时，<code>&amp;&gt;</code>把<code>ls</code>当成一条命令运行重定向到sss里。</p>
 <p>相当于执行的是<code>(ls) 1&amp;&gt;flag2</code>。</p>
 <div class="anchor" id="命令替换"></div>
-<h3 class="relative group">命令替换 
+<h4 class="relative group">命令替换 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e5%91%bd%e4%bb%a4%e6%9b%bf%e6%8d%a2" style="text-decoration-line: none !important;">#</a></span>
-</h3>
+</h4>
 <p>命令替换是指将命令的标准输出作为值赋给某个变量，bash Shell定义了两种形式进行命令的替换，两种形式的语法格式如下：</p>
 <div class="highlight"><pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 方式一： </span>
 </span></span><span class="line"><span class="cl"><span class="sb">`</span>Linux命令<span class="sb">`</span>
@@ -924,11 +938,12 @@
 </figure>
 </p>
 <p><strong>注：尽管$（）和反引号在命令替换上是等价的，但是，$（）形式的命令替换是可以嵌套的</strong></p>
+<br/>
 <div class="anchor" id="附录"></div>
-<h1 class="relative group">附录 
+<h2 class="relative group">附录 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e9%99%84%e5%bd%95" style="text-decoration-line: none !important;">#</a></span>
-</h1>
+</h2>
 <p>本文参考链接及推荐阅读：</p>
 <p><a href="https://mp.weixin.qq.com/s/mRPxdDJnS8boa7BNyxME3w" target="_blank">
     CTF PWN新手入门篇 PWN学习大纲 (qq.com)</a></p>
@@ -1049,7 +1064,7 @@
 <div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/pwn/basic/tutorial1/">pwn入门教程</div>
 <div class="text-sm text-neutral-500 dark:text-neutral-400">
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-08-05 00:00:00 +0000 UTC">August 5, 2023</time><span class="px-2 text-primary-500">·</span><span>5000 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">10 分钟</span>
+<time datetime="2023-08-05 00:00:00 +0000 UTC">August 5, 2023</time><span class="px-2 text-primary-500">·</span><span>5653 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">12 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
 <span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%85%A5%E9%97%A8/&quot;,'_self');" style="margin-top:0.5rem">

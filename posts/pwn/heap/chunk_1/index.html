@@ -26,7 +26,7 @@
 <link href="/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="/site.webmanifest" rel="manifest"/>
 <meta content="堆基础知识学习记录" property="og:title"/>
-<meta content="堆的概念 # 在程序运行过程中，堆可以提供动态分配的内存，允许程" property="og:description"/>
+<meta content="如果本博客部分文章图片加载失败， 可以点击此处查看解决办法 堆的" property="og:description"/>
 <meta content="article" property="og:type"/>
 <meta content="https://ta0lve.github.io/posts/pwn/heap/chunk_1/" property="og:url"/><meta content="https://ta0lve.github.io/posts/pwn/heap/chunk_1/featured.png" property="og:image"/><meta content="posts" property="article:section"/>
 <meta content="2023-07-31T00:00:00+00:00" property="article:published_time"/>
@@ -34,7 +34,7 @@
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="https://ta0lve.github.io/posts/pwn/heap/chunk_1/featured.png" name="twitter:image"/>
 <meta content="堆基础知识学习记录" name="twitter:title"/>
-<meta content="堆的概念 # 在程序运行过程中，堆可以提供动态分配的内存，允许程" name="twitter:description"/>
+<meta content="如果本博客部分文章图片加载失败， 可以点击此处查看解决办法 堆的" name="twitter:description"/>
 <script type="application/ld+json">
   [{
     "@context": "https://schema.org",
@@ -43,7 +43,7 @@
     "name": "堆基础知识学习记录",
     "headline": "堆基础知识学习记录",
     
-    "abstract": "堆的概念 # 在程序运行过程中，堆可以提供动态分配的内存，允许程",
+    "abstract": "如果本博客部分文章图片加载失败， 可以点击此处查看解决办法 堆的",
     "inLanguage": "zh-cn",
     "url" : "https:\/\/ta0lve.github.io\/posts\/pwn\/heap\/chunk_1\/",
     "author" : {
@@ -59,7 +59,7 @@
     "keywords": ["CTF","PWN","heap"],
     
     "mainEntityOfPage": "true",
-    "wordCount": "7845"
+    "wordCount": "9037"
   }]
   </script>
 <meta content="ta0lve" name="author"/>
@@ -283,7 +283,7 @@
     </h1>
 <div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-07-31 00:00:00 +0000 UTC">July 31, 2023</time><span class="px-2 text-primary-500">·</span><span>7845 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">16 分钟</span>
+<time datetime="2023-07-31 00:00:00 +0000 UTC">July 31, 2023</time><span class="px-2 text-primary-500">·</span><span>9037 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">19 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
 <span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/&quot;,'_self');" style="margin-top:0.5rem">
@@ -362,7 +362,7 @@
 <li><a href="#堆的微观结构">堆的微观结构</a>
 <ul>
 <li><a href="#size_sz-与-size_t"><strong>SIZE_SZ 与 size_t</strong></a></li>
-<li><a href="#malloc_chunk"><strong>malloc_chunk</strong></a></li>
+<li><a href="#chunk"><strong>chunk</strong></a></li>
 <li><a href="#prev_size"><strong>prev_size</strong></a></li>
 <li><a href="#size"><strong>size</strong></a>
 <ul>
@@ -381,12 +381,12 @@
 <li><a href="#bin"><strong>bin</strong></a>
 <ul>
 <li><a href="#fastbin"><strong>fastbin</strong></a></li>
-<li><a href="#smallbin"><strong>smallbin</strong></a></li>
 <li><a href="#unsortedbin"><strong>unsortedbin</strong></a></li>
+<li><a href="#smallbin"><strong>smallbin</strong></a></li>
 <li><a href="#largebin"><strong>largebin</strong></a></li>
 </ul>
 </li>
-<li><a href="#top-chunk">top chunk</a></li>
+<li><a href="#top-chunk"><strong>top chunk</strong></a></li>
 <li><a href="#附录">附录</a></li>
 </ul>
 </li>
@@ -405,7 +405,7 @@
 <li><a href="#堆的微观结构">堆的微观结构</a>
 <ul>
 <li><a href="#size_sz-与-size_t"><strong>SIZE_SZ 与 size_t</strong></a></li>
-<li><a href="#malloc_chunk"><strong>malloc_chunk</strong></a></li>
+<li><a href="#chunk"><strong>chunk</strong></a></li>
 <li><a href="#prev_size"><strong>prev_size</strong></a></li>
 <li><a href="#size"><strong>size</strong></a>
 <ul>
@@ -424,12 +424,12 @@
 <li><a href="#bin"><strong>bin</strong></a>
 <ul>
 <li><a href="#fastbin"><strong>fastbin</strong></a></li>
-<li><a href="#smallbin"><strong>smallbin</strong></a></li>
 <li><a href="#unsortedbin"><strong>unsortedbin</strong></a></li>
+<li><a href="#smallbin"><strong>smallbin</strong></a></li>
 <li><a href="#largebin"><strong>largebin</strong></a></li>
 </ul>
 </li>
-<li><a href="#top-chunk">top chunk</a></li>
+<li><a href="#top-chunk"><strong>top chunk</strong></a></li>
 <li><a href="#附录">附录</a></li>
 </ul>
 </li>
@@ -487,10 +487,19 @@
     </div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
 <a href="https://ta0lve.github.io/posts/pwn/heap/chunk_2/">
-            Part 2: 堆分配过程学习记录
+            Part 2: 堆管理过程学习记录
         </a>
 </div>
 </details>
+<div class="flex px-4 py-3 rounded-md bg-primary-100 dark:bg-primary-900">
+<span class="text-primary-400 ltr:pr-3 rtl:pl-3 flex items-center">
+<span class="relative block icon">
+<svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M506.3 417l-213.3-364c-16.33-28-57.54-28-73.98 0l-213.2 364C-10.59 444.9 9.849 480 42.74 480h426.6C502.1 480 522.6 445 506.3 417zM232 168c0-13.25 10.75-24 24-24S280 154.8 280 168v128c0 13.25-10.75 24-23.1 24S232 309.3 232 296V168zM256 416c-17.36 0-31.44-14.08-31.44-31.44c0-17.36 14.07-31.44 31.44-31.44s31.44 14.08 31.44 31.44C287.4 401.9 273.4 416 256 416z" fill="currentColor"></path></svg>
+</span>
+</span>
+<span class="dark:text-neutral-300"><strong>如果本博客部分文章图片加载失败，</strong><a href="https://ta0lve.github.io/posts/sth/sm.ms/" target="_blank">
+<strong>可以点击此处查看解决办法</strong></a></span>
+</div>
 <div class="anchor" id="堆的概念"></div>
 <h2 class="relative group">堆的概念 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
@@ -551,6 +560,19 @@
 </ul>
 </li>
 </ul>
+<p>glibc内存管理流程图（看不清楚可以保存下来放大）：</p>
+<p>
+<figure>
+<img alt="img" class="my-0 rounded-md" src="https://s2.loli.net/2023/08/30/WsrFx6btKpVe2DP.png"/>
+</figure>
+</p>
+<br/>
+<p>glibc运行时库分配动态内存，底层用的是malloc来实现(new 最终也是调用malloc)，下面是malloc函数调用流程图：</p>
+<p>
+<figure>
+<img alt="image-20230830005928014" class="my-0 rounded-md" src="https://s2.loli.net/2023/08/30/p3W5cNCbhYKts78.png"/>
+</figure>
+</p>
 <hr/>
 <p><strong>堆管理器</strong></p>
 <p>堆管理器位于程序与内核之间，主要做两件事：</p>
@@ -580,6 +602,11 @@
 <hr/>
 <p><strong>系统所调用的函数</strong></p>
 <p>malloc和free在动态申请或释放内存时，主要是调用(s)brk和mmap,unmmap函数实现的。</p>
+<p>
+<figure>
+<img alt="img" class="my-0 rounded-md" src="https://s2.loli.net/2023/08/30/ETkLOdiNJHCMagr.png"/>
+</figure>
+</p>
 <ol>
 <li><strong>(s)brk函数</strong>机制</li>
 </ol>
@@ -604,7 +631,17 @@
 </span></span><span class="line"><span class="cl"> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><ul>
-<li>初始时，堆的起始地址start_brk以及堆的当前末尾brk指向同一地址。根据是否开启ASLR，两者的具体位置会有所不同
+<li>
+<p>用于设置program_break指向的位置</p>
+</li>
+<li>
+<p>sbrk()函数</p>
+<ul>
+<li>同brk()，参数可以是负数。执行成功返回上一次program_break的值，可以设置参数为0返回当前的program_break</li>
+</ul>
+</li>
+<li>
+<p>初始时，堆的起始地址start_brk以及堆的当前末尾brk指向同一地址。根据是否开启ASLR，两者的具体位置会有所不同</p>
 <ul>
 <li>
 <p>开启ASLR后，BSS segment和heap间存在Random brk offset</p>
@@ -621,14 +658,22 @@
 </ul>
 </li>
 </ul>
+<p>
+<figure>
+<img alt="img" class="my-0 rounded-md" src="https://s2.loli.net/2023/08/30/VL38AkEzl1qBaWe.png"/>
+</figure>
+</p>
+<br/>
 <ol start="2">
 <li><strong>mmap函数</strong>机制</li>
 </ol>
 <ul>
+<li>当用户申请空间大于等于128kb，也就是0x20000字节时，不再使用brk()进行分配，改为使用mmap()</li>
 <li>malloc会使用mmap来创建独立的匿名映射段。</li>
 <li>匿名映射的目的主要是可以申请以0填充的内存，并且这块内存仅被调用进程所使用，这块内存为系统随机分配。</li>
 <li>munmap用于释放内存。</li>
 <li>mmap创建的chunk紧邻libc</li>
+<li>unmmap()函数将mmap()申请的空间进行回收</li>
 </ul>
 <hr/>
 <p><strong>多线程支持</strong></p>
@@ -687,11 +732,25 @@
 <li>SIZE_SZ：同size_t，8字节/16字节</li>
 </ul>
 <hr/>
-<div class="anchor" id="malloc_chunk"></div>
-<h3 class="relative group"><strong>malloc_chunk</strong>
+<div class="anchor" id="chunk"></div>
+<h3 class="relative group"><strong>chunk</strong>
 <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
-<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#malloc_chunk" style="text-decoration-line: none !important;">#</a></span>
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#chunk" style="text-decoration-line: none !important;">#</a></span>
 </h3>
+<p><strong>chunk是glibc管理内存的基本单元。主要分为以下几类：</strong></p>
+<ul>
+<li>alloced chunk：已分配正在使用中的chunk。</li>
+<li>free chunk：已经free的chunk。</li>
+<li>top chunk：可以理解为地址的最高处，还没有分配的chunk。</li>
+<li>last remainder chunk：是为了提高内存分配的局部性。</li>
+</ul>
+<p>chunk = chunk header + user data，malloc返回给用户的其实是<strong>user data指针</strong>，具体如下图：</p>
+<p>
+<figure>
+<img alt="img" class="my-0 rounded-md" src="https://s2.loli.net/2023/08/30/WeI5ZNlhgqtGcUJ.png"/>
+</figure>
+</p>
+<p>malloc_chunk的结构如下：</p>
 <div class="highlight"><pre class="chroma" tabindex="0"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">malloc_chunk</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="n">INTERNAL_SIZE_T</span>      <span class="n">prev_size</span><span class="p">;</span>  <span class="cm">/* 如果前面一个堆块是空闲的则表示前一个堆块的大小,否则无意义  */</span>
@@ -1043,7 +1102,7 @@
 <li>管理流程</li>
 </ul>
 <ol>
-<li>malloc/free –&gt; glibc –&gt; arena –&gt; fastbin/bins –&gt;smallbin/largebin/unsortedbin</li>
+<li>malloc/free –&gt; glibc –&gt; arena –&gt; fastbin/bins –&gt;smallbin/unsortedbin/largebin</li>
 <li>从glibc找到main_arena</li>
 <li>在main_arena的管理结构体malloc_state通过固定偏移中找到fastbinsY[NFASTBINS]，用以管理fastbin。</li>
 <li>找到bins[NBINS * 2 - 2]，用以管理unsortedbin。</li>
@@ -1138,6 +1197,35 @@
 </ul>
 </li>
 </ul>
+<p>
+<figure>
+<img alt="img" class="my-0 rounded-md" src="https://s2.loli.net/2023/08/30/ot6bzZF8ScXuQ2d.png"/>
+</figure>
+</p>
+<hr/>
+<div class="anchor" id="unsortedbin"></div>
+<h4 class="relative group"><strong>unsortedbin</strong>
+<span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#unsortedbin" style="text-decoration-line: none !important;">#</a></span>
+</h4>
+<p>堆块中转站</p>
+<ul>
+<li><strong>双向循环链表，先进先出</strong>（FIFO）</li>
+<li>存放所有不满足 fastbin，未被整理的 chunk
+<ul>
+<li>除了fastbin管理的<strong>小</strong>堆块，free掉的chunk都是先进入到unsortedbin里再进行整理</li>
+</ul>
+</li>
+<li>malloc 的时候在其他 bin 没找到合适的就会遍历 unsortedbin 同时根据大小放到对应的 bin 里</li>
+<li>在整理过程中，先将所有放在unsortedbin链上的堆块按照大小整理到其它链上</li>
+<li>将fastbin上的碎片整理到unsorted,再由unsorted整理到其他bin链</li>
+<li>由于使用双链表，一个bin会占用bins的两个元素。fd指向上一个chunk，bk指向下一个</li>
+</ul>
+<p>
+<figure>
+<img alt="img" class="my-0 rounded-md" src="https://s2.loli.net/2023/08/30/zRs5QM2j1Ymy8WO.png"/>
+</figure>
+</p>
 <hr/>
 <div class="anchor" id="smallbin"></div>
 <h4 class="relative group"><strong>smallbin</strong>
@@ -1189,27 +1277,15 @@
 </tbody>
 </table>
 <ul>
-<li><strong>双向链表，先进先出</strong></li>
+<li><strong>双向链表，先进先出</strong>（FIFO）</li>
+<li>由于fast bin和small bin 有重合部分，在某些情况下会加入到small bin</li>
 <li>释放的时候会检查相邻的是不是 free 的，如果是进行<strong>合并</strong>然后放到 <strong>unsortedbin</strong></li>
 </ul>
-<hr/>
-<div class="anchor" id="unsortedbin"></div>
-<h4 class="relative group"><strong>unsortedbin</strong>
-<span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
-<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#unsortedbin" style="text-decoration-line: none !important;">#</a></span>
-</h4>
-<p>堆块中转站</p>
-<ul>
-<li><strong>双向循环链表，先进先出</strong></li>
-<li>存放所有不满足 fastbin，未被整理的 chunk
-<ul>
-<li>除了fastbin管理的<strong>小</strong>堆块，free掉的chunk都是先进入到unsortedbin里再进行整理</li>
-</ul>
-</li>
-<li>malloc 的时候在其他 bin 没找到合适的就会遍历 unsortedbin 同时根据大小放到对应的 bin 里</li>
-<li>在整理过程中，先将所有放在unsortedbin链上的堆块按照大小整理到其它链上</li>
-<li>将fastbin上的碎片整理到unsorted,再由unsorted整理到其他bin链</li>
-</ul>
+<p>
+<figure>
+<img alt="img" class="my-0 rounded-md" src="https://s2.loli.net/2023/08/30/ExMuhDnAcQKrCH8.png"/>
+</figure>
+</p>
 <hr/>
 <div class="anchor" id="largebin"></div>
 <h4 class="relative group"><strong>largebin</strong>
@@ -1218,22 +1294,54 @@
 </h4>
 <ul>
 <li>管理大于0x400的堆块（64位），大于0x200的堆块（32位）</li>
-<li><strong>双向链表，先进先出</strong></li>
-<li>需要根据 fd_nextsize 和 bk_nextsize 指针从大到小排序</li>
+<li><strong>双向链表，先进先出</strong>（FIFO）</li>
+<li>free时bk后面多两个此参数：fd_nextsize、bk_nextsize</li>
+<li>fd_nextsize和bk_nextsize指针用于指向第一个与自己大小不同的chunk，所以也只有在加入了大小不同的chunk时，这两个指针才会被修改</li>
 </ul>
 <br/>
 <hr/>
 <div class="anchor" id="top-chunk"></div>
-<h3 class="relative group">top chunk 
-    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<h3 class="relative group"><strong>top chunk</strong>
+<span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#top-chunk" style="text-decoration-line: none !important;">#</a></span>
 </h3>
-<p>当我们分配一块堆内存时，top chunk是处于地址的<strong>最高处的</strong>，其前面就是我们所申请的chunk。</p>
-<p>top chunk的合并操作</p>
+<p>当我们分配一块堆内存时，top chunk是处于地址的<strong>最高处的</strong>，其前面就是我们所申请的chunk</p>
+<p>
+<figure>
+<img alt="image-20230830002711964" class="my-0 rounded-md" src="https://s2.loli.net/2023/08/30/lOyrKJ3THn2ZYQo.png"/>
+</figure>
+</p>
+<br/>
+<p>top chunk的结构：</p>
+<p>
+<figure>
+<img alt="img" class="my-0 rounded-md" src="https://s2.loli.net/2023/08/30/J8YGdjiR7hQblfB.png"/>
+</figure>
+</p>
+<ul>
+<li>size：top chunk还有多少空间可以分配。</li>
+<li>重要的是P位：0表示上一堆块处于空闲，1表示上一堆块处于使用状态。主要用于判断free时是否能与上一堆块进行合并（fastbin除外）</li>
+<li>top chunk的合并操作
 <ul>
 <li>如果top chunk前面的chunk不是fast chunk并且处于空闲，那么top chunk就会合并这个chunk。</li>
 <li>如果top chunk前面的chunk是fast chunk，不论是否空闲，top chunk都不会合并这个chunk</li>
 </ul>
+</li>
+<li>阻止top chunk合并chunk
+<ul>
+<li>如果在一个free掉的chunk后面再申请一个chunk，那么新申请的chunk处于使用状态，top chunk就不会合并前面的chunk。</li>
+</ul>
+</li>
+</ul>
+<p>补充：</p>
+<p>last remainder chunk</p>
+<ul>
+<li>Last remainder chunk是另外一种特殊的chunk，这个特殊chunk是被维护在unsorted bin中的</li>
+<li>在malloc时，如果有比较大的chunk可以分配，会把这个chunk分成两部分，一部分返回给用户，另一部分称为remainder，加入到 unsorted bin，last remainder会记录最近拆分的remainder。这个remainder大小至少要为MINSIZE，否则不能拆分。</li>
+<li>当下次malloc时，如果last remainder chunk够大，则重复上一过程。</li>
+<li>拆分的情况：fast bin 和 small bin 都没有合适的chunk，同时unsorted bin有且只有一个可拆分的chunk，并且这个chunk 是last remainder</li>
+</ul>
+<br/>
 <hr/>
 <div class="anchor" id="附录"></div>
 <h3 class="relative group">附录 
@@ -1255,6 +1363,10 @@
     堆相关知识 (yuque.com)</a></p>
 <p><a href="https://blog.csdn.net/sinat_19596835/article/details/81665095" target="_blank">
     malloc内存管理总结_g_malloc是怎么进行内存管理的</a></p>
+<p>（注：本文部分图片来源于unr4v31师傅的<a href="https://www.cnblogs.com/unr4v31/p/14446412.html" target="_blank">
+    文章</a>）</p>
+<br/>
+<br/>
 <details class="mt-2 mb-5 overflow-hidden rounded-lg ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5" style="margin-left:0px">
 <summary class="py-1 text-lg font-semibold cursor-pointer bg-primary-200 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-primary-800 dark:text-neutral-100">
         堆学习记录 - This article is part of a series.
@@ -1264,7 +1376,7 @@
     </div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
 <a href="https://ta0lve.github.io/posts/pwn/heap/chunk_2/">
-            Part 2: 堆分配过程学习记录
+            Part 2: 堆管理过程学习记录
         </a>
 </div>
 </details>
@@ -1282,10 +1394,10 @@
 <div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
 <div class="w-full thumbnail_card_related nozoom" style="background-image:url(/posts/pwn/heap/chunk_2/featured.jpg);"></div>
 <div class="px-6 py-4">
-<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/pwn/heap/chunk_2/">堆分配过程学习记录</div>
+<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/pwn/heap/chunk_2/">堆管理过程学习记录</div>
 <div class="text-sm text-neutral-500 dark:text-neutral-400">
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-08-09 00:00:00 +0000 UTC">August 9, 2023</time><span class="px-2 text-primary-500">·</span><span>3364 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">7 分钟</span>
+<time datetime="2023-08-09 00:00:00 +0000 UTC">August 9, 2023</time><span class="px-2 text-primary-500">·</span><span>3424 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">7 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
 <span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/&quot;,'_self');" style="margin-top:0.5rem">
