@@ -518,14 +518,11 @@
 <ul>
 <li>目前市场上主流的芯片架构有 X86、ARM、RISC-V和MIPS四种
 <ul>
-<li>RISC-V 架构是基于 <strong>精简指令集计算</strong>（RISC）原理建立的开放 <strong>指令集架构</strong>（ISA），RISC-V是在指令集不断发展和成熟的基础上建立的全新指令
-<ul>
+<li>RISC-V 架构是基于 <strong>精简指令集计算</strong>（RISC）原理建立的开放 <strong>指令集架构</strong>（ISA），RISC-V是在指令集不断发展和成熟的基础上建立的全新指令</li>
 <li>实际上，ARM、MIPS都是采取 <strong>精简指令集</strong>（RISC）的处理器架构，基于RISC原理建立</li>
 </ul>
 </li>
 <li>经改进，这种架构可支持高级语言的优化执行。其算术和逻辑运算采用三个操作数的形式，允许编译器优化复杂的表达式</li>
-</ul>
-</li>
 </ul>
 <br/>
 <div class="anchor" id="安装ghidra"></div>
@@ -553,8 +550,8 @@
 <img alt="image-20230904114441046" class="my-0 rounded-md" src="https://s2.loli.net/2023/09/04/rJW3tvbZyXIquQa.png"/>
 </figure>
 </p>
-<br/>
 <p>当然这个程序不会很复杂，所以直接看IDA的汇编代码也是完全可以的</p>
+<br/>
 <div class="anchor" id="寄存器学习"></div>
 <h3 class="relative group">寄存器学习 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
@@ -625,17 +622,17 @@
 </h3>
 <p>简单了解一些RSIC-V指令：</p>
 <p>加法指令（add）：</p>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">add x1, x2, x3    # 将x2和x3寄存器中的值相加，结果保存在x1寄存器
-</span></span><span class="line"><span class="cl">add x4, x5, x6    # 将x5和x6寄存器中的值相加，结果保存在x4寄存器
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">add</span> <span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">x3</span>    <span class="c1"># 将x2和x3寄存器中的值相加，结果保存在x1寄存器</span>
+</span></span><span class="line"><span class="cl"><span class="n">add</span> <span class="n">x4</span><span class="p">,</span> <span class="n">x5</span><span class="p">,</span> <span class="n">x6</span>    <span class="c1"># 将x5和x6寄存器中的值相加，结果保存在x4寄存器</span>
 </span></span></code></pre></div><p>加载指令（lw）：</p>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">lw x2, 0(x3)     # 将位于内存地址x3的字中的内容加载到x2寄存器
-</span></span><span class="line"><span class="cl">lw x4, 4(x5)     # 将位于内存地址x5+4的字中的内容加载到x4寄存器
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">lw</span> <span class="n">x2</span><span class="p">,</span> <span class="mi">0</span><span class="p">(</span><span class="n">x3</span><span class="p">)</span>     <span class="c1"># 将位于内存地址x3的字中的内容加载到x2寄存器</span>
+</span></span><span class="line"><span class="cl"><span class="n">lw</span> <span class="n">x4</span><span class="p">,</span> <span class="mi">4</span><span class="p">(</span><span class="n">x5</span><span class="p">)</span>     <span class="c1"># 将位于内存地址x5+4的字中的内容加载到x4寄存器</span>
 </span></span></code></pre></div><p>减法指令（sub）：</p>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sub x1, x2, x3    # 将x3寄存器中的值从x2寄存器中减去，结果保存在x1寄存器
-</span></span><span class="line"><span class="cl">sub x4, x5, x6    # 将x6寄存器中的值从x5寄存器中减去，结果保存在x4寄存器
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">sub</span> <span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">x3</span>    <span class="c1"># 将x3寄存器中的值从x2寄存器中减去，结果保存在x1寄存器</span>
+</span></span><span class="line"><span class="cl"><span class="n">sub</span> <span class="n">x4</span><span class="p">,</span> <span class="n">x5</span><span class="p">,</span> <span class="n">x6</span>    <span class="c1"># 将x6寄存器中的值从x5寄存器中减去，结果保存在x4寄存器</span>
 </span></span></code></pre></div><p>存储指令（sw）：</p>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sw x2, 0(x3)     # 将x2寄存器中的内容存储到内存地址x3的字中
-</span></span><span class="line"><span class="cl">sw x4, 4(x5)     # 将x4寄存器中的内容存储到内存地址x5+4的字中
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">sw</span> <span class="n">x2</span><span class="p">,</span> <span class="mi">0</span><span class="p">(</span><span class="n">x3</span><span class="p">)</span>     <span class="c1"># 将x2寄存器中的内容存储到内存地址x3的字中</span>
+</span></span><span class="line"><span class="cl"><span class="n">sw</span> <span class="n">x4</span><span class="p">,</span> <span class="mi">4</span><span class="p">(</span><span class="n">x5</span><span class="p">)</span>     <span class="c1"># 将x4寄存器中的内容存储到内存地址x5+4的字中</span>
 </span></span></code></pre></div><div class="anchor" id="加载指令"></div>
 <h4 class="relative group">加载指令 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
@@ -667,7 +664,7 @@
 <p>举个例子：假设我们有一个8位的二进制数：<code>0110 1011</code>。</p>
 <p>它代表一个无符号的整数107和一个有符号的整数-37（当使用二进制补码表示法时）。</p>
 <p>如果我们进行零扩展将其扩展为16位，那么符号位之后的所有位将填充为零，如下所示：</p>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="m">0000</span> <span class="m">0000</span> <span class="m">0110</span> <span class="m">1011</span>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">0000 0000 0110 1011
 </span></span></code></pre></div><p>可以看到，高8位都被填充为零，原始的8位数据在低位保持不变。</p>
 <p>这样，我们将8位数据零扩展为16位数据，使得原始数据在更大数据类型中占据了相同的位置，而不会改变无符号数字的数值本身。</p>
 <p>当然，有符号数字的数值就发生了改变。</p>
@@ -769,65 +766,66 @@
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e9%80%bb%e8%be%91%e4%b8%8e%e7%a7%bb%e4%bd%8d%e6%8c%87%e4%bb%a4" style="text-decoration-line: none !important;">#</a></span>
 </h4>
 <p>逻辑与指令（and）：</p>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">and x1, x2, x3    # 对x2和x3寄存器中的值进行逻辑与操作，结果保存在x1寄存器
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="ow">and</span> <span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">x3</span>    <span class="c1"># 对x2和x3寄存器中的值进行逻辑与操作，结果保存在x1寄存器</span>
 </span></span></code></pre></div><p>逻辑或指令（or）：</p>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">or x1, x2, x3     # 对x2和x3寄存器中的值进行逻辑或操作，结果保存在x1寄存器
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="ow">or</span> <span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">x3</span>     <span class="c1"># 对x2和x3寄存器中的值进行逻辑或操作，结果保存在x1寄存器</span>
 </span></span></code></pre></div><p>或指令（xor）：</p>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">xor x1, x2, x3    # 对x2和x3寄存器中的值进行异或操作（逻辑异或），结果保存在x1寄存器
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">xor</span> <span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">x3</span>    <span class="c1"># 对x2和x3寄存器中的值进行异或操作（逻辑异或），结果保存在x1寄存器</span>
 </span></span></code></pre></div><p>逻辑与非指令（andn）：</p>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">andn x1, x2, x3    # 对x2和x3寄存器中的值进行逻辑与非操作，结果保存在x1寄存器
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">andn</span> <span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">x3</span>    <span class="c1"># 对x2和x3寄存器中的值进行逻辑与非操作，结果保存在x1寄存器</span>
 </span></span></code></pre></div><p>逻辑或非指令（orn）：</p>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">orn x1, x2, x3    # 对x2和x3寄存器中的值进行逻辑或非操作，结果保存在x1寄存器
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">orn</span> <span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">x3</span>    <span class="c1"># 对x2和x3寄存器中的值进行逻辑或非操作，结果保存在x1寄存器</span>
 </span></span></code></pre></div><p>左移指令（sll）：</p>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sll x1, x2, x3     # 将寄存器x2的值左移x3位，结果保存在寄存器x1中
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">sll</span> <span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">x3</span>     <span class="c1"># 将寄存器x2的值左移x3位，结果保存在寄存器x1中</span>
 </span></span></code></pre></div><p>右移指令（srl）：</p>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">srl x1, x2, x3     # 将寄存器x2的值右移x3位（逻辑右移），结果保存在寄存器x1中
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">srl</span> <span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">x3</span>     <span class="c1"># 将寄存器x2的值右移x3位（逻辑右移），结果保存在寄存器x1中</span>
 </span></span></code></pre></div><p>算术右移指令（sra）：</p>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sra x1, x2, x3     # 将寄存器x2的值右移x3位（算术右移），结果保存在寄存器x1中
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">sra</span> <span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">x3</span>     <span class="c1"># 将寄存器x2的值右移x3位（算术右移），结果保存在寄存器x1中</span>
 </span></span></code></pre></div><p>左移扩展指令（slli）：</p>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">slli x1, x2, 4     # 将寄存器x2的值左移4位，结果保存在寄存器x1中，同时补齐低位的0
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">slli</span> <span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="mi">4</span>     <span class="c1"># 将寄存器x2的值左移4位，结果保存在寄存器x1中，同时补齐低位的0</span>
 </span></span></code></pre></div><p>右移扩展指令（srli）：</p>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">srli x1, x2, 4     # 将寄存器x2的值右移4位（逻辑右移），结果保存在寄存器x1中，同时补齐高位的
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">srli</span> <span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="mi">4</span>     <span class="c1"># 将寄存器x2的值右移4位（逻辑右移），结果保存在寄存器x1中，同时补齐高位的</span>
 </span></span></code></pre></div><p>循环左移指令（rol）：</p>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">rol x1, x2, x3    # 将x2寄存器中的值循环左移x3位，结果保存在x1寄存器
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">rol</span> <span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">x3</span>    <span class="c1"># 将x2寄存器中的值循环左移x3位，结果保存在x1寄存器</span>
 </span></span></code></pre></div><p>循环右移指令（ror）：</p>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ror x1, x2, x3    # 将x2寄存器中的值循环右移x3位，结果保存在x1寄存器
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">ror</span> <span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">x3</span>    <span class="c1"># 将x2寄存器中的值循环右移x3位，结果保存在x1寄存器</span>
 </span></span></code></pre></div><p>移位左逻辑和指令（sll and）：</p>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sll and x1, x2, x3    
-</span></span><span class="line"><span class="cl"># 对x2寄存器中的值左移x3位，
-</span></span><span class="line"><span class="cl"># 然后与x1寄存器中的值进行逻辑与操作，
-</span></span><span class="line"><span class="cl"># 结果保存在x1寄存器
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">sll</span> <span class="ow">and</span> <span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">x3</span>    
+</span></span><span class="line"><span class="cl"><span class="c1"># 对x2寄存器中的值左移x3位，</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 然后与x1寄存器中的值进行逻辑与操作，</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 结果保存在x1寄存器</span>
 </span></span></code></pre></div><p>移位右逻辑和指令（srl and）：</p>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">srl and x1, x2, x3    
-</span></span><span class="line"><span class="cl"># 对x2寄存器中的值右移x3位，
-</span></span><span class="line"><span class="cl"># 然后与x1寄存器中的值进行逻辑与操作，
-</span></span><span class="line"><span class="cl"># 结果保存在x1寄存器
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">srl</span> <span class="ow">and</span> <span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">x3</span>    
+</span></span><span class="line"><span class="cl"><span class="c1"># 对x2寄存器中的值右移x3位，</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 然后与x1寄存器中的值进行逻辑与操作，</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 结果保存在x1寄存器</span>
 </span></span></code></pre></div><p>移位右算术和指令（sra and）：</p>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sra and x1, x2, x3    
-</span></span><span class="line"><span class="cl"># 对x2寄存器中的值右移x3位（算术右移），
-</span></span><span class="line"><span class="cl"># 然后与x1寄存器中的值进行逻辑与操作，
-</span></span><span class="line"><span class="cl"># 结果保存在x1寄存器
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">sra</span> <span class="ow">and</span> <span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">x3</span>    
+</span></span><span class="line"><span class="cl"><span class="c1"># 对x2寄存器中的值右移x3位（算术右移），</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 然后与x1寄存器中的值进行逻辑与操作，</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 结果保存在x1寄存器</span>
 </span></span></code></pre></div><p>跳转指令（jal）：</p>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">jal x1, label    # 跳转到标签为"label"的指令，并将返回地址保存在x1寄存器
-</span></span><span class="line"><span class="cl">jal x2, label2   # 跳转到标签为"label2"的指令，并将返回地址保存在x2寄存器
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">jal</span> <span class="n">x1</span><span class="p">,</span> <span class="n">label</span>    <span class="c1"># 跳转到标签为"label"的指令，并将返回地址保存在x1寄存器</span>
+</span></span><span class="line"><span class="cl"><span class="n">jal</span> <span class="n">x2</span><span class="p">,</span> <span class="n">label2</span>   <span class="c1"># 跳转到标签为"label2"的指令，并将返回地址保存在x2寄存器</span>
 </span></span></code></pre></div><p>比较指令（slt）：</p>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">slt x1, x2, x3    # 如果x2寄存器中的值小于x3寄存器中的值，则将x1寄存器置为1，否则置为0
-</span></span><span class="line"><span class="cl">slt x4, x5, x6    # 如果x5寄存器中的值小于x6寄存器中的值，则将x4寄存器置为1，否则置为0
-</span></span></code></pre></div><div class="anchor" id="条件分支指令"></div>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">slt</span> <span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">x3</span>    <span class="c1"># 如果x2寄存器中的值小于x3寄存器中的值，则将x1寄存器置为1，否则置为0</span>
+</span></span><span class="line"><span class="cl"><span class="n">slt</span> <span class="n">x4</span><span class="p">,</span> <span class="n">x5</span><span class="p">,</span> <span class="n">x6</span>    <span class="c1"># 如果x5寄存器中的值小于x6寄存器中的值，则将x4寄存器置为1，否则置为0</span>
+</span></span></code></pre></div><br/>
+<div class="anchor" id="条件分支指令"></div>
 <h4 class="relative group">条件分支指令 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e6%9d%a1%e4%bb%b6%e5%88%86%e6%94%af%e6%8c%87%e4%bb%a4" style="text-decoration-line: none !important;">#</a></span>
 </h4>
 <p>相等条件分支（beq）：</p>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">beq x1, x2, label    # 如果x1和x2寄存器中的值相等，则跳转到标签为"label"的指令
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">beq</span> <span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">label</span>    <span class="c1"># 如果x1和x2寄存器中的值相等，则跳转到标签为"label"的指令</span>
 </span></span></code></pre></div><p>不相等条件分支（bne）：</p>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">bne x1, x2, label    # 如果x1和x2寄存器中的值不相等，则跳转到标签为"label"的指令
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">bne</span> <span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">label</span>    <span class="c1"># 如果x1和x2寄存器中的值不相等，则跳转到标签为"label"的指令</span>
 </span></span></code></pre></div><p>小于条件分支（blt）：</p>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">blt x1, x2, label    # 如果x1寄存器中的值小于x2寄存器中的值，则跳转到标签为"label"的指令
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">blt</span> <span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">label</span>    <span class="c1"># 如果x1寄存器中的值小于x2寄存器中的值，则跳转到标签为"label"的指令</span>
 </span></span></code></pre></div><p>小于等于条件分支（ble）：</p>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ble x1, x2, label    # 如果x1寄存器中的值小于等于x2寄存器中的值，则跳转到标签为"label"的指令
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">ble</span> <span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">label</span>    <span class="c1"># 如果x1寄存器中的值小于等于x2寄存器中的值，则跳转到标签为"label"的指令</span>
 </span></span></code></pre></div><p>大于条件分支（bgt）：</p>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">bgt x1, x2, label    # 如果x1寄存器中的值
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">bgt</span> <span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">label</span>    <span class="c1"># 如果x1寄存器中的值</span>
 </span></span></code></pre></div><br/>
 <p>下表给出了一系列伪指令及其依赖的真实的处理器物理指令（这些伪指令都依赖于x0寄存器，从中可以看到x0寄存器的作用：</p>
 <p>
@@ -879,7 +877,7 @@
 </h4>
 <p><code>addi</code> 是RISC-V汇编指令中的一条整数加法指令，用于将一个立即数与源寄存器的值相加，并将结果存储到目标寄存器中。</p>
 <p>该指令的语法如下：</p>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">addi rd, rs, immediate
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">addi</span> <span class="n">rd</span><span class="p">,</span> <span class="n">rs</span><span class="p">,</span> <span class="n">immediate</span>
 </span></span></code></pre></div><p>其中，<code>rd</code> 是目标寄存器，用于保存运算结果；<code>rs</code> 是源寄存器，包含要参与加法运算的值；<code>immediate</code> 是一个 16 位立即数，表示要与 <code>rs</code> 寄存器的值相加的常数。</p>
 <p>具体的操作步骤如下：</p>
 <ol>
@@ -897,7 +895,7 @@
 </h4>
 <p><code>sd</code> 是 RISC-V 汇编指令中的一条存储指令，用于将一个 64 位（8 字节）的值存储到内存中。</p>
 <p>该指令的语法如下：</p>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sd rs, offset(base)
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">sd</span> <span class="n">rs</span><span class="p">,</span> <span class="n">offset</span><span class="p">(</span><span class="n">base</span><span class="p">)</span>
 </span></span></code></pre></div><p>其中，<code>rs</code> 是源寄存器，包含要写入内存的数据；<code>offset</code> 是基址寄存器 <code>base</code> 的偏移量，表示存储位置相对于 <code>base</code> 寄存器的位移。</p>
 <p>具体的操作步骤如下：</p>
 <ol>
@@ -914,21 +912,21 @@
 </h4>
 <p>在 RISC-V 汇编中，<code>li</code> 并不是一条单独的指令，而是一种伪指令（pseudo-instruction）。<code>li</code>是一个常用的伪指令，它被用来加载一个立即数到寄存器中。由于RISC-V指令集的设计，无法直接将一个立即数加载到一个寄存器中。“li"指令会被汇编器转化为一系列指令来实现加载立即数的功能。</p>
 <p>以下是一个常见的用法：</p>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">li rd, imm
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">li</span> <span class="n">rd</span><span class="p">,</span> <span class="n">imm</span>
 </span></span></code></pre></div><ul>
 <li>rd为目标寄存器，用于存储立即数。</li>
 <li>imm为要加载的立即数。</li>
 </ul>
 <p>一般来说，“li"指令会被转化为以下两条指令来实现立即数加载：</p>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">lui rd, upper
-</span></span><span class="line"><span class="cl">addi rd, rd, lower
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">lui</span> <span class="n">rd</span><span class="p">,</span> <span class="n">upper</span>
+</span></span><span class="line"><span class="cl"><span class="n">addi</span> <span class="n">rd</span><span class="p">,</span> <span class="n">rd</span><span class="p">,</span> <span class="n">lower</span>
 </span></span></code></pre></div><ul>
 <li>lui指令将常数的高位部分放入目标寄存器rd中。</li>
 <li>addi指令将常数的低位部分与目标寄存器rd相加，并将结果存回目标寄存器rd中。</li>
 </ul>
 <p>举例来说，如果要将立即数123加载到寄存器x5中，可以使用以下指令序列来实现：</p>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">lui x5, %hi(123)
-</span></span><span class="line"><span class="cl">addi x5, x5, %lo(123)
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">lui</span> <span class="n">x5</span><span class="p">,</span> <span class="o">%</span><span class="nf">hi</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">addi</span> <span class="n">x5</span><span class="p">,</span> <span class="n">x5</span><span class="p">,</span> <span class="o">%</span><span class="nf">lo</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>
 </span></span></code></pre></div><p>其中，%hi(123)表示获取123的高位部分，%lo(123)表示获取123的低位部分。</p>
 <p>请注意，“li"指令是一个伪指令，由汇编器在编译时转化为真正的指令，所以在实际的RISC-V汇编语言中，我们不会直接使用"li"指令。</p>
 <br/>
@@ -988,7 +986,7 @@
 </h3>
 <p><strong>如何在纯汇编下找到main函数呢？</strong></p>
 <p>点进程序的入口函数——start函数，我们可以看到他调用了一个函数</p>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">.text:0000000012345606 17 05 00 00 13 05 45 1E       la              a0, sub_123457EA
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="p">.</span><span class="nl">text</span><span class="p">:</span><span class="mo">0000000012345606</span> <span class="mi">17</span> <span class="mo">05</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mi">13</span> <span class="mo">05</span> <span class="mi">45</span> <span class="mi">1</span><span class="n">E</span>       <span class="n">la</span>              <span class="n">a0</span><span class="p">,</span> <span class="n">sub_123457EA</span>
 </span></span></code></pre></div><p>右键或快捷键"n"重命名为 main：</p>
 <p>
 <figure>
