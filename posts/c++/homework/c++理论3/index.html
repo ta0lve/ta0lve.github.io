@@ -779,48 +779,48 @@
      c++虚函数详解（你肯定懂了）_戴着眼镜看不清的博客-CSDN博客</a></p>
 <p><a href="http://blog.chinaunix.net/uid-26851094-id-3327323.html" target="_blank">
     C++的精髓——虚函数-博客</a></p>
-<pre tabindex="0"><code>1.
-以下关于虚函数的说法正确的是
-A.虚函数不能在另一个类中被声明为友元函数
-B.虚函数只能在类定义的函数原型声明中，不能再成员函数的函数体实现的时候声明
-C.一个虚函数无论被公有继承多少次，它仍然保持其虚函数的特性
-D.定义了虚函数后，程序中声明的指向基类的指针可以指向其派生类
-（B C D）
-
-2.
-以下描述正确的是
-A.一个类可以在一个类族中既被用作虚基类，也被用作非虚基类
-B.派生类的构造函数的成员初始化列表中必须列出对虚基类构造函数的调用
-C.在派生类的对象中，同名的虚基类只产生一个虚基类子对象，而非虚基类产生各自的子对象
-D.在一个成员初始化列表中同时出现对虚基类和非虚基类构造函数的调用时，非虚基类的构造函数先于虚基类的构造函数执行
-（A C）
-
-3.
-以下哪些说法是正确的
-A.如果一个函数在基类中定义为虚函数，则它在其所有派生类中自动为虚函数。 派生类的函数声明中不需要添加关键字virtual
-B.如果一个函数不会被重新定义，那么在不将其声明为虚拟的情况下效率更高，因为在运行时动态绑定虚拟函数需要更多的时间和系统资源
-C.一个虚函数可以在几个派生类中实现。 C++ 在运行时动态绑定函数的实现，由变量引用的对象的实际类决定。
-D.编译器在编译时根据参数类型、参数个数、参数的顺序找到匹配的函数
-
-Standard Answer: D, A, B, C
-
-4.
-以下哪些说法是正确的
-A.私有成员只能从类内部访问，而公共成员可以从任何其他类访问。
-B.基类中的受保护数据字段或受保护函数可以在其派生类中按名称访问。
-C.任何其他程序都可以通过名称访问类中的公共数据字段或函数。
-
-Standard Answer: A, B, C
-
-5.
-以下哪个是抽象函数
-A.virtual double getArea();
-B.virtual double getArea()=0;
-C.double getArea()=0;
-D.double getArea();
-
-Standard Answer: B
-</code></pre><div class="anchor" id="多态"></div>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">1.
+</span></span><span class="line"><span class="cl">以下关于虚函数的说法正确的是
+</span></span><span class="line"><span class="cl">A.虚函数不能在另一个类中被声明为友元函数
+</span></span><span class="line"><span class="cl">B.虚函数只能在类定义的函数原型声明中，不能再成员函数的函数体实现的时候声明
+</span></span><span class="line"><span class="cl">C.一个虚函数无论被公有继承多少次，它仍然保持其虚函数的特性
+</span></span><span class="line"><span class="cl">D.定义了虚函数后，程序中声明的指向基类的指针可以指向其派生类
+</span></span><span class="line"><span class="cl">（B C D）
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">2.
+</span></span><span class="line"><span class="cl">以下描述正确的是
+</span></span><span class="line"><span class="cl">A.一个类可以在一个类族中既被用作虚基类，也被用作非虚基类
+</span></span><span class="line"><span class="cl">B.派生类的构造函数的成员初始化列表中必须列出对虚基类构造函数的调用
+</span></span><span class="line"><span class="cl">C.在派生类的对象中，同名的虚基类只产生一个虚基类子对象，而非虚基类产生各自的子对象
+</span></span><span class="line"><span class="cl">D.在一个成员初始化列表中同时出现对虚基类和非虚基类构造函数的调用时，非虚基类的构造函数先于虚基类的构造函数执行
+</span></span><span class="line"><span class="cl">（A C）
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">3.
+</span></span><span class="line"><span class="cl">以下哪些说法是正确的
+</span></span><span class="line"><span class="cl">A.如果一个函数在基类中定义为虚函数，则它在其所有派生类中自动为虚函数。 派生类的函数声明中不需要添加关键字virtual
+</span></span><span class="line"><span class="cl">B.如果一个函数不会被重新定义，那么在不将其声明为虚拟的情况下效率更高，因为在运行时动态绑定虚拟函数需要更多的时间和系统资源
+</span></span><span class="line"><span class="cl">C.一个虚函数可以在几个派生类中实现。 C++ 在运行时动态绑定函数的实现，由变量引用的对象的实际类决定。
+</span></span><span class="line"><span class="cl">D.编译器在编译时根据参数类型、参数个数、参数的顺序找到匹配的函数
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Standard Answer: D, A, B, C
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">4.
+</span></span><span class="line"><span class="cl">以下哪些说法是正确的
+</span></span><span class="line"><span class="cl">A.私有成员只能从类内部访问，而公共成员可以从任何其他类访问。
+</span></span><span class="line"><span class="cl">B.基类中的受保护数据字段或受保护函数可以在其派生类中按名称访问。
+</span></span><span class="line"><span class="cl">C.任何其他程序都可以通过名称访问类中的公共数据字段或函数。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Standard Answer: A, B, C
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">5.
+</span></span><span class="line"><span class="cl">以下哪个是抽象函数
+</span></span><span class="line"><span class="cl">A.virtual double getArea();
+</span></span><span class="line"><span class="cl">B.virtual double getArea()=0;
+</span></span><span class="line"><span class="cl">C.double getArea()=0;
+</span></span><span class="line"><span class="cl">D.double getArea();
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Standard Answer: B
+</span></span></code></pre></div><div class="anchor" id="多态"></div>
 <h4 class="relative group">多态 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e5%a4%9a%e6%80%81" style="text-decoration-line: none !important;">#</a></span>

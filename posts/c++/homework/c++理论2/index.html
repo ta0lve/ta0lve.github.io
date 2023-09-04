@@ -552,17 +552,17 @@
 <p>B.函数参数是一个右值引用</p>
 <p>C.初始化一个对象时使用同类型的另一个对象</p>
 <p>D.上述都是（D）</p>
-<pre tabindex="0"><code>复制省略（copy elision）是编译器的一种优化技术，在特定情况下可以避免对象的拷贝或移动操作，从而提高程序的性能和效率。以下是几种情况可能会触发复制省略：
-
-返回值优化（RVO）：
-当函数返回一个对象时，如果被返回的对象是一个局部对象，且该对象没有被其他代码引用，编译器可以将这个局部对象直接构造在调用者提供的存储空间中，而不进行实际的拷贝或移动操作。
-
-命名返回值优化（NRVO）：
-类似于返回值优化，当函数返回一个对象时，如果被返回的对象是一个局部对象，并且该对象在函数内部被命名并声明为函数返回值，编译器可以直接将这个局部对象构造在函数外部的目标对象中，而不进行实际的拷贝或移动操作。
-
-参数传递优化：
-当将一个对象作为函数参数进行传递时，如果传递的对象是一个临时对象，并且该临时对象没有被其他代码引用，编译器可以直接将这个临时对象构造在函数内部的目标对象中，而不进行实际的拷贝或移动操作。
-</code></pre><p>3.下面哪种写法可以利用复制省略提高性能？</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">复制省略（copy elision）是编译器的一种优化技术，在特定情况下可以避免对象的拷贝或移动操作，从而提高程序的性能和效率。以下是几种情况可能会触发复制省略：
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">返回值优化（RVO）：
+</span></span><span class="line"><span class="cl">当函数返回一个对象时，如果被返回的对象是一个局部对象，且该对象没有被其他代码引用，编译器可以将这个局部对象直接构造在调用者提供的存储空间中，而不进行实际的拷贝或移动操作。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">命名返回值优化（NRVO）：
+</span></span><span class="line"><span class="cl">类似于返回值优化，当函数返回一个对象时，如果被返回的对象是一个局部对象，并且该对象在函数内部被命名并声明为函数返回值，编译器可以直接将这个局部对象构造在函数外部的目标对象中，而不进行实际的拷贝或移动操作。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">参数传递优化：
+</span></span><span class="line"><span class="cl">当将一个对象作为函数参数进行传递时，如果传递的对象是一个临时对象，并且该临时对象没有被其他代码引用，编译器可以直接将这个临时对象构造在函数内部的目标对象中，而不进行实际的拷贝或移动操作。
+</span></span></code></pre></div><p>3.下面哪种写法可以利用复制省略提高性能？</p>
 <p>A.<code>std::string s = "hello"; </code></p>
 <p>B.<code>std::string s("hello"); </code></p>
 <p>C.<code>std::string s = std::string("hello"); </code></p>
@@ -582,44 +582,44 @@
 <p>2.开发者不可以将构造函数设置const成员函数</p>
 <p>3.<strong>当一个对象按值传递给函数时，函数会在栈上创建一个新的对象，并将原始对象的值复制到这个新对象中。函数在执行过程中对该副本进行操作，而不会影响原始对象。</strong></p>
 <p>4.<strong>定义const对象</strong></p>
-<pre tabindex="0"><code>在 C++ 中，const 也可以用来修饰对象，称为常对象。一旦将对象定义为常对象之后，就只能调用类的 const 成员（包括 const 成员变量和 const 成员函数）了。
-
-定义常对象的语法和定义常量的语法类似：
-const  class  object(params);
-class const object(params);
-
-当然你也可以定义 const 指针：
-const class *p = new class(params);
-class const *p = new class(params);
-
-class为类名，object为对象名，params为实参列表，p为指针名。两种方式定义出来的对象都是常对象。
-</code></pre><p>5.</p>
-<pre tabindex="0"><code>const成员函数是指在C++中，被声明为const的成员函数。const成员函数在类内部或类外部定义时使用const关键字进行标识，并且在函数签名的末尾加上const修饰符。
-
-const成员函数有以下特点：
-
-不修改对象状态：const成员函数承诺不会修改类的数据成员。它们可以读取对象的数据成员和调用其他const成员函数，但不能修改对象的任何非mutable成员。
-
-保护对象的常量性：const成员函数在被调用时，如果对象为const或通过const引用或指针调用，则只能调用const成员函数。
-
-成员函数重载：同名的非const成员函数和const成员函数可以共存，并根据调用对象的常量性来确定具体调用哪个函数。
-
-常量对象调用：当使用常量对象调用成员函数时，只能调用const成员函数。这样可以确保常量对象的状态不会被修改。
-
-通过在成员函数的声明和定义中添加const关键字，可以将其附加的常量属性表达出来，在编译器层面进行类型检查和限制，提供更安全和可靠的代码编写方式。
-</code></pre><p>6.同一个程序中的一个函数可以同时有const和non-const两个版本。这种情况下，这两个版本被视为函数重载，根据调用时的对象是否为const对象来选择合适的版本进行调用。</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">在 C++ 中，const 也可以用来修饰对象，称为常对象。一旦将对象定义为常对象之后，就只能调用类的 const 成员（包括 const 成员变量和 const 成员函数）了。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">定义常对象的语法和定义常量的语法类似：
+</span></span><span class="line"><span class="cl">const  class  object(params);
+</span></span><span class="line"><span class="cl">class const object(params);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">当然你也可以定义 const 指针：
+</span></span><span class="line"><span class="cl">const class *p = new class(params);
+</span></span><span class="line"><span class="cl">class const *p = new class(params);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">class为类名，object为对象名，params为实参列表，p为指针名。两种方式定义出来的对象都是常对象。
+</span></span></code></pre></div><p>5.</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">const成员函数是指在C++中，被声明为const的成员函数。const成员函数在类内部或类外部定义时使用const关键字进行标识，并且在函数签名的末尾加上const修饰符。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">const成员函数有以下特点：
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">不修改对象状态：const成员函数承诺不会修改类的数据成员。它们可以读取对象的数据成员和调用其他const成员函数，但不能修改对象的任何非mutable成员。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">保护对象的常量性：const成员函数在被调用时，如果对象为const或通过const引用或指针调用，则只能调用const成员函数。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">成员函数重载：同名的非const成员函数和const成员函数可以共存，并根据调用对象的常量性来确定具体调用哪个函数。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">常量对象调用：当使用常量对象调用成员函数时，只能调用const成员函数。这样可以确保常量对象的状态不会被修改。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">通过在成员函数的声明和定义中添加const关键字，可以将其附加的常量属性表达出来，在编译器层面进行类型检查和限制，提供更安全和可靠的代码编写方式。
+</span></span></code></pre></div><p>6.同一个程序中的一个函数可以同时有const和non-const两个版本。这种情况下，这两个版本被视为函数重载，根据调用时的对象是否为const对象来选择合适的版本进行调用。</p>
 <p>考虑以下示例：</p>
-<pre tabindex="0"><code>class MyClass {
-public:
-    void function() {
-        // 非常规范的函数实现
-    }
-    
-    void function() const {
-         // 常规范的函数实现
-    }
-};
-</code></pre><p>上述代码定义了一个名为<code>function</code>的成员函数，并分别提供了一个非const版本和一个const版本。非const版本用于对非const对象进行操作，而const版本用于对const对象进行操作。</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">class MyClass {
+</span></span><span class="line"><span class="cl">public:
+</span></span><span class="line"><span class="cl">    void function() {
+</span></span><span class="line"><span class="cl">        // 非常规范的函数实现
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    void function() const {
+</span></span><span class="line"><span class="cl">         // 常规范的函数实现
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">};
+</span></span></code></pre></div><p>上述代码定义了一个名为<code>function</code>的成员函数，并分别提供了一个非const版本和一个const版本。非const版本用于对非const对象进行操作，而const版本用于对const对象进行操作。</p>
 <p>当<strong>非const对象</strong>调用该函数时，将会调用非const版本的函数；当<strong>const对象</strong>调用该函数时，将会调用const版本的函数。通过这种方式，可以实现对不同类型（const和非const）的对象进行特定的操作，并保证不改变const对象的状态。</p>
 <p>使用const和非const版本的函数重载，可以提高程序的灵活性和可读性，在不改变对象状态的情况下，可以对const对象进行操作，避免意外修改对象的行为。</p>
 <p>7.如果在一个类中声明以下4个重载函数，有哪两个是互相冲突的？</p>
@@ -775,8 +775,8 @@ public:
 </span></span></span><span class="line"><span class="cl"><span class="cm">*/</span>
 </span></span></code></pre></div><p>一元运算符 <code>+</code> 的重载函数<strong>只有一个参数</strong>，即被操作的对象本身。因此，它<strong>不需要额外的参数</strong>来进行操作。重载函数的返回类型应该是 <code>Obj</code> 类型，表示对运算符操作后得到的新对象。</p>
 <p>所以，正确的声明是：</p>
-<pre tabindex="0"><code>Obj Obj::operator+();
-</code></pre><div class="anchor" id="3有些运算符只能用成员函数进行重载"></div>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Obj Obj::operator+();
+</span></span></code></pre></div><div class="anchor" id="3有些运算符只能用成员函数进行重载"></div>
 <h5 class="relative group"><strong>3.有些运算符只能用成员函数进行重载</strong>
 <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#3%e6%9c%89%e4%ba%9b%e8%bf%90%e7%ae%97%e7%ac%a6%e5%8f%aa%e8%83%bd%e7%94%a8%e6%88%90%e5%91%98%e5%87%bd%e6%95%b0%e8%bf%9b%e8%a1%8c%e9%87%8d%e8%bd%bd" style="text-decoration-line: none !important;">#</a></span>

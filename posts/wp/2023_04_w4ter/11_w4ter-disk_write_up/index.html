@@ -645,8 +645,8 @@
 
 
 看看可能的块边缘（0x10000 = 64 KB 的倍数)的情况：</p>
-<pre tabindex="0"><code>for i in *.img; do echo $i &amp;&amp; hexdump -C $i | grep '0000  '; done &gt; ./tmp1
-</code></pre><p>但是并没有什么有意思的字符串，<del>有点小失望</del>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">for i in *.img; do echo $i &amp;&amp; hexdump -C $i | grep '0000  '; done &gt; ./tmp1
+</span></span></code></pre></div><p>但是并没有什么有意思的字符串，<del>有点小失望</del>
 <figure>
 <img alt="image.png" class="my-0 rounded-md" src="https://s2.loli.net/2023/07/05/jC9sloK74pYtemq.png"/>
 </figure>

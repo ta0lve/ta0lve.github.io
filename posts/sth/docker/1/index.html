@@ -619,17 +619,17 @@
 <hr/>
 <p><strong>实例</strong>:</p>
 <p>使用docker镜像nginx:latest以后台模式启动一个容器,并将容器命名为mynginx。</p>
-<pre tabindex="0"><code>docker run --name mynginx -d nginx:latest
-</code></pre><p>使用镜像nginx:latest以后台模式启动一个容器,并将容器的80端口映射到主机随机端口。</p>
-<pre tabindex="0"><code>docker run -P -d nginx:latest
-</code></pre><p>使用镜像 nginx:latest，以后台模式启动一个容器,将容器的 80 端口映射到主机的 80 端口,主机的目录 /data 映射到容器的 /data。</p>
-<pre tabindex="0"><code>docker run -p 80:80 -v /data:/data -d nginx:latest
-</code></pre><p>绑定容器的 8080 端口，并将其映射到本地主机 127.0.0.1 的 80 端口上。</p>
-<pre tabindex="0"><code>$ docker run -p 127.0.0.1:80:8080/tcp ubuntu bash
-</code></pre><p>使用镜像nginx:latest以交互模式启动一个容器,在容器内执行/bin/bash命令。</p>
-<pre tabindex="0"><code>runoob@runoob:~$ docker run -it nginx:latest /bin/bash
-root@b8573233d675:/# 
-</code></pre><hr/>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">docker run --name mynginx -d nginx:latest
+</span></span></code></pre></div><p>使用镜像nginx:latest以后台模式启动一个容器,并将容器的80端口映射到主机随机端口。</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">docker run -P -d nginx:latest
+</span></span></code></pre></div><p>使用镜像 nginx:latest，以后台模式启动一个容器,将容器的 80 端口映射到主机的 80 端口,主机的目录 /data 映射到容器的 /data。</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">docker run -p 80:80 -v /data:/data -d nginx:latest
+</span></span></code></pre></div><p>绑定容器的 8080 端口，并将其映射到本地主机 127.0.0.1 的 80 端口上。</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ docker run -p 127.0.0.1:80:8080/tcp ubuntu bash
+</span></span></code></pre></div><p>使用镜像nginx:latest以交互模式启动一个容器,在容器内执行/bin/bash命令。</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">runoob@runoob:~$ docker run -it nginx:latest /bin/bash
+</span></span><span class="line"><span class="cl">root@b8573233d675:/# 
+</span></span></code></pre></div><hr/>
 <div class="anchor" id="ps-命令"></div>
 <h3 class="relative group">ps 命令 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
@@ -666,11 +666,11 @@ root@b8573233d675:/#
 <hr/>
 <p><strong>实例:</strong></p>
 <p>列出所有在运行的容器信息。</p>
-<pre tabindex="0"><code>runoob@runoob:~$ docker ps
-CONTAINER ID   IMAGE          COMMAND                ...  PORTS                    NAMES
-09b93464c2f7   nginx:latest   "nginx -g 'daemon off" ...  80/tcp, 443/tcp          myrunoob
-96f7f14e99ab   mysql:5.6      "docker-entrypoint.sh" ...  0.0.0.0:3306-&gt;3306/tcp   mymysql
-</code></pre><p>输出详情介绍：</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">runoob@runoob:~$ docker ps
+</span></span><span class="line"><span class="cl">CONTAINER ID   IMAGE          COMMAND                ...  PORTS                    NAMES
+</span></span><span class="line"><span class="cl">09b93464c2f7   nginx:latest   "nginx -g 'daemon off" ...  80/tcp, 443/tcp          myrunoob
+</span></span><span class="line"><span class="cl">96f7f14e99ab   mysql:5.6      "docker-entrypoint.sh" ...  0.0.0.0:3306-&gt;3306/tcp   mymysql
+</span></span></code></pre></div><p>输出详情介绍：</p>
 <p><strong>CONTAINER ID:</strong> 容器 ID。</p>
 <p><strong>IMAGE:</strong> 使用的镜像。</p>
 <p><strong>COMMAND:</strong> 启动容器时运行的命令。</p>
@@ -689,52 +689,52 @@ CONTAINER ID   IMAGE          COMMAND                ...  PORTS                 
 <p><strong>PORTS:</strong> 容器的端口信息和使用的连接类型（tcp\udp）。</p>
 <p><strong>NAMES:</strong> 自动分配的容器名称。</p>
 <p>列出最近创建的5个容器信息。</p>
-<pre tabindex="0"><code>runoob@runoob:~$ docker ps -n 5
-CONTAINER ID        IMAGE               COMMAND                   CREATED           
-09b93464c2f7        nginx:latest        "nginx -g 'daemon off"    2 days ago   ...     
-b8573233d675        nginx:latest        "/bin/bash"               2 days ago   ...     
-b1a0703e41e7        nginx:latest        "nginx -g 'daemon off"    2 days ago   ...    
-f46fb1dec520        5c6e1090e771        "/bin/sh -c 'set -x \t"   2 days ago   ...   
-a63b4a5597de        860c279d2fec        "bash"                    2 days ago   ...
-</code></pre><p>列出所有创建的容器ID。</p>
-<pre tabindex="0"><code>runoob@runoob:~$ docker ps -a -q
-09b93464c2f7
-b8573233d675
-b1a0703e41e7
-f46fb1dec520
-a63b4a5597de
-6a4aa42e947b
-de7bb36e7968
-43a432b73776
-664a8ab1a585
-ba52eb632bbd
-...
-</code></pre><hr/>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">runoob@runoob:~$ docker ps -n 5
+</span></span><span class="line"><span class="cl">CONTAINER ID        IMAGE               COMMAND                   CREATED           
+</span></span><span class="line"><span class="cl">09b93464c2f7        nginx:latest        "nginx -g 'daemon off"    2 days ago   ...     
+</span></span><span class="line"><span class="cl">b8573233d675        nginx:latest        "/bin/bash"               2 days ago   ...     
+</span></span><span class="line"><span class="cl">b1a0703e41e7        nginx:latest        "nginx -g 'daemon off"    2 days ago   ...    
+</span></span><span class="line"><span class="cl">f46fb1dec520        5c6e1090e771        "/bin/sh -c 'set -x \t"   2 days ago   ...   
+</span></span><span class="line"><span class="cl">a63b4a5597de        860c279d2fec        "bash"                    2 days ago   ...
+</span></span></code></pre></div><p>列出所有创建的容器ID。</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">runoob@runoob:~$ docker ps -a -q
+</span></span><span class="line"><span class="cl">09b93464c2f7
+</span></span><span class="line"><span class="cl">b8573233d675
+</span></span><span class="line"><span class="cl">b1a0703e41e7
+</span></span><span class="line"><span class="cl">f46fb1dec520
+</span></span><span class="line"><span class="cl">a63b4a5597de
+</span></span><span class="line"><span class="cl">6a4aa42e947b
+</span></span><span class="line"><span class="cl">de7bb36e7968
+</span></span><span class="line"><span class="cl">43a432b73776
+</span></span><span class="line"><span class="cl">664a8ab1a585
+</span></span><span class="line"><span class="cl">ba52eb632bbd
+</span></span><span class="line"><span class="cl">...
+</span></span></code></pre></div><hr/>
 <div class="anchor" id="ps-过滤"></div>
 <h3 class="relative group">ps 过滤 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#ps-%e8%bf%87%e6%bb%a4" style="text-decoration-line: none !important;">#</a></span>
 </h3>
 <p>根据条件过滤显示的内容</p>
-<pre tabindex="0"><code>$ docker run -d --name=test-nginx --label color=blue nginx
-$ docker ps --filter "label=color"
-$ docker ps --filter "label=color=blue"
-</code></pre><p>根据名称过滤</p>
-<pre tabindex="0"><code>$ docker ps --filter"name=test-nginx"
-</code></pre><p>根据状态过滤</p>
-<pre tabindex="0"><code>$ docker ps -a --filter 'exited=0'
-$ docker ps --filter status=running
-$ docker ps --filter status=paused
-</code></pre><p>根据镜像过滤</p>
-<pre tabindex="0"><code>#镜像名称
-$ docker ps --filter ancestor=nginx
-
-#镜像ID
-$ docker ps --filter ancestor=d0e008c6cf02
-</code></pre><p>根据启动顺序过滤</p>
-<pre tabindex="0"><code>$ docker ps -f before=9c3527ed70ce
-$ docker ps -f since=6e63f6ff38b0
-</code></pre><hr/>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ docker run -d --name=test-nginx --label color=blue nginx
+</span></span><span class="line"><span class="cl">$ docker ps --filter "label=color"
+</span></span><span class="line"><span class="cl">$ docker ps --filter "label=color=blue"
+</span></span></code></pre></div><p>根据名称过滤</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ docker ps --filter"name=test-nginx"
+</span></span></code></pre></div><p>根据状态过滤</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ docker ps -a --filter 'exited=0'
+</span></span><span class="line"><span class="cl">$ docker ps --filter status=running
+</span></span><span class="line"><span class="cl">$ docker ps --filter status=paused
+</span></span></code></pre></div><p>根据镜像过滤</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">#镜像名称
+</span></span><span class="line"><span class="cl">$ docker ps --filter ancestor=nginx
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#镜像ID
+</span></span><span class="line"><span class="cl">$ docker ps --filter ancestor=d0e008c6cf02
+</span></span></code></pre></div><p>根据启动顺序过滤</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ docker ps -f before=9c3527ed70ce
+</span></span><span class="line"><span class="cl">$ docker ps -f since=6e63f6ff38b0
+</span></span></code></pre></div><hr/>
 <div class="anchor" id="附录"></div>
 <h2 class="relative group">附录 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
@@ -764,7 +764,7 @@ $ docker ps -f since=6e63f6ff38b0
 <div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/pwn/basic/linux_/">Linux命令入门与总结</div>
 <div class="text-sm text-neutral-500 dark:text-neutral-400">
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-07-14 00:00:00 +0000 UTC">July 14, 2023</time><span class="px-2 text-primary-500">·</span><span>4902 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">10 分钟</span>
+<time datetime="2023-07-14 00:00:00 +0000 UTC">July 14, 2023</time><span class="px-2 text-primary-500">·</span><span>4854 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">10 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
 <span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%85%A5%E9%97%A8/&quot;,'_self');" style="margin-top:0.5rem">

@@ -835,8 +835,8 @@
 <p>观察后推测第一行是类似base64编码后的密文， 第二行有 “%”，推测是进行了url编码</p>
 <p>第一行字符串不能直接用欧通的base64解码，也不能用base91、base92等，</p>
 <p>而第二行url解码之后是：</p>
-<pre tabindex="0"><code>GHI3KLMNJOPQRSTUb=cdefghijklmnopWXYZ/12+406789VaqrstuvwxyzABCDEF5 
-</code></pre><p>可以看这一个字符串是base64码表的乱序，</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">GHI3KLMNJOPQRSTUb=cdefghijklmnopWXYZ/12+406789VaqrstuvwxyzABCDEF5 
+</span></span></code></pre></div><p>可以看这一个字符串是base64码表的乱序，</p>
 <p>推测是以第二行字符串为新的码表来对第一行进行解码得到flag</p>
 <p>由于“=”号在码表中间，所以把最后面的5当作是原来的“=”号，</p>
 <p>可以直接自己写一个base64解码脚本，也可以直接上网搜base64解码脚本再修改码表</p>

