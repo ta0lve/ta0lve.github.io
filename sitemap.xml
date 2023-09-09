@@ -316,8 +316,6 @@
     
   
     
-  
-    
       <url>
             <loc>https://ta0lve.github.io/pointer/intoverflow/pointer1/</loc>
             <lastmod>2023-07-14T00:00:00+00:00</lastmod>
@@ -397,8 +395,19 @@
     
   
     
+  
+    
       <url>
             <loc>https://ta0lve.github.io/posts/wp/2023_04_w4ter/6_gz-rsa_write_up/</loc>
+            <lastmod>2023-07-05T00:00:00+00:00</lastmod>
+            <changefreq>daily</changefreq>
+            <priority>0.5</priority>
+          </url>
+    
+  
+    
+      <url>
+            <loc>https://ta0lve.github.io/link/xia0/</loc>
             <lastmod>2023-07-05T00:00:00+00:00</lastmod>
             <changefreq>daily</changefreq>
             <priority>0.5</priority>
@@ -510,6 +519,15 @@
     
   
     
+      <url>
+            <loc>https://ta0lve.github.io/link/</loc>
+            <lastmod>2023-07-05T00:00:00+00:00</lastmod>
+            <changefreq>daily</changefreq>
+            <priority>0.5</priority>
+          </url>
+    
+  
+    
   
     
       <url>
@@ -534,15 +552,6 @@
     
       <url>
             <loc>https://ta0lve.github.io/link/gztime/</loc>
-            <lastmod>2023-07-02T00:00:00+00:00</lastmod>
-            <changefreq>daily</changefreq>
-            <priority>0.5</priority>
-          </url>
-    
-  
-    
-      <url>
-            <loc>https://ta0lve.github.io/link/</loc>
             <lastmod>2023-07-02T00:00:00+00:00</lastmod>
             <changefreq>daily</changefreq>
             <priority>0.5</priority>
