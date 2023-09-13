@@ -45,6 +45,13 @@
 <description>&lt;p&gt;本文是一篇RISC-V PWN的学习记录，同时也是&lt;strong&gt;羊城杯2023 risky_login&lt;/strong&gt;一题的wp.&lt;/p&gt;</description>
 </item>
 <item>
+<title>exp_template</title>
+<link>https://ta0lve.github.io/posts/pwn/basic/template/0x01/</link>
+<pubDate>Fri, 01 Sep 2023 00:00:00 +0000</pubDate>
+<guid>https://ta0lve.github.io/posts/pwn/basic/template/0x01/</guid>
+<description>一些exp的template： from pwn import * from LibcSearcher import * is_debug = 1 is_remote = 0 is_gdb</description>
+</item>
+<item>
 <title>Ubuntu Ropper安装与使用</title>
 <link>https://ta0lve.github.io/posts/pwn/basic/tools/ropper_/</link>
 <pubDate>Mon, 28 Aug 2023 00:00:00 +0000</pubDate>
