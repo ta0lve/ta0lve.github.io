@@ -15,7 +15,7 @@
 <meta content="ie=edge" http-equiv="X-UA-Compatible"/>
 <title>ycb2023_final_pwn1 · ta0lve</title>
 <meta content="ycb2023_final_pwn1 · ta0lve" name="title"/>
-<meta content="CTF, PWN, AWDP, " name="keywords"/>
+<meta content="CTF, PWN, 整数溢出漏洞, " name="keywords"/>
 <link href="https://ta0lve.github.io/posts/wp/2023_09_ycb_final/0x01/" rel="canonical"/>
 <link href="/css/main.bundle.min.c6116b9ed1c907a8c0eb015f377d3eecc07e448d75729e31fc3de5881465c6c172ba9fa9a6800c030116caf2a110d92242bb816639484ca791f7cd107a8d49b5.css" integrity="sha512-xhFrntHJB6jA6wFfN30+7MB+RI11cp4x/D3liBRlxsFyup+ppoAMAwEWyvKhENkiQruBZjlITKeR980Qeo1JtQ==" rel="stylesheet" type="text/css"/>
 <script integrity="sha512-UWoWdFvqWpvQERONJUzA/TlzzVXObhXz3sdj58fCx0SPj+e1TMqBHLghsMfhLNFhyqzh3XlKw9NNQJN8vMnuEg==" src="/js/appearance.min.516a16745bea5a9bd011138d254cc0fd3973cd55ce6e15f3dec763e7c7c2c7448f8fe7b54cca811cb821b0c7e12cd161caace1dd794ac3d34d40937cbcc9ee12.js" type="text/javascript"></script>
@@ -55,10 +55,10 @@
     
     "dateModified": "2023-09-12T00:00:00\u002b00:00",
     
-    "keywords": ["CTF","PWN","AWDP"],
+    "keywords": ["CTF","PWN","整数溢出漏洞"],
     
     "mainEntityOfPage": "true",
-    "wordCount": "2807"
+    "wordCount": "3235"
   }]
   </script>
 <meta content="ta0lve" name="author"/>
@@ -282,13 +282,13 @@
     </h1>
 <div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-09-12 00:00:00 +0000 UTC">September 12, 2023</time><span class="px-2 text-primary-500">·</span><span>2807 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">6 分钟</span>
+<time datetime="2023-09-12 00:00:00 +0000 UTC">September 12, 2023</time><span class="px-2 text-primary-500">·</span><span>3235 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">7 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
-<span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="mr-2" onclick="window.open(&quot;/categories/wp/&quot;,'_self');" style="margin-top:0.5rem">
 <span class="flex">
 <span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    PWN学习记录
+    WP
   </span>
 </span>
 </span>
@@ -306,10 +306,10 @@
   </span>
 </span>
 </span>
-<span class="mr-2" onclick="window.open(&quot;/tags/awdp/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="mr-2" onclick="window.open(&quot;/tags/%E6%95%B4%E6%95%B0%E6%BA%A2%E5%87%BA%E6%BC%8F%E6%B4%9E/&quot;,'_self');" style="margin-top:0.5rem">
 <span class="flex">
 <span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    AWDP
+    整数溢出漏洞
   </span>
 </span>
 </span>
@@ -450,13 +450,18 @@
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
         Part 1: This Article
     </div>
+<div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+<a href="https://ta0lve.github.io/posts/wp/2023_09_ycb_final/0x02/">
+            Part 2: ycb2023_final_pwn2
+        </a>
+</div>
 </details>
 <div class="anchor" id="前言"></div>
 <h2 class="relative group">前言 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e5%89%8d%e8%a8%80" style="text-decoration-line: none !important;">#</a></span>
 </h2>
-<p>本文为ycb2023线下赛pwn的第一题wp，主要是简单记录一下自己在打比赛是做题遇到的一些小要点，仅为个人的一个学习记录，水平不高还望师傅们包容。</p>
+<p>本文为ycb2023线下赛pwn的第一题wp，主要是简单记录一下自己在打比赛时做题遇到的一些小要点，仅为个人的一个学习记录，水平不高还望师傅们包容。</p>
 <br/>
 <div class="anchor" id="ida分析"></div>
 <h2 class="relative group">IDA分析 
@@ -598,7 +603,7 @@
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e6%bc%8f%e6%b4%9e%e5%88%a9%e7%94%a8%e6%80%9d%e8%b7%af" style="text-decoration-line: none !important;">#</a></span>
 </h2>
-<p>IDA 分析完了，感觉思路还是有的，先泄露出 <code>textbase</code> 的漏洞，再覆盖返回地址就可以 getshell</p>
+<p>IDA 分析完了，思路还是挺清晰的，先泄露出 <code>textbase</code> 的漏洞，再覆盖返回地址就可以 getshell</p>
 <div class="anchor" id="泄露-textbase"></div>
 <h3 class="relative group">泄露 textbase 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
@@ -611,12 +616,50 @@
 </span></span><span class="line"><span class="cl">        <span class="n">puts</span><span class="p">(</span><span class="s2">"???"</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">        <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>                                
 </span></span><span class="line"><span class="cl">      <span class="p">}</span>
-</span></span><span class="line"><span class="cl">      <span class="n">printf</span><span class="p">(</span><span class="s2">"accounts[%lld] = %lld</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span> <span class="n">v3</span><span class="p">,</span> <span class="n">v1</span><span class="p">[</span><span class="n">v3</span><span class="p">]);</span><span class="o">//</span> <span class="n">menu选项1</span><span class="p">:</span> <span class="n">以lld的格式打印</span>
-</span></span><span class="line"><span class="cl">              
-</span></span></code></pre></div><p>由于前面的检查只是比较是否小于等于1，所以我们可以输入负值，打印出accounts数组上面地址的值，这时候偶就需要我们在gdb中调试进行动态分析了，看看哪个地址可以帮助我们泄漏<code>textbase</code>的值</p>
+</span></span><span class="line"><span class="cl">      <span class="n">printf</span><span class="p">(</span><span class="s2">"accounts[%lld] = %lld</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span> <span class="n">v3</span><span class="p">,</span> <span class="n">v1</span><span class="p">[</span><span class="n">v3</span><span class="p">]);</span><span class="o">//</span> <span class="n">menu选项1</span><span class="p">:</span> <span class="n">以lld的格式打印</span>       
+</span></span></code></pre></div><p>注意到判断大小时程序的汇编代码为：</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="p">.</span><span class="nl">text</span><span class="p">:</span><span class="mo">0000000000001431</span> <span class="mi">48</span> <span class="mi">39</span> <span class="mi">45</span> <span class="n">F0</span>                   <span class="n">cmp</span>     <span class="p">[</span><span class="n">rbp</span><span class="o">+</span><span class="n">var_10</span><span class="p">],</span> <span class="n">rax</span>
+</span></span><span class="line"><span class="cl"><span class="p">.</span><span class="nl">text</span><span class="p">:</span><span class="mo">0000000000001435</span> <span class="mi">7</span><span class="n">E</span> <span class="mi">16</span>                         <span class="n">jle</span>     <span class="kt">short</span> <span class="n">loc_144D</span>
+</span></span></code></pre></div><p>采用的是 <code>jle</code> 指令来跳转，而 jle 指令常常与 cmp  结合用于有符号数的比较，所以存在漏洞</p>
+<p><strong>（由于是线下赛的AWDP赛制，所以这个时候就可以想想怎么将这个漏洞 fix 好。此处可以简单地用IDA的<code>keypatch</code>插件将<code>jle</code>指令改为<code>jbe</code>指令即可）</strong></p>
 <ul>
-<li>注意！<strong>如果题目有提供 libc 文件</strong>需要 patchelf 更换 libc 库与 ld 链接器，不然内存地址的值会和我们远程打靶机是不一样，可能会出现本地可以 getshell 而远程打不通的情况</li>
+<li>
+<p>menu1的代码只做了单边限制，存在整数溢出漏洞</p>
+<ul>
+<li>从表面上看，对变量 v3 进行了限制，但是仔细看看汇编代码可以发现，进行的是是有符号整型的比较，所以 v3 可以为负数</li>
+<li>但是在数组中取值时，数组的索引的类型是 <code>size_t</code>，该类型相当于属于无符号整型
+<ul>
+<li>在64位程序中<code>size_t</code>的大小为8 字节</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>由于前面的检查只是比较是否小于等于1，所以我们可以输入负值，打印出<strong>该负值对应的无符号整数索引</strong>的accounts数组地址的值</p>
+</li>
+<li>
+<p>所以我们的数值的二进制码可以为 FFFF FFFF FFFF FFFF</p>
+<ul>
+<li>
+<p>在比较时会被当做有符号整数，所以为-1&lt;1，成功绕过检查</p>
+</li>
+<li>
+<p>在数组索引时为无符号整数，会打印出一个距离栈很远的地址，有概率打印出可以泄漏textbase的值</p>
+</li>
+<li>
+<p>这时候就需要我们在gdb中调试进行动态分析了，看看哪个地址可以帮助我们泄漏<code>textbase</code>的值</p>
+</li>
+<li>
+<p>当然，我们可以直接写一个脚本直接看某几个负数对应的数组的值是什么，直接使用也是可以的</p>
+</li>
+</ul>
+</li>
+<li>
+<p>注意！<strong>如果题目有提供 libc 文件</strong>需要 patchelf 更换 libc 库与 ld 链接器，不然内存地址的值会和我们远程打靶机是不一样，可能会出现本地可以 getshell 而远程打不通的情况</p>
+<ul>
 <li>不过本题中题目并没有提供libc，所以直接gdb调试就可以了</li>
+</ul>
+</li>
 </ul>
 <div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
 </span></span><span class="line"><span class="cl">
@@ -866,6 +909,11 @@
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
         Part 1: This Article
     </div>
+<div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+<a href="https://ta0lve.github.io/posts/wp/2023_09_ycb_final/0x02/">
+            Part 2: ycb2023_final_pwn2
+        </a>
+</div>
 </details>
 </div>
 <script>
@@ -877,14 +925,14 @@
 <footer class="pt-8 max-w-prose print:hidden">
 <h2 class="mt-8 text-2xl font-extrabold mb-10">Related</h2>
 <section class="w-full grid gap-4 sm:grid-cols-2 md:grid-cols-3">
-<a class="min-w-full" href="/posts/pwn/awdp/0x02/">
+<a class="min-w-full" href="/posts/wp/2023_09_ycb_final/0x02/">
 <div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
 <div class="w-full thumbnail_card_related nozoom" style="background-image:url(/flyx6.jpg);"></div>
 <div class="px-6 py-4">
-<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/pwn/awdp/0x02/">从0到0.002的AWDP实战记录</div>
+<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/wp/2023_09_ycb_final/0x02/">ycb2023_final_pwn2</div>
 <div class="text-sm text-neutral-500 dark:text-neutral-400">
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-09-11 00:00:00 +0000 UTC">September 11, 2023</time><span class="px-2 text-primary-500">·</span><span>3380 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">7 分钟</span>
+<time datetime="2023-09-12 00:00:00 +0000 UTC">September 12, 2023</time><span class="px-2 text-primary-500">·</span><span>3237 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">7 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
 <span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/&quot;,'_self');" style="margin-top:0.5rem">
@@ -908,10 +956,17 @@
   </span>
 </span>
 </span>
-<span class="mr-2" onclick="window.open(&quot;/tags/awdp/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="mr-2" onclick="window.open(&quot;/tags/tcache-attack/&quot;,'_self');" style="margin-top:0.5rem">
 <span class="flex">
 <span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    AWDP
+    tcache attack
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/mp_.tcache_bins/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    mp_.tcache_bins
   </span>
 </span>
 </span>
@@ -922,20 +977,20 @@
 </div>
 </div>
 </a>
-<a class="min-w-full" href="/posts/pwn/awdp/0x01/">
+<a class="min-w-full" href="/posts/wp/2023_07_hws/fmt2/">
 <div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
-<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/flyx6.jpg);"></div>
+<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/posts/wp/2023_07_hws/fmt2/featured.jpg);"></div>
 <div class="px-6 py-4">
-<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/pwn/awdp/0x01/">从0到0.001的AWDP学习记录</div>
+<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/wp/2023_07_hws/fmt2/">HWS 2023 fmt exp</div>
 <div class="text-sm text-neutral-500 dark:text-neutral-400">
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-09-04 00:00:00 +0000 UTC">September 4, 2023</time><span class="px-2 text-primary-500">·</span><span>3381 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">7 分钟</span>
+<time datetime="2023-07-18 00:00:00 +0000 UTC">July 18, 2023</time><span class="px-2 text-primary-500">·</span><span>123 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">1 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
-<span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="mr-2" onclick="window.open(&quot;/categories/wp/&quot;,'_self');" style="margin-top:0.5rem">
 <span class="flex">
 <span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    PWN学习记录
+    WP
   </span>
 </span>
 </span>
@@ -953,10 +1008,10 @@
   </span>
 </span>
 </span>
-<span class="mr-2" onclick="window.open(&quot;/tags/awdp/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="mr-2" onclick="window.open(&quot;/tags/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%BC%8F%E6%B4%9E/&quot;,'_self');" style="margin-top:0.5rem">
 <span class="flex">
 <span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    AWDP
+    格式化字符串漏洞
   </span>
 </span>
 </span>
@@ -967,20 +1022,20 @@
 </div>
 </div>
 </a>
-<a class="min-w-full" href="/posts/pwn/risc-v/0x01/">
+<a class="min-w-full" href="/posts/wp/2023_07_hws/fmt/">
 <div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
-<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/flyx6.jpg);"></div>
+<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/posts/wp/2023_07_hws/fmt/featured.jpg);"></div>
 <div class="px-6 py-4">
-<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/pwn/risc-v/0x01/">RISC-V PWN学习</div>
+<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/wp/2023_07_hws/fmt/">HWS 2023 fmt wp</div>
 <div class="text-sm text-neutral-500 dark:text-neutral-400">
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-09-03 00:00:00 +0000 UTC">September 3, 2023</time><span class="px-2 text-primary-500">·</span><span>11267 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">23 分钟</span>
+<time datetime="2023-07-18 00:00:00 +0000 UTC">July 18, 2023</time><span class="px-2 text-primary-500">·</span><span>4861 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">10 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
-<span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="mr-2" onclick="window.open(&quot;/categories/wp/&quot;,'_self');" style="margin-top:0.5rem">
 <span class="flex">
 <span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    PWN学习记录
+    WP
   </span>
 </span>
 </span>
@@ -998,24 +1053,18 @@
   </span>
 </span>
 </span>
-<span class="mr-2" onclick="window.open(&quot;/tags/riscv64/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="mr-2" onclick="window.open(&quot;/tags/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%BC%8F%E6%B4%9E/&quot;,'_self');" style="margin-top:0.5rem">
 <span class="flex">
 <span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    riscv64
-  </span>
-</span>
-</span>
-<span class="mr-2" onclick="window.open(&quot;/tags/%E5%BC%82%E6%9E%84pwn/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    异构PWN
+    格式化字符串漏洞
   </span>
 </span>
 </span>
 </div>
 </div>
 <div class="py-1 prose dark:prose-invert">
-<p>本文是一篇RISC-V PWN的学习记录，同时也是<strong>羊城杯2023 risky_login</strong>一题的wp.</p>
+<p><strong>此文章还在施工中，</strong></p>
+<p>路过的师傅们看看远处的学习记录吧！</p>
 </div>
 </div>
 <div class="px-6 pt-4 pb-2">
@@ -1041,13 +1090,13 @@
 <hr class="border-dotted border-neutral-300 dark:border-neutral-600"/>
 <div class="flex justify-between pt-3">
 <span>
-<a class="flex group mr-3" href="/posts/pwn/awdp/0x02/">
+<a class="flex group mr-3" href="/posts/wp/2023_09_ycb_final/0x02/">
 <span class="mr-3 text-neutral-700 group-hover:text-primary-600 ltr:inline rtl:hidden dark:text-neutral dark:group-hover:text-primary-400">←</span>
 <span class="ml-3 text-neutral-700 group-hover:text-primary-600 ltr:hidden rtl:inline dark:text-neutral dark:group-hover:text-primary-400">→</span>
 <span class="flex flex-col">
-<span class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500">从0到0.002的AWDP实战记录</span>
+<span class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500">ycb2023_final_pwn2</span>
 <span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
-<time datetime="2023-09-11 00:00:00 +0000 UTC">September 11, 2023</time>
+<time datetime="2023-09-12 00:00:00 +0000 UTC">September 12, 2023</time>
 </span>
 </span>
 </a>

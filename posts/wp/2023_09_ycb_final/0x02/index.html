@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" data-auto-appearance="false" data-default-appearance="dark" dir="ltr" lang="CN"><head>
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?f260c483ac9fab4fdd9fd55057878c8c";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+<meta charset="utf-8"/>
+<meta content="zh-cn" http-equiv="content-language"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="ie=edge" http-equiv="X-UA-Compatible"/>
+<title>ycb2023_final_pwn2 · ta0lve</title>
+<meta content="ycb2023_final_pwn2 · ta0lve" name="title"/>
+<meta content="CTF, PWN, tcache attack, mp_.tcache_bins, " name="keywords"/>
+<link href="https://ta0lve.github.io/posts/wp/2023_09_ycb_final/0x02/" rel="canonical"/>
+<link href="/css/main.bundle.min.c6116b9ed1c907a8c0eb015f377d3eecc07e448d75729e31fc3de5881465c6c172ba9fa9a6800c030116caf2a110d92242bb816639484ca791f7cd107a8d49b5.css" integrity="sha512-xhFrntHJB6jA6wFfN30+7MB+RI11cp4x/D3liBRlxsFyup+ppoAMAwEWyvKhENkiQruBZjlITKeR980Qeo1JtQ==" rel="stylesheet" type="text/css"/>
+<script integrity="sha512-UWoWdFvqWpvQERONJUzA/TlzzVXObhXz3sdj58fCx0SPj+e1TMqBHLghsMfhLNFhyqzh3XlKw9NNQJN8vMnuEg==" src="/js/appearance.min.516a16745bea5a9bd011138d254cc0fd3973cd55ce6e15f3dec763e7c7c2c7448f8fe7b54cca811cb821b0c7e12cd161caace1dd794ac3d34d40937cbcc9ee12.js" type="text/javascript"></script>
+<script data-copied="" data-copy="" defer="" id="script-bundle" integrity="sha512-PdzwT1sNTDL3LnJtPBLuvM2MPJ+dqpoTQUgIiV3grh4c3d2mhJaA1b2W27YNCx4LJMKfXIPlYx5V5+a8AgFUkA==" src="/js/main.bundle.min.3ddcf04f5b0d4c32f72e726d3c12eebccd8c3c9f9daa9a13414808895de0ae1e1cdddda6849680d5bd96dbb60d0b1e0b24c29f5c83e5631e55e7e6bc02015490.js" type="text/javascript"></script>
+<script src="/js/zoom.min.js"></script>
+<link href="/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
+<link href="/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
+<link href="/site.webmanifest" rel="manifest"/>
+<meta content="ycb2023_final_pwn2" property="og:title"/>
+<meta content="前言 # 本文为ycb2023线下赛pwn的第二题wp，主要是简" property="og:description"/>
+<meta content="article" property="og:type"/>
+<meta content="https://ta0lve.github.io/posts/wp/2023_09_ycb_final/0x02/" property="og:url"/><meta content="posts" property="article:section"/>
+<meta content="2023-09-12T00:00:00+00:00" property="article:published_time"/>
+<meta content="2023-09-12T00:00:00+00:00" property="article:modified_time"/>
+<meta content="summary" name="twitter:card"/>
+<meta content="ycb2023_final_pwn2" name="twitter:title"/>
+<meta content="前言 # 本文为ycb2023线下赛pwn的第二题wp，主要是简" name="twitter:description"/>
+<script type="application/ld+json">
+  [{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "articleSection": "Posts",
+    "name": "ycb2023_final_pwn2",
+    "headline": "ycb2023_final_pwn2",
+    
+    "abstract": "前言 # 本文为ycb2023线下赛pwn的第二题wp，主要是简",
+    "inLanguage": "zh-cn",
+    "url" : "https:\/\/ta0lve.github.io\/posts\/wp\/2023_09_ycb_final\/0x02\/",
+    "author" : {
+      "@type": "Person",
+      "name": "ta0lve"
+    },
+    "copyrightYear": "2023",
+    "dateCreated": "2023-09-12T00:00:00\u002b00:00",
+    "datePublished": "2023-09-12T00:00:00\u002b00:00",
+    
+    "dateModified": "2023-09-12T00:00:00\u002b00:00",
+    
+    "keywords": ["CTF","PWN","tcache attack","mp_.tcache_bins"],
+    
+    "mainEntityOfPage": "true",
+    "wordCount": "3237"
+  }]
+  </script>
+<meta content="ta0lve" name="author"/>
+<link href="mailto:hujt25@mail2.sysu.edu.cn" rel="me"/>
+<link href="https://ta0lve.github.io/" rel="me"/>
+<link href="https://github.com/username" rel="me"/>
+<script integrity="" src="/lib/jquery/jquery.slim.min.js"></script>
+<meta name="theme-color"/>
+</head>
+<body class="flex flex-col h-screen px-6 m-auto text-lg leading-7 max-w-7xl bg-neutral text-neutral-900 dark:bg-neutral-800 dark:text-neutral sm:px-14 md:px-24 lg:px-32">
+<div class="absolute flex self-center" id="the-top">
+<a class="px-3 py-1 text-sm -translate-y-8 rounded-b-lg bg-primary-200 focus:translate-y-0 dark:bg-neutral-600" href="#main-content"><span class="font-bold text-primary-600 ltr:pr-2 rtl:pl-2 dark:text-primary-400">↓</span></a>
+</div>
+<div class="min-h-[148px]"></div>
+<div class="fixed inset-x-0 pl-[24px] pr-[24px]" style="z-index:100">
+<div class="absolute opacity-0 inset-x-0 top-0 h-full single_hero_background nozoom backdrop-blur-2xl shadow-2xl" id="menu-blur"></div>
+<div class="relative max-w-[64rem] ml-auto mr-auto">
+<div class="main-menu flex items-center justify-between px-4 py-6 sm:px-6 md:justify-start space-x-3" style="padding-left:0;padding-right:0;padding-top:2px;padding-bottom:3px">
+<div class="flex flex-1 items-center justify-between">
+<nav class="flex space-x-3">
+<a class="text-base font-medium text-gray-500 hover:text-gray-900" href="/">ta0lve</a>
+</nav>
+<nav class="hidden md:flex items-center space-x-5 md:ml-12 h-12">
+<a class="flex items-center" href="/posts/">
+<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="Posts">
+        Posts
+    </p>
+</a>
+<a class="flex items-center" href="/pointer/">
+<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="Pointer">
+        Pointer
+    </p>
+</a>
+<a class="flex items-center" href="/tags/pwn/">
+<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="PWN">
+        Pwn
+    </p>
+</a>
+<a class="flex items-center" href="/categories/">
+<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="Categories">
+        分类
+    </p>
+</a>
+<a class="flex items-center" href="/tags/">
+<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="Tags">
+        标签
+    </p>
+</a>
+<a class="flex items-center" href="/link/">
+<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="友链/links">
+        友链
+    </p>
+</a>
+<a class="flex items-center" href="/about/">
+<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="About">
+        About
+    </p>
+</a>
+<button aria-label="Search" class="text-base hover:text-primary-600 dark:hover:text-primary-400 h-12" id="search-button" title="">
+<span class="relative block icon">
+<svg aria-hidden="true" class="svg-inline--fa fa-search fa-w-16" data-icon="search" data-prefix="fas" focusable="false" role="img" viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z" fill="currentColor"></path></svg>
+</span>
+</button>
+<div class="ltr:mr-14 rtl:ml-14 cursor-pointer text-sm text-neutral-700 hover:text-primary-600 dark:text-neutral dark:hover:text-primary-400">
+<button aria-label="Dark mode switcher" id="appearance-switcher" type="button">
+<div class="flex items-center justify-center h-12 dark:hidden">
+<span class="relative block icon">
+<svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M32 256c0-123.8 100.3-224 223.8-224c11.36 0 29.7 1.668 40.9 3.746c9.616 1.777 11.75 14.63 3.279 19.44C245 86.5 211.2 144.6 211.2 207.8c0 109.7 99.71 193 208.3 172.3c9.561-1.805 16.28 9.324 10.11 16.95C387.9 448.6 324.8 480 255.8 480C132.1 480 32 379.6 32 256z" fill="currentColor"></path></svg>
+</span>
+</div>
+<div class="items-center justify-center hidden h-12 dark:flex">
+<span class="relative block icon">
+<svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M256 159.1c-53.02 0-95.1 42.98-95.1 95.1S202.1 351.1 256 351.1s95.1-42.98 95.1-95.1S309 159.1 256 159.1zM509.3 347L446.1 255.1l63.15-91.01c6.332-9.125 1.104-21.74-9.826-23.72l-109-19.7l-19.7-109c-1.975-10.93-14.59-16.16-23.72-9.824L256 65.89L164.1 2.736c-9.125-6.332-21.74-1.107-23.72 9.824L121.6 121.6L12.56 141.3C1.633 143.2-3.596 155.9 2.736 164.1L65.89 256l-63.15 91.01c-6.332 9.125-1.105 21.74 9.824 23.72l109 19.7l19.7 109c1.975 10.93 14.59 16.16 23.72 9.824L256 446.1l91.01 63.15c9.127 6.334 21.75 1.107 23.72-9.822l19.7-109l109-19.7C510.4 368.8 515.6 356.1 509.3 347zM256 383.1c-70.69 0-127.1-57.31-127.1-127.1c0-70.69 57.31-127.1 127.1-127.1s127.1 57.3 127.1 127.1C383.1 326.7 326.7 383.1 256 383.1z" fill="currentColor"></path></svg>
+</span>
+</div>
+</button>
+</div>
+</nav>
+<div class="flex md:hidden items-center space-x-5 md:ml-12">
+<span></span>
+<button aria-label="Search" class="text-base hover:text-primary-600 dark:hover:text-primary-400" id="search-button-mobile" title="">
+<span class="relative block icon">
+<svg aria-hidden="true" class="svg-inline--fa fa-search fa-w-16" data-icon="search" data-prefix="fas" focusable="false" role="img" viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z" fill="currentColor"></path></svg>
+</span>
+</button>
+<button aria-label="Dark mode switcher" id="appearance-switcher-mobile" style="margin-right:5px" type="button">
+<div class="flex items-center justify-center h-12 dark:hidden">
+<span class="relative block icon">
+<svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M32 256c0-123.8 100.3-224 223.8-224c11.36 0 29.7 1.668 40.9 3.746c9.616 1.777 11.75 14.63 3.279 19.44C245 86.5 211.2 144.6 211.2 207.8c0 109.7 99.71 193 208.3 172.3c9.561-1.805 16.28 9.324 10.11 16.95C387.9 448.6 324.8 480 255.8 480C132.1 480 32 379.6 32 256z" fill="currentColor"></path></svg>
+</span>
+</div>
+<div class="items-center justify-center hidden h-12 dark:flex">
+<span class="relative block icon">
+<svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M256 159.1c-53.02 0-95.1 42.98-95.1 95.1S202.1 351.1 256 351.1s95.1-42.98 95.1-95.1S309 159.1 256 159.1zM509.3 347L446.1 255.1l63.15-91.01c6.332-9.125 1.104-21.74-9.826-23.72l-109-19.7l-19.7-109c-1.975-10.93-14.59-16.16-23.72-9.824L256 65.89L164.1 2.736c-9.125-6.332-21.74-1.107-23.72 9.824L121.6 121.6L12.56 141.3C1.633 143.2-3.596 155.9 2.736 164.1L65.89 256l-63.15 91.01c-6.332 9.125-1.105 21.74 9.824 23.72l109 19.7l19.7 109c1.975 10.93 14.59 16.16 23.72 9.824L256 446.1l91.01 63.15c9.127 6.334 21.75 1.107 23.72-9.822l19.7-109l109-19.7C510.4 368.8 515.6 356.1 509.3 347zM256 383.1c-70.69 0-127.1-57.31-127.1-127.1c0-70.69 57.31-127.1 127.1-127.1s127.1 57.3 127.1 127.1C383.1 326.7 326.7 383.1 256 383.1z" fill="currentColor"></path></svg>
+</span>
+</div>
+</button>
+</div>
+</div>
+<div class="-my-2 -mr-2 md:hidden">
+<label class="block" for="menu-controller" id="menu-button">
+<input class="hidden" id="menu-controller" type="checkbox"/>
+<div class="cursor-pointer hover:text-primary-600 dark:hover:text-primary-400">
+<span class="relative block icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M0 96C0 78.33 14.33 64 32 64H416C433.7 64 448 78.33 448 96C448 113.7 433.7 128 416 128H32C14.33 128 0 113.7 0 96zM0 256C0 238.3 14.33 224 32 224H416C433.7 224 448 238.3 448 256C448 273.7 433.7 288 416 288H32C14.33 288 0 273.7 0 256zM416 448H32C14.33 448 0 433.7 0 416C0 398.3 14.33 384 32 384H416C433.7 384 448 398.3 448 416C448 433.7 433.7 448 416 448z" fill="currentColor"></path></svg>
+</span>
+</div>
+<div class="fixed inset-0 z-30 invisible w-screen h-screen m-auto overflow-auto transition-opacity opacity-0 cursor-default bg-neutral-100/50 backdrop-blur-sm dark:bg-neutral-900/50" id="menu-wrapper" style="padding-top:5px;">
+<ul class="flex space-y-2 mt-3 flex-col items-end w-full px-6 py-6 mx-auto overflow-visible list-none ltr:text-right rtl:text-left max-w-7xl">
+<li>
+<span class="cursor-pointer inline-block align-text-bottom hover:text-primary-600 dark:hover:text-primary-400">
+<span class="relative block icon">
+<svg viewbox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><path d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z" fill="currentColor"></path></svg>
+</span>
+</span>
+</li>
+<li class="mt-1">
+<a class="flex items-center" href="/posts/">
+<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="Posts">
+            Posts
+        </p>
+</a>
+</li>
+<li class="mt-1">
+<a class="flex items-center" href="/pointer/">
+<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="Pointer">
+            Pointer
+        </p>
+</a>
+</li>
+<li class="mt-1">
+<a class="flex items-center" href="/tags/pwn/">
+<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="PWN">
+            Pwn
+        </p>
+</a>
+</li>
+<li class="mt-1">
+<a class="flex items-center" href="/categories/">
+<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="Categories">
+            分类
+        </p>
+</a>
+</li>
+<li class="mt-1">
+<a class="flex items-center" href="/tags/">
+<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="Tags">
+            标签
+        </p>
+</a>
+</li>
+<li class="mt-1">
+<a class="flex items-center" href="/link/">
+<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="友链/links">
+            友链
+        </p>
+</a>
+</li>
+<li class="mt-1">
+<a class="flex items-center" href="/about/">
+<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="About">
+            About
+        </p>
+</a>
+</li>
+</ul>
+</div>
+</label>
+</div>
+</div>
+<script>
+    (function () {
+        var $mainmenu = $('.main-menu');
+        var path = window.location.pathname;
+        $mainmenu.find('a[href="' + path + '"]').each(function (i, e) {
+            $(e).children('p').addClass('active');
+        });
+    })();
+</script>
+</div>
+</div>
+<script>
+  window.addEventListener('scroll', function (e) {
+    var scroll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    var background_blur = document.getElementById('menu-blur');
+    background_blur.style.opacity = (scroll / 300);
+  });
+</script>
+<div class="relative flex flex-col grow">
+<main class="grow" id="main-content">
+<article>
+<div class="h-[150px] md:h-[200px]" id="hero"></div>
+<div class="fixed inset-x-0 top-0 h-[800px] single_hero_background nozoom" style="background-image:url(/flyx6.jpg);">
+<div class="absolute inset-0 bg-gradient-to-t from-neutral dark:from-neutral-800 to-transparent mix-blend-normal">
+</div>
+<div class="absolute inset-0 opacity-60 bg-gradient-to-t from-neutral dark:from-neutral-800 to-neutral-100 dark:to-neutral-800 mix-blend-normal">
+</div>
+</div>
+<div class="fixed opacity-0 inset-x-0 top-0 h-full single_hero_background nozoom backdrop-blur-2xl" id="background-blur"></div>
+<script>
+    window.addEventListener('scroll', function (e) {
+        var scroll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+        var background_blur = document.getElementById('background-blur');
+        background_blur.style.opacity = (scroll / 300)
+    });
+</script>
+<header class="mt-5 max-w-prose" id="single_header">
+<ol class="text-sm text-neutral-500 dark:text-neutral-400 print:hidden">
+<li class="inline hidden">
+<a class="hover:underline decoration-neutral-300 dark:underline-neutral-600" href="/"></a><span class="px-1 text-primary-500">/</span>
+</li>
+<li class="inline">
+<a class="hover:underline decoration-neutral-300 dark:underline-neutral-600" href="/posts/">Posts</a><span class="px-1 text-primary-500">/</span>
+</li>
+<li class="inline hidden">
+<a class="hover:underline decoration-neutral-300 dark:underline-neutral-600" href="/posts/wp/2023_09_ycb_final/0x02/">ycb2023_final_pwn2</a><span class="px-1 text-primary-500">/</span>
+</li>
+</ol>
+<h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">
+      ycb2023_final_pwn2
+    </h1>
+<div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
+<div class="flex flex-row flex-wrap items-center">
+<time datetime="2023-09-12 00:00:00 +0000 UTC">September 12, 2023</time><span class="px-2 text-primary-500">·</span><span>3237 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">7 分钟</span>
+</div>
+<div class="flex flex-row flex-wrap items-center">
+<span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    PWN学习记录
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/ctf/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    CTF
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/pwn/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    PWN
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/tcache-attack/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    tcache attack
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/mp_.tcache_bins/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    mp_.tcache_bins
+  </span>
+</span>
+</span>
+</div>
+</div>
+<div class="flex">
+<div class="place-self-center">
+<div class="text-[0.6rem] uppercase leading-3 text-neutral-500 dark:text-neutral-400">
+      作者
+    </div>
+<div class="font-semibold leading-6 text-neutral-800 dark:text-neutral-300">
+      ta0lve
+    </div>
+<div class="text-sm text-neutral-700 dark:text-neutral-400">一些记录，一点思考</div>
+<div class="text-2xl sm:text-lg">
+<div class="flex flex-wrap text-neutral-400 dark:text-neutral-500">
+<a aria-label="Email" class="px-1 hover:text-primary-700 dark:hover:text-primary-400" href="mailto:hujt25@mail2.sysu.edu.cn" rel="me noopener noreferrer" target="_blank"><span class="inline-block align-text-bottom">
+<span class="relative block icon">
+<svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M207.8 20.73c-93.45 18.32-168.7 93.66-187 187.1c-27.64 140.9 68.65 266.2 199.1 285.1c19.01 2.888 36.17-12.26 36.17-31.49l.0001-.6631c0-15.74-11.44-28.88-26.84-31.24c-84.35-12.98-149.2-86.13-149.2-174.2c0-102.9 88.61-185.5 193.4-175.4c91.54 8.869 158.6 91.25 158.6 183.2l0 16.16c0 22.09-17.94 40.05-40 40.05s-40.01-17.96-40.01-40.05v-120.1c0-8.847-7.161-16.02-16.01-16.02l-31.98 .0036c-7.299 0-13.2 4.992-15.12 11.68c-24.85-12.15-54.24-16.38-86.06-5.106c-38.75 13.73-68.12 48.91-73.72 89.64c-9.483 69.01 43.81 128 110.9 128c26.44 0 50.43-9.544 69.59-24.88c24 31.3 65.23 48.69 109.4 37.49C465.2 369.3 496 324.1 495.1 277.2V256.3C495.1 107.1 361.2-9.332 207.8 20.73zM239.1 304.3c-26.47 0-48-21.56-48-48.05s21.53-48.05 48-48.05s48 21.56 48 48.05S266.5 304.3 239.1 304.3z" fill="currentColor"></path></svg>
+</span>
+</span></a>
+<a aria-label="Blogger" class="px-1 hover:text-primary-700 dark:hover:text-primary-400" href="https://ta0lve.github.io/" rel="me noopener noreferrer" target="_blank"><span class="inline-block align-text-bottom">
+<span class="relative block icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M446.6 222.7c-1.8-8-6.8-15.4-12.5-18.5-1.8-1-13-2.2-25-2.7-20.1-.9-22.3-1.3-28.7-5-10.1-5.9-12.8-12.3-12.9-29.5-.1-33-13.8-63.7-40.9-91.3-19.3-19.7-40.9-33-65.5-40.5-5.9-1.8-19.1-2.4-63.3-2.9-69.4-.8-84.8.6-108.4 10C45.9 59.5 14.7 96.1 3.3 142.9 1.2 151.7.7 165.8.2 246.8c-.6 101.5.1 116.4 6.4 136.5 15.6 49.6 59.9 86.3 104.4 94.3 14.8 2.7 197.3 3.3 216 .8 32.5-4.4 58-17.5 81.9-41.9 17.3-17.7 28.1-36.8 35.2-62.1 4.9-17.6 4.5-142.8 2.5-151.7zm-322.1-63.6c7.8-7.9 10-8.2 58.8-8.2 43.9 0 45.4.1 51.8 3.4 9.3 4.7 13.4 11.3 13.4 21.9 0 9.5-3.8 16.2-12.3 21.6-4.6 2.9-7.3 3.1-50.3 3.3-26.5.2-47.7-.4-50.8-1.2-16.6-4.7-22.8-28.5-10.6-40.8zm191.8 199.8l-14.9 2.4-77.5.9c-68.1.8-87.3-.4-90.9-2-7.1-3.1-13.8-11.7-14.9-19.4-1.1-7.3 2.6-17.3 8.2-22.4 7.1-6.4 10.2-6.6 97.3-6.7 89.6-.1 89.1-.1 97.6 7.8 12.1 11.3 9.5 31.2-4.9 39.4z" fill="currentColor"></path></svg>
+</span>
+</span></a>
+<a aria-label="Github" class="px-1 hover:text-primary-700 dark:hover:text-primary-400" href="https://github.com/username" rel="me noopener noreferrer" target="_blank"><span class="inline-block align-text-bottom">
+<span class="relative block icon">
+<svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z" fill="currentColor"></path></svg>
+</span>
+</span></a>
+</div>
+</div>
+</div>
+</div>
+<div class="mb-5"></div>
+</header>
+<section class="flex flex-col max-w-full mt-0 prose dark:prose-invert lg:flex-row">
+<div class="order-first sm:max-w-prose lg:ml-auto px-0 lg:order-last lg:max-w-xs ltr:lg:pl-8 rtl:lg:pr-8">
+<div class="toc ltr:pl-5 rtl:pr-5 print:hidden lg:sticky lg:top-10">
+<details class="mt-0 overflow-hidden rounded-lg ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 hidden lg:block" open="">
+<summary class="block py-1 text-lg font-semibold cursor-pointer bg-neutral-100 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-neutral-700 dark:text-neutral-100 lg:hidden">
+</summary>
+<div class="min-w-[220px] py-2 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+<nav id="TableOfContents">
+<ul>
+<li><a href="#前言">前言</a></li>
+<li><a href="#ida分析">IDA分析</a>
+<ul>
+<li><a href="#checksec">checksec</a></li>
+<li><a href="#main-函数">main 函数</a></li>
+<li><a href="#add-函数">add 函数</a></li>
+<li><a href="#del-函数">del 函数</a></li>
+<li><a href="#edit-函数">edit 函数</a></li>
+<li><a href="#show-函数">show 函数</a></li>
+<li><a href="#后门函数">后门函数</a></li>
+</ul>
+</li>
+<li><a href="#漏洞利用思路">漏洞利用思路</a></li>
+<li><a href="#附录">附录</a></li>
+</ul>
+</nav>
+</div>
+</details>
+<details class="mt-0 overflow-hidden rounded-lg ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 lg:hidden">
+<summary class="py-1 text-lg font-semibold cursor-pointer bg-neutral-100 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-neutral-700 dark:text-neutral-100 lg:hidden">
+</summary>
+<div class="py-2 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+<nav id="TableOfContents">
+<ul>
+<li><a href="#前言">前言</a></li>
+<li><a href="#ida分析">IDA分析</a>
+<ul>
+<li><a href="#checksec">checksec</a></li>
+<li><a href="#main-函数">main 函数</a></li>
+<li><a href="#add-函数">add 函数</a></li>
+<li><a href="#del-函数">del 函数</a></li>
+<li><a href="#edit-函数">edit 函数</a></li>
+<li><a href="#show-函数">show 函数</a></li>
+<li><a href="#后门函数">后门函数</a></li>
+</ul>
+</li>
+<li><a href="#漏洞利用思路">漏洞利用思路</a></li>
+<li><a href="#附录">附录</a></li>
+</ul>
+</nav>
+</div>
+</details>
+<script>
+  (function () {
+    var $toc = $('#TableOfContents');
+    if ($toc.length > 0) {
+      var $window = $(window);
+
+      function onScroll() {
+        var currentScroll = $window.scrollTop();
+        var h = $('.anchor');
+        var id = "";
+        h.each(function (i, e) {
+          e = $(e);
+          if (e.offset().top - $(window).height()/3 <= currentScroll) {
+            id = e.attr('id');
+          }
+        });
+        var active = $toc.find('a.active');      
+        if (active.length == 1 && active.eq(0).attr('href') == '#' + id) return true;
+
+        active.each(function (i, e) {
+          
+            $(e).removeClass('active');
+          
+        });
+        $toc.find('a[href="#' + id + '"]').addClass('active')
+        $toc.find('a[href="#' + id + '"]').parentsUntil('#TableOfContents').each(function (i, e) {
+          $(e).children('a').parents('ul').show();          
+        });
+      }
+
+      $window.on('scroll', onScroll);
+      $(document).ready(function () {
+        
+        onScroll();
+      });
+    }
+  })();
+</script>
+</div>
+</div>
+<div class="min-w-0 min-h-0 max-w-prose">
+<details class="mt-2 mb-5 overflow-hidden rounded-lg ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5" open="" style="margin-left:0px">
+<summary class="py-1 text-lg font-semibold cursor-pointer bg-primary-200 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-primary-800 dark:text-neutral-100">
+        羊城杯2023-final-wp - This article is part of a series.
+    </summary>
+<div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+<a href="https://ta0lve.github.io/posts/wp/2023_09_ycb_final/0x01/">
+            Part 1: ycb2023_final_pwn1
+        </a>
+</div>
+<div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+        Part 2: This Article
+    </div>
+</details>
+<div class="anchor" id="前言"></div>
+<h2 class="relative group">前言 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e5%89%8d%e8%a8%80" style="text-decoration-line: none !important;">#</a></span>
+</h2>
+<p>本文为ycb2023线下赛pwn的第二题wp，主要是简单记录一下自己在打比赛时做题遇到的一些小要点，仅为个人的一个学习记录，水平不高还望师傅们包容。</p>
+<br/>
+<div class="anchor" id="ida分析"></div>
+<h2 class="relative group">IDA分析 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#ida%e5%88%86%e6%9e%90" style="text-decoration-line: none !important;">#</a></span>
+</h2>
+<div class="anchor" id="checksec"></div>
+<h3 class="relative group">checksec 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#checksec" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<p>当然，在拖入IDA前先例行检查一下：</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ checksec pwn
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> <span class="s1">'/home/ta0lve/桌面/CTF/ycb2023_final/pwn2/pwn'</span>
+</span></span><span class="line"><span class="cl">    Arch:     amd64-64-little
+</span></span><span class="line"><span class="cl">    RELRO:    Partial RELRO
+</span></span><span class="line"><span class="cl">    Stack:    Canary found
+</span></span><span class="line"><span class="cl">    NX:       NX enabled
+</span></span><span class="line"><span class="cl">    PIE:      No PIE <span class="o">(</span>0x3fe000<span class="o">)</span>
+</span></span></code></pre></div><p>没有开 <code>PIE</code> ，而且是 <code>Partial RELRO</code></p>
+<br/>
+<p>再查看一下libc的版本：</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ strings libc.so.6 <span class="p">|</span>grep GLIBC
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 输出:</span>
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">GLIBC_2.32
+</span></span><span class="line"><span class="cl">GLIBC_2.33
+</span></span><span class="line"><span class="cl">GLIBC_2.34
+</span></span><span class="line"><span class="cl">GLIBC_2.35
+</span></span><span class="line"><span class="cl">GLIBC_2.36
+</span></span><span class="line"><span class="cl">GLIBC_ABI_DT_RELR
+</span></span><span class="line"><span class="cl">GLIBC_PRIVATE
+</span></span><span class="line"><span class="cl">GNU C Library <span class="o">(</span>Ubuntu GLIBC 2.36-0ubuntu4<span class="o">)</span> stable release version 2.36.
+</span></span></code></pre></div><p>版本是GLIBC_2.36，有<code>tcache</code>机制</p>
+<br/>
+<div class="anchor" id="main-函数"></div>
+<h3 class="relative group">main 函数 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#main-%e5%87%bd%e6%95%b0" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<p>然后打开IDA开始分析</p>
+<p>点击main函数，查看其伪代码，可以看到是一个<strong>菜单题</strong></p>
+<p>有4个功能：</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">_menu</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">puts</span><span class="p">(</span><span class="s">"1. Add note"</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">puts</span><span class="p">(</span><span class="s">"2. Delete note"</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">puts</span><span class="p">(</span><span class="s">"3. Edit note"</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">puts</span><span class="p">(</span><span class="s">"4. Show note"</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nf">putchar</span><span class="p">(</span><span class="mi">62</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>
+<p>一般情况下我们都会选择直接先运行一下二进制程序来了解一下程序的功能，不过这道题当我们运行时却提示我们：</p>
+<ul>
+<li>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">ta0lve@ta0lve:~/桌面/CTF/ycb2023_final/pwn2$ ./pwn
+</span></span><span class="line"><span class="cl">No! you can<span class="err">'</span>t <span class="k">do</span> this!
+</span></span></code></pre></div></li>
+<li>
+<p>所以我们先看看这个字符串在哪里出现吧</p>
+</li>
+<li>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">FILE</span> <span class="o">*</span><span class="nf">sub_40127C</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">FILE</span> <span class="o">*</span><span class="n">result</span><span class="p">;</span> <span class="c1">// rax
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span> <span class="o">*</span><span class="p">(</span><span class="n">FILE</span> <span class="o">**</span><span class="p">)</span><span class="n">off_404070</span> <span class="o">!=</span> <span class="n">stderr</span>
+</span></span><span class="line"><span class="cl">    <span class="o">||</span> <span class="o">*</span><span class="p">(</span><span class="n">FILE</span> <span class="o">**</span><span class="p">)</span><span class="n">off_404078</span> <span class="o">!=</span> <span class="n">stdout</span>
+</span></span><span class="line"><span class="cl">    <span class="o">||</span> <span class="p">(</span><span class="n">result</span> <span class="o">=</span> <span class="n">stdin</span><span class="p">,</span> <span class="o">*</span><span class="p">(</span><span class="n">FILE</span> <span class="o">**</span><span class="p">)</span><span class="n">off_404080</span> <span class="o">!=</span> <span class="n">stdin</span><span class="p">)</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">write</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s">"No! you can't do this!"</span><span class="p">,</span> <span class="mh">0x17uLL</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">_exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p>简单的来讲就是程序检查了一下一些地址上面的函数是否与设定上的相同，而且1这些函数都是在libc中的</p>
+</li>
+<li>
+<p>所以我们patchelf二进制文件，用题目给我们的libc和ld来启动程序</p>
+</li>
+<li>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ patchelf --replace-needed libc.so.6 ./libc.so.6 ./pwn
+</span></span><span class="line"><span class="cl">$ patchelf --set-interpreter ./ld* ./pwn
+</span></span></code></pre></div></li>
+</ul>
+</li>
+</ul>
+<p>
+<figure>
+<img alt="image-20230913102804173" class="my-0 rounded-md" src="https://s2.loli.net/2023/09/13/RO7I6b3vBA5NzLX.png"/>
+</figure>
+</p>
+<br/>
+<p>下面分析一下4个功能对应的函数，按1~4的顺序查看其伪代码：</p>
+<div class="anchor" id="add-函数"></div>
+<h3 class="relative group">add 函数 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#add-%e5%87%bd%e6%95%b0" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">unsigned</span> <span class="kr">__int64</span> <span class="kr">__fastcall</span> <span class="nf">_add</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">a1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">v1</span><span class="p">;</span> <span class="c1">// ebx
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">v3</span><span class="p">;</span> <span class="c1">// [rsp+0h] [rbp-20h] BYREF
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">_DWORD</span> <span class="n">size</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span> <span class="c1">// [rsp+4h] [rbp-1Ch] BYREF
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">  <span class="o">*</span><span class="p">(</span><span class="n">_QWORD</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nf">__readfsqword</span><span class="p">(</span><span class="mh">0x28u</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">printf</span><span class="p">(</span><span class="s">"Index: "</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">__isoc99_scanf</span><span class="p">(</span><span class="s">"%u"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">v3</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span> <span class="n">v3</span> <span class="o">&lt;=</span> <span class="mh">0xF</span> <span class="p">)</span>                              <span class="c1">// 只能申请0x10个堆块
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">"Size: "</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">__isoc99_scanf</span><span class="p">(</span><span class="s">"%u"</span><span class="p">,</span> <span class="n">size</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span> <span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mh">0x900u</span> <span class="p">)</span>                    <span class="c1">// 不能大于0x900
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span> <span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mh">0x4FFu</span> <span class="p">)</span>                   <span class="c1">// 不能小于0x4FF,所以我们只能申请large bin
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">v1</span> <span class="o">=</span> <span class="n">v3</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">chunk</span><span class="p">[</span><span class="n">v1</span><span class="p">]</span> <span class="o">=</span> <span class="nf">malloc</span><span class="p">(</span><span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>            <span class="c1">// 指针存放在chunk数组里(rename from qword_4040E0)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">chunk_size</span><span class="p">[</span><span class="n">v3</span><span class="p">]</span> <span class="o">=</span> <span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>               <span class="c1">// chunk的size也存放在一个数组里(rename from dword_404160)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="k">else</span>
+</span></span><span class="line"><span class="cl">      <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">puts</span><span class="p">(</span><span class="s">"Too small."</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nf">puts</span><span class="p">(</span><span class="s">"Too big."</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">else</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">puts</span><span class="p">(</span><span class="s">"There are only 16 pages in this notebook."</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="o">*</span><span class="p">(</span><span class="n">_QWORD</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="nf">__readfsqword</span><span class="p">(</span><span class="mh">0x28u</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>推测应该是Large Bin Attack</li>
+</ul>
+<br/>
+<div class="anchor" id="del-函数"></div>
+<h3 class="relative group">del 函数 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#del-%e5%87%bd%e6%95%b0" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">unsigned</span> <span class="kr">__int64</span> <span class="kr">__fastcall</span> <span class="nf">_del</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">a1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">v2</span><span class="p">;</span> <span class="c1">// [rsp+4h] [rbp-Ch] BYREF
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">unsigned</span> <span class="kr">__int64</span> <span class="n">v3</span><span class="p">;</span> <span class="c1">// [rsp+8h] [rbp-8h]
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">  <span class="n">v3</span> <span class="o">=</span> <span class="nf">__readfsqword</span><span class="p">(</span><span class="mh">0x28u</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">printf</span><span class="p">(</span><span class="s">"Index: "</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">__isoc99_scanf</span><span class="p">(</span><span class="s">"%u"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">v2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span> <span class="n">v2</span> <span class="o">&lt;=</span> <span class="mh">0xF</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span> <span class="n">chunk</span><span class="p">[</span><span class="n">v2</span><span class="p">]</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="nf">free</span><span class="p">((</span><span class="kt">void</span> <span class="o">*</span><span class="p">)</span><span class="n">chunk</span><span class="p">[</span><span class="n">v2</span><span class="p">]);</span>                  <span class="c1">// uaf
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                                                <span class="c1">// 可以泄露libc
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                                                <span class="c1">// fix的时候可以考虑patch这个地方
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">else</span>
+</span></span><span class="line"><span class="cl">      <span class="nf">puts</span><span class="p">(</span><span class="s">"Page not found."</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">else</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">puts</span><span class="p">(</span><span class="s">"There are only 16 pages in this notebook."</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">v3</span> <span class="o">-</span> <span class="nf">__readfsqword</span><span class="p">(</span><span class="mh">0x28u</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>很明显有一个<code>uaf</code>漏洞，可以泄露出libc的基址</li>
+</ul>
+<br/>
+<div class="anchor" id="edit-函数"></div>
+<h3 class="relative group">edit 函数 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#edit-%e5%87%bd%e6%95%b0" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">unsigned</span> <span class="kr">__int64</span> <span class="nf">_edit</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">v1</span><span class="p">;</span> <span class="c1">// [rsp+4h] [rbp-Ch] BYREF
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">unsigned</span> <span class="kr">__int64</span> <span class="n">v2</span><span class="p">;</span> <span class="c1">// [rsp+8h] [rbp-8h]
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">  <span class="n">v2</span> <span class="o">=</span> <span class="nf">__readfsqword</span><span class="p">(</span><span class="mh">0x28u</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">printf</span><span class="p">(</span><span class="s">"Index: "</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">__isoc99_scanf</span><span class="p">(</span><span class="s">"%u"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">v1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span> <span class="n">v1</span> <span class="o">&lt;=</span> <span class="mh">0xF</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span> <span class="n">chunk</span><span class="p">[</span><span class="n">v1</span><span class="p">]</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nf">printf</span><span class="p">(</span><span class="s">"Content: "</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="nf">read</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">)</span><span class="n">chunk</span><span class="p">[</span><span class="n">v1</span><span class="p">],</span> <span class="n">chunk_size</span><span class="p">[</span><span class="n">v1</span><span class="p">]);</span><span class="c1">// 读入一个与size相同大小的content
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nf">puts</span><span class="p">(</span><span class="s">"Page not found."</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">else</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">puts</span><span class="p">(</span><span class="s">"There are only 16 pages in this notebook."</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">v2</span> <span class="o">-</span> <span class="nf">__readfsqword</span><span class="p">(</span><span class="mh">0x28u</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><br/>
+<div class="anchor" id="show-函数"></div>
+<h3 class="relative group">show 函数 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#show-%e5%87%bd%e6%95%b0" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">unsigned</span> <span class="kr">__int64</span> <span class="nf">_show</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">v1</span><span class="p">;</span> <span class="c1">// [rsp+4h] [rbp-Ch] BYREF
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">unsigned</span> <span class="kr">__int64</span> <span class="n">v2</span><span class="p">;</span> <span class="c1">// [rsp+8h] [rbp-8h]
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">  <span class="n">v2</span> <span class="o">=</span> <span class="nf">__readfsqword</span><span class="p">(</span><span class="mh">0x28u</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">printf</span><span class="p">(</span><span class="s">"Index: "</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">__isoc99_scanf</span><span class="p">(</span><span class="s">"%u"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">v1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span> <span class="n">v1</span> <span class="o">&lt;=</span> <span class="mh">0xF</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span> <span class="n">chunk</span><span class="p">[</span><span class="n">v1</span><span class="p">]</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="nf">printf</span><span class="p">(</span><span class="s">"Content: %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="n">chunk</span><span class="p">[</span><span class="n">v1</span><span class="p">]);</span><span class="c1">// 利用uaf漏洞打印出libc
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">else</span>
+</span></span><span class="line"><span class="cl">      <span class="nf">puts</span><span class="p">(</span><span class="s">"Page not found."</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">else</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">puts</span><span class="p">(</span><span class="s">"There are only 16 pages in this notebook."</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">v2</span> <span class="o">-</span> <span class="nf">__readfsqword</span><span class="p">(</span><span class="mh">0x28u</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><br/>
+<div class="anchor" id="后门函数"></div>
+<h3 class="relative group">后门函数 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e5%90%8e%e9%97%a8%e5%87%bd%e6%95%b0" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<p>其实这一步应该是打开IDA后做的第一件事：</p>
+<p>shift + F12 查看程序的字符串，有时候字符串中会有一些语句帮助我们更快地找到关键代码，也有时候会有一些明显的 win 语句提示我们成功 getshell 或者 成功取得 flag，当然，最有价值的还得是<code>/bin/sh/</code>语句，这提示我们给程序可能存在后门函数，我们可以在之后的构造RO链、调用 system 函数时使用这个字符串。</p>
+<p>当然，当我们在函数的引用表里看到 system 函数时应该也会想到类似的事情。</p>
+<p>在本题中，</p>
+<ul>
+<li>双击 system 函数进入<code>.plt.sec</code>段，查看交叉引用XREF可以很快地找到后门函数</li>
+<li>双击<code>/bin/sh</code>字符串进入<code>.rodata</code>段，查看交叉引用XREF可以很快地找到后门函数</li>
+</ul>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">int</span> <span class="n">sub_4011D6</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">system</span><span class="p">(</span><span class="s2">"/bin/sh"</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><div class="highlight"><pre class="chroma" tabindex="0"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="p">.</span><span class="nl">text</span><span class="p">:</span><span class="mo">00000000004011</span><span class="n">D6</span>                               <span class="p">;</span> <span class="o">===============</span> <span class="n">S</span> <span class="n">U</span> <span class="n">B</span> <span class="n">R</span> <span class="n">O</span> <span class="n">U</span> <span class="n">T</span> <span class="n">I</span> <span class="n">N</span> <span class="n">E</span> <span class="o">=======================================</span>
+</span></span><span class="line"><span class="cl"><span class="p">.</span><span class="nl">text</span><span class="p">:</span><span class="mo">00000000004011</span><span class="n">D6</span>
+</span></span><span class="line"><span class="cl"><span class="p">.</span><span class="nl">text</span><span class="p">:</span><span class="mo">00000000004011</span><span class="n">D6</span>                               <span class="p">;</span> <span class="nl">Attributes</span><span class="p">:</span> <span class="n">bp</span><span class="o">-</span><span class="n">based</span> <span class="n">frame</span>
+</span></span><span class="line"><span class="cl"><span class="p">.</span><span class="nl">text</span><span class="p">:</span><span class="mo">00000000004011</span><span class="n">D6</span>
+</span></span><span class="line"><span class="cl"><span class="p">.</span><span class="nl">text</span><span class="p">:</span><span class="mo">00000000004011</span><span class="n">D6</span>                               <span class="p">;</span> <span class="kt">int</span> <span class="nf">sub_4011D6</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">.</span><span class="nl">text</span><span class="p">:</span><span class="mo">00000000004011</span><span class="n">D6</span>                               <span class="n">sub_4011D6</span> <span class="n">proc</span> <span class="n">near</span>
+</span></span><span class="line"><span class="cl"><span class="p">.</span><span class="nl">text</span><span class="p">:</span><span class="mo">00000000004011</span><span class="n">D6</span>                               <span class="p">;</span> <span class="n">__unwind</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="p">.</span><span class="nl">text</span><span class="p">:</span><span class="mo">00000000004011</span><span class="n">D6</span> <span class="mi">55</span>                            <span class="n">push</span>    <span class="n">rbp</span>
+</span></span><span class="line"><span class="cl"><span class="p">.</span><span class="nl">text</span><span class="p">:</span><span class="mo">00000000004011</span><span class="n">D7</span> <span class="mi">48</span> <span class="mi">89</span> <span class="n">E5</span>                      <span class="n">mov</span>     <span class="n">rbp</span><span class="p">,</span> <span class="n">rsp</span>
+</span></span><span class="line"><span class="cl"><span class="p">.</span><span class="nl">text</span><span class="p">:</span><span class="mo">00000000004011</span><span class="n">DA</span> <span class="mi">48</span> <span class="mi">8</span><span class="n">D</span> <span class="mo">05</span> <span class="mi">27</span> <span class="mi">0</span><span class="n">E</span> <span class="mo">00</span> <span class="mo">00</span>          <span class="n">lea</span>     <span class="n">rax</span><span class="p">,</span> <span class="n">command</span>                    <span class="p">;</span> <span class="s">"/bin/sh"</span>
+</span></span><span class="line"><span class="cl"><span class="p">.</span><span class="nl">text</span><span class="p">:</span><span class="mf">00000000004011E1</span> <span class="mi">48</span> <span class="mi">89</span> <span class="n">C7</span>                      <span class="n">mov</span>     <span class="n">rdi</span><span class="p">,</span> <span class="n">rax</span>                        <span class="p">;</span> <span class="n">command</span>
+</span></span><span class="line"><span class="cl"><span class="p">.</span><span class="nl">text</span><span class="p">:</span><span class="mf">00000000004011E4</span> <span class="n">E8</span> <span class="n">B7</span> <span class="n">FE</span> <span class="n">FF</span> <span class="n">FF</span>                <span class="n">call</span>    <span class="n">_system</span>
+</span></span><span class="line"><span class="cl"><span class="p">.</span><span class="nl">text</span><span class="p">:</span><span class="mf">00000000004011E4</span>
+</span></span><span class="line"><span class="cl"><span class="p">.</span><span class="nl">text</span><span class="p">:</span><span class="mf">00000000004011E9</span> <span class="mi">90</span>                            <span class="n">nop</span>
+</span></span><span class="line"><span class="cl"><span class="p">.</span><span class="nl">text</span><span class="p">:</span><span class="mo">00000000004011</span><span class="n">EA</span> <span class="mi">5</span><span class="n">D</span>                            <span class="n">pop</span>     <span class="n">rbp</span>
+</span></span><span class="line"><span class="cl"><span class="p">.</span><span class="nl">text</span><span class="p">:</span><span class="mo">00000000004011</span><span class="n">EB</span> <span class="n">C3</span>                            <span class="n">retn</span>
+</span></span><span class="line"><span class="cl"><span class="p">.</span><span class="nl">text</span><span class="p">:</span><span class="mo">00000000004011</span><span class="n">EB</span>                               <span class="p">;</span> <span class="p">}</span> <span class="c1">// starts at 4011D6
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">.</span><span class="nl">text</span><span class="p">:</span><span class="mo">00000000004011</span><span class="n">EB</span>
+</span></span><span class="line"><span class="cl"><span class="p">.</span><span class="nl">text</span><span class="p">:</span><span class="mo">00000000004011</span><span class="n">EB</span>                               <span class="n">sub_4011D6</span> <span class="n">endp</span>
+</span></span></code></pre></div><p>嗯，覆盖地址转到0x04011D6的地址，不过本题没有开 PIE，所以不需要泄露 textbase</p>
+<br/>
+<div class="anchor" id="漏洞利用思路"></div>
+<h2 class="relative group">漏洞利用思路 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e6%bc%8f%e6%b4%9e%e5%88%a9%e7%94%a8%e6%80%9d%e8%b7%af" style="text-decoration-line: none !important;">#</a></span>
+</h2>
+<p><strong>后面的部分还在施工中</strong>，</p>
+<p>路过的师傅们看看远处的学习记录吧！</p>
+<hr/>
+<section class="space-y-10 w-full">
+<a class="flex flex-wrap article border border-neutral-200 dark:border-neutral-700 border-2 rounded-md backdrop-blur" href="/posts/pwn/basic/pwn-_environment/">
+<div class="w-full md:w-auto h-full thumbnail nozoom" style="background-image:url(/posts/pwn/basic/pwn-_environment/featured.jpg);"></div>
+<div class="p-4">
+<div class="items-center text-xl font-semibold">
+<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/pwn/basic/pwn-_environment/">PWN环境二次搭建记录-Ubuntu 22.04</div>
+</div>
+<div class="text-sm text-neutral-500 dark:text-neutral-400">
+<div class="flex flex-row flex-wrap items-center">
+<time datetime="2023-07-10 00:00:00 +0000 UTC">July 10, 2023</time><span class="px-2 text-primary-500">·</span><span>9775 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">20 分钟</span>
+</div>
+<div class="flex flex-row flex-wrap items-center">
+<span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%85%A5%E9%97%A8/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    pwn入门
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/ctf/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    CTF
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/pwn/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    PWN
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/ubuntu/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    Ubuntu
+  </span>
+</span>
+</span>
+</div>
+</div>
+</div>
+</a>
+</section>
+<hr/>
+<section class="space-y-10 w-full">
+<a class="flex flex-wrap article border border-neutral-200 dark:border-neutral-700 border-2 rounded-md backdrop-blur" href="/posts/pwn/heap/chunk_1/">
+<div class="w-full md:w-auto h-full thumbnail nozoom" style="background-image:url(/posts/pwn/heap/chunk_1/featured.png);"></div>
+<div class="p-4">
+<div class="items-center text-xl font-semibold">
+<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/pwn/heap/chunk_1/">堆基础知识学习记录</div>
+</div>
+<div class="text-sm text-neutral-500 dark:text-neutral-400">
+<div class="flex flex-row flex-wrap items-center">
+<time datetime="2023-07-31 00:00:00 +0000 UTC">July 31, 2023</time><span class="px-2 text-primary-500">·</span><span>9063 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">19 分钟</span>
+</div>
+<div class="flex flex-row flex-wrap items-center">
+<span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    PWN学习记录
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/ctf/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    CTF
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/pwn/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    PWN
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/heap/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    heap
+  </span>
+</span>
+</span>
+</div>
+</div>
+</div>
+</a>
+</section>
+<hr/>
+<div class="hugo-encryptor-container">
+<div class="hugo-encryptor-prompt">
+<p>文章的部分内容被密码保护：</p>
+</div>
+<div class="hugo-encryptor-form">
+<input class="hugo-encryptor-input" placeholder="请输入密码"/>
+<input class="hugo-encryptor-button" onclick="_click_handler(this)" type="button" value="点击验证"/>
+</div>
+<div class="hugo-encryptor-cipher-text" style="display: none;">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</div>
+</div>
+<div class="anchor" id="附录"></div>
+<h2 class="relative group">附录 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e9%99%84%e5%bd%95" style="text-decoration-line: none !important;">#</a></span>
+</h2>
+<p>此次的 ycb 线下赛我和战队的学长 <a href="https://kpwnz.github.io/" target="_blank">
+    xia0</a> 一起参加，这也是本菜鸟pwn手第一次打AWDP，收获满满，在此特别感谢 xia0 学长的指导与帮助，祝他下周升学快乐， 早日成为一个带嘿客！</p>
+<details class="mt-2 mb-5 overflow-hidden rounded-lg ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5" style="margin-left:0px">
+<summary class="py-1 text-lg font-semibold cursor-pointer bg-primary-200 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-primary-800 dark:text-neutral-100">
+        羊城杯2023-final-wp - This article is part of a series.
+    </summary>
+<div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+<a href="https://ta0lve.github.io/posts/wp/2023_09_ycb_final/0x01/">
+            Part 1: ycb2023_final_pwn1
+        </a>
+</div>
+<div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+        Part 2: This Article
+    </div>
+</details>
+</div>
+<script>
+        var oid = "views_posts\\wp\\2023_09_ycb_final\\0x02\\index.md"
+        var oid_likes = "likes_posts\\wp\\2023_09_ycb_final\\0x02\\index.md"
+      </script>
+<script integrity="sha512-DkmXO0rQo4LHxgEti/+CJjFmQtqrxPiiBHe9CGdPPabi+pk7wgrU9R58W7aOb5E6IHp8T+N+oOe4BolK/OCmTg==" src="/js/page.min.0e49973b4ad0a382c7c6012d8bff8226316642daabc4f8a20477bd08674f3da6e2fa993bc20ad4f51e7c5bb68e6f913a207a7c4fe37ea0e7b806894afce0a64e.js" type="text/javascript"></script>
+</section>
+<footer class="pt-8 max-w-prose print:hidden">
+<h2 class="mt-8 text-2xl font-extrabold mb-10">Related</h2>
+<section class="w-full grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+<a class="min-w-full" href="/posts/pwn/risc-v/0x01/">
+<div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
+<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/flyx6.jpg);"></div>
+<div class="px-6 py-4">
+<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/pwn/risc-v/0x01/">RISC-V PWN学习</div>
+<div class="text-sm text-neutral-500 dark:text-neutral-400">
+<div class="flex flex-row flex-wrap items-center">
+<time datetime="2023-09-03 00:00:00 +0000 UTC">September 3, 2023</time><span class="px-2 text-primary-500">·</span><span>11267 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">23 分钟</span>
+</div>
+<div class="flex flex-row flex-wrap items-center">
+<span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    PWN学习记录
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/ctf/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    CTF
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/pwn/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    PWN
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/riscv64/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    riscv64
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/%E5%BC%82%E6%9E%84pwn/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    异构PWN
+  </span>
+</span>
+</span>
+</div>
+</div>
+<div class="py-1 prose dark:prose-invert">
+<p>本文是一篇RISC-V PWN的学习记录，同时也是<strong>羊城杯2023 risky_login</strong>一题的wp.</p>
+</div>
+</div>
+<div class="px-6 pt-4 pb-2">
+</div>
+</div>
+</a>
+<a class="min-w-full" href="/posts/wp/2023_09_ycb_final/0x01/">
+<div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
+<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/flyx6.jpg);"></div>
+<div class="px-6 py-4">
+<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/wp/2023_09_ycb_final/0x01/">ycb2023_final_pwn1</div>
+<div class="text-sm text-neutral-500 dark:text-neutral-400">
+<div class="flex flex-row flex-wrap items-center">
+<time datetime="2023-09-12 00:00:00 +0000 UTC">September 12, 2023</time><span class="px-2 text-primary-500">·</span><span>3235 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">7 分钟</span>
+</div>
+<div class="flex flex-row flex-wrap items-center">
+<span class="mr-2" onclick="window.open(&quot;/categories/wp/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    WP
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/ctf/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    CTF
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/pwn/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    PWN
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/%E6%95%B4%E6%95%B0%E6%BA%A2%E5%87%BA%E6%BC%8F%E6%B4%9E/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    整数溢出漏洞
+  </span>
+</span>
+</span>
+</div>
+</div>
+</div>
+<div class="px-6 pt-4 pb-2">
+</div>
+</div>
+</a>
+<a class="min-w-full" href="/posts/pwn/basic/tools/ropper_/">
+<div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
+<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/flyx6.jpg);"></div>
+<div class="px-6 py-4">
+<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/pwn/basic/tools/ropper_/">Ubuntu Ropper安装与使用</div>
+<div class="text-sm text-neutral-500 dark:text-neutral-400">
+<div class="flex flex-row flex-wrap items-center">
+<time datetime="2023-08-28 00:00:00 +0000 UTC">August 28, 2023</time><span class="px-2 text-primary-500">·</span><span>1612 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">4 分钟</span>
+</div>
+<div class="flex flex-row flex-wrap items-center">
+<span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    PWN学习记录
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/ctf/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    CTF
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/pwn/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    PWN
+  </span>
+</span>
+</span>
+</div>
+</div>
+</div>
+<div class="px-6 pt-4 pb-2">
+</div>
+</div>
+</a>
+</section>
+<div class="content" id="content">
+<div style="margin-top:2em;padding:0 0.5em;font-size:.875rem">
+<hr/>
+<br/>
+<div style="padding-bottom:1em;">
+<p> </p>
+<p>本文作者：<a href="https://ta0lve.github.io/about/" target="_blank"><font color="#49b1f5" style="text-decoration: underline">ta0lve</font></a></p>
+<p>本文链接：<a href="https://ta0lve.github.io/posts/wp/2023_09_ycb_final/0x02/" target="_blank"><font color="#49b1f5" style="text-decoration: underline">ycb2023_final_pwn2</font></a></p>
+<p><a href="https://ta0lve.github.io/posts/wp/2023_09_ycb_final/0x02/" target="_blank"><font color="#49b1f5" style="text-decoration: underline"> https://ta0lve.github.io/posts/wp/2023_09_ycb_final/0x02/ </font></a></p>
+<p>版权声明：本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank"><font color="#49b1f5" style="text-decoration: underline"> CC BY-NC 4.0 </font></a> 许可协议。</p>
+<p>转载请注明来自<a class="redlink" href="https://ta0lve.github.io/" target="_blank"> <font color="#49b1f5" style="text-decoration: underline">ta0lve's Blog</font></a> ！</p>
+</div>
+</div>
+</div>
+<div class="pt-8">
+<hr class="border-dotted border-neutral-300 dark:border-neutral-600"/>
+<div class="flex justify-between pt-3">
+<span>
+<a class="flex group mr-3" href="/posts/pwn/awdp/0x02/">
+<span class="mr-3 text-neutral-700 group-hover:text-primary-600 ltr:inline rtl:hidden dark:text-neutral dark:group-hover:text-primary-400">←</span>
+<span class="ml-3 text-neutral-700 group-hover:text-primary-600 ltr:hidden rtl:inline dark:text-neutral dark:group-hover:text-primary-400">→</span>
+<span class="flex flex-col">
+<span class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500">从0到0.002的AWDP实战记录</span>
+<span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
+<time datetime="2023-09-11 00:00:00 +0000 UTC">September 11, 2023</time>
+</span>
+</span>
+</a>
+</span>
+<span>
+<a class="flex text-right group ml-3" href="/posts/wp/2023_09_ycb_final/0x01/">
+<span class="flex flex-col">
+<span class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500">ycb2023_final_pwn1</span>
+<span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
+<time datetime="2023-09-12 00:00:00 +0000 UTC">September 12, 2023</time>
+</span>
+</span>
+<span class="ml-3 text-neutral-700 group-hover:text-primary-600 ltr:inline rtl:hidden dark:text-neutral dark:group-hover:text-primary-400">→</span>
+<span class="mr-3 text-neutral-700 group-hover:text-primary-600 ltr:hidden rtl:inline dark:text-neutral dark:group-hover:text-primary-400">←</span>
+</a>
+</span>
+</div>
+</div>
+<script async="" crossorigin="anonymous" data-category="Announcements" data-category-id="DIC_kwDOJ9Vlo84CX_0P" data-emit-metadata="0" data-input-position="bottom" data-lang="zh-CN" data-mapping="pathname" data-reactions-enabled="1" data-repo="ta0lve/blogtalk" data-repo-id="R_kgDOJ9Vlow" data-strict="0" data-theme="dark_dimmed" src="https://giscus.app/client.js">
+</script>
+</footer>
+</article>
+<div class="pointer-events-none absolute top-[110vh] bottom-0 w-12 ltr:right-0 rtl:left-0" id="top-scroller">
+<a aria-label="" class="pointer-events-auto sticky top-[calc(100vh-5.5rem)] flex h-12 w-12 mb-16 items-center justify-center rounded-full bg-neutral/50 text-xl text-neutral-700 backdrop-blur hover:text-primary-600 dark:bg-neutral-800/50 dark:text-neutral dark:hover:text-primary-400" href="#the-top" title="">
+    ↑
+  </a>
+</div>
+</main><footer class="py-10 print:hidden" id="site-footer">
+<nav class="flex flex-row pb-4 text-base font-medium text-neutral-500 dark:text-neutral-400">
+<ul class="flex flex-col list-none sm:flex-row">
+<li class="flex mb-1 ltr:text-right rtl:text-left sm:mb-0 ltr:sm:mr-7 ltr:sm:last:mr-0 rtl:sm:ml-7 rtl:sm:last:ml-0">
+<a class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2" href="/about/" title="About">About</a>
+</li>
+<li class="flex mb-1 ltr:text-right rtl:text-left sm:mb-0 ltr:sm:mr-7 ltr:sm:last:mr-0 rtl:sm:ml-7 rtl:sm:last:ml-0">
+<a class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2" href="/tags/pwn/" title="PWN">pwn2own , pwn4fun</a>
+</li>
+</ul>
+</nav>
+<div class="flex items-center justify-between">
+<p class="text-sm text-neutral-500 dark:text-neutral-400">
+      Copyright ©2023 ta0lve, All Rights Reserved.
+    </p>
+<p class="text-xs text-neutral-500 dark:text-neutral-400">
+      
+      
+      由 <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500" href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &amp; <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500" href="https://blowfish.page/" rel="noopener noreferrer" target="_blank">Blowfish</a> 强力驱动
+    </p>
+</div>
+<script>
+    
+    mediumZoom(document.querySelectorAll("img:not(.nozoom)"), {
+      margin: 24,
+      background: 'rgba(0,0,0,0.5)',
+      scrollOffset: 0,
+    })
+    
+  </script>
+<script integrity="sha512-NcERO8wWxaWb8DEIL55jgiqpUoBCOIGnhHp/8zoW5imc5qhA2e9OENlH4DChjz8gNZr7LsDzWWdIS5qTYKwxRQ==" src="/js/process.min.35c1113bcc16c5a59bf031082f9e63822aa95280423881a7847a7ff33a16e6299ce6a840d9ef4e10d947e030a18f3f20359afb2ec0f35967484b9a9360ac3145.js" type="text/javascript"></script>
+</footer><div class="invisible fixed inset-0 flex h-screen w-screen cursor-default flex-col bg-neutral-500/50 p-4 backdrop-blur-sm dark:bg-neutral-900/50 sm:p-6 md:p-[10vh] lg:p-[12vh]" data-url="https://ta0lve.github.io/" id="search-wrapper" style="z-index:500">
+<div class="flex flex-col w-full max-w-3xl min-h-0 mx-auto border rounded-md shadow-lg top-20 border-neutral-200 bg-neutral dark:border-neutral-700 dark:bg-neutral-800" id="search-modal">
+<header class="relative z-10 flex items-center justify-between flex-none px-2">
+<form class="flex items-center flex-auto min-w-0">
+<div class="flex items-center justify-center w-8 h-8 text-neutral-400">
+<span class="relative block icon">
+<svg aria-hidden="true" class="svg-inline--fa fa-search fa-w-16" data-icon="search" data-prefix="fas" focusable="false" role="img" viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z" fill="currentColor"></path></svg>
+</span>
+</div>
+<input class="flex flex-auto h-12 mx-1 bg-transparent appearance-none focus:outline-dotted focus:outline-2 focus:outline-transparent" id="search-query" placeholder="" tabindex="0" type="search"/>
+</form>
+<button class="flex items-center justify-center w-8 h-8 text-neutral-700 hover:text-primary-600 dark:text-neutral dark:hover:text-primary-400" id="close-search-button" title="">
+<span class="relative block icon">
+<svg viewbox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><path d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z" fill="currentColor"></path></svg>
+</span>
+</button>
+</header>
+<section class="flex-auto px-2 overflow-auto">
+<ul id="search-results">
+</ul>
+</section>
+</div>
+</div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script><script src="/decrypt.js"></script></body>
+</html>

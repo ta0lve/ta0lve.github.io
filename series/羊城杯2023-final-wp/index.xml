@@ -16,5 +16,14 @@
       <description>前言 # 本文为ycb2023线下赛pwn的第一题wp，主要是简</description>
     </item>
     
+    <item>
+      <title>ycb2023_final_pwn2</title>
+      <link>https://ta0lve.github.io/posts/wp/2023_09_ycb_final/0x02/</link>
+      <pubDate>Tue, 12 Sep 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ta0lve.github.io/posts/wp/2023_09_ycb_final/0x02/</guid>
+      <description>前言 # 本文为ycb2023线下赛pwn的第二题wp，主要是简</description>
+    </item>
+    
   </channel>
 </rss>
