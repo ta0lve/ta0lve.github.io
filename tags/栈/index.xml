@@ -17,12 +17,12 @@
     </item>
     
     <item>
-      <title>pwn基础——定位溢出点位置</title>
+      <title>pwn基础——用工具无脑定位溢出点位置</title>
       <link>https://ta0lve.github.io/posts/pwn/basic/long_long_ago/1/</link>
       <pubDate>Mon, 10 Jul 2023 00:00:00 +0000</pubDate>
       
       <guid>https://ta0lve.github.io/posts/pwn/basic/long_long_ago/1/</guid>
-      <description>&lt;p&gt;本系列为博主在大一上学期刚入门pwn时所记下的学习记录&lt;/p&gt;</description>
+      <description>&lt;p&gt;本系列为博主刚入门pwn时所记下的学习记录&lt;/p&gt;</description>
     </item>
     
   </channel>

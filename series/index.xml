@@ -35,6 +35,15 @@
     </item>
     
     <item>
+      <title>Tenable CTF 2023</title>
+      <link>https://ta0lve.github.io/series/tenable-ctf-2023/</link>
+      <pubDate>Fri, 11 Aug 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ta0lve.github.io/series/tenable-ctf-2023/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Kernel PWN 学习</title>
       <link>https://ta0lve.github.io/series/kernel-pwn-%E5%AD%A6%E4%B9%A0/</link>
       <pubDate>Wed, 09 Aug 2023 00:00:00 +0000</pubDate>
@@ -121,6 +130,15 @@
       <pubDate>Mon, 10 Jul 2023 00:00:00 +0000</pubDate>
       
       <guid>https://ta0lve.github.io/series/%E4%B8%80%E4%BA%9B%E4%B9%85%E8%BF%9C%E7%9A%84pwn%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>something_easy</title>
+      <link>https://ta0lve.github.io/series/something_easy/</link>
+      <pubDate>Thu, 06 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ta0lve.github.io/series/something_easy/</guid>
       <description></description>
     </item>
     

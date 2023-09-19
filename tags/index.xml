@@ -278,20 +278,47 @@
     </item>
     
     <item>
-      <title>BibName</title>
-      <link>https://ta0lve.github.io/tags/bibname/</link>
-      <pubDate>Wed, 05 Jul 2023 00:00:00 +0000</pubDate>
+      <title>canary</title>
+      <link>https://ta0lve.github.io/tags/canary/</link>
+      <pubDate>Thu, 06 Jul 2023 00:00:00 +0000</pubDate>
       
-      <guid>https://ta0lve.github.io/tags/bibname/</guid>
+      <guid>https://ta0lve.github.io/tags/canary/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Crypto</title>
       <link>https://ta0lve.github.io/tags/crypto/</link>
-      <pubDate>Wed, 05 Jul 2023 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 06 Jul 2023 00:00:00 +0000</pubDate>
       
       <guid>https://ta0lve.github.io/tags/crypto/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ret2libc</title>
+      <link>https://ta0lve.github.io/tags/ret2libc/</link>
+      <pubDate>Thu, 06 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ta0lve.github.io/tags/ret2libc/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ret2text</title>
+      <link>https://ta0lve.github.io/tags/ret2text/</link>
+      <pubDate>Thu, 06 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ta0lve.github.io/tags/ret2text/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>BibName</title>
+      <link>https://ta0lve.github.io/tags/bibname/</link>
+      <pubDate>Wed, 05 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ta0lve.github.io/tags/bibname/</guid>
       <description></description>
     </item>
     

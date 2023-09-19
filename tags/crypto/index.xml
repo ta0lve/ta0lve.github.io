@@ -6,7 +6,16 @@
     <description>Recent content in Crypto on ta0lve</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 05 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://ta0lve.github.io/tags/crypto/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 06 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://ta0lve.github.io/tags/crypto/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>some_easy_Crypto</title>
+      <link>https://ta0lve.github.io/posts/wp/2023_--_--/basic_/0x02/</link>
+      <pubDate>Thu, 06 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ta0lve.github.io/posts/wp/2023_--_--/basic_/0x02/</guid>
+      <description>前言 # 本文为我个人第一次接触CTF的Crypto方向中的环境</description>
+    </item>
+    
     <item>
       <title>Crypto-GZ RSA</title>
       <link>https://ta0lve.github.io/posts/wp/2023_04_w4ter/6_gz-rsa_write_up/</link>

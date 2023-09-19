@@ -13,8 +13,8 @@
 <meta content="zh-cn" http-equiv="content-language"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta content="ie=edge" http-equiv="X-UA-Compatible"/>
-<title>pwn基础——定位溢出点位置 · ta0lve</title>
-<meta content="pwn基础——定位溢出点位置 · ta0lve" name="title"/>
+<title>pwn基础——用工具无脑定位溢出点位置 · ta0lve</title>
+<meta content="pwn基础——用工具无脑定位溢出点位置 · ta0lve" name="title"/>
 <meta content="CTF, PWN, 栈, " name="keywords"/>
 <link href="https://ta0lve.github.io/posts/pwn/basic/long_long_ago/1/" rel="canonical"/>
 <link href="/css/main.bundle.min.c6116b9ed1c907a8c0eb015f377d3eecc07e448d75729e31fc3de5881465c6c172ba9fa9a6800c030116caf2a110d92242bb816639484ca791f7cd107a8d49b5.css" integrity="sha512-xhFrntHJB6jA6wFfN30+7MB+RI11cp4x/D3liBRlxsFyup+ppoAMAwEWyvKhENkiQruBZjlITKeR980Qeo1JtQ==" rel="stylesheet" type="text/css"/>
@@ -25,24 +25,24 @@
 <link href="/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="/site.webmanifest" rel="manifest"/>
-<meta content="pwn基础——定位溢出点位置" property="og:title"/>
-<meta content="本系列为博主在大一上学期刚入门pwn时所记下的学习记录" property="og:description"/>
+<meta content="pwn基础——用工具无脑定位溢出点位置" property="og:title"/>
+<meta content="本系列为博主刚入门pwn时所记下的学习记录" property="og:description"/>
 <meta content="article" property="og:type"/>
 <meta content="https://ta0lve.github.io/posts/pwn/basic/long_long_ago/1/" property="og:url"/><meta content="posts" property="article:section"/>
 <meta content="2023-07-10T00:00:00+00:00" property="article:published_time"/>
 <meta content="2023-07-10T00:00:00+00:00" property="article:modified_time"/>
 <meta content="summary" name="twitter:card"/>
-<meta content="pwn基础——定位溢出点位置" name="twitter:title"/>
-<meta content="本系列为博主在大一上学期刚入门pwn时所记下的学习记录" name="twitter:description"/>
+<meta content="pwn基础——用工具无脑定位溢出点位置" name="twitter:title"/>
+<meta content="本系列为博主刚入门pwn时所记下的学习记录" name="twitter:description"/>
 <script type="application/ld+json">
   [{
     "@context": "https://schema.org",
     "@type": "Article",
     "articleSection": "Posts",
-    "name": "pwn基础——定位溢出点位置",
-    "headline": "pwn基础——定位溢出点位置",
+    "name": "pwn基础——用工具无脑定位溢出点位置",
+    "headline": "pwn基础——用工具无脑定位溢出点位置",
     
-    "abstract": "\u003cp\u003e本系列为博主在大一上学期刚入门pwn时所记下的学习记录\u003c\/p\u003e",
+    "abstract": "\u003cp\u003e本系列为博主刚入门pwn时所记下的学习记录\u003c\/p\u003e",
     "inLanguage": "zh-cn",
     "url" : "https:\/\/ta0lve.github.io\/posts\/pwn\/basic\/long_long_ago\/1\/",
     "author" : {
@@ -58,7 +58,7 @@
     "keywords": ["CTF","PWN","栈"],
     
     "mainEntityOfPage": "true",
-    "wordCount": "1399"
+    "wordCount": "1393"
   }]
   </script>
 <meta content="ta0lve" name="author"/>
@@ -274,15 +274,15 @@
 <a class="hover:underline decoration-neutral-300 dark:underline-neutral-600" href="/posts/">Posts</a><span class="px-1 text-primary-500">/</span>
 </li>
 <li class="inline hidden">
-<a class="hover:underline decoration-neutral-300 dark:underline-neutral-600" href="/posts/pwn/basic/long_long_ago/1/">pwn基础——定位溢出点位置</a><span class="px-1 text-primary-500">/</span>
+<a class="hover:underline decoration-neutral-300 dark:underline-neutral-600" href="/posts/pwn/basic/long_long_ago/1/">pwn基础——用工具无脑定位溢出点位置</a><span class="px-1 text-primary-500">/</span>
 </li>
 </ol>
 <h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">
-      pwn基础——定位溢出点位置
+      pwn基础——用工具无脑定位溢出点位置
     </h1>
 <div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-07-10 00:00:00 +0000 UTC">July 10, 2023</time><span class="px-2 text-primary-500">·</span><span>1399 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">3 分钟</span>
+<time datetime="2023-07-10 00:00:00 +0000 UTC">July 10, 2023</time><span class="px-2 text-primary-500">·</span><span>1393 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">3 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
 <span class="mr-2" onclick="window.open(&quot;/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/&quot;,'_self');" style="margin-top:0.5rem">
@@ -443,7 +443,7 @@
         Part 1: This Article
     </div>
 </details>
-<p>本系列为博主在大一上学期刚入门pwn时所记下的学习记录</p>
+<p>本系列为博主刚入门pwn时所记下的学习记录</p>
 <div class="flex px-4 py-3 rounded-md bg-primary-100 dark:bg-primary-900">
 <span class="text-primary-400 ltr:pr-3 rtl:pl-3 flex items-center">
 <span class="relative block icon">
@@ -846,7 +846,7 @@
 <span class="mr-2" onclick="window.open(&quot;/categories/wp/&quot;,'_self');" style="margin-top:0.5rem">
 <span class="flex">
 <span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    WP
+    wp
   </span>
 </span>
 </span>
@@ -945,7 +945,7 @@
 <div style="padding-bottom:1em;">
 <p> </p>
 <p>本文作者：<a href="https://ta0lve.github.io/about/" target="_blank"><font color="#49b1f5" style="text-decoration: underline">ta0lve</font></a></p>
-<p>本文链接：<a href="https://ta0lve.github.io/posts/pwn/basic/long_long_ago/1/" target="_blank"><font color="#49b1f5" style="text-decoration: underline">pwn基础——定位溢出点位置</font></a></p>
+<p>本文链接：<a href="https://ta0lve.github.io/posts/pwn/basic/long_long_ago/1/" target="_blank"><font color="#49b1f5" style="text-decoration: underline">pwn基础——用工具无脑定位溢出点位置</font></a></p>
 <p><a href="https://ta0lve.github.io/posts/pwn/basic/long_long_ago/1/" target="_blank"><font color="#49b1f5" style="text-decoration: underline"> https://ta0lve.github.io/posts/pwn/basic/long_long_ago/1/ </font></a></p>
 <p>版权声明：本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank"><font color="#49b1f5" style="text-decoration: underline"> CC BY-NC 4.0 </font></a> 许可协议。</p>
 <p>转载请注明来自<a class="redlink" href="https://ta0lve.github.io/" target="_blank"> <font color="#49b1f5" style="text-decoration: underline">ta0lve's Blog</font></a> ！</p>

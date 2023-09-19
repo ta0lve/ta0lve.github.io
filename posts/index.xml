@@ -73,6 +73,15 @@
     </item>
     
     <item>
+      <title>Tenable CTF 2023 pwn/re wp</title>
+      <link>https://ta0lve.github.io/posts/wp/2023_08_tenable_ctf/</link>
+      <pubDate>Fri, 11 Aug 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ta0lve.github.io/posts/wp/2023_08_tenable_ctf/</guid>
+      <description>前言 # 本文为 Tenable CTF 2023 pwn/re 方向题目的wp及赛后复现记录，主要是简单</description>
+    </item>
+    
+    <item>
       <title>Kernel PWN 基础知识学习记录</title>
       <link>https://ta0lve.github.io/posts/pwn/kernel/basic1/</link>
       <pubDate>Wed, 09 Aug 2023 00:00:00 +0000</pubDate>
@@ -185,12 +194,12 @@
     </item>
     
     <item>
-      <title>pwn基础——定位溢出点位置</title>
+      <title>pwn基础——用工具无脑定位溢出点位置</title>
       <link>https://ta0lve.github.io/posts/pwn/basic/long_long_ago/1/</link>
       <pubDate>Mon, 10 Jul 2023 00:00:00 +0000</pubDate>
       
       <guid>https://ta0lve.github.io/posts/pwn/basic/long_long_ago/1/</guid>
-      <description>&lt;p&gt;本系列为博主在大一上学期刚入门pwn时所记下的学习记录&lt;/p&gt;</description>
+      <description>&lt;p&gt;本系列为博主刚入门pwn时所记下的学习记录&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -200,6 +209,24 @@
       
       <guid>https://ta0lve.github.io/posts/sth/sm.ms/</guid>
       <description>&lt;p&gt;&lt;strong&gt;如果本博客中有任何图片加载失败&lt;/strong&gt;，可以参考本文章的解决方案！&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>some_easy_Crypto</title>
+      <link>https://ta0lve.github.io/posts/wp/2023_--_--/basic_/0x02/</link>
+      <pubDate>Thu, 06 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ta0lve.github.io/posts/wp/2023_--_--/basic_/0x02/</guid>
+      <description>前言 # 本文为我个人第一次接触CTF的Crypto方向中的环境</description>
+    </item>
+    
+    <item>
+      <title>some_easy_pwn</title>
+      <link>https://ta0lve.github.io/posts/wp/2023_--_--/basic_/0x01/</link>
+      <pubDate>Thu, 06 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ta0lve.github.io/posts/wp/2023_--_--/basic_/0x01/</guid>
+      <description>前言 # 本文为我个人第一次接触CTF的pwn方向时所做的题的w</description>
     </item>
     
     <item>
