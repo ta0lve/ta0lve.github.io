@@ -26,14 +26,14 @@
 <link href="/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="/site.webmanifest" rel="manifest"/>
 <meta content="ycb2023_final_pwn1" property="og:title"/>
-<meta content="前言 # 本文为ycb2023线下赛pwn的第一题wp，主要是简" property="og:description"/>
+<meta content="前言 # 本文为ycb2023线下赛pwn的第一题arrary_" property="og:description"/>
 <meta content="article" property="og:type"/>
 <meta content="https://ta0lve.github.io/posts/wp/2023_09_ycb_final/0x01/" property="og:url"/><meta content="posts" property="article:section"/>
 <meta content="2023-09-12T00:00:00+00:00" property="article:published_time"/>
 <meta content="2023-09-12T00:00:00+00:00" property="article:modified_time"/>
 <meta content="summary" name="twitter:card"/>
 <meta content="ycb2023_final_pwn1" name="twitter:title"/>
-<meta content="前言 # 本文为ycb2023线下赛pwn的第一题wp，主要是简" name="twitter:description"/>
+<meta content="前言 # 本文为ycb2023线下赛pwn的第一题arrary_" name="twitter:description"/>
 <script type="application/ld+json">
   [{
     "@context": "https://schema.org",
@@ -42,7 +42,7 @@
     "name": "ycb2023_final_pwn1",
     "headline": "ycb2023_final_pwn1",
     
-    "abstract": "前言 # 本文为ycb2023线下赛pwn的第一题wp，主要是简",
+    "abstract": "前言 # 本文为ycb2023线下赛pwn的第一题arrary_",
     "inLanguage": "zh-cn",
     "url" : "https:\/\/ta0lve.github.io\/posts\/wp\/2023_09_ycb_final\/0x01\/",
     "author" : {
@@ -58,7 +58,7 @@
     "keywords": ["CTF","PWN","整数溢出漏洞"],
     
     "mainEntityOfPage": "true",
-    "wordCount": "3235"
+    "wordCount": "3257"
   }]
   </script>
 <meta content="ta0lve" name="author"/>
@@ -282,7 +282,7 @@
     </h1>
 <div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-09-12 00:00:00 +0000 UTC">September 12, 2023</time><span class="px-2 text-primary-500">·</span><span>3235 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">7 分钟</span>
+<time datetime="2023-09-12 00:00:00 +0000 UTC">September 12, 2023</time><span class="px-2 text-primary-500">·</span><span>3257 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">7 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
 <span class="mr-2" onclick="window.open(&quot;/categories/wp/&quot;,'_self');" style="margin-top:0.5rem">
@@ -461,7 +461,7 @@
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e5%89%8d%e8%a8%80" style="text-decoration-line: none !important;">#</a></span>
 </h2>
-<p>本文为ycb2023线下赛pwn的第一题wp，主要是简单记录一下自己在打比赛时做题遇到的一些小要点，仅为个人的一个学习记录，水平不高还望师傅们包容。</p>
+<p>本文为ycb2023线下赛pwn的第一题<code>arrary_index_bank</code>的wp，主要是简单记录一下自己在打比赛时做题遇到的一些小要点，仅为个人的一个学习记录，水平不高还望师傅们包容。</p>
 <br/>
 <div class="anchor" id="ida分析"></div>
 <h2 class="relative group">IDA分析 
@@ -475,7 +475,7 @@
 </h3>
 <p>当然，在拖入IDA前先例行检查一下：</p>
 <div class="highlight"><pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ checksec pwn
-</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> <span class="s1">'/home/ta0lve/桌面/CTF/ycb2023-2/pwn1/pwn'</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> <span class="s1">'/home/ta0lve/桌面/CTF/ycb2023_final/pwn1/pwn'</span>
 </span></span><span class="line"><span class="cl">    Arch:     amd64-64-little
 </span></span><span class="line"><span class="cl">    RELRO:    Full RELRO
 </span></span><span class="line"><span class="cl">    Stack:    No canary found
@@ -564,7 +564,7 @@
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e5%90%8e%e9%97%a8%e5%87%bd%e6%95%b0" style="text-decoration-line: none !important;">#</a></span>
 </h3>
 <p>其实这一步应该是打开IDA后做的第一件事：</p>
-<p>shift + F12 查看程序的字符串，有时候字符串中会有一些语句帮助我们更快地找到关键代码，也有时候会有一些明显的 win 语句提示我们成功 getshell 或者 成功取得 flag，当然，最有价值的还得是<code>/bin/sh/</code>语句，这提示我们给程序可能存在后门函数，我们可以在之后的构造RO链、调用 system 函数时使用这个字符串。</p>
+<p>shift + F12 查看程序的字符串，有时候字符串中会有一些语句帮助我们更快地找到关键代码，也有时候会有一些明显的 win 语句提示我们成功 getshell 或者 成功取得 flag，当然，最有价值的还得是<code>/bin/sh/</code>语句，这提示我们的程序可能存在后门函数，我们可以在之后的构造RO链、调用 system 函数时使用这个字符串。</p>
 <p>当然，当我们在函数的引用表里看到 system 函数时应该也会想到类似的事情。</p>
 <p>在本题中，</p>
 <ul>
@@ -596,14 +596,14 @@
 </span></span><span class="line"><span class="cl"><span class="p">.</span><span class="nl">text</span><span class="p">:</span><span class="mo">0000000000001326</span>                               <span class="p">;</span> <span class="p">}</span> <span class="c1">// starts at 1310
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">.</span><span class="nl">text</span><span class="p">:</span><span class="mo">0000000000001326</span>
 </span></span><span class="line"><span class="cl"><span class="p">.</span><span class="nl">text</span><span class="p">:</span><span class="mo">0000000000001326</span>                               <span class="n">win</span> <span class="n">endp</span>
-</span></span></code></pre></div><p>嗯，覆盖地址转到01310的地址，注意开了PIE，所以需要先泄露<code>textbase</code>，才能知道真实地址。</p>
+</span></span></code></pre></div><p>嗯，覆盖地址转到0x01310的地址，注意开了PIE，所以需要先泄露<code>textbase</code>，才能知道真实地址。</p>
 <br/>
 <div class="anchor" id="漏洞利用思路"></div>
 <h2 class="relative group">漏洞利用思路 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e6%bc%8f%e6%b4%9e%e5%88%a9%e7%94%a8%e6%80%9d%e8%b7%af" style="text-decoration-line: none !important;">#</a></span>
 </h2>
-<p>IDA 分析完了，思路还是挺清晰的，先泄露出 <code>textbase</code> 的漏洞，再覆盖返回地址就可以 getshell</p>
+<p>IDA 分析完了，思路还是挺清晰的，先泄露出 <code>textbase</code> ，再覆盖返回地址就可以 getshell</p>
 <div class="anchor" id="泄露-textbase"></div>
 <h3 class="relative group">泄露 textbase 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
@@ -626,7 +626,7 @@
 <li>
 <p>menu1的代码只做了单边限制，存在整数溢出漏洞</p>
 <ul>
-<li>从表面上看，对变量 v3 进行了限制，但是仔细看看汇编代码可以发现，进行的是是有符号整型的比较，所以 v3 可以为负数</li>
+<li>从表面上看，对变量 v3 进行了限制，但是仔细看看汇编代码可以发现，进行的是有符号整型的比较，所以 v3 可以为负数</li>
 <li>但是在数组中取值时，数组的索引的类型是 <code>size_t</code>，该类型相当于属于无符号整型
 <ul>
 <li>在64位程序中<code>size_t</code>的大小为8 字节</li>
@@ -655,7 +655,7 @@
 </ul>
 </li>
 <li>
-<p>注意！<strong>如果题目有提供 libc 文件</strong>需要 patchelf 更换 libc 库与 ld 链接器，不然内存地址的值会和我们远程打靶机是不一样，可能会出现本地可以 getshell 而远程打不通的情况</p>
+<p>注意！ <strong>如果题目有提供 libc 文件</strong> 需要 patchelf 更换 libc 库与 ld 链接器，不然内存地址的值会和我们远程打靶机是不一样，可能会出现本地可以 getshell 而远程打不通的情况</p>
 <ul>
 <li>不过本题中题目并没有提供libc，所以直接gdb调试就可以了</li>
 </ul>
@@ -775,7 +775,7 @@
 </span></span><span class="line"><span class="cl"><span class="n">taolve</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="sa">b</span><span class="s1">'[-1] = '</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="n">account</span> <span class="o">=</span> <span class="n">taolve</span><span class="o">.</span><span class="n">recvline</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="n">textbase</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">account</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">'utf-8'</span><span class="p">))</span><span class="o">-</span><span class="mh">0x1426</span>
+</span></span><span class="line"><span class="cl"><span class="n">textbase</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">account</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">'utf-8'</span><span class="p">))</span> <span class="o">-</span> <span class="mh">0x1426</span>
 </span></span><span class="line"><span class="cl"><span class="n">log</span><span class="o">.</span><span class="n">success</span><span class="p">(</span><span class="s2">"textbase = "</span> <span class="o">+</span> <span class="nb">hex</span><span class="p">(</span><span class="n">textbase</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="n">taolve</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
