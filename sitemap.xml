@@ -5,14 +5,10 @@
     
       <url>
             <loc>https://ta0lve.github.io/</loc>
-            <lastmod>2023-09-12T00:00:00+00:00</lastmod>
+            <lastmod>2023-09-23T00:00:00+00:00</lastmod>
             <changefreq>daily</changefreq>
             <priority>0.5</priority>
           </url>
-    
-  
-    
-  
     
   
     
@@ -21,11 +17,28 @@
   
     
       <url>
-            <loc>https://ta0lve.github.io/posts/</loc>
-            <lastmod>2023-09-12T00:00:00+00:00</lastmod>
+            <loc>https://ta0lve.github.io/posts/pwn/basic/tutorial2/</loc>
+            <lastmod>2023-09-23T00:00:00+00:00</lastmod>
             <changefreq>daily</changefreq>
             <priority>0.5</priority>
           </url>
+    
+  
+    
+      <url>
+            <loc>https://ta0lve.github.io/posts/</loc>
+            <lastmod>2023-09-23T00:00:00+00:00</lastmod>
+            <changefreq>daily</changefreq>
+            <priority>0.5</priority>
+          </url>
+    
+  
+    
+  
+    
+  
+    
+  
     
   
     
@@ -234,10 +247,6 @@
             <changefreq>daily</changefreq>
             <priority>0.5</priority>
           </url>
-    
-  
-    
-  
     
   
     
@@ -710,14 +719,6 @@
       <url>
             <loc>https://ta0lve.github.io/link/weyung/</loc>
             <lastmod>2023-06-28T00:00:00+00:00</lastmod>
-            <changefreq>daily</changefreq>
-            <priority>0.5</priority>
-          </url>
-    
-  
-    
-      <url>
-            <loc>https://ta0lve.github.io/posts/pwn/basic/tutorial2/</loc>
             <changefreq>daily</changefreq>
             <priority>0.5</priority>
           </url>

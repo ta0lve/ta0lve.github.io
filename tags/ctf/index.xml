@@ -6,7 +6,16 @@
     <description>Recent content in CTF on ta0lve</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 12 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://ta0lve.github.io/tags/ctf/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 23 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://ta0lve.github.io/tags/ctf/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CTF宣讲-PWN方向</title>
+      <link>https://ta0lve.github.io/posts/pwn/basic/tutorial2/</link>
+      <pubDate>Sat, 23 Sep 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ta0lve.github.io/posts/pwn/basic/tutorial2/</guid>
+      <description>&lt;p&gt;写给学弟学妹的pwn入门宣讲~&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>ycb2023_final_pwn1</title>
       <link>https://ta0lve.github.io/posts/wp/2023_09_ycb_final/0x01/</link>
