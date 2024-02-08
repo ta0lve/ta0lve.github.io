@@ -17,24 +17,6 @@
     </item>
     
     <item>
-      <title>ycb2023_final_pwn1</title>
-      <link>https://ta0lve.github.io/posts/wp/2023_09_ycb_final/0x01/</link>
-      <pubDate>Tue, 12 Sep 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://ta0lve.github.io/posts/wp/2023_09_ycb_final/0x01/</guid>
-      <description>前言 # 本文为ycb2023线下赛pwn的第一题arrary_</description>
-    </item>
-    
-    <item>
-      <title>ycb2023_final_pwn2</title>
-      <link>https://ta0lve.github.io/posts/wp/2023_09_ycb_final/0x02/</link>
-      <pubDate>Tue, 12 Sep 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://ta0lve.github.io/posts/wp/2023_09_ycb_final/0x02/</guid>
-      <description>前言 # 本文为ycb2023线下赛pwn的第二题wp，主要是简</description>
-    </item>
-    
-    <item>
       <title>从0到0.002的AWDP实战记录</title>
       <link>https://ta0lve.github.io/posts/pwn/awdp/0x02/</link>
       <pubDate>Mon, 11 Sep 2023 00:00:00 +0000</pubDate>
@@ -679,25 +661,6 @@
     </item>
     
     <item>
-      <title>Kernel PWN 基础知识学习记录</title>
-      <link>https://ta0lve.github.io/posts/pwn/kernel/basic1/</link>
-      <pubDate>Wed, 09 Aug 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://ta0lve.github.io/posts/pwn/kernel/basic1/</guid>
-      <description>&lt;p&gt;&lt;strong&gt;此文章还在施工中，&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;路过的师傅们看看远处的学习记录吧！&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>堆管理过程学习记录</title>
-      <link>https://ta0lve.github.io/posts/pwn/heap/chunk_2/</link>
-      <pubDate>Wed, 09 Aug 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://ta0lve.github.io/posts/pwn/heap/chunk_2/</guid>
-      <description>glibc内存管理流程图 # （看不清楚可以保存下来放大）： gl</description>
-    </item>
-    
-    <item>
       <title>pwn入门教程</title>
       <link>https://ta0lve.github.io/posts/pwn/basic/tutorial1/</link>
       <pubDate>Sat, 05 Aug 2023 00:00:00 +0000</pubDate>
@@ -716,71 +679,6 @@
     </item>
     
     <item>
-      <title>HWS 2023 fmt exp</title>
-      <link>https://ta0lve.github.io/posts/wp/2023_07_hws/fmt2/</link>
-      <pubDate>Tue, 18 Jul 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://ta0lve.github.io/posts/wp/2023_07_hws/fmt2/</guid>
-      <description>&lt;p&gt;&lt;strong&gt;此文章还在施工中，&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;路过的师傅们看看远处的学习记录吧！&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>HWS 2023 fmt wp</title>
-      <link>https://ta0lve.github.io/posts/wp/2023_07_hws/fmt/</link>
-      <pubDate>Tue, 18 Jul 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://ta0lve.github.io/posts/wp/2023_07_hws/fmt/</guid>
-      <description>&lt;p&gt;&lt;strong&gt;此文章还在施工中，&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;路过的师傅们看看远处的学习记录吧！&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Kernel Pwn 学习书签</title>
-      <link>https://ta0lve.github.io/pointer/kernel-pwn/pointer1/</link>
-      <pubDate>Tue, 18 Jul 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://ta0lve.github.io/pointer/kernel-pwn/pointer1/</guid>
-      <description>&lt;p&gt;一些我在入门pwn &lt;strong&gt;Kernel Pwn&lt;/strong&gt; 知识时所学习阅读的文章，收集在此处以便于之后的复习和回顾。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>堆学习书签</title>
-      <link>https://ta0lve.github.io/pointer/heap/pointer1/</link>
-      <pubDate>Sun, 16 Jul 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://ta0lve.github.io/pointer/heap/pointer1/</guid>
-      <description>&lt;p&gt;一些我在入门pwn &lt;strong&gt;堆&lt;/strong&gt; 时所学习阅读的文章，收集在此处以便于之后的复习和回顾。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>fmt学习书签</title>
-      <link>https://ta0lve.github.io/pointer/fmt/pointer1/</link>
-      <pubDate>Sat, 15 Jul 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://ta0lve.github.io/pointer/fmt/pointer1/</guid>
-      <description>&lt;p&gt;一些我在入门pwn&lt;strong&gt;格式化字符串漏洞&lt;/strong&gt;时所学习阅读的文章，收集在此处以便于之后的复习和回顾。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>wp学习书签</title>
-      <link>https://ta0lve.github.io/pointer/wp/pointer1/</link>
-      <pubDate>Sat, 15 Jul 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://ta0lve.github.io/pointer/wp/pointer1/</guid>
-      <description>&lt;p&gt;一些我在学习pwn时学习和复现的wp文章，收集在此处以便于之后的复习和回顾。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>栈学习书签</title>
-      <link>https://ta0lve.github.io/pointer/stack/pointer1/</link>
-      <pubDate>Sat, 15 Jul 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://ta0lve.github.io/pointer/stack/pointer1/</guid>
-      <description>&lt;p&gt;一些我在入门pwn &lt;strong&gt;栈&lt;/strong&gt; 时所学习阅读的文章，收集在此处以便于之后的复习和回顾。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
       <title>Linux命令入门与总结</title>
       <link>https://ta0lve.github.io/posts/pwn/basic/linux_/</link>
       <pubDate>Fri, 14 Jul 2023 00:00:00 +0000</pubDate>
@@ -790,39 +688,12 @@
     </item>
     
     <item>
-      <title>pwn基础学习书签</title>
-      <link>https://ta0lve.github.io/pointer/%E4%B9%A6%E7%AD%BE/pwn%E4%B9%A6%E7%AD%BE/</link>
-      <pubDate>Fri, 14 Jul 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://ta0lve.github.io/pointer/%E4%B9%A6%E7%AD%BE/pwn%E4%B9%A6%E7%AD%BE/</guid>
-      <description>&lt;p&gt;一些我在入门pwn时所学习阅读的基础知识相关文章，收集在此处以便于之后的复习和回顾。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>整数溢出漏洞学习书签</title>
-      <link>https://ta0lve.github.io/pointer/intoverflow/pointer1/</link>
-      <pubDate>Fri, 14 Jul 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://ta0lve.github.io/pointer/intoverflow/pointer1/</guid>
-      <description>&lt;p&gt;一些我在入门pwn&lt;strong&gt;整数溢出漏洞&lt;/strong&gt;时所学习阅读的文章，收集在此处以便于之后的复习和回顾。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
       <title>PWN环境二次搭建记录-Ubuntu 22.04</title>
       <link>https://ta0lve.github.io/posts/pwn/basic/pwn-_environment/</link>
       <pubDate>Mon, 10 Jul 2023 00:00:00 +0000</pubDate>
       
       <guid>https://ta0lve.github.io/posts/pwn/basic/pwn-_environment/</guid>
       <description>如果本博客部分文章图片加载失败， 可以点击此处查看解决办法 前言</description>
-    </item>
-    
-    <item>
-      <title>pwn基础——用工具无脑定位溢出点位置</title>
-      <link>https://ta0lve.github.io/posts/pwn/basic/long_long_ago/1/</link>
-      <pubDate>Mon, 10 Jul 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://ta0lve.github.io/posts/pwn/basic/long_long_ago/1/</guid>
-      <description>&lt;p&gt;本系列为博主刚入门pwn时所记下的学习记录&lt;/p&gt;</description>
     </item>
     
     <item>

@@ -17,24 +17,6 @@
     </item>
     
     <item>
-      <title>ycb2023_final_pwn1</title>
-      <link>https://ta0lve.github.io/posts/wp/2023_09_ycb_final/0x01/</link>
-      <pubDate>Tue, 12 Sep 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://ta0lve.github.io/posts/wp/2023_09_ycb_final/0x01/</guid>
-      <description>前言 # 本文为ycb2023线下赛pwn的第一题arrary_</description>
-    </item>
-    
-    <item>
-      <title>ycb2023_final_pwn2</title>
-      <link>https://ta0lve.github.io/posts/wp/2023_09_ycb_final/0x02/</link>
-      <pubDate>Tue, 12 Sep 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://ta0lve.github.io/posts/wp/2023_09_ycb_final/0x02/</guid>
-      <description>前言 # 本文为ycb2023线下赛pwn的第二题wp，主要是简</description>
-    </item>
-    
-    <item>
       <title>从0到0.002的AWDP实战记录</title>
       <link>https://ta0lve.github.io/posts/pwn/awdp/0x02/</link>
       <pubDate>Mon, 11 Sep 2023 00:00:00 +0000</pubDate>
@@ -679,25 +661,6 @@
     </item>
     
     <item>
-      <title>Kernel PWN 基础知识学习记录</title>
-      <link>https://ta0lve.github.io/posts/pwn/kernel/basic1/</link>
-      <pubDate>Wed, 09 Aug 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://ta0lve.github.io/posts/pwn/kernel/basic1/</guid>
-      <description>&lt;p&gt;&lt;strong&gt;此文章还在施工中，&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;路过的师傅们看看远处的学习记录吧！&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>堆管理过程学习记录</title>
-      <link>https://ta0lve.github.io/posts/pwn/heap/chunk_2/</link>
-      <pubDate>Wed, 09 Aug 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://ta0lve.github.io/posts/pwn/heap/chunk_2/</guid>
-      <description>glibc内存管理流程图 # （看不清楚可以保存下来放大）： gl</description>
-    </item>
-    
-    <item>
       <title>Docker学习记录</title>
       <link>https://ta0lve.github.io/posts/sth/docker/1/</link>
       <pubDate>Mon, 07 Aug 2023 00:00:00 +0000</pubDate>
@@ -713,25 +676,6 @@
       
       <guid>https://ta0lve.github.io/posts/sth/redis/1/</guid>
       <description>安装（Ubuntu） # # apt 安装 sudo apt install redis-server # 检测 redis-server 使用 # clear 清空屏</description>
-    </item>
-    
-    <item>
-      <title>apktool安装与使用</title>
-      <link>https://ta0lve.github.io/posts/android/tools/apktool/</link>
-      <pubDate>Sun, 06 Aug 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://ta0lve.github.io/posts/android/tools/apktool/</guid>
-      <description>安装 # Windows # 下载 Windows 包装脚本（右键单击，将链接另存为apktoo</description>
-    </item>
-    
-    <item>
-      <title>IoT 学习记录1</title>
-      <link>https://ta0lve.github.io/posts/iot/0x01/</link>
-      <pubDate>Sun, 06 Aug 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://ta0lve.github.io/posts/iot/0x01/</guid>
-      <description>&lt;p&gt;&lt;strong&gt;此文章还在施工中&lt;/strong&gt;，&lt;/p&gt;
-&lt;p&gt;路过的师傅们看看远处的学习记录吧&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -753,26 +697,6 @@
     </item>
     
     <item>
-      <title>HWS 2023 fmt exp</title>
-      <link>https://ta0lve.github.io/posts/wp/2023_07_hws/fmt2/</link>
-      <pubDate>Tue, 18 Jul 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://ta0lve.github.io/posts/wp/2023_07_hws/fmt2/</guid>
-      <description>&lt;p&gt;&lt;strong&gt;此文章还在施工中，&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;路过的师傅们看看远处的学习记录吧！&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>HWS 2023 fmt wp</title>
-      <link>https://ta0lve.github.io/posts/wp/2023_07_hws/fmt/</link>
-      <pubDate>Tue, 18 Jul 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://ta0lve.github.io/posts/wp/2023_07_hws/fmt/</guid>
-      <description>&lt;p&gt;&lt;strong&gt;此文章还在施工中，&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;路过的师傅们看看远处的学习记录吧！&lt;/p&gt;</description>
-    </item>
-    
-    <item>
       <title>Linux命令入门与总结</title>
       <link>https://ta0lve.github.io/posts/pwn/basic/linux_/</link>
       <pubDate>Fri, 14 Jul 2023 00:00:00 +0000</pubDate>
@@ -788,15 +712,6 @@
       
       <guid>https://ta0lve.github.io/posts/pwn/basic/pwn-_environment/</guid>
       <description>如果本博客部分文章图片加载失败， 可以点击此处查看解决办法 前言</description>
-    </item>
-    
-    <item>
-      <title>pwn基础——用工具无脑定位溢出点位置</title>
-      <link>https://ta0lve.github.io/posts/pwn/basic/long_long_ago/1/</link>
-      <pubDate>Mon, 10 Jul 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://ta0lve.github.io/posts/pwn/basic/long_long_ago/1/</guid>
-      <description>&lt;p&gt;本系列为博主刚入门pwn时所记下的学习记录&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -941,42 +856,6 @@
       
       <guid>https://ta0lve.github.io/posts/wp/2023_06_ciscn/</guid>
       <description>以下为2023信安国赛初赛的pwn，reverse和Cryp</description>
-    </item>
-    
-    <item>
-      <title>C&#43;&#43;理论1</title>
-      <link>https://ta0lve.github.io/posts/c&#43;&#43;/homework/c&#43;&#43;%E7%90%86%E8%AE%BA1/</link>
-      <pubDate>Fri, 30 Jun 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://ta0lve.github.io/posts/c&#43;&#43;/homework/c&#43;&#43;%E7%90%86%E8%AE%BA1/</guid>
-      <description>cin与cout # 第一周T8，T9，T10 下面语句的输出是？</description>
-    </item>
-    
-    <item>
-      <title>C&#43;&#43;理论2</title>
-      <link>https://ta0lve.github.io/posts/c&#43;&#43;/homework/c&#43;&#43;%E7%90%86%E8%AE%BA2/</link>
-      <pubDate>Fri, 30 Jun 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://ta0lve.github.io/posts/c&#43;&#43;/homework/c&#43;&#43;%E7%90%86%E8%AE%BA2/</guid>
-      <description>构造函数 # 1.构造函数1的参数列表 //以下两个构造函数都是没</description>
-    </item>
-    
-    <item>
-      <title>C&#43;&#43;理论3</title>
-      <link>https://ta0lve.github.io/posts/c&#43;&#43;/homework/c&#43;&#43;%E7%90%86%E8%AE%BA3/</link>
-      <pubDate>Fri, 30 Jun 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://ta0lve.github.io/posts/c&#43;&#43;/homework/c&#43;&#43;%E7%90%86%E8%AE%BA3/</guid>
-      <description>explicit # 当一个类的构造函数有多个参数，除第一个参数外其它都有默认</description>
-    </item>
-    
-    <item>
-      <title>C&#43;&#43;实验</title>
-      <link>https://ta0lve.github.io/posts/c&#43;&#43;/homework/c&#43;&#43;%E5%AE%9E%E9%AA%8C%E9%A2%98/</link>
-      <pubDate>Fri, 30 Jun 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://ta0lve.github.io/posts/c&#43;&#43;/homework/c&#43;&#43;%E5%AE%9E%E9%AA%8C%E9%A2%98/</guid>
-      <description>1.基础知识(:dog:都不看好吧) # 忙里偷闲整理一下上学期</description>
     </item>
     
   </channel>

@@ -605,24 +605,6 @@
     </item>
     
     <item>
-      <title>apktool安装与使用</title>
-      <link>https://ta0lve.github.io/posts/android/tools/apktool/</link>
-      <pubDate>Sun, 06 Aug 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://ta0lve.github.io/posts/android/tools/apktool/</guid>
-      <description>安装 # Windows # 下载 Windows 包装脚本（右键单击，将链接另存为apktoo</description>
-    </item>
-    
-    <item>
-      <title>安卓安全-工具篇</title>
-      <link>https://ta0lve.github.io/pointer/android/tools1/</link>
-      <pubDate>Sun, 06 Aug 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://ta0lve.github.io/pointer/android/tools1/</guid>
-      <description>解包: # apktool: # https://apktool.org/ Install Guide | Apktool Android逆向之旅—反编译利器Ap</description>
-    </item>
-    
-    <item>
       <title>reverse-Lazy Puts</title>
       <link>https://ta0lve.github.io/posts/wp/2023_04_w4ter/4_lazy-puts_write_up/</link>
       <pubDate>Wed, 05 Jul 2023 00:00:00 +0000</pubDate>

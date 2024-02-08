@@ -26,42 +26,6 @@
     </item>
     
     <item>
-      <title>largebin attack</title>
-      <link>https://ta0lve.github.io/tags/largebin-attack/</link>
-      <pubDate>Tue, 12 Sep 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://ta0lve.github.io/tags/largebin-attack/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>mp_.tcache_bins</title>
-      <link>https://ta0lve.github.io/tags/mp_.tcache_bins/</link>
-      <pubDate>Tue, 12 Sep 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://ta0lve.github.io/tags/mp_.tcache_bins/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>tcache attack</title>
-      <link>https://ta0lve.github.io/tags/tcache-attack/</link>
-      <pubDate>Tue, 12 Sep 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://ta0lve.github.io/tags/tcache-attack/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>整数溢出漏洞</title>
-      <link>https://ta0lve.github.io/tags/%E6%95%B4%E6%95%B0%E6%BA%A2%E5%87%BA%E6%BC%8F%E6%B4%9E/</link>
-      <pubDate>Tue, 12 Sep 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://ta0lve.github.io/tags/%E6%95%B4%E6%95%B0%E6%BA%A2%E5%87%BA%E6%BC%8F%E6%B4%9E/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>AWDP</title>
       <link>https://ta0lve.github.io/tags/awdp/</link>
       <pubDate>Mon, 11 Sep 2023 00:00:00 +0000</pubDate>
@@ -103,24 +67,6 @@
       <pubDate>Fri, 11 Aug 2023 00:00:00 +0000</pubDate>
       
       <guid>https://ta0lve.github.io/tags/reverse/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>heap</title>
-      <link>https://ta0lve.github.io/tags/heap/</link>
-      <pubDate>Wed, 09 Aug 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://ta0lve.github.io/tags/heap/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Kernel</title>
-      <link>https://ta0lve.github.io/tags/kernel/</link>
-      <pubDate>Wed, 09 Aug 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://ta0lve.github.io/tags/kernel/</guid>
       <description></description>
     </item>
     
@@ -170,83 +116,11 @@
     </item>
     
     <item>
-      <title>Android</title>
-      <link>https://ta0lve.github.io/tags/android/</link>
-      <pubDate>Sun, 06 Aug 2023 00:00:00 +0000</pubDate>
+      <title>heap</title>
+      <link>https://ta0lve.github.io/tags/heap/</link>
+      <pubDate>Mon, 31 Jul 2023 00:00:00 +0000</pubDate>
       
-      <guid>https://ta0lve.github.io/tags/android/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>IoT</title>
-      <link>https://ta0lve.github.io/tags/iot/</link>
-      <pubDate>Sun, 06 Aug 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://ta0lve.github.io/tags/iot/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>物联网安全</title>
-      <link>https://ta0lve.github.io/tags/%E7%89%A9%E8%81%94%E7%BD%91%E5%AE%89%E5%85%A8/</link>
-      <pubDate>Sun, 06 Aug 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://ta0lve.github.io/tags/%E7%89%A9%E8%81%94%E7%BD%91%E5%AE%89%E5%85%A8/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>nothing</title>
-      <link>https://ta0lve.github.io/tags/nothing/</link>
-      <pubDate>Tue, 18 Jul 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://ta0lve.github.io/tags/nothing/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>格式化字符串漏洞</title>
-      <link>https://ta0lve.github.io/tags/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%BC%8F%E6%B4%9E/</link>
-      <pubDate>Tue, 18 Jul 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://ta0lve.github.io/tags/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%BC%8F%E6%B4%9E/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>堆</title>
-      <link>https://ta0lve.github.io/tags/%E5%A0%86/</link>
-      <pubDate>Sun, 16 Jul 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://ta0lve.github.io/tags/%E5%A0%86/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>PLT&amp;GOT</title>
-      <link>https://ta0lve.github.io/tags/pltgot/</link>
-      <pubDate>Sat, 15 Jul 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://ta0lve.github.io/tags/pltgot/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>栈</title>
-      <link>https://ta0lve.github.io/tags/%E6%A0%88/</link>
-      <pubDate>Sat, 15 Jul 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://ta0lve.github.io/tags/%E6%A0%88/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>栈迁移</title>
-      <link>https://ta0lve.github.io/tags/%E6%A0%88%E8%BF%81%E7%A7%BB/</link>
-      <pubDate>Sat, 15 Jul 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://ta0lve.github.io/tags/%E6%A0%88%E8%BF%81%E7%A7%BB/</guid>
+      <guid>https://ta0lve.github.io/tags/heap/</guid>
       <description></description>
     </item>
     
@@ -256,24 +130,6 @@
       <pubDate>Fri, 14 Jul 2023 00:00:00 +0000</pubDate>
       
       <guid>https://ta0lve.github.io/tags/linux/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>misc</title>
-      <link>https://ta0lve.github.io/tags/misc/</link>
-      <pubDate>Thu, 13 Jul 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://ta0lve.github.io/tags/misc/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>schedole</title>
-      <link>https://ta0lve.github.io/tags/schedole/</link>
-      <pubDate>Wed, 12 Jul 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://ta0lve.github.io/tags/schedole/</guid>
       <description></description>
     </item>
     
@@ -328,6 +184,15 @@
       <pubDate>Wed, 05 Jul 2023 00:00:00 +0000</pubDate>
       
       <guid>https://ta0lve.github.io/tags/bibname/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>misc</title>
+      <link>https://ta0lve.github.io/tags/misc/</link>
+      <pubDate>Wed, 05 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ta0lve.github.io/tags/misc/</guid>
       <description></description>
     </item>
     
@@ -400,15 +265,6 @@
       <pubDate>Sun, 02 Jul 2023 00:00:00 +0000</pubDate>
       
       <guid>https://ta0lve.github.io/tags/bigname/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>C&#43;&#43;</title>
-      <link>https://ta0lve.github.io/tags/c&#43;&#43;/</link>
-      <pubDate>Fri, 30 Jun 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://ta0lve.github.io/tags/c&#43;&#43;/</guid>
       <description></description>
     </item>
     

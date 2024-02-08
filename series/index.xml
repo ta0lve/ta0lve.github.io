@@ -17,15 +17,6 @@
     </item>
     
     <item>
-      <title>羊城杯2023-final-wp</title>
-      <link>https://ta0lve.github.io/series/%E7%BE%8A%E5%9F%8E%E6%9D%AF2023-final-wp/</link>
-      <pubDate>Tue, 12 Sep 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://ta0lve.github.io/series/%E7%BE%8A%E5%9F%8E%E6%9D%AF2023-final-wp/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>AWDP PWN学习记录</title>
       <link>https://ta0lve.github.io/series/awdp-pwn%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</link>
       <pubDate>Mon, 11 Sep 2023 00:00:00 +0000</pubDate>
@@ -53,24 +44,6 @@
     </item>
     
     <item>
-      <title>Kernel PWN 学习</title>
-      <link>https://ta0lve.github.io/series/kernel-pwn-%E5%AD%A6%E4%B9%A0/</link>
-      <pubDate>Wed, 09 Aug 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://ta0lve.github.io/series/kernel-pwn-%E5%AD%A6%E4%B9%A0/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>堆学习记录</title>
-      <link>https://ta0lve.github.io/series/%E5%A0%86%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</link>
-      <pubDate>Wed, 09 Aug 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://ta0lve.github.io/series/%E5%A0%86%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>后端开发项目学习记录</title>
       <link>https://ta0lve.github.io/series/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E9%A1%B9%E7%9B%AE%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</link>
       <pubDate>Mon, 07 Aug 2023 00:00:00 +0000</pubDate>
@@ -80,38 +53,11 @@
     </item>
     
     <item>
-      <title>Android安全学习记录</title>
-      <link>https://ta0lve.github.io/series/android%E5%AE%89%E5%85%A8%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</link>
-      <pubDate>Sun, 06 Aug 2023 00:00:00 +0000</pubDate>
+      <title>堆学习记录</title>
+      <link>https://ta0lve.github.io/series/%E5%A0%86%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</link>
+      <pubDate>Mon, 31 Jul 2023 00:00:00 +0000</pubDate>
       
-      <guid>https://ta0lve.github.io/series/android%E5%AE%89%E5%85%A8%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>HWS 2023 学习记录</title>
-      <link>https://ta0lve.github.io/series/hws-2023-%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</link>
-      <pubDate>Sun, 06 Aug 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://ta0lve.github.io/series/hws-2023-%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>HWS 2023</title>
-      <link>https://ta0lve.github.io/series/hws-2023/</link>
-      <pubDate>Tue, 18 Jul 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://ta0lve.github.io/series/hws-2023/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>schedole</title>
-      <link>https://ta0lve.github.io/series/schedole/</link>
-      <pubDate>Wed, 12 Jul 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://ta0lve.github.io/series/schedole/</guid>
+      <guid>https://ta0lve.github.io/series/%E5%A0%86%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</guid>
       <description></description>
     </item>
     
@@ -125,15 +71,6 @@
     </item>
     
     <item>
-      <title>一些久远的PWN学习记录</title>
-      <link>https://ta0lve.github.io/series/%E4%B8%80%E4%BA%9B%E4%B9%85%E8%BF%9C%E7%9A%84pwn%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</link>
-      <pubDate>Mon, 10 Jul 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://ta0lve.github.io/series/%E4%B8%80%E4%BA%9B%E4%B9%85%E8%BF%9C%E7%9A%84pwn%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>something_easy</title>
       <link>https://ta0lve.github.io/series/something_easy/</link>
       <pubDate>Thu, 06 Jul 2023 00:00:00 +0000</pubDate>
@@ -143,11 +80,11 @@
     </item>
     
     <item>
-      <title>My first series of CTF wp</title>
-      <link>https://ta0lve.github.io/series/my-first-series-of-ctf-wp/</link>
+      <title>W4terCTF2023 wp</title>
+      <link>https://ta0lve.github.io/series/w4terctf2023-wp/</link>
       <pubDate>Wed, 05 Jul 2023 00:00:00 +0000</pubDate>
       
-      <guid>https://ta0lve.github.io/series/my-first-series-of-ctf-wp/</guid>
+      <guid>https://ta0lve.github.io/series/w4terctf2023-wp/</guid>
       <description></description>
     </item>
     
