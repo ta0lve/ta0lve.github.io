@@ -59,7 +59,7 @@
     "keywords": ["IoT"],
     
     "mainEntityOfPage": "true",
-    "wordCount": "6297"
+    "wordCount": "6165"
   }]
   </script>
 <meta content="ta0lve" name="author"/>
@@ -259,7 +259,7 @@
     </h1>
 <div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2024-02-21 00:00:00 +0000 UTC">February 21, 2024</time><span class="px-2 text-primary-500">·</span><time datetime="2024-02-23 00:00:00 +0000 UTC"></time><span class="px-2 text-primary-500">·</span><span>6297 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">13 分钟</span>
+<time datetime="2024-02-21 00:00:00 +0000 UTC">February 21, 2024</time><span class="px-2 text-primary-500">·</span><time datetime="2024-02-23 00:00:00 +0000 UTC"></time><span class="px-2 text-primary-500">·</span><span>6165 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">13 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
 <span class="mr-2" onclick="window.open(&quot;/categories/iot%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/&quot;,'_self');" style="margin-top:0.5rem">
@@ -514,7 +514,7 @@
 <svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M506.3 417l-213.3-364c-16.33-28-57.54-28-73.98 0l-213.2 364C-10.59 444.9 9.849 480 42.74 480h426.6C502.1 480 522.6 445 506.3 417zM232 168c0-13.25 10.75-24 24-24S280 154.8 280 168v128c0 13.25-10.75 24-23.1 24S232 309.3 232 296V168zM256 416c-17.36 0-31.44-14.08-31.44-31.44c0-17.36 14.07-31.44 31.44-31.44s31.44 14.08 31.44 31.44C287.4 401.9 273.4 416 256 416z" fill="currentColor"></path></svg>
 </span>
 </span>
-<span class="dark:text-neutral-300"><strong>如果本博客部分文章图片加载失败，</strong><a href="https://ta0lve.github.io/posts/sth/sm.ms/" target="_blank">
+<span class="dark:text-neutral-300"><strong>如果本博客部分文章图片加载失败，</strong><a href="/posts/sth/sm.ms/">
 <strong>可以点击此处查看解决办法</strong></a></span>
 </div>
 <div class="anchor" id="固件获取"></div>
@@ -1045,29 +1045,25 @@
 </h4>
 <p><strong>安装</strong></p>
 <ul>
-<li>
-<p>afl安装会报错，可以按照<a href="https://blog.csdn.net/qysh123/article/details/114792891" target="_blank">
-    这篇博客</a>来修改：</p>
+<li>afl安装会报错，可以按照<a href="https://blog.csdn.net/qysh123/article/details/114792891" target="_blank">
+    这篇博客</a>来修改：
 <ul>
 <li>不过我们可以安装的afl++</li>
 <li>所以可以直接跳过afl部分</li>
 </ul>
 </li>
-<li>
-<p><a href="https://blog.csdn.net/qysh123/article/details/114792891" target="_blank">
-    AFL（afl-qemu mode）的安装和使用（一）_afl qemu-CSDN博客</a></p>
+<li><a href="https://blog.csdn.net/qysh123/article/details/114792891" target="_blank">
+    AFL（afl-qemu mode）的安装和使用（一）_afl qemu-CSDN博客</a>
 <ul>
 <li>afl安装</li>
 </ul>
 </li>
-<li>
-<p><a href="https://haoyep.com/posts/afl-install/" target="_blank">
-    Ubuntu 22.04 安装 AFL 及 qemu mode 实践 | 云吱的小站 (haoyep.com)</a></p>
+<li><a href="https://haoyep.com/posts/afl-install/" target="_blank">
+    Ubuntu 22.04 安装 AFL 及 qemu mode 实践 | 云吱的小站 (haoyep.com)</a>
 <ul>
 <li>qemu模块的安装及无源码fuzz可以参考这篇文章</li>
 </ul>
 </li>
-<li></li>
 </ul>
 <div class="anchor" id="alf"></div>
 <h4 class="relative group">alf++ 
@@ -1119,46 +1115,7 @@
 <li>fuzz_in 为语料库，可以直接使用 AFL 自带的 testcases</li>
 <li>fuzz_out 就是输出的内容</li>
 </ul>
-<p>一个test源代码：</p>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
-</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">isBigPrime</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">2</span><span class="p">;</span> <span class="n">i</span><span class="o">*</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">n</span> <span class="o">%</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">char</span> <span class="n">s</span><span class="p">[</span><span class="mi">35</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">    <span class="nf">scanf</span><span class="p">(</span><span class="s">"%s"</span><span class="p">,</span> <span class="n">s</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="kt">char</span> <span class="n">cnt</span><span class="p">[</span><span class="mi">300</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">];</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">cnt</span><span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="o">++</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="sc">'x'</span> <span class="o">||</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="sc">'z'</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="nf">puts</span><span class="p">(</span><span class="s">"unacceptable"</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="nf">isBigPrime</span><span class="p">(</span><span class="n">cnt</span><span class="p">[</span><span class="sc">'x'</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="nf">isBigPrime</span><span class="p">(</span><span class="n">cnt</span><span class="p">[</span><span class="sc">'y'</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="nf">isBigPrime</span><span class="p">(</span><span class="n">cnt</span><span class="p">[</span><span class="sc">'z'</span><span class="p">]))</span>
-</span></span><span class="line"><span class="cl">        <span class="nf">abort</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="nf">puts</span><span class="p">(</span><span class="s">"Nice string"</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p>程序有两个 bug：</p>
-<ol>
-<li>未检测输入字符串长度，<code>main()</code> 可能栈溢出</li>
-<li>若输入字符串由 <code>x, y, z</code> 组成，且 <code>x, y, z</code> 出现次数都是大于 5 的质数，则程序 abort</li>
-</ol>
-<p>现在我们开始 fuzz。首先利用 afl-clang-lto 编译程序。AFL++ 文档中有“如何选择编译器”的<a href="https://github.com/AFLplusplus/AFLplusplus/blob/stable/docs/fuzzing_in_depth.md#a-selecting-the-best-afl-compiler-for-instrumenting-the-target" target="_blank">
+<p>现在我们开始 fuzz。首先利用 afl-clang-lto 编译一个有漏洞的代码<code>hello.c</code>。AFL++ 文档中有“如何选择编译器”的<a href="https://github.com/AFLplusplus/AFLplusplus/blob/stable/docs/fuzzing_in_depth.md#a-selecting-the-best-afl-compiler-for-instrumenting-the-target" target="_blank">
     指引</a>。我们手上的 llvm 版本大于 11，所以选择 LTO mode。</p>
 <div class="highlight"><pre class="chroma" tabindex="0"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">afl-gcc ./hello.c -o hello
 </span></span><span class="line"><span class="cl">
@@ -1547,7 +1504,7 @@
 <div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/iot/0x02/">IoT漏洞复现记录</div>
 <div class="text-sm text-neutral-500 dark:text-neutral-400">
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2024-02-22 00:00:00 +0000 UTC">February 22, 2024</time><span class="px-2 text-primary-500">·</span><time datetime="2024-02-23 00:00:00 +0000 UTC"></time><span class="px-2 text-primary-500">·</span><span>13430 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">27 分钟</span>
+<time datetime="2024-02-22 00:00:00 +0000 UTC">February 22, 2024</time><span class="px-2 text-primary-500">·</span><time datetime="2024-02-23 00:00:00 +0000 UTC"></time><span class="px-2 text-primary-500">·</span><span>13389 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">27 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
 <span class="mr-2" onclick="window.open(&quot;/categories/iot%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/&quot;,'_self');" style="margin-top:0.5rem">
