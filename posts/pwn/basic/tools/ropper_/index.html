@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" data-auto-appearance="false" data-default-appearance="dark" dir="ltr" lang="CN"><head>
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?f260c483ac9fab4fdd9fd55057878c8c";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+<meta charset="utf-8"/>
+<meta content="zh-cn" http-equiv="content-language"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="ie=edge" http-equiv="X-UA-Compatible"/>
+<title>Ubuntu Ropper安装与使用 · ta0lve</title>
+<meta content="Ubuntu Ropper安装与使用 · ta0lve" name="title"/>
+<meta content="CTF, PWN, " name="keywords"/>
+<link href="https://ta0lve.github.io/posts/pwn/basic/tools/ropper_/" rel="canonical"/>
+<link href="/css/main.bundle.min.c6116b9ed1c907a8c0eb015f377d3eecc07e448d75729e31fc3de5881465c6c172ba9fa9a6800c030116caf2a110d92242bb816639484ca791f7cd107a8d49b5.css" integrity="sha512-xhFrntHJB6jA6wFfN30+7MB+RI11cp4x/D3liBRlxsFyup+ppoAMAwEWyvKhENkiQruBZjlITKeR980Qeo1JtQ==" rel="stylesheet" type="text/css"/>
+<script integrity="sha512-UWoWdFvqWpvQERONJUzA/TlzzVXObhXz3sdj58fCx0SPj+e1TMqBHLghsMfhLNFhyqzh3XlKw9NNQJN8vMnuEg==" src="/js/appearance.min.516a16745bea5a9bd011138d254cc0fd3973cd55ce6e15f3dec763e7c7c2c7448f8fe7b54cca811cb821b0c7e12cd161caace1dd794ac3d34d40937cbcc9ee12.js" type="text/javascript"></script>
+<script data-copied="" data-copy="" defer="" id="script-bundle" integrity="sha512-PdzwT1sNTDL3LnJtPBLuvM2MPJ+dqpoTQUgIiV3grh4c3d2mhJaA1b2W27YNCx4LJMKfXIPlYx5V5+a8AgFUkA==" src="/js/main.bundle.min.3ddcf04f5b0d4c32f72e726d3c12eebccd8c3c9f9daa9a13414808895de0ae1e1cdddda6849680d5bd96dbb60d0b1e0b24c29f5c83e5631e55e7e6bc02015490.js" type="text/javascript"></script>
+<script src="/js/zoom.min.js"></script>
+<link href="/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
+<link href="/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
+<link href="/site.webmanifest" rel="manifest"/>
+<meta content="Ubuntu Ropper安装与使用" property="og:title"/>
+<meta content="研究内核Pwn需要用到Ropper来找gadgets，而且R" property="og:description"/>
+<meta content="article" property="og:type"/>
+<meta content="https://ta0lve.github.io/posts/pwn/basic/tools/ropper_/" property="og:url"/><meta content="posts" property="article:section"/>
+<meta content="2023-08-28T00:00:00+00:00" property="article:published_time"/>
+<meta content="2023-08-28T00:00:00+00:00" property="article:modified_time"/>
+<meta content="summary" name="twitter:card"/>
+<meta content="Ubuntu Ropper安装与使用" name="twitter:title"/>
+<meta content="研究内核Pwn需要用到Ropper来找gadgets，而且R" name="twitter:description"/>
+<script type="application/ld+json">
+  [{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "articleSection": "Posts",
+    "name": "Ubuntu Ropper安装与使用",
+    "headline": "Ubuntu Ropper安装与使用",
+    
+    "abstract": "研究内核Pwn需要用到Ropper来找gadgets，而且R",
+    "inLanguage": "zh-cn",
+    "url" : "https:\/\/ta0lve.github.io\/posts\/pwn\/basic\/tools\/ropper_\/",
+    "author" : {
+      "@type": "Person",
+      "name": "ta0lve"
+    },
+    "copyrightYear": "2023",
+    "dateCreated": "2023-08-28T00:00:00\u002b00:00",
+    "datePublished": "2023-08-28T00:00:00\u002b00:00",
+    
+    "dateModified": "2023-08-28T00:00:00\u002b00:00",
+    
+    "keywords": ["CTF","PWN"],
+    
+    "mainEntityOfPage": "true",
+    "wordCount": "1612"
+  }]
+  </script>
+<meta content="ta0lve" name="author"/>
+<link href="mailto:hujt25@mail2.sysu.edu.cn" rel="me"/>
+<link href="https://ta0lve.github.io/" rel="me"/>
+<link href="https://github.com/ta0lve" rel="me"/>
+<script integrity="" src="/lib/jquery/jquery.slim.min.js"></script>
+<meta name="theme-color"/>
+</head>
+<body class="flex flex-col h-screen px-6 m-auto text-lg leading-7 max-w-7xl bg-neutral text-neutral-900 dark:bg-neutral-800 dark:text-neutral sm:px-14 md:px-24 lg:px-32">
+<div class="absolute flex self-center" id="the-top">
+<a class="px-3 py-1 text-sm -translate-y-8 rounded-b-lg bg-primary-200 focus:translate-y-0 dark:bg-neutral-600" href="#main-content"><span class="font-bold text-primary-600 ltr:pr-2 rtl:pl-2 dark:text-primary-400">↓</span></a>
+</div>
+<div class="min-h-[148px]"></div>
+<div class="fixed inset-x-0 pl-[24px] pr-[24px]" style="z-index:100">
+<div class="absolute opacity-0 inset-x-0 top-0 h-full single_hero_background nozoom backdrop-blur-2xl shadow-2xl" id="menu-blur"></div>
+<div class="relative max-w-[64rem] ml-auto mr-auto">
+<div class="main-menu flex items-center justify-between px-4 py-6 sm:px-6 md:justify-start space-x-3" style="padding-left:0;padding-right:0;padding-top:2px;padding-bottom:3px">
+<div class="flex flex-1 items-center justify-between">
+<nav class="flex space-x-3">
+<a class="text-base font-medium text-gray-500 hover:text-gray-900" href="/">ta0lve</a>
+</nav>
+<nav class="hidden md:flex items-center space-x-5 md:ml-12 h-12">
+<a class="flex items-center" href="/posts/">
+<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="Posts">
+        Posts
+    </p>
+</a>
+<a class="flex items-center" href="/categories/">
+<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="Categories">
+        分类
+    </p>
+</a>
+<a class="flex items-center" href="/tags/">
+<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="Tags">
+        标签
+    </p>
+</a>
+<a class="flex items-center" href="/link/">
+<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="友链/links">
+        友链
+    </p>
+</a>
+<a class="flex items-center" href="/about/">
+<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="About">
+        About
+    </p>
+</a>
+<button aria-label="Search" class="text-base hover:text-primary-600 dark:hover:text-primary-400 h-12" id="search-button" title="">
+<span class="relative block icon">
+<svg aria-hidden="true" class="svg-inline--fa fa-search fa-w-16" data-icon="search" data-prefix="fas" focusable="false" role="img" viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z" fill="currentColor"></path></svg>
+</span>
+</button>
+<div class="ltr:mr-14 rtl:ml-14 cursor-pointer text-sm text-neutral-700 hover:text-primary-600 dark:text-neutral dark:hover:text-primary-400">
+<button aria-label="Dark mode switcher" id="appearance-switcher" type="button">
+<div class="flex items-center justify-center h-12 dark:hidden">
+<span class="relative block icon">
+<svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M32 256c0-123.8 100.3-224 223.8-224c11.36 0 29.7 1.668 40.9 3.746c9.616 1.777 11.75 14.63 3.279 19.44C245 86.5 211.2 144.6 211.2 207.8c0 109.7 99.71 193 208.3 172.3c9.561-1.805 16.28 9.324 10.11 16.95C387.9 448.6 324.8 480 255.8 480C132.1 480 32 379.6 32 256z" fill="currentColor"></path></svg>
+</span>
+</div>
+<div class="items-center justify-center hidden h-12 dark:flex">
+<span class="relative block icon">
+<svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M256 159.1c-53.02 0-95.1 42.98-95.1 95.1S202.1 351.1 256 351.1s95.1-42.98 95.1-95.1S309 159.1 256 159.1zM509.3 347L446.1 255.1l63.15-91.01c6.332-9.125 1.104-21.74-9.826-23.72l-109-19.7l-19.7-109c-1.975-10.93-14.59-16.16-23.72-9.824L256 65.89L164.1 2.736c-9.125-6.332-21.74-1.107-23.72 9.824L121.6 121.6L12.56 141.3C1.633 143.2-3.596 155.9 2.736 164.1L65.89 256l-63.15 91.01c-6.332 9.125-1.105 21.74 9.824 23.72l109 19.7l19.7 109c1.975 10.93 14.59 16.16 23.72 9.824L256 446.1l91.01 63.15c9.127 6.334 21.75 1.107 23.72-9.822l19.7-109l109-19.7C510.4 368.8 515.6 356.1 509.3 347zM256 383.1c-70.69 0-127.1-57.31-127.1-127.1c0-70.69 57.31-127.1 127.1-127.1s127.1 57.3 127.1 127.1C383.1 326.7 326.7 383.1 256 383.1z" fill="currentColor"></path></svg>
+</span>
+</div>
+</button>
+</div>
+</nav>
+<div class="flex md:hidden items-center space-x-5 md:ml-12">
+<span></span>
+<button aria-label="Search" class="text-base hover:text-primary-600 dark:hover:text-primary-400" id="search-button-mobile" title="">
+<span class="relative block icon">
+<svg aria-hidden="true" class="svg-inline--fa fa-search fa-w-16" data-icon="search" data-prefix="fas" focusable="false" role="img" viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z" fill="currentColor"></path></svg>
+</span>
+</button>
+<button aria-label="Dark mode switcher" id="appearance-switcher-mobile" style="margin-right:5px" type="button">
+<div class="flex items-center justify-center h-12 dark:hidden">
+<span class="relative block icon">
+<svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M32 256c0-123.8 100.3-224 223.8-224c11.36 0 29.7 1.668 40.9 3.746c9.616 1.777 11.75 14.63 3.279 19.44C245 86.5 211.2 144.6 211.2 207.8c0 109.7 99.71 193 208.3 172.3c9.561-1.805 16.28 9.324 10.11 16.95C387.9 448.6 324.8 480 255.8 480C132.1 480 32 379.6 32 256z" fill="currentColor"></path></svg>
+</span>
+</div>
+<div class="items-center justify-center hidden h-12 dark:flex">
+<span class="relative block icon">
+<svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M256 159.1c-53.02 0-95.1 42.98-95.1 95.1S202.1 351.1 256 351.1s95.1-42.98 95.1-95.1S309 159.1 256 159.1zM509.3 347L446.1 255.1l63.15-91.01c6.332-9.125 1.104-21.74-9.826-23.72l-109-19.7l-19.7-109c-1.975-10.93-14.59-16.16-23.72-9.824L256 65.89L164.1 2.736c-9.125-6.332-21.74-1.107-23.72 9.824L121.6 121.6L12.56 141.3C1.633 143.2-3.596 155.9 2.736 164.1L65.89 256l-63.15 91.01c-6.332 9.125-1.105 21.74 9.824 23.72l109 19.7l19.7 109c1.975 10.93 14.59 16.16 23.72 9.824L256 446.1l91.01 63.15c9.127 6.334 21.75 1.107 23.72-9.822l19.7-109l109-19.7C510.4 368.8 515.6 356.1 509.3 347zM256 383.1c-70.69 0-127.1-57.31-127.1-127.1c0-70.69 57.31-127.1 127.1-127.1s127.1 57.3 127.1 127.1C383.1 326.7 326.7 383.1 256 383.1z" fill="currentColor"></path></svg>
+</span>
+</div>
+</button>
+</div>
+</div>
+<div class="-my-2 -mr-2 md:hidden">
+<label class="block" for="menu-controller" id="menu-button">
+<input class="hidden" id="menu-controller" type="checkbox"/>
+<div class="cursor-pointer hover:text-primary-600 dark:hover:text-primary-400">
+<span class="relative block icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M0 96C0 78.33 14.33 64 32 64H416C433.7 64 448 78.33 448 96C448 113.7 433.7 128 416 128H32C14.33 128 0 113.7 0 96zM0 256C0 238.3 14.33 224 32 224H416C433.7 224 448 238.3 448 256C448 273.7 433.7 288 416 288H32C14.33 288 0 273.7 0 256zM416 448H32C14.33 448 0 433.7 0 416C0 398.3 14.33 384 32 384H416C433.7 384 448 398.3 448 416C448 433.7 433.7 448 416 448z" fill="currentColor"></path></svg>
+</span>
+</div>
+<div class="fixed inset-0 z-30 invisible w-screen h-screen m-auto overflow-auto transition-opacity opacity-0 cursor-default bg-neutral-100/50 backdrop-blur-sm dark:bg-neutral-900/50" id="menu-wrapper" style="padding-top:5px;">
+<ul class="flex space-y-2 mt-3 flex-col items-end w-full px-6 py-6 mx-auto overflow-visible list-none ltr:text-right rtl:text-left max-w-7xl">
+<li>
+<span class="cursor-pointer inline-block align-text-bottom hover:text-primary-600 dark:hover:text-primary-400">
+<span class="relative block icon">
+<svg viewbox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><path d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z" fill="currentColor"></path></svg>
+</span>
+</span>
+</li>
+<li class="mt-1">
+<a class="flex items-center" href="/posts/">
+<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="Posts">
+            Posts
+        </p>
+</a>
+</li>
+<li class="mt-1">
+<a class="flex items-center" href="/categories/">
+<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="Categories">
+            分类
+        </p>
+</a>
+</li>
+<li class="mt-1">
+<a class="flex items-center" href="/tags/">
+<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="Tags">
+            标签
+        </p>
+</a>
+</li>
+<li class="mt-1">
+<a class="flex items-center" href="/link/">
+<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="友链/links">
+            友链
+        </p>
+</a>
+</li>
+<li class="mt-1">
+<a class="flex items-center" href="/about/">
+<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="About">
+            About
+        </p>
+</a>
+</li>
+</ul>
+</div>
+</label>
+</div>
+</div>
+<script>
+    (function () {
+        var $mainmenu = $('.main-menu');
+        var path = window.location.pathname;
+        $mainmenu.find('a[href="' + path + '"]').each(function (i, e) {
+            $(e).children('p').addClass('active');
+        });
+    })();
+</script>
+</div>
+</div>
+<script>
+  window.addEventListener('scroll', function (e) {
+    var scroll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    var background_blur = document.getElementById('menu-blur');
+    background_blur.style.opacity = (scroll / 300);
+  });
+</script>
+<div class="relative flex flex-col grow">
+<main class="grow" id="main-content">
+<article>
+<header class="mt-5 max-w-prose" id="single_header">
+<ol class="text-sm text-neutral-500 dark:text-neutral-400 print:hidden">
+<li class="inline hidden">
+<a class="hover:underline decoration-neutral-300 dark:underline-neutral-600" href="/"></a><span class="px-1 text-primary-500">/</span>
+</li>
+<li class="inline">
+<a class="hover:underline decoration-neutral-300 dark:underline-neutral-600" href="/posts/">Posts</a><span class="px-1 text-primary-500">/</span>
+</li>
+<li class="inline hidden">
+<a class="hover:underline decoration-neutral-300 dark:underline-neutral-600" href="/posts/pwn/basic/tools/ropper_/">Ubuntu Ropper安装与使用</a><span class="px-1 text-primary-500">/</span>
+</li>
+</ol>
+<h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">
+      Ubuntu Ropper安装与使用
+    </h1>
+<div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
+<div class="flex flex-row flex-wrap items-center">
+<time datetime="2023-08-28 00:00:00 +0000 UTC">August 28, 2023</time><span class="px-2 text-primary-500">·</span><span>1612 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">4 分钟</span>
+</div>
+<div class="flex flex-row flex-wrap items-center">
+<span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    PWN学习记录
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/ctf/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    CTF
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/pwn/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    PWN
+  </span>
+</span>
+</span>
+</div>
+</div>
+<div class="flex">
+<div class="place-self-center">
+<div class="text-[0.6rem] uppercase leading-3 text-neutral-500 dark:text-neutral-400">
+      作者
+    </div>
+<div class="font-semibold leading-6 text-neutral-800 dark:text-neutral-300">
+      ta0lve
+    </div>
+<div class="text-sm text-neutral-700 dark:text-neutral-400">一些记录，一点思考</div>
+<div class="text-2xl sm:text-lg">
+<div class="flex flex-wrap text-neutral-400 dark:text-neutral-500">
+<a aria-label="Email" class="px-1 hover:text-primary-700 dark:hover:text-primary-400" href="mailto:hujt25@mail2.sysu.edu.cn" rel="me noopener noreferrer" target="_blank"><span class="inline-block align-text-bottom">
+<span class="relative block icon">
+<svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M207.8 20.73c-93.45 18.32-168.7 93.66-187 187.1c-27.64 140.9 68.65 266.2 199.1 285.1c19.01 2.888 36.17-12.26 36.17-31.49l.0001-.6631c0-15.74-11.44-28.88-26.84-31.24c-84.35-12.98-149.2-86.13-149.2-174.2c0-102.9 88.61-185.5 193.4-175.4c91.54 8.869 158.6 91.25 158.6 183.2l0 16.16c0 22.09-17.94 40.05-40 40.05s-40.01-17.96-40.01-40.05v-120.1c0-8.847-7.161-16.02-16.01-16.02l-31.98 .0036c-7.299 0-13.2 4.992-15.12 11.68c-24.85-12.15-54.24-16.38-86.06-5.106c-38.75 13.73-68.12 48.91-73.72 89.64c-9.483 69.01 43.81 128 110.9 128c26.44 0 50.43-9.544 69.59-24.88c24 31.3 65.23 48.69 109.4 37.49C465.2 369.3 496 324.1 495.1 277.2V256.3C495.1 107.1 361.2-9.332 207.8 20.73zM239.1 304.3c-26.47 0-48-21.56-48-48.05s21.53-48.05 48-48.05s48 21.56 48 48.05S266.5 304.3 239.1 304.3z" fill="currentColor"></path></svg>
+</span>
+</span></a>
+<a aria-label="Blogger" class="px-1 hover:text-primary-700 dark:hover:text-primary-400" href="https://ta0lve.github.io/" rel="me noopener noreferrer" target="_blank"><span class="inline-block align-text-bottom">
+<span class="relative block icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M446.6 222.7c-1.8-8-6.8-15.4-12.5-18.5-1.8-1-13-2.2-25-2.7-20.1-.9-22.3-1.3-28.7-5-10.1-5.9-12.8-12.3-12.9-29.5-.1-33-13.8-63.7-40.9-91.3-19.3-19.7-40.9-33-65.5-40.5-5.9-1.8-19.1-2.4-63.3-2.9-69.4-.8-84.8.6-108.4 10C45.9 59.5 14.7 96.1 3.3 142.9 1.2 151.7.7 165.8.2 246.8c-.6 101.5.1 116.4 6.4 136.5 15.6 49.6 59.9 86.3 104.4 94.3 14.8 2.7 197.3 3.3 216 .8 32.5-4.4 58-17.5 81.9-41.9 17.3-17.7 28.1-36.8 35.2-62.1 4.9-17.6 4.5-142.8 2.5-151.7zm-322.1-63.6c7.8-7.9 10-8.2 58.8-8.2 43.9 0 45.4.1 51.8 3.4 9.3 4.7 13.4 11.3 13.4 21.9 0 9.5-3.8 16.2-12.3 21.6-4.6 2.9-7.3 3.1-50.3 3.3-26.5.2-47.7-.4-50.8-1.2-16.6-4.7-22.8-28.5-10.6-40.8zm191.8 199.8l-14.9 2.4-77.5.9c-68.1.8-87.3-.4-90.9-2-7.1-3.1-13.8-11.7-14.9-19.4-1.1-7.3 2.6-17.3 8.2-22.4 7.1-6.4 10.2-6.6 97.3-6.7 89.6-.1 89.1-.1 97.6 7.8 12.1 11.3 9.5 31.2-4.9 39.4z" fill="currentColor"></path></svg>
+</span>
+</span></a>
+<a aria-label="Github" class="px-1 hover:text-primary-700 dark:hover:text-primary-400" href="https://github.com/ta0lve" rel="me noopener noreferrer" target="_blank"><span class="inline-block align-text-bottom">
+<span class="relative block icon">
+<svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z" fill="currentColor"></path></svg>
+</span>
+</span></a>
+</div>
+</div>
+</div>
+</div>
+<div class="mb-5"></div>
+</header>
+<section class="flex flex-col max-w-full mt-0 prose dark:prose-invert lg:flex-row">
+<div class="order-first sm:max-w-prose lg:ml-auto px-0 lg:order-last lg:max-w-xs ltr:lg:pl-8 rtl:lg:pr-8">
+<div class="toc ltr:pl-5 rtl:pr-5 print:hidden lg:sticky lg:top-10">
+<details class="mt-0 overflow-hidden rounded-lg ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 hidden lg:block" open="">
+<summary class="block py-1 text-lg font-semibold cursor-pointer bg-neutral-100 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-neutral-700 dark:text-neutral-100 lg:hidden">
+</summary>
+<div class="min-w-[220px] py-2 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+<nav id="TableOfContents">
+<ul>
+<li><a href="#0x01-ubuntu-安装">0x01 Ubuntu 安装</a></li>
+<li><a href="#0x02-常用命令">0x02 常用命令</a>
+<ul>
+<li><a href="#file"><strong>file</strong></a></li>
+<li><a href="#show"><strong>show</strong></a></li>
+<li><a href="#search"><strong>search</strong></a></li>
+<li><a href="#ropchain"><strong>ropchain</strong></a></li>
+<li><a href="#semantic"><strong>semantic</strong></a></li>
+<li><a href="#jmp"><strong>jmp</strong></a></li>
+<li><a href="#type"><strong>type</strong></a></li>
+<li><a href="#settings"><strong>settings</strong></a></li>
+<li><a href="#quit"><strong>quit</strong></a></li>
+</ul>
+</li>
+<li><a href="#附录">附录</a></li>
+</ul>
+</nav>
+</div>
+</details>
+<details class="mt-0 overflow-hidden rounded-lg ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 lg:hidden">
+<summary class="py-1 text-lg font-semibold cursor-pointer bg-neutral-100 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-neutral-700 dark:text-neutral-100 lg:hidden">
+</summary>
+<div class="py-2 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+<nav id="TableOfContents">
+<ul>
+<li><a href="#0x01-ubuntu-安装">0x01 Ubuntu 安装</a></li>
+<li><a href="#0x02-常用命令">0x02 常用命令</a>
+<ul>
+<li><a href="#file"><strong>file</strong></a></li>
+<li><a href="#show"><strong>show</strong></a></li>
+<li><a href="#search"><strong>search</strong></a></li>
+<li><a href="#ropchain"><strong>ropchain</strong></a></li>
+<li><a href="#semantic"><strong>semantic</strong></a></li>
+<li><a href="#jmp"><strong>jmp</strong></a></li>
+<li><a href="#type"><strong>type</strong></a></li>
+<li><a href="#settings"><strong>settings</strong></a></li>
+<li><a href="#quit"><strong>quit</strong></a></li>
+</ul>
+</li>
+<li><a href="#附录">附录</a></li>
+</ul>
+</nav>
+</div>
+</details>
+<script>
+  (function () {
+    var $toc = $('#TableOfContents');
+    if ($toc.length > 0) {
+      var $window = $(window);
+
+      function onScroll() {
+        var currentScroll = $window.scrollTop();
+        var h = $('.anchor');
+        var id = "";
+        h.each(function (i, e) {
+          e = $(e);
+          if (e.offset().top - $(window).height()/3 <= currentScroll) {
+            id = e.attr('id');
+          }
+        });
+        var active = $toc.find('a.active');      
+        if (active.length == 1 && active.eq(0).attr('href') == '#' + id) return true;
+
+        active.each(function (i, e) {
+          
+            $(e).removeClass('active');
+          
+        });
+        $toc.find('a[href="#' + id + '"]').addClass('active')
+        $toc.find('a[href="#' + id + '"]').parentsUntil('#TableOfContents').each(function (i, e) {
+          $(e).children('a').parents('ul').show();          
+        });
+      }
+
+      $window.on('scroll', onScroll);
+      $(document).ready(function () {
+        
+        onScroll();
+      });
+    }
+  })();
+</script>
+</div>
+</div>
+<div class="min-w-0 min-h-0 max-w-prose">
+<p>研究内核Pwn需要用到Ropper来找gadgets，而且Ropper在非内核的pwn题中也可以寻找gadget，可以和ROPgadget交替使用</p>
+<br/>
+<div class="anchor" id="0x01-ubuntu-安装"></div>
+<h2 class="relative group">0x01 Ubuntu 安装 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#0x01-ubuntu-%e5%ae%89%e8%a3%85" style="text-decoration-line: none !important;">#</a></span>
+</h2>
+<p>先安装一些依赖：</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 一口气安装：</span>
+</span></span><span class="line"><span class="cl">pip3 install capstone filebytes unicorn keystone-engine ropper
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 安装Capstone:</span>
+</span></span><span class="line"><span class="cl">pip3 install capstone
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 安装filebyteswith:</span>
+</span></span><span class="line"><span class="cl">pip3 install filebytes
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 安装 unicorn</span>
+</span></span><span class="line"><span class="cl">pip3 install unicorn
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 安装 Keystone:</span>
+</span></span><span class="line"><span class="cl">pip3 install keystone-engine
+</span></span></code></pre></div><br/>
+<p>安装Ropper：</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># pip直接安装:</span>
+</span></span><span class="line"><span class="cl">pip3 install ropper
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 或者使用源码安装:</span>
+</span></span><span class="line"><span class="cl">git clone https://github.com/sashs/Ropper.git
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> Ropper
+</span></span><span class="line"><span class="cl">sudo python3 setup.py install
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 检查</span>
+</span></span><span class="line"><span class="cl">ropper
+</span></span><span class="line"><span class="cl">ropper --file pwn --search <span class="s2">"pop rbp; ret"</span>
+</span></span></code></pre></div><p>
+<figure>
+<img alt="image-20230828204833657" class="my-0 rounded-md" src="https://s2.loli.net/2023/08/28/TRnV729Nyvpbmt1.png"/>
+</figure>
+</p>
+<br/>
+<div class="anchor" id="0x02-常用命令"></div>
+<h2 class="relative group">0x02 常用命令 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#0x02-%e5%b8%b8%e7%94%a8%e5%91%bd%e4%bb%a4" style="text-decoration-line: none !important;">#</a></span>
+</h2>
+<div class="anchor" id="file"></div>
+<h3 class="relative group"><strong>file</strong>
+<span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#file" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<p>加载文件，可以是题目的二进制文件pwn，也可以是libc库</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ ropper
+</span></span><span class="line"><span class="cl"><span class="o">(</span>ropper<span class="o">)</span>&gt; file pwn
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 输出：</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>INFO<span class="o">]</span> Load gadgets from cache
+</span></span><span class="line"><span class="cl"><span class="o">[</span>LOAD<span class="o">]</span> loading... 100%
+</span></span><span class="line"><span class="cl"><span class="o">[</span>LOAD<span class="o">]</span> removing double gadgets... 100%
+</span></span><span class="line"><span class="cl"><span class="o">[</span>INFO<span class="o">]</span> File loaded.
+</span></span><span class="line"><span class="cl"><span class="o">(</span>pwn/ELF/x86_64<span class="o">)</span>&gt; 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">$ ropper
+</span></span><span class="line"><span class="cl"><span class="o">(</span>ropper<span class="o">)</span>&gt; file libc.so.6
+</span></span><span class="line"><span class="cl"><span class="c1"># 输出：</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>INFO<span class="o">]</span> Load gadgets from cache
+</span></span><span class="line"><span class="cl"><span class="o">[</span>LOAD<span class="o">]</span> loading... 100%
+</span></span><span class="line"><span class="cl"><span class="o">[</span>LOAD<span class="o">]</span> removing double gadgets... 100%
+</span></span><span class="line"><span class="cl"><span class="o">[</span>INFO<span class="o">]</span> File loaded.
+</span></span><span class="line"><span class="cl"><span class="o">(</span>libc.so.6/ELF/x86_64<span class="o">)</span>&gt; 
+</span></span></code></pre></div><br/>
+<div class="anchor" id="show"></div>
+<h3 class="relative group"><strong>show</strong>
+<span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#show" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<p>显示一些信息，</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 二进制程序</span>
+</span></span><span class="line"><span class="cl"><span class="o">(</span>pwn/ELF/x86_64<span class="o">)</span>&gt; show
+</span></span><span class="line"><span class="cl">show &lt;info&gt;  -  shows informations about the loaded fileAvailable informations:
+</span></span><span class="line"><span class="cl">architecture
+</span></span><span class="line"><span class="cl">entry_point
+</span></span><span class="line"><span class="cl">file_type
+</span></span><span class="line"><span class="cl">image_base
+</span></span><span class="line"><span class="cl">imports
+</span></span><span class="line"><span class="cl">information
+</span></span><span class="line"><span class="cl">sections
+</span></span><span class="line"><span class="cl">segments
+</span></span><span class="line"><span class="cl">symbols
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">(</span>pwn/ELF/x86_64<span class="o">)</span>&gt; show imports
+</span></span><span class="line"><span class="cl">Relocation section: &lt;filebytes.elf.ShdrData object at 0x7fc6d714b0d0&gt;
+</span></span><span class="line"><span class="cl"><span class="o">=====================================================================</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Offset              Type         Name  
+</span></span><span class="line"><span class="cl">------              ----         ----  
+</span></span><span class="line"><span class="cl">0x00000000004e60d8  TLS_TPOFF32  
+</span></span><span class="line"><span class="cl">0x00000000004e60d0  TLS_TPOFF32  
+</span></span><span class="line"><span class="cl">0x00000000004e60c8  TLS_TPOFF32  
+</span></span><span class="line"><span class="cl">0x00000000004e60c0  TLS_TPOFF32
+</span></span><span class="line"><span class="cl"><span class="c1"># 下略</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># libc库同上</span>
+</span></span><span class="line"><span class="cl"><span class="o">(</span>libc.so.6/ELF/x86_64<span class="o">)</span>&gt; show
+</span></span><span class="line"><span class="cl">show &lt;info&gt;  -  shows informations about the loaded fileAvailable informations:
+</span></span><span class="line"><span class="cl">architecture
+</span></span><span class="line"><span class="cl">entry_point
+</span></span><span class="line"><span class="cl">file_type
+</span></span><span class="line"><span class="cl">image_base
+</span></span><span class="line"><span class="cl">imports
+</span></span><span class="line"><span class="cl">information
+</span></span><span class="line"><span class="cl">sections
+</span></span><span class="line"><span class="cl">segments
+</span></span><span class="line"><span class="cl">symbols
+</span></span></code></pre></div><br/>
+<div class="anchor" id="search"></div>
+<h3 class="relative group"><strong>search</strong>
+<span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#search" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">search <span class="o">[</span>/&lt;quality&gt;/<span class="o">]</span> &lt;string&gt;  -  search gadgets.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># /quality/ The quality of the gadget (1 = best).</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># The better the quality the less instructions are between the found intruction and ret</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 一些通配符：</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># ? :any character</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># % :any string</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 搜素组合汇编指令时分号后面加空格：</span>
+</span></span><span class="line"><span class="cl">search pop rbp<span class="p">;</span> ret
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 示例：</span>
+</span></span><span class="line"><span class="cl">search pop rdx
+</span></span><span class="line"><span class="cl">search pop rbp<span class="p">;</span> ret
+</span></span><span class="line"><span class="cl">search /1/ mov <span class="o">[</span>%<span class="o">]</span>, edx
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 输出示例：</span>
+</span></span><span class="line"><span class="cl"><span class="o">(</span>pwn/ELF/x86_64<span class="o">)</span>&gt; search pop rax<span class="p">;</span> ret
+</span></span><span class="line"><span class="cl"><span class="o">[</span>INFO<span class="o">]</span> Searching <span class="k">for</span> gadgets: pop rax<span class="p">;</span> ret
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>INFO<span class="o">]</span> File: ./pwn
+</span></span><span class="line"><span class="cl">0x000000000042a664: pop rax<span class="p">;</span> ret 1<span class="p">;</span> 
+</span></span><span class="line"><span class="cl">0x0000000000458827: pop rax<span class="p">;</span> ret<span class="p">;</span> 
+</span></span></code></pre></div><br/>
+<div class="anchor" id="ropchain"></div>
+<h3 class="relative group"><strong>ropchain</strong>
+<span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#ropchain" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<p>生成完整的rop链，执行后会生成一段python代码，执行这段代码可以生成相应的rop链</p>
+<p>目前支持三个：<strong>execve</strong>、<strong>mprotect</strong>、<strong>virtualprotect</strong></p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">(</span>pwn/ELF/x86_64<span class="o">)</span>&gt; ropchain
+</span></span><span class="line"><span class="cl">ropchain &lt;generator&gt;<span class="o">[</span> <span class="nv">argname</span><span class="o">=</span>arg<span class="o">[</span> <span class="nv">argname</span><span class="o">=</span>arg...<span class="o">]]</span>  -  uses the given generator and create a ropchain with args
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Available generators:
+</span></span><span class="line"><span class="cl">execve
+</span></span><span class="line"><span class="cl">args: cmd <span class="o">(</span>optional<span class="o">)</span>
+</span></span><span class="line"><span class="cl">available: x86, x86_64
+</span></span><span class="line"><span class="cl">OS: linux
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">mprotect
+</span></span><span class="line"><span class="cl">args: address, size
+</span></span><span class="line"><span class="cl">available: x86, x86_64
+</span></span><span class="line"><span class="cl">OS: linux
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">virtualprotect
+</span></span><span class="line"><span class="cl">args: address <span class="o">(</span>IAT<span class="o">)(</span>optional<span class="o">)</span>
+</span></span><span class="line"><span class="cl">available: x86
+</span></span><span class="line"><span class="cl">OS: Windows
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Examples:
+</span></span><span class="line"><span class="cl">ropchain execve
+</span></span><span class="line"><span class="cl">ropchain mprotect <span class="nv">address</span><span class="o">=</span>0xbfff0000 <span class="nv">size</span><span class="o">=</span>0x21000
+</span></span></code></pre></div><p><strong>示例：</strong></p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 注意：这里的rop_payload含有\x20字节</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 会导致字节发送时被截断导致getshell失败</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 而且ropchain一般在get函数接受大量的字符、且存在溢出漏洞时才使用</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 所以这个ropchain的功能不太常用</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 类似的功能ROPgadget也有：ROPgadget --binary pwn --ropchain</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">(</span>pwn/ELF/x86_64<span class="o">)</span>&gt; ropchain execve
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>INFO<span class="o">]</span> ROPchain Generator <span class="k">for</span> syscall execve:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>INFO<span class="o">]</span> 
+</span></span><span class="line"><span class="cl">write <span class="nb">command</span> into data section
+</span></span><span class="line"><span class="cl">rax 0xb
+</span></span><span class="line"><span class="cl">rdi address to cmd
+</span></span><span class="line"><span class="cl">rsi address to null
+</span></span><span class="line"><span class="cl">rdx address to null
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>INFO<span class="o">]</span> Try to create chain which fills registers without delete content of previous filled registers
+</span></span><span class="line"><span class="cl"><span class="o">[</span>*<span class="o">]</span> Try permuation <span class="m">1</span> / <span class="m">24</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>INFO<span class="o">]</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>INFO<span class="o">]</span> Look <span class="k">for</span> syscall gadget
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>INFO<span class="o">]</span> syscall gadget found
+</span></span><span class="line"><span class="cl"><span class="o">[</span>INFO<span class="o">]</span> generating rop chain
+</span></span><span class="line"><span class="cl"><span class="c1">#!/usr/bin/env python</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Generated by ropper ropchain generator #</span>
+</span></span><span class="line"><span class="cl">from struct import pack
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">p</span> <span class="o">=</span> lambda x : pack<span class="o">(</span><span class="s1">'Q'</span>, x<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">IMAGE_BASE_0</span> <span class="o">=</span> 0x0000000000400000 <span class="c1"># d63fe07c443f45436898541ba93e7d71933e7fbb3aa1bdab2c8e136791140dfb</span>
+</span></span><span class="line"><span class="cl"><span class="nv">rebase_0</span> <span class="o">=</span> lambda x : p<span class="o">(</span>x + IMAGE_BASE_0<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">rop</span> <span class="o">=</span> <span class="s1">''</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">rop</span> <span class="o">+=</span> rebase_0<span class="o">(</span>0x0000000000013fc0<span class="o">)</span> <span class="c1"># 0x0000000000413fc0: pop r13; ret; </span>
+</span></span><span class="line"><span class="cl"><span class="nv">rop</span> <span class="o">+=</span> <span class="s1">'//bin/sh'</span>
+</span></span><span class="line"><span class="cl"><span class="nv">rop</span> <span class="o">+=</span> rebase_0<span class="o">(</span>0x0000000000002080<span class="o">)</span> <span class="c1"># 0x0000000000402080: pop rbx; ret; </span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">##########</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 注意：此处的\x20字节会导致字节发送时被截断导致getshell失败，</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 而且ropchain一般在get函数接受大量的字符、且存在溢出漏洞时才使用</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 所以这个ropchain的功能不太常用</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 类似的功能ROPgadget也有：ROPgadget --binary pwn --ropchain</span>
+</span></span><span class="line"><span class="cl"><span class="c1">##########</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">rop</span> <span class="o">+=</span> rebase_0<span class="o">(</span>0x00000000000e60e0<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">rop</span> <span class="o">+=</span> rebase_0<span class="o">(</span>0x0000000000080f02<span class="o">)</span> <span class="c1"># 0x0000000000480f02: mov qword ptr [rbx], r13; pop rbx; pop rbp; pop r12; pop r13; ret; </span>
+</span></span><span class="line"><span class="cl"><span class="nv">rop</span> <span class="o">+=</span> p<span class="o">(</span>0xdeadbeefdeadbeef<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">rop</span> <span class="o">+=</span> p<span class="o">(</span>0xdeadbeefdeadbeef<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">rop</span> <span class="o">+=</span> p<span class="o">(</span>0xdeadbeefdeadbeef<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">rop</span> <span class="o">+=</span> p<span class="o">(</span>0xdeadbeefdeadbeef<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">rop</span> <span class="o">+=</span> rebase_0<span class="o">(</span>0x0000000000013fc0<span class="o">)</span> <span class="c1"># 0x0000000000413fc0: pop r13; ret; </span>
+</span></span><span class="line"><span class="cl"><span class="nv">rop</span> <span class="o">+=</span> p<span class="o">(</span>0x0000000000000000<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">rop</span> <span class="o">+=</span> rebase_0<span class="o">(</span>0x0000000000002080<span class="o">)</span> <span class="c1"># 0x0000000000402080: pop rbx; ret; </span>
+</span></span><span class="line"><span class="cl"><span class="nv">rop</span> <span class="o">+=</span> rebase_0<span class="o">(</span>0x00000000000e60e8<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">rop</span> <span class="o">+=</span> rebase_0<span class="o">(</span>0x0000000000080f02<span class="o">)</span> <span class="c1"># 0x0000000000480f02: mov qword ptr [rbx], r13; pop rbx; pop rbp; pop r12; pop r13; ret; </span>
+</span></span><span class="line"><span class="cl"><span class="nv">rop</span> <span class="o">+=</span> p<span class="o">(</span>0xdeadbeefdeadbeef<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">rop</span> <span class="o">+=</span> p<span class="o">(</span>0xdeadbeefdeadbeef<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">rop</span> <span class="o">+=</span> p<span class="o">(</span>0xdeadbeefdeadbeef<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">rop</span> <span class="o">+=</span> p<span class="o">(</span>0xdeadbeefdeadbeef<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">rop</span> <span class="o">+=</span> rebase_0<span class="o">(</span>0x000000000000264f<span class="o">)</span> <span class="c1"># 0x000000000040264f: pop rdi; ret; </span>
+</span></span><span class="line"><span class="cl"><span class="nv">rop</span> <span class="o">+=</span> rebase_0<span class="o">(</span>0x00000000000e60e0<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">rop</span> <span class="o">+=</span> rebase_0<span class="o">(</span>0x000000000000a67e<span class="o">)</span> <span class="c1"># 0x000000000040a67e: pop rsi; ret; </span>
+</span></span><span class="line"><span class="cl"><span class="nv">rop</span> <span class="o">+=</span> rebase_0<span class="o">(</span>0x00000000000e60e8<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">rop</span> <span class="o">+=</span> rebase_0<span class="o">(</span>0x00000000000a404b<span class="o">)</span> <span class="c1"># 0x00000000004a404b: pop rdx; pop rbx; ret; </span>
+</span></span><span class="line"><span class="cl"><span class="nv">rop</span> <span class="o">+=</span> rebase_0<span class="o">(</span>0x00000000000e60e8<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">rop</span> <span class="o">+=</span> p<span class="o">(</span>0xdeadbeefdeadbeef<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">rop</span> <span class="o">+=</span> rebase_0<span class="o">(</span>0x0000000000058827<span class="o">)</span> <span class="c1"># 0x0000000000458827: pop rax; ret; </span>
+</span></span><span class="line"><span class="cl"><span class="nv">rop</span> <span class="o">+=</span> p<span class="o">(</span>0x000000000000003b<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">rop</span> <span class="o">+=</span> rebase_0<span class="o">(</span>0x00000000000230a6<span class="o">)</span> <span class="c1"># 0x00000000004230a6: syscall; ret; </span>
+</span></span><span class="line"><span class="cl">print<span class="o">(</span>rop<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>INFO<span class="o">]</span> rop chain generated!
+</span></span></code></pre></div><br/>
+<div class="anchor" id="semantic"></div>
+<h3 class="relative group"><strong>semantic</strong>
+<span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#semantic" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<p>寻找能够实现一定功能的指令片段（其实没什么用，一般都是手动构造的doge）</p>
+<p>安装相关依赖：</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo pip3 install z3
+</span></span><span class="line"><span class="cl">sudo pip3 install archinfo
+</span></span><span class="line"><span class="cl">sudo pip3 install pyvex
+</span></span></code></pre></div><p>支持的约束命令</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nv">reg</span> <span class="o">==</span> reg     -  assign register to another
+</span></span><span class="line"><span class="cl"><span class="nv">reg</span> <span class="o">==</span> number  -  assign number to register
+</span></span><span class="line"><span class="cl"><span class="nv">reg</span> <span class="o">==</span> <span class="o">[</span>reg<span class="o">]</span>   -  assign memory to register
+</span></span><span class="line"><span class="cl"><span class="nv">reg</span> <span class="o">+=</span> number/reg/<span class="o">[</span>reg<span class="o">]</span>
+</span></span><span class="line"><span class="cl">reg -<span class="o">=</span> number/reg/<span class="o">[</span>reg<span class="o">]</span>
+</span></span><span class="line"><span class="cl">reg *<span class="o">=</span> number/reg/<span class="o">[</span>reg<span class="o">]</span>
+</span></span><span class="line"><span class="cl">reg /<span class="o">=</span> number/reg/<span class="o">[</span>reg<span class="o">]</span>
+</span></span></code></pre></div><br/>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">(</span>ropper<span class="o">)</span>&gt; semantic
+</span></span><span class="line"><span class="cl">semantic  -  Searches gadgets
+</span></span><span class="line"><span class="cl">semantic &lt;constraint&gt;<span class="o">[</span><span class="p">;</span> &lt;constraint&gt;<span class="o">][</span> !&lt;stable reg&gt;*<span class="o">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Example:
+</span></span><span class="line"><span class="cl">semantc <span class="nv">eax</span><span class="o">==</span>ebx<span class="p">;</span> <span class="nv">ecx</span><span class="o">==</span><span class="m">1</span> !edx !esi
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Valid constraints:
+</span></span><span class="line"><span class="cl"><span class="nv">reg</span><span class="o">==</span>reg
+</span></span><span class="line"><span class="cl"><span class="nv">reg</span><span class="o">==</span>number
+</span></span><span class="line"><span class="cl"><span class="nv">reg</span><span class="o">==[</span>reg<span class="o">]</span>
+</span></span><span class="line"><span class="cl">reg&lt;+<span class="p">|</span>-<span class="p">|</span>*<span class="p">|</span>/&gt;<span class="o">=</span>&lt;reg<span class="p">|</span>number<span class="p">|</span><span class="o">[</span>reg<span class="o">]</span>&gt;
+</span></span></code></pre></div><br/>
+<div class="anchor" id="jmp"></div>
+<h3 class="relative group"><strong>jmp</strong>
+<span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#jmp" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<p>查找 转到所提供的寄存器中所保存的地址 的指令</p>
+<ul>
+<li>jmp</li>
+<li>call</li>
+</ul>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">(</span>pwn/ELF/x86_64<span class="o">)</span>&gt; jmp rax
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">JMP <span class="nv">Instructions</span>
+</span></span><span class="line"><span class="cl"><span class="o">================</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">0x0000000000401014: call rax<span class="p">;</span> 
+</span></span><span class="line"><span class="cl">0x0000000000401a7c: jmp rax<span class="p">;</span> 
+</span></span><span class="line"><span class="cl">0x0000000000401abe: jmp rax<span class="p">;</span> 
+</span></span><span class="line"><span class="cl"><span class="c1"># 下略</span>
+</span></span></code></pre></div><br/>
+<div class="anchor" id="type"></div>
+<h3 class="relative group"><strong>type</strong>
+<span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#type" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<p>设置gadget 的类型</p>
+<ul>
+<li>sets the gadget type
+<ul>
+<li>rop</li>
+<li>jop</li>
+<li>sys</li>
+<li>all</li>
+<li>default : all</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">(</span>pwn/ELF/x86_64<span class="o">)</span>&gt; inst rbp
+</span></span><span class="line"><span class="cl"><span class="o">[</span>ERROR<span class="o">]</span> Invalid mnemonic <span class="o">(</span>KS_ERR_ASM_MNEMONICFAIL<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">(</span>pwn/ELF/x86_64<span class="o">)</span>&gt; <span class="nb">type</span> rop
+</span></span><span class="line"><span class="cl"><span class="o">[</span>INFO<span class="o">]</span> Load gadgets <span class="k">for</span> sec
+</span></span></code></pre></div><br/>
+<div class="anchor" id="settings"></div>
+<h3 class="relative group"><strong>settings</strong>
+<span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#settings" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<p>显示当前的设置</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">(</span>pwn/ELF/x86_64<span class="o">)</span>&gt; settings
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">Settings</span>
+</span></span><span class="line"><span class="cl"><span class="o">========</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Name               Value  Description                                                                                       
+</span></span><span class="line"><span class="cl">----               -----  -----------                                                                                       
+</span></span><span class="line"><span class="cl">all                off    If on shows all found gadgets including double gadgets
+</span></span><span class="line"><span class="cl">color              on     If on output is colored
+</span></span><span class="line"><span class="cl">badbytes                  Gadget addresses are not allowed to contain this bytes
+</span></span><span class="line"><span class="cl">detailed           off    If on the gadgets will be printed with more detailed information
+</span></span><span class="line"><span class="cl">inst_count         <span class="m">6</span>      The max count of instructions in a gadgets
+</span></span><span class="line"><span class="cl"><span class="nb">type</span>               all    The file is scanned <span class="k">for</span> this <span class="nb">type</span> of gadgets. <span class="o">(</span>rop, jop, sys, all<span class="o">)</span>
+</span></span><span class="line"><span class="cl">cfg_only           off    <span class="k">if</span> on gadgets are filtered <span class="k">for</span> use in CFG exploits <span class="o">(</span>only PE<span class="o">)</span>
+</span></span><span class="line"><span class="cl">count_of_findings  <span class="m">5</span>      The max count of findings which will be printed with semantic search <span class="o">(</span><span class="nv">0</span> <span class="o">=</span> undefined, default: 5<span class="o">)</span>
+</span></span><span class="line"><span class="cl">multiprocessing    on     If on multiple processes will be used <span class="k">for</span> gadget scanning <span class="o">(</span>not supported on Windows.<span class="o">)</span>
+</span></span></code></pre></div><br/>
+<div class="anchor" id="quit"></div>
+<h3 class="relative group"><strong>quit</strong>
+<span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#quit" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">(</span>pwn/ELF/x86_64<span class="o">)</span>&gt; quit
+</span></span><span class="line"><span class="cl"><span class="c1"># 退出 ropper</span>
+</span></span></code></pre></div><br/>
+<hr/>
+<div class="anchor" id="附录"></div>
+<h2 class="relative group">附录 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e9%99%84%e5%bd%95" style="text-decoration-line: none !important;">#</a></span>
+</h2>
+<p>学习与参考链接：</p>
+<p><a href="https://www.jianshu.com/p/e14c811496ac" target="_blank">
+    Ubuntu Ropper keystone-engine安装 - 简书 (jianshu.com)</a></p>
+<p><a href="https://www.cnblogs.com/robotech/p/16220623.html" target="_blank">
+    Rop gadgets搜索工具 Ropper 的安装与使用 - robotech_erx - 博客园 (cnblogs.com)</a></p>
+<p><a href="https://blog.csdn.net/qq_45595732/article/details/114834116" target="_blank">
+    ropper简单使用_ropper使用_TTYflag的博客-CSDN博客</a></p>
+</div>
+<script>
+        var oid = "views_posts\\pwn\\basic\\tools\\ropper_\\index.md"
+        var oid_likes = "likes_posts\\pwn\\basic\\tools\\ropper_\\index.md"
+      </script>
+<script integrity="sha512-DkmXO0rQo4LHxgEti/+CJjFmQtqrxPiiBHe9CGdPPabi+pk7wgrU9R58W7aOb5E6IHp8T+N+oOe4BolK/OCmTg==" src="/js/page.min.0e49973b4ad0a382c7c6012d8bff8226316642daabc4f8a20477bd08674f3da6e2fa993bc20ad4f51e7c5bb68e6f913a207a7c4fe37ea0e7b806894afce0a64e.js" type="text/javascript"></script>
+</section>
+<footer class="pt-8 max-w-prose print:hidden">
+<h2 class="mt-8 text-2xl font-extrabold mb-10">Related</h2>
+<section class="w-full grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+<a class="min-w-full" href="/posts/pwn/risc-v/0x01/">
+<div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
+<div class="px-6 py-4">
+<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/pwn/risc-v/0x01/">RISC-V PWN学习</div>
+<div class="text-sm text-neutral-500 dark:text-neutral-400">
+<div class="flex flex-row flex-wrap items-center">
+<time datetime="2023-09-03 00:00:00 +0000 UTC">September 3, 2023</time><span class="px-2 text-primary-500">·</span><span>11267 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">23 分钟</span>
+</div>
+<div class="flex flex-row flex-wrap items-center">
+<span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    PWN学习记录
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/ctf/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    CTF
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/pwn/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    PWN
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/riscv64/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    riscv64
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/%E5%BC%82%E6%9E%84pwn/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    异构PWN
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/iot/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    IoT
+  </span>
+</span>
+</span>
+</div>
+</div>
+</div>
+<div class="px-6 pt-4 pb-2">
+</div>
+</div>
+</a>
+<a class="min-w-full" href="/posts/pwn/heap/chunk_1/">
+<div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
+<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/posts/pwn/heap/chunk_1/featured.png);"></div>
+<div class="px-6 py-4">
+<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/pwn/heap/chunk_1/">堆基础知识学习记录</div>
+<div class="text-sm text-neutral-500 dark:text-neutral-400">
+<div class="flex flex-row flex-wrap items-center">
+<time datetime="2023-07-31 00:00:00 +0000 UTC">July 31, 2023</time><span class="px-2 text-primary-500">·</span><span>9063 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">19 分钟</span>
+</div>
+<div class="flex flex-row flex-wrap items-center">
+<span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    PWN学习记录
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/ctf/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    CTF
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/pwn/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    PWN
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/heap/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    heap
+  </span>
+</span>
+</span>
+</div>
+</div>
+</div>
+<div class="px-6 pt-4 pb-2">
+</div>
+</div>
+</a>
+<a class="min-w-full" href="/posts/pwn/awdp/0x02/">
+<div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
+<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/posts/pwn/awdp/0x02/featured.jpg);"></div>
+<div class="px-6 py-4">
+<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/pwn/awdp/0x02/">从0到0.002的AWDP实战记录</div>
+<div class="text-sm text-neutral-500 dark:text-neutral-400">
+<div class="flex flex-row flex-wrap items-center">
+<time datetime="2023-09-11 00:00:00 +0000 UTC">September 11, 2023</time><span class="px-2 text-primary-500">·</span><span>1967 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">4 分钟</span>
+</div>
+<div class="flex flex-row flex-wrap items-center">
+<span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    PWN学习记录
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/ctf/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    CTF
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/pwn/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    PWN
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/awdp/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    AWDP
+  </span>
+</span>
+</span>
+</div>
+</div>
+</div>
+<div class="px-6 pt-4 pb-2">
+</div>
+</div>
+</a>
+</section>
+<div class="content" id="content">
+<div style="margin-top:2em;padding:0 0.5em;font-size:.875rem">
+<hr/>
+<br/>
+<div style="padding-bottom:1em;">
+<p> </p>
+<p>本文作者：<a href="https://ta0lve.github.io/about/" target="_blank"><font color="#49b1f5" style="text-decoration: underline">ta0lve</font></a></p>
+<p>本文链接：<a href="https://ta0lve.github.io/posts/pwn/basic/tools/ropper_/" target="_blank"><font color="#49b1f5" style="text-decoration: underline">Ubuntu Ropper安装与使用</font></a></p>
+<p><a href="https://ta0lve.github.io/posts/pwn/basic/tools/ropper_/" target="_blank"><font color="#49b1f5" style="text-decoration: underline"> https://ta0lve.github.io/posts/pwn/basic/tools/ropper_/ </font></a></p>
+<p>版权声明：本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank"><font color="#49b1f5" style="text-decoration: underline"> CC BY-NC 4.0 </font></a> 许可协议。</p>
+<p>转载请注明来自<a class="redlink" href="https://ta0lve.github.io/" target="_blank"> <font color="#49b1f5" style="text-decoration: underline">ta0lve's Blog</font></a> ！</p>
+</div>
+</div>
+</div>
+<div class="pt-8">
+<hr class="border-dotted border-neutral-300 dark:border-neutral-600"/>
+<div class="flex justify-between pt-3">
+<span>
+<a class="flex group mr-3" href="/posts/wp/2023_08_tenable_ctf/">
+<span class="mr-3 text-neutral-700 group-hover:text-primary-600 ltr:inline rtl:hidden dark:text-neutral dark:group-hover:text-primary-400">←</span>
+<span class="ml-3 text-neutral-700 group-hover:text-primary-600 ltr:hidden rtl:inline dark:text-neutral dark:group-hover:text-primary-400">→</span>
+<span class="flex flex-col">
+<span class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500">Tenable CTF 2023 pwn/re wp</span>
+<span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
+<time datetime="2023-08-11 00:00:00 +0000 UTC">August 11, 2023</time>
+</span>
+</span>
+</a>
+</span>
+<span>
+<a class="flex text-right group ml-3" href="/posts/pwn/basic/template/0x01/">
+<span class="flex flex-col">
+<span class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500">exp_template</span>
+<span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
+<time datetime="2023-09-01 00:00:00 +0000 UTC">September 1, 2023</time>
+</span>
+</span>
+<span class="ml-3 text-neutral-700 group-hover:text-primary-600 ltr:inline rtl:hidden dark:text-neutral dark:group-hover:text-primary-400">→</span>
+<span class="mr-3 text-neutral-700 group-hover:text-primary-600 ltr:hidden rtl:inline dark:text-neutral dark:group-hover:text-primary-400">←</span>
+</a>
+</span>
+</div>
+</div>
+<script async="" crossorigin="anonymous" data-category="Announcements" data-category-id="DIC_kwDOJ9Vlo84CX_0P" data-emit-metadata="0" data-input-position="bottom" data-lang="zh-CN" data-mapping="pathname" data-reactions-enabled="1" data-repo="ta0lve/blogtalk" data-repo-id="R_kgDOJ9Vlow" data-strict="0" data-theme="dark_dimmed" src="https://giscus.app/client.js">
+</script>
+</footer>
+</article>
+<div class="pointer-events-none absolute top-[110vh] bottom-0 w-12 ltr:right-0 rtl:left-0" id="top-scroller">
+<a aria-label="" class="pointer-events-auto sticky top-[calc(100vh-5.5rem)] flex h-12 w-12 mb-16 items-center justify-center rounded-full bg-neutral/50 text-xl text-neutral-700 backdrop-blur hover:text-primary-600 dark:bg-neutral-800/50 dark:text-neutral dark:hover:text-primary-400" href="#the-top" title="">
+    ↑
+  </a>
+</div>
+</main><footer class="py-10 print:hidden" id="site-footer">
+<nav class="flex flex-row pb-4 text-base font-medium text-neutral-500 dark:text-neutral-400">
+<ul class="flex flex-col list-none sm:flex-row">
+<li class="flex mb-1 ltr:text-right rtl:text-left sm:mb-0 ltr:sm:mr-7 ltr:sm:last:mr-0 rtl:sm:ml-7 rtl:sm:last:ml-0">
+<a class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2" href="/about/" title="About">About</a>
+</li>
+<li class="flex mb-1 ltr:text-right rtl:text-left sm:mb-0 ltr:sm:mr-7 ltr:sm:last:mr-0 rtl:sm:ml-7 rtl:sm:last:ml-0">
+<a class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2" href="/tags/pwn/" title="PWN">pwn2own , pwn4fun</a>
+</li>
+</ul>
+</nav>
+<div class="flex items-center justify-between">
+<p class="text-sm text-neutral-500 dark:text-neutral-400">
+      Copyright ©2024 ta0lve, All Rights Reserved.
+    </p>
+<p class="text-xs text-neutral-500 dark:text-neutral-400">
+      
+      
+      由 <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500" href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &amp; <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500" href="https://blowfish.page/" rel="noopener noreferrer" target="_blank">Blowfish</a> 强力驱动
+    </p>
+</div>
+<script>
+    
+    mediumZoom(document.querySelectorAll("img:not(.nozoom)"), {
+      margin: 24,
+      background: 'rgba(0,0,0,0.5)',
+      scrollOffset: 0,
+    })
+    
+  </script>
+<script integrity="sha512-NcERO8wWxaWb8DEIL55jgiqpUoBCOIGnhHp/8zoW5imc5qhA2e9OENlH4DChjz8gNZr7LsDzWWdIS5qTYKwxRQ==" src="/js/process.min.35c1113bcc16c5a59bf031082f9e63822aa95280423881a7847a7ff33a16e6299ce6a840d9ef4e10d947e030a18f3f20359afb2ec0f35967484b9a9360ac3145.js" type="text/javascript"></script>
+</footer><div class="invisible fixed inset-0 flex h-screen w-screen cursor-default flex-col bg-neutral-500/50 p-4 backdrop-blur-sm dark:bg-neutral-900/50 sm:p-6 md:p-[10vh] lg:p-[12vh]" data-url="https://ta0lve.github.io/" id="search-wrapper" style="z-index:500">
+<div class="flex flex-col w-full max-w-3xl min-h-0 mx-auto border rounded-md shadow-lg top-20 border-neutral-200 bg-neutral dark:border-neutral-700 dark:bg-neutral-800" id="search-modal">
+<header class="relative z-10 flex items-center justify-between flex-none px-2">
+<form class="flex items-center flex-auto min-w-0">
+<div class="flex items-center justify-center w-8 h-8 text-neutral-400">
+<span class="relative block icon">
+<svg aria-hidden="true" class="svg-inline--fa fa-search fa-w-16" data-icon="search" data-prefix="fas" focusable="false" role="img" viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z" fill="currentColor"></path></svg>
+</span>
+</div>
+<input class="flex flex-auto h-12 mx-1 bg-transparent appearance-none focus:outline-dotted focus:outline-2 focus:outline-transparent" id="search-query" placeholder="" tabindex="0" type="search"/>
+</form>
+<button class="flex items-center justify-center w-8 h-8 text-neutral-700 hover:text-primary-600 dark:text-neutral dark:hover:text-primary-400" id="close-search-button" title="">
+<span class="relative block icon">
+<svg viewbox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><path d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z" fill="currentColor"></path></svg>
+</span>
+</button>
+</header>
+<section class="flex-auto px-2 overflow-auto">
+<ul id="search-results">
+</ul>
+</section>
+</div>
+</div>
+</div>
+</body>
+</html>

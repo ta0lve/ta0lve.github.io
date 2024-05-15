@@ -9,14 +9,11 @@
     <lastBuildDate>Wed, 05 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://ta0lve.github.io/tags/pyc%E9%80%86%E5%90%91/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>reverse-Oh My Python</title>
-      <link>https://ta0lve.github.io/posts/wp/2023_04_ctf/5_oh-my-python_write_up/</link>
+      <link>https://ta0lve.github.io/posts/wp/2023_04_w4ter/5_oh-my-python_write_up/</link>
       <pubDate>Wed, 05 Jul 2023 00:00:00 +0000</pubDate>
       
-      <guid>https://ta0lve.github.io/posts/wp/2023_04_ctf/5_oh-my-python_write_up/</guid>
-      <description>&lt;p&gt;&lt;strong&gt;此文章仅限战队内部成员阅读&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;路过的师傅们看看远处的wp吧：&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://ta0lve.github.io/posts/wp/2023_06_ciscn/&#34;   target=&#34;_blank&#34;&gt;
-    2023 ciscn 初赛 · ta0lve&lt;/a&gt;&lt;/p&gt;</description>
+      <guid>https://ta0lve.github.io/posts/wp/2023_04_w4ter/5_oh-my-python_write_up/</guid>
+      <description>下载题目附件后发现是pyc程序，所以我们先将pyc程序用在线</description>
     </item>
     
   </channel>

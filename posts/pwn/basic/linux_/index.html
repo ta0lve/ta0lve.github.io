@@ -13,9 +13,9 @@
 <meta content="zh-cn" http-equiv="content-language"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta content="ie=edge" http-equiv="X-UA-Compatible"/>
-<title>Linux 配置补充 · ta0lve</title>
-<meta content="Linux 配置补充 · ta0lve" name="title"/>
-<meta content="CTF, PWN, Ubuntu, " name="keywords"/>
+<title>Linux命令入门与总结 · ta0lve</title>
+<meta content="Linux命令入门与总结 · ta0lve" name="title"/>
+<meta content="CTF, PWN, Ubuntu, Linux, " name="keywords"/>
 <link href="https://ta0lve.github.io/posts/pwn/basic/linux_/" rel="canonical"/>
 <link href="/css/main.bundle.min.c6116b9ed1c907a8c0eb015f377d3eecc07e448d75729e31fc3de5881465c6c172ba9fa9a6800c030116caf2a110d92242bb816639484ca791f7cd107a8d49b5.css" integrity="sha512-xhFrntHJB6jA6wFfN30+7MB+RI11cp4x/D3liBRlxsFyup+ppoAMAwEWyvKhENkiQruBZjlITKeR980Qeo1JtQ==" rel="stylesheet" type="text/css"/>
 <script integrity="sha512-UWoWdFvqWpvQERONJUzA/TlzzVXObhXz3sdj58fCx0SPj+e1TMqBHLghsMfhLNFhyqzh3XlKw9NNQJN8vMnuEg==" src="/js/appearance.min.516a16745bea5a9bd011138d254cc0fd3973cd55ce6e15f3dec763e7c7c2c7448f8fe7b54cca811cb821b0c7e12cd161caace1dd794ac3d34d40937cbcc9ee12.js" type="text/javascript"></script>
@@ -25,24 +25,24 @@
 <link href="/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="/site.webmanifest" rel="manifest"/>
-<meta content="Linux 配置补充" property="og:title"/>
-<meta content="此文章还在施工中， 路过的师傅们看看远处的学习记录吧： New article! 2023 ciscn" property="og:description"/>
+<meta content="Linux命令入门与总结" property="og:title"/>
+<meta content="个人比较常用的Linux命令 基础知识（入门向） # 大部分内容都" property="og:description"/>
 <meta content="article" property="og:type"/>
 <meta content="https://ta0lve.github.io/posts/pwn/basic/linux_/" property="og:url"/><meta content="posts" property="article:section"/>
 <meta content="2023-07-14T00:00:00+00:00" property="article:published_time"/>
 <meta content="2023-07-14T00:00:00+00:00" property="article:modified_time"/>
 <meta content="summary" name="twitter:card"/>
-<meta content="Linux 配置补充" name="twitter:title"/>
-<meta content="此文章还在施工中， 路过的师傅们看看远处的学习记录吧： New article! 2023 ciscn" name="twitter:description"/>
+<meta content="Linux命令入门与总结" name="twitter:title"/>
+<meta content="个人比较常用的Linux命令 基础知识（入门向） # 大部分内容都" name="twitter:description"/>
 <script type="application/ld+json">
   [{
     "@context": "https://schema.org",
     "@type": "Article",
     "articleSection": "Posts",
-    "name": "Linux 配置补充",
-    "headline": "Linux 配置补充",
+    "name": "Linux命令入门与总结",
+    "headline": "Linux命令入门与总结",
     
-    "abstract": "此文章还在施工中， 路过的师傅们看看远处的学习记录吧： New article! 2023 ciscn",
+    "abstract": "个人比较常用的Linux命令 基础知识（入门向） # 大部分内容都",
     "inLanguage": "zh-cn",
     "url" : "https:\/\/ta0lve.github.io\/posts\/pwn\/basic\/linux_\/",
     "author" : {
@@ -55,16 +55,16 @@
     
     "dateModified": "2023-07-14T00:00:00\u002b00:00",
     
-    "keywords": ["CTF","PWN","Ubuntu"],
+    "keywords": ["CTF","PWN","Ubuntu","Linux"],
     
     "mainEntityOfPage": "true",
-    "wordCount": "764"
+    "wordCount": "4854"
   }]
   </script>
 <meta content="ta0lve" name="author"/>
 <link href="mailto:hujt25@mail2.sysu.edu.cn" rel="me"/>
 <link href="https://ta0lve.github.io/" rel="me"/>
-<link href="https://github.com/username" rel="me"/>
+<link href="https://github.com/ta0lve" rel="me"/>
 <script integrity="" src="/lib/jquery/jquery.slim.min.js"></script>
 <meta name="theme-color"/>
 </head>
@@ -84,7 +84,7 @@
 <nav class="hidden md:flex items-center space-x-5 md:ml-12 h-12">
 <a class="flex items-center" href="/posts/">
 <p class="text-base font-medium text-gray-500 hover:text-gray-900" title="Posts">
-        归档
+        Posts
     </p>
 </a>
 <a class="flex items-center" href="/categories/">
@@ -98,17 +98,12 @@
     </p>
 </a>
 <a class="flex items-center" href="/link/">
-<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="">
+<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="友链/links">
         友链
     </p>
 </a>
-<a class="flex items-center" href="/pointer/">
-<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="Pointers">
-        Pointer
-    </p>
-</a>
 <a class="flex items-center" href="/about/">
-<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="">
+<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="About">
         About
     </p>
 </a>
@@ -173,7 +168,7 @@
 <li class="mt-1">
 <a class="flex items-center" href="/posts/">
 <p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="Posts">
-            归档
+            Posts
         </p>
 </a>
 </li>
@@ -193,21 +188,14 @@
 </li>
 <li class="mt-1">
 <a class="flex items-center" href="/link/">
-<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="">
+<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="友链/links">
             友链
         </p>
 </a>
 </li>
 <li class="mt-1">
-<a class="flex items-center" href="/pointer/">
-<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="Pointers">
-            Pointer
-        </p>
-</a>
-</li>
-<li class="mt-1">
 <a class="flex items-center" href="/about/">
-<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="">
+<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="About">
             About
         </p>
 </a>
@@ -238,13 +226,6 @@
 <div class="relative flex flex-col grow">
 <main class="grow" id="main-content">
 <article>
-<div class="h-[150px] md:h-[200px]" id="hero"></div>
-<div class="fixed inset-x-0 top-0 h-[800px] single_hero_background nozoom" style="background-image:url(/IMAGE_Background.jpg);">
-<div class="absolute inset-0 bg-gradient-to-t from-neutral dark:from-neutral-800 to-transparent mix-blend-normal">
-</div>
-<div class="absolute inset-0 opacity-60 bg-gradient-to-t from-neutral dark:from-neutral-800 to-neutral-100 dark:to-neutral-800 mix-blend-normal">
-</div>
-</div>
 <header class="mt-5 max-w-prose" id="single_header">
 <ol class="text-sm text-neutral-500 dark:text-neutral-400 print:hidden">
 <li class="inline hidden">
@@ -254,21 +235,21 @@
 <a class="hover:underline decoration-neutral-300 dark:underline-neutral-600" href="/posts/">Posts</a><span class="px-1 text-primary-500">/</span>
 </li>
 <li class="inline hidden">
-<a class="hover:underline decoration-neutral-300 dark:underline-neutral-600" href="/posts/pwn/basic/linux_/">Linux 配置补充</a><span class="px-1 text-primary-500">/</span>
+<a class="hover:underline decoration-neutral-300 dark:underline-neutral-600" href="/posts/pwn/basic/linux_/">Linux命令入门与总结</a><span class="px-1 text-primary-500">/</span>
 </li>
 </ol>
 <h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">
-      Linux 配置补充
+      Linux命令入门与总结
     </h1>
 <div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-07-14 00:00:00 +0000 UTC">July 14, 2023</time><span class="px-2 text-primary-500">·</span><span>764 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">2 分钟</span>
+<time datetime="2023-07-14 00:00:00 +0000 UTC">July 14, 2023</time><span class="px-2 text-primary-500">·</span><span>4854 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">10 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
-<span class="mr-2" onclick="window.open(&quot;/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%85%A5%E9%97%A8/&quot;,'_self');" style="margin-top:0.5rem">
 <span class="flex">
 <span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    基础知识
+    pwn入门
   </span>
 </span>
 </span>
@@ -290,6 +271,13 @@
 <span class="flex">
 <span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
     Ubuntu
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/linux/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    Linux
   </span>
 </span>
 </span>
@@ -316,7 +304,7 @@
 <svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M446.6 222.7c-1.8-8-6.8-15.4-12.5-18.5-1.8-1-13-2.2-25-2.7-20.1-.9-22.3-1.3-28.7-5-10.1-5.9-12.8-12.3-12.9-29.5-.1-33-13.8-63.7-40.9-91.3-19.3-19.7-40.9-33-65.5-40.5-5.9-1.8-19.1-2.4-63.3-2.9-69.4-.8-84.8.6-108.4 10C45.9 59.5 14.7 96.1 3.3 142.9 1.2 151.7.7 165.8.2 246.8c-.6 101.5.1 116.4 6.4 136.5 15.6 49.6 59.9 86.3 104.4 94.3 14.8 2.7 197.3 3.3 216 .8 32.5-4.4 58-17.5 81.9-41.9 17.3-17.7 28.1-36.8 35.2-62.1 4.9-17.6 4.5-142.8 2.5-151.7zm-322.1-63.6c7.8-7.9 10-8.2 58.8-8.2 43.9 0 45.4.1 51.8 3.4 9.3 4.7 13.4 11.3 13.4 21.9 0 9.5-3.8 16.2-12.3 21.6-4.6 2.9-7.3 3.1-50.3 3.3-26.5.2-47.7-.4-50.8-1.2-16.6-4.7-22.8-28.5-10.6-40.8zm191.8 199.8l-14.9 2.4-77.5.9c-68.1.8-87.3-.4-90.9-2-7.1-3.1-13.8-11.7-14.9-19.4-1.1-7.3 2.6-17.3 8.2-22.4 7.1-6.4 10.2-6.6 97.3-6.7 89.6-.1 89.1-.1 97.6 7.8 12.1 11.3 9.5 31.2-4.9 39.4z" fill="currentColor"></path></svg>
 </span>
 </span></a>
-<a aria-label="Github" class="px-1 hover:text-primary-700 dark:hover:text-primary-400" href="https://github.com/username" rel="me noopener noreferrer" target="_blank"><span class="inline-block align-text-bottom">
+<a aria-label="Github" class="px-1 hover:text-primary-700 dark:hover:text-primary-400" href="https://github.com/ta0lve" rel="me noopener noreferrer" target="_blank"><span class="inline-block align-text-bottom">
 <span class="relative block icon">
 <svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z" fill="currentColor"></path></svg>
 </span>
@@ -328,108 +316,611 @@
 <div class="mb-5"></div>
 </header>
 <section class="flex flex-col max-w-full mt-0 prose dark:prose-invert lg:flex-row">
+<div class="order-first sm:max-w-prose lg:ml-auto px-0 lg:order-last lg:max-w-xs ltr:lg:pl-8 rtl:lg:pr-8">
+<div class="toc ltr:pl-5 rtl:pr-5 print:hidden lg:sticky lg:top-10">
+<details class="mt-0 overflow-hidden rounded-lg ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 hidden lg:block" open="">
+<summary class="block py-1 text-lg font-semibold cursor-pointer bg-neutral-100 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-neutral-700 dark:text-neutral-100 lg:hidden">
+</summary>
+<div class="min-w-[220px] py-2 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+<nav id="TableOfContents">
+<ul>
+<li><a href="#基础知识入门向">基础知识（入门向）</a>
+<ul>
+<li><a href="#linux-常用命令">Linux 常用命令</a></li>
+<li><a href="#常用快捷键">常用快捷键</a></li>
+<li><a href="#一些根目录的知识">一些根目录的知识</a></li>
+</ul>
+</li>
+<li><a href="#linux命令执行小结">Linux命令执行小结</a>
+<ul>
+<li><a href="#读取文件命令">读取文件命令</a></li>
+<li><a href="#目录读取命令">目录读取命令</a></li>
+<li><a href="#linux命令分割符">linux命令分割符</a>
+<ul>
+<li><a href="#-符号">‘;’ 符号</a></li>
+<li><a href="#单--符号">单 ’|’ 符号</a></li>
+<li><a href="#单符号">单’&amp;’符号</a></li>
+<li><a href="#双符号">双’&amp;’符号（’&amp;&amp;’）</a></li>
+<li><a href="#双符号-1">双’|’符号（’||’）</a></li>
+</ul>
+</li>
+<li><a href="#i--o重定向">I / O重定向</a>
+<ul>
+<li><a href="#文件描述符">文件描述符</a></li>
+<li><a href="#输入重定向">输入重定向</a></li>
+<li><a href="#输出重定向">输出重定向</a></li>
+<li><a href="#-与-">&amp;&gt; 与 &gt;&amp;</a></li>
+<li><a href="#命令替换">命令替换</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#附录">附录</a></li>
+</ul>
+</nav>
+</div>
+</details>
+<details class="mt-0 overflow-hidden rounded-lg ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 lg:hidden">
+<summary class="py-1 text-lg font-semibold cursor-pointer bg-neutral-100 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-neutral-700 dark:text-neutral-100 lg:hidden">
+</summary>
+<div class="py-2 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+<nav id="TableOfContents">
+<ul>
+<li><a href="#基础知识入门向">基础知识（入门向）</a>
+<ul>
+<li><a href="#linux-常用命令">Linux 常用命令</a></li>
+<li><a href="#常用快捷键">常用快捷键</a></li>
+<li><a href="#一些根目录的知识">一些根目录的知识</a></li>
+</ul>
+</li>
+<li><a href="#linux命令执行小结">Linux命令执行小结</a>
+<ul>
+<li><a href="#读取文件命令">读取文件命令</a></li>
+<li><a href="#目录读取命令">目录读取命令</a></li>
+<li><a href="#linux命令分割符">linux命令分割符</a>
+<ul>
+<li><a href="#-符号">‘;’ 符号</a></li>
+<li><a href="#单--符号">单 ’|’ 符号</a></li>
+<li><a href="#单符号">单’&amp;’符号</a></li>
+<li><a href="#双符号">双’&amp;’符号（’&amp;&amp;’）</a></li>
+<li><a href="#双符号-1">双’|’符号（’||’）</a></li>
+</ul>
+</li>
+<li><a href="#i--o重定向">I / O重定向</a>
+<ul>
+<li><a href="#文件描述符">文件描述符</a></li>
+<li><a href="#输入重定向">输入重定向</a></li>
+<li><a href="#输出重定向">输出重定向</a></li>
+<li><a href="#-与-">&amp;&gt; 与 &gt;&amp;</a></li>
+<li><a href="#命令替换">命令替换</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#附录">附录</a></li>
+</ul>
+</nav>
+</div>
+</details>
+<script>
+  (function () {
+    var $toc = $('#TableOfContents');
+    if ($toc.length > 0) {
+      var $window = $(window);
+
+      function onScroll() {
+        var currentScroll = $window.scrollTop();
+        var h = $('.anchor');
+        var id = "";
+        h.each(function (i, e) {
+          e = $(e);
+          if (e.offset().top - $(window).height()/3 <= currentScroll) {
+            id = e.attr('id');
+          }
+        });
+        var active = $toc.find('a.active');      
+        if (active.length == 1 && active.eq(0).attr('href') == '#' + id) return true;
+
+        active.each(function (i, e) {
+          
+            $(e).removeClass('active');
+          
+        });
+        $toc.find('a[href="#' + id + '"]').addClass('active')
+        $toc.find('a[href="#' + id + '"]').parentsUntil('#TableOfContents').each(function (i, e) {
+          $(e).children('a').parents('ul').show();          
+        });
+      }
+
+      $window.on('scroll', onScroll);
+      $(document).ready(function () {
+        
+        onScroll();
+      });
+    }
+  })();
+</script>
+</div>
+</div>
 <div class="min-w-0 min-h-0 max-w-prose">
 <details class="mt-2 mb-5 overflow-hidden rounded-lg ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5" open="" style="margin-left:0px">
 <summary class="py-1 text-lg font-semibold cursor-pointer bg-primary-200 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-primary-800 dark:text-neutral-100">
         PWN入门 - This article is part of a series.
     </summary>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/posts/pwn/basic/pwn-_environment/">
-            Part 1: PWN环境搭建记录-Ubuntu 22.04
+<a href="https://ta0lve.github.io/posts/pwn/basic/tutorial11/">
+            Part 1: CTF入门宣讲-PWN方向
         </a>
 </div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-        Part 2: This Article
+<a href="https://ta0lve.github.io/posts/pwn/basic/tutorial22/">
+            Part 2: pwn入门教程
+        </a>
+</div>
+<div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+        Part 3: This Article
     </div>
+<div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+<a href="https://ta0lve.github.io/posts/pwn/basic/pwn-_environment/">
+            Part 4: PWN环境二次搭建记录-Ubuntu 22.04
+        </a>
+</div>
+<div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+<a href="https://ta0lve.github.io/posts/pwn/basic/remember-it-wp/">
+            Part 5: remember-it-012 official wp
+        </a>
+</div>
 </details>
-<p><strong>此文章还在施工中，</strong></p>
-<p>路过的师傅们看看远处的学习记录吧：</p>
-<hr/>
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    
-New article!
-
-  </span>
-</span>
-<section class="space-y-10 w-full">
-</section>
-<hr/>
-<section class="space-y-10 w-full">
-<a class="flex flex-wrap article border border-neutral-200 dark:border-neutral-700 border-2 rounded-md backdrop-blur" href="/posts/wp/2023_06_ciscn/">
-<div class="w-full md:w-auto h-full thumbnail nozoom" style="background-image:url(/posts/wp/2023_06_ciscn/featured.jpg);"></div>
-<div class="p-4">
-<div class="items-center text-xl font-semibold">
-<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/wp/2023_06_ciscn/">2023 ciscn 初赛</div>
-</div>
-<div class="text-sm text-neutral-500 dark:text-neutral-400">
-<div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-06-30 00:00:00 +0000 UTC">June 30, 2023</time><span class="px-2 text-primary-500">·</span><span>1691 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">4 分钟</span>
-</div>
-<div class="flex flex-row flex-wrap items-center">
-<span class="mr-2" onclick="window.open(&quot;/categories/wp/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    WP
-  </span>
-</span>
-</span>
-<span class="mr-2" onclick="window.open(&quot;/tags/ctf/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    CTF
-  </span>
-</span>
-</span>
-<span class="mr-2" onclick="window.open(&quot;/tags/pwn/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    PWN
-  </span>
-</span>
-</span>
-<span class="mr-2" onclick="window.open(&quot;/tags/reverse/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    reverse
-  </span>
-</span>
-</span>
-<span class="mr-2" onclick="window.open(&quot;/tags/crypto/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    Crypto
-  </span>
-</span>
-</span>
-</div>
-</div>
-</div>
-</a>
-</section>
-<hr/>
-<div class="hugo-encryptor-container">
-<div class="hugo-encryptor-prompt">
-<p>文章的部分内容被密码保护：</p>
-</div>
-<div class="hugo-encryptor-form">
-<input class="hugo-encryptor-input" placeholder="请输入密码"/>
-<input class="hugo-encryptor-button" onclick="_click_handler(this)" type="button" value="点击验证"/>
-</div>
-<div class="hugo-encryptor-cipher-text" style="display: none;">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</div>
-</div>
+<p>个人比较常用的Linux命令</p>
+<div class="anchor" id="基础知识入门向"></div>
+<h2 class="relative group">基础知识（入门向） 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e5%9f%ba%e7%a1%80%e7%9f%a5%e8%af%86%e5%85%a5%e9%97%a8%e5%90%91" style="text-decoration-line: none !important;">#</a></span>
+</h2>
+<p>大部分内容都是copy自 珠天PearlSky-sevenG0师傅的<a href="https://mp.weixin.qq.com/s/mRPxdDJnS8boa7BNyxME3w" target="_blank">
+    文章</a>，师傅太强啦！</p>
+<p>原文链接：<a href="https://mp.weixin.qq.com/s/mRPxdDJnS8boa7BNyxME3w" target="_blank">
+    https://mp.weixin.qq.com/s/mRPxdDJnS8boa7BNyxME3w</a></p>
+<div class="anchor" id="linux-常用命令"></div>
+<h3 class="relative group">Linux 常用命令 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#linux-%e5%b8%b8%e7%94%a8%e5%91%bd%e4%bb%a4" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Linux 常用命令</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># &lt;------这个符号的内容后面是注释</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 下面的命令只做简单解释，不明白的可以自行百度</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sudo <span class="o">[</span>command<span class="o">]</span> <span class="c1"># 以系统管理员的身份执行指令，授权所执行指令的执行指令。</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">ls -al <span class="c1"># 列出当前目录所有文件的详细信息 包括以 . 开头的隐藏文件</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> <span class="o">[</span>path<span class="o">]</span> <span class="c1"># 切换工作目录到 path 下 . 表示当前目录 .. 表示上一级目录 / 表示根目录</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">pwd</span> <span class="c1"># 以绝对路径的方式显示用户当前工作目录</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">rm -rf <span class="o">[</span>file<span class="o">]</span> <span class="c1"># 强制删除文件或目录</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">mv <span class="o">[</span>file1<span class="o">]</span> <span class="o">[</span>file2<span class="o">]</span> <span class="c1"># 用来对文件或目录重新命名，或者将文件从一个目录移到另一个目录中</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">cp <span class="o">[</span>file1<span class="o">]</span> <span class="o">[</span>file2<span class="o">]</span> <span class="c1"># 用来将一个或多个源文件或者目录复制到指定的目的文件或目录</span>
+</span></span><span class="line"><span class="cl">	<span class="c1"># 示例：将文件 file 复制到目录 /your/path/ 中：</span>
+</span></span><span class="line"><span class="cl">	$ cp file /your/path/
+</span></span><span class="line"><span class="cl">	<span class="c1"># 使用指令 cp 将当前目录 old/dir/ 下的所有文件复制到新目录/your/new/dir 下，输入如下命令：</span>
+</span></span><span class="line"><span class="cl">	$ cp –r old/dir/ your/new/dir
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">less <span class="o">[</span>file<span class="o">]</span> <span class="c1"># 允许用户向前或向后浏览文字档案的内容</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">cat <span class="o">[</span>file<span class="o">]</span> <span class="c1"># 连接文件并打印到标准输出设备上</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="o">[</span>string<span class="o">]</span> <span class="c1"># 打印一行文本，参数“-e”可激活转义字符</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">nc <span class="o">[</span>ip<span class="o">]</span> <span class="o">[</span>port<span class="o">]</span> <span class="c1"># netcat 建立 TCP 和 UDP 连接IP地址的端口并监听</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">ps <span class="c1"># 用于报告当前系统的进程状态</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">top <span class="c1"># 实时查看系统的整体运行情况</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">kill</span> <span class="c1"># 杀死一个进程</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">ifconfig <span class="c1"># 查看或设置网络设备</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">ping <span class="c1"># 查看网络上的主机是否工作</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">netstat <span class="c1"># 显示网络连接、路由表和网络接口信息</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">su <span class="c1"># 切换当前用户身份到其他用户身份</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">touch <span class="o">[</span>file<span class="o">]</span> <span class="c1"># 创建新的空文件</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">mkdir <span class="o">[</span>dir<span class="o">]</span> <span class="c1"># 创建目录</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">chmod <span class="c1"># 变更文件或目录的权限</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">chown <span class="c1"># 变更某个文件或目录的所有者和所属组</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">uname -a <span class="c1"># 找到对应内核版本全部信息</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">exit</span> <span class="c1"># 退出 shell</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">man <span class="o">[</span>command<span class="o">]</span> <span class="c1"># 查看Linux中的指令帮助、配置文件帮助和编程帮助等信息</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">apropos <span class="o">[</span>whatever<span class="o">]</span> <span class="c1"># 在一些特定的包含系统命令的简短描述的数据库文件里查找关键字</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">|</span> <span class="c1"># 管道命令符 将一个命令的标准输出作为另一个命令的标准输入</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">var</span><span class="o">=</span>value <span class="c1"># 给变量var赋值value</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$var</span>, <span class="si">${</span><span class="nv">var</span><span class="si">}</span> <span class="c1"># 取变量的值</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="sb">`</span>cmd<span class="sb">`</span>, <span class="k">$(</span>cmd<span class="k">)</span> <span class="c1"># 代换标准输出</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="s1">'string'</span> <span class="c1"># 非替换字符串</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="s2">"string"</span> <span class="c1"># 可替换字符串</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 以下为一组命令</span>
+</span></span><span class="line"><span class="cl">$ <span class="nv">var</span><span class="o">=</span><span class="s2">"test"</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">$ <span class="nb">echo</span> <span class="nv">$var</span>
+</span></span><span class="line"><span class="cl"><span class="nb">test</span>
+</span></span><span class="line"><span class="cl">$ <span class="nb">echo</span> <span class="s1">'This is a $var'</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">This is a <span class="nv">$var</span>
+</span></span><span class="line"><span class="cl">$ <span class="nb">echo</span> <span class="s2">"This is a </span><span class="nv">$var</span><span class="s2">"</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">This is a <span class="nb">test</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">$ <span class="nb">echo</span> <span class="sb">`</span>date<span class="sb">`</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">2023年 07月 14日 星期二 23:05:19 CST
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">$ <span class="nb">echo</span> <span class="nv">$0</span>
+</span></span><span class="line"><span class="cl">/bin/bash
+</span></span></code></pre></div><br/>
+<div class="anchor" id="常用快捷键"></div>
+<h3 class="relative group">常用快捷键 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e5%b8%b8%e7%94%a8%e5%bf%ab%e6%8d%b7%e9%94%ae" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># Bash 快捷键</span>
+</span></span><span class="line"><span class="cl">Up<span class="o">(</span>Down<span class="o">)</span> <span class="c1"># 上（下）一条指令</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Ctrl + c <span class="c1"># 终止当前进程</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Ctrl + z <span class="c1"># 挂起当前进程，使用“fg”可唤醒</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Ctrl + d <span class="c1"># 删除光标处的字符</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Ctrl + l <span class="c1"># 清屏</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Ctrl + a <span class="c1"># 移动到命令行首</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Ctrl + e <span class="c1"># 移动到命令行尾</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Ctrl + b <span class="c1"># 按单词后移（向左）</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Ctrl + f <span class="c1"># 按单词前移（向右）</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Ctrl + Shift + c <span class="c1"># 复制</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Ctrl + Shift + v <span class="c1"># 粘贴</span>
+</span></span></code></pre></div><br/>
+<div class="anchor" id="一些根目录的知识"></div>
+<h3 class="relative group">一些根目录的知识 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e4%b8%80%e4%ba%9b%e6%a0%b9%e7%9b%ae%e5%bd%95%e7%9a%84%e7%9f%a5%e8%af%86" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<ul>
+<li><code>/bin</code>、<code>/sbin</code>：链接到 <code>/usr/bin</code>，存放 Linux 一些核心的二进制文件，其包含的命令可在 shell 上运行。</li>
+<li><code>/boot</code>：操作系统启动时要用到的程序。</li>
+<li><code>/dev</code>：包含了所有 Linux 系统中使用的外部设备。需要注意的是这里并不是存放外部设备的驱动程序，而是一个访问这些设备的端口。</li>
+<li><code>/etc</code>：存放系统管理时要用到的各种配置文件和子目录。</li>
+<li><code>/etc/rc.d</code>：存放 Linux 启动和关闭时要用到的脚本。</li>
+<li><code>/home</code>：普通用户的主目录。</li>
+<li><code>/mnt</code>：这个目录让用户可以临时挂载其他的文件系统。</li>
+<li><code>/proc</code>：虚拟的目录，是系统内存的映射。可直接访问这个目录来获取系统信息。</li>
+<li><code>/root</code>：系统管理员的主目录。</li>
+<li><code>/srv</code>：存放一些服务启动之后需要提取的数据。</li>
+<li><code>/sys</code>：该目录下安装了一个文件系统 sysfs。该文件系统是内核设备树的一个直观反映。当一个内核对象被创建时，对应的文件和目录也在内核对象子系统中被创建。</li>
+<li><code>/tmp</code>：公用的临时文件存放目录。</li>
+<li><code>/usr</code>：应用程序和文件几乎都在这个目录下。</li>
+<li><code>/usr/src</code>：内核源代码的存放目录。</li>
+<li><code>/var</code>：存放了很多服务的日志信息</li>
+</ul>
+<div class="anchor" id="linux命令执行小结"></div>
+<h2 class="relative group">Linux命令执行小结 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#linux%e5%91%bd%e4%bb%a4%e6%89%a7%e8%a1%8c%e5%b0%8f%e7%bb%93" style="text-decoration-line: none !important;">#</a></span>
+</h2>
+<p>参考学习自lexsd6师傅的<a href="https://lexsd6.github.io/2020/09/10/%E5%AF%B9linux%20%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E7%9A%84%E6%80%BB%E7%BB%93/" target="_blank">
+    文章</a>，师傅太强啦！</p>
+<p>文章链接：</p>
+<p>[对linux 命令执行的总结 | lexsd6’s home](<a href="https://lexsd6.github.io/2020/09/10/" target="_blank">
+    https://lexsd6.github.io/2020/09/10/</a>对linux 命令执行的总结/)</p>
+<br/>
+<div class="anchor" id="读取文件命令"></div>
+<h3 class="relative group">读取文件命令 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e8%af%bb%e5%8f%96%e6%96%87%e4%bb%b6%e5%91%bd%e4%bb%a4" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cat <span class="c1"># 由第一行开始显示内容，并将所有内容输出</span>
+</span></span><span class="line"><span class="cl">	cat ./flag
+</span></span><span class="line"><span class="cl">	cat /home/flag
+</span></span><span class="line"><span class="cl">	cat flag<span class="p">|</span>base64 <span class="c1"># 在当前目录输出文件内容的base64编码	</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">## 在getshell后如果我们实在找不到flag文件的话可以试着用find命令搜素一下</span>
+</span></span><span class="line"><span class="cl">	find / -name flag*
+</span></span><span class="line"><span class="cl">	find / -name *flag
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">tac <span class="c1"># 从最后一行倒序显示内容，并将所有内容输出</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">more <span class="c1"># 根据窗口大小，一页一页的现实文件内容</span>
+</span></span><span class="line"><span class="cl">	 <span class="c1"># 可加-数字 一次显示的行数。+数字设置从第几行开始查看</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">less <span class="c1"># 与more类似，但其优点可以往前翻页，而且进行可以搜索字符。在默认情况下翻页。</span>
+</span></span><span class="line"><span class="cl">	<span class="c1"># :q 退出</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="sb">`</span>less ./flag<span class="sb">`</span> <span class="c1">#我们还可以反引号来进行指令替代</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">#（以某一个指令的输出结果作为另一个指令的输入项）</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">head <span class="c1"># 只显示头几行。</span>
+</span></span><span class="line"><span class="cl">	 <span class="c1"># 可加-c 设置一次显示的字符数。-n设置从显示行数</span>
+</span></span><span class="line"><span class="cl">	 
+</span></span><span class="line"><span class="cl">tail <span class="c1"># 只显示最后几行。</span>
+</span></span><span class="line"><span class="cl">	 <span class="c1"># 可加-c 设置一次显示的字符数。-n设置从显示行数</span>
+</span></span><span class="line"><span class="cl">	 
+</span></span><span class="line"><span class="cl">nl <span class="c1"># 类似于cat -n，显示时输出行号</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sort <span class="c1"># sort 命令默认用法也有读取文件的作用</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">paste <span class="c1"># 在合并文件的同时也会输出文件的内容（可以只传一个文件名）</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">diff <span class="c1"># diff在对比两个文件后，会将两个文件输出</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">od <span class="c1"># od指令会读取所给予的文件的内容，并将其内容以八进制字码呈现出来</span>
+</span></span><span class="line"><span class="cl">   <span class="c1"># 我们可以通过 -a、 -c、 -ta 、-tc 选项将其转为可见字符显示出来</span>
+</span></span><span class="line"><span class="cl">   
+</span></span><span class="line"><span class="cl">bzmore <span class="c1"># bzmore将bzip压缩过的文件解压到标准输出</span>
+</span></span><span class="line"><span class="cl">	   <span class="c1"># 同时也可以将普通文件显示到标准输出</span>
+</span></span><span class="line"><span class="cl">	   
+</span></span><span class="line"><span class="cl">bzless <span class="c1"># 增强“.bz2”压缩包查看器，bzless比bzmore命令功能更加强大。在默认情况下翻页。</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="sb">`</span>bzless ./flag<span class="sb">`</span><span class="c1"># 我们同样可以用反引号来进行指令替代</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">m4 <span class="c1"># m4 将输入拷贝到输出,同时将宏展开. 宏可以是内嵌的也可以是用户定义的</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">curl <span class="c1"># curl 通过文件协议来读取文件。</span>
+</span></span><span class="line"><span class="cl">curl file:///home/flag
+</span></span></code></pre></div><br/>
+<div class="anchor" id="目录读取命令"></div>
+<h3 class="relative group">目录读取命令 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e7%9b%ae%e5%bd%95%e8%af%bb%e5%8f%96%e5%91%bd%e4%bb%a4" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">ls <span class="c1"># ls 用于查看参数目录下的文件</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">dir <span class="c1"># 与ls类似，用于查看参数目录下的文件</span>
+</span></span></code></pre></div><br/>
+<div class="anchor" id="linux命令分割符"></div>
+<h3 class="relative group">linux命令分割符 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#linux%e5%91%bd%e4%bb%a4%e5%88%86%e5%89%b2%e7%ac%a6" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<p>用linux命令时候,我们想用一行来执行多条命令时我们可以用命令分割符来操作。</p>
+<div class="anchor" id="-符号"></div>
+<h4 class="relative group">‘;’ 符号 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#-%e7%ac%a6%e5%8f%b7" style="text-decoration-line: none !important;">#</a></span>
+</h4>
+<p>用;号隔开每个命令, 每个命令按照从左到右的顺序,顺序执行， 彼此之间不关心是否失败， 所有命令都会执行.用法:</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">command1 <span class="p">;</span> command2
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 在做pwn题目时我们可能会用到利用这个`;`的特性</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 比如执行system("xxx;/bin/sh")来getshell</span>
+</span></span></code></pre></div><div class="anchor" id="单--符号"></div>
+<h4 class="relative group">单 ’|’ 符号 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e5%8d%95--%e7%ac%a6%e5%8f%b7" style="text-decoration-line: none !important;">#</a></span>
+</h4>
+<p>Linux所提供的管道符“|”将两个命令隔开，管道符左边命令的输出就会作为管道符右边命令的输入。连续使用管道意味着第一个命令的输出会作为 第二个命令的输入，第二个命令的输出又会作为第三个命令的输入，依此类推.</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">command1 <span class="p">|</span> command2
+</span></span></code></pre></div><div class="anchor" id="单符号"></div>
+<h4 class="relative group">单’&amp;’符号 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e5%8d%95%e7%ac%a6%e5%8f%b7" style="text-decoration-line: none !important;">#</a></span>
+</h4>
+<p>默认情况下，我们命令行执行的进程是前台进程，这时就把Shell给占据了，我们无法进行其他操作，对于那些没有交互的进程，很多时候，我们希望将其在后台启动，可以在启动参数的时候加一个’&amp;’实现这个目的。用法:</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">command1 <span class="p">&amp;</span> command2      <span class="c1">#commond1 命令将会在后台进行</span>
+</span></span></code></pre></div><ul>
+<li>‘&amp;’前面的命令将会在在后端运行</li>
+<li>另外’&amp;’也是可以套娃使用的</li>
+<li>‘&amp;’与’;’的对比
+<ul>
+<li>’;’是死板的从左到右,’&amp;’是将右边的放入后台执行</li>
+</ul>
+</li>
+</ul>
+<div class="anchor" id="双符号"></div>
+<h4 class="relative group">双’&amp;’符号（’&amp;&amp;’） 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e5%8f%8c%e7%ac%a6%e5%8f%b7" style="text-decoration-line: none !important;">#</a></span>
+</h4>
+<p>与c语言的’&amp;&amp;’类似，’&amp;&amp;’表时逻辑且的意思。只有在 &amp;&amp; 左边的命令返回真（命令返回值 $? == 0），&amp;&amp; 右边的命令才会被执行。用法：</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">command1 <span class="o">&amp;&amp;</span> command2
+</span></span></code></pre></div><div class="anchor" id="双符号-1"></div>
+<h4 class="relative group">双’|’符号（’||’） 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e5%8f%8c%e7%ac%a6%e5%8f%b7-1" style="text-decoration-line: none !important;">#</a></span>
+</h4>
+<p>与’&amp;&amp;’相反，’||’表示逻辑或的意思。只有在 || 左边的命令返回假，|| 右边的命令才会被执行。这和 c 语言中的逻辑或语法功能相同，即实现短路逻辑或操作</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">command1 <span class="o">||</span> command2
+</span></span></code></pre></div><br/>
+<div class="anchor" id="i--o重定向"></div>
+<h3 class="relative group">I / O重定向 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#i--o%e9%87%8d%e5%ae%9a%e5%90%91" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<p>I / O重定向通俗的讲就是就是我们平时用到的那些就是经典的输出重定向<code>&gt;</code>和输入重定向<code>&lt;</code>.</p>
+<p>但如过要深入点了解I / O重定向，还需要了解<strong>文件描述符。</strong></p>
+<div class="anchor" id="文件描述符"></div>
+<h4 class="relative group">文件描述符 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e6%96%87%e4%bb%b6%e6%8f%8f%e8%bf%b0%e7%ac%a6" style="text-decoration-line: none !important;">#</a></span>
+</h4>
+<p>在linux中，每个打开的文件都分配有一个文件描述符。但会保留描述符1到9。其中0、1、2是默认打开文件stdin， stdout和stderr的 文件描述符。</p>
+<ul>
+<li>0  是stdin（键盘设备文件） 又称为标准输入 ，是我们从键盘输入信息所在的文件</li>
+<li>1  是stdout（屏幕设备文件）又称为标准输出，是linux的正常输出信息。</li>
+<li>2  是stderr（错误消息输出到屏幕设备文件）又称为标准错误输出，是linux的错误输出信息。</li>
+</ul>
+<p>如果还不理解stdout与stderr，看下下面这张图</p>
+<p>
+<figure>
+<img alt="image-20230829234400104" class="my-0 rounded-md" src="https://s2.loli.net/2023/08/29/CzbuEkqfTtpoUgK.png"/>
+</figure>
+</p>
+<ul>
+<li>在<code>cat flag1 1&gt;flag2</code>时<code>cat flag1</code>的标准输出未打印在屏幕上，而是重定向输出在文件flag2里。</li>
+<li>在<code>cat flag1 2&gt;flag2</code>时<code>cat flag1</code>并未报错，所以标准输出打印在屏幕上且flag2中的文件为NULL</li>
+<li>在<code>cat flag3 1&gt;flag2</code>时，由于没有flag3文件，所以标准输出到flag2文件里且flag2中的文件为NULL</li>
+<li>在<code>cat flag3 2&gt;flag2</code>时，由于没有flag3文件，<code>cat flag3</code>有报错但是未打印在屏幕上，而是重定向输出在文件flag2里</li>
+</ul>
+<br/>
+<div class="anchor" id="输入重定向"></div>
+<h4 class="relative group">输入重定向 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e8%be%93%e5%85%a5%e9%87%8d%e5%ae%9a%e5%90%91" style="text-decoration-line: none !important;">#</a></span>
+</h4>
+<blockquote>
+<p>输入重定向是指把命令（或可执行程序）的标准输入重定向到指定的文件中。也就是说，输入可以不来自键盘，而来自一个指定的文件。所以说，输入重定向主要用于改变一个命令的输入源，特别是改变那些需要大量输入的输入源。</p>
+</blockquote>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"> &lt;用法：
+</span></span><span class="line"><span class="cl"><span class="nb">command</span> &lt; 文件 <span class="c1">#等同于command 0&lt; 文件 把文件当成输入源</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&lt;&lt;用法：
+</span></span><span class="line"><span class="cl"><span class="s">&lt;&lt; flag
+</span></span></span><span class="line"><span class="cl"><span class="s"> 
+</span></span></span><span class="line"><span class="cl"><span class="s"># 内容:
+</span></span></span><span class="line"><span class="cl"><span class="s">flag</span>
+</span></span></code></pre></div><br/>
+<div class="anchor" id="输出重定向"></div>
+<h4 class="relative group">输出重定向 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e8%be%93%e5%87%ba%e9%87%8d%e5%ae%9a%e5%90%91" style="text-decoration-line: none !important;">#</a></span>
+</h4>
+<blockquote>
+<p>输出重定向是指把命令（或可执行程序）的标准输出或标准错误输出重新定向到指定文件中。这样，该命令的输出就不显示在屏幕上，而是写入到指定文件。</p>
+</blockquote>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">command</span> &gt; 文件 
+</span></span><span class="line"><span class="cl"><span class="c1"># 相当于command 1&gt;文件 command标准输出就不显示在屏幕上，而是写入到指定文件。</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#这用法会覆盖文件里的内容</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">command</span> &gt;&gt; 文件 
+</span></span><span class="line"><span class="cl"><span class="c1"># 相当于command 1&gt;&gt;文件 command标准输出就不显示在屏幕上，而是追加写入到指定文件。</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#这用法不会覆盖文件里的内容</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">command</span> 1&gt; 文件 
+</span></span><span class="line"><span class="cl"><span class="c1">#command标准输出就不显示在屏幕上，而是写入到指定文件。</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#这用法会覆盖文件里的内容</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">command</span> 1&gt;&gt; 文件 
+</span></span><span class="line"><span class="cl"><span class="c1">#command标准输出就不显示在屏幕上，而是追加写入到指定文件。</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#这用法不会覆盖文件里的内容</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">command</span> 2&gt; 文件 
+</span></span><span class="line"><span class="cl"><span class="c1"># 相当于command 2&gt;文件 command报错输出就不显示在屏幕上，而是写入到指定文件。</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#这用法会覆盖文件里的内容</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">command</span> 2&gt;&gt; 文件 
+</span></span><span class="line"><span class="cl"><span class="c1"># 相当于command 2&gt;&gt;文件 command报错输出就不显示在屏幕上，而是追加写入到指定文件。</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#这用法不会覆盖文件里的内容</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">command</span> <span class="p">&amp;</span>&gt; 文件 
+</span></span><span class="line"><span class="cl"><span class="c1"># 类似于command 1&gt;文件  2&gt;文件 或command 1&gt;文件  2&gt;1 </span>
+</span></span><span class="line"><span class="cl"><span class="c1">#command标准输出与报错输出就不显示在屏幕上，而是写入到指定文件。</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 这用法不会覆盖文件里的内容</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">command</span> <span class="p">&amp;</span>&gt;&gt; 文件 
+</span></span><span class="line"><span class="cl"><span class="c1"># 类似于command 1&gt;&gt;文件  2&gt;&gt;文件 或 command 1&gt;&gt;文件  2&gt;&gt;1</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#command标准输出与报错输出就不显示在屏幕上，而是追加写入到指定文件。</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 这用法会不会覆盖文件里的内容</span>
+</span></span></code></pre></div><br/>
+<div class="anchor" id="-与-"></div>
+<h4 class="relative group">&amp;&gt; 与 &gt;&amp; 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#-%e4%b8%8e-" style="text-decoration-line: none !important;">#</a></span>
+</h4>
+<p><code>&amp;&gt;</code>与<code>&gt;&amp;</code>都允许将标准输出（文件描述符1）和标准错误输出（文件描述符2）都重定向到的文件里.如下图所示：</p>
+<p>
+<figure>
+<img alt="image-20230829235403805" class="my-0 rounded-md" src="https://s2.loli.net/2023/08/29/M1WSVOCgowT6mYZ.png"/>
+</figure>
+</p>
+<br/>
+<p>看似<code>&amp;&gt;</code>与<code>&gt;&amp;</code>一样,但如果重定向的是文件描述符时,两者这有点细微的:</p>
+<p>
+<figure>
+<img alt="image-20230829235525814" class="my-0 rounded-md" src="https://s2.loli.net/2023/08/29/rm6l7Rv8nKPMpgw.png"/>
+</figure>
+</p>
+<p>注意！在当前目录下,有个名为1的文件！！！</p>
+<p>我们在执行<code>ls 1&amp;&gt;flag2</code>时，<code>&amp;&gt;</code>把<code>ls 1</code>当成一条命令运行重定向到flag2里。</p>
+<p>相当于执行的是<code>(ls 1) &amp;&gt;flag2</code>。</p>
+<p>我们在执行<code>ls 1&gt;&amp;flag2</code>时，<code>&amp;&gt;</code>把<code>ls</code>当成一条命令运行重定向到sss里。</p>
+<p>相当于执行的是<code>(ls) 1&amp;&gt;flag2</code>。</p>
+<br/>
+<div class="anchor" id="命令替换"></div>
+<h4 class="relative group">命令替换 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e5%91%bd%e4%bb%a4%e6%9b%bf%e6%8d%a2" style="text-decoration-line: none !important;">#</a></span>
+</h4>
+<p>命令替换是指将命令的标准输出作为值赋给某个变量，bash Shell定义了两种形式进行命令的替换，两种形式的语法格式如下：</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 方式一： </span>
+</span></span><span class="line"><span class="cl"><span class="sb">`</span>Linux命令<span class="sb">`</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 方式二： </span>
+</span></span><span class="line"><span class="cl">$（Linux命令）
+</span></span></code></pre></div><p>
+<figure>
+<img alt="image-20230830000114892" class="my-0 rounded-md" src="https://s2.loli.net/2023/08/30/xwVm5R947IF8JCK.png"/>
+</figure>
+</p>
+<p><strong>注：尽管$（）和反引号在命令替换上是等价的，但是，$（）形式的命令替换是可以嵌套的</strong></p>
+<br/>
+<div class="anchor" id="附录"></div>
+<h2 class="relative group">附录 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e9%99%84%e5%bd%95" style="text-decoration-line: none !important;">#</a></span>
+</h2>
+<p>本文参考链接及推荐阅读：</p>
+<p><a href="https://mp.weixin.qq.com/s/mRPxdDJnS8boa7BNyxME3w" target="_blank">
+    CTF PWN新手入门篇 PWN学习大纲 (qq.com)</a></p>
+<p>[对linux 命令执行的总结 | lexsd6’s home](<a href="https://lexsd6.github.io/2020/09/10/" target="_blank">
+    https://lexsd6.github.io/2020/09/10/</a>对linux 命令执行的总结/)</p>
 <details class="mt-2 mb-5 overflow-hidden rounded-lg ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5" style="margin-left:0px">
 <summary class="py-1 text-lg font-semibold cursor-pointer bg-primary-200 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-primary-800 dark:text-neutral-100">
         PWN入门 - This article is part of a series.
     </summary>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/posts/pwn/basic/pwn-_environment/">
-            Part 1: PWN环境搭建记录-Ubuntu 22.04
+<a href="https://ta0lve.github.io/posts/pwn/basic/tutorial11/">
+            Part 1: CTF入门宣讲-PWN方向
         </a>
 </div>
 <div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-        Part 2: This Article
+<a href="https://ta0lve.github.io/posts/pwn/basic/tutorial22/">
+            Part 2: pwn入门教程
+        </a>
+</div>
+<div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+        Part 3: This Article
     </div>
+<div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+<a href="https://ta0lve.github.io/posts/pwn/basic/pwn-_environment/">
+            Part 4: PWN环境二次搭建记录-Ubuntu 22.04
+        </a>
+</div>
+<div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+<a href="https://ta0lve.github.io/posts/pwn/basic/remember-it-wp/">
+            Part 5: remember-it-012 official wp
+        </a>
+</div>
 </details>
 </div>
 <script>
@@ -445,10 +936,10 @@ New article!
 <div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
 <div class="w-full thumbnail_card_related nozoom" style="background-image:url(/posts/pwn/basic/pwn-_environment/featured.jpg);"></div>
 <div class="px-6 py-4">
-<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/pwn/basic/pwn-_environment/">PWN环境搭建记录-Ubuntu 22.04</div>
+<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/pwn/basic/pwn-_environment/">PWN环境二次搭建记录-Ubuntu 22.04</div>
 <div class="text-sm text-neutral-500 dark:text-neutral-400">
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-07-10 00:00:00 +0000 UTC">July 10, 2023</time><span class="px-2 text-primary-500">·</span><span>8224 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">17 分钟</span>
+<time datetime="2023-07-10 00:00:00 +0000 UTC">July 10, 2023</time><span class="px-2 text-primary-500">·</span><span>9775 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">20 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
 <span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%85%A5%E9%97%A8/&quot;,'_self');" style="margin-top:0.5rem">
@@ -486,20 +977,20 @@ New article!
 </div>
 </div>
 </a>
-<a class="min-w-full" href="/posts/wp/2023_07_hws/fmt2/">
+<a class="min-w-full" href="/posts/pwn/basic/tutorial11/">
 <div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
-<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/posts/wp/2023_07_hws/fmt2/featured.jpg);"></div>
+<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/posts/pwn/basic/tutorial11/featured.jpg);"></div>
 <div class="px-6 py-4">
-<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/wp/2023_07_hws/fmt2/">HWS 2023 PWN fmt exp</div>
+<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/pwn/basic/tutorial11/">CTF入门宣讲-PWN方向</div>
 <div class="text-sm text-neutral-500 dark:text-neutral-400">
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-07-18 00:00:00 +0000 UTC">July 18, 2023</time><span class="px-2 text-primary-500">·</span><span>2818 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">6 分钟</span>
+<time datetime="2023-09-23 00:00:00 +0000 UTC">September 23, 2023</time><span class="px-2 text-primary-500">·</span><span>8419 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">17 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
-<span class="mr-2" onclick="window.open(&quot;/categories/wp/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%85%A5%E9%97%A8/&quot;,'_self');" style="margin-top:0.5rem">
 <span class="flex">
 <span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    WP
+    pwn入门
   </span>
 </span>
 </span>
@@ -517,34 +1008,30 @@ New article!
   </span>
 </span>
 </span>
-<span class="mr-2" onclick="window.open(&quot;/tags/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%BC%8F%E6%B4%9E/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    格式化字符串漏洞
-  </span>
-</span>
-</span>
 </div>
+</div>
+<div class="py-1 prose dark:prose-invert">
+<p>写给学弟学妹的pwn入门宣讲~</p>
 </div>
 </div>
 <div class="px-6 pt-4 pb-2">
 </div>
 </div>
 </a>
-<a class="min-w-full" href="/posts/wp/2023_07_hws/fmt/">
+<a class="min-w-full" href="/posts/pwn/basic/tutorial22/">
 <div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
-<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/posts/wp/2023_07_hws/fmt/featured.jpg);"></div>
+<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/posts/pwn/basic/tutorial22/featured.jpg);"></div>
 <div class="px-6 py-4">
-<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/wp/2023_07_hws/fmt/">HWS 2023 fmt wp</div>
+<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/pwn/basic/tutorial22/">pwn入门教程</div>
 <div class="text-sm text-neutral-500 dark:text-neutral-400">
 <div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-07-18 00:00:00 +0000 UTC">July 18, 2023</time><span class="px-2 text-primary-500">·</span><span>2536 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">6 分钟</span>
+<time datetime="2023-08-05 00:00:00 +0000 UTC">August 5, 2023</time><span class="px-2 text-primary-500">·</span><span>5811 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">12 分钟</span>
 </div>
 <div class="flex flex-row flex-wrap items-center">
-<span class="mr-2" onclick="window.open(&quot;/categories/wp/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%85%A5%E9%97%A8/&quot;,'_self');" style="margin-top:0.5rem">
 <span class="flex">
 <span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    WP
+    pwn入门
   </span>
 </span>
 </span>
@@ -562,14 +1049,10 @@ New article!
   </span>
 </span>
 </span>
-<span class="mr-2" onclick="window.open(&quot;/tags/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%BC%8F%E6%B4%9E/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    格式化字符串漏洞
-  </span>
-</span>
-</span>
 </div>
+</div>
+<div class="py-1 prose dark:prose-invert">
+<p>写给学弟学妹的pwn入门教程~</p>
 </div>
 </div>
 <div class="px-6 pt-4 pb-2">
@@ -580,12 +1063,14 @@ New article!
 <div class="content" id="content">
 <div style="margin-top:2em;padding:0 0.5em;font-size:.875rem">
 <hr/>
+<br/>
 <div style="padding-bottom:1em;">
 <p> </p>
-<p>本文作者：<a href="https://ta0lve.github.io/about/" target="_blank">ta0lve</a></p>
-<p>本文链接：<a href="https://ta0lve.github.io/posts/pwn/basic/linux_/" target="_blank">Linux 配置补充</a></p>
-<p><a href="https://ta0lve.github.io/posts/pwn/basic/linux_/" target="_blank">( https://ta0lve.github.io/posts/pwn/basic/linux_/ )</a></p>
-<p>版权声明：<a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">「署名-非商业性使用-相同方式共享 4.0 国际」</a></p>
+<p>本文作者：<a href="https://ta0lve.github.io/about/" target="_blank"><font color="#49b1f5" style="text-decoration: underline">ta0lve</font></a></p>
+<p>本文链接：<a href="https://ta0lve.github.io/posts/pwn/basic/linux_/" target="_blank"><font color="#49b1f5" style="text-decoration: underline">Linux命令入门与总结</font></a></p>
+<p><a href="https://ta0lve.github.io/posts/pwn/basic/linux_/" target="_blank"><font color="#49b1f5" style="text-decoration: underline"> https://ta0lve.github.io/posts/pwn/basic/linux_/ </font></a></p>
+<p>版权声明：本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank"><font color="#49b1f5" style="text-decoration: underline"> CC BY-NC 4.0 </font></a> 许可协议。</p>
+<p>转载请注明来自<a class="redlink" href="https://ta0lve.github.io/" target="_blank"> <font color="#49b1f5" style="text-decoration: underline">ta0lve's Blog</font></a> ！</p>
 </div>
 </div>
 </div>
@@ -597,7 +1082,7 @@ New article!
 <span class="mr-3 text-neutral-700 group-hover:text-primary-600 ltr:inline rtl:hidden dark:text-neutral dark:group-hover:text-primary-400">←</span>
 <span class="ml-3 text-neutral-700 group-hover:text-primary-600 ltr:hidden rtl:inline dark:text-neutral dark:group-hover:text-primary-400">→</span>
 <span class="flex flex-col">
-<span class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500">PWN环境搭建记录-Ubuntu 22.04</span>
+<span class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500">PWN环境二次搭建记录-Ubuntu 22.04</span>
 <span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
 <time datetime="2023-07-10 00:00:00 +0000 UTC">July 10, 2023</time>
 </span>
@@ -605,11 +1090,11 @@ New article!
 </a>
 </span>
 <span>
-<a class="flex text-right group ml-3" href="/posts/wp/2023_07_hws/fmt2/">
+<a class="flex text-right group ml-3" href="/posts/pwn/heap/chunk_1/">
 <span class="flex flex-col">
-<span class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500">HWS 2023 PWN fmt exp</span>
+<span class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500">堆基础知识学习记录</span>
 <span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
-<time datetime="2023-07-18 00:00:00 +0000 UTC">July 18, 2023</time>
+<time datetime="2023-07-31 00:00:00 +0000 UTC">July 31, 2023</time>
 </span>
 </span>
 <span class="ml-3 text-neutral-700 group-hover:text-primary-600 ltr:inline rtl:hidden dark:text-neutral dark:group-hover:text-primary-400">→</span>
@@ -618,6 +1103,8 @@ New article!
 </span>
 </div>
 </div>
+<script async="" crossorigin="anonymous" data-category="Announcements" data-category-id="DIC_kwDOJ9Vlo84CX_0P" data-emit-metadata="0" data-input-position="bottom" data-lang="zh-CN" data-mapping="pathname" data-reactions-enabled="1" data-repo="ta0lve/blogtalk" data-repo-id="R_kgDOJ9Vlow" data-strict="0" data-theme="dark_dimmed" src="https://giscus.app/client.js">
+</script>
 </footer>
 </article>
 <div class="pointer-events-none absolute top-[110vh] bottom-0 w-12 ltr:right-0 rtl:left-0" id="top-scroller">
@@ -629,7 +1116,7 @@ New article!
 <nav class="flex flex-row pb-4 text-base font-medium text-neutral-500 dark:text-neutral-400">
 <ul class="flex flex-col list-none sm:flex-row">
 <li class="flex mb-1 ltr:text-right rtl:text-left sm:mb-0 ltr:sm:mr-7 ltr:sm:last:mr-0 rtl:sm:ml-7 rtl:sm:last:ml-0">
-<a class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2" href="/about/" title="">About</a>
+<a class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2" href="/about/" title="About">About</a>
 </li>
 <li class="flex mb-1 ltr:text-right rtl:text-left sm:mb-0 ltr:sm:mr-7 ltr:sm:last:mr-0 rtl:sm:ml-7 rtl:sm:last:ml-0">
 <a class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2" href="/tags/pwn/" title="PWN">pwn2own , pwn4fun</a>
@@ -638,7 +1125,7 @@ New article!
 </nav>
 <div class="flex items-center justify-between">
 <p class="text-sm text-neutral-500 dark:text-neutral-400">
-      Copyright ©2023 ta0lve, All Rights Reserved.
+      Copyright ©2024 ta0lve, All Rights Reserved.
     </p>
 <p class="text-xs text-neutral-500 dark:text-neutral-400">
       
@@ -680,5 +1167,5 @@ New article!
 </div>
 </div>
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script><script src="/decrypt.js"></script></body>
+</body>
 </html>

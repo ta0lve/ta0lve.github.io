@@ -9,14 +9,11 @@
     <lastBuildDate>Wed, 05 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://ta0lve.github.io/tags/rsa/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Crypto-GZ RSA</title>
-      <link>https://ta0lve.github.io/posts/wp/2023_04_ctf/6_gz-rsa_write_up/</link>
+      <link>https://ta0lve.github.io/posts/wp/2023_04_w4ter/6_gz-rsa_write_up/</link>
       <pubDate>Wed, 05 Jul 2023 00:00:00 +0000</pubDate>
       
-      <guid>https://ta0lve.github.io/posts/wp/2023_04_ctf/6_gz-rsa_write_up/</guid>
-      <description>&lt;p&gt;&lt;strong&gt;此文章仅限战队内部成员阅读&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;路过的师傅们看看远处的wp吧：&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://ta0lve.github.io/posts/wp/2023_06_ciscn/&#34;   target=&#34;_blank&#34;&gt;
-    2023 ciscn 初赛 · ta0lve&lt;/a&gt;&lt;/p&gt;</description>
+      <guid>https://ta0lve.github.io/posts/wp/2023_04_w4ter/6_gz-rsa_write_up/</guid>
+      <description>题目描述 # 在RSA中，素数的选择和保密性非常重要。 只要不泄露</description>
     </item>
     
   </channel>

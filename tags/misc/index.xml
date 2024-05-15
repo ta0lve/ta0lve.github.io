@@ -9,62 +9,47 @@
     <lastBuildDate>Wed, 05 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://ta0lve.github.io/tags/misc/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>misc-Chisato</title>
-      <link>https://ta0lve.github.io/posts/wp/2023_04_ctf/10_chisato_write_up/</link>
+      <link>https://ta0lve.github.io/posts/wp/2023_04_w4ter/10_chisato_write_up/</link>
       <pubDate>Wed, 05 Jul 2023 00:00:00 +0000</pubDate>
       
-      <guid>https://ta0lve.github.io/posts/wp/2023_04_ctf/10_chisato_write_up/</guid>
-      <description>&lt;p&gt;&lt;strong&gt;此文章仅限战队内部成员阅读&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;路过的师傅们看看远处的wp吧：&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://ta0lve.github.io/posts/wp/2023_06_ciscn/&#34;   target=&#34;_blank&#34;&gt;
-    2023 ciscn 初赛 · ta0lve&lt;/a&gt;&lt;/p&gt;</description>
+      <guid>https://ta0lve.github.io/posts/wp/2023_04_w4ter/10_chisato_write_up/</guid>
+      <description>0.题目描述 # 据说泷奈拿到了新情报？ 能不能假装千束将情报骗到</description>
     </item>
     
     <item>
       <title>misc-Shadow</title>
-      <link>https://ta0lve.github.io/posts/wp/2023_04_ctf/8_shadow_write_up/</link>
+      <link>https://ta0lve.github.io/posts/wp/2023_04_w4ter/8_shadow_write_up/</link>
       <pubDate>Wed, 05 Jul 2023 00:00:00 +0000</pubDate>
       
-      <guid>https://ta0lve.github.io/posts/wp/2023_04_ctf/8_shadow_write_up/</guid>
-      <description>&lt;p&gt;&lt;strong&gt;此文章仅限战队内部成员阅读&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;路过的师傅们看看远处的wp吧：&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://ta0lve.github.io/posts/wp/2023_06_ciscn/&#34;   target=&#34;_blank&#34;&gt;
-    2023 ciscn 初赛 · ta0lve&lt;/a&gt;&lt;/p&gt;</description>
+      <guid>https://ta0lve.github.io/posts/wp/2023_04_w4ter/8_shadow_write_up/</guid>
+      <description>先 nc 一下，提示在shadow中寻找flag 第一反应是写一个r</description>
     </item>
     
     <item>
       <title>misc-USB Hacker</title>
-      <link>https://ta0lve.github.io/posts/wp/2023_04_ctf/9_usb-hacker_write_up/</link>
+      <link>https://ta0lve.github.io/posts/wp/2023_04_w4ter/9_usb-hacker_write_up/</link>
       <pubDate>Wed, 05 Jul 2023 00:00:00 +0000</pubDate>
       
-      <guid>https://ta0lve.github.io/posts/wp/2023_04_ctf/9_usb-hacker_write_up/</guid>
-      <description>&lt;p&gt;&lt;strong&gt;此文章仅限战队内部成员阅读&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;路过的师傅们看看远处的wp吧：&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://ta0lve.github.io/posts/wp/2023_06_ciscn/&#34;   target=&#34;_blank&#34;&gt;
-    2023 ciscn 初赛 · ta0lve&lt;/a&gt;&lt;/p&gt;</description>
+      <guid>https://ta0lve.github.io/posts/wp/2023_04_w4ter/9_usb-hacker_write_up/</guid>
+      <description>用wireshark分析了一下流量包后发现是usb的键盘流量</description>
     </item>
     
     <item>
       <title>misc-W4ter Disk</title>
-      <link>https://ta0lve.github.io/posts/wp/2023_04_ctf/11_w4ter-disk_write_up/</link>
+      <link>https://ta0lve.github.io/posts/wp/2023_04_w4ter/11_w4ter-disk_write_up/</link>
       <pubDate>Wed, 05 Jul 2023 00:00:00 +0000</pubDate>
       
-      <guid>https://ta0lve.github.io/posts/wp/2023_04_ctf/11_w4ter-disk_write_up/</guid>
-      <description>&lt;p&gt;&lt;strong&gt;此文章仅限战队内部成员阅读&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;路过的师傅们看看远处的wp吧：&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://ta0lve.github.io/posts/wp/2023_06_ciscn/&#34;   target=&#34;_blank&#34;&gt;
-    2023 ciscn 初赛 · ta0lve&lt;/a&gt;&lt;/p&gt;</description>
+      <guid>https://ta0lve.github.io/posts/wp/2023_04_w4ter/11_w4ter-disk_write_up/</guid>
+      <description>本题wp的结构如下：（前排提示，该题wp有点多） 题目描述 # ​</description>
     </item>
     
     <item>
       <title>misc-Weird Letter</title>
-      <link>https://ta0lve.github.io/posts/wp/2023_04_ctf/7_weird-letter_write_up/</link>
+      <link>https://ta0lve.github.io/posts/wp/2023_04_w4ter/7_weird-letter_write_up/</link>
       <pubDate>Wed, 05 Jul 2023 00:00:00 +0000</pubDate>
       
-      <guid>https://ta0lve.github.io/posts/wp/2023_04_ctf/7_weird-letter_write_up/</guid>
-      <description>&lt;p&gt;&lt;strong&gt;此文章仅限战队内部成员阅读&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;路过的师傅们看看远处的wp吧：&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://ta0lve.github.io/posts/wp/2023_06_ciscn/&#34;   target=&#34;_blank&#34;&gt;
-    2023 ciscn 初赛 · ta0lve&lt;/a&gt;&lt;/p&gt;</description>
+      <guid>https://ta0lve.github.io/posts/wp/2023_04_w4ter/7_weird-letter_write_up/</guid>
+      <description>先在浏览器上访问实例，可以得到密文： Okze WEYng, D eixy jgty lrmdtpt afhlm onf cdyf lgm icxn gik&amp;rsquo;qp</description>
     </item>
     
   </channel>

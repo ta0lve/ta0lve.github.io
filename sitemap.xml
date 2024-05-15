@@ -5,7 +5,7 @@
     
       <url>
             <loc>https://ta0lve.github.io/</loc>
-            <lastmod>2023-07-18T00:00:00+00:00</lastmod>
+            <lastmod>2024-05-06T00:00:00+00:00</lastmod>
             <changefreq>daily</changefreq>
             <priority>0.5</priority>
           </url>
@@ -13,32 +13,12 @@
   
     
   
-    
-  
-    
-  
-    
-      <url>
-            <loc>https://ta0lve.github.io/posts/wp/2023_07_hws/fmt/</loc>
-            <lastmod>2023-07-18T00:00:00+00:00</lastmod>
-            <changefreq>daily</changefreq>
-            <priority>0.5</priority>
-          </url>
-    
-  
-    
-      <url>
-            <loc>https://ta0lve.github.io/posts/wp/2023_07_hws/fmt2/</loc>
-            <lastmod>2023-07-18T00:00:00+00:00</lastmod>
-            <changefreq>daily</changefreq>
-            <priority>0.5</priority>
-          </url>
     
   
     
       <url>
             <loc>https://ta0lve.github.io/posts/</loc>
-            <lastmod>2023-07-18T00:00:00+00:00</lastmod>
+            <lastmod>2024-05-06T00:00:00+00:00</lastmod>
             <changefreq>daily</changefreq>
             <priority>0.5</priority>
           </url>
@@ -48,6 +28,138 @@
   
     
   
+    
+  
+    
+      <url>
+            <loc>https://ta0lve.github.io/posts/pwn/basic/remember-it-wp/</loc>
+            <lastmod>2024-05-06T00:00:00+00:00</lastmod>
+            <changefreq>daily</changefreq>
+            <priority>0.5</priority>
+          </url>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <url>
+            <loc>https://ta0lve.github.io/posts/iot/0x03/</loc>
+            <lastmod>2024-02-23T00:00:00+00:00</lastmod>
+            <changefreq>daily</changefreq>
+            <priority>0.5</priority>
+          </url>
+    
+  
+    
+  
+    
+  
+    
+      <url>
+            <loc>https://ta0lve.github.io/posts/iot/0x02/</loc>
+            <lastmod>2024-02-23T00:00:00+00:00</lastmod>
+            <changefreq>daily</changefreq>
+            <priority>0.5</priority>
+          </url>
+    
+  
+    
+      <url>
+            <loc>https://ta0lve.github.io/posts/iot/0x01/</loc>
+            <lastmod>2024-02-23T00:00:00+00:00</lastmod>
+            <changefreq>daily</changefreq>
+            <priority>0.5</priority>
+          </url>
+    
+  
+    
+      <url>
+            <loc>https://ta0lve.github.io/posts/pwn/basic/tutorial11/</loc>
+            <lastmod>2023-09-23T00:00:00+00:00</lastmod>
+            <changefreq>daily</changefreq>
+            <priority>0.5</priority>
+          </url>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <url>
+            <loc>https://ta0lve.github.io/posts/pwn/awdp/0x02/</loc>
+            <lastmod>2023-09-11T00:00:00+00:00</lastmod>
+            <changefreq>daily</changefreq>
+            <priority>0.5</priority>
+          </url>
+    
+  
+    
+      <url>
+            <loc>https://ta0lve.github.io/posts/pwn/awdp/0x01/</loc>
+            <lastmod>2023-09-04T00:00:00+00:00</lastmod>
+            <changefreq>daily</changefreq>
+            <priority>0.5</priority>
+          </url>
+    
+  
+    
+      <url>
+            <loc>https://ta0lve.github.io/posts/pwn/risc-v/0x01/</loc>
+            <lastmod>2023-09-03T00:00:00+00:00</lastmod>
+            <changefreq>daily</changefreq>
+            <priority>0.5</priority>
+          </url>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <url>
+            <loc>https://ta0lve.github.io/link/xia0/</loc>
+            <lastmod>2023-08-24T00:00:00+00:00</lastmod>
+            <changefreq>daily</changefreq>
+            <priority>0.5</priority>
+          </url>
+    
+  
+    
+      <url>
+            <loc>https://ta0lve.github.io/link/</loc>
+            <lastmod>2023-08-24T00:00:00+00:00</lastmod>
+            <changefreq>daily</changefreq>
+            <priority>0.5</priority>
+          </url>
+    
+  
+    
+      <url>
+            <loc>https://ta0lve.github.io/posts/pwn/basic/tutorial22/</loc>
+            <lastmod>2023-08-05T00:00:00+00:00</lastmod>
+            <changefreq>daily</changefreq>
+            <priority>0.5</priority>
+          </url>
+    
+  
+    
+  
+    
+      <url>
+            <loc>https://ta0lve.github.io/posts/pwn/heap/chunk_1/</loc>
+            <lastmod>2023-07-31T00:00:00+00:00</lastmod>
+            <changefreq>daily</changefreq>
+            <priority>0.5</priority>
+          </url>
     
   
     
@@ -70,30 +182,6 @@
     
   
     
-  
-    
-      <url>
-            <loc>https://ta0lve.github.io/pointer/schedole/2023_07_12/</loc>
-            <lastmod>2023-07-12T00:00:00+00:00</lastmod>
-            <changefreq>daily</changefreq>
-            <priority>0.5</priority>
-          </url>
-    
-  
-    
-      <url>
-            <loc>https://ta0lve.github.io/pointer/</loc>
-            <lastmod>2023-07-12T00:00:00+00:00</lastmod>
-            <changefreq>daily</changefreq>
-            <priority>0.5</priority>
-          </url>
-    
-  
-    
-  
-    
-  
-    
       <url>
             <loc>https://ta0lve.github.io/posts/pwn/basic/pwn-_environment/</loc>
             <lastmod>2023-07-10T00:00:00+00:00</lastmod>
@@ -103,10 +191,27 @@
     
   
     
+      <url>
+            <loc>https://ta0lve.github.io/posts/sth/sm.ms/</loc>
+            <lastmod>2023-07-10T00:00:00+00:00</lastmod>
+            <changefreq>daily</changefreq>
+            <priority>0.5</priority>
+          </url>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
   
     
       <url>
-            <loc>https://ta0lve.github.io/pointer/%E4%B9%A6%E7%AD%BE/misc%E4%B9%A6%E7%AD%BE/</loc>
+            <loc>https://ta0lve.github.io/posts/wp/2023_--_--/basic_/0x02/</loc>
             <lastmod>2023-07-06T00:00:00+00:00</lastmod>
             <changefreq>daily</changefreq>
             <priority>0.5</priority>
@@ -115,16 +220,7 @@
   
     
       <url>
-            <loc>https://ta0lve.github.io/pointer/%E4%B9%A6%E7%AD%BE/pwn%E4%B9%A6%E7%AD%BE/</loc>
-            <lastmod>2023-07-06T00:00:00+00:00</lastmod>
-            <changefreq>daily</changefreq>
-            <priority>0.5</priority>
-          </url>
-    
-  
-    
-      <url>
-            <loc>https://ta0lve.github.io/pointer/%E4%B9%A6%E7%AD%BE/%E5%B7%A5%E5%85%B7%E7%BD%91%E5%9D%80/</loc>
+            <loc>https://ta0lve.github.io/posts/wp/2023_--_--/basic_/0x01/</loc>
             <lastmod>2023-07-06T00:00:00+00:00</lastmod>
             <changefreq>daily</changefreq>
             <priority>0.5</priority>
@@ -134,8 +230,10 @@
     
   
     
+  
+    
       <url>
-            <loc>https://ta0lve.github.io/posts/wp/2023_04_ctf/6_gz-rsa_write_up/</loc>
+            <loc>https://ta0lve.github.io/posts/wp/2023_04_w4ter/6_gz-rsa_write_up/</loc>
             <lastmod>2023-07-05T00:00:00+00:00</lastmod>
             <changefreq>daily</changefreq>
             <priority>0.5</priority>
@@ -146,7 +244,7 @@
   
     
       <url>
-            <loc>https://ta0lve.github.io/posts/wp/2023_04_ctf/10_chisato_write_up/</loc>
+            <loc>https://ta0lve.github.io/posts/wp/2023_04_w4ter/10_chisato_write_up/</loc>
             <lastmod>2023-07-05T00:00:00+00:00</lastmod>
             <changefreq>daily</changefreq>
             <priority>0.5</priority>
@@ -155,7 +253,7 @@
   
     
       <url>
-            <loc>https://ta0lve.github.io/posts/wp/2023_04_ctf/8_shadow_write_up/</loc>
+            <loc>https://ta0lve.github.io/posts/wp/2023_04_w4ter/8_shadow_write_up/</loc>
             <lastmod>2023-07-05T00:00:00+00:00</lastmod>
             <changefreq>daily</changefreq>
             <priority>0.5</priority>
@@ -164,7 +262,7 @@
   
     
       <url>
-            <loc>https://ta0lve.github.io/posts/wp/2023_04_ctf/9_usb-hacker_write_up/</loc>
+            <loc>https://ta0lve.github.io/posts/wp/2023_04_w4ter/9_usb-hacker_write_up/</loc>
             <lastmod>2023-07-05T00:00:00+00:00</lastmod>
             <changefreq>daily</changefreq>
             <priority>0.5</priority>
@@ -173,7 +271,7 @@
   
     
       <url>
-            <loc>https://ta0lve.github.io/posts/wp/2023_04_ctf/11_w4ter-disk_write_up/</loc>
+            <loc>https://ta0lve.github.io/posts/wp/2023_04_w4ter/11_w4ter-disk_write_up/</loc>
             <lastmod>2023-07-05T00:00:00+00:00</lastmod>
             <changefreq>daily</changefreq>
             <priority>0.5</priority>
@@ -182,18 +280,7 @@
   
     
       <url>
-            <loc>https://ta0lve.github.io/posts/wp/2023_04_ctf/7_weird-letter_write_up/</loc>
-            <lastmod>2023-07-05T00:00:00+00:00</lastmod>
-            <changefreq>daily</changefreq>
-            <priority>0.5</priority>
-          </url>
-    
-  
-    
-  
-    
-      <url>
-            <loc>https://ta0lve.github.io/posts/wp/2023_04_ctf/2_tic-tac-toe-level-0_write_up/</loc>
+            <loc>https://ta0lve.github.io/posts/wp/2023_04_w4ter/7_weird-letter_write_up/</loc>
             <lastmod>2023-07-05T00:00:00+00:00</lastmod>
             <changefreq>daily</changefreq>
             <priority>0.5</priority>
@@ -202,7 +289,7 @@
   
     
       <url>
-            <loc>https://ta0lve.github.io/posts/wp/2023_04_ctf/3_nimgame-level-1_write_up/</loc>
+            <loc>https://ta0lve.github.io/posts/wp/2023_04_w4ter/2_tic-tac-toe-level-0_write_up/</loc>
             <lastmod>2023-07-05T00:00:00+00:00</lastmod>
             <changefreq>daily</changefreq>
             <priority>0.5</priority>
@@ -211,22 +298,7 @@
   
     
       <url>
-            <loc>https://ta0lve.github.io/posts/wp/2023_04_ctf/1_what-is-netcat_write_up/</loc>
-            <lastmod>2023-07-05T00:00:00+00:00</lastmod>
-            <changefreq>daily</changefreq>
-            <priority>0.5</priority>
-          </url>
-    
-  
-    
-  
-    
-  
-    
-  
-    
-      <url>
-            <loc>https://ta0lve.github.io/posts/wp/2023_04_ctf/4_lazy-puts_write_up/</loc>
+            <loc>https://ta0lve.github.io/posts/wp/2023_04_w4ter/3_nimgame-level-1_write_up/</loc>
             <lastmod>2023-07-05T00:00:00+00:00</lastmod>
             <changefreq>daily</changefreq>
             <priority>0.5</priority>
@@ -235,7 +307,7 @@
   
     
       <url>
-            <loc>https://ta0lve.github.io/posts/wp/2023_04_ctf/5_oh-my-python_write_up/</loc>
+            <loc>https://ta0lve.github.io/posts/wp/2023_04_w4ter/1_what-is-netcat_write_up/</loc>
             <lastmod>2023-07-05T00:00:00+00:00</lastmod>
             <changefreq>daily</changefreq>
             <priority>0.5</priority>
@@ -249,12 +321,38 @@
     
   
     
+      <url>
+            <loc>https://ta0lve.github.io/posts/wp/2023_04_w4ter/4_lazy-puts_write_up/</loc>
+            <lastmod>2023-07-05T00:00:00+00:00</lastmod>
+            <changefreq>daily</changefreq>
+            <priority>0.5</priority>
+          </url>
+    
+  
+    
+      <url>
+            <loc>https://ta0lve.github.io/posts/wp/2023_04_w4ter/5_oh-my-python_write_up/</loc>
+            <lastmod>2023-07-05T00:00:00+00:00</lastmod>
+            <changefreq>daily</changefreq>
+            <priority>0.5</priority>
+          </url>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
   
     
   
     
       <url>
-            <loc>https://ta0lve.github.io/posts/wp/2023_04_ctf/111/</loc>
+            <loc>https://ta0lve.github.io/posts/wp/2023_04_w4ter/111/</loc>
             <lastmod>2023-07-04T00:00:00+00:00</lastmod>
             <changefreq>daily</changefreq>
             <priority>0.5</priority>
@@ -272,8 +370,17 @@
   
     
       <url>
-            <loc>https://ta0lve.github.io/link/</loc>
+            <loc>https://ta0lve.github.io/link/gztime/</loc>
             <lastmod>2023-07-02T00:00:00+00:00</lastmod>
+            <changefreq>daily</changefreq>
+            <priority>0.5</priority>
+          </url>
+    
+  
+    
+      <url>
+            <loc>https://ta0lve.github.io/link/tel/</loc>
+            <lastmod>2023-07-01T00:00:00+00:00</lastmod>
             <changefreq>daily</changefreq>
             <priority>0.5</priority>
           </url>
@@ -289,11 +396,9 @@
     
   
     
-  
-    
       <url>
-            <loc>https://ta0lve.github.io/posts/c&#43;&#43;/homework/c&#43;&#43;%E7%90%86%E8%AE%BA1/</loc>
-            <lastmod>2023-06-30T00:00:00+00:00</lastmod>
+            <loc>https://ta0lve.github.io/link/yring/</loc>
+            <lastmod>2023-06-25T00:00:00+00:00</lastmod>
             <changefreq>daily</changefreq>
             <priority>0.5</priority>
           </url>
@@ -301,8 +406,8 @@
   
     
       <url>
-            <loc>https://ta0lve.github.io/posts/c&#43;&#43;/homework/c&#43;&#43;%E7%90%86%E8%AE%BA2/</loc>
-            <lastmod>2023-06-30T00:00:00+00:00</lastmod>
+            <loc>https://ta0lve.github.io/link/weyung/</loc>
+            <lastmod>2023-06-24T00:00:00+00:00</lastmod>
             <changefreq>daily</changefreq>
             <priority>0.5</priority>
           </url>
@@ -310,8 +415,8 @@
   
     
       <url>
-            <loc>https://ta0lve.github.io/posts/c&#43;&#43;/homework/c&#43;&#43;%E7%90%86%E8%AE%BA3/</loc>
-            <lastmod>2023-06-30T00:00:00+00:00</lastmod>
+            <loc>https://ta0lve.github.io/link/a39/</loc>
+            <lastmod>2023-06-20T00:00:00+00:00</lastmod>
             <changefreq>daily</changefreq>
             <priority>0.5</priority>
           </url>
@@ -319,13 +424,29 @@
   
     
       <url>
-            <loc>https://ta0lve.github.io/posts/c&#43;&#43;/homework/c&#43;&#43;%E5%AE%9E%E9%AA%8C%E9%A2%98/</loc>
-            <lastmod>2023-06-30T00:00:00+00:00</lastmod>
+            <loc>https://ta0lve.github.io/link/pazuris/</loc>
+            <lastmod>2023-06-12T00:00:00+00:00</lastmod>
             <changefreq>daily</changefreq>
             <priority>0.5</priority>
           </url>
     
   
+    
+      <url>
+            <loc>https://ta0lve.github.io/link/r1ck/</loc>
+            <lastmod>2023-06-11T00:00:00+00:00</lastmod>
+            <changefreq>daily</changefreq>
+            <priority>0.5</priority>
+          </url>
+    
+  
+    
+      <url>
+            <loc>https://ta0lve.github.io/link/lilran/</loc>
+            <lastmod>2023-06-10T00:00:00+00:00</lastmod>
+            <changefreq>daily</changefreq>
+            <priority>0.5</priority>
+          </url>
     
   
     

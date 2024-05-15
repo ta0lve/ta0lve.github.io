@@ -6,49 +6,49 @@
     <description>Recent content in Categories on ta0lve</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 18 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://ta0lve.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>WP</title>
-      <link>https://ta0lve.github.io/categories/wp/</link>
-      <pubDate>Tue, 18 Jul 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://ta0lve.github.io/categories/wp/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>基础知识</title>
-      <link>https://ta0lve.github.io/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</link>
-      <pubDate>Fri, 14 Jul 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://ta0lve.github.io/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Life</title>
-      <link>https://ta0lve.github.io/categories/life/</link>
-      <pubDate>Wed, 12 Jul 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://ta0lve.github.io/categories/life/</guid>
-      <description></description>
-    </item>
-    
+    <lastBuildDate>Mon, 06 May 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://ta0lve.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>pwn入门</title>
       <link>https://ta0lve.github.io/categories/pwn%E5%85%A5%E9%97%A8/</link>
-      <pubDate>Mon, 10 Jul 2023 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 06 May 2024 00:00:00 +0000</pubDate>
       
       <guid>https://ta0lve.github.io/categories/pwn%E5%85%A5%E9%97%A8/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>C&#43;&#43;</title>
-      <link>https://ta0lve.github.io/categories/c&#43;&#43;/</link>
-      <pubDate>Fri, 30 Jun 2023 00:00:00 +0000</pubDate>
+      <title>IoT学习记录</title>
+      <link>https://ta0lve.github.io/categories/iot%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</link>
+      <pubDate>Fri, 23 Feb 2024 00:00:00 +0000</pubDate>
       
-      <guid>https://ta0lve.github.io/categories/c&#43;&#43;/</guid>
+      <guid>https://ta0lve.github.io/categories/iot%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>PWN学习记录</title>
+      <link>https://ta0lve.github.io/categories/pwn%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</link>
+      <pubDate>Mon, 11 Sep 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ta0lve.github.io/categories/pwn%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>blog</title>
+      <link>https://ta0lve.github.io/categories/blog/</link>
+      <pubDate>Mon, 10 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ta0lve.github.io/categories/blog/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>wp</title>
+      <link>https://ta0lve.github.io/categories/wp/</link>
+      <pubDate>Thu, 06 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ta0lve.github.io/categories/wp/</guid>
       <description></description>
     </item>
     

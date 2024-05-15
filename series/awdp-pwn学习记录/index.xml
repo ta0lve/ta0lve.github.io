@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>AWDP PWN学习记录 on ta0lve</title>
+    <link>https://ta0lve.github.io/series/awdp-pwn%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</link>
+    <description>Recent content in AWDP PWN学习记录 on ta0lve</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 11 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://ta0lve.github.io/series/awdp-pwn%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>从0到0.002的AWDP实战记录</title>
+      <link>https://ta0lve.github.io/posts/pwn/awdp/0x02/</link>
+      <pubDate>Mon, 11 Sep 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ta0lve.github.io/posts/pwn/awdp/0x02/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;此文章还在施工中，&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;路过的师傅们看看远处的学习记录吧！&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>从0到0.001的AWDP学习记录</title>
+      <link>https://ta0lve.github.io/posts/pwn/awdp/0x01/</link>
+      <pubDate>Mon, 04 Sep 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ta0lve.github.io/posts/pwn/awdp/0x01/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;此文章还在施工中，&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;路过的师傅们看看远处的学习记录吧！&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

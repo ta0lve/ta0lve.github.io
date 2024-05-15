@@ -8,21 +8,21 @@
     <language>zh-cn</language>
     <lastBuildDate>Fri, 14 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://ta0lve.github.io/tags/ubuntu/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Linux 配置补充</title>
+      <title>Linux命令入门与总结</title>
       <link>https://ta0lve.github.io/posts/pwn/basic/linux_/</link>
       <pubDate>Fri, 14 Jul 2023 00:00:00 +0000</pubDate>
       
       <guid>https://ta0lve.github.io/posts/pwn/basic/linux_/</guid>
-      <description>此文章还在施工中， 路过的师傅们看看远处的学习记录吧： New article! 2023 ciscn</description>
+      <description>个人比较常用的Linux命令 基础知识（入门向） # 大部分内容都</description>
     </item>
     
     <item>
-      <title>PWN环境搭建记录-Ubuntu 22.04</title>
+      <title>PWN环境二次搭建记录-Ubuntu 22.04</title>
       <link>https://ta0lve.github.io/posts/pwn/basic/pwn-_environment/</link>
       <pubDate>Mon, 10 Jul 2023 00:00:00 +0000</pubDate>
       
       <guid>https://ta0lve.github.io/posts/pwn/basic/pwn-_environment/</guid>
-      <description>前言 # 学习pwn已经有一段时间了，但是由于之前自己一直没有注</description>
+      <description>如果本博客部分文章图片加载失败， 可以点击此处查看解决办法 前言</description>
     </item>
     
   </channel>
