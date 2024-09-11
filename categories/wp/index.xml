@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>wp on ta0lve</title>
+    <link>https://ta0lve.github.io/categories/wp/</link>
+    <description>Recent content in wp on ta0lve</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 06 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://ta0lve.github.io/categories/wp/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>some_easy_Crypto</title>
+      <link>https://ta0lve.github.io/posts/wp/2023_--_--/basic_/0x02/</link>
+      <pubDate>Thu, 06 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ta0lve.github.io/posts/wp/2023_--_--/basic_/0x02/</guid>
+      <description>前言 # 本文为我个人第一次接触CTF的Crypto方向中的环境</description>
+    </item>
+    
+    <item>
+      <title>some_easy_pwn</title>
+      <link>https://ta0lve.github.io/posts/wp/2023_--_--/basic_/0x01/</link>
+      <pubDate>Thu, 06 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ta0lve.github.io/posts/wp/2023_--_--/basic_/0x01/</guid>
+      <description>前言 # 本文为我个人第一次接触CTF的pwn方向时所做的题的w</description>
+    </item>
+    
+    <item>
+      <title>Crypto-GZ RSA</title>
+      <link>https://ta0lve.github.io/posts/wp/2023_04_w4ter/6_gz-rsa_write_up/</link>
+      <pubDate>Wed, 05 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ta0lve.github.io/posts/wp/2023_04_w4ter/6_gz-rsa_write_up/</guid>
+      <description>题目描述 # 在RSA中，素数的选择和保密性非常重要。 只要不泄露</description>
+    </item>
+    
+    <item>
+      <title>misc-Chisato</title>
+      <link>https://ta0lve.github.io/posts/wp/2023_04_w4ter/10_chisato_write_up/</link>
+      <pubDate>Wed, 05 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ta0lve.github.io/posts/wp/2023_04_w4ter/10_chisato_write_up/</guid>
+      <description>0.题目描述 # 据说泷奈拿到了新情报？ 能不能假装千束将情报骗到</description>
+    </item>
+    
+    <item>
+      <title>misc-Shadow</title>
+      <link>https://ta0lve.github.io/posts/wp/2023_04_w4ter/8_shadow_write_up/</link>
+      <pubDate>Wed, 05 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ta0lve.github.io/posts/wp/2023_04_w4ter/8_shadow_write_up/</guid>
+      <description>先 nc 一下，提示在shadow中寻找flag 第一反应是写一个r</description>
+    </item>
+    
+    <item>
+      <title>misc-USB Hacker</title>
+      <link>https://ta0lve.github.io/posts/wp/2023_04_w4ter/9_usb-hacker_write_up/</link>
+      <pubDate>Wed, 05 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ta0lve.github.io/posts/wp/2023_04_w4ter/9_usb-hacker_write_up/</guid>
+      <description>用wireshark分析了一下流量包后发现是usb的键盘流量</description>
+    </item>
+    
+    <item>
+      <title>misc-W4ter Disk</title>
+      <link>https://ta0lve.github.io/posts/wp/2023_04_w4ter/11_w4ter-disk_write_up/</link>
+      <pubDate>Wed, 05 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ta0lve.github.io/posts/wp/2023_04_w4ter/11_w4ter-disk_write_up/</guid>
+      <description>本题wp的结构如下：（前排提示，该题wp有点多） 题目描述 # ​</description>
+    </item>
+    
+    <item>
+      <title>misc-Weird Letter</title>
+      <link>https://ta0lve.github.io/posts/wp/2023_04_w4ter/7_weird-letter_write_up/</link>
+      <pubDate>Wed, 05 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ta0lve.github.io/posts/wp/2023_04_w4ter/7_weird-letter_write_up/</guid>
+      <description>先在浏览器上访问实例，可以得到密文： Okze WEYng, D eixy jgty lrmdtpt afhlm onf cdyf lgm icxn gik&amp;rsquo;qp</description>
+    </item>
+    
+    <item>
+      <title>PWN-Level 0 Tic-Tac-Toe </title>
+      <link>https://ta0lve.github.io/posts/wp/2023_04_w4ter/2_tic-tac-toe-level-0_write_up/</link>
+      <pubDate>Wed, 05 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ta0lve.github.io/posts/wp/2023_04_w4ter/2_tic-tac-toe-level-0_write_up/</guid>
+      <description>栈溢出利用的基本步骤 # 1.将程序拖入IDA中查看反汇编代码 #</description>
+    </item>
+    
+    <item>
+      <title>PWN-Level 1 Nimgame</title>
+      <link>https://ta0lve.github.io/posts/wp/2023_04_w4ter/3_nimgame-level-1_write_up/</link>
+      <pubDate>Wed, 05 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ta0lve.github.io/posts/wp/2023_04_w4ter/3_nimgame-level-1_write_up/</guid>
+      <description>由canary的结构我们可以得知当我们输入的填充字符覆盖掉c</description>
+    </item>
+    
+    <item>
+      <title>PWN-What is NetCat</title>
+      <link>https://ta0lve.github.io/posts/wp/2023_04_w4ter/1_what-is-netcat_write_up/</link>
+      <pubDate>Wed, 05 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ta0lve.github.io/posts/wp/2023_04_w4ter/1_what-is-netcat_write_up/</guid>
+      <description>1.给出的实例入口为 host:port，则可以使用 nc host port 来连</description>
+    </item>
+    
+    <item>
+      <title>reverse-Lazy Puts</title>
+      <link>https://ta0lve.github.io/posts/wp/2023_04_w4ter/4_lazy-puts_write_up/</link>
+      <pubDate>Wed, 05 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ta0lve.github.io/posts/wp/2023_04_w4ter/4_lazy-puts_write_up/</guid>
+      <description>直接将程序拖入IDA，shift+F12查看字符串，即可看到</description>
+    </item>
+    
+    <item>
+      <title>reverse-Oh My Python</title>
+      <link>https://ta0lve.github.io/posts/wp/2023_04_w4ter/5_oh-my-python_write_up/</link>
+      <pubDate>Wed, 05 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ta0lve.github.io/posts/wp/2023_04_w4ter/5_oh-my-python_write_up/</guid>
+      <description>下载题目附件后发现是pyc程序，所以我们先将pyc程序用在线</description>
+    </item>
+    
+    <item>
+      <title>2023 ciscn 初赛</title>
+      <link>https://ta0lve.github.io/posts/wp/2023_06_ciscn/</link>
+      <pubDate>Fri, 30 Jun 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://ta0lve.github.io/posts/wp/2023_06_ciscn/</guid>
+      <description>以下为2023信安国赛初赛的pwn，reverse和Cryp</description>
+    </item>
+    
+  </channel>
+</rss>

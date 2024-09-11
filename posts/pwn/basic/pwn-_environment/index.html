@@ -1,0 +1,1935 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" data-auto-appearance="false" data-default-appearance="dark" dir="ltr" lang="CN"><head>
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?f260c483ac9fab4fdd9fd55057878c8c";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+<meta charset="utf-8"/>
+<meta content="zh-cn" http-equiv="content-language"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="ie=edge" http-equiv="X-UA-Compatible"/>
+<title>PWN环境二次搭建记录-Ubuntu 22.04 · ta0lve</title>
+<meta content="PWN环境二次搭建记录-Ubuntu 22.04 · ta0lve" name="title"/>
+<meta content="CTF, PWN, Ubuntu, " name="keywords"/>
+<link href="https://ta0lve.github.io/posts/pwn/basic/pwn-_environment/" rel="canonical"/>
+<link href="/css/main.bundle.min.c6116b9ed1c907a8c0eb015f377d3eecc07e448d75729e31fc3de5881465c6c172ba9fa9a6800c030116caf2a110d92242bb816639484ca791f7cd107a8d49b5.css" integrity="sha512-xhFrntHJB6jA6wFfN30+7MB+RI11cp4x/D3liBRlxsFyup+ppoAMAwEWyvKhENkiQruBZjlITKeR980Qeo1JtQ==" rel="stylesheet" type="text/css"/>
+<script integrity="sha512-UWoWdFvqWpvQERONJUzA/TlzzVXObhXz3sdj58fCx0SPj+e1TMqBHLghsMfhLNFhyqzh3XlKw9NNQJN8vMnuEg==" src="/js/appearance.min.516a16745bea5a9bd011138d254cc0fd3973cd55ce6e15f3dec763e7c7c2c7448f8fe7b54cca811cb821b0c7e12cd161caace1dd794ac3d34d40937cbcc9ee12.js" type="text/javascript"></script>
+<script data-copied="" data-copy="" defer="" id="script-bundle" integrity="sha512-PdzwT1sNTDL3LnJtPBLuvM2MPJ+dqpoTQUgIiV3grh4c3d2mhJaA1b2W27YNCx4LJMKfXIPlYx5V5+a8AgFUkA==" src="/js/main.bundle.min.3ddcf04f5b0d4c32f72e726d3c12eebccd8c3c9f9daa9a13414808895de0ae1e1cdddda6849680d5bd96dbb60d0b1e0b24c29f5c83e5631e55e7e6bc02015490.js" type="text/javascript"></script>
+<script src="/js/zoom.min.js"></script>
+<link href="/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
+<link href="/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
+<link href="/site.webmanifest" rel="manifest"/>
+<meta content="PWN环境二次搭建记录-Ubuntu 22.04" property="og:title"/>
+<meta content="如果本博客部分文章图片加载失败， 可以点击此处查看解决办法 前言" property="og:description"/>
+<meta content="article" property="og:type"/>
+<meta content="https://ta0lve.github.io/posts/pwn/basic/pwn-_environment/" property="og:url"/><meta content="https://ta0lve.github.io/posts/pwn/basic/pwn-_environment/featured.jpg" property="og:image"/><meta content="posts" property="article:section"/>
+<meta content="2023-07-10T00:00:00+00:00" property="article:published_time"/>
+<meta content="2023-07-10T00:00:00+00:00" property="article:modified_time"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="https://ta0lve.github.io/posts/pwn/basic/pwn-_environment/featured.jpg" name="twitter:image"/>
+<meta content="PWN环境二次搭建记录-Ubuntu 22.04" name="twitter:title"/>
+<meta content="如果本博客部分文章图片加载失败， 可以点击此处查看解决办法 前言" name="twitter:description"/>
+<script type="application/ld+json">
+  [{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "articleSection": "Posts",
+    "name": "PWN环境二次搭建记录-Ubuntu 22.04",
+    "headline": "PWN环境二次搭建记录-Ubuntu 22.04",
+    
+    "abstract": "如果本博客部分文章图片加载失败， 可以点击此处查看解决办法 前言",
+    "inLanguage": "zh-cn",
+    "url" : "https:\/\/ta0lve.github.io\/posts\/pwn\/basic\/pwn-_environment\/",
+    "author" : {
+      "@type": "Person",
+      "name": "ta0lve"
+    },
+    "copyrightYear": "2023",
+    "dateCreated": "2023-07-10T00:00:00\u002b00:00",
+    "datePublished": "2023-07-10T00:00:00\u002b00:00",
+    
+    "dateModified": "2023-07-10T00:00:00\u002b00:00",
+    
+    "keywords": ["CTF","PWN","Ubuntu"],
+    
+    "mainEntityOfPage": "true",
+    "wordCount": "9775"
+  }]
+  </script>
+<meta content="ta0lve" name="author"/>
+<link href="mailto:hujt25@mail2.sysu.edu.cn" rel="me"/>
+<link href="https://ta0lve.github.io/" rel="me"/>
+<link href="https://github.com/ta0lve" rel="me"/>
+<script integrity="" src="/lib/jquery/jquery.slim.min.js"></script>
+<meta name="theme-color"/>
+</head>
+<body class="flex flex-col h-screen px-6 m-auto text-lg leading-7 max-w-7xl bg-neutral text-neutral-900 dark:bg-neutral-800 dark:text-neutral sm:px-14 md:px-24 lg:px-32">
+<div class="absolute flex self-center" id="the-top">
+<a class="px-3 py-1 text-sm -translate-y-8 rounded-b-lg bg-primary-200 focus:translate-y-0 dark:bg-neutral-600" href="#main-content"><span class="font-bold text-primary-600 ltr:pr-2 rtl:pl-2 dark:text-primary-400">↓</span></a>
+</div>
+<div class="min-h-[148px]"></div>
+<div class="fixed inset-x-0 pl-[24px] pr-[24px]" style="z-index:100">
+<div class="absolute opacity-0 inset-x-0 top-0 h-full single_hero_background nozoom backdrop-blur-2xl shadow-2xl" id="menu-blur"></div>
+<div class="relative max-w-[64rem] ml-auto mr-auto">
+<div class="main-menu flex items-center justify-between px-4 py-6 sm:px-6 md:justify-start space-x-3" style="padding-left:0;padding-right:0;padding-top:2px;padding-bottom:3px">
+<div class="flex flex-1 items-center justify-between">
+<nav class="flex space-x-3">
+<a class="text-base font-medium text-gray-500 hover:text-gray-900" href="/">ta0lve</a>
+</nav>
+<nav class="hidden md:flex items-center space-x-5 md:ml-12 h-12">
+<a class="flex items-center" href="/posts/">
+<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="Posts">
+        Posts
+    </p>
+</a>
+<a class="flex items-center" href="/categories/">
+<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="Categories">
+        分类
+    </p>
+</a>
+<a class="flex items-center" href="/tags/">
+<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="Tags">
+        标签
+    </p>
+</a>
+<a class="flex items-center" href="/link/">
+<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="友链/links">
+        友链
+    </p>
+</a>
+<a class="flex items-center" href="/about/">
+<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="About">
+        About
+    </p>
+</a>
+<button aria-label="Search" class="text-base hover:text-primary-600 dark:hover:text-primary-400 h-12" id="search-button" title="">
+<span class="relative block icon">
+<svg aria-hidden="true" class="svg-inline--fa fa-search fa-w-16" data-icon="search" data-prefix="fas" focusable="false" role="img" viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z" fill="currentColor"></path></svg>
+</span>
+</button>
+<div class="ltr:mr-14 rtl:ml-14 cursor-pointer text-sm text-neutral-700 hover:text-primary-600 dark:text-neutral dark:hover:text-primary-400">
+<button aria-label="Dark mode switcher" id="appearance-switcher" type="button">
+<div class="flex items-center justify-center h-12 dark:hidden">
+<span class="relative block icon">
+<svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M32 256c0-123.8 100.3-224 223.8-224c11.36 0 29.7 1.668 40.9 3.746c9.616 1.777 11.75 14.63 3.279 19.44C245 86.5 211.2 144.6 211.2 207.8c0 109.7 99.71 193 208.3 172.3c9.561-1.805 16.28 9.324 10.11 16.95C387.9 448.6 324.8 480 255.8 480C132.1 480 32 379.6 32 256z" fill="currentColor"></path></svg>
+</span>
+</div>
+<div class="items-center justify-center hidden h-12 dark:flex">
+<span class="relative block icon">
+<svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M256 159.1c-53.02 0-95.1 42.98-95.1 95.1S202.1 351.1 256 351.1s95.1-42.98 95.1-95.1S309 159.1 256 159.1zM509.3 347L446.1 255.1l63.15-91.01c6.332-9.125 1.104-21.74-9.826-23.72l-109-19.7l-19.7-109c-1.975-10.93-14.59-16.16-23.72-9.824L256 65.89L164.1 2.736c-9.125-6.332-21.74-1.107-23.72 9.824L121.6 121.6L12.56 141.3C1.633 143.2-3.596 155.9 2.736 164.1L65.89 256l-63.15 91.01c-6.332 9.125-1.105 21.74 9.824 23.72l109 19.7l19.7 109c1.975 10.93 14.59 16.16 23.72 9.824L256 446.1l91.01 63.15c9.127 6.334 21.75 1.107 23.72-9.822l19.7-109l109-19.7C510.4 368.8 515.6 356.1 509.3 347zM256 383.1c-70.69 0-127.1-57.31-127.1-127.1c0-70.69 57.31-127.1 127.1-127.1s127.1 57.3 127.1 127.1C383.1 326.7 326.7 383.1 256 383.1z" fill="currentColor"></path></svg>
+</span>
+</div>
+</button>
+</div>
+</nav>
+<div class="flex md:hidden items-center space-x-5 md:ml-12">
+<span></span>
+<button aria-label="Search" class="text-base hover:text-primary-600 dark:hover:text-primary-400" id="search-button-mobile" title="">
+<span class="relative block icon">
+<svg aria-hidden="true" class="svg-inline--fa fa-search fa-w-16" data-icon="search" data-prefix="fas" focusable="false" role="img" viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z" fill="currentColor"></path></svg>
+</span>
+</button>
+<button aria-label="Dark mode switcher" id="appearance-switcher-mobile" style="margin-right:5px" type="button">
+<div class="flex items-center justify-center h-12 dark:hidden">
+<span class="relative block icon">
+<svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M32 256c0-123.8 100.3-224 223.8-224c11.36 0 29.7 1.668 40.9 3.746c9.616 1.777 11.75 14.63 3.279 19.44C245 86.5 211.2 144.6 211.2 207.8c0 109.7 99.71 193 208.3 172.3c9.561-1.805 16.28 9.324 10.11 16.95C387.9 448.6 324.8 480 255.8 480C132.1 480 32 379.6 32 256z" fill="currentColor"></path></svg>
+</span>
+</div>
+<div class="items-center justify-center hidden h-12 dark:flex">
+<span class="relative block icon">
+<svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M256 159.1c-53.02 0-95.1 42.98-95.1 95.1S202.1 351.1 256 351.1s95.1-42.98 95.1-95.1S309 159.1 256 159.1zM509.3 347L446.1 255.1l63.15-91.01c6.332-9.125 1.104-21.74-9.826-23.72l-109-19.7l-19.7-109c-1.975-10.93-14.59-16.16-23.72-9.824L256 65.89L164.1 2.736c-9.125-6.332-21.74-1.107-23.72 9.824L121.6 121.6L12.56 141.3C1.633 143.2-3.596 155.9 2.736 164.1L65.89 256l-63.15 91.01c-6.332 9.125-1.105 21.74 9.824 23.72l109 19.7l19.7 109c1.975 10.93 14.59 16.16 23.72 9.824L256 446.1l91.01 63.15c9.127 6.334 21.75 1.107 23.72-9.822l19.7-109l109-19.7C510.4 368.8 515.6 356.1 509.3 347zM256 383.1c-70.69 0-127.1-57.31-127.1-127.1c0-70.69 57.31-127.1 127.1-127.1s127.1 57.3 127.1 127.1C383.1 326.7 326.7 383.1 256 383.1z" fill="currentColor"></path></svg>
+</span>
+</div>
+</button>
+</div>
+</div>
+<div class="-my-2 -mr-2 md:hidden">
+<label class="block" for="menu-controller" id="menu-button">
+<input class="hidden" id="menu-controller" type="checkbox"/>
+<div class="cursor-pointer hover:text-primary-600 dark:hover:text-primary-400">
+<span class="relative block icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M0 96C0 78.33 14.33 64 32 64H416C433.7 64 448 78.33 448 96C448 113.7 433.7 128 416 128H32C14.33 128 0 113.7 0 96zM0 256C0 238.3 14.33 224 32 224H416C433.7 224 448 238.3 448 256C448 273.7 433.7 288 416 288H32C14.33 288 0 273.7 0 256zM416 448H32C14.33 448 0 433.7 0 416C0 398.3 14.33 384 32 384H416C433.7 384 448 398.3 448 416C448 433.7 433.7 448 416 448z" fill="currentColor"></path></svg>
+</span>
+</div>
+<div class="fixed inset-0 z-30 invisible w-screen h-screen m-auto overflow-auto transition-opacity opacity-0 cursor-default bg-neutral-100/50 backdrop-blur-sm dark:bg-neutral-900/50" id="menu-wrapper" style="padding-top:5px;">
+<ul class="flex space-y-2 mt-3 flex-col items-end w-full px-6 py-6 mx-auto overflow-visible list-none ltr:text-right rtl:text-left max-w-7xl">
+<li>
+<span class="cursor-pointer inline-block align-text-bottom hover:text-primary-600 dark:hover:text-primary-400">
+<span class="relative block icon">
+<svg viewbox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><path d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z" fill="currentColor"></path></svg>
+</span>
+</span>
+</li>
+<li class="mt-1">
+<a class="flex items-center" href="/posts/">
+<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="Posts">
+            Posts
+        </p>
+</a>
+</li>
+<li class="mt-1">
+<a class="flex items-center" href="/categories/">
+<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="Categories">
+            分类
+        </p>
+</a>
+</li>
+<li class="mt-1">
+<a class="flex items-center" href="/tags/">
+<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="Tags">
+            标签
+        </p>
+</a>
+</li>
+<li class="mt-1">
+<a class="flex items-center" href="/link/">
+<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="友链/links">
+            友链
+        </p>
+</a>
+</li>
+<li class="mt-1">
+<a class="flex items-center" href="/about/">
+<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="About">
+            About
+        </p>
+</a>
+</li>
+</ul>
+</div>
+</label>
+</div>
+</div>
+<script>
+    (function () {
+        var $mainmenu = $('.main-menu');
+        var path = window.location.pathname;
+        $mainmenu.find('a[href="' + path + '"]').each(function (i, e) {
+            $(e).children('p').addClass('active');
+        });
+    })();
+</script>
+</div>
+</div>
+<script>
+  window.addEventListener('scroll', function (e) {
+    var scroll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    var background_blur = document.getElementById('menu-blur');
+    background_blur.style.opacity = (scroll / 300);
+  });
+</script>
+<div class="relative flex flex-col grow">
+<main class="grow" id="main-content">
+<article>
+<div class="h-[150px] md:h-[200px]" id="hero"></div>
+<div class="fixed inset-x-0 top-0 h-[800px] single_hero_background nozoom" style="background-image:url(/posts/pwn/basic/pwn-_environment/featured.jpg);">
+<div class="absolute inset-0 bg-gradient-to-t from-neutral dark:from-neutral-800 to-transparent mix-blend-normal">
+</div>
+<div class="absolute inset-0 opacity-60 bg-gradient-to-t from-neutral dark:from-neutral-800 to-neutral-100 dark:to-neutral-800 mix-blend-normal">
+</div>
+</div>
+<div class="fixed opacity-0 inset-x-0 top-0 h-full single_hero_background nozoom backdrop-blur-2xl" id="background-blur"></div>
+<script>
+    window.addEventListener('scroll', function (e) {
+        var scroll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+        var background_blur = document.getElementById('background-blur');
+        background_blur.style.opacity = (scroll / 300)
+    });
+</script>
+<header class="mt-5 max-w-prose" id="single_header">
+<ol class="text-sm text-neutral-500 dark:text-neutral-400 print:hidden">
+<li class="inline hidden">
+<a class="hover:underline decoration-neutral-300 dark:underline-neutral-600" href="/"></a><span class="px-1 text-primary-500">/</span>
+</li>
+<li class="inline">
+<a class="hover:underline decoration-neutral-300 dark:underline-neutral-600" href="/posts/">Posts</a><span class="px-1 text-primary-500">/</span>
+</li>
+<li class="inline hidden">
+<a class="hover:underline decoration-neutral-300 dark:underline-neutral-600" href="/posts/pwn/basic/pwn-_environment/">PWN环境二次搭建记录-Ubuntu 22.04</a><span class="px-1 text-primary-500">/</span>
+</li>
+</ol>
+<h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">
+      PWN环境二次搭建记录-Ubuntu 22.04
+    </h1>
+<div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
+<div class="flex flex-row flex-wrap items-center">
+<time datetime="2023-07-10 00:00:00 +0000 UTC">July 10, 2023</time><span class="px-2 text-primary-500">·</span><span>9775 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">20 分钟</span>
+</div>
+<div class="flex flex-row flex-wrap items-center">
+<span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%85%A5%E9%97%A8/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    pwn入门
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/ctf/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    CTF
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/pwn/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    PWN
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/ubuntu/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    Ubuntu
+  </span>
+</span>
+</span>
+</div>
+</div>
+<div class="flex">
+<div class="place-self-center">
+<div class="text-[0.6rem] uppercase leading-3 text-neutral-500 dark:text-neutral-400">
+      作者
+    </div>
+<div class="font-semibold leading-6 text-neutral-800 dark:text-neutral-300">
+      ta0lve
+    </div>
+<div class="text-sm text-neutral-700 dark:text-neutral-400">一些记录，一点思考</div>
+<div class="text-2xl sm:text-lg">
+<div class="flex flex-wrap text-neutral-400 dark:text-neutral-500">
+<a aria-label="Email" class="px-1 hover:text-primary-700 dark:hover:text-primary-400" href="mailto:hujt25@mail2.sysu.edu.cn" rel="me noopener noreferrer" target="_blank"><span class="inline-block align-text-bottom">
+<span class="relative block icon">
+<svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M207.8 20.73c-93.45 18.32-168.7 93.66-187 187.1c-27.64 140.9 68.65 266.2 199.1 285.1c19.01 2.888 36.17-12.26 36.17-31.49l.0001-.6631c0-15.74-11.44-28.88-26.84-31.24c-84.35-12.98-149.2-86.13-149.2-174.2c0-102.9 88.61-185.5 193.4-175.4c91.54 8.869 158.6 91.25 158.6 183.2l0 16.16c0 22.09-17.94 40.05-40 40.05s-40.01-17.96-40.01-40.05v-120.1c0-8.847-7.161-16.02-16.01-16.02l-31.98 .0036c-7.299 0-13.2 4.992-15.12 11.68c-24.85-12.15-54.24-16.38-86.06-5.106c-38.75 13.73-68.12 48.91-73.72 89.64c-9.483 69.01 43.81 128 110.9 128c26.44 0 50.43-9.544 69.59-24.88c24 31.3 65.23 48.69 109.4 37.49C465.2 369.3 496 324.1 495.1 277.2V256.3C495.1 107.1 361.2-9.332 207.8 20.73zM239.1 304.3c-26.47 0-48-21.56-48-48.05s21.53-48.05 48-48.05s48 21.56 48 48.05S266.5 304.3 239.1 304.3z" fill="currentColor"></path></svg>
+</span>
+</span></a>
+<a aria-label="Blogger" class="px-1 hover:text-primary-700 dark:hover:text-primary-400" href="https://ta0lve.github.io/" rel="me noopener noreferrer" target="_blank"><span class="inline-block align-text-bottom">
+<span class="relative block icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M446.6 222.7c-1.8-8-6.8-15.4-12.5-18.5-1.8-1-13-2.2-25-2.7-20.1-.9-22.3-1.3-28.7-5-10.1-5.9-12.8-12.3-12.9-29.5-.1-33-13.8-63.7-40.9-91.3-19.3-19.7-40.9-33-65.5-40.5-5.9-1.8-19.1-2.4-63.3-2.9-69.4-.8-84.8.6-108.4 10C45.9 59.5 14.7 96.1 3.3 142.9 1.2 151.7.7 165.8.2 246.8c-.6 101.5.1 116.4 6.4 136.5 15.6 49.6 59.9 86.3 104.4 94.3 14.8 2.7 197.3 3.3 216 .8 32.5-4.4 58-17.5 81.9-41.9 17.3-17.7 28.1-36.8 35.2-62.1 4.9-17.6 4.5-142.8 2.5-151.7zm-322.1-63.6c7.8-7.9 10-8.2 58.8-8.2 43.9 0 45.4.1 51.8 3.4 9.3 4.7 13.4 11.3 13.4 21.9 0 9.5-3.8 16.2-12.3 21.6-4.6 2.9-7.3 3.1-50.3 3.3-26.5.2-47.7-.4-50.8-1.2-16.6-4.7-22.8-28.5-10.6-40.8zm191.8 199.8l-14.9 2.4-77.5.9c-68.1.8-87.3-.4-90.9-2-7.1-3.1-13.8-11.7-14.9-19.4-1.1-7.3 2.6-17.3 8.2-22.4 7.1-6.4 10.2-6.6 97.3-6.7 89.6-.1 89.1-.1 97.6 7.8 12.1 11.3 9.5 31.2-4.9 39.4z" fill="currentColor"></path></svg>
+</span>
+</span></a>
+<a aria-label="Github" class="px-1 hover:text-primary-700 dark:hover:text-primary-400" href="https://github.com/ta0lve" rel="me noopener noreferrer" target="_blank"><span class="inline-block align-text-bottom">
+<span class="relative block icon">
+<svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z" fill="currentColor"></path></svg>
+</span>
+</span></a>
+</div>
+</div>
+</div>
+</div>
+<div class="mb-5"></div>
+</header>
+<section class="flex flex-col max-w-full mt-0 prose dark:prose-invert lg:flex-row">
+<div class="order-first sm:max-w-prose lg:ml-auto px-0 lg:order-last lg:max-w-xs ltr:lg:pl-8 rtl:lg:pr-8">
+<div class="toc ltr:pl-5 rtl:pr-5 print:hidden lg:sticky lg:top-10">
+<details class="mt-0 overflow-hidden rounded-lg ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 hidden lg:block" open="">
+<summary class="block py-1 text-lg font-semibold cursor-pointer bg-neutral-100 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-neutral-700 dark:text-neutral-100 lg:hidden">
+</summary>
+<div class="min-w-[220px] py-2 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+<nav id="TableOfContents">
+<ul>
+<li><a href="#前言">前言</a></li>
+<li><a href="#虚拟机安装">虚拟机安装</a>
+<ul>
+<li><a href="#可能会遇到的问题">可能会遇到的问题：</a></li>
+</ul>
+</li>
+<li><a href="#基础工具">基础工具</a></li>
+<li><a href="#qemu-kernel-pwn"><strong>qemu （Kernel Pwn）</strong></a></li>
+<li><a href="#gdb-插件">gdb 插件</a></li>
+<li><a href="#pwntools">pwntools</a></li>
+<li><a href="#libcsearcher">LibcSearcher</a></li>
+<li><a href="#pwn-相关工具">PWN 相关工具</a>
+<ul>
+<li><a href="#ropgadget">ROPgadget</a></li>
+<li><a href="#one_gadget">one_gadget</a></li>
+<li><a href="#glibc-all-in_one">glibc-all-in_one</a></li>
+<li><a href="#patchelf">patchelf</a></li>
+<li><a href="#pwn相关命令补充">pwn相关命令补充：</a></li>
+<li><a href="#seccomp-tools">seccomp-tools</a></li>
+<li><a href="#main_arena_offset可跳">main_arena_offset（可跳）</a></li>
+</ul>
+</li>
+<li><a href="#crypto-相关工具可跳">Crypto 相关工具（可跳）</a></li>
+<li><a href="#优化体验的相关配置">优化体验的相关配置</a>
+<ul>
+<li><a href="#oh-my-zsh-可选">Oh-My-Zsh （可选）</a></li>
+<li><a href="#terminator-可选">terminator （可选）</a></li>
+<li><a href="#others">Others</a></li>
+</ul>
+</li>
+<li><a href="#附录">附录</a></li>
+</ul>
+</nav>
+</div>
+</details>
+<details class="mt-0 overflow-hidden rounded-lg ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 lg:hidden">
+<summary class="py-1 text-lg font-semibold cursor-pointer bg-neutral-100 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-neutral-700 dark:text-neutral-100 lg:hidden">
+</summary>
+<div class="py-2 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+<nav id="TableOfContents">
+<ul>
+<li><a href="#前言">前言</a></li>
+<li><a href="#虚拟机安装">虚拟机安装</a>
+<ul>
+<li><a href="#可能会遇到的问题">可能会遇到的问题：</a></li>
+</ul>
+</li>
+<li><a href="#基础工具">基础工具</a></li>
+<li><a href="#qemu-kernel-pwn"><strong>qemu （Kernel Pwn）</strong></a></li>
+<li><a href="#gdb-插件">gdb 插件</a></li>
+<li><a href="#pwntools">pwntools</a></li>
+<li><a href="#libcsearcher">LibcSearcher</a></li>
+<li><a href="#pwn-相关工具">PWN 相关工具</a>
+<ul>
+<li><a href="#ropgadget">ROPgadget</a></li>
+<li><a href="#one_gadget">one_gadget</a></li>
+<li><a href="#glibc-all-in_one">glibc-all-in_one</a></li>
+<li><a href="#patchelf">patchelf</a></li>
+<li><a href="#pwn相关命令补充">pwn相关命令补充：</a></li>
+<li><a href="#seccomp-tools">seccomp-tools</a></li>
+<li><a href="#main_arena_offset可跳">main_arena_offset（可跳）</a></li>
+</ul>
+</li>
+<li><a href="#crypto-相关工具可跳">Crypto 相关工具（可跳）</a></li>
+<li><a href="#优化体验的相关配置">优化体验的相关配置</a>
+<ul>
+<li><a href="#oh-my-zsh-可选">Oh-My-Zsh （可选）</a></li>
+<li><a href="#terminator-可选">terminator （可选）</a></li>
+<li><a href="#others">Others</a></li>
+</ul>
+</li>
+<li><a href="#附录">附录</a></li>
+</ul>
+</nav>
+</div>
+</details>
+<script>
+  (function () {
+    var $toc = $('#TableOfContents');
+    if ($toc.length > 0) {
+      var $window = $(window);
+
+      function onScroll() {
+        var currentScroll = $window.scrollTop();
+        var h = $('.anchor');
+        var id = "";
+        h.each(function (i, e) {
+          e = $(e);
+          if (e.offset().top - $(window).height()/3 <= currentScroll) {
+            id = e.attr('id');
+          }
+        });
+        var active = $toc.find('a.active');      
+        if (active.length == 1 && active.eq(0).attr('href') == '#' + id) return true;
+
+        active.each(function (i, e) {
+          
+            $(e).removeClass('active');
+          
+        });
+        $toc.find('a[href="#' + id + '"]').addClass('active')
+        $toc.find('a[href="#' + id + '"]').parentsUntil('#TableOfContents').each(function (i, e) {
+          $(e).children('a').parents('ul').show();          
+        });
+      }
+
+      $window.on('scroll', onScroll);
+      $(document).ready(function () {
+        
+        onScroll();
+      });
+    }
+  })();
+</script>
+</div>
+</div>
+<div class="min-w-0 min-h-0 max-w-prose">
+<details class="mt-2 mb-5 overflow-hidden rounded-lg ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5" open="" style="margin-left:0px">
+<summary class="py-1 text-lg font-semibold cursor-pointer bg-primary-200 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-primary-800 dark:text-neutral-100">
+        PWN入门 - This article is part of a series.
+    </summary>
+<div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+<a href="https://ta0lve.github.io/posts/pwn/basic/tutorial11/">
+            Part 1: CTF入门宣讲-PWN方向
+        </a>
+</div>
+<div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+<a href="https://ta0lve.github.io/posts/pwn/basic/tutorial22/">
+            Part 2: pwn入门教程
+        </a>
+</div>
+<div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+<a href="https://ta0lve.github.io/posts/pwn/basic/linux_/">
+            Part 3: Linux命令入门与总结
+        </a>
+</div>
+<div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+        Part 4: This Article
+    </div>
+<div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+<a href="https://ta0lve.github.io/posts/pwn/basic/remember-it-wp/">
+            Part 5: remember-it-012 official wp
+        </a>
+</div>
+</details>
+<div class="flex px-4 py-3 rounded-md bg-primary-100 dark:bg-primary-900">
+<span class="text-primary-400 ltr:pr-3 rtl:pl-3 flex items-center">
+<span class="relative block icon">
+<svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M506.3 417l-213.3-364c-16.33-28-57.54-28-73.98 0l-213.2 364C-10.59 444.9 9.849 480 42.74 480h426.6C502.1 480 522.6 445 506.3 417zM232 168c0-13.25 10.75-24 24-24S280 154.8 280 168v128c0 13.25-10.75 24-23.1 24S232 309.3 232 296V168zM256 416c-17.36 0-31.44-14.08-31.44-31.44c0-17.36 14.07-31.44 31.44-31.44s31.44 14.08 31.44 31.44C287.4 401.9 273.4 416 256 416z" fill="currentColor"></path></svg>
+</span>
+</span>
+<span class="dark:text-neutral-300"><strong>如果本博客部分文章图片加载失败，</strong><a href="https://ta0lve.github.io/posts/sth/sm.ms/" target="_blank">
+<strong>可以点击此处查看解决办法</strong></a></span>
+</div>
+<div class="anchor" id="前言"></div>
+<h2 class="relative group">前言 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e5%89%8d%e8%a8%80" style="text-decoration-line: none !important;">#</a></span>
+</h2>
+<p>学习pwn已经有一段时间了，但是由于之前自己一直没有注意文件管理，也没有好的整理习惯，导致现在打pwn主用的ubuntu虚拟机的文件夹十分的混乱，虽然其实不影响目前阶段的学习和做题，但是还是想找一个契机来重装一下虚拟机。正好现在在假期时间，没有那么忙，想着重头开始搭建PWN环境，并做一下记录，一来方便以后的自己回来看，二来也可以为其他想重装ubuntu的PWN环境或者是想入门PWN的师傅提供一些参考。</p>
+<p><strong>（注1：本文在部分工具安装后会补充一些基础用法，已经安装了工具的师傅们也可以看一看）</strong></p>
+<p><strong>（注2：安装的工具不全是关于PWN的，不打pwn的师傅们也可以挑着看👀）</strong></p>
+<p>以下是本文所安装的工具列表，大家可以按顺序安装。</p>
+<ul>
+<li>虚拟机安装（前置条件）</li>
+<li>基础工具
+<ul>
+<li>vim</li>
+<li>git</li>
+<li>gcc</li>
+</ul>
+</li>
+<li>qemu（Kernel Pwn，刚入门的师傅可能不常用，可以跳过）</li>
+<li>python3 与 pip3 （这个要先装，之后的工具安装可能会用到pip3）</li>
+<li>gdb 及插件
+<ul>
+<li>peda</li>
+<li>pwndbg</li>
+<li>gef</li>
+<li>gdb-multiarch （这个可以先跳过）</li>
+</ul>
+</li>
+<li>python PWN 相关库
+<ul>
+<li>pwntools</li>
+<li>LibcSearcher</li>
+<li>LibcSearcher3（可选）</li>
+<li>LibcSearcherX（可选）</li>
+<li>pwnmodules（可选）</li>
+</ul>
+</li>
+<li>PWN 相关工具
+<ul>
+<li>ROPgadget</li>
+<li>one_gadget</li>
+<li>glibc-all-in_one</li>
+<li>patchelf</li>
+<li>pwn相关命令补充</li>
+<li>seccomp-tools</li>
+<li>main_arena_offset</li>
+</ul>
+</li>
+<li>Crypto 相关工具
+<ul>
+<li>gym2</li>
+<li>sage math</li>
+</ul>
+</li>
+<li>优化体验的相关配置（可以在配置pwn环境之前先装好）
+<ul>
+<li>Oh-My-Zsh （可选）</li>
+<li>terminator（可选）</li>
+<li>其他配置</li>
+</ul>
+</li>
+</ul>
+<div class="anchor" id="虚拟机安装"></div>
+<h2 class="relative group">虚拟机安装 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e8%99%9a%e6%8b%9f%e6%9c%ba%e5%ae%89%e8%a3%85" style="text-decoration-line: none !important;">#</a></span>
+</h2>
+<p>目前流行的虚拟机软件有VMware、Virtual Box和Virtual PC等等，也可以直接使用Windows上面自带的虚拟机，不同虚拟机软件各有优劣，我当时入门的时候是选择了VMware 16虚拟机，感觉安装起来不算很复杂。</p>
+<p>关于linux操作系统的选择，打pwn的师傅们一般都是使用ubuntu，版本的选择则是最新的长期支持版本 22.04（ubuntu 23并不是长期支持的版本）。虽然之前的很多题目都是在Ubuntu 20 或者18 甚至是16 的环境下，不过我们可以使用 patchelf 工具等方法来完成题目，而随着时间的推移，后面新出的pwn题都是会逐渐在较新的环境在运行，所以推荐大家直接安装最新的长期支持的版本——ubuntu 22.04：</p>
+<p><a href="https://releases.ubuntu.com/22.04/ubuntu-22.04.2-desktop-amd64.iso" target="_blank">
+    ubuntu-22.04.2-desktop-amd64.iso</a></p>
+<p>关于虚拟机的具体安装过程，这里就不多说了，可以直接在网上搜现成的教程，网上的师傅们都写的非常详细了，这里也给大家放上一篇比较详细的教程，师傅们可以直接点击跳转：</p>
+<p><a href="https://blog.csdn.net/weixin_45673283/article/details/126563001" target="_blank">
+    在VMware16虚拟机安装Ubuntu详细教程</a></p>
+<p>（因为怕有些坑大家先跳进去了，所以建议大家可以先看看后面的注意事项，大家遇到问题可以先往后翻一翻看看，也可以直接上搜索引擎搜）</p>
+<div class="anchor" id="可能会遇到的问题"></div>
+<h3 class="relative group">可能会遇到的问题： 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e5%8f%af%e8%83%bd%e4%bc%9a%e9%81%87%e5%88%b0%e7%9a%84%e9%97%ae%e9%a2%98" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<p><strong>1.关于磁盘容量的问题：</strong></p>
+<p>
+<figure>
+<img alt="image-20230709172118414" class="my-0 rounded-md" src="https://s2.loli.net/2023/07/09/iOat4AfgSHJnM76.png"/>
+</figure>
+</p>
+<p>虽然很多教程都推荐最大磁盘容量为<strong>20g</strong>，但是在我的实际体验中，感觉内存还是<strong>越大越好</strong>，特别是当虚拟机里已经装了sage math等比较大的工具时，可用空间就不是特别的充足，这个时候倘若你刚好想做一道磁盘取证题，却发现磁盘太大不能够放入linux虚拟机中，可能会有点难受。</p>
+<p>虽然磁盘空间在装好虚拟机之后也能更改，但是需要虚拟机把<strong>所有的快照都删除掉</strong>，还是比较麻烦的。所以建议师傅们一开始就设置一个比较大的磁盘容量，反正是实际使用多少就占用多少空间的。</p>
+<p><strong>2.关于打印机的一点坑：</strong></p>
+<p>
+<figure>
+<img alt="image-20230709172321111" class="my-0 rounded-md" src="https://s2.loli.net/2023/07/09/1O6oL3bVmp2CinZ.png"/>
+</figure>
+</p>
+<p>当创建好虚拟机时会有自定义硬件的选项，一开始默认会有打印机，最好移除打印机，如果没有移除打印机的话部分虚拟机可能会出现黑屏等问题。</p>
+<p>如果已经安装完了，也可以点编辑虚拟机设置移除打印机：</p>
+<p>
+<figure>
+<img alt="image-20230709172823032" class="my-0 rounded-md" src="https://s2.loli.net/2023/07/09/1uJDmxlkLbBUctf.png"/>
+</figure>
+</p>
+<p><strong>3.关于连网的问题：</strong></p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 检查联网情况，右键打开终端输入指令：</span>
+</span></span><span class="line"><span class="cl"><span class="n">ping</span> <span class="n">baidu</span><span class="o">.</span><span class="n">com</span>
+</span></span></code></pre></div><p>如果连不上网的话可能需要自己查博客排查原因，实在不行就删掉重新再安装一次，第一次安装出一些小问题很正常，所以看教程的时候一定要做好每一步。</p>
+<p><strong>4.关于软件源更换：</strong></p>
+<p>不想在下载安装/更新软件时等比较长的时间的话最好还是换成国内的软件源吧。当然如果不想换的话也可以。我个人感觉换不换都没关系，大不了安装/更新软件时找一些其他的事干，比如看番/写博客文章的时候挂后台下载。</p>
+<p>（补充：“之前踩过阿里源的坑，官方源虽然慢了点，但是没有什么问题”——某师傅如是说）</p>
+<p><strong>5.关于root：</strong></p>
+<p>ubuntu安装完之后root是需要我们手动设置密码的，不然不能切换为root用户。步骤如下：</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 先用我们的初始用户右键打开终端，</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 输入命令：</span>
+</span></span><span class="line"><span class="cl"><span class="n">sudo</span> <span class="n">passwd</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 输入新密码，并重复输入密码，最后提示成功更新即可</span>
+</span></span></code></pre></div><p>
+<figure>
+<img alt="image-20230709174644002" class="my-0 rounded-md" src="https://s2.loli.net/2023/07/09/d1i7mzruGxNB2XE.png"/>
+</figure>
+</p>
+<p>此时已完成root密码的设置</p>
+<p><strong>6.关于共享文件夹：</strong></p>
+<p>可以参考：<a href="https://zhuanlan.zhihu.com/p/475119154" target="_blank">
+    Ubuntu共享文件夹的创建和使用 - 知乎 (zhihu.com)</a></p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 首先输入下面命令查看是否真的设置成功共享文件夹</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 不会设置的话就点上面的链接看一下就会了</span>
+</span></span><span class="line"><span class="cl"><span class="n">vmware</span><span class="o">-</span><span class="n">hgfsclient</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 进入共享文件夹</span>
+</span></span><span class="line"><span class="cl"><span class="n">cd</span> <span class="o">/</span><span class="n">mnt</span><span class="o">/</span><span class="n">hgfs</span><span class="o">/</span><span class="n">your_shareDir_name</span>
+</span></span></code></pre></div>
+<p><strong>关于工具安装的提醒：</strong></p>
+<ol>
+<li>第一次接触 linux 的师傅们可以先去学习一些 linux 的基本操作再回来接着看</li>
+<li>后续出现的所有名词如果有不懂的可以直接上搜索引擎查询，永远记住：<strong>搜索引擎是我们 CTFers 的好伙伴！</strong></li>
+<li>建议大家在安装各种工具时多拍快照，安装错误后可以直接恢复到之前的快照</li>
+<li>Ubuntu的虚拟机大小大概在30g~60g，大家平使用记得留足空间，快照基本都在1g以上，不用的快照及时删除，但是<strong>至少</strong>要留有一个快照！</li>
+<li>现在，开启我们的PWN环境搭建之旅吧，大概耗时30分钟~90分钟（具体看大家的linux熟练度和网速）</li>
+</ol>
+<div class="anchor" id="基础工具"></div>
+<h2 class="relative group">基础工具 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e5%9f%ba%e7%a1%80%e5%b7%a5%e5%85%b7" style="text-decoration-line: none !important;">#</a></span>
+</h2>
+<p>一些比较基础的工具。</p>
+<p><strong>1. vim</strong></p>
+<p>这个文本编辑器可能新手不太常用，不过以后迟早会用到的，所以可以先安装好，反正不用花多少时间 [doge]</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 安装</span>
+</span></span><span class="line"><span class="cl"><span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">vim</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 检测是否安装成功</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#法一，不过打印(输出)出来的东西有点多</span>
+</span></span><span class="line"><span class="cl"><span class="n">vim</span> <span class="o">--</span><span class="n">version</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 法二，不过需要看提示退出编辑器界面</span>
+</span></span><span class="line"><span class="cl"><span class="n">vim</span> <span class="o">-</span><span class="n">v</span>
+</span></span></code></pre></div><p>如何退出vim编辑器：</p>
+<p>vim退出时要先按 <code>:</code> (加shift变成冒号) ，看到<strong>光标到了底下</strong>再按<code>q + enter</code>退出，<code>w + enter</code> 保存后退出</p>
+<p>推荐阅读：</p>
+<p><a href="https://zhuanlan.zhihu.com/p/68111471" target="_blank">
+    精通 VIM ，此文就够了 - 知乎 (zhihu.com)</a></p>
+<p><a href="https://www.runoob.com/linux/linux-vim.html" target="_blank">
+    Linux vi/vim | 菜鸟教程 (runoob.com)</a></p>
+<p><a href="https://blog.csdn.net/scaleqiao/article/details/45153379" target="_blank">
+    史上最全的Vim命令</a>  （这个有点多，其实没必要，我只是放在这当书签🐶）</p>
+<p><strong>2. git</strong></p>
+<p>这个不多说了，必装</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1"># 安装</span>
+</span></span><span class="line"><span class="cl"><span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">git</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 检测是否安装成功</span>
+</span></span><span class="line"><span class="cl"><span class="n">git</span> <span class="o">--</span><span class="n">version</span>
+</span></span></code></pre></div>
+<p><strong>3. gcc</strong></p>
+<p>这个也是必装的</p>
+<p>（学pwn的话是必须要学C语言的）</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 安装</span>
+</span></span><span class="line"><span class="cl"><span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">gcc</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 检测是否安装成功</span>
+</span></span><span class="line"><span class="cl"><span class="n">gcc</span> <span class="o">-</span><span class="n">v</span>
+</span></span></code></pre></div>
+<div class="anchor" id="qemu-kernel-pwn"></div>
+<h2 class="relative group"><strong>qemu （Kernel Pwn）</strong>
+<span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#qemu-kernel-pwn" style="text-decoration-line: none !important;">#</a></span>
+</h2>
+<p>（刚入门pwn的师傅可能不太常用，不过也可以先装着）</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 安装 </span>
+</span></span><span class="line"><span class="cl"><span class="c1"># (这里我直接采用了qemu官方的安装方式，大约有1G的包需要下载，所以网速很重要doge)</span>
+</span></span><span class="line"><span class="cl"><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">qemu</span><span class="o">-</span><span class="n">user</span> <span class="n">qemu</span><span class="o">-</span><span class="n">system</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 检测是否安装成功</span>
+</span></span><span class="line"><span class="cl"><span class="n">qemu</span><span class="o">-</span><span class="n">system</span><span class="o">-</span><span class="n">arm</span> <span class="o">-</span><span class="n">M</span> <span class="err">?</span>
+</span></span></code></pre></div><p>
+<figure>
+<img alt="image-20230731175337803" class="my-0 rounded-md" src="https://s2.loli.net/2023/07/31/OiVdloquE3S8T2R.png"/>
+</figure>
+</p>
+<p><strong>qemu</strong>的详细安装过程与使用方法可以看：</p>
+<section class="space-y-10 w-full">
+</section>
+<p><strong>5. python3 与 pip3</strong></p>
+<p>ubuntu 已经默认装好了python3，如果想用python2的话可以自己装，不过现在已经不推荐用python2了</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 安装pip3</span>
+</span></span><span class="line"><span class="cl"><span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">python3</span><span class="o">-</span><span class="n">pip</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 检测是否安装成功</span>
+</span></span><span class="line"><span class="cl"><span class="n">pip</span> <span class="o">-</span><span class="n">V</span>
+</span></span></code></pre></div><div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 设置python命令默认为python3</span>
+</span></span><span class="line"><span class="cl"><span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">python</span><span class="o">-</span><span class="ow">is</span><span class="o">-</span><span class="n">python3</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 安装前会显示找不到命令 “python”，安装后可以正常使用python指令</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 其实安装这个软件包只是为了少打那个“3”,所以也可以不装[doge]</span>
+</span></span></code></pre></div><div class="anchor" id="gdb-插件"></div>
+<h2 class="relative group">gdb 插件 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#gdb-%e6%8f%92%e4%bb%b6" style="text-decoration-line: none !important;">#</a></span>
+</h2>
+<p>前排提示：PWNer 必须学会使用 gdb！！！</p>
+<p>（ubuntu默认装有普通的gdb，其实也不是不能直接用，不过还是安装一些插件比较好）</p>
+<p><strong>1. peda</strong></p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 原版</span>
+</span></span><span class="line"><span class="cl"><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">longld</span><span class="o">/</span><span class="n">peda</span><span class="o">.</span><span class="n">git</span>
+</span></span><span class="line"><span class="cl"><span class="n">echo</span> <span class="s2">"source ~/peda/peda.py"</span> <span class="o">&gt;</span> <span class="o">~/.</span><span class="n">gdbinit</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 带heap插件版</span>
+</span></span><span class="line"><span class="cl"><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">gitee</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">AC_ddme</span><span class="o">/</span><span class="n">peda</span><span class="o">-</span><span class="n">heap</span><span class="o">.</span><span class="n">git</span>
+</span></span><span class="line"><span class="cl"><span class="n">echo</span> <span class="s2">"source ~/peda-heap/peda.py"</span> <span class="o">&gt;</span> <span class="o">~/.</span><span class="n">gdbinit</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 测试：</span>
+</span></span><span class="line"><span class="cl"><span class="n">gdb</span>
+</span></span></code></pre></div><p>
+<figure>
+<img alt="image-20230710145853104" class="my-0 rounded-md" src="https://s2.loli.net/2023/07/10/kfZt7AhM5Q6NsFg.png"/>
+</figure>
+</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">### peda-heap 使用方法</span>
+</span></span><span class="line"><span class="cl">heap set_mainarena <span class="o">[</span>new_addr<span class="o">]</span> <span class="c1"># -- set main_arena = newvalue</span>
+</span></span><span class="line"><span class="cl">heap all <span class="c1"># -- print heap info (mmap + sbrk)</span>
+</span></span><span class="line"><span class="cl">heap freed <span class="o">[</span>main_arena<span class="o">]</span> <span class="c1"># -- print freed chunks (tcache + fastbinY + bins)</span>
+</span></span><span class="line"><span class="cl">heap fastbin <span class="o">[</span>main_arena<span class="o">]</span> <span class="c1"># -- print freed chunks(fastbinY)</span>
+</span></span><span class="line"><span class="cl">heap bins <span class="o">[</span>main_arena<span class="o">]</span> <span class="c1"># -- print freed chunks (bins)</span>
+</span></span><span class="line"><span class="cl">heap trace <span class="c1"># -- print (arg + return_value) of malloc,free,realloc</span>
+</span></span><span class="line"><span class="cl">heap checkfree address <span class="c1"># -- try free chunk at address and print some info</span>
+</span></span><span class="line"><span class="cl">heap debug + heap restore <span class="c1"># -- try restore heap state before it was overlapped</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">### heap all 如下图：</span>
+</span></span></code></pre></div><p>
+<figure>
+<img alt="image-20230807000723376" class="my-0 rounded-md" src="https://s2.loli.net/2023/08/07/QCdSHA7icRvF9oh.png"/>
+</figure>
+</p>
+<hr/>
+<p><strong>2. pwndbg</strong></p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># (时间较长)</span>
+</span></span><span class="line"><span class="cl"><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">pwndbg</span><span class="o">/</span><span class="n">pwndbg</span><span class="o">.</span><span class="n">git</span>
+</span></span><span class="line"><span class="cl"><span class="n">cd</span> <span class="n">pwndbg</span>
+</span></span><span class="line"><span class="cl"><span class="o">./</span><span class="n">setup</span><span class="o">.</span><span class="n">sh</span>
+</span></span><span class="line"><span class="cl"><span class="n">echo</span> <span class="s2">"source ~/pwndbg/gdbinit.py"</span> <span class="o">&gt;</span> <span class="o">~/.</span><span class="n">gdbinit</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 测试：</span>
+</span></span><span class="line"><span class="cl"><span class="n">gdb</span>
+</span></span></code></pre></div><p>
+<figure>
+<img alt="image-20230710144926373" class="my-0 rounded-md" src="https://s2.loli.net/2023/07/10/6LeSZhsfQTqw93z.png"/>
+</figure>
+</p>
+<hr/>
+<p><strong>3. gef</strong></p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># git</span>
+</span></span><span class="line"><span class="cl"><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">hugsy</span><span class="o">/</span><span class="n">gef</span><span class="o">.</span><span class="n">git</span>
+</span></span><span class="line"><span class="cl"><span class="n">echo</span> <span class="s2">"source ~/gef/gef.py"</span> <span class="o">&gt;</span> <span class="o">~/.</span><span class="n">gdbinit</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 测试：</span>
+</span></span><span class="line"><span class="cl"><span class="n">gdb</span>
+</span></span></code></pre></div><p>
+<figure>
+<img alt="image-20230710145040108" class="my-0 rounded-md" src="https://s2.loli.net/2023/07/10/msJfaKZ2EpwSe5t.png"/>
+</figure>
+</p>
+<hr/>
+<p><strong>三个插件使用指南</strong></p>
+<p>平时使用方式一：（注释法）</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">sudo</span> <span class="n">vim</span> <span class="o">~/.</span><span class="n">gdbinit</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># vim后参照第一行的内容，在文件内输入下方横线中内容</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#（注意每个人的路径是不同的，所以要输入的内容也是不同的）</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 选择你要用的一个，另外两个注释掉，保存退出</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 原来：</span>
+</span></span><span class="line"><span class="cl"><span class="n">source</span> <span class="o">~/</span><span class="n">pwndbg</span><span class="o">/</span><span class="n">gdbinit</span><span class="o">.</span><span class="n">py</span>
+</span></span><span class="line"><span class="cl"><span class="n">source</span> <span class="o">~/</span><span class="n">gef</span><span class="o">/</span><span class="n">gef</span><span class="o">.</span><span class="n">py</span>
+</span></span><span class="line"><span class="cl"><span class="n">source</span> <span class="o">~/</span><span class="n">peda</span><span class="o">/</span><span class="n">peda</span><span class="o">.</span><span class="n">py</span>
+</span></span><span class="line"><span class="cl"><span class="n">source</span> <span class="o">~/</span><span class="n">peda</span><span class="o">-</span><span class="n">heap</span><span class="o">/</span><span class="n">peda</span><span class="o">.</span><span class="n">py</span><span class="s2">"</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">### 使用pwndbg:</span>
+</span></span><span class="line"><span class="cl"><span class="n">source</span> <span class="o">~/</span><span class="n">pwndbg</span><span class="o">/</span><span class="n">gdbinit</span><span class="o">.</span><span class="n">py</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># source ~/gef/gef.py</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># source ~/peda/peda.py</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># source ~/peda-heap/peda.py"</span>
+</span></span></code></pre></div><p>平时使用方式二：（多打一行命令法：）</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 使用前多打一行命令</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 路径需要根据自己的安装路径更改</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">### 使用pwndbg:</span>
+</span></span><span class="line"><span class="cl"><span class="n">echo</span> <span class="s2">"source ~/pwndbg/gdbinit.py"</span> <span class="o">&gt;</span> <span class="o">~/.</span><span class="n">gdbinit</span>
+</span></span><span class="line"><span class="cl"><span class="n">gdb</span>
+</span></span><span class="line"><span class="cl"><span class="c1">### 使用gef:</span>
+</span></span><span class="line"><span class="cl"><span class="n">echo</span> <span class="s2">"source ~/gef/gef.py"</span> <span class="o">&gt;</span> <span class="o">~/.</span><span class="n">gdbinit</span>
+</span></span><span class="line"><span class="cl"><span class="n">gdb</span>
+</span></span><span class="line"><span class="cl"><span class="c1">### 使用peda:</span>
+</span></span><span class="line"><span class="cl"><span class="n">echo</span> <span class="s2">"source ~/peda/peda.py"</span> <span class="o">&gt;&gt;</span> <span class="o">~/.</span><span class="n">gdbinit</span>
+</span></span><span class="line"><span class="cl"><span class="n">gdb</span>
+</span></span><span class="line"><span class="cl"><span class="c1">### 使用peda-heap:</span>
+</span></span><span class="line"><span class="cl"><span class="n">echo</span> <span class="s2">"source ~/peda-heap/peda.py"</span> <span class="o">&gt;&gt;</span> <span class="o">~/.</span><span class="n">gdbinit</span>
+</span></span><span class="line"><span class="cl"><span class="n">gdb</span>
+</span></span></code></pre></div><p>在exp脚本中调用gdb调试时，可以自己写一个函数来解决，比如：</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">taolve</span> <span class="o">=</span> <span class="n">process</span><span class="p">(</span><span class="s1">'./pwn'</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">_gdb</span><span class="p">(</span><span class="n">my_gdb</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">my_gdb</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s2">"echo </span><span class="se">\"</span><span class="s2">source ~/pwndbg/gdbinit.py</span><span class="se">\"</span><span class="s2"> &gt; ~/.gdbinit"</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">gdb</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">taolve</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">elif</span> <span class="n">my_gdb</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s2">"echo </span><span class="se">\"</span><span class="s2">source ~/gef/gef.py</span><span class="se">\"</span><span class="s2"> &gt; ~/.gdbinit"</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">gdb</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">taolve</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">elif</span> <span class="n">my_gdb</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s2">"echo </span><span class="se">\"</span><span class="s2">source ~/peda/peda.py</span><span class="se">\"</span><span class="s2"> &gt; ~/.gdbinit"</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">gdb</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">taolve</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl"><span class="c1">#使用pwndbg,其他同理</span>
+</span></span><span class="line"><span class="cl"><span class="n">_gdb</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span></code></pre></div><p><strong>4. gdb-multiarch（可选）</strong></p>
+<p><strong>（目前可能还用不到，大家可以先跳过）</strong></p>
+<p>以下为ARM和MIPS的交叉编译及运行环境，安装可参考 hollk 大佬的文章：</p>
+<p><a href="https://blog.csdn.net/qq_41202237/article/details/118188924" target="_blank">
+    ubuntu20.04 PWN（含x86、ARM、MIPS）环境搭建</a></p>
+<ul>
+<li>gdb-multiarch</li>
+<li>gcc-arm-linux-gnueabi</li>
+<li>gcc-aarch64-linux-gnu</li>
+<li>gcc-mips-linux-gnu</li>
+<li>gcc-mipsel-linux-gnu</li>
+<li>gcc-mips64-linux-gnuabi64</li>
+<li>gcc-mips64el-linux-gnuabi64</li>
+<li>ARM PWN —— ARM软件包</li>
+<li>MIPS PWN —— MIPS软件包</li>
+</ul>
+<hr/>
+<p>python PWN 相关库</p>
+<div class="anchor" id="pwntools"></div>
+<h2 class="relative group">pwntools 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#pwntools" style="text-decoration-line: none !important;">#</a></span>
+</h2>
+<p>（ps：后面的工具比较多，可以专门在根目录上新建一个tools文件夹来放工具）</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># pip3直接安装：</span>
+</span></span><span class="line"><span class="cl"><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">update</span>
+</span></span><span class="line"><span class="cl"><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">python3</span> <span class="n">python3</span><span class="o">-</span><span class="n">pip</span> <span class="n">python3</span><span class="o">-</span><span class="n">dev</span> <span class="n">git</span> <span class="n">libssl</span><span class="o">-</span><span class="n">dev</span> <span class="n">libffi</span><span class="o">-</span><span class="n">dev</span> <span class="n">build</span><span class="o">-</span><span class="n">essential</span>
+</span></span><span class="line"><span class="cl"><span class="n">python3</span> <span class="o">-</span><span class="n">m</span> <span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">upgrade</span> <span class="n">pip</span>
+</span></span><span class="line"><span class="cl"><span class="n">python3</span> <span class="o">-</span><span class="n">m</span> <span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">upgrade</span> <span class="n">pwntools</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 先git下来再用pip3安装：（好像法2会快一些）</span>
+</span></span><span class="line"><span class="cl"><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">Gallopsled</span><span class="o">/</span><span class="n">pwntools</span><span class="o">.</span><span class="n">git</span>
+</span></span><span class="line"><span class="cl"><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">python3</span> <span class="n">python3</span><span class="o">-</span><span class="n">pip</span> <span class="n">python3</span><span class="o">-</span><span class="n">dev</span> <span class="n">git</span> <span class="n">libssl</span><span class="o">-</span><span class="n">dev</span> <span class="n">libffi</span><span class="o">-</span><span class="n">dev</span> <span class="n">build</span><span class="o">-</span><span class="n">essential</span>
+</span></span><span class="line"><span class="cl"><span class="n">python3</span> <span class="o">-</span><span class="n">m</span> <span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">upgrade</span> <span class="n">pip</span>
+</span></span><span class="line"><span class="cl"><span class="n">python3</span> <span class="o">-</span><span class="n">m</span> <span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">upgrade</span> <span class="n">pwntools</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 检测是否安装成功</span>
+</span></span><span class="line"><span class="cl"><span class="n">python3</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 没有报错就说明装好了</span>
+</span></span></code></pre></div><p>
+<figure>
+<img alt="image-20230709212814696" class="my-0 rounded-md" src="https://s2.loli.net/2023/07/09/8i2CSnZljEHKALT.png"/>
+</figure>
+</p>
+<p>注：输入 <code>quit()</code> 退出Python交互模式</p>
+<p>又注：之前用户名为"pwner"的虚拟机是入门时用到现在的老虚拟机，还是默认背景和配色，用户名为"ta0lve"的虚拟机是今天刚装的新虚拟机，个性化配置见本文的最后：<strong><a href="https://ta0lve.github.io/posts/pwn/%e5%85%a5%e9%97%a8/pwn%e7%8e%af%e5%a2%83%e6%90%ad%e5%bb%ba%e8%ae%b0%e5%bd%95/#terminator-%e5%8f%af%e9%80%89" target="_blank">
+    terminator （可选）</a></strong></p>
+<p><strong>基本使用方法：</strong></p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># python3</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span> <span class="c1"># 导入python库</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">### 0x01 环境设置</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 1</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="o">.</span><span class="n">log_level</span> <span class="o">=</span> <span class="s1">'debug'</span> <span class="c1"># 在对漏洞进行故障排除</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="o">.</span><span class="n">arch</span> <span class="o">=</span> <span class="s1">'i386'</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="o">.</span><span class="n">os</span> <span class="o">=</span> <span class="s1">'linux'</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 2</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="p">(</span><span class="n">os</span><span class="o">=</span><span class="s1">'linux'</span><span class="p">,</span> <span class="n">arch</span><span class="o">=</span><span class="s1">'amd64'</span><span class="p">,</span> <span class="n">log_level</span><span class="o">=</span><span class="s1">'debug'</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 3</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="o">.</span><span class="n">binary</span> <span class="o">=</span> <span class="n">pwn_name</span> <span class="c1"># 从二进制文件推断目标架构、位与和字节序</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">### 0x02 建立链接</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="n">ip</span><span class="p">,</span><span class="n">port</span><span class="p">)</span> <span class="c1"># 创建与ip:port的链接</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">=</span> <span class="n">process</span><span class="p">(</span><span class="n">pwn_name</span><span class="p">)</span> <span class="c1"># 执行二进制文件process</span>
+</span></span><span class="line"><span class="cl"><span class="n">gdb</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="c1"># 在当前进程下调试二进制文件</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">### 0x03 利用elf文件</span>
+</span></span><span class="line"><span class="cl"><span class="n">elf</span> <span class="o">=</span> <span class="n">ELF</span><span class="p">(</span><span class="n">pwn_name</span><span class="p">)</span> <span class="c1"># 封装有关 ELF 文件的信息</span>
+</span></span><span class="line"><span class="cl"><span class="n">func_addr</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">sym</span><span class="p">[</span><span class="s2">"func"</span><span class="p">]</span> <span class="c1"># 在ELF文件中查找函数的加载地址</span>
+</span></span><span class="line"><span class="cl"><span class="n">func_got</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">got</span><span class="p">[</span><span class="s2">"func"</span><span class="p">]</span> <span class="c1"># 在ELF文件中查找函数的got表地址</span>
+</span></span><span class="line"><span class="cl"><span class="n">func_plt</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">plt</span><span class="p">[</span><span class="s2">"func"</span><span class="p">]</span> <span class="c1"># 在ELF文件中查找函数的plt表地址</span>
+</span></span><span class="line"><span class="cl"><span class="n">binsh_addr</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">b</span><span class="s1">'/bin/sh'</span><span class="p">)</span><span class="o">.</span><span class="n">__next</span><span class="p">()</span><span class="n">__</span> <span class="c1"># 在ELF文件中查找字符串</span>
+</span></span><span class="line"><span class="cl"><span class="n">binsh_addr</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">libc</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">b</span><span class="s2">"/bin/sh"</span><span class="p">))</span> <span class="c1"># 这个写法也可以</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">### 0x04 利用本地libc文件</span>
+</span></span><span class="line"><span class="cl"><span class="n">libc</span> <span class="o">=</span> <span class="n">ELF</span><span class="p">(</span><span class="s1">'./libc-2.23.so'</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">libc_base</span> <span class="o">=</span> <span class="n">puts_real_addr</span> <span class="o">-</span> <span class="n">libc</span><span class="o">.</span><span class="n">symbols</span><span class="p">[</span><span class="s1">'puts'</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">binsh_addr</span> <span class="o">=</span> <span class="n">libc_base</span> <span class="o">+</span> <span class="n">libc</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">b</span><span class="s2">"/bin/sh"</span><span class="p">)</span><span class="o">.</span><span class="fm">__next__</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># binsh_addr = libc_base + next(libc.search(b"/bin/sh"))</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 这个写法也可以</span>
+</span></span><span class="line"><span class="cl"><span class="n">system_addr</span> <span class="o">=</span> <span class="n">libc_base</span> <span class="o">+</span> <span class="n">libc</span><span class="o">.</span><span class="n">symbols</span><span class="p">[</span><span class="s2">"system"</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">### 0x05 查找libc文件</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">LibcSearcher</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="n">libc</span> <span class="o">=</span> <span class="n">LibcSearcher</span><span class="p">(</span><span class="s1">'puts'</span><span class="p">,</span> <span class="n">puts_real_addr</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">libc_base</span> <span class="o">=</span> <span class="n">puts_real_addr</span> <span class="o">-</span> <span class="n">libc</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="s1">'puts'</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">log</span><span class="o">.</span><span class="n">success</span><span class="p">(</span><span class="s1">'libc_base '</span> <span class="o">+</span> <span class="nb">hex</span><span class="p">(</span><span class="n">libc_base</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">system_addr</span> <span class="o">=</span> <span class="n">libc_base</span> <span class="o">+</span> <span class="n">libc</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="s2">"system"</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">binsh_addr</span> <span class="o">=</span> <span class="n">libc_base</span> <span class="o">+</span> <span class="n">libc</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="s2">"str_bin_sh"</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">### 0x06 生成shellcode</span>
+</span></span><span class="line"><span class="cl"><span class="n">shellcode</span> <span class="o">=</span> <span class="n">shellcraft</span><span class="o">.</span><span class="n">sh</span><span class="p">()</span> <span class="c1"># 生成指定架构的shellcode 汇编语言</span>
+</span></span><span class="line"><span class="cl"><span class="n">shellcode</span> <span class="o">=</span> <span class="n">asm</span><span class="p">(</span><span class="n">shellcode</span><span class="p">)</span> <span class="c1"># 转换为字节</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">### 0x07 接收发送字节</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="n">size</span><span class="p">)</span> <span class="c1"># 接收 size 个字节 默认全部接收</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">recvline</span><span class="p">()</span> <span class="c1"># 接收字节直至遇到b'\n'</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="n">string</span><span class="p">)</span> <span class="c1"># 接受字节直到遇到 string</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="c1"># 发送 data</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="c1"># 发送 data 在后面加 b'\n'</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">sendafter</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="c1"># 在接收 string 后发送data</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="n">string</span><span class="p">,</span><span class="n">data</span><span class="p">)</span> <span class="c1"># 在接收 string 后发送data 在后面加 '\n'</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">p64</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="c1"># 将 data 转换为64位小端序字节 也可以为32/16/8位字节</span>
+</span></span><span class="line"><span class="cl"><span class="n">u64</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="c1"># 将 data 转换为64位大端序字节 也可以为32/16/8位字节</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">### 0x08 创建一个交互shell</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span> 
+</span></span></code></pre></div><p>还可以看看：</p>
+<p><a href="https://blog.csdn.net/weixin_43833642/article/details/104181681" target="_blank">
+    pwntools的安装及基本使用</a></p>
+<p><a href="https://docs.pwntools.com/en/stable/" target="_blank">
+    pwntools — pwntools 4.10.0 documentation</a></p>
+<div class="anchor" id="libcsearcher"></div>
+<h2 class="relative group">LibcSearcher 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#libcsearcher" style="text-decoration-line: none !important;">#</a></span>
+</h2>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 安装方式一：</span>
+</span></span><span class="line"><span class="cl"><span class="n">sudo</span> <span class="n">pip3</span> <span class="n">install</span> <span class="n">LibcSearcher</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 可以多试几次，实在不行可以使用方式二</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 方式二如果在使用时出现“No Moudule Name LibcSearcher”，</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 可以将exp.py文件复制到LibcSearcher根目录下，</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 或是将LibcSearcher.py复制到exp.py文件所在的文件夹下</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 安装方式二：</span>
+</span></span><span class="line"><span class="cl"><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">lieanu</span><span class="o">/</span><span class="n">LibcSearcher</span><span class="o">.</span><span class="n">git</span>
+</span></span><span class="line"><span class="cl"><span class="n">cd</span> <span class="n">LibcSearcher</span>
+</span></span><span class="line"><span class="cl"><span class="n">sudo</span> <span class="n">python3</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">install</span>
+</span></span></code></pre></div><div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 检测是否安装成功</span>
+</span></span><span class="line"><span class="cl"><span class="n">python3</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">LibcSearcher</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span></code></pre></div><p>
+<figure>
+<img alt="image-20230709214229030" class="my-0 rounded-md" src="https://s2.loli.net/2023/07/10/5iU3sgaHR4mfQPj.png"/>
+</figure>
+</p>
+<p>（如果两个方法都不行可以看一看这个：<a href="https://blog.csdn.net/OrientalGlass/article/details/128541226?spm=1001.2101.3001.6650.7&amp;utm_medium=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~Rate-7-128541226-blog-107150265.235%5ev38%5epc_relevant_sort_base1&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~Rate-7-128541226-blog-107150265.235%5ev38%5epc_relevant_sort_base1&amp;utm_relevant_index=10" target="_blank">
+    LibcSearcher安装的心路历程和坑</a>）</p>
+<p><strong>基本使用方法：</strong>（还没入门的师傅们可以等学到ret2libc的时候再看）</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">LibcSearcher</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 接收函数的got表的地址,比如我这里拿到puts函数的真实地址</span>
+</span></span><span class="line"><span class="cl"><span class="n">puts_real_addr</span> <span class="o">=</span> <span class="n">u64</span><span class="p">(</span><span class="n">taolve</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="sa">b</span><span class="s2">"</span><span class="se">\x00</span><span class="s2">"</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">log</span><span class="o">.</span><span class="n">success</span><span class="p">(</span><span class="s2">"puts_real_addr:"</span><span class="o">+</span> <span class="nb">hex</span><span class="p">(</span><span class="n">puts_real_addr</span><span class="p">))</span> <span class="c1"># 打印出来给自己看一看</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">libc</span> <span class="o">=</span> <span class="n">LibcSearcher</span><span class="p">(</span><span class="s1">'puts'</span><span class="p">,</span> <span class="n">puts_real_addr</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">libc</span><span class="o">.</span><span class="n">add_condition</span><span class="p">(</span><span class="s2">"atoi"</span><span class="p">,</span> <span class="mi">218528</span><span class="p">)</span> <span class="c1"># 添加一个约束条件</span>
+</span></span><span class="line"><span class="cl"><span class="n">libc_base</span> <span class="o">=</span> <span class="n">puts_real_addr</span> <span class="o">-</span> <span class="n">libc</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="s1">'puts'</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 养成好习惯，打印一下libc_base看看是不是后三位为0</span>
+</span></span><span class="line"><span class="cl"><span class="n">log</span><span class="o">.</span><span class="n">success</span><span class="p">(</span><span class="s1">'libc_base '</span> <span class="o">+</span> <span class="nb">hex</span><span class="p">(</span><span class="n">libc_base</span><span class="p">))</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">system_addr</span> <span class="o">=</span> <span class="n">libc_base</span> <span class="o">+</span> <span class="n">libc</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="s2">"system"</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">binsh_addr</span> <span class="o">=</span> <span class="n">libc_base</span> <span class="o">+</span> <span class="n">libc</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="s2">"str_bin_sh"</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 构造payload, 准备getshell</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">"a"</span><span class="o">*</span><span class="n">offset</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">pop_rdi_ret</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">binsh_addr</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">system_addr</span><span class="p">)</span> <span class="c1">#+p64(vuln)</span>
+</span></span></code></pre></div><p><strong>注：其实大家装一个LibcSearcher库就够用了，后面几个库可以直接跳过</strong></p>
+<p><strong>LibcSearcher3 （可选）</strong></p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 安装</span>
+</span></span><span class="line"><span class="cl"><span class="n">pip3</span> <span class="n">install</span> <span class="n">LibcSearcher3</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 检测是否安装成功</span>
+</span></span><span class="line"><span class="cl"><span class="n">python3</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">LibcSearcher3</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span></code></pre></div><p>
+<figure>
+<img alt="image-20230710134753037" class="my-0 rounded-md" src="https://s2.loli.net/2023/07/10/EaNg8CwUyLQvScA.png"/>
+</figure>
+</p>
+<p>相关说明：</p>
+<p><a href="https://pypi.org/project/LibcSearcher3/" target="_blank">
+    LibcSearcher3 · PyPI</a></p>
+<p><strong>LibcSearcherX （可选）</strong></p>
+<p>（这个我没装）</p>
+<p><a href="https://github.com/iptL-F4ck/LibcSearcherX" target="_blank">
+    iptL-F4ck/LibcSearcherX (github.com)</a></p>
+<p><strong>pwnmodules （可选）</strong></p>
+<p>（这个我也没装 🐶 ）</p>
+<p><a href="https://pypi.org/project/PwnModules/" target="_blank">
+    PwnModules · PyPI</a></p>
+<p><strong>在线查找libc库：</strong></p>
+<p><a href="https://libc.rip/" target="_blank">
+    libc-database</a></p>
+<p><a href="https://libc.blukat.me/" target="_blank">
+    libc database search (blukat.me)</a></p>
+<br/>
+<div class="anchor" id="pwn-相关工具"></div>
+<h2 class="relative group">PWN 相关工具 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#pwn-%e7%9b%b8%e5%85%b3%e5%b7%a5%e5%85%b7" style="text-decoration-line: none !important;">#</a></span>
+</h2>
+<p>现在不知道怎么用、什么时候用很正常，可以先装好，反正以后迟早会用到的[doge]</p>
+<p>当然也可以先标记一下等到时候有需要再回来看。</p>
+<div class="anchor" id="ropgadget"></div>
+<h3 class="relative group">ROPgadget 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#ropgadget" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<blockquote>
+<p>该工具允许在二进制文件中搜索小工具，以促进对ROP的利用。ROPgadget支持x86、x64、ARM、ARM64、PowerPC、SPARC和MIPS架构下的ELF/PE/Mach-O格式</p>
+</blockquote>
+<p>完成基本ROP题型时方便我们构造ROP链</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 安装</span>
+</span></span><span class="line"><span class="cl"><span class="n">sudo</span> <span class="n">pip3</span> <span class="n">install</span> <span class="n">capstone</span>
+</span></span><span class="line"><span class="cl"><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">JonathanSalwan</span><span class="o">/</span><span class="n">ROPgadget</span><span class="o">.</span><span class="n">git</span>
+</span></span><span class="line"><span class="cl"><span class="n">cd</span> <span class="n">ROPgadget</span>
+</span></span><span class="line"><span class="cl"><span class="n">sudo</span> <span class="n">python3</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">install</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 检测是否安装成功</span>
+</span></span><span class="line"><span class="cl"><span class="n">ROPgadget</span> <span class="o">-</span><span class="n">V</span>
+</span></span></code></pre></div><p>如果报错了，可以按下面的方法解决：</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 报错详情：</span>
+</span></span><span class="line"><span class="cl"><span class="o">...</span><span class="n">Error</span><span class="p">:</span> <span class="n">Script</span> <span class="s1">'scripts/ROPgadget'</span> <span class="ow">not</span> <span class="n">found</span> <span class="ow">in</span> <span class="n">metadata</span> <span class="n">at</span> 
+</span></span><span class="line"><span class="cl"><span class="s1">'/home/ta0lve/.local/lib/python3.10/site-packages/ROPGadget-7.3.dist-info'</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 复制这个报错的路径</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 解决：</span>
+</span></span><span class="line"><span class="cl"><span class="n">cd</span> <span class="n">ROPgadget</span> <span class="c1"># 进入你们git的目录里，已经进去了就不用输这个命令了</span>
+</span></span><span class="line"><span class="cl"><span class="n">sudo</span> <span class="n">cp</span> <span class="o">-</span><span class="n">r</span> <span class="n">scripts</span> <span class="n">你复制的路径</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 示例：</span>
+</span></span><span class="line"><span class="cl"><span class="n">sudo</span> <span class="n">cp</span> <span class="o">-</span><span class="n">r</span> <span class="n">scripts</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">ta0lve</span><span class="o">/.</span><span class="n">local</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.10</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">ROPGadget</span><span class="o">-</span><span class="mf">7.3</span><span class="o">.</span><span class="n">dist</span><span class="o">-</span><span class="n">info</span>
+</span></span></code></pre></div><p>
+<figure>
+<img alt="image-20230710162706847" class="my-0 rounded-md" src="https://s2.loli.net/2023/07/10/F1nISmxtWQTR3fc.png"/>
+</figure>
+</p>
+<p>基础用法：</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 其中的pwn是我们的二进制文件</span>
+</span></span><span class="line"><span class="cl"><span class="n">ROPgadget</span> <span class="o">--</span><span class="n">binary</span> <span class="n">pwn</span> <span class="o">--</span><span class="n">only</span> <span class="s2">"pop|ret"</span> <span class="o">|</span> <span class="n">grep</span> <span class="n">rax</span>
+</span></span><span class="line"><span class="cl"><span class="n">ROPgadget</span> <span class="o">--</span><span class="n">binary</span> <span class="n">pwn</span> <span class="o">--</span><span class="n">only</span> <span class="err">“</span><span class="nb">int</span><span class="err">”</span>
+</span></span><span class="line"><span class="cl"><span class="n">ROPgadget</span> <span class="o">--</span><span class="n">binary</span> <span class="n">pwn</span> <span class="o">--</span><span class="n">string</span>  <span class="s2">"/bin/sh"</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 辨析：</span>
+</span></span><span class="line"><span class="cl"><span class="n">ROPgadget</span> <span class="o">--</span><span class="n">binary</span> <span class="n">pwn</span> <span class="o">|</span> <span class="n">grep</span> <span class="n">ret</span>  <span class="c1"># 含有ret指令的都符合</span>
+</span></span><span class="line"><span class="cl"><span class="n">ROPgadget</span> <span class="o">--</span><span class="n">binary</span> <span class="n">pwn</span> <span class="o">--</span><span class="n">only</span> <span class="s2">"ret"</span> <span class="c1"># 只含有ret指令的</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># ROPgadget自动生成ropchain</span>
+</span></span><span class="line"><span class="cl"><span class="n">ROPgadget</span> <span class="o">--</span><span class="n">binary</span> <span class="n">pwn</span> <span class="o">--</span><span class="n">ropchain</span>
+</span></span></code></pre></div><p>
+<figure>
+<img alt="image-20230710163347644" class="my-0 rounded-md" src="https://s2.loli.net/2023/08/07/wHFtfrdgo153cOa.png"/>
+</figure>
+</p>
+<div class="anchor" id="one_gadget"></div>
+<h3 class="relative group">one_gadget 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#one_gadget" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<blockquote>
+<p>在ctf-pwn中大部分情况需要获得远程shell，one_gadget会自动查找ELF文件中的execve(‘/bin/sh’, NULL, NULL)，通过exploit实现RCE（远程代码执行）</p>
+</blockquote>
+<p>查找可以用来 getshell 的指令</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 安装</span>
+</span></span><span class="line"><span class="cl"><span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="o">-</span><span class="n">y</span> <span class="n">ruby</span> <span class="n">ruby</span><span class="o">-</span><span class="n">dev</span>
+</span></span><span class="line"><span class="cl"><span class="n">sudo</span> <span class="n">gem</span> <span class="n">install</span> <span class="n">one_gadget</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl"><span class="c1"># 检测是否安装成功</span>
+</span></span><span class="line"><span class="cl"><span class="n">one_gadget</span> <span class="o">--</span><span class="n">version</span>
+</span></span></code></pre></div><p>基础用法：</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">one_gadget</span> <span class="n">libc</span><span class="o">.</span><span class="n">so</span><span class="mf">.6</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="s2">"""
+</span></span></span><span class="line"><span class="cl"><span class="s2">输出：
+</span></span></span><span class="line"><span class="cl"><span class="s2">0x45226 execve("/bin/sh", rsp+0x30, environ)
+</span></span></span><span class="line"><span class="cl"><span class="s2">constraints:
+</span></span></span><span class="line"><span class="cl"><span class="s2">  rax == NULL
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">0x4527a execve("/bin/sh", rsp+0x30, environ)
+</span></span></span><span class="line"><span class="cl"><span class="s2">constraints:
+</span></span></span><span class="line"><span class="cl"><span class="s2">  [rsp+0x30] == NULL
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">0xf03a4 execve("/bin/sh", rsp+0x50, environ)
+</span></span></span><span class="line"><span class="cl"><span class="s2">constraints:
+</span></span></span><span class="line"><span class="cl"><span class="s2">  [rsp+0x50] == NULL
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">0xf1247 execve("/bin/sh", rsp+0x70, environ)
+</span></span></span><span class="line"><span class="cl"><span class="s2">constraints:
+</span></span></span><span class="line"><span class="cl"><span class="s2">  [rsp+0x70] == NULL
+</span></span></span><span class="line"><span class="cl"><span class="s2">"""</span>
+</span></span></code></pre></div><p>
+<figure>
+<img alt="image-20230710163717527" class="my-0 rounded-md" src="https://s2.loli.net/2023/07/10/p5cA8lBoL7fOYy4.png"/>
+</figure>
+</p>
+<div class="anchor" id="glibc-all-in_one"></div>
+<h3 class="relative group">glibc-all-in_one 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#glibc-all-in_one" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<blockquote>
+<p>glibc-all-in-one 是一个开源项目，里面有各种版本的glibc 源码。</p>
+</blockquote>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1">## git安装</span>
+</span></span><span class="line"><span class="cl"><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">matrix1001</span><span class="o">/</span><span class="n">glibc</span><span class="o">-</span><span class="nb">all</span><span class="o">-</span><span class="ow">in</span><span class="o">-</span><span class="n">one</span>
+</span></span><span class="line"><span class="cl"><span class="n">cd</span> <span class="n">glibc</span><span class="o">-</span><span class="nb">all</span><span class="o">-</span><span class="ow">in</span><span class="o">-</span><span class="n">one</span>
+</span></span><span class="line"><span class="cl"><span class="n">sudo</span> <span class="n">python3</span> <span class="n">update_list</span>
+</span></span></code></pre></div><p>
+<figure>
+<img alt="image-20230710165906599" class="my-0 rounded-md" src="https://s2.loli.net/2023/07/10/YjDrbo8vXhU2cOG.png"/>
+</figure>
+</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1">## 使用</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 获取可以更新的glibc的版本</span>
+</span></span><span class="line"><span class="cl"><span class="o">./</span><span class="n">update_list</span> 	
+</span></span><span class="line"><span class="cl"><span class="c1"># 查看可下载的glibc</span>
+</span></span><span class="line"><span class="cl"><span class="n">cat</span> <span class="nb">list</span> 
+</span></span><span class="line"><span class="cl"><span class="c1"># glibc为要下载glibc的名字</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#（题目应该会有提示，或者ida里面也有相关信息）</span>
+</span></span><span class="line"><span class="cl"><span class="n">sudo</span> <span class="o">./</span><span class="n">download</span> <span class="n">glibc</span> 	
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## 示例：</span>
+</span></span><span class="line"><span class="cl"><span class="n">sudo</span> <span class="o">./</span><span class="n">download</span> <span class="mf">2.23</span><span class="o">-</span><span class="mi">0</span><span class="n">ubuntu11</span><span class="mf">.3</span><span class="n">_amd64</span>  
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## 关于 old_list文件：</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># old_list中的是过时的glibc文件，一般不会用到，</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 如果需要下载old_list里面对应的glibc，</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 要用./download_old进行下载操作。（用./download会报错）</span>
+</span></span></code></pre></div><p>下载好之后目录里ld.so文件是链接器，libc.so文件是glibc文件</p>
+<p>
+<figure>
+<img alt="image-20230710172254486" class="my-0 rounded-md" src="https://s2.loli.net/2023/07/10/eFGqh4UPVtwb8Mk.png"/>
+</figure>
+</p>
+<div class="anchor" id="patchelf"></div>
+<h3 class="relative group">patchelf 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#patchelf" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<blockquote>
+<p>用于修改现有ELF可执行文件和库的简单实用程序</p>
+</blockquote>
+<p>非常实用的一个工具！</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 安装</span>
+</span></span><span class="line"><span class="cl"><span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">patchelf</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 检测是否安装成功</span>
+</span></span><span class="line"><span class="cl"><span class="n">patchelf</span> <span class="o">--</span><span class="n">version</span>
+</span></span></code></pre></div><p>
+<figure>
+<img alt="image-20230710164345624" class="my-0 rounded-md" src="https://s2.loli.net/2023/07/10/oRIisUnmeMK7w4b.png"/>
+</figure>
+</p>
+<p>基础用法：</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1">## 其中的pwn是我们的二进制文件</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 更换链接器 ld.so 文件</span>
+</span></span><span class="line"><span class="cl"><span class="n">patchelf</span> <span class="o">--</span><span class="nb">set</span><span class="o">-</span><span class="n">interpreter</span> <span class="n">ld的硬路径</span> <span class="o">./</span><span class="n">pwn</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 直接选择 glibc libc.so 文件</span>
+</span></span><span class="line"><span class="cl"><span class="n">patchelf</span> <span class="o">--</span><span class="n">replace</span><span class="o">-</span><span class="n">needed</span> <span class="n">libc</span><span class="o">.</span><span class="n">so</span><span class="mf">.6</span> <span class="n">你要换的libc的硬路径</span> <span class="o">./</span><span class="n">pwn</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 更换glibc搜索路径：</span>
+</span></span><span class="line"><span class="cl"><span class="n">patchelf</span> <span class="o">--</span><span class="nb">set</span><span class="o">-</span><span class="n">rpath</span> <span class="n">glibc</span><span class="o">-</span><span class="nb">all</span><span class="o">-</span><span class="ow">in</span><span class="o">-</span><span class="n">one下载的文件夹</span> <span class="o">./</span><span class="n">pwn</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 查看elf的ld和libc</span>
+</span></span><span class="line"><span class="cl"><span class="n">ldd</span> <span class="o">./</span><span class="n">pwn</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## 示例：</span>
+</span></span><span class="line"><span class="cl"><span class="n">patchelf</span> <span class="o">--</span><span class="nb">set</span><span class="o">-</span><span class="n">interpreter</span> <span class="o">~/</span><span class="n">my_tools</span><span class="o">/</span><span class="n">pwn_tools</span><span class="o">/</span><span class="n">glibc</span><span class="o">-</span><span class="nb">all</span><span class="o">-</span><span class="ow">in</span><span class="o">-</span><span class="n">one</span><span class="o">/</span><span class="n">libs</span><span class="o">/</span><span class="mf">2.23</span><span class="o">-</span><span class="mi">0</span><span class="n">ubuntu11</span><span class="mf">.3</span><span class="n">_amd64</span><span class="o">/</span><span class="n">ld</span><span class="o">-</span><span class="mf">2.23</span><span class="o">.</span><span class="n">so</span>  <span class="o">./</span><span class="n">pwn</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">patchelf</span> <span class="o">--</span><span class="n">replace</span><span class="o">-</span><span class="n">needed</span> <span class="n">libc</span><span class="o">.</span><span class="n">so</span><span class="mf">.6</span> <span class="o">./</span><span class="n">libc</span><span class="o">-</span><span class="mf">2.23</span><span class="o">.</span><span class="n">so</span> <span class="o">./</span><span class="n">pwn</span>  
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">patchelf</span> <span class="o">--</span><span class="nb">set</span><span class="o">-</span><span class="n">rpath</span> <span class="o">~/</span><span class="n">my_tools</span><span class="o">/</span><span class="n">pwn_tools</span><span class="o">/</span><span class="n">glibc</span><span class="o">-</span><span class="nb">all</span><span class="o">-</span><span class="ow">in</span><span class="o">-</span><span class="n">one</span><span class="o">/</span><span class="n">libs</span><span class="o">/</span><span class="mf">2.23</span><span class="o">-</span><span class="mi">0</span><span class="n">ubuntu11</span><span class="mf">.3</span><span class="n">_amd64</span> <span class="o">./</span><span class="n">pwn</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 检查：</span>
+</span></span><span class="line"><span class="cl"><span class="n">ldd</span> <span class="o">./</span><span class="n">pwn</span>
+</span></span></code></pre></div><p>如果觉得太麻烦了，其实也可以直接在exp里面指定：</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 利用pwntools加载不同版本libc调试程序</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 这个方法最好将链接器ld.so和题目给我们的libc.so复制到当前目录下</span>
+</span></span><span class="line"><span class="cl"><span class="n">taolve</span> <span class="o">=</span> <span class="n">process</span><span class="p">([</span><span class="s2">"ld.so"</span><span class="p">,</span> <span class="s2">"./pwn"</span><span class="p">],</span> <span class="n">env</span><span class="o">=</span><span class="p">{</span><span class="s2">"LD_PRELOAD"</span><span class="p">:</span><span class="s2">"libc.so.6"</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 示例：(这是我常用的脚本开头部分)</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">LibcSearcher3</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">is_debug</span> <span class="o">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl"><span class="n">is_remote</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># is_remote == 2时可以利用pwntools加载不同版本libc调试程序</span>
+</span></span><span class="line"><span class="cl"><span class="n">is_gdb</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="n">is_debug</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">context</span><span class="o">.</span><span class="n">log_level</span> <span class="o">=</span> <span class="s1">'debug'</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="n">is_remote</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">taolve</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s2">"ip"</span><span class="p">,</span> <span class="n">post</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">elif</span> <span class="n">is_remote</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span> 
+</span></span><span class="line"><span class="cl">    <span class="n">taolve</span> <span class="o">=</span> <span class="n">process</span><span class="p">([</span><span class="s2">"./ld-2.23.so"</span><span class="p">,</span> <span class="s1">'./pwn'</span><span class="p">],</span> <span class="n">env</span><span class="o">=</span><span class="p">{</span><span class="s2">"LD_PRELOAD"</span><span class="p">:</span> <span class="s2">"./libc-2.23.so"</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">taolve</span> <span class="o">=</span> <span class="n">process</span><span class="p">(</span><span class="s1">'./pwn'</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">_gdb</span><span class="p">(</span><span class="n">my_gdb</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">my_gdb</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s2">"echo </span><span class="se">\"</span><span class="s2">source ~/pwndbg/gdbinit.py</span><span class="se">\"</span><span class="s2"> &gt; ~/.gdbinit"</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">gdb</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">taolve</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">elif</span> <span class="n">my_gdb</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s2">"echo </span><span class="se">\"</span><span class="s2">source ~/gef/gef.py</span><span class="se">\"</span><span class="s2"> &gt; ~/.gdbinit"</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">gdb</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">taolve</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">elif</span> <span class="n">my_gdb</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s2">"echo </span><span class="se">\"</span><span class="s2">source ~/peda/peda.py</span><span class="se">\"</span><span class="s2"> &gt; ~/.gdbinit"</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">gdb</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">taolve</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">_gdb</span><span class="p">(</span><span class="n">is_gdb</span><span class="p">)</span>
+</span></span></code></pre></div><p>推荐阅读：</p>
+<p><a href="https://blog.csdn.net/qq_35078631/article/details/124069226" target="_blank">
+    CTF pwn中利用pwntools加载不同版本libc调试程序的方法</a></p>
+<div class="anchor" id="pwn相关命令补充"></div>
+<h3 class="relative group">pwn相关命令补充： 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#pwn%e7%9b%b8%e5%85%b3%e5%91%bd%e4%bb%a4%e8%a1%a5%e5%85%85" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<p>（这些命令都是linux自带的，只是过一下一些比较常用的命令）</p>
+<p><strong>strings的使用</strong></p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 搜索字符串</span>
+</span></span><span class="line"><span class="cl"><span class="n">strings</span> <span class="n">pwn</span> <span class="s2">"ctf"</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 查看一个libc的版本(看使用什么版本的连接器)</span>
+</span></span><span class="line"><span class="cl"><span class="n">strings</span> <span class="n">libc</span><span class="o">.</span><span class="n">so</span><span class="mf">.6</span> <span class="o">|</span><span class="n">grep</span> <span class="n">GLIBC</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="s2">"""
+</span></span></span><span class="line"><span class="cl"><span class="s2">输出：
+</span></span></span><span class="line"><span class="cl"><span class="s2">GLIBC_2.2.5
+</span></span></span><span class="line"><span class="cl"><span class="s2">GLIBC_2.2.6
+</span></span></span><span class="line"><span class="cl"><span class="s2">...
+</span></span></span><span class="line"><span class="cl"><span class="s2">GLIBC_2.23
+</span></span></span><span class="line"><span class="cl"><span class="s2">GLIBC_PRIVATE
+</span></span></span><span class="line"><span class="cl"><span class="s2">GNU C Library (Ubuntu GLIBC 2.23-0ubuntu11.3) stable release version 2.23, by Roland McGrath et al.
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">"""</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 所以这个 libc.so 文件是2.23版本的</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 使用 2.23-0ubuntu11.3 的链接器</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># ~/my_tools/pwn_tools/glibc-all-in-one/libs/2.23-0ubuntu11.3_amd64/ld-2.23.so</span>
+</span></span></code></pre></div><p><strong>objdump 的使用</strong></p>
+<blockquote>
+<p>objdump命令，一般用于显示二进制文件的信息</p>
+</blockquote>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 其中的pwn是我们的二进制文件</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 示例图就不放了，师傅们可以直接在自己的linux里执行一下看看</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 整体信息</span>
+</span></span><span class="line"><span class="cl"><span class="n">objdump</span> <span class="o">-</span><span class="n">f</span> <span class="n">pwn</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 所有段</span>
+</span></span><span class="line"><span class="cl"><span class="n">objdump</span> <span class="o">-</span><span class="n">p</span> <span class="n">pwn</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 所有节</span>
+</span></span><span class="line"><span class="cl"><span class="n">objdump</span> <span class="o">-</span><span class="n">h</span> <span class="n">pwn</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 所有段 + 所有节 + 所有符号</span>
+</span></span><span class="line"><span class="cl"><span class="n">objdump</span> <span class="o">+</span><span class="n">x</span> <span class="n">pwn</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 可执行部分并反汇编</span>
+</span></span><span class="line"><span class="cl"><span class="n">objdump</span> <span class="o">-</span><span class="n">d</span> <span class="n">pwn</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 所有节反汇编</span>
+</span></span><span class="line"><span class="cl"><span class="n">objdump</span> <span class="o">-</span><span class="n">D</span> <span class="n">pwn</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 显示所有节的 16 进制内容（可看 got 表）</span>
+</span></span><span class="line"><span class="cl"><span class="n">objdump</span> <span class="o">-</span><span class="n">s</span> <span class="n">pwn</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 符号表</span>
+</span></span><span class="line"><span class="cl"><span class="n">objdump</span> <span class="o">-</span><span class="n">t</span> <span class="n">pwn</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 动态符号表</span>
+</span></span><span class="line"><span class="cl"><span class="n">objdump</span> <span class="o">-</span><span class="n">T</span> <span class="n">pwn</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 重定位信息</span>
+</span></span><span class="line"><span class="cl"><span class="n">objdump</span> <span class="o">-</span><span class="n">R</span> <span class="n">pwn</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 仅反汇编指定的section。可以有多个-j参数来选择多个section</span>
+</span></span><span class="line"><span class="cl"><span class="o">-</span><span class="n">j</span> <span class="n">section</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 指定节的内容</span>
+</span></span><span class="line"><span class="cl"><span class="n">objdump</span> <span class="o">-</span><span class="n">s</span> <span class="o">-</span><span class="n">j</span> <span class="o">.</span><span class="n">got</span> <span class="n">pwn</span>
+</span></span></code></pre></div><p>以下是我个人比较常用的，欢迎师傅们补充：</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 查看plt符号表的调用地址</span>
+</span></span><span class="line"><span class="cl"><span class="n">objdump</span> <span class="o">-</span><span class="n">d</span> <span class="n">pwn</span> <span class="o">|</span> <span class="n">grep</span> <span class="s2">"plt"</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">objdump</span> <span class="o">-</span><span class="n">R</span> <span class="n">pwn</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">objdump</span> <span class="o">-</span><span class="n">s</span> <span class="o">-</span><span class="n">j</span> <span class="o">.</span><span class="n">got</span> <span class="n">pwn</span>
+</span></span></code></pre></div><p>关于objdump的其他反汇编命令的使用，可阅读：</p>
+<p><a href="https://blog.csdn.net/wwchao2012/article/details/79980514" target="_blank">
+    objdump反汇编命令使用指南</a></p>
+<p><strong>readelf 的使用</strong></p>
+<blockquote>
+<p>readelf命令，一般用于查看ELF格式的文件信息</p>
+</blockquote>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 示例：</span>
+</span></span><span class="line"><span class="cl"><span class="n">readelf</span> <span class="n">pwn</span> <span class="o">-</span><span class="n">h</span>
+</span></span></code></pre></div><ul>
+<li><code>-a</code> , <code>--all</code> 显示全部信息,等价于 <code>-h -l -S -s -r -d -V -A -I</code> 。</li>
+<li><code>-h</code> , <code>--file-header</code> 显示 <code>elf</code> 文件开始的文件头信息.</li>
+<li><code>-l</code> , <code>--program-headers</code> , <code>--segments</code> 显示程序头（段头）信息(如果有的话)。</li>
+<li><code>-S</code> , <code>--section-headers</code> , <code>--sections</code> 显示节头信息(如果有的话)。</li>
+<li><code>-g</code> , <code>--section-groups</code> 显示节组信息(如果有的话)。</li>
+<li><code>-t</code> , <code>--section-details</code> 显示节的详细信息( <code>-S</code> 的)。</li>
+<li><code>-s</code> , <code>--syms</code> , <code>--symbols</code> 显示符号表段中的项（如果有的话）。</li>
+<li><code>-e</code> , <code>--headers</code> 显示全部头信息，等价于: <code>-h -l -S</code></li>
+<li><code>-n</code> , <code>--notes</code> 显示 <code>note</code> 段（内核注释）的信息。</li>
+<li><code>-r</code> , <code>--relocs</code> 显示可重定位段的信息。</li>
+<li><code>-u</code> , <code>--unwind</code> 显示 <code>unwind</code> 段信息。当前只支持 <code>IA64 ELF</code> 的 <code>unwind</code> 段信息。</li>
+<li><code>-d</code> , <code>--dynamic</code> 显示动态段的信息。</li>
+<li><code>-V</code> , <code>--version-info</code> 显示版本段的信息。</li>
+<li><code>-A</code> , <code>--arch-specific</code> 显示 <code>CPU</code> 构架信息。</li>
+<li><code>-D</code> , <code>--use-dynamic</code> 使用动态段中的符号表显示符号，而不是使用符号段。</li>
+<li><code>-x</code> , <code>--hex-dump=</code> 以16进制方式显示指定段内内容。 <code>number</code> 指定段表中段的索引,或字符串指定文件中的段名。</li>
+<li><code>-w[liaprmfFsoR]</code> or –debug-dump[=line,=info,=abbrev,=pubnames,=aranges,=macro,=frames,=frames-interp,=str,=loc,=Ranges] 显示调试段中指定的内容。</li>
+<li><code>-I</code> , <code>--histogram</code> 显示符号的时候，显示 <code>bucket list</code> 长度的柱状图。</li>
+<li><code>-v</code> , <code>--version</code> 显示 <code>readelf</code> 的版本信息。</li>
+<li><code>-H</code> , <code>--help</code> 显示 <code>readelf</code> 所支持的命令行选项。</li>
+<li><code>-W</code> , <code>--wide</code> 宽行输出。</li>
+</ul>
+<p>参考：<a href="https://zhuanlan.zhihu.com/p/112754720" target="_blank">
+    Linux命令学习手册-readelf </a></p>
+<p><strong>checksec</strong></p>
+<p>这个命令可以识别二进制文件的安全属性 ，即检测我们的二进制程序的保护机制的开关情况，可以在Linux中安装，也可以在三个gdb插件中直接使用。</p>
+<p>不过gdb中的checksec版本较老，检测的保护机制种类较少，所以还是建议大家都安装一个</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 安装后在终端命令行中使用</span>
+</span></span><span class="line"><span class="cl"><span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">checksec</span>
+</span></span><span class="line"><span class="cl"><span class="n">checksec</span> <span class="o">--</span><span class="n">file</span><span class="o">=</span><span class="n">pwn</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 在带插件的gdb中使用</span>
+</span></span><span class="line"><span class="cl"><span class="n">gdb</span> <span class="n">pwn</span>
+</span></span><span class="line"><span class="cl"><span class="n">checksec</span>
+</span></span></code></pre></div><p>
+<figure>
+<img alt="image-20230714220442033" class="my-0 rounded-md" src="https://s2.loli.net/2023/07/14/LzGcsU6rd2hOEla.png"/>
+</figure>
+</p>
+<div class="anchor" id="seccomp-tools"></div>
+<h3 class="relative group">seccomp-tools 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#seccomp-tools" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<blockquote>
+<p>seccomp是一种内核中的安全机制,正常情况下,程序可以使用所有的syscall，这是不安全的，比如劫持程序流后通过execve的syscall来getshell。通过seccomp我们可以在程序中禁用掉某些syscall，这样就算劫持了程序流也只能调用部分的syscall了</p>
+<p>seccomp-tools项目旨在(但不限于)分析CTF pwn挑战中的seccomp沙盒。有些特性可能是特定于ctf的，但对于分析真实情况下的seccomp仍然有用</p>
+</blockquote>
+<p>用于分析沙盒的工具</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 安装</span>
+</span></span><span class="line"><span class="cl"><span class="n">sudo</span> <span class="n">gem</span> <span class="n">install</span> <span class="n">seccomp</span><span class="o">-</span><span class="n">tools</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 检测是否安装成功</span>
+</span></span><span class="line"><span class="cl"><span class="n">seccomp</span><span class="o">-</span><span class="n">tools</span> <span class="o">--</span><span class="n">version</span>
+</span></span></code></pre></div><p>
+<figure>
+<img alt="image-20230710175312449" class="my-0 rounded-md" src="https://s2.loli.net/2023/07/10/ow14YGiDCUvNSTz.png"/>
+</figure>
+</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 使用：</span>
+</span></span><span class="line"><span class="cl"><span class="n">seccomp</span><span class="o">-</span><span class="n">tools</span> <span class="n">dump</span> <span class="o">./</span><span class="n">pwn</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 可以知道哪些syscall被系统被禁用</span>
+</span></span></code></pre></div><p>
+<figure>
+<img alt="image-20230710175824818" class="my-0 rounded-md" src="https://s2.loli.net/2023/07/10/Fz9LJYdPsAfGK41.png"/>
+</figure>
+</p>
+<div class="anchor" id="main_arena_offset可跳"></div>
+<h3 class="relative group">main_arena_offset（可跳） 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#main_arena_offset%e5%8f%af%e8%b7%b3" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<p>用来计算 main_arena 的偏移工具</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 安装</span>
+</span></span><span class="line"><span class="cl"><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">bash</span><span class="o">-</span><span class="n">c</span><span class="o">/</span><span class="n">main_arena_offset</span><span class="o">.</span><span class="n">git</span>
+</span></span><span class="line"><span class="cl"><span class="n">cd</span> <span class="n">main_arena_offset</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 检测是否安装成功</span>
+</span></span><span class="line"><span class="cl"><span class="o">./</span><span class="n">main_arena</span> <span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">x86_64</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span><span class="o">/</span><span class="n">libc</span><span class="o">.</span><span class="n">so</span><span class="mf">.6</span>
+</span></span></code></pre></div><p><strong>也可以用 dev2ero 库中封装的 py_main_arena_offsetpy 模块来计算main_arena的偏移。</strong></p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pymao</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="n">libc</span> <span class="o">=</span> <span class="s2">"/lib/x86_64-linux-gnu/libc.so.6"</span>
+</span></span><span class="line"><span class="cl"><span class="n">main_arena_offset</span> <span class="o">=</span> <span class="n">gmao</span><span class="p">(</span><span class="n">blic</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">main_arena_offset</span>
+</span></span></code></pre></div><div class="anchor" id="crypto-相关工具可跳"></div>
+<h2 class="relative group">Crypto 相关工具（可跳） 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#crypto-%e7%9b%b8%e5%85%b3%e5%b7%a5%e5%85%b7%e5%8f%af%e8%b7%b3" style="text-decoration-line: none !important;">#</a></span>
+</h2>
+<p>累了，我先挖个坑，下次再更新  _(:з」∠)_</p>
+<p><strong>gym2</strong></p>
+<p><strong>sage math（Crypto）</strong></p>
+<div class="anchor" id="优化体验的相关配置"></div>
+<h2 class="relative group">优化体验的相关配置 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e4%bc%98%e5%8c%96%e4%bd%93%e9%aa%8c%e7%9a%84%e7%9b%b8%e5%85%b3%e9%85%8d%e7%bd%ae" style="text-decoration-line: none !important;">#</a></span>
+</h2>
+<div class="anchor" id="oh-my-zsh-可选"></div>
+<h3 class="relative group">Oh-My-Zsh （可选） 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#oh-my-zsh-%e5%8f%af%e9%80%89" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 安装：</span>
+</span></span><span class="line"><span class="cl"><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">robbyrussell</span><span class="o">/</span><span class="n">oh</span><span class="o">-</span><span class="n">my</span><span class="o">-</span><span class="n">zsh</span><span class="o">.</span><span class="n">git</span> <span class="o">~/.</span><span class="n">oh</span><span class="o">-</span><span class="n">my</span><span class="o">-</span><span class="n">zsh</span>
+</span></span><span class="line"><span class="cl"><span class="n">cp</span> <span class="o">~/.</span><span class="n">oh</span><span class="o">-</span><span class="n">my</span><span class="o">-</span><span class="n">zsh</span><span class="o">/</span><span class="n">templates</span><span class="o">/</span><span class="n">zshrc</span><span class="o">.</span><span class="n">zsh</span><span class="o">-</span><span class="n">template</span> <span class="o">~/.</span><span class="n">zshrc</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 更改你的默认 Shell：</span>
+</span></span><span class="line"><span class="cl"><span class="n">chsh</span> <span class="o">-</span><span class="n">s</span> <span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">zsh</span>
+</span></span></code></pre></div><p>使用参考：</p>
+<p><a href="https://blog.csdn.net/weixin_30550081/article/details/98483678" target="_blank">
+    Oh-My-Zsh的配置与使用</a></p>
+<div class="anchor" id="terminator-可选"></div>
+<h3 class="relative group">terminator （可选） 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#terminator-%e5%8f%af%e9%80%89" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<p>一个终端软件，只是用来优化体验的（毕竟打pwn的话以后可能会较为频繁地使用终端），<strong>赶时间的师傅可以跳过~</strong></p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1"># 安装：</span>
+</span></span><span class="line"><span class="cl"><span class="n">sudo</span> <span class="n">apt</span> <span class="n">update</span>
+</span></span><span class="line"><span class="cl"><span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">terminator</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 自定义：</span>
+</span></span><span class="line"><span class="cl"><span class="n">cd</span> <span class="o">~/.</span><span class="n">config</span><span class="o">/</span><span class="n">terminator</span><span class="o">/</span> 
+</span></span><span class="line"><span class="cl"><span class="n">sudo</span> <span class="n">gedit</span> <span class="n">config</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 注意这个config文件以及terminator文件夹可能一开始不存在，</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 可以自己新建文件夹再创建.一样会生效的</span>
+</span></span></code></pre></div><p>常用快捷键：</p>
+<p><strong>（操作方面）</strong></p>
+<p><code>Ctrl + Shift + C</code> 复制</p>
+<p><code>Ctrl + Shift + V</code> 粘贴</p>
+<p><code>Ctrl + Shift + F</code> 在当前窗口搜索</p>
+<p><code>Ctrl + Shift + G</code> 清屏</p>
+<p><code>Ctrl + Shift + N</code> 或者 <code>Ctrl + Tab</code> 在分割的各窗口之间切换</p>
+<p><code>Ctrl + Shift + W</code> 关闭当前终端</p>
+<p><code>Ctrl + Shift + Q </code>关闭所有终端（退出程序）</p>
+<p><code>Ctrl + Alt + T</code>    启动终端（不安装terminator则是Ubuntu自带的terminal）</p>
+<p><strong>（窗口方面）</strong></p>
+<p><code>F11</code> 全屏</p>
+<p><code> Ctrl + Shift + O</code> 水平分割终端（分成上下两个窗口）</p>
+<p><code>Ctrl + Shift + E</code> 垂直分割终端（分成左右两个窗口）</p>
+<p><code>Ctrl + Shift + Right/Left</code> 在垂直分割的终端中将分割条向右/左移动</p>
+<p><code>Ctrl + Shift + X </code>放大（还原）当前终端（将分割的某一个窗口放大至全屏使用）</p>
+<p><code>Ctrl + Shift + S</code> 隐藏/显示滚动条</p>
+<p><code>Ctrl + Shift + Z</code> 从放大至全屏的某一窗口回到多窗格界面</p>
+<p><strong>（其他快捷键）</strong></p>
+<blockquote>
+<p>Search for a Keyword – Ctrl+Shift+f（好用的搜索功能）</p>
+<p>Move to Next Terminal – Ctrl+Shift+N or Ctrl+Tab</p>
+<p>Move Parent Dragbar Right – Ctrl+Shift+Right_Arrow_key</p>
+<p>Move Parent Dragbar Left – Ctrl+Shift+Left_Arrow_key</p>
+<p>Move Parent Dragbar Up – Ctrl+Shift+Up_Arrow_key</p>
+<p>Move Parent Dragbar Down – Ctrl+Shift+Down_Arrow_key</p>
+<p>Hide/Show Scrollbar – Ctrl+Shift+s</p>
+<p>Move to the Above Terminal – Alt+Up_Arrow_Key</p>
+<p>Move to the Below Terminal – Alt+Down_Arrow_Key</p>
+<p>Move to the Left Terminal – Alt+Left_Arrow_Key</p>
+<p>Move to the Right Terminal – Alt+Right_Arrow_Key</p>
+<p>Copy a text to clipboard – Ctrl+Shift+c</p>
+<p>Paste a text from Clipboard – Ctrl+Shift+v</p>
+<p>Close the Current Terminal – Ctrl+Shift+w</p>
+<p>Quit the Terminator – Ctrl+Shift+q</p>
+<p>Toggle Between Terminals（切换终端） – Ctrl+Shift+x</p>
+<p>Open New Tab – Ctrl+Shift+t</p>
+<p>Move to Next Tab – Ctrl+page_Down</p>
+<p>Move to Previous Tab – Ctrl+Page_up</p>
+<p>Increase Font size – Ctrl+(+)</p>
+<p>Decrease Font Size – Ctrl+(-)</p>
+<p>Reset Font Size to Original – Ctrl+0</p>
+<p>Toggle Full Screen Mode – F11</p>
+<p>Reset Terminal – Ctrl+Shift+R</p>
+<p>Reset Terminal and Clear Window – Ctrl+Shift+G</p>
+<p>Remove all the terminal grouping – Super+Shift+t</p>
+<p>Group all Terminal into one – Super+g</p>
+</blockquote>
+<p><strong>config</strong> 文件内容可以照搬：</p>
+<p>（我们还可以顺便把桌面背景给换了，这样终端设置为透明的就有一个背景了）</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1"># 示例1：(如果直接复制粘贴不行就把注释删掉)</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="n">global_config</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="n">handle_size</span> <span class="o">=</span> <span class="o">-</span><span class="mi">3</span>
+</span></span><span class="line"><span class="cl">  <span class="n">title_transmit_fg_color</span> <span class="o">=</span> <span class="s2">"#000000"</span>
+</span></span><span class="line"><span class="cl">  <span class="n">title_transmit_bg_color</span> <span class="o">=</span> <span class="s2">"#3e3838"</span>
+</span></span><span class="line"><span class="cl">  <span class="n">inactive_color_offset</span> <span class="o">=</span> <span class="mf">1.0</span>
+</span></span><span class="line"><span class="cl">  <span class="n">enabled_plugins</span> <span class="o">=</span> <span class="n">CustomCommandsMenu</span><span class="p">,</span> <span class="n">LaunchpadCodeURLHandler</span><span class="p">,</span> <span class="n">APTURLHandler</span><span class="p">,</span> <span class="n">LaunchpadBugURLHandler</span>
+</span></span><span class="line"><span class="cl">  <span class="n">suppress_multiple_term_dialog</span> <span class="o">=</span> <span class="kc">True</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="n">keybindings</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="n">profiles</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="p">[[</span><span class="n">default</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">background_color</span> <span class="o">=</span> <span class="s2">"#373737"</span>
+</span></span><span class="line"><span class="cl">    <span class="n">background_darkness</span> <span class="o">=</span> <span class="mf">0.8</span>
+</span></span><span class="line"><span class="cl">    <span class="n">background_type</span> <span class="o">=</span> <span class="n">transparent</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cursor_shape</span> <span class="o">=</span> <span class="n">ibeam</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cursor_color</span> <span class="o">=</span> <span class="s2">"#e8e8e8"</span>
+</span></span><span class="line"><span class="cl">    <span class="n">font</span> <span class="o">=</span> <span class="n">Ubuntu</span> <span class="n">Mono</span> <span class="mi">14</span>
+</span></span><span class="line"><span class="cl">    <span class="n">foreground_color</span> <span class="o">=</span> <span class="s2">"#e8e8e8"</span>
+</span></span><span class="line"><span class="cl">    <span class="n">copy_on_selection</span> <span class="o">=</span> <span class="kc">True</span> <span class="c1"># 选择文本时同时将数据拷贝到剪切板中,强烈推荐</span>
+</span></span><span class="line"><span class="cl">    <span class="n">show_titlebar</span> <span class="o">=</span> <span class="kc">False</span>
+</span></span><span class="line"><span class="cl">    <span class="n">scroll_background</span> <span class="o">=</span> <span class="kc">False</span>
+</span></span><span class="line"><span class="cl">    <span class="n">scrollback_lines</span> <span class="o">=</span> <span class="mi">3000</span>
+</span></span><span class="line"><span class="cl">    <span class="n">palette</span> <span class="o">=</span> <span class="s2">"#292424:#5a8e1c:#00ff00:#cdcd00:#1e90ff:#cd00cd:#00cdcd:#d6d9d4:#4c4c4c:#868e09:#00ff00:#ffff00:#4682b4:#ff00ff:#00ffff:#ffffff"</span>
+</span></span><span class="line"><span class="cl">    <span class="n">use_system_font</span> <span class="o">=</span> <span class="kc">False</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="n">layouts</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="p">[[</span><span class="n">default</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl">    <span class="p">[[[</span><span class="n">child1</span><span class="p">]]]</span>
+</span></span><span class="line"><span class="cl">      <span class="n">parent</span> <span class="o">=</span> <span class="n">window0</span>
+</span></span><span class="line"><span class="cl">      <span class="n">profile</span> <span class="o">=</span> <span class="n">default</span>
+</span></span><span class="line"><span class="cl">      <span class="nb">type</span> <span class="o">=</span> <span class="n">Terminal</span>
+</span></span><span class="line"><span class="cl">    <span class="p">[[[</span><span class="n">window0</span><span class="p">]]]</span>
+</span></span><span class="line"><span class="cl">      <span class="n">parent</span> <span class="o">=</span> <span class="s2">""</span>
+</span></span><span class="line"><span class="cl">      <span class="n">size</span> <span class="o">=</span> <span class="mi">925</span><span class="p">,</span> <span class="mi">570</span>
+</span></span><span class="line"><span class="cl">      <span class="nb">type</span> <span class="o">=</span> <span class="n">Window</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="n">plugins</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 示例2：(如果直接复制粘贴不行就把注释删掉)</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="n">global_config</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="n">title_transmit_bg_color</span> <span class="o">=</span> <span class="s2">"#d30102"</span>
+</span></span><span class="line"><span class="cl">  <span class="n">focus</span> <span class="o">=</span> <span class="n">system</span>
+</span></span><span class="line"><span class="cl">  <span class="n">suppress_multiple_term_dialog</span> <span class="o">=</span> <span class="kc">True</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="n">keybindings</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="n">profiles</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="p">[[</span><span class="n">default</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">palette</span> <span class="o">=</span> <span class="s2">"#2d2d2d:#f2777a:#99cc99:#ffcc66:#6699cc:#cc99cc:#66cccc:#d3d0c8:#747369:#f2777a:#99cc99:#ffcc66:#6699cc:#cc99cc:#66cccc:#f2f0ec"</span>
+</span></span><span class="line"><span class="cl">    <span class="n">background_color</span> <span class="o">=</span> <span class="s2">"#2D2D2D"</span> <span class="c1"># 背景颜色</span>
+</span></span><span class="line"><span class="cl">    <span class="n">background_image</span> <span class="o">=</span> <span class="kc">None</span>   
+</span></span><span class="line"><span class="cl">    <span class="n">background_darkness</span> <span class="o">=</span> <span class="mf">0.85</span> 
+</span></span><span class="line"><span class="cl">    <span class="n">cursor_color</span> <span class="o">=</span> <span class="s2">"#2D2D2D"</span> <span class="c1"># 光标颜色</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cursor_blink</span> <span class="o">=</span> <span class="kc">True</span> <span class="c1"># 光标是否闪烁</span>
+</span></span><span class="line"><span class="cl">    <span class="n">foreground_color</span> <span class="o">=</span> <span class="s2">"#EEE9E9"</span> <span class="c1"># 文字的颜色</span>
+</span></span><span class="line"><span class="cl">    <span class="n">use_system_font</span> <span class="o">=</span> <span class="kc">False</span> <span class="c1"># 是否启用系统字体</span>
+</span></span><span class="line"><span class="cl">    <span class="n">font</span> <span class="o">=</span> <span class="n">Ubuntu</span> <span class="n">Mono</span> <span class="mi">13</span>  <span class="c1"># 字体设置，后面的数字表示字体大小</span>
+</span></span><span class="line"><span class="cl">    <span class="n">copy_on_selection</span> <span class="o">=</span> <span class="kc">True</span> <span class="c1"># 选择文本时同时将数据拷贝到剪切板中</span>
+</span></span><span class="line"><span class="cl">    <span class="n">show_titlebar</span> <span class="o">=</span> <span class="kc">False</span> <span class="c1"># 不显示标题栏，也就是 terminator 中那个默认的红色的标题栏</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="n">layouts</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="p">[[</span><span class="n">default</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl">    <span class="p">[[[</span><span class="n">child1</span><span class="p">]]]</span>
+</span></span><span class="line"><span class="cl">      <span class="nb">type</span> <span class="o">=</span> <span class="n">Terminal</span>
+</span></span><span class="line"><span class="cl">      <span class="n">parent</span> <span class="o">=</span> <span class="n">window0</span>
+</span></span><span class="line"><span class="cl">      <span class="n">profile</span> <span class="o">=</span> <span class="n">default</span>
+</span></span><span class="line"><span class="cl">    <span class="p">[[[</span><span class="n">window0</span><span class="p">]]]</span>
+</span></span><span class="line"><span class="cl">      <span class="nb">type</span> <span class="o">=</span> <span class="n">Window</span>
+</span></span><span class="line"><span class="cl">      <span class="n">parent</span> <span class="o">=</span> <span class="s2">""</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="n">plugins</span><span class="p">]</span>
+</span></span></code></pre></div><p>示例1截图：（也是我自己的桌面）</p>
+<p>
+<figure>
+<img alt="image-20230709185350462" class="my-0 rounded-md" src="https://s2.loli.net/2023/07/09/sZrPGiwa25gFtOc.png"/>
+</figure>
+</p>
+<p>背景图片（可能加载有点慢）：</p>
+<p>
+<figure>
+<img alt="070907" class="my-0 rounded-md" src="https://s2.loli.net/2023/07/10/lXNZYFKeTIt1Pm2.jpg"/>
+</figure>
+</p>
+<p>参考链接：</p>
+<p><a href="https://blog.csdn.net/learning_tortosie/article/details/102581261" target="_blank">
+    Ubuntu中终端分屏工具terminator的安装和使用</a></p>
+<p><a href="https://blog.csdn.net/zhangkzz/article/details/90524066" target="_blank">
+    Terminator的安装和配置(颜色和字体)</a></p>
+<p><a href="https://blog.csdn.net/maizousidemao/article/details/103510722" target="_blank">
+    terminator安装、美化、使用及闪退解决</a></p>
+<p><a href="https://www.jianshu.com/p/fe4b1088ada4" target="_blank">
+    Terminator终端的安装，配置以及如何修改默认终端</a></p>
+<br/>
+<div class="anchor" id="others"></div>
+<h3 class="relative group">Others 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#others" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<ul>
+<li><strong>在Ubuntu中右键菜单添加自定义命令</strong></li>
+</ul>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 右键菜单添加自定义命令</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 本文以添加右键打开terminator为例</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 1.进入~/.local/share/nautilus/scripts文件夹</span>
+</span></span><span class="line"><span class="cl"><span class="n">cd</span> <span class="o">~/.</span><span class="n">local</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">nautilus</span><span class="o">/</span><span class="n">scripts</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 2.创建文件</span>
+</span></span><span class="line"><span class="cl"><span class="n">vim</span> <span class="n">open_terminator</span>     
+</span></span><span class="line"><span class="cl"><span class="c1">#文件名"open_terminator"作为右键菜单Scripts的二级菜单名</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 3.添加相应脚本（下面两行为脚本的内容）</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#!/bin/bash</span>
+</span></span><span class="line"><span class="cl"><span class="n">terminator</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 4.保存退出</span>
+</span></span><span class="line"><span class="cl"><span class="p">:</span><span class="n">wq</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 5.赋予权限</span>
+</span></span><span class="line"><span class="cl"><span class="n">sudo</span> <span class="n">chmod</span> <span class="n">u</span><span class="o">+</span><span class="n">x</span> <span class="n">open_terminator</span>
+</span></span></code></pre></div><p>参考链接：<a href="https://blog.csdn.net/CHAOS_ORDER/article/details/103104319" target="_blank">
+    (5条消息) Ubuntu18.04添加右键菜单_ubuntu nautilus修改右键_CHAOS_ORDER的博客-CSDN博客</a></p>
+<p>
+<figure>
+<img alt="image-20230714213547115" class="my-0 rounded-md" src="https://s2.loli.net/2023/07/14/HY3BhilzCeW2fVx.png"/>
+</figure>
+</p>
+<p>
+<figure>
+<img alt="image-20230714213907946" class="my-0 rounded-md" src="https://s2.loli.net/2023/07/14/bpW5qszPLcMrGu6.png"/>
+</figure>
+</p>
+<br/>
+<ul>
+<li><strong>在Ubuntu中右键以管理员身份打开文件夹或编辑文件</strong></li>
+</ul>
+<p>方便刚接触Linux系统的师傅们在图形化界面的操作体验，不过还是建议师傅们尽早熟悉使用命令行</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 右键单击文件并选择“以管理员身份编辑”</span>
+</span></span><span class="line"><span class="cl"><span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">nautilus</span><span class="o">-</span><span class="n">admin</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 安装扩展后，您需要重新启动文件管理器以应用更改。</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 不仅关闭并重新打开文件管理器窗口，</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 还需要运行命令退出后台服务并让它自动重新启动：</span>
+</span></span><span class="line"><span class="cl"><span class="n">nautilus</span> <span class="o">-</span><span class="n">q</span>
+</span></span></code></pre></div><br/>
+<ul>
+<li><strong>在Ubuntu中右键新建模版文档</strong></li>
+</ul>
+<blockquote>
+<p>ubuntu系统（22.04）下右键默认是没有新建文档（文本文档、office等）功能的。</p>
+<p>但可以手动添加。</p>
+<p><strong>1、</strong> 在<strong>主目录</strong>下找到<strong>模板</strong>文件夹，这时候文件夹里面是空的。</p>
+<p><strong>2、</strong> 打开<strong>文本文档</strong>，保存为一个新的<strong>空白文档</strong>（命名为<strong>Txt Document.txt</strong>），将这个空白文档保存到这个<strong>模板</strong>文件夹下。</p>
+<p>这时候再右键空白处就会发现多了一个<strong>新建文档</strong>选项，下面可选项有<strong>Txt Document</strong>。</p>
+<p><strong>3、<strong>同理可以新建空白的L</strong>ibreOffice Writer/Calc/Impress</strong>等文档，保存至模板文件夹下。</p>
+<p>另外，LibreOffice Writer/Calc/Impress等也可以另存为<strong>Office Word/Excel/PPT格式</strong>的模板</p>
+<p>把需要的空白模板放入<strong>模板</strong>文件夹后，<strong>右键</strong>空白就可以新建相应的文件了。</p>
+</blockquote>
+<p>参考链接：<a href="https://zhuanlan.zhihu.com/p/601763511" target="_blank">
+    ubuntu 22.04系统添加右键新建文本文档及Office的功能 - 知乎 (zhihu.com)</a></p>
+<p>
+<figure>
+<img alt="image-20230714213712639" class="my-0 rounded-md" src="https://s2.loli.net/2023/07/14/wRDVkXAOid46Zux.png"/>
+</figure>
+</p>
+<br/>
+<hr/>
+<br/>
+<div class="anchor" id="附录"></div>
+<h2 class="relative group">附录 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e9%99%84%e5%bd%95" style="text-decoration-line: none !important;">#</a></span>
+</h2>
+<p>本文其他的参考链接及推荐阅读：</p>
+<p><a href="https://blog.csdn.net/qq_41202237/article/details/118188924" target="_blank">
+     ubuntu20.04 PWN（含x86、ARM、MIPS）环境搭建</a></p>
+<p><a href="https://www.cnblogs.com/LY613313/p/16180458.html" target="_blank">
+    Ubuntu22.04搭建PWN环境</a></p>
+<p><a href="https://www.cnblogs.com/VxerLee/p/15424937.html#%e5%ae%89%e8%a3%8532%e4%bd%8d%e7%9a%84%e5%ba%93" target="_blank">
+    pwn基础 PWN环境搭建</a></p>
+<p>再放一张学习pwn的路线图，来源于华科的 <a href="https://blog.csdn.net/qq_54218833?type=blog" target="_blank">
+    C0lin</a> 师傅：</p>
+<p><a href="https://hornos3.github.io/2023/02/28/ARM-pwn-%E5%85%A5%E9%97%A8-1/pwn%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF.png" target="_blank">
+<strong>pwn学习路线图</strong></a></p>
+<p>
+<figure>
+<img alt="pwn学习路线" class="my-0 rounded-md" src="https://s2.loli.net/2023/07/24/ja1hytGklKeWndJ.png"/>
+</figure>
+</p>
+<details class="mt-2 mb-5 overflow-hidden rounded-lg ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5" style="margin-left:0px">
+<summary class="py-1 text-lg font-semibold cursor-pointer bg-primary-200 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-primary-800 dark:text-neutral-100">
+        PWN入门 - This article is part of a series.
+    </summary>
+<div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+<a href="https://ta0lve.github.io/posts/pwn/basic/tutorial11/">
+            Part 1: CTF入门宣讲-PWN方向
+        </a>
+</div>
+<div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+<a href="https://ta0lve.github.io/posts/pwn/basic/tutorial22/">
+            Part 2: pwn入门教程
+        </a>
+</div>
+<div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+<a href="https://ta0lve.github.io/posts/pwn/basic/linux_/">
+            Part 3: Linux命令入门与总结
+        </a>
+</div>
+<div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+        Part 4: This Article
+    </div>
+<div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+<a href="https://ta0lve.github.io/posts/pwn/basic/remember-it-wp/">
+            Part 5: remember-it-012 official wp
+        </a>
+</div>
+</details>
+</div>
+<script>
+        var oid = "views_posts\\pwn\\basic\\PWN-_environment\\index.md"
+        var oid_likes = "likes_posts\\pwn\\basic\\PWN-_environment\\index.md"
+      </script>
+<script integrity="sha512-DkmXO0rQo4LHxgEti/+CJjFmQtqrxPiiBHe9CGdPPabi+pk7wgrU9R58W7aOb5E6IHp8T+N+oOe4BolK/OCmTg==" src="/js/page.min.0e49973b4ad0a382c7c6012d8bff8226316642daabc4f8a20477bd08674f3da6e2fa993bc20ad4f51e7c5bb68e6f913a207a7c4fe37ea0e7b806894afce0a64e.js" type="text/javascript"></script>
+</section>
+<footer class="pt-8 max-w-prose print:hidden">
+<h2 class="mt-8 text-2xl font-extrabold mb-10">Related</h2>
+<section class="w-full grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+<a class="min-w-full" href="/posts/pwn/basic/linux_/">
+<div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
+<div class="px-6 py-4">
+<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/pwn/basic/linux_/">Linux命令入门与总结</div>
+<div class="text-sm text-neutral-500 dark:text-neutral-400">
+<div class="flex flex-row flex-wrap items-center">
+<time datetime="2023-07-14 00:00:00 +0000 UTC">July 14, 2023</time><span class="px-2 text-primary-500">·</span><span>4854 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">10 分钟</span>
+</div>
+<div class="flex flex-row flex-wrap items-center">
+<span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%85%A5%E9%97%A8/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    pwn入门
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/ctf/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    CTF
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/pwn/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    PWN
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/ubuntu/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    Ubuntu
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/linux/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    Linux
+  </span>
+</span>
+</span>
+</div>
+</div>
+</div>
+<div class="px-6 pt-4 pb-2">
+</div>
+</div>
+</a>
+<a class="min-w-full" href="/posts/pwn/basic/tutorial11/">
+<div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
+<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/posts/pwn/basic/tutorial11/featured.jpg);"></div>
+<div class="px-6 py-4">
+<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/pwn/basic/tutorial11/">CTF入门宣讲-PWN方向</div>
+<div class="text-sm text-neutral-500 dark:text-neutral-400">
+<div class="flex flex-row flex-wrap items-center">
+<time datetime="2023-09-23 00:00:00 +0000 UTC">September 23, 2023</time><span class="px-2 text-primary-500">·</span><span>8419 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">17 分钟</span>
+</div>
+<div class="flex flex-row flex-wrap items-center">
+<span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%85%A5%E9%97%A8/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    pwn入门
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/ctf/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    CTF
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/pwn/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    PWN
+  </span>
+</span>
+</span>
+</div>
+</div>
+<div class="py-1 prose dark:prose-invert">
+<p>写给学弟学妹的pwn入门宣讲~</p>
+</div>
+</div>
+<div class="px-6 pt-4 pb-2">
+</div>
+</div>
+</a>
+<a class="min-w-full" href="/posts/pwn/basic/tutorial22/">
+<div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
+<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/posts/pwn/basic/tutorial22/featured.jpg);"></div>
+<div class="px-6 py-4">
+<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/pwn/basic/tutorial22/">pwn入门教程</div>
+<div class="text-sm text-neutral-500 dark:text-neutral-400">
+<div class="flex flex-row flex-wrap items-center">
+<time datetime="2023-08-05 00:00:00 +0000 UTC">August 5, 2023</time><span class="px-2 text-primary-500">·</span><span>5811 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">12 分钟</span>
+</div>
+<div class="flex flex-row flex-wrap items-center">
+<span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%85%A5%E9%97%A8/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    pwn入门
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/ctf/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    CTF
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/pwn/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    PWN
+  </span>
+</span>
+</span>
+</div>
+</div>
+<div class="py-1 prose dark:prose-invert">
+<p>写给学弟学妹的pwn入门教程~</p>
+</div>
+</div>
+<div class="px-6 pt-4 pb-2">
+</div>
+</div>
+</a>
+</section>
+<div class="content" id="content">
+<div style="margin-top:2em;padding:0 0.5em;font-size:.875rem">
+<hr/>
+<br/>
+<div style="padding-bottom:1em;">
+<p> </p>
+<p>本文作者：<a href="https://ta0lve.github.io/about/" target="_blank"><font color="#49b1f5" style="text-decoration: underline">ta0lve</font></a></p>
+<p>本文链接：<a href="https://ta0lve.github.io/posts/pwn/basic/pwn-_environment/" target="_blank"><font color="#49b1f5" style="text-decoration: underline">PWN环境二次搭建记录-Ubuntu 22.04</font></a></p>
+<p><a href="https://ta0lve.github.io/posts/pwn/basic/pwn-_environment/" target="_blank"><font color="#49b1f5" style="text-decoration: underline"> https://ta0lve.github.io/posts/pwn/basic/pwn-_environment/ </font></a></p>
+<p>版权声明：本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank"><font color="#49b1f5" style="text-decoration: underline"> CC BY-NC 4.0 </font></a> 许可协议。</p>
+<p>转载请注明来自<a class="redlink" href="https://ta0lve.github.io/" target="_blank"> <font color="#49b1f5" style="text-decoration: underline">ta0lve's Blog</font></a> ！</p>
+</div>
+</div>
+</div>
+<div class="pt-8">
+<hr class="border-dotted border-neutral-300 dark:border-neutral-600"/>
+<div class="flex justify-between pt-3">
+<span>
+<a class="flex group mr-3" href="/posts/sth/sm.ms/">
+<span class="mr-3 text-neutral-700 group-hover:text-primary-600 ltr:inline rtl:hidden dark:text-neutral dark:group-hover:text-primary-400">←</span>
+<span class="ml-3 text-neutral-700 group-hover:text-primary-600 ltr:hidden rtl:inline dark:text-neutral dark:group-hover:text-primary-400">→</span>
+<span class="flex flex-col">
+<span class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500">SM.MS图床加载失败解决方法</span>
+<span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
+<time datetime="2023-07-10 00:00:00 +0000 UTC">July 10, 2023</time>
+</span>
+</span>
+</a>
+</span>
+<span>
+<a class="flex text-right group ml-3" href="/posts/pwn/basic/linux_/">
+<span class="flex flex-col">
+<span class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500">Linux命令入门与总结</span>
+<span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
+<time datetime="2023-07-14 00:00:00 +0000 UTC">July 14, 2023</time>
+</span>
+</span>
+<span class="ml-3 text-neutral-700 group-hover:text-primary-600 ltr:inline rtl:hidden dark:text-neutral dark:group-hover:text-primary-400">→</span>
+<span class="mr-3 text-neutral-700 group-hover:text-primary-600 ltr:hidden rtl:inline dark:text-neutral dark:group-hover:text-primary-400">←</span>
+</a>
+</span>
+</div>
+</div>
+<script async="" crossorigin="anonymous" data-category="Announcements" data-category-id="DIC_kwDOJ9Vlo84CX_0P" data-emit-metadata="0" data-input-position="bottom" data-lang="zh-CN" data-mapping="pathname" data-reactions-enabled="1" data-repo="ta0lve/blogtalk" data-repo-id="R_kgDOJ9Vlow" data-strict="0" data-theme="dark_dimmed" src="https://giscus.app/client.js">
+</script>
+</footer>
+</article>
+<div class="pointer-events-none absolute top-[110vh] bottom-0 w-12 ltr:right-0 rtl:left-0" id="top-scroller">
+<a aria-label="" class="pointer-events-auto sticky top-[calc(100vh-5.5rem)] flex h-12 w-12 mb-16 items-center justify-center rounded-full bg-neutral/50 text-xl text-neutral-700 backdrop-blur hover:text-primary-600 dark:bg-neutral-800/50 dark:text-neutral dark:hover:text-primary-400" href="#the-top" title="">
+    ↑
+  </a>
+</div>
+</main><footer class="py-10 print:hidden" id="site-footer">
+<nav class="flex flex-row pb-4 text-base font-medium text-neutral-500 dark:text-neutral-400">
+<ul class="flex flex-col list-none sm:flex-row">
+<li class="flex mb-1 ltr:text-right rtl:text-left sm:mb-0 ltr:sm:mr-7 ltr:sm:last:mr-0 rtl:sm:ml-7 rtl:sm:last:ml-0">
+<a class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2" href="/about/" title="About">About</a>
+</li>
+<li class="flex mb-1 ltr:text-right rtl:text-left sm:mb-0 ltr:sm:mr-7 ltr:sm:last:mr-0 rtl:sm:ml-7 rtl:sm:last:ml-0">
+<a class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2" href="/tags/pwn/" title="PWN">pwn2own , pwn4fun</a>
+</li>
+</ul>
+</nav>
+<div class="flex items-center justify-between">
+<p class="text-sm text-neutral-500 dark:text-neutral-400">
+      Copyright ©2024 ta0lve, All Rights Reserved.
+    </p>
+<p class="text-xs text-neutral-500 dark:text-neutral-400">
+      
+      
+      由 <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500" href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &amp; <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500" href="https://blowfish.page/" rel="noopener noreferrer" target="_blank">Blowfish</a> 强力驱动
+    </p>
+</div>
+<script>
+    
+    mediumZoom(document.querySelectorAll("img:not(.nozoom)"), {
+      margin: 24,
+      background: 'rgba(0,0,0,0.5)',
+      scrollOffset: 0,
+    })
+    
+  </script>
+<script integrity="sha512-NcERO8wWxaWb8DEIL55jgiqpUoBCOIGnhHp/8zoW5imc5qhA2e9OENlH4DChjz8gNZr7LsDzWWdIS5qTYKwxRQ==" src="/js/process.min.35c1113bcc16c5a59bf031082f9e63822aa95280423881a7847a7ff33a16e6299ce6a840d9ef4e10d947e030a18f3f20359afb2ec0f35967484b9a9360ac3145.js" type="text/javascript"></script>
+</footer><div class="invisible fixed inset-0 flex h-screen w-screen cursor-default flex-col bg-neutral-500/50 p-4 backdrop-blur-sm dark:bg-neutral-900/50 sm:p-6 md:p-[10vh] lg:p-[12vh]" data-url="https://ta0lve.github.io/" id="search-wrapper" style="z-index:500">
+<div class="flex flex-col w-full max-w-3xl min-h-0 mx-auto border rounded-md shadow-lg top-20 border-neutral-200 bg-neutral dark:border-neutral-700 dark:bg-neutral-800" id="search-modal">
+<header class="relative z-10 flex items-center justify-between flex-none px-2">
+<form class="flex items-center flex-auto min-w-0">
+<div class="flex items-center justify-center w-8 h-8 text-neutral-400">
+<span class="relative block icon">
+<svg aria-hidden="true" class="svg-inline--fa fa-search fa-w-16" data-icon="search" data-prefix="fas" focusable="false" role="img" viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z" fill="currentColor"></path></svg>
+</span>
+</div>
+<input class="flex flex-auto h-12 mx-1 bg-transparent appearance-none focus:outline-dotted focus:outline-2 focus:outline-transparent" id="search-query" placeholder="" tabindex="0" type="search"/>
+</form>
+<button class="flex items-center justify-center w-8 h-8 text-neutral-700 hover:text-primary-600 dark:text-neutral dark:hover:text-primary-400" id="close-search-button" title="">
+<span class="relative block icon">
+<svg viewbox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><path d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z" fill="currentColor"></path></svg>
+</span>
+</button>
+</header>
+<section class="flex-auto px-2 overflow-auto">
+<ul id="search-results">
+</ul>
+</section>
+</div>
+</div>
+</div>
+</body>
+</html>

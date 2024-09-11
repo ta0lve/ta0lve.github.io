@@ -1,0 +1,2818 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" data-auto-appearance="false" data-default-appearance="dark" dir="ltr" lang="CN"><head>
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?f260c483ac9fab4fdd9fd55057878c8c";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+<meta charset="utf-8"/>
+<meta content="zh-cn" http-equiv="content-language"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="ie=edge" http-equiv="X-UA-Compatible"/>
+<title>IoT漏洞挖掘思路 · ta0lve</title>
+<meta content="IoT漏洞挖掘思路 · ta0lve" name="title"/>
+<meta content="IoT, " name="keywords"/>
+<link href="https://ta0lve.github.io/posts/iot/0x03/" rel="canonical"/>
+<link href="/css/main.bundle.min.c6116b9ed1c907a8c0eb015f377d3eecc07e448d75729e31fc3de5881465c6c172ba9fa9a6800c030116caf2a110d92242bb816639484ca791f7cd107a8d49b5.css" integrity="sha512-xhFrntHJB6jA6wFfN30+7MB+RI11cp4x/D3liBRlxsFyup+ppoAMAwEWyvKhENkiQruBZjlITKeR980Qeo1JtQ==" rel="stylesheet" type="text/css"/>
+<script integrity="sha512-UWoWdFvqWpvQERONJUzA/TlzzVXObhXz3sdj58fCx0SPj+e1TMqBHLghsMfhLNFhyqzh3XlKw9NNQJN8vMnuEg==" src="/js/appearance.min.516a16745bea5a9bd011138d254cc0fd3973cd55ce6e15f3dec763e7c7c2c7448f8fe7b54cca811cb821b0c7e12cd161caace1dd794ac3d34d40937cbcc9ee12.js" type="text/javascript"></script>
+<script data-copied="" data-copy="" defer="" id="script-bundle" integrity="sha512-PdzwT1sNTDL3LnJtPBLuvM2MPJ+dqpoTQUgIiV3grh4c3d2mhJaA1b2W27YNCx4LJMKfXIPlYx5V5+a8AgFUkA==" src="/js/main.bundle.min.3ddcf04f5b0d4c32f72e726d3c12eebccd8c3c9f9daa9a13414808895de0ae1e1cdddda6849680d5bd96dbb60d0b1e0b24c29f5c83e5631e55e7e6bc02015490.js" type="text/javascript"></script>
+<script src="/js/zoom.min.js"></script>
+<link href="/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
+<link href="/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
+<link href="/site.webmanifest" rel="manifest"/>
+<meta content="IoT漏洞挖掘思路" property="og:title"/>
+<meta content="
+
+  
+
+    
+
+  
+    
+
+  
+
+
+  
+
+  如果本博客部分文章图片加载失败，
+    可以点击此处查看解决办法
+
+
+
+0x01 获取固件 
+    
+        #        
+    
+
+一般从固件厂商官网获取
+也可以通过抓设备升级的包、购买硬件设备来获取固件
+
+0x02 解密固件 
+    
+        #        
+    
+
+参考链接：
+    固件解密 - IOT 固件安全 All in One (gitbook.io)
+
+在解密固件之前可以先上网查询有没有相关文章
+也可以看一下同一品牌的其他固件是如何解密的
+
+解密固件是分析加密固件所需迈过的第一道坎
+
+
+
+
+
+  
+    
+    
+  
+
+
+部分固件的解密思路可以参考以下思路：
+看看是不是仍有少部分固件（或过渡版本的固件）并未加密，当这些固件升级的过程中大概也会使用到解密的程序，因此可以通过解开这些未加密固件，找到解密程序，并逆向分析出相关算法，这也是固件解密常用的一种手段。并且，一般一个厂商的固件加密算法都是相同的，这样所有的固件我们都能够解开了
+解密完固件为后续的静态分析做准备
+
+0x03 仿真模拟 
+    
+        #        
+    
+
+动态分析方法需要固件进行仿真模拟，或者在物理设备上进行片上调试，来获得反馈信息
+真实固件的调试可以参考：
+    固件调试 - IOT 固件安全 All in One (gitbook.io)
+而仿真模拟可以参考以下的思路来进行：
+
+先使用FirmAE、Firmware Analysis Toolkit等开箱即用的工具进行仿真
+
+固件跑起来并不意味着成功仿真
+可能会有部分功能的缺失
+需要测试网络是否连通，web是否正常访问，若有其他开放端口是否能正常访问等
+
+
+也可以使用FirmAFL、FirmFuzz、Fuzzware来进行仿真模拟+fuzz
+工具仿真效果不理想时可以使用qemu来进行仿真
+
+Unicorn和Qiling暂时了解较少，也可以用来仿真模拟
+
+
+
+
+FirmAE 
+    
+        #        
+    
+
+
+成功概率较高（优于Firmadyne）
+
+FirmAE significantly increases the emulation success rate (From 
+    Firmadyne’s 16.28% to 79.36%)
+
+
+
+
+
+    FirmAE及DlinkDIR320、600、645漏洞复现 - 『软件调试区』 - 吾爱破解 - LCG - LSG |安卓破解|病毒分析|www.52pojie.cn
+
+    pr0v3rbs/FirmAE: Towards Large-Scale Emulation of IoT Firmware for Dynamic Analysis (github.com)
+
+    Index of /pub/Router/DIR-645/Firmware (dlink.ru)
+
+安装：
+git clone --recursive https://github.com/pr0v3rbs/FirmAE
+./download.sh
+./install.sh
+使用：
+执行脚本
+./init.sh
+准备固件
+# 举例：
+wget https://github.com/pr0v3rbs/FirmAE/releases/download/v1.0/DIR-868L_fw_revB_2-05b02_eu_multi_20161117.zip
+检查仿真
+sudo ./run.sh -c &lt;brand&gt; &lt;firmware&gt;
+分析目标固件
+
+分析模式使用 FirmAE 分析器
+
+sudo ./run.sh -a &lt;brand&gt; &lt;firmware&gt;
+
+运行模式有助于测试 Web 服务或执行自定义分析器
+
+sudo ./run.sh -r &lt;brand&gt; &lt;firmware&gt;
+
+
+
+
+
+  
+    
+    
+  
+
+
+
+Firmware Analysis Toolkit 
+    
+        #        
+    
+
+
+    attify/firmware-analysis-toolkit: Toolkit to emulate firmware and analyse it for security vulnerabilities (github.com)
+安装：
+git clone https://github.com/attify/firmware-analysis-toolkit
+cd firmware-analysis-toolkit
+./setup.sh
+# fat.config
+[DEFAULT]
+sudo_password=attify123
+firmadyne_path=/home/attify/firmadyne
+使用：
+./fat.py &lt;firmware file&gt;
+$ ./fat.py DIR-601_REVB_FIRMWARE_2.01.BIN 
+
+                               __           _   
+                              / _|         | |  
+                             | |_    __ _  | |_ 
+                             |  _|  / _` | | __|
+                             | |   | (_| | | |_ 
+                             |_|    \__,_|  \__|                    
+                    
+                Welcome to the Firmware Analysis Toolkit - v0.3
+    Offensive IoT Exploitation Training http://bit.do/offensiveiotexploitation
+                  By Attify - https://attify.com  | @attifyme
+    
+[+] Firmware: DIR-601_REVB_FIRMWARE_2.01.BIN
+[+] Extracting the firmware...
+[+] Image ID: 1
+[+] Identifying architecture...
+[+] Architecture: mipseb
+[+] Building QEMU disk image...
+[+] Setting up the network connection, please standby...
+[+] Network interfaces: [('br0', '192.168.0.1')]
+[+] All set! Press ENTER to run the firmware...
+[+] When running, press Ctrl + A X to terminate qemu
+
+
+
+
+
+  
+    
+    
+  
+
+
+
+QEMU 
+    
+        #        
+    
+
+
+    https://wokough.gitbook.io/iot-firmware-aio/wiki/fang-zhen-fen-xi#id-1.1-qemu
+具体问题具体分析
+具体固件使用对应的命令进行仿真
+
+先上网搜索相关信息，看看有没有文章已经仿真过了
+参考之前仿真设备的案例来试着仿真
+如果都没有就需要我们参考着官方文档以及对固件的静态分析来自己调整命令
+
+如果遇到一些参数实在没有办法满足时可以先跑起来
+在动态调试的过程看是哪个汇编执行报错
+
+再在IDA中进行合适的patch来使得固件可以成功仿真
+
+
+
+
+
+例如当我们需要向main函数传递参数argv和设置环境变量时，可以先看看官方usage：
+
+
+
+
+
+  
+    
+    
+  
+
+
+发现我们可以用-0选项传递第一个参数，用-E选项设置环境变量，用-L选项做到类似于更改根目录的效果，用-strace选项追踪程序执行时进程系统调用和所接收的信号，方便调试
+
+
+部分固件的仿真需要我们使用qemu来配置网络
+
+
+可以先拍一个快照再来开始仿真，便于会快照重新配置
+
+
+参考
+    IoT-vulhub项目网络配置的方法，可以得到一个配置网络的shell文件模版
+
+
+#!/bin/bash
+
+# 启动 ssh 服务
+/etc/init.d/ssh start
+
+# 配置网卡
+tunctl -t tap0
+ifconfig tap0 192.168.2.1/24
+
+# 启动 http 服务
+nohup python3 -m http.server 8000 1&gt;&amp;/dev/null &amp;
+
+# 进入 qemu 镜像目录
+cd /root/images
+
+/usr/bin/expect&lt;&lt;EOF
+set timeout 10000
+
+# 依照固件及qemu文档更改此处命令
+spawn qemu-system-mips -M malta -kernel vmlinux-3.2.0-4-4kc-malta -hda debian_wheezy_mips_standard.qcow2 -append &quot;root=/dev/sda1 console=tty0&quot; -netdev tap,id=tapnet,ifname=tap0,script=no -device rtl8139,netdev=tapnet -nographic
+
+expect &quot;debian-mips login:&quot;
+send &quot;root\r&quot;
+expect &quot;Password:&quot;
+send &quot;root\r&quot;
+
+expect &quot;root@debian-mips:~# &quot;
+send &quot;ifconfig eth0 192.168.2.2/24\r&quot;
+
+#expect &quot;root@debian-mips:~# &quot;
+#send &quot;echo 0 &gt; /proc/sys/kernel/randomize_va_space\r&quot;
+
+expect &quot;root@debian-mips:~# &quot;
+send &quot;scp root@192.168.2.1:/root/squashfs-root.tar.gz /root/squashfs-root.tar.gz\r&quot;
+expect {
+    &quot;(yes/no)? &quot; { send &quot;yes\r&quot;; exp_continue }
+    &quot;password: &quot; { send &quot;root\r&quot; }
+}
+
+expect &quot;root@debian-mips:~# &quot;
+send &quot;tar xzf squashfs-root.tar.gz &amp;&amp; rm squashfs-root.tar.gz\r&quot;
+expect &quot;root@debian-mips:~# &quot;
+send &quot;mount -o bind /dev ./squashfs-root/dev &amp;&amp; mount -t proc /proc ./squashfs-root/proc\r&quot;
+
+expect &quot;root@debian-mips:~# &quot;
+send &quot;scp -r root@192.168.2.1:/root/tools /root/squashfs-root/tools\r&quot;
+expect {
+    &quot;(yes/no)? &quot; { send &quot;yes\r&quot;; exp_continue }
+    &quot;password: &quot; { send &quot;root\r&quot; }
+}
+
+expect &quot;root@debian-mips:~# &quot;
+send &quot;echo 'sleep 30' &gt; net.sh\r&quot;
+expect &quot;root@debian-mips:~# &quot;
+send &quot;echo 'ifconfig eth0 192.168.2.2/24' &gt;&gt; net.sh\r&quot;
+expect &quot;root@debian-mips:~# &quot;
+send &quot;echo 'ifconfig br0 192.168.2.3/24' &gt;&gt; net.sh\r&quot;
+expect &quot;root@debian-mips:~# &quot;
+send &quot;chmod +x net.sh &amp;&amp; /bin/sh net.sh &amp;\r&quot;
+
+expect &quot;root@debian-mips:~# &quot;
+send &quot;chroot squashfs-root/ sh\r&quot;
+expect &quot;# &quot;
+send &quot;./bin/upnp\r&quot;
+expect &quot;# &quot;
+send &quot;./bin/mic\r&quot;
+
+expect eof
+EOF
+
+
+
+
+
+0x04 fuzz 
+    
+        #        
+    
+
+动态分析查找漏洞时主要通过各类fuzz工具来得到漏洞的触发点
+
+主要使用FirmAFL、FirmFuzz、Fuzzware工具来进行fuzz
+也可以使用afl与afl++
+
+
+Fuzzware 
+    
+        #        
+    
+
+
+    fuzzware-fuzzer/fuzzware: Fuzzware’s main repository. Start here to install. (github.com)
+git clone https://github.com/fuzzware-fuzzer/fuzzware.git
+
+sudo ./build_docker.sh
+
+sudo ./run_docker.sh examples fuzzware pipeline --skip-afl-cpufreq pw-recovery/ARCH_PRO
+sudo ./run_docker.sh test fuzzware pipeline --skip-afl-cpufreq .
+成功将固件跑起来：
+
+
+
+
+
+  
+    
+    
+  
+
+
+由图可以看到刚开始运行时发现新的MMIO寄存器模型，由于MMIO Access Model中并不存在，因此会将其定义为新的模型，然后继续向下运行
+
+
+
+
+
+  
+    
+    
+  
+
+
+建模完毕后，开始进行正常的fuzzing阶段：
+
+
+
+
+
+  
+    
+    
+  
+
+
+每一轮fuzzing结束后，根据反馈调整输入，开始下一阶段fuzzing：
+
+
+
+
+
+  
+    
+    
+  
+
+
+
+afl++ 
+    
+        #        
+    
+
+
+有源码 
+    
+        #        
+    
+
+使用 afl-gcc 进行插桩编译：
+afl-gcc test.c -o test_file
+gcc test.c -o test_gcc
+
+afl-gcc 插桩编译后，fuzz 的速度会快一些
+
+接下来就可以进行 fuzz 了：
+afl-fuzz -i ./fuzz_in -o ./fuzz_out ./test_file -f
+
+fuzz_in 为语料库，可以直接使用 AFL 自带的 testcases
+fuzz_out 就是输出的内容
+
+
+无源码 
+    
+        #        
+    
+
+配置：
+sudo apt-get install libtool-bin libgtk2.0-dev -y
+cd /home/iot/test/tools/AFLplusplus/qemu_mode
+./build_qemu_support.sh
+cd ..
+sudo make install
+afl-fuzz -Q -m none -i in -o out ./pwn_file @@
+
+/home/iot/test/tools/AFLplusplus/afl-fuzz -i fuzz_in -o ./fuzz_out -Q ./pwn
+
+
+
+
+
+  
+    
+    
+  
+
+
+
+0x05 静态分析 
+    
+        #        
+    
+
+
+    浅析IOT二进制静态辅助方法 - FreeBuf网络安全行业门户
+
+
+IDA
+
+大多数是32位的，少数是64位的
+推荐安装keypatch插件，在patch固件的时候会方便一些
+
+
+
+Ghira
+
+可以安装许多有用的插件
+
+
+
+SaTC
+
+自动化挖掘工具
+
+
+
+其他二进制静态辅助工具
+
+BinAbsInspector
+Rhabdomancer
+Haruspex + semgrep
+
+
+
+
+SaTC 
+    
+        #        
+    
+
+
+    NSSL-SJTU/SaTC: A prototype of Shared-keywords aware Taint Checking, a novel static analysis approach that tracks the data flow of the user input between front-end and back-end to precisely detect security vulnerabilities. (github.com)
+安装
+建议通过使用Dockerfile来构建系统环境:
+# 进入SaTC代码目录
+cd SaTC 
+
+# 构建Docker镜像
+docker build . -t satc
+
+# 进入Dokcer环境, 自行添加目录映射
+docker run -it satc
+如果因为网络等原因无法构建，可使用我们提供等docker image
+# 从docker hun拉去image
+docker pull smile0304/satc:V1.0
+
+# 进入Dokcer环境, 自行添加目录映射
+docker run -it smile0304/satc:V1.0
+使用方法
+usage: satc.py [-h] -d /root/path/_ac18.extracted -o /root/output
+               [--ghidra_script {ref2sink_cmdi,ref2sink_bof,share2sink,ref2share,all}]
+               [--save_ghidra_project] --taint_check
+               [-b /var/ac18/bin/httpd | -l 3]
+
+SATC tool
+
+optional arguments:
+  -h, --help            查看帮助
+  -d /root/path/_ac18.extracted, --directory /root/path/_ac18.extracted
+                        指定从固件中提取出的文件系统
+  -o /root/output, --output /root/output
+                        指定结果输出位置
+  --ghidra_script {ref2sink_cmdi,ref2sink_bof,share2sink,ref2share,all}
+                        (可选) 指定要使用的 Ghidra 脚本。 如果使用`all`命令，`ref2sink_cmdi`、`ref2sink_bof`和`ref2share`三个脚本将同时运行
+  --ref2share_result /root/path/ref2share_result  (可选) 运行`share2sink` Ghidra脚本时，需要使用该参数指定`ref2share`脚本的输出结果
+  --save_ghidra_project (可选) 是否保存程序运行时产生的ghidra工程路径
+  --taint_check         (可选) 指定是否启用污点分析
+  -b /var/ac18/bin/httpd, --bin /var/ac18/bin/httpd
+                        (可选) 用于指定需要分析的程序，如果不指定，SaTC将使用内置算法确认需要分析的程序
+  -l 3, --len 3         (可选) 根据分析结果分析可能为边界的前N个程序，默认为3
+输出结果的目录结构为：
+|-- ghidra_extract_result # ghidra寻找函数调用路径的分析结果, 启用`--ghidra_script`选项会输出该目录
+|   |-- httpd # 每个被分析的bin都会生成一个同名文件夹
+|       |-- httpd # 被分析的bin
+|       |-- httpd_ref2sink_bof.result # 定位bof类型的sink函数路径
+|       |-- httpd_ref2sink_cmdi.result # 定位cmdi类型的sink函数路径
+|-- keyword_extract_result  # 关键字提取结果
+|   |-- detail  # 前端关键字提取结果(详细分析结果)
+|   |   |-- API_detail.result # 提取的API详细结果
+|   |   |-- API_remove_detail.result # 被过滤掉的API信息
+|   |   |-- api_split.result  # 模糊匹配的API结果
+|   |   |-- Clustering_result_v2.result # 详细分析结果(不关心其他过程关心此文件即可)
+|   |   |-- File_detail.result  # 记录了从单独文件中提取的关键字
+|   |   |-- from_bin_add_para.result # 在二进制匹配过程中新增的关键字
+|   |   |-- from_bin_add_para.result_v2 # 同上,V2版本
+|   |   |-- Not_Analysise_JS_File.result # 未被分析的JS文件
+|   |   |-- Prar_detail.result # 提取的Prar详细结果
+|   |   |-- Prar_remove_detail.result # 被过滤掉的Prar结果
+|   |-- info.txt  # 记录前端关键字提取时间等信息
+|   |-- simple  # 前端关键字提取结果, 比较简单
+|       |-- API_simple.result # 在全部二进制中出现的全部API名称
+|       |-- Prar_simple.result  # 在全部二进制中出现等的全部Prar
+|-- result-httpd-ref2sink_cmdi-ctW8.txt # 污点分析结果,启用`--taint-check` 和 `--ghidra_script`选项才会生成该文件
+在/home/satc/res下生成的txt文件可以查看结果
+
+
+
+
+
+  
+    
+    
+  
+
+
+
+0x06 验证漏洞 
+    
+        #        
+    
+
+
+直接购买真实设备来验证漏洞
+本地仿真模拟来验证 or 复现
+
+可以先按照 0x03 部分先对固件进行仿真模拟
+然后在本地对漏洞进行验证或复现
+
+
+一些路由器固件的漏洞可以在一些网站上查找到还在用此路由器设备的站点
+
+
+    shodan
+
+    ZoomEye
+
+
+
+
+0x07 其他 
+    
+        #        
+    
+
+
+
+挖漏洞之前可以先在各类cve cnvd平台搜索一下
+
+
+相关产品的漏洞可以提供参考
+
+
+也可以避免重复挖出/提交已有的漏洞
+
+
+
+    CVE - Search CVE List (mitre.org)
+
+
+
+    Vulnerabilities (CVE) - OpenCVE (ics-csirt.io)
+
+
+
+
+挖出一个洞之后
+
+可以横向看看同一家厂商的其他产品是不是也存在类似的漏洞
+可以思考这个漏洞点是否有其他更加有危害的利用方式
+
+
+
+还可以思考一下如何修复这个漏洞
+
+应该如何打补丁
+一些有漏洞的固件在第一次修补之后仍存在漏洞，我们的修复方式是否能避免这样的情况
+
+
+
+可以参考一下winmt师傅的挖洞经历
+
+
+    记一次全设备通杀未授权RCE的挖掘经历-看雪-安全社区|
+
+
+
+
+后记 
+    
+        #        
+    
+
+漏洞挖掘众多尝试的一小部分：
+
+尝试1
+
+$ wget https://down.tenda.com.cn/uploadfile/AC18/ac18_kf_V15.03.05.19(6318_)_cn.zip
+$ binwalk -Me ac18_kf_V15.03.05.19(6318_)_cn.zip
+$ sudo docker run -it -v ./squashfs-root/:/home/satc/SaTC/SaTC_data smile0304/satc
+
+# 进入SaTC容器中
+# 检查/home/satc/SaTC/SaTC_data文件夹中是否有数据
+$ ls /home/satc/SaTC/SaTC_data
+$ cd ~/SaTC
+# 测试/bin/httpd是否存在命令注入漏洞
+$ python satc.py -d /home/satc/SaTC/SaTC_data -o /home/satc/res --ghidra_script=ref2sink_cmdi -b httpd --taint_check
+# 测试/bin/httpd是否存在缓冲区溢出漏洞
+$ python satc.py -d /home/satc/SaTC/SaTC_data -o /home/satc/res --ghidra_script=ref2sink_bof -b httpd --taint_check
+
+
+
+
+
+  
+    
+    
+  
+
+
+过程中可能会飘红，或者警告，直接忽略，只要在/home/satc/res下输出txt文件就ok
+
+尝试2
+
+$ wget https://down.tenda.com.cn/uploadfile/AC10/V16.03.48.23.zip
+$ unzip V16.03.48.23.zip &amp;&amp; cd V16.03.48.23
+$ binwalk -Me US_AC10V5.0si_V16.03.48.23_cn_TDC01.bin 
+
+
+
+
+
+  
+    
+    
+  
+
+
+
+尝试3
+
+$wget https://ftp.dlink.ru/pub/Router/DWR-921/Firmware/2023.07.20-15.22_DWR_921_POST_4.0.2_release.bin
+
+$ cd /home/iot/tools/firmware-analysis-toolkit
+$ ./fat.py /home/iot/vul/D-Link/DWR-921/2023.07.20-15.22_DWR_921_POST_4.0.2_release.bin
+
+
+
+
+
+  
+    
+    
+  
+
+
+$ binwalk -Me 2023.07.20-15.22_DWR_921_POST_4.0.2_release.bin
+$ sudo docker run -it -v ./squashfs-root/:/home/satc/SaTC/SaTC_data smile0304/satc
+
+# 进入SaTC容器中
+# 检查/home/satc/SaTC/SaTC_data文件夹中是否有数据
+$ ls /home/satc/SaTC/SaTC_data
+$ cd ~/SaTC
+# 测试/bin/httpd是否存在命令注入漏洞
+$ python satc.py -d /home/satc/SaTC/SaTC_data -o /home/satc/res --ghidra_script=ref2sink_cmdi -b httpd --taint_check
+# 测试/bin/httpd是否存在缓冲区溢出漏洞
+$ python satc.py -d /home/satc/SaTC/SaTC_data -o /home/satc/res --ghidra_script=ref2sink_bof -b httpd --taint_check
+
+
+
+
+
+  
+    
+    
+  
+
+
+文章后面的部分还在施工中，
+路过的师傅们看看远处的学习记录吧！" property="og:description"/>
+<meta content="article" property="og:type"/>
+<meta content="https://ta0lve.github.io/posts/iot/0x03/" property="og:url"/><meta content="https://ta0lve.github.io/posts/iot/0x03/featured.jpg" property="og:image"/><meta content="posts" property="article:section"/>
+<meta content="2024-02-23T00:00:00+00:00" property="article:published_time"/>
+<meta content="2024-02-23T00:00:00+00:00" property="article:modified_time"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="https://ta0lve.github.io/posts/iot/0x03/featured.jpg" name="twitter:image"/>
+<meta content="IoT漏洞挖掘思路" name="twitter:title"/>
+<meta content="
+
+  
+
+    
+
+  
+    
+
+  
+
+
+  
+
+  如果本博客部分文章图片加载失败，
+    可以点击此处查看解决办法
+
+
+
+0x01 获取固件 
+    
+        #        
+    
+
+一般从固件厂商官网获取
+也可以通过抓设备升级的包、购买硬件设备来获取固件
+
+0x02 解密固件 
+    
+        #        
+    
+
+参考链接：
+    固件解密 - IOT 固件安全 All in One (gitbook.io)
+
+在解密固件之前可以先上网查询有没有相关文章
+也可以看一下同一品牌的其他固件是如何解密的
+
+解密固件是分析加密固件所需迈过的第一道坎
+
+
+
+
+
+  
+    
+    
+  
+
+
+部分固件的解密思路可以参考以下思路：
+看看是不是仍有少部分固件（或过渡版本的固件）并未加密，当这些固件升级的过程中大概也会使用到解密的程序，因此可以通过解开这些未加密固件，找到解密程序，并逆向分析出相关算法，这也是固件解密常用的一种手段。并且，一般一个厂商的固件加密算法都是相同的，这样所有的固件我们都能够解开了
+解密完固件为后续的静态分析做准备
+
+0x03 仿真模拟 
+    
+        #        
+    
+
+动态分析方法需要固件进行仿真模拟，或者在物理设备上进行片上调试，来获得反馈信息
+真实固件的调试可以参考：
+    固件调试 - IOT 固件安全 All in One (gitbook.io)
+而仿真模拟可以参考以下的思路来进行：
+
+先使用FirmAE、Firmware Analysis Toolkit等开箱即用的工具进行仿真
+
+固件跑起来并不意味着成功仿真
+可能会有部分功能的缺失
+需要测试网络是否连通，web是否正常访问，若有其他开放端口是否能正常访问等
+
+
+也可以使用FirmAFL、FirmFuzz、Fuzzware来进行仿真模拟+fuzz
+工具仿真效果不理想时可以使用qemu来进行仿真
+
+Unicorn和Qiling暂时了解较少，也可以用来仿真模拟
+
+
+
+
+FirmAE 
+    
+        #        
+    
+
+
+成功概率较高（优于Firmadyne）
+
+FirmAE significantly increases the emulation success rate (From 
+    Firmadyne’s 16.28% to 79.36%)
+
+
+
+
+
+    FirmAE及DlinkDIR320、600、645漏洞复现 - 『软件调试区』 - 吾爱破解 - LCG - LSG |安卓破解|病毒分析|www.52pojie.cn
+
+    pr0v3rbs/FirmAE: Towards Large-Scale Emulation of IoT Firmware for Dynamic Analysis (github.com)
+
+    Index of /pub/Router/DIR-645/Firmware (dlink.ru)
+
+安装：
+git clone --recursive https://github.com/pr0v3rbs/FirmAE
+./download.sh
+./install.sh
+使用：
+执行脚本
+./init.sh
+准备固件
+# 举例：
+wget https://github.com/pr0v3rbs/FirmAE/releases/download/v1.0/DIR-868L_fw_revB_2-05b02_eu_multi_20161117.zip
+检查仿真
+sudo ./run.sh -c &lt;brand&gt; &lt;firmware&gt;
+分析目标固件
+
+分析模式使用 FirmAE 分析器
+
+sudo ./run.sh -a &lt;brand&gt; &lt;firmware&gt;
+
+运行模式有助于测试 Web 服务或执行自定义分析器
+
+sudo ./run.sh -r &lt;brand&gt; &lt;firmware&gt;
+
+
+
+
+
+  
+    
+    
+  
+
+
+
+Firmware Analysis Toolkit 
+    
+        #        
+    
+
+
+    attify/firmware-analysis-toolkit: Toolkit to emulate firmware and analyse it for security vulnerabilities (github.com)
+安装：
+git clone https://github.com/attify/firmware-analysis-toolkit
+cd firmware-analysis-toolkit
+./setup.sh
+# fat.config
+[DEFAULT]
+sudo_password=attify123
+firmadyne_path=/home/attify/firmadyne
+使用：
+./fat.py &lt;firmware file&gt;
+$ ./fat.py DIR-601_REVB_FIRMWARE_2.01.BIN 
+
+                               __           _   
+                              / _|         | |  
+                             | |_    __ _  | |_ 
+                             |  _|  / _` | | __|
+                             | |   | (_| | | |_ 
+                             |_|    \__,_|  \__|                    
+                    
+                Welcome to the Firmware Analysis Toolkit - v0.3
+    Offensive IoT Exploitation Training http://bit.do/offensiveiotexploitation
+                  By Attify - https://attify.com  | @attifyme
+    
+[+] Firmware: DIR-601_REVB_FIRMWARE_2.01.BIN
+[+] Extracting the firmware...
+[+] Image ID: 1
+[+] Identifying architecture...
+[+] Architecture: mipseb
+[+] Building QEMU disk image...
+[+] Setting up the network connection, please standby...
+[+] Network interfaces: [('br0', '192.168.0.1')]
+[+] All set! Press ENTER to run the firmware...
+[+] When running, press Ctrl + A X to terminate qemu
+
+
+
+
+
+  
+    
+    
+  
+
+
+
+QEMU 
+    
+        #        
+    
+
+
+    https://wokough.gitbook.io/iot-firmware-aio/wiki/fang-zhen-fen-xi#id-1.1-qemu
+具体问题具体分析
+具体固件使用对应的命令进行仿真
+
+先上网搜索相关信息，看看有没有文章已经仿真过了
+参考之前仿真设备的案例来试着仿真
+如果都没有就需要我们参考着官方文档以及对固件的静态分析来自己调整命令
+
+如果遇到一些参数实在没有办法满足时可以先跑起来
+在动态调试的过程看是哪个汇编执行报错
+
+再在IDA中进行合适的patch来使得固件可以成功仿真
+
+
+
+
+
+例如当我们需要向main函数传递参数argv和设置环境变量时，可以先看看官方usage：
+
+
+
+
+
+  
+    
+    
+  
+
+
+发现我们可以用-0选项传递第一个参数，用-E选项设置环境变量，用-L选项做到类似于更改根目录的效果，用-strace选项追踪程序执行时进程系统调用和所接收的信号，方便调试
+
+
+部分固件的仿真需要我们使用qemu来配置网络
+
+
+可以先拍一个快照再来开始仿真，便于会快照重新配置
+
+
+参考
+    IoT-vulhub项目网络配置的方法，可以得到一个配置网络的shell文件模版
+
+
+#!/bin/bash
+
+# 启动 ssh 服务
+/etc/init.d/ssh start
+
+# 配置网卡
+tunctl -t tap0
+ifconfig tap0 192.168.2.1/24
+
+# 启动 http 服务
+nohup python3 -m http.server 8000 1&gt;&amp;/dev/null &amp;
+
+# 进入 qemu 镜像目录
+cd /root/images
+
+/usr/bin/expect&lt;&lt;EOF
+set timeout 10000
+
+# 依照固件及qemu文档更改此处命令
+spawn qemu-system-mips -M malta -kernel vmlinux-3.2.0-4-4kc-malta -hda debian_wheezy_mips_standard.qcow2 -append &quot;root=/dev/sda1 console=tty0&quot; -netdev tap,id=tapnet,ifname=tap0,script=no -device rtl8139,netdev=tapnet -nographic
+
+expect &quot;debian-mips login:&quot;
+send &quot;root\r&quot;
+expect &quot;Password:&quot;
+send &quot;root\r&quot;
+
+expect &quot;root@debian-mips:~# &quot;
+send &quot;ifconfig eth0 192.168.2.2/24\r&quot;
+
+#expect &quot;root@debian-mips:~# &quot;
+#send &quot;echo 0 &gt; /proc/sys/kernel/randomize_va_space\r&quot;
+
+expect &quot;root@debian-mips:~# &quot;
+send &quot;scp root@192.168.2.1:/root/squashfs-root.tar.gz /root/squashfs-root.tar.gz\r&quot;
+expect {
+    &quot;(yes/no)? &quot; { send &quot;yes\r&quot;; exp_continue }
+    &quot;password: &quot; { send &quot;root\r&quot; }
+}
+
+expect &quot;root@debian-mips:~# &quot;
+send &quot;tar xzf squashfs-root.tar.gz &amp;&amp; rm squashfs-root.tar.gz\r&quot;
+expect &quot;root@debian-mips:~# &quot;
+send &quot;mount -o bind /dev ./squashfs-root/dev &amp;&amp; mount -t proc /proc ./squashfs-root/proc\r&quot;
+
+expect &quot;root@debian-mips:~# &quot;
+send &quot;scp -r root@192.168.2.1:/root/tools /root/squashfs-root/tools\r&quot;
+expect {
+    &quot;(yes/no)? &quot; { send &quot;yes\r&quot;; exp_continue }
+    &quot;password: &quot; { send &quot;root\r&quot; }
+}
+
+expect &quot;root@debian-mips:~# &quot;
+send &quot;echo 'sleep 30' &gt; net.sh\r&quot;
+expect &quot;root@debian-mips:~# &quot;
+send &quot;echo 'ifconfig eth0 192.168.2.2/24' &gt;&gt; net.sh\r&quot;
+expect &quot;root@debian-mips:~# &quot;
+send &quot;echo 'ifconfig br0 192.168.2.3/24' &gt;&gt; net.sh\r&quot;
+expect &quot;root@debian-mips:~# &quot;
+send &quot;chmod +x net.sh &amp;&amp; /bin/sh net.sh &amp;\r&quot;
+
+expect &quot;root@debian-mips:~# &quot;
+send &quot;chroot squashfs-root/ sh\r&quot;
+expect &quot;# &quot;
+send &quot;./bin/upnp\r&quot;
+expect &quot;# &quot;
+send &quot;./bin/mic\r&quot;
+
+expect eof
+EOF
+
+
+
+
+
+0x04 fuzz 
+    
+        #        
+    
+
+动态分析查找漏洞时主要通过各类fuzz工具来得到漏洞的触发点
+
+主要使用FirmAFL、FirmFuzz、Fuzzware工具来进行fuzz
+也可以使用afl与afl++
+
+
+Fuzzware 
+    
+        #        
+    
+
+
+    fuzzware-fuzzer/fuzzware: Fuzzware’s main repository. Start here to install. (github.com)
+git clone https://github.com/fuzzware-fuzzer/fuzzware.git
+
+sudo ./build_docker.sh
+
+sudo ./run_docker.sh examples fuzzware pipeline --skip-afl-cpufreq pw-recovery/ARCH_PRO
+sudo ./run_docker.sh test fuzzware pipeline --skip-afl-cpufreq .
+成功将固件跑起来：
+
+
+
+
+
+  
+    
+    
+  
+
+
+由图可以看到刚开始运行时发现新的MMIO寄存器模型，由于MMIO Access Model中并不存在，因此会将其定义为新的模型，然后继续向下运行
+
+
+
+
+
+  
+    
+    
+  
+
+
+建模完毕后，开始进行正常的fuzzing阶段：
+
+
+
+
+
+  
+    
+    
+  
+
+
+每一轮fuzzing结束后，根据反馈调整输入，开始下一阶段fuzzing：
+
+
+
+
+
+  
+    
+    
+  
+
+
+
+afl++ 
+    
+        #        
+    
+
+
+有源码 
+    
+        #        
+    
+
+使用 afl-gcc 进行插桩编译：
+afl-gcc test.c -o test_file
+gcc test.c -o test_gcc
+
+afl-gcc 插桩编译后，fuzz 的速度会快一些
+
+接下来就可以进行 fuzz 了：
+afl-fuzz -i ./fuzz_in -o ./fuzz_out ./test_file -f
+
+fuzz_in 为语料库，可以直接使用 AFL 自带的 testcases
+fuzz_out 就是输出的内容
+
+
+无源码 
+    
+        #        
+    
+
+配置：
+sudo apt-get install libtool-bin libgtk2.0-dev -y
+cd /home/iot/test/tools/AFLplusplus/qemu_mode
+./build_qemu_support.sh
+cd ..
+sudo make install
+afl-fuzz -Q -m none -i in -o out ./pwn_file @@
+
+/home/iot/test/tools/AFLplusplus/afl-fuzz -i fuzz_in -o ./fuzz_out -Q ./pwn
+
+
+
+
+
+  
+    
+    
+  
+
+
+
+0x05 静态分析 
+    
+        #        
+    
+
+
+    浅析IOT二进制静态辅助方法 - FreeBuf网络安全行业门户
+
+
+IDA
+
+大多数是32位的，少数是64位的
+推荐安装keypatch插件，在patch固件的时候会方便一些
+
+
+
+Ghira
+
+可以安装许多有用的插件
+
+
+
+SaTC
+
+自动化挖掘工具
+
+
+
+其他二进制静态辅助工具
+
+BinAbsInspector
+Rhabdomancer
+Haruspex + semgrep
+
+
+
+
+SaTC 
+    
+        #        
+    
+
+
+    NSSL-SJTU/SaTC: A prototype of Shared-keywords aware Taint Checking, a novel static analysis approach that tracks the data flow of the user input between front-end and back-end to precisely detect security vulnerabilities. (github.com)
+安装
+建议通过使用Dockerfile来构建系统环境:
+# 进入SaTC代码目录
+cd SaTC 
+
+# 构建Docker镜像
+docker build . -t satc
+
+# 进入Dokcer环境, 自行添加目录映射
+docker run -it satc
+如果因为网络等原因无法构建，可使用我们提供等docker image
+# 从docker hun拉去image
+docker pull smile0304/satc:V1.0
+
+# 进入Dokcer环境, 自行添加目录映射
+docker run -it smile0304/satc:V1.0
+使用方法
+usage: satc.py [-h] -d /root/path/_ac18.extracted -o /root/output
+               [--ghidra_script {ref2sink_cmdi,ref2sink_bof,share2sink,ref2share,all}]
+               [--save_ghidra_project] --taint_check
+               [-b /var/ac18/bin/httpd | -l 3]
+
+SATC tool
+
+optional arguments:
+  -h, --help            查看帮助
+  -d /root/path/_ac18.extracted, --directory /root/path/_ac18.extracted
+                        指定从固件中提取出的文件系统
+  -o /root/output, --output /root/output
+                        指定结果输出位置
+  --ghidra_script {ref2sink_cmdi,ref2sink_bof,share2sink,ref2share,all}
+                        (可选) 指定要使用的 Ghidra 脚本。 如果使用`all`命令，`ref2sink_cmdi`、`ref2sink_bof`和`ref2share`三个脚本将同时运行
+  --ref2share_result /root/path/ref2share_result  (可选) 运行`share2sink` Ghidra脚本时，需要使用该参数指定`ref2share`脚本的输出结果
+  --save_ghidra_project (可选) 是否保存程序运行时产生的ghidra工程路径
+  --taint_check         (可选) 指定是否启用污点分析
+  -b /var/ac18/bin/httpd, --bin /var/ac18/bin/httpd
+                        (可选) 用于指定需要分析的程序，如果不指定，SaTC将使用内置算法确认需要分析的程序
+  -l 3, --len 3         (可选) 根据分析结果分析可能为边界的前N个程序，默认为3
+输出结果的目录结构为：
+|-- ghidra_extract_result # ghidra寻找函数调用路径的分析结果, 启用`--ghidra_script`选项会输出该目录
+|   |-- httpd # 每个被分析的bin都会生成一个同名文件夹
+|       |-- httpd # 被分析的bin
+|       |-- httpd_ref2sink_bof.result # 定位bof类型的sink函数路径
+|       |-- httpd_ref2sink_cmdi.result # 定位cmdi类型的sink函数路径
+|-- keyword_extract_result  # 关键字提取结果
+|   |-- detail  # 前端关键字提取结果(详细分析结果)
+|   |   |-- API_detail.result # 提取的API详细结果
+|   |   |-- API_remove_detail.result # 被过滤掉的API信息
+|   |   |-- api_split.result  # 模糊匹配的API结果
+|   |   |-- Clustering_result_v2.result # 详细分析结果(不关心其他过程关心此文件即可)
+|   |   |-- File_detail.result  # 记录了从单独文件中提取的关键字
+|   |   |-- from_bin_add_para.result # 在二进制匹配过程中新增的关键字
+|   |   |-- from_bin_add_para.result_v2 # 同上,V2版本
+|   |   |-- Not_Analysise_JS_File.result # 未被分析的JS文件
+|   |   |-- Prar_detail.result # 提取的Prar详细结果
+|   |   |-- Prar_remove_detail.result # 被过滤掉的Prar结果
+|   |-- info.txt  # 记录前端关键字提取时间等信息
+|   |-- simple  # 前端关键字提取结果, 比较简单
+|       |-- API_simple.result # 在全部二进制中出现的全部API名称
+|       |-- Prar_simple.result  # 在全部二进制中出现等的全部Prar
+|-- result-httpd-ref2sink_cmdi-ctW8.txt # 污点分析结果,启用`--taint-check` 和 `--ghidra_script`选项才会生成该文件
+在/home/satc/res下生成的txt文件可以查看结果
+
+
+
+
+
+  
+    
+    
+  
+
+
+
+0x06 验证漏洞 
+    
+        #        
+    
+
+
+直接购买真实设备来验证漏洞
+本地仿真模拟来验证 or 复现
+
+可以先按照 0x03 部分先对固件进行仿真模拟
+然后在本地对漏洞进行验证或复现
+
+
+一些路由器固件的漏洞可以在一些网站上查找到还在用此路由器设备的站点
+
+
+    shodan
+
+    ZoomEye
+
+
+
+
+0x07 其他 
+    
+        #        
+    
+
+
+
+挖漏洞之前可以先在各类cve cnvd平台搜索一下
+
+
+相关产品的漏洞可以提供参考
+
+
+也可以避免重复挖出/提交已有的漏洞
+
+
+
+    CVE - Search CVE List (mitre.org)
+
+
+
+    Vulnerabilities (CVE) - OpenCVE (ics-csirt.io)
+
+
+
+
+挖出一个洞之后
+
+可以横向看看同一家厂商的其他产品是不是也存在类似的漏洞
+可以思考这个漏洞点是否有其他更加有危害的利用方式
+
+
+
+还可以思考一下如何修复这个漏洞
+
+应该如何打补丁
+一些有漏洞的固件在第一次修补之后仍存在漏洞，我们的修复方式是否能避免这样的情况
+
+
+
+可以参考一下winmt师傅的挖洞经历
+
+
+    记一次全设备通杀未授权RCE的挖掘经历-看雪-安全社区|
+
+
+
+
+后记 
+    
+        #        
+    
+
+漏洞挖掘众多尝试的一小部分：
+
+尝试1
+
+$ wget https://down.tenda.com.cn/uploadfile/AC18/ac18_kf_V15.03.05.19(6318_)_cn.zip
+$ binwalk -Me ac18_kf_V15.03.05.19(6318_)_cn.zip
+$ sudo docker run -it -v ./squashfs-root/:/home/satc/SaTC/SaTC_data smile0304/satc
+
+# 进入SaTC容器中
+# 检查/home/satc/SaTC/SaTC_data文件夹中是否有数据
+$ ls /home/satc/SaTC/SaTC_data
+$ cd ~/SaTC
+# 测试/bin/httpd是否存在命令注入漏洞
+$ python satc.py -d /home/satc/SaTC/SaTC_data -o /home/satc/res --ghidra_script=ref2sink_cmdi -b httpd --taint_check
+# 测试/bin/httpd是否存在缓冲区溢出漏洞
+$ python satc.py -d /home/satc/SaTC/SaTC_data -o /home/satc/res --ghidra_script=ref2sink_bof -b httpd --taint_check
+
+
+
+
+
+  
+    
+    
+  
+
+
+过程中可能会飘红，或者警告，直接忽略，只要在/home/satc/res下输出txt文件就ok
+
+尝试2
+
+$ wget https://down.tenda.com.cn/uploadfile/AC10/V16.03.48.23.zip
+$ unzip V16.03.48.23.zip &amp;&amp; cd V16.03.48.23
+$ binwalk -Me US_AC10V5.0si_V16.03.48.23_cn_TDC01.bin 
+
+
+
+
+
+  
+    
+    
+  
+
+
+
+尝试3
+
+$wget https://ftp.dlink.ru/pub/Router/DWR-921/Firmware/2023.07.20-15.22_DWR_921_POST_4.0.2_release.bin
+
+$ cd /home/iot/tools/firmware-analysis-toolkit
+$ ./fat.py /home/iot/vul/D-Link/DWR-921/2023.07.20-15.22_DWR_921_POST_4.0.2_release.bin
+
+
+
+
+
+  
+    
+    
+  
+
+
+$ binwalk -Me 2023.07.20-15.22_DWR_921_POST_4.0.2_release.bin
+$ sudo docker run -it -v ./squashfs-root/:/home/satc/SaTC/SaTC_data smile0304/satc
+
+# 进入SaTC容器中
+# 检查/home/satc/SaTC/SaTC_data文件夹中是否有数据
+$ ls /home/satc/SaTC/SaTC_data
+$ cd ~/SaTC
+# 测试/bin/httpd是否存在命令注入漏洞
+$ python satc.py -d /home/satc/SaTC/SaTC_data -o /home/satc/res --ghidra_script=ref2sink_cmdi -b httpd --taint_check
+# 测试/bin/httpd是否存在缓冲区溢出漏洞
+$ python satc.py -d /home/satc/SaTC/SaTC_data -o /home/satc/res --ghidra_script=ref2sink_bof -b httpd --taint_check
+
+
+
+
+
+  
+    
+    
+  
+
+
+文章后面的部分还在施工中，
+路过的师傅们看看远处的学习记录吧！" name="twitter:description"/>
+<script type="application/ld+json">
+  [{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "articleSection": "Posts",
+    "name": "IoT漏洞挖掘思路",
+    "headline": "IoT漏洞挖掘思路",
+    
+    "abstract": "\u003cdiv\n  \n    class=\u0022flex px-4 py-3 rounded-md bg-primary-100 dark:bg-primary-900\u0022\n  \u003e\n\n  \u003cspan\n    \n      class=\u0022text-primary-400 ltr:pr-3 rtl:pl-3 flex items-center\u0022\n    \u003e\n\n    \n\n  \u003cspan class=\u0022relative block icon\u0022\u003e\n    \u003csvg xmlns=\u0022http:\/\/www.w3.org\/2000\/svg\u0022 viewBox=\u00220 0 512 512\u0022\u003e\u003cpath fill=\u0022currentColor\u0022 d=\u0022M506.3 417l-213.3-364c-16.33-28-57.54-28-73.98 0l-213.2 364C-10.59 444.9 9.849 480 42.74 480h426.6C502.1 480 522.6 445 506.3 417zM232 168c0-13.25 10.75-24 24-24S280 154.8 280 168v128c0 13.25-10.75 24-23.1 24S232 309.3 232 296V168zM256 416c-17.36 0-31.44-14.08-31.44-31.44c0-17.36 14.07-31.44 31.44-31.44s31.44 14.08 31.44 31.44C287.4 401.9 273.4 416 256 416z\u0022\/\u003e\u003c\/svg\u003e\n\n  \u003c\/span\u003e\n\n\n  \u003c\/span\u003e\n\n  \u003cspan\n    \n      class=\u0022dark:text-neutral-300\u0022\n    \u003e\u003cstrong\u003e如果本博客部分文章图片加载失败，\u003c\/strong\u003e\u003ca href=\u0022\/posts\/sth\/sm.ms\/\u0022  \u003e\n    \u003cstrong\u003e可以点击此处查看解决办法\u003c\/strong\u003e\u003c\/a\u003e\u003c\/span\u003e\n\u003c\/div\u003e\n\n\u003cdiv id=\u00220x01-获取固件\u0022 class=\u0022anchor\u0022\u003e\u003c\/div\u003e\n\u003ch2 class=\u0022relative group\u0022\u003e0x01 获取固件 \n    \u003cspan\n        class=\u0022absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100\u0022\u003e\n        \u003ca class=\u0022group-hover:text-primary-300 dark:group-hover:text-neutral-700\u0022\n            style=\u0022text-decoration-line: none !important;\u0022 href=\u0022#0x01-%e8%8e%b7%e5%8f%96%e5%9b%ba%e4%bb%b6\u0022 aria-label=\u0022锚点\u0022\u003e#\u003c\/a\u003e\u003c\/span\u003e        \n    \n\u003c\/h2\u003e\n\u003cp\u003e一般从\u003cstrong\u003e固件厂商官网\u003c\/strong\u003e获取\u003c\/p\u003e\n\u003cp\u003e也可以通过抓设备升级的包、购买硬件设备来获取固件\u003c\/p\u003e\n\u003cdiv id=\u00220x02-解密固件\u0022 class=\u0022anchor\u0022\u003e\u003c\/div\u003e\n\u003ch2 class=\u0022relative group\u0022\u003e0x02 解密固件 \n    \u003cspan\n        class=\u0022absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100\u0022\u003e\n        \u003ca class=\u0022group-hover:text-primary-300 dark:group-hover:text-neutral-700\u0022\n            style=\u0022text-decoration-line: none !important;\u0022 href=\u0022#0x02-%e8%a7%a3%e5%af%86%e5%9b%ba%e4%bb%b6\u0022 aria-label=\u0022锚点\u0022\u003e#\u003c\/a\u003e\u003c\/span\u003e        \n    \n\u003c\/h2\u003e\n\u003cp\u003e参考链接：\u003ca href=\u0022https:\/\/wokough.gitbook.io\/iot-firmware-aio\/wiki\/gu-jian-jie-mi#yi-gu-jian-jia-mi-pan-duan\u0022   target=\u0022_blank\u0022\u003e\n    固件解密 - IOT 固件安全 All in One (gitbook.io)\u003c\/a\u003e\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e在解密固件之前可以先上网查询有没有相关文章\u003c\/li\u003e\n\u003cli\u003e也可以看一下同一品牌的其他固件是如何解密的\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003cp\u003e解密固件是分析加密固件所需迈过的第一道坎\u003c\/p\u003e\n\u003cp\u003e\n\n\n\n\n  \u003cfigure\u003e\n    \u003cimg class=\u0022my-0 rounded-md\u0022 src=\u0022https:\/\/s2.loli.net\/2024\/02\/25\/bT35JcBd2Sn4gvR.png\u0022 alt=\u0022image-20240225113753127\u0022 \/\u003e\n    \n  \u003c\/figure\u003e\n\n\u003c\/p\u003e\n\u003cp\u003e部分固件的解密思路可以参考以下思路：\u003c\/p\u003e\n\u003cp\u003e看看是不是仍有少部分固件（或过渡版本的固件）并未加密，当这些固件升级的过程中大概也会使用到解密的程序，因此可以\u003cstrong\u003e通过解开这些未加密固件，找到解密程序，并逆向分析出相关算法\u003c\/strong\u003e，这也是固件解密常用的一种手段。并且，一般一个厂商的固件加密算法都是相同的，这样所有的固件我们都能够解开了\u003c\/p\u003e\n\u003cp\u003e解密完固件为后续的静态分析做准备\u003c\/p\u003e\n\u003cdiv id=\u00220x03-仿真模拟\u0022 class=\u0022anchor\u0022\u003e\u003c\/div\u003e\n\u003ch2 class=\u0022relative group\u0022\u003e0x03 仿真模拟 \n    \u003cspan\n        class=\u0022absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100\u0022\u003e\n        \u003ca class=\u0022group-hover:text-primary-300 dark:group-hover:text-neutral-700\u0022\n            style=\u0022text-decoration-line: none !important;\u0022 href=\u0022#0x03-%e4%bb%bf%e7%9c%9f%e6%a8%a1%e6%8b%9f\u0022 aria-label=\u0022锚点\u0022\u003e#\u003c\/a\u003e\u003c\/span\u003e        \n    \n\u003c\/h2\u003e\n\u003cp\u003e\u003cstrong\u003e动态分析方法\u003c\/strong\u003e需要固件进行仿真模拟，或者在物理设备上进行片上调试，来获得反馈信息\u003c\/p\u003e\n\u003cp\u003e真实固件的调试可以参考：\u003ca href=\u0022https:\/\/wokough.gitbook.io\/iot-firmware-aio\/wiki\/gu-jian-tiao-shi\u0022   target=\u0022_blank\u0022\u003e\n    固件调试 - IOT 固件安全 All in One (gitbook.io)\u003c\/a\u003e\u003c\/p\u003e\n\u003cp\u003e而仿真模拟可以参考以下的思路来进行：\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e先使用FirmAE、Firmware Analysis Toolkit等开箱即用的工具进行仿真\n\u003cul\u003e\n\u003cli\u003e固件跑起来并不意味着成功仿真\u003c\/li\u003e\n\u003cli\u003e可能会有部分功能的缺失\u003c\/li\u003e\n\u003cli\u003e需要测试网络是否连通，web是否正常访问，若有其他开放端口是否能正常访问等\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003c\/li\u003e\n\u003cli\u003e也可以使用FirmAFL、FirmFuzz、Fuzzware来进行仿真模拟\u002bfuzz\u003c\/li\u003e\n\u003cli\u003e工具仿真效果不理想时可以使用qemu来进行仿真\n\u003cul\u003e\n\u003cli\u003eUnicorn和Qiling暂时了解较少，也可以用来仿真模拟\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003cdiv id=\u0022firmae\u0022 class=\u0022anchor\u0022\u003e\u003c\/div\u003e\n\u003ch3 class=\u0022relative group\u0022\u003eFirmAE \n    \u003cspan\n        class=\u0022absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100\u0022\u003e\n        \u003ca class=\u0022group-hover:text-primary-300 dark:group-hover:text-neutral-700\u0022\n            style=\u0022text-decoration-line: none !important;\u0022 href=\u0022#firmae\u0022 aria-label=\u0022锚点\u0022\u003e#\u003c\/a\u003e\u003c\/span\u003e        \n    \n\u003c\/h3\u003e\n\u003cul\u003e\n\u003cli\u003e成功概率较高（优于Firmadyne）\n\u003cul\u003e\n\u003cli\u003eFirmAE significantly increases the emulation success rate (From \u003ca href=\u0022https:\/\/github.com\/firmadyne\/firmadyne\u0022   target=\u0022_blank\u0022\u003e\n    Firmadyne\u003c\/a\u003e\u0026rsquo;s 16.28% to 79.36%)\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\u0022https:\/\/www.52pojie.cn\/thread-1572565-1-1.html\u0022   target=\u0022_blank\u0022\u003e\n    FirmAE及DlinkDIR320、600、645漏洞复现 - 『软件调试区』 - 吾爱破解 - LCG - LSG |安卓破解|病毒分析|www.52pojie.cn\u003c\/a\u003e\u003c\/li\u003e\n\u003cli\u003e\u003ca href=\u0022https:\/\/github.com\/pr0v3rbs\/FirmAE\u0022   target=\u0022_blank\u0022\u003e\n    pr0v3rbs\/FirmAE: Towards Large-Scale Emulation of IoT Firmware for Dynamic Analysis (github.com)\u003c\/a\u003e\u003c\/li\u003e\n\u003cli\u003e\u003ca href=\u0022https:\/\/ftp.dlink.ru\/pub\/Router\/DIR-645\/Firmware\/\u0022   target=\u0022_blank\u0022\u003e\n    Index of \/pub\/Router\/DIR-645\/Firmware (dlink.ru)\u003c\/a\u003e\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003cp\u003e\u003cstrong\u003e安装：\u003c\/strong\u003e\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-sh\u0022 data-lang=\u0022sh\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003egit clone --recursive https:\/\/github.com\/pr0v3rbs\/FirmAE\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e.\/download.sh\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e.\/install.sh\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e\u003cstrong\u003e使用：\u003c\/strong\u003e\u003c\/p\u003e\n\u003cp\u003e执行脚本\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-sh\u0022 data-lang=\u0022sh\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e.\/init.sh\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e准备固件\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-sh\u0022 data-lang=\u0022sh\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022c1\u0022\u003e# 举例：\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003ewget https:\/\/github.com\/pr0v3rbs\/FirmAE\/releases\/download\/v1.0\/DIR-868L_fw_revB_2-05b02_eu_multi_20161117.zip\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e检查仿真\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-sh\u0022 data-lang=\u0022sh\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003esudo .\/run.sh -c \u0026lt;brand\u0026gt; \u0026lt;firmware\u0026gt;\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e分析目标固件\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e分析模式使用 FirmAE 分析器\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-sh\u0022 data-lang=\u0022sh\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003esudo .\/run.sh -a \u0026lt;brand\u0026gt; \u0026lt;firmware\u0026gt;\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cul\u003e\n\u003cli\u003e运行模式有助于测试 Web 服务或执行自定义分析器\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-sh\u0022 data-lang=\u0022sh\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003esudo .\/run.sh -r \u0026lt;brand\u0026gt; \u0026lt;firmware\u0026gt;\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e\n\n\n\n\n  \u003cfigure\u003e\n    \u003cimg class=\u0022my-0 rounded-md\u0022 src=\u0022https:\/\/s2.loli.net\/2024\/02\/25\/UhFeDBbwIEcVaHs.png\u0022 alt=\u0022image-20240225104426390\u0022 \/\u003e\n    \n  \u003c\/figure\u003e\n\n\u003c\/p\u003e\n\u003cdiv id=\u0022firmware-analysis-toolkit\u0022 class=\u0022anchor\u0022\u003e\u003c\/div\u003e\n\u003ch3 class=\u0022relative group\u0022\u003eFirmware Analysis Toolkit \n    \u003cspan\n        class=\u0022absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100\u0022\u003e\n        \u003ca class=\u0022group-hover:text-primary-300 dark:group-hover:text-neutral-700\u0022\n            style=\u0022text-decoration-line: none !important;\u0022 href=\u0022#firmware-analysis-toolkit\u0022 aria-label=\u0022锚点\u0022\u003e#\u003c\/a\u003e\u003c\/span\u003e        \n    \n\u003c\/h3\u003e\n\u003cp\u003e\u003ca href=\u0022https:\/\/github.com\/attify\/firmware-analysis-toolkit\u0022   target=\u0022_blank\u0022\u003e\n    attify\/firmware-analysis-toolkit: Toolkit to emulate firmware and analyse it for security vulnerabilities (github.com)\u003c\/a\u003e\u003c\/p\u003e\n\u003cp\u003e\u003cstrong\u003e安装：\u003c\/strong\u003e\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-sh\u0022 data-lang=\u0022sh\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003egit clone https:\/\/github.com\/attify\/firmware-analysis-toolkit\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022nb\u0022\u003ecd\u003c\/span\u003e firmware-analysis-toolkit\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e.\/setup.sh\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-sh\u0022 data-lang=\u0022sh\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022c1\u0022\u003e# fat.config\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022o\u0022\u003e[\u003c\/span\u003eDEFAULT\u003cspan class=\u0022o\u0022\u003e]\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022nv\u0022\u003esudo_password\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003eattify123\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022nv\u0022\u003efirmadyne_path\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003e\/home\/attify\/firmadyne\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e\u003cstrong\u003e使用：\u003c\/strong\u003e\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-sh\u0022 data-lang=\u0022sh\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e.\/fat.py \u0026lt;firmware file\u0026gt;\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-sh\u0022 data-lang=\u0022sh\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e$ .\/fat.py DIR-601_REVB_FIRMWARE_2.01.BIN \n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e                               __           _   \n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e                              \/ _\u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e         \u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e \u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e  \n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e                             \u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e \u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e_    __ _  \u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e \u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e_ \n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e                             \u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e  _\u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e  \/ _\u003cspan class=\u0022sb\u0022\u003e\u0060\u003c\/span\u003e \u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e \u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e __\u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e                             \u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e \u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e   \u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e \u003cspan class=\u0022o\u0022\u003e(\u003c\/span\u003e_\u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e \u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e \u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e \u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e_ \n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e                             \u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e_\u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e    \u003cspan class=\u0022se\u0022\u003e\\_\u003c\/span\u003e_,_\u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e  \u003cspan class=\u0022se\u0022\u003e\\_\u003c\/span\u003e_\u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e                    \n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e                    \n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e                Welcome to the Firmware Analysis Toolkit - v0.3\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e    Offensive IoT Exploitation Training http:\/\/bit.do\/offensiveiotexploitation\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e                  By Attify - https:\/\/attify.com  \u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e @attifyme\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e    \n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022o\u0022\u003e[\u003c\/span\u003e\u002b\u003cspan class=\u0022o\u0022\u003e]\u003c\/span\u003e Firmware: DIR-601_REVB_FIRMWARE_2.01.BIN\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022o\u0022\u003e[\u003c\/span\u003e\u002b\u003cspan class=\u0022o\u0022\u003e]\u003c\/span\u003e Extracting the firmware...\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022o\u0022\u003e[\u003c\/span\u003e\u002b\u003cspan class=\u0022o\u0022\u003e]\u003c\/span\u003e Image ID: \u003cspan class=\u0022m\u0022\u003e1\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022o\u0022\u003e[\u003c\/span\u003e\u002b\u003cspan class=\u0022o\u0022\u003e]\u003c\/span\u003e Identifying architecture...\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022o\u0022\u003e[\u003c\/span\u003e\u002b\u003cspan class=\u0022o\u0022\u003e]\u003c\/span\u003e Architecture: mipseb\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022o\u0022\u003e[\u003c\/span\u003e\u002b\u003cspan class=\u0022o\u0022\u003e]\u003c\/span\u003e Building QEMU disk image...\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022o\u0022\u003e[\u003c\/span\u003e\u002b\u003cspan class=\u0022o\u0022\u003e]\u003c\/span\u003e Setting up the network connection, please standby...\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022o\u0022\u003e[\u003c\/span\u003e\u002b\u003cspan class=\u0022o\u0022\u003e]\u003c\/span\u003e Network interfaces: \u003cspan class=\u0022o\u0022\u003e[(\u003c\/span\u003e\u003cspan class=\u0022s1\u0022\u003e\u0026#39;br0\u0026#39;\u003c\/span\u003e, \u003cspan class=\u0022s1\u0022\u003e\u0026#39;192.168.0.1\u0026#39;\u003c\/span\u003e\u003cspan class=\u0022o\u0022\u003e)]\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022o\u0022\u003e[\u003c\/span\u003e\u002b\u003cspan class=\u0022o\u0022\u003e]\u003c\/span\u003e All set! Press ENTER to run the firmware...\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022o\u0022\u003e[\u003c\/span\u003e\u002b\u003cspan class=\u0022o\u0022\u003e]\u003c\/span\u003e When running, press Ctrl \u002b A X to terminate qemu\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e\n\n\n\n\n  \u003cfigure\u003e\n    \u003cimg class=\u0022my-0 rounded-md\u0022 src=\u0022https:\/\/s2.loli.net\/2024\/02\/25\/5vn4FhxHLXNaVkY.png\u0022 alt=\u0022image-20240223021726180\u0022 \/\u003e\n    \n  \u003c\/figure\u003e\n\n\u003c\/p\u003e\n\u003cdiv id=\u0022qemu\u0022 class=\u0022anchor\u0022\u003e\u003c\/div\u003e\n\u003ch3 class=\u0022relative group\u0022\u003eQEMU \n    \u003cspan\n        class=\u0022absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100\u0022\u003e\n        \u003ca class=\u0022group-hover:text-primary-300 dark:group-hover:text-neutral-700\u0022\n            style=\u0022text-decoration-line: none !important;\u0022 href=\u0022#qemu\u0022 aria-label=\u0022锚点\u0022\u003e#\u003c\/a\u003e\u003c\/span\u003e        \n    \n\u003c\/h3\u003e\n\u003cp\u003e\u003ca href=\u0022https:\/\/wokough.gitbook.io\/iot-firmware-aio\/wiki\/fang-zhen-fen-xi#id-1.1-qemu\u0022   target=\u0022_blank\u0022\u003e\n    https:\/\/wokough.gitbook.io\/iot-firmware-aio\/wiki\/fang-zhen-fen-xi#id-1.1-qemu\u003c\/a\u003e\u003c\/p\u003e\n\u003cp\u003e具体问题具体分析\u003c\/p\u003e\n\u003cp\u003e具体固件使用对应的命令进行仿真\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e先上网搜索相关信息，看看有没有文章已经仿真过了\u003c\/li\u003e\n\u003cli\u003e参考之前仿真设备的案例来试着仿真\u003c\/li\u003e\n\u003cli\u003e如果都没有就需要我们参考着官方文档以及对固件的静态分析来自己调整命令\n\u003cul\u003e\n\u003cli\u003e如果遇到一些参数实在没有办法满足时可以先跑起来\u003c\/li\u003e\n\u003cli\u003e在动态调试的过程看是哪个汇编执行报错\n\u003cul\u003e\n\u003cli\u003e再在IDA中进行合适的patch来使得固件可以成功仿真\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003cp\u003e例如当我们需要向\u003ccode\u003emain\u003c\/code\u003e函数传递参数\u003ccode\u003eargv\u003c\/code\u003e和设置环境变量时，可以先看看官方usage：\u003c\/p\u003e\n\u003cp\u003e\n\n\n\n\n  \u003cfigure\u003e\n    \u003cimg class=\u0022my-0 rounded-md\u0022 src=\u0022https:\/\/s2.loli.net\/2024\/02\/25\/apCn8t9zLSGwFbK.png\u0022 alt=\u0022image-20240224180845930\u0022 \/\u003e\n    \n  \u003c\/figure\u003e\n\n\u003c\/p\u003e\n\u003cp\u003e发现我们可以用\u003ccode\u003e-0\u003c\/code\u003e选项传递第一个参数，用\u003ccode\u003e-E\u003c\/code\u003e选项设置环境变量，用\u003ccode\u003e-L\u003c\/code\u003e选项做到类似于更改根目录的效果，用\u003ccode\u003e-strace\u003c\/code\u003e选项追踪程序执行时进程系统调用和所接收的信号，方便调试\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e\n\u003cp\u003e部分固件的仿真需要我们使用qemu来配置网络\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e\n\u003cp\u003e可以先拍一个快照再来开始仿真，便于会快照重新配置\u003c\/p\u003e\n\u003c\/li\u003e\n\u003cli\u003e\n\u003cp\u003e参考\u003ca href=\u0022https:\/\/github.com\/Vu1nT0tal\/IoT-vulhub\/tree\/master\/HUAWEI\/CVE-2017-17215\u0022   target=\u0022_blank\u0022\u003e\n    IoT-vulhub\u003c\/a\u003e项目网络配置的方法，可以得到一个配置网络的shell文件模版\u003c\/p\u003e\n\u003c\/li\u003e\n\u003cli\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-sh\u0022 data-lang=\u0022sh\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022cp\u0022\u003e#!\/bin\/bash\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022cp\u0022\u003e\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022c1\u0022\u003e# 启动 ssh 服务\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\/etc\/init.d\/ssh start\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022c1\u0022\u003e# 配置网卡\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003etunctl -t tap0\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003eifconfig tap0 192.168.2.1\/24\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022c1\u0022\u003e# 启动 http 服务\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003enohup python3 -m http.server \u003cspan class=\u0022m\u0022\u003e8000\u003c\/span\u003e 1\u0026gt;\u003cspan class=\u0022p\u0022\u003e\u0026amp;\u003c\/span\u003e\/dev\/null \u003cspan class=\u0022p\u0022\u003e\u0026amp;\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022c1\u0022\u003e# 进入 qemu 镜像目录\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022nb\u0022\u003ecd\u003c\/span\u003e \/root\/images\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\/usr\/bin\/expect\u003cspan class=\u0022s\u0022\u003e\u0026lt;\u0026lt;EOF\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022s\u0022\u003eset timeout 10000\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022s\u0022\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022s\u0022\u003e# 依照固件及qemu文档更改此处命令\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022s\u0022\u003espawn qemu-system-mips -M malta -kernel vmlinux-3.2.0-4-4kc-malta -hda debian_wheezy_mips_standard.qcow2 -append \u0026#34;root=\/dev\/sda1 console=tty0\u0026#34; -netdev tap,id=tapnet,ifname=tap0,script=no -device rtl8139,netdev=tapnet -nographic\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022s\u0022\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022s\u0022\u003eexpect \u0026#34;debian-mips login:\u0026#34;\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022s\u0022\u003esend \u0026#34;root\\r\u0026#34;\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022s\u0022\u003eexpect \u0026#34;Password:\u0026#34;\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022s\u0022\u003esend \u0026#34;root\\r\u0026#34;\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022s\u0022\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022s\u0022\u003eexpect \u0026#34;root@debian-mips:~# \u0026#34;\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022s\u0022\u003esend \u0026#34;ifconfig eth0 192.168.2.2\/24\\r\u0026#34;\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022s\u0022\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022s\u0022\u003e#expect \u0026#34;root@debian-mips:~# \u0026#34;\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022s\u0022\u003e#send \u0026#34;echo 0 \u0026gt; \/proc\/sys\/kernel\/randomize_va_space\\r\u0026#34;\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022s\u0022\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022s\u0022\u003eexpect \u0026#34;root@debian-mips:~# \u0026#34;\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022s\u0022\u003esend \u0026#34;scp root@192.168.2.1:\/root\/squashfs-root.tar.gz \/root\/squashfs-root.tar.gz\\r\u0026#34;\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022s\u0022\u003eexpect {\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022s\u0022\u003e    \u0026#34;(yes\/no)? \u0026#34; { send \u0026#34;yes\\r\u0026#34;; exp_continue }\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022s\u0022\u003e    \u0026#34;password: \u0026#34; { send \u0026#34;root\\r\u0026#34; }\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022s\u0022\u003e}\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022s\u0022\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022s\u0022\u003eexpect \u0026#34;root@debian-mips:~# \u0026#34;\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022s\u0022\u003esend \u0026#34;tar xzf squashfs-root.tar.gz \u0026amp;\u0026amp; rm squashfs-root.tar.gz\\r\u0026#34;\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022s\u0022\u003eexpect \u0026#34;root@debian-mips:~# \u0026#34;\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022s\u0022\u003esend \u0026#34;mount -o bind \/dev .\/squashfs-root\/dev \u0026amp;\u0026amp; mount -t proc \/proc .\/squashfs-root\/proc\\r\u0026#34;\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022s\u0022\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022s\u0022\u003eexpect \u0026#34;root@debian-mips:~# \u0026#34;\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022s\u0022\u003esend \u0026#34;scp -r root@192.168.2.1:\/root\/tools \/root\/squashfs-root\/tools\\r\u0026#34;\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022s\u0022\u003eexpect {\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022s\u0022\u003e    \u0026#34;(yes\/no)? \u0026#34; { send \u0026#34;yes\\r\u0026#34;; exp_continue }\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022s\u0022\u003e    \u0026#34;password: \u0026#34; { send \u0026#34;root\\r\u0026#34; }\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022s\u0022\u003e}\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022s\u0022\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022s\u0022\u003eexpect \u0026#34;root@debian-mips:~# \u0026#34;\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022s\u0022\u003esend \u0026#34;echo \u0026#39;sleep 30\u0026#39; \u0026gt; net.sh\\r\u0026#34;\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022s\u0022\u003eexpect \u0026#34;root@debian-mips:~# \u0026#34;\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022s\u0022\u003esend \u0026#34;echo \u0026#39;ifconfig eth0 192.168.2.2\/24\u0026#39; \u0026gt;\u0026gt; net.sh\\r\u0026#34;\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022s\u0022\u003eexpect \u0026#34;root@debian-mips:~# \u0026#34;\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022s\u0022\u003esend \u0026#34;echo \u0026#39;ifconfig br0 192.168.2.3\/24\u0026#39; \u0026gt;\u0026gt; net.sh\\r\u0026#34;\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022s\u0022\u003eexpect \u0026#34;root@debian-mips:~# \u0026#34;\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022s\u0022\u003esend \u0026#34;chmod \u002bx net.sh \u0026amp;\u0026amp; \/bin\/sh net.sh \u0026amp;\\r\u0026#34;\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022s\u0022\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022s\u0022\u003eexpect \u0026#34;root@debian-mips:~# \u0026#34;\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022s\u0022\u003esend \u0026#34;chroot squashfs-root\/ sh\\r\u0026#34;\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022s\u0022\u003eexpect \u0026#34;# \u0026#34;\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022s\u0022\u003esend \u0026#34;.\/bin\/upnp\\r\u0026#34;\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022s\u0022\u003eexpect \u0026#34;# \u0026#34;\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022s\u0022\u003esend \u0026#34;.\/bin\/mic\\r\u0026#34;\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022s\u0022\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022s\u0022\u003eexpect eof\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022s\u0022\u003eEOF\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003cdiv id=\u00220x04-fuzz\u0022 class=\u0022anchor\u0022\u003e\u003c\/div\u003e\n\u003ch2 class=\u0022relative group\u0022\u003e0x04 fuzz \n    \u003cspan\n        class=\u0022absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100\u0022\u003e\n        \u003ca class=\u0022group-hover:text-primary-300 dark:group-hover:text-neutral-700\u0022\n            style=\u0022text-decoration-line: none !important;\u0022 href=\u0022#0x04-fuzz\u0022 aria-label=\u0022锚点\u0022\u003e#\u003c\/a\u003e\u003c\/span\u003e        \n    \n\u003c\/h2\u003e\n\u003cp\u003e\u003cstrong\u003e动态分析\u003c\/strong\u003e查找漏洞时主要通过各类fuzz工具来得到漏洞的触发点\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e主要使用FirmAFL、FirmFuzz、Fuzzware工具来进行fuzz\u003c\/li\u003e\n\u003cli\u003e也可以使用afl与afl\u002b\u002b\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003cdiv id=\u0022fuzzware\u0022 class=\u0022anchor\u0022\u003e\u003c\/div\u003e\n\u003ch3 class=\u0022relative group\u0022\u003eFuzzware \n    \u003cspan\n        class=\u0022absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100\u0022\u003e\n        \u003ca class=\u0022group-hover:text-primary-300 dark:group-hover:text-neutral-700\u0022\n            style=\u0022text-decoration-line: none !important;\u0022 href=\u0022#fuzzware\u0022 aria-label=\u0022锚点\u0022\u003e#\u003c\/a\u003e\u003c\/span\u003e        \n    \n\u003c\/h3\u003e\n\u003cp\u003e\u003ca href=\u0022https:\/\/github.com\/fuzzware-fuzzer\/fuzzware\u0022   target=\u0022_blank\u0022\u003e\n    fuzzware-fuzzer\/fuzzware: Fuzzware\u0026rsquo;s main repository. Start here to install. (github.com)\u003c\/a\u003e\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-sh\u0022 data-lang=\u0022sh\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003egit clone https:\/\/github.com\/fuzzware-fuzzer\/fuzzware.git\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003esudo .\/build_docker.sh\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003esudo .\/run_docker.sh examples fuzzware pipeline --skip-afl-cpufreq pw-recovery\/ARCH_PRO\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003esudo .\/run_docker.sh \u003cspan class=\u0022nb\u0022\u003etest\u003c\/span\u003e fuzzware pipeline --skip-afl-cpufreq .\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e成功将固件跑起来：\u003c\/p\u003e\n\u003cp\u003e\n\n\n\n\n  \u003cfigure\u003e\n    \u003cimg class=\u0022my-0 rounded-md\u0022 src=\u0022https:\/\/s2.loli.net\/2024\/02\/25\/krvpGM6NwIgKcLs.png\u0022 alt=\u0022image-20240202005856817\u0022 \/\u003e\n    \n  \u003c\/figure\u003e\n\n\u003c\/p\u003e\n\u003cp\u003e由图可以看到刚开始运行时发现新的MMIO寄存器模型，由于MMIO Access Model中并不存在，因此会将其定义为新的模型，然后继续向下运行\u003c\/p\u003e\n\u003cp\u003e\n\n\n\n\n  \u003cfigure\u003e\n    \u003cimg class=\u0022my-0 rounded-md\u0022 src=\u0022https:\/\/s2.loli.net\/2024\/02\/25\/PunMRS4qrwWbN93.png\u0022 alt=\u0022image-20240202010428350\u0022 \/\u003e\n    \n  \u003c\/figure\u003e\n\n\u003c\/p\u003e\n\u003cp\u003e建模完毕后，开始进行正常的fuzzing阶段：\u003c\/p\u003e\n\u003cp\u003e\n\n\n\n\n  \u003cfigure\u003e\n    \u003cimg class=\u0022my-0 rounded-md\u0022 src=\u0022https:\/\/s2.loli.net\/2024\/02\/25\/MnVkI6tiX5OAKlC.png\u0022 alt=\u0022image-20240202011901838\u0022 \/\u003e\n    \n  \u003c\/figure\u003e\n\n\u003c\/p\u003e\n\u003cp\u003e每一轮fuzzing结束后，根据反馈调整输入，开始下一阶段fuzzing：\u003c\/p\u003e\n\u003cp\u003e\n\n\n\n\n  \u003cfigure\u003e\n    \u003cimg class=\u0022my-0 rounded-md\u0022 src=\u0022https:\/\/s2.loli.net\/2024\/02\/25\/7p9AVbuitzjJGg5.png\u0022 alt=\u0022image-20240202010524792\u0022 \/\u003e\n    \n  \u003c\/figure\u003e\n\n\u003c\/p\u003e\n\u003cdiv id=\u0022afl\u0022 class=\u0022anchor\u0022\u003e\u003c\/div\u003e\n\u003ch3 class=\u0022relative group\u0022\u003eafl\u002b\u002b \n    \u003cspan\n        class=\u0022absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100\u0022\u003e\n        \u003ca class=\u0022group-hover:text-primary-300 dark:group-hover:text-neutral-700\u0022\n            style=\u0022text-decoration-line: none !important;\u0022 href=\u0022#afl\u0022 aria-label=\u0022锚点\u0022\u003e#\u003c\/a\u003e\u003c\/span\u003e        \n    \n\u003c\/h3\u003e\n\u003cdiv id=\u0022有源码\u0022 class=\u0022anchor\u0022\u003e\u003c\/div\u003e\n\u003ch4 class=\u0022relative group\u0022\u003e有源码 \n    \u003cspan\n        class=\u0022absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100\u0022\u003e\n        \u003ca class=\u0022group-hover:text-primary-300 dark:group-hover:text-neutral-700\u0022\n            style=\u0022text-decoration-line: none !important;\u0022 href=\u0022#%e6%9c%89%e6%ba%90%e7%a0%81\u0022 aria-label=\u0022锚点\u0022\u003e#\u003c\/a\u003e\u003c\/span\u003e        \n    \n\u003c\/h4\u003e\n\u003cp\u003e使用 afl-gcc 进行插桩编译：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-sh\u0022 data-lang=\u0022sh\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003eafl-gcc test.c -o test_file\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003egcc test.c -o test_gcc\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cul\u003e\n\u003cli\u003eafl-gcc 插桩编译后，fuzz 的速度会快一些\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003cp\u003e接下来就可以进行 fuzz 了：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-sh\u0022 data-lang=\u0022sh\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003eafl-fuzz -i .\/fuzz_in -o .\/fuzz_out .\/test_file -f\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cul\u003e\n\u003cli\u003efuzz_in 为语料库，可以直接使用 AFL 自带的 testcases\u003c\/li\u003e\n\u003cli\u003efuzz_out 就是输出的内容\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003cdiv id=\u0022无源码\u0022 class=\u0022anchor\u0022\u003e\u003c\/div\u003e\n\u003ch4 class=\u0022relative group\u0022\u003e无源码 \n    \u003cspan\n        class=\u0022absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100\u0022\u003e\n        \u003ca class=\u0022group-hover:text-primary-300 dark:group-hover:text-neutral-700\u0022\n            style=\u0022text-decoration-line: none !important;\u0022 href=\u0022#%e6%97%a0%e6%ba%90%e7%a0%81\u0022 aria-label=\u0022锚点\u0022\u003e#\u003c\/a\u003e\u003c\/span\u003e        \n    \n\u003c\/h4\u003e\n\u003cp\u003e配置：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-sh\u0022 data-lang=\u0022sh\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003esudo apt-get install libtool-bin libgtk2.0-dev -y\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022nb\u0022\u003ecd\u003c\/span\u003e \/home\/iot\/test\/tools\/AFLplusplus\/qemu_mode\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e.\/build_qemu_support.sh\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022nb\u0022\u003ecd\u003c\/span\u003e ..\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003esudo make install\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-sh\u0022 data-lang=\u0022sh\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003eafl-fuzz -Q -m none -i in -o out .\/pwn_file @@\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\/home\/iot\/test\/tools\/AFLplusplus\/afl-fuzz -i fuzz_in -o .\/fuzz_out -Q .\/pwn\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e\n\n\n\n\n  \u003cfigure\u003e\n    \u003cimg class=\u0022my-0 rounded-md\u0022 src=\u0022https:\/\/s2.loli.net\/2024\/02\/25\/FLNCaEdOGBynpku.png\u0022 alt=\u0022image-20240202034131386\u0022 \/\u003e\n    \n  \u003c\/figure\u003e\n\n\u003c\/p\u003e\n\u003cdiv id=\u00220x05-静态分析\u0022 class=\u0022anchor\u0022\u003e\u003c\/div\u003e\n\u003ch2 class=\u0022relative group\u0022\u003e0x05 静态分析 \n    \u003cspan\n        class=\u0022absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100\u0022\u003e\n        \u003ca class=\u0022group-hover:text-primary-300 dark:group-hover:text-neutral-700\u0022\n            style=\u0022text-decoration-line: none !important;\u0022 href=\u0022#0x05-%e9%9d%99%e6%80%81%e5%88%86%e6%9e%90\u0022 aria-label=\u0022锚点\u0022\u003e#\u003c\/a\u003e\u003c\/span\u003e        \n    \n\u003c\/h2\u003e\n\u003cp\u003e\u003ca href=\u0022https:\/\/www.freebuf.com\/sectool\/339207.html\u0022   target=\u0022_blank\u0022\u003e\n    浅析IOT二进制静态辅助方法 - FreeBuf网络安全行业门户\u003c\/a\u003e\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e\n\u003cp\u003eIDA\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e大多数是32位的，少数是64位的\u003c\/li\u003e\n\u003cli\u003e推荐安装keypatch插件，在patch固件的时候会方便一些\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003c\/li\u003e\n\u003cli\u003e\n\u003cp\u003eGhira\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e可以安装许多有用的插件\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003c\/li\u003e\n\u003cli\u003e\n\u003cp\u003eSaTC\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e自动化挖掘工具\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003c\/li\u003e\n\u003cli\u003e\n\u003cp\u003e其他二进制静态辅助工具\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003eBinAbsInspector\u003c\/li\u003e\n\u003cli\u003eRhabdomancer\u003c\/li\u003e\n\u003cli\u003eHaruspex \u002b semgrep\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003cdiv id=\u0022satc\u0022 class=\u0022anchor\u0022\u003e\u003c\/div\u003e\n\u003ch4 class=\u0022relative group\u0022\u003eSaTC \n    \u003cspan\n        class=\u0022absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100\u0022\u003e\n        \u003ca class=\u0022group-hover:text-primary-300 dark:group-hover:text-neutral-700\u0022\n            style=\u0022text-decoration-line: none !important;\u0022 href=\u0022#satc\u0022 aria-label=\u0022锚点\u0022\u003e#\u003c\/a\u003e\u003c\/span\u003e        \n    \n\u003c\/h4\u003e\n\u003cp\u003e\u003ca href=\u0022https:\/\/github.com\/NSSL-SJTU\/SaTC\u0022   target=\u0022_blank\u0022\u003e\n    NSSL-SJTU\/SaTC: A prototype of Shared-keywords aware Taint Checking, a novel static analysis approach that tracks the data flow of the user input between front-end and back-end to precisely detect security vulnerabilities. (github.com)\u003c\/a\u003e\u003c\/p\u003e\n\u003cp\u003e\u003cstrong\u003e安装\u003c\/strong\u003e\u003c\/p\u003e\n\u003cp\u003e建议通过使用Dockerfile来构建系统环境:\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-sh\u0022 data-lang=\u0022sh\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022c1\u0022\u003e# 进入SaTC代码目录\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022nb\u0022\u003ecd\u003c\/span\u003e SaTC \n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022c1\u0022\u003e# 构建Docker镜像\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003edocker build . -t satc\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022c1\u0022\u003e# 进入Dokcer环境, 自行添加目录映射\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003edocker run -it satc\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e如果因为网络等原因无法构建，可使用我们提供等docker image\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-sh\u0022 data-lang=\u0022sh\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022c1\u0022\u003e# 从docker hun拉去image\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003edocker pull smile0304\/satc:V1.0\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022c1\u0022\u003e# 进入Dokcer环境, 自行添加目录映射\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003edocker run -it smile0304\/satc:V1.0\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e\u003cstrong\u003e使用方法\u003c\/strong\u003e\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-sh\u0022 data-lang=\u0022sh\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003eusage: satc.py \u003cspan class=\u0022o\u0022\u003e[\u003c\/span\u003e-h\u003cspan class=\u0022o\u0022\u003e]\u003c\/span\u003e -d \/root\/path\/_ac18.extracted -o \/root\/output\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e               \u003cspan class=\u0022o\u0022\u003e[\u003c\/span\u003e--ghidra_script \u003cspan class=\u0022o\u0022\u003e{\u003c\/span\u003eref2sink_cmdi,ref2sink_bof,share2sink,ref2share,all\u003cspan class=\u0022o\u0022\u003e}]\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e               \u003cspan class=\u0022o\u0022\u003e[\u003c\/span\u003e--save_ghidra_project\u003cspan class=\u0022o\u0022\u003e]\u003c\/span\u003e --taint_check\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e               \u003cspan class=\u0022o\u0022\u003e[\u003c\/span\u003e-b \/var\/ac18\/bin\/httpd \u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e -l 3\u003cspan class=\u0022o\u0022\u003e]\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003eSATC tool\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003eoptional arguments:\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e  -h, --help            查看帮助\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e  -d \/root\/path\/_ac18.extracted, --directory \/root\/path\/_ac18.extracted\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e                        指定从固件中提取出的文件系统\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e  -o \/root\/output, --output \/root\/output\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e                        指定结果输出位置\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e  --ghidra_script \u003cspan class=\u0022o\u0022\u003e{\u003c\/span\u003eref2sink_cmdi,ref2sink_bof,share2sink,ref2share,all\u003cspan class=\u0022o\u0022\u003e}\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e                        \u003cspan class=\u0022o\u0022\u003e(\u003c\/span\u003e可选\u003cspan class=\u0022o\u0022\u003e)\u003c\/span\u003e 指定要使用的 Ghidra 脚本。 如果使用\u003cspan class=\u0022sb\u0022\u003e\u0060\u003c\/span\u003eall\u003cspan class=\u0022sb\u0022\u003e\u0060\u003c\/span\u003e命令，\u003cspan class=\u0022sb\u0022\u003e\u0060\u003c\/span\u003eref2sink_cmdi\u003cspan class=\u0022sb\u0022\u003e\u0060\u003c\/span\u003e、\u003cspan class=\u0022sb\u0022\u003e\u0060\u003c\/span\u003eref2sink_bof\u003cspan class=\u0022sb\u0022\u003e\u0060\u003c\/span\u003e和\u003cspan class=\u0022sb\u0022\u003e\u0060\u003c\/span\u003eref2share\u003cspan class=\u0022sb\u0022\u003e\u0060\u003c\/span\u003e三个脚本将同时运行\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e  --ref2share_result \/root\/path\/ref2share_result  \u003cspan class=\u0022o\u0022\u003e(\u003c\/span\u003e可选\u003cspan class=\u0022o\u0022\u003e)\u003c\/span\u003e 运行\u003cspan class=\u0022sb\u0022\u003e\u0060\u003c\/span\u003eshare2sink\u003cspan class=\u0022sb\u0022\u003e\u0060\u003c\/span\u003e Ghidra脚本时，需要使用该参数指定\u003cspan class=\u0022sb\u0022\u003e\u0060\u003c\/span\u003eref2share\u003cspan class=\u0022sb\u0022\u003e\u0060\u003c\/span\u003e脚本的输出结果\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e  --save_ghidra_project \u003cspan class=\u0022o\u0022\u003e(\u003c\/span\u003e可选\u003cspan class=\u0022o\u0022\u003e)\u003c\/span\u003e 是否保存程序运行时产生的ghidra工程路径\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e  --taint_check         \u003cspan class=\u0022o\u0022\u003e(\u003c\/span\u003e可选\u003cspan class=\u0022o\u0022\u003e)\u003c\/span\u003e 指定是否启用污点分析\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e  -b \/var\/ac18\/bin\/httpd, --bin \/var\/ac18\/bin\/httpd\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e                        \u003cspan class=\u0022o\u0022\u003e(\u003c\/span\u003e可选\u003cspan class=\u0022o\u0022\u003e)\u003c\/span\u003e 用于指定需要分析的程序，如果不指定，SaTC将使用内置算法确认需要分析的程序\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e  -l 3, --len \u003cspan class=\u0022m\u0022\u003e3\u003c\/span\u003e         \u003cspan class=\u0022o\u0022\u003e(\u003c\/span\u003e可选\u003cspan class=\u0022o\u0022\u003e)\u003c\/span\u003e 根据分析结果分析可能为边界的前N个程序，默认为3\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e输出结果的目录结构为：\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-sh\u0022 data-lang=\u0022sh\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e-- ghidra_extract_result \u003cspan class=\u0022c1\u0022\u003e# ghidra寻找函数调用路径的分析结果, 启用\u0060--ghidra_script\u0060选项会输出该目录\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e   \u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e-- httpd \u003cspan class=\u0022c1\u0022\u003e# 每个被分析的bin都会生成一个同名文件夹\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e       \u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e-- httpd \u003cspan class=\u0022c1\u0022\u003e# 被分析的bin\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e       \u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e-- httpd_ref2sink_bof.result \u003cspan class=\u0022c1\u0022\u003e# 定位bof类型的sink函数路径\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e       \u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e-- httpd_ref2sink_cmdi.result \u003cspan class=\u0022c1\u0022\u003e# 定位cmdi类型的sink函数路径\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e-- keyword_extract_result  \u003cspan class=\u0022c1\u0022\u003e# 关键字提取结果\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e   \u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e-- detail  \u003cspan class=\u0022c1\u0022\u003e# 前端关键字提取结果(详细分析结果)\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e   \u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e   \u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e-- API_detail.result \u003cspan class=\u0022c1\u0022\u003e# 提取的API详细结果\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e   \u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e   \u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e-- API_remove_detail.result \u003cspan class=\u0022c1\u0022\u003e# 被过滤掉的API信息\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e   \u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e   \u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e-- api_split.result  \u003cspan class=\u0022c1\u0022\u003e# 模糊匹配的API结果\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e   \u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e   \u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e-- Clustering_result_v2.result \u003cspan class=\u0022c1\u0022\u003e# 详细分析结果(不关心其他过程关心此文件即可)\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e   \u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e   \u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e-- File_detail.result  \u003cspan class=\u0022c1\u0022\u003e# 记录了从单独文件中提取的关键字\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e   \u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e   \u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e-- from_bin_add_para.result \u003cspan class=\u0022c1\u0022\u003e# 在二进制匹配过程中新增的关键字\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e   \u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e   \u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e-- from_bin_add_para.result_v2 \u003cspan class=\u0022c1\u0022\u003e# 同上,V2版本\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e   \u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e   \u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e-- Not_Analysise_JS_File.result \u003cspan class=\u0022c1\u0022\u003e# 未被分析的JS文件\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e   \u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e   \u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e-- Prar_detail.result \u003cspan class=\u0022c1\u0022\u003e# 提取的Prar详细结果\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e   \u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e   \u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e-- Prar_remove_detail.result \u003cspan class=\u0022c1\u0022\u003e# 被过滤掉的Prar结果\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e   \u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e-- info.txt  \u003cspan class=\u0022c1\u0022\u003e# 记录前端关键字提取时间等信息\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e   \u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e-- simple  \u003cspan class=\u0022c1\u0022\u003e# 前端关键字提取结果, 比较简单\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e       \u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e-- API_simple.result \u003cspan class=\u0022c1\u0022\u003e# 在全部二进制中出现的全部API名称\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e       \u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e-- Prar_simple.result  \u003cspan class=\u0022c1\u0022\u003e# 在全部二进制中出现等的全部Prar\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022p\u0022\u003e|\u003c\/span\u003e-- result-httpd-ref2sink_cmdi-ctW8.txt \u003cspan class=\u0022c1\u0022\u003e# 污点分析结果,启用\u0060--taint-check\u0060 和 \u0060--ghidra_script\u0060选项才会生成该文件\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e在\u003ccode\u003e\/home\/satc\/res\u003c\/code\u003e下生成的txt文件可以查看结果\u003c\/p\u003e\n\u003cp\u003e\n\n\n\n\n  \u003cfigure\u003e\n    \u003cimg class=\u0022my-0 rounded-md\u0022 src=\u0022https:\/\/s2.loli.net\/2024\/02\/25\/cFOLYQuvWgzjpid.png\u0022 alt=\u0022image-20240225155835675\u0022 \/\u003e\n    \n  \u003c\/figure\u003e\n\n\u003c\/p\u003e\n\u003cdiv id=\u00220x06-验证漏洞\u0022 class=\u0022anchor\u0022\u003e\u003c\/div\u003e\n\u003ch2 class=\u0022relative group\u0022\u003e0x06 验证漏洞 \n    \u003cspan\n        class=\u0022absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100\u0022\u003e\n        \u003ca class=\u0022group-hover:text-primary-300 dark:group-hover:text-neutral-700\u0022\n            style=\u0022text-decoration-line: none !important;\u0022 href=\u0022#0x06-%e9%aa%8c%e8%af%81%e6%bc%8f%e6%b4%9e\u0022 aria-label=\u0022锚点\u0022\u003e#\u003c\/a\u003e\u003c\/span\u003e        \n    \n\u003c\/h2\u003e\n\u003cul\u003e\n\u003cli\u003e直接购买真实设备来验证漏洞\u003c\/li\u003e\n\u003cli\u003e本地仿真模拟来验证 or 复现\n\u003cul\u003e\n\u003cli\u003e可以先按照 0x03 部分先对固件进行仿真模拟\u003c\/li\u003e\n\u003cli\u003e然后在本地对漏洞进行验证或复现\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003c\/li\u003e\n\u003cli\u003e一些路由器固件的漏洞可以在一些网站上查找到还在用此路由器设备的站点\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\u0022https:\/\/www.shodan.io\/\u0022   target=\u0022_blank\u0022\u003e\n    shodan\u003c\/a\u003e\u003c\/li\u003e\n\u003cli\u003e\u003ca href=\u0022https:\/\/www.zoomeye.org\/discover\u0022   target=\u0022_blank\u0022\u003e\n    ZoomEye\u003c\/a\u003e\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003cdiv id=\u00220x07-其他\u0022 class=\u0022anchor\u0022\u003e\u003c\/div\u003e\n\u003ch2 class=\u0022relative group\u0022\u003e0x07 其他 \n    \u003cspan\n        class=\u0022absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100\u0022\u003e\n        \u003ca class=\u0022group-hover:text-primary-300 dark:group-hover:text-neutral-700\u0022\n            style=\u0022text-decoration-line: none !important;\u0022 href=\u0022#0x07-%e5%85%b6%e4%bb%96\u0022 aria-label=\u0022锚点\u0022\u003e#\u003c\/a\u003e\u003c\/span\u003e        \n    \n\u003c\/h2\u003e\n\u003cul\u003e\n\u003cli\u003e\n\u003cp\u003e挖漏洞之前可以先在各类cve cnvd平台搜索一下\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e\n\u003cp\u003e相关产品的漏洞可以提供参考\u003c\/p\u003e\n\u003c\/li\u003e\n\u003cli\u003e\n\u003cp\u003e也可以避免重复挖出\/提交已有的漏洞\u003c\/p\u003e\n\u003c\/li\u003e\n\u003cli\u003e\n\u003cp\u003e\u003ca href=\u0022https:\/\/cve.mitre.org\/cve\/search_cve_list.html\u0022   target=\u0022_blank\u0022\u003e\n    CVE - Search CVE List (mitre.org)\u003c\/a\u003e\u003c\/p\u003e\n\u003c\/li\u003e\n\u003cli\u003e\n\u003cp\u003e\u003ca href=\u0022https:\/\/cve.ics-csirt.io\/cve\u0022   target=\u0022_blank\u0022\u003e\n    Vulnerabilities (CVE) - OpenCVE (ics-csirt.io)\u003c\/a\u003e\u003c\/p\u003e\n\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003c\/li\u003e\n\u003cli\u003e\n\u003cp\u003e挖出一个洞之后\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e可以横向看看同一家厂商的其他产品是不是也存在类似的漏洞\u003c\/li\u003e\n\u003cli\u003e可以思考这个漏洞点是否有其他更加有危害的利用方式\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003c\/li\u003e\n\u003cli\u003e\n\u003cp\u003e还可以思考一下如何修复这个漏洞\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e应该如何打补丁\u003c\/li\u003e\n\u003cli\u003e一些有漏洞的固件在第一次修补之后仍存在漏洞，我们的修复方式是否能避免这样的情况\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003c\/li\u003e\n\u003cli\u003e\n\u003cp\u003e可以参考一下winmt师傅的挖洞经历\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\u0022https:\/\/bbs.kanxue.com\/thread-277386.htm#msg_header_h2_6\u0022   target=\u0022_blank\u0022\u003e\n    记一次全设备通杀未授权RCE的挖掘经历-看雪-安全社区|\u003c\/a\u003e\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003cdiv id=\u0022后记\u0022 class=\u0022anchor\u0022\u003e\u003c\/div\u003e\n\u003ch2 class=\u0022relative group\u0022\u003e后记 \n    \u003cspan\n        class=\u0022absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100\u0022\u003e\n        \u003ca class=\u0022group-hover:text-primary-300 dark:group-hover:text-neutral-700\u0022\n            style=\u0022text-decoration-line: none !important;\u0022 href=\u0022#%e5%90%8e%e8%ae%b0\u0022 aria-label=\u0022锚点\u0022\u003e#\u003c\/a\u003e\u003c\/span\u003e        \n    \n\u003c\/h2\u003e\n\u003cp\u003e漏洞挖掘众多尝试的一小部分：\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e尝试1\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-sh\u0022 data-lang=\u0022sh\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e$ wget https:\/\/down.tenda.com.cn\/uploadfile\/AC18\/ac18_kf_V15.03.05.19\u003cspan class=\u0022o\u0022\u003e(\u003c\/span\u003e6318_\u003cspan class=\u0022o\u0022\u003e)\u003c\/span\u003e_cn.zip\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e$ binwalk -Me ac18_kf_V15.03.05.19\u003cspan class=\u0022o\u0022\u003e(\u003c\/span\u003e6318_\u003cspan class=\u0022o\u0022\u003e)\u003c\/span\u003e_cn.zip\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e$ sudo docker run -it -v .\/squashfs-root\/:\/home\/satc\/SaTC\/SaTC_data smile0304\/satc\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022c1\u0022\u003e# 进入SaTC容器中\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022c1\u0022\u003e# 检查\/home\/satc\/SaTC\/SaTC_data文件夹中是否有数据\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e$ ls \/home\/satc\/SaTC\/SaTC_data\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e$ \u003cspan class=\u0022nb\u0022\u003ecd\u003c\/span\u003e ~\/SaTC\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022c1\u0022\u003e# 测试\/bin\/httpd是否存在命令注入漏洞\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e$ python satc.py -d \/home\/satc\/SaTC\/SaTC_data -o \/home\/satc\/res --ghidra_script\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003eref2sink_cmdi -b httpd --taint_check\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022c1\u0022\u003e# 测试\/bin\/httpd是否存在缓冲区溢出漏洞\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e$ python satc.py -d \/home\/satc\/SaTC\/SaTC_data -o \/home\/satc\/res --ghidra_script\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003eref2sink_bof -b httpd --taint_check\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e\n\n\n\n\n  \u003cfigure\u003e\n    \u003cimg class=\u0022my-0 rounded-md\u0022 src=\u0022https:\/\/s2.loli.net\/2024\/02\/25\/NIs4Tolehu6FVn5.png\u0022 alt=\u0022image-20240225123452035\u0022 \/\u003e\n    \n  \u003c\/figure\u003e\n\n\u003c\/p\u003e\n\u003cp\u003e过程中可能会飘红，或者警告，直接忽略，只要在\u003ccode\u003e\/home\/satc\/res\u003c\/code\u003e下输出txt文件就ok\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e尝试2\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-SH\u0022 data-lang=\u0022SH\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e$ wget https:\/\/down.tenda.com.cn\/uploadfile\/AC10\/V16.03.48.23.zip\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e$ unzip V16.03.48.23.zip \u003cspan class=\u0022o\u0022\u003e\u0026amp;\u0026amp;\u003c\/span\u003e \u003cspan class=\u0022nb\u0022\u003ecd\u003c\/span\u003e V16.03.48.23\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e$ binwalk -Me US_AC10V5.0si_V16.03.48.23_cn_TDC01.bin \n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e\n\n\n\n\n  \u003cfigure\u003e\n    \u003cimg class=\u0022my-0 rounded-md\u0022 src=\u0022https:\/\/s2.loli.net\/2024\/02\/25\/bT35JcBd2Sn4gvR.png\u0022 alt=\u0022image-20240225123547359\u0022 \/\u003e\n    \n  \u003c\/figure\u003e\n\n\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e尝试3\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-sh\u0022 data-lang=\u0022sh\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022nv\u0022\u003e$wget\u003c\/span\u003e https:\/\/ftp.dlink.ru\/pub\/Router\/DWR-921\/Firmware\/2023.07.20-15.22_DWR_921_POST_4.0.2_release.bin\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e$ \u003cspan class=\u0022nb\u0022\u003ecd\u003c\/span\u003e \/home\/iot\/tools\/firmware-analysis-toolkit\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e$ .\/fat.py \/home\/iot\/vul\/D-Link\/DWR-921\/2023.07.20-15.22_DWR_921_POST_4.0.2_release.bin\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e\n\n\n\n\n  \u003cfigure\u003e\n    \u003cimg class=\u0022my-0 rounded-md\u0022 src=\u0022https:\/\/s2.loli.net\/2024\/02\/25\/2rAUfnyPv3qkLZa.png\u0022 alt=\u0022image-20240225121253995\u0022 \/\u003e\n    \n  \u003c\/figure\u003e\n\n\u003c\/p\u003e\n\u003cdiv class=\u0022highlight\u0022\u003e\u003cpre tabindex=\u00220\u0022 class=\u0022chroma\u0022\u003e\u003ccode class=\u0022language-sh\u0022 data-lang=\u0022sh\u0022\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e$ binwalk -Me 2023.07.20-15.22_DWR_921_POST_4.0.2_release.bin\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e$ sudo docker run -it -v .\/squashfs-root\/:\/home\/satc\/SaTC\/SaTC_data smile0304\/satc\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022c1\u0022\u003e# 进入SaTC容器中\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022c1\u0022\u003e# 检查\/home\/satc\/SaTC\/SaTC_data文件夹中是否有数据\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e$ ls \/home\/satc\/SaTC\/SaTC_data\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e$ \u003cspan class=\u0022nb\u0022\u003ecd\u003c\/span\u003e ~\/SaTC\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022c1\u0022\u003e# 测试\/bin\/httpd是否存在命令注入漏洞\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e$ python satc.py -d \/home\/satc\/SaTC\/SaTC_data -o \/home\/satc\/res --ghidra_script\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003eref2sink_cmdi -b httpd --taint_check\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e\u003cspan class=\u0022c1\u0022\u003e# 测试\/bin\/httpd是否存在缓冲区溢出漏洞\u003c\/span\u003e\n\u003c\/span\u003e\u003c\/span\u003e\u003cspan class=\u0022line\u0022\u003e\u003cspan class=\u0022cl\u0022\u003e$ python satc.py -d \/home\/satc\/SaTC\/SaTC_data -o \/home\/satc\/res --ghidra_script\u003cspan class=\u0022o\u0022\u003e=\u003c\/span\u003eref2sink_bof -b httpd --taint_check\n\u003c\/span\u003e\u003c\/span\u003e\u003c\/code\u003e\u003c\/pre\u003e\u003c\/div\u003e\u003cp\u003e\n\n\n\n\n  \u003cfigure\u003e\n    \u003cimg class=\u0022my-0 rounded-md\u0022 src=\u0022https:\/\/s2.loli.net\/2024\/02\/25\/8XGEe9RblsIdCcF.png\u0022 alt=\u0022image-20240225123710408\u0022 \/\u003e\n    \n  \u003c\/figure\u003e\n\n\u003c\/p\u003e\n\u003cp\u003e\u003cstrong\u003e文章后面的部分还在施工中，\u003c\/strong\u003e\u003c\/p\u003e\n\u003cp\u003e路过的师傅们看看远处的学习记录吧！\u003c\/p\u003e",
+    "inLanguage": "zh-cn",
+    "url" : "https:\/\/ta0lve.github.io\/posts\/iot\/0x03\/",
+    "author" : {
+      "@type": "Person",
+      "name": "ta0lve"
+    },
+    "copyrightYear": "2024",
+    "dateCreated": "2024-02-23T00:00:00\u002b00:00",
+    "datePublished": "2024-02-23T00:00:00\u002b00:00",
+    
+    "dateModified": "2024-02-23T00:00:00\u002b00:00",
+    
+    "keywords": ["IoT"],
+    
+    "mainEntityOfPage": "true",
+    "wordCount": "3901"
+  }]
+  </script>
+<meta content="ta0lve" name="author"/>
+<link href="mailto:hujt25@mail2.sysu.edu.cn" rel="me"/>
+<link href="https://ta0lve.github.io/" rel="me"/>
+<link href="https://github.com/ta0lve" rel="me"/>
+<script integrity="" src="/lib/jquery/jquery.slim.min.js"></script>
+<meta name="theme-color"/>
+</head>
+<body class="flex flex-col h-screen px-6 m-auto text-lg leading-7 max-w-7xl bg-neutral text-neutral-900 dark:bg-neutral-800 dark:text-neutral sm:px-14 md:px-24 lg:px-32">
+<div class="absolute flex self-center" id="the-top">
+<a class="px-3 py-1 text-sm -translate-y-8 rounded-b-lg bg-primary-200 focus:translate-y-0 dark:bg-neutral-600" href="#main-content"><span class="font-bold text-primary-600 ltr:pr-2 rtl:pl-2 dark:text-primary-400">↓</span></a>
+</div>
+<div class="min-h-[148px]"></div>
+<div class="fixed inset-x-0 pl-[24px] pr-[24px]" style="z-index:100">
+<div class="absolute opacity-0 inset-x-0 top-0 h-full single_hero_background nozoom backdrop-blur-2xl shadow-2xl" id="menu-blur"></div>
+<div class="relative max-w-[64rem] ml-auto mr-auto">
+<div class="main-menu flex items-center justify-between px-4 py-6 sm:px-6 md:justify-start space-x-3" style="padding-left:0;padding-right:0;padding-top:2px;padding-bottom:3px">
+<div class="flex flex-1 items-center justify-between">
+<nav class="flex space-x-3">
+<a class="text-base font-medium text-gray-500 hover:text-gray-900" href="/">ta0lve</a>
+</nav>
+<nav class="hidden md:flex items-center space-x-5 md:ml-12 h-12">
+<a class="flex items-center" href="/posts/">
+<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="Posts">
+        Posts
+    </p>
+</a>
+<a class="flex items-center" href="/categories/">
+<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="Categories">
+        分类
+    </p>
+</a>
+<a class="flex items-center" href="/tags/">
+<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="Tags">
+        标签
+    </p>
+</a>
+<a class="flex items-center" href="/link/">
+<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="友链/links">
+        友链
+    </p>
+</a>
+<a class="flex items-center" href="/about/">
+<p class="text-base font-medium text-gray-500 hover:text-gray-900" title="About">
+        About
+    </p>
+</a>
+<button aria-label="Search" class="text-base hover:text-primary-600 dark:hover:text-primary-400 h-12" id="search-button" title="">
+<span class="relative block icon">
+<svg aria-hidden="true" class="svg-inline--fa fa-search fa-w-16" data-icon="search" data-prefix="fas" focusable="false" role="img" viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z" fill="currentColor"></path></svg>
+</span>
+</button>
+<div class="ltr:mr-14 rtl:ml-14 cursor-pointer text-sm text-neutral-700 hover:text-primary-600 dark:text-neutral dark:hover:text-primary-400">
+<button aria-label="Dark mode switcher" id="appearance-switcher" type="button">
+<div class="flex items-center justify-center h-12 dark:hidden">
+<span class="relative block icon">
+<svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M32 256c0-123.8 100.3-224 223.8-224c11.36 0 29.7 1.668 40.9 3.746c9.616 1.777 11.75 14.63 3.279 19.44C245 86.5 211.2 144.6 211.2 207.8c0 109.7 99.71 193 208.3 172.3c9.561-1.805 16.28 9.324 10.11 16.95C387.9 448.6 324.8 480 255.8 480C132.1 480 32 379.6 32 256z" fill="currentColor"></path></svg>
+</span>
+</div>
+<div class="items-center justify-center hidden h-12 dark:flex">
+<span class="relative block icon">
+<svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M256 159.1c-53.02 0-95.1 42.98-95.1 95.1S202.1 351.1 256 351.1s95.1-42.98 95.1-95.1S309 159.1 256 159.1zM509.3 347L446.1 255.1l63.15-91.01c6.332-9.125 1.104-21.74-9.826-23.72l-109-19.7l-19.7-109c-1.975-10.93-14.59-16.16-23.72-9.824L256 65.89L164.1 2.736c-9.125-6.332-21.74-1.107-23.72 9.824L121.6 121.6L12.56 141.3C1.633 143.2-3.596 155.9 2.736 164.1L65.89 256l-63.15 91.01c-6.332 9.125-1.105 21.74 9.824 23.72l109 19.7l19.7 109c1.975 10.93 14.59 16.16 23.72 9.824L256 446.1l91.01 63.15c9.127 6.334 21.75 1.107 23.72-9.822l19.7-109l109-19.7C510.4 368.8 515.6 356.1 509.3 347zM256 383.1c-70.69 0-127.1-57.31-127.1-127.1c0-70.69 57.31-127.1 127.1-127.1s127.1 57.3 127.1 127.1C383.1 326.7 326.7 383.1 256 383.1z" fill="currentColor"></path></svg>
+</span>
+</div>
+</button>
+</div>
+</nav>
+<div class="flex md:hidden items-center space-x-5 md:ml-12">
+<span></span>
+<button aria-label="Search" class="text-base hover:text-primary-600 dark:hover:text-primary-400" id="search-button-mobile" title="">
+<span class="relative block icon">
+<svg aria-hidden="true" class="svg-inline--fa fa-search fa-w-16" data-icon="search" data-prefix="fas" focusable="false" role="img" viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z" fill="currentColor"></path></svg>
+</span>
+</button>
+<button aria-label="Dark mode switcher" id="appearance-switcher-mobile" style="margin-right:5px" type="button">
+<div class="flex items-center justify-center h-12 dark:hidden">
+<span class="relative block icon">
+<svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M32 256c0-123.8 100.3-224 223.8-224c11.36 0 29.7 1.668 40.9 3.746c9.616 1.777 11.75 14.63 3.279 19.44C245 86.5 211.2 144.6 211.2 207.8c0 109.7 99.71 193 208.3 172.3c9.561-1.805 16.28 9.324 10.11 16.95C387.9 448.6 324.8 480 255.8 480C132.1 480 32 379.6 32 256z" fill="currentColor"></path></svg>
+</span>
+</div>
+<div class="items-center justify-center hidden h-12 dark:flex">
+<span class="relative block icon">
+<svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M256 159.1c-53.02 0-95.1 42.98-95.1 95.1S202.1 351.1 256 351.1s95.1-42.98 95.1-95.1S309 159.1 256 159.1zM509.3 347L446.1 255.1l63.15-91.01c6.332-9.125 1.104-21.74-9.826-23.72l-109-19.7l-19.7-109c-1.975-10.93-14.59-16.16-23.72-9.824L256 65.89L164.1 2.736c-9.125-6.332-21.74-1.107-23.72 9.824L121.6 121.6L12.56 141.3C1.633 143.2-3.596 155.9 2.736 164.1L65.89 256l-63.15 91.01c-6.332 9.125-1.105 21.74 9.824 23.72l109 19.7l19.7 109c1.975 10.93 14.59 16.16 23.72 9.824L256 446.1l91.01 63.15c9.127 6.334 21.75 1.107 23.72-9.822l19.7-109l109-19.7C510.4 368.8 515.6 356.1 509.3 347zM256 383.1c-70.69 0-127.1-57.31-127.1-127.1c0-70.69 57.31-127.1 127.1-127.1s127.1 57.3 127.1 127.1C383.1 326.7 326.7 383.1 256 383.1z" fill="currentColor"></path></svg>
+</span>
+</div>
+</button>
+</div>
+</div>
+<div class="-my-2 -mr-2 md:hidden">
+<label class="block" for="menu-controller" id="menu-button">
+<input class="hidden" id="menu-controller" type="checkbox"/>
+<div class="cursor-pointer hover:text-primary-600 dark:hover:text-primary-400">
+<span class="relative block icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M0 96C0 78.33 14.33 64 32 64H416C433.7 64 448 78.33 448 96C448 113.7 433.7 128 416 128H32C14.33 128 0 113.7 0 96zM0 256C0 238.3 14.33 224 32 224H416C433.7 224 448 238.3 448 256C448 273.7 433.7 288 416 288H32C14.33 288 0 273.7 0 256zM416 448H32C14.33 448 0 433.7 0 416C0 398.3 14.33 384 32 384H416C433.7 384 448 398.3 448 416C448 433.7 433.7 448 416 448z" fill="currentColor"></path></svg>
+</span>
+</div>
+<div class="fixed inset-0 z-30 invisible w-screen h-screen m-auto overflow-auto transition-opacity opacity-0 cursor-default bg-neutral-100/50 backdrop-blur-sm dark:bg-neutral-900/50" id="menu-wrapper" style="padding-top:5px;">
+<ul class="flex space-y-2 mt-3 flex-col items-end w-full px-6 py-6 mx-auto overflow-visible list-none ltr:text-right rtl:text-left max-w-7xl">
+<li>
+<span class="cursor-pointer inline-block align-text-bottom hover:text-primary-600 dark:hover:text-primary-400">
+<span class="relative block icon">
+<svg viewbox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><path d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z" fill="currentColor"></path></svg>
+</span>
+</span>
+</li>
+<li class="mt-1">
+<a class="flex items-center" href="/posts/">
+<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="Posts">
+            Posts
+        </p>
+</a>
+</li>
+<li class="mt-1">
+<a class="flex items-center" href="/categories/">
+<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="Categories">
+            分类
+        </p>
+</a>
+</li>
+<li class="mt-1">
+<a class="flex items-center" href="/tags/">
+<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="Tags">
+            标签
+        </p>
+</a>
+</li>
+<li class="mt-1">
+<a class="flex items-center" href="/link/">
+<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="友链/links">
+            友链
+        </p>
+</a>
+</li>
+<li class="mt-1">
+<a class="flex items-center" href="/about/">
+<p class="text-bg font-bg text-gray-500 hover:text-gray-900" title="About">
+            About
+        </p>
+</a>
+</li>
+</ul>
+</div>
+</label>
+</div>
+</div>
+<script>
+    (function () {
+        var $mainmenu = $('.main-menu');
+        var path = window.location.pathname;
+        $mainmenu.find('a[href="' + path + '"]').each(function (i, e) {
+            $(e).children('p').addClass('active');
+        });
+    })();
+</script>
+</div>
+</div>
+<script>
+  window.addEventListener('scroll', function (e) {
+    var scroll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    var background_blur = document.getElementById('menu-blur');
+    background_blur.style.opacity = (scroll / 300);
+  });
+</script>
+<div class="relative flex flex-col grow">
+<main class="grow" id="main-content">
+<article>
+<div class="h-[150px] md:h-[200px]" id="hero"></div>
+<div class="fixed inset-x-0 top-0 h-[800px] single_hero_background nozoom" style="background-image:url(/posts/iot/0x03/featured.jpg);">
+<div class="absolute inset-0 bg-gradient-to-t from-neutral dark:from-neutral-800 to-transparent mix-blend-normal">
+</div>
+<div class="absolute inset-0 opacity-60 bg-gradient-to-t from-neutral dark:from-neutral-800 to-neutral-100 dark:to-neutral-800 mix-blend-normal">
+</div>
+</div>
+<div class="fixed opacity-0 inset-x-0 top-0 h-full single_hero_background nozoom backdrop-blur-2xl" id="background-blur"></div>
+<script>
+    window.addEventListener('scroll', function (e) {
+        var scroll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+        var background_blur = document.getElementById('background-blur');
+        background_blur.style.opacity = (scroll / 300)
+    });
+</script>
+<header class="mt-5 max-w-prose" id="single_header">
+<ol class="text-sm text-neutral-500 dark:text-neutral-400 print:hidden">
+<li class="inline hidden">
+<a class="hover:underline decoration-neutral-300 dark:underline-neutral-600" href="/"></a><span class="px-1 text-primary-500">/</span>
+</li>
+<li class="inline">
+<a class="hover:underline decoration-neutral-300 dark:underline-neutral-600" href="/posts/">Posts</a><span class="px-1 text-primary-500">/</span>
+</li>
+<li class="inline hidden">
+<a class="hover:underline decoration-neutral-300 dark:underline-neutral-600" href="/posts/iot/0x03/">IoT漏洞挖掘思路</a><span class="px-1 text-primary-500">/</span>
+</li>
+</ol>
+<h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">
+      IoT漏洞挖掘思路
+    </h1>
+<div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
+<div class="flex flex-row flex-wrap items-center">
+<time datetime="2024-02-23 00:00:00 +0000 UTC">February 23, 2024</time><span class="px-2 text-primary-500">·</span><span>3901 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">8 分钟</span>
+</div>
+<div class="flex flex-row flex-wrap items-center">
+<span class="mr-2" onclick="window.open(&quot;/categories/iot%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    IoT学习记录
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/iot/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    IoT
+  </span>
+</span>
+</span>
+</div>
+</div>
+<div class="flex">
+<div class="place-self-center">
+<div class="text-[0.6rem] uppercase leading-3 text-neutral-500 dark:text-neutral-400">
+      作者
+    </div>
+<div class="font-semibold leading-6 text-neutral-800 dark:text-neutral-300">
+      ta0lve
+    </div>
+<div class="text-sm text-neutral-700 dark:text-neutral-400">一些记录，一点思考</div>
+<div class="text-2xl sm:text-lg">
+<div class="flex flex-wrap text-neutral-400 dark:text-neutral-500">
+<a aria-label="Email" class="px-1 hover:text-primary-700 dark:hover:text-primary-400" href="mailto:hujt25@mail2.sysu.edu.cn" rel="me noopener noreferrer" target="_blank"><span class="inline-block align-text-bottom">
+<span class="relative block icon">
+<svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M207.8 20.73c-93.45 18.32-168.7 93.66-187 187.1c-27.64 140.9 68.65 266.2 199.1 285.1c19.01 2.888 36.17-12.26 36.17-31.49l.0001-.6631c0-15.74-11.44-28.88-26.84-31.24c-84.35-12.98-149.2-86.13-149.2-174.2c0-102.9 88.61-185.5 193.4-175.4c91.54 8.869 158.6 91.25 158.6 183.2l0 16.16c0 22.09-17.94 40.05-40 40.05s-40.01-17.96-40.01-40.05v-120.1c0-8.847-7.161-16.02-16.01-16.02l-31.98 .0036c-7.299 0-13.2 4.992-15.12 11.68c-24.85-12.15-54.24-16.38-86.06-5.106c-38.75 13.73-68.12 48.91-73.72 89.64c-9.483 69.01 43.81 128 110.9 128c26.44 0 50.43-9.544 69.59-24.88c24 31.3 65.23 48.69 109.4 37.49C465.2 369.3 496 324.1 495.1 277.2V256.3C495.1 107.1 361.2-9.332 207.8 20.73zM239.1 304.3c-26.47 0-48-21.56-48-48.05s21.53-48.05 48-48.05s48 21.56 48 48.05S266.5 304.3 239.1 304.3z" fill="currentColor"></path></svg>
+</span>
+</span></a>
+<a aria-label="Blogger" class="px-1 hover:text-primary-700 dark:hover:text-primary-400" href="https://ta0lve.github.io/" rel="me noopener noreferrer" target="_blank"><span class="inline-block align-text-bottom">
+<span class="relative block icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M446.6 222.7c-1.8-8-6.8-15.4-12.5-18.5-1.8-1-13-2.2-25-2.7-20.1-.9-22.3-1.3-28.7-5-10.1-5.9-12.8-12.3-12.9-29.5-.1-33-13.8-63.7-40.9-91.3-19.3-19.7-40.9-33-65.5-40.5-5.9-1.8-19.1-2.4-63.3-2.9-69.4-.8-84.8.6-108.4 10C45.9 59.5 14.7 96.1 3.3 142.9 1.2 151.7.7 165.8.2 246.8c-.6 101.5.1 116.4 6.4 136.5 15.6 49.6 59.9 86.3 104.4 94.3 14.8 2.7 197.3 3.3 216 .8 32.5-4.4 58-17.5 81.9-41.9 17.3-17.7 28.1-36.8 35.2-62.1 4.9-17.6 4.5-142.8 2.5-151.7zm-322.1-63.6c7.8-7.9 10-8.2 58.8-8.2 43.9 0 45.4.1 51.8 3.4 9.3 4.7 13.4 11.3 13.4 21.9 0 9.5-3.8 16.2-12.3 21.6-4.6 2.9-7.3 3.1-50.3 3.3-26.5.2-47.7-.4-50.8-1.2-16.6-4.7-22.8-28.5-10.6-40.8zm191.8 199.8l-14.9 2.4-77.5.9c-68.1.8-87.3-.4-90.9-2-7.1-3.1-13.8-11.7-14.9-19.4-1.1-7.3 2.6-17.3 8.2-22.4 7.1-6.4 10.2-6.6 97.3-6.7 89.6-.1 89.1-.1 97.6 7.8 12.1 11.3 9.5 31.2-4.9 39.4z" fill="currentColor"></path></svg>
+</span>
+</span></a>
+<a aria-label="Github" class="px-1 hover:text-primary-700 dark:hover:text-primary-400" href="https://github.com/ta0lve" rel="me noopener noreferrer" target="_blank"><span class="inline-block align-text-bottom">
+<span class="relative block icon">
+<svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z" fill="currentColor"></path></svg>
+</span>
+</span></a>
+</div>
+</div>
+</div>
+</div>
+<div class="mb-5"></div>
+</header>
+<section class="flex flex-col max-w-full mt-0 prose dark:prose-invert lg:flex-row">
+<div class="order-first sm:max-w-prose lg:ml-auto px-0 lg:order-last lg:max-w-xs ltr:lg:pl-8 rtl:lg:pr-8">
+<div class="toc ltr:pl-5 rtl:pr-5 print:hidden lg:sticky lg:top-10">
+<details class="mt-0 overflow-hidden rounded-lg ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 hidden lg:block" open="">
+<summary class="block py-1 text-lg font-semibold cursor-pointer bg-neutral-100 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-neutral-700 dark:text-neutral-100 lg:hidden">
+</summary>
+<div class="min-w-[220px] py-2 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+<nav id="TableOfContents">
+<ul>
+<li><a href="#0x01-获取固件">0x01 获取固件</a></li>
+<li><a href="#0x02-解密固件">0x02 解密固件</a></li>
+<li><a href="#0x03-仿真模拟">0x03 仿真模拟</a>
+<ul>
+<li><a href="#firmae">FirmAE</a></li>
+<li><a href="#firmware-analysis-toolkit">Firmware Analysis Toolkit</a></li>
+<li><a href="#qemu">QEMU</a></li>
+</ul>
+</li>
+<li><a href="#0x04-fuzz">0x04 fuzz</a>
+<ul>
+<li><a href="#fuzzware">Fuzzware</a></li>
+<li><a href="#afl">afl++</a>
+<ul>
+<li><a href="#有源码">有源码</a></li>
+<li><a href="#无源码">无源码</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#0x05-静态分析">0x05 静态分析</a>
+<ul>
+<li>
+<ul>
+<li><a href="#satc">SaTC</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#0x06-验证漏洞">0x06 验证漏洞</a></li>
+<li><a href="#0x07-其他">0x07 其他</a></li>
+<li><a href="#后记">后记</a></li>
+</ul>
+</nav>
+</div>
+</details>
+<details class="mt-0 overflow-hidden rounded-lg ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 lg:hidden">
+<summary class="py-1 text-lg font-semibold cursor-pointer bg-neutral-100 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-neutral-700 dark:text-neutral-100 lg:hidden">
+</summary>
+<div class="py-2 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+<nav id="TableOfContents">
+<ul>
+<li><a href="#0x01-获取固件">0x01 获取固件</a></li>
+<li><a href="#0x02-解密固件">0x02 解密固件</a></li>
+<li><a href="#0x03-仿真模拟">0x03 仿真模拟</a>
+<ul>
+<li><a href="#firmae">FirmAE</a></li>
+<li><a href="#firmware-analysis-toolkit">Firmware Analysis Toolkit</a></li>
+<li><a href="#qemu">QEMU</a></li>
+</ul>
+</li>
+<li><a href="#0x04-fuzz">0x04 fuzz</a>
+<ul>
+<li><a href="#fuzzware">Fuzzware</a></li>
+<li><a href="#afl">afl++</a>
+<ul>
+<li><a href="#有源码">有源码</a></li>
+<li><a href="#无源码">无源码</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#0x05-静态分析">0x05 静态分析</a>
+<ul>
+<li>
+<ul>
+<li><a href="#satc">SaTC</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#0x06-验证漏洞">0x06 验证漏洞</a></li>
+<li><a href="#0x07-其他">0x07 其他</a></li>
+<li><a href="#后记">后记</a></li>
+</ul>
+</nav>
+</div>
+</details>
+<script>
+  (function () {
+    var $toc = $('#TableOfContents');
+    if ($toc.length > 0) {
+      var $window = $(window);
+
+      function onScroll() {
+        var currentScroll = $window.scrollTop();
+        var h = $('.anchor');
+        var id = "";
+        h.each(function (i, e) {
+          e = $(e);
+          if (e.offset().top - $(window).height()/3 <= currentScroll) {
+            id = e.attr('id');
+          }
+        });
+        var active = $toc.find('a.active');      
+        if (active.length == 1 && active.eq(0).attr('href') == '#' + id) return true;
+
+        active.each(function (i, e) {
+          
+            $(e).removeClass('active');
+          
+        });
+        $toc.find('a[href="#' + id + '"]').addClass('active')
+        $toc.find('a[href="#' + id + '"]').parentsUntil('#TableOfContents').each(function (i, e) {
+          $(e).children('a').parents('ul').show();          
+        });
+      }
+
+      $window.on('scroll', onScroll);
+      $(document).ready(function () {
+        
+        onScroll();
+      });
+    }
+  })();
+</script>
+</div>
+</div>
+<div class="min-w-0 min-h-0 max-w-prose">
+<details class="mt-2 mb-5 overflow-hidden rounded-lg ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5" open="" style="margin-left:0px">
+<summary class="py-1 text-lg font-semibold cursor-pointer bg-primary-200 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-primary-800 dark:text-neutral-100">
+        IoT学习小记 - This article is part of a series.
+    </summary>
+<div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+<a href="https://ta0lve.github.io/posts/iot/0x01/">
+            Part 1: IoT基础学习
+        </a>
+</div>
+<div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+<a href="https://ta0lve.github.io/posts/iot/0x02/">
+            Part 2: IoT漏洞复现记录
+        </a>
+</div>
+<div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+        Part 3: This Article
+    </div>
+</details>
+<div class="flex px-4 py-3 rounded-md bg-primary-100 dark:bg-primary-900">
+<span class="text-primary-400 ltr:pr-3 rtl:pl-3 flex items-center">
+<span class="relative block icon">
+<svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M506.3 417l-213.3-364c-16.33-28-57.54-28-73.98 0l-213.2 364C-10.59 444.9 9.849 480 42.74 480h426.6C502.1 480 522.6 445 506.3 417zM232 168c0-13.25 10.75-24 24-24S280 154.8 280 168v128c0 13.25-10.75 24-23.1 24S232 309.3 232 296V168zM256 416c-17.36 0-31.44-14.08-31.44-31.44c0-17.36 14.07-31.44 31.44-31.44s31.44 14.08 31.44 31.44C287.4 401.9 273.4 416 256 416z" fill="currentColor"></path></svg>
+</span>
+</span>
+<span class="dark:text-neutral-300"><strong>如果本博客部分文章图片加载失败，</strong><a href="/posts/sth/sm.ms/">
+<strong>可以点击此处查看解决办法</strong></a></span>
+</div>
+<div class="anchor" id="0x01-获取固件"></div>
+<h2 class="relative group">0x01 获取固件 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#0x01-%e8%8e%b7%e5%8f%96%e5%9b%ba%e4%bb%b6" style="text-decoration-line: none !important;">#</a></span>
+</h2>
+<p>一般从<strong>固件厂商官网</strong>获取</p>
+<p>也可以通过抓设备升级的包、购买硬件设备来获取固件</p>
+<div class="anchor" id="0x02-解密固件"></div>
+<h2 class="relative group">0x02 解密固件 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#0x02-%e8%a7%a3%e5%af%86%e5%9b%ba%e4%bb%b6" style="text-decoration-line: none !important;">#</a></span>
+</h2>
+<p>参考链接：<a href="https://wokough.gitbook.io/iot-firmware-aio/wiki/gu-jian-jie-mi#yi-gu-jian-jia-mi-pan-duan" target="_blank">
+    固件解密 - IOT 固件安全 All in One (gitbook.io)</a></p>
+<ul>
+<li>在解密固件之前可以先上网查询有没有相关文章</li>
+<li>也可以看一下同一品牌的其他固件是如何解密的</li>
+</ul>
+<p>解密固件是分析加密固件所需迈过的第一道坎</p>
+<p>
+<figure>
+<img alt="image-20240225113753127" class="my-0 rounded-md" src="https://s2.loli.net/2024/02/25/bT35JcBd2Sn4gvR.png"/>
+</figure>
+</p>
+<p>部分固件的解密思路可以参考以下思路：</p>
+<p>看看是不是仍有少部分固件（或过渡版本的固件）并未加密，当这些固件升级的过程中大概也会使用到解密的程序，因此可以<strong>通过解开这些未加密固件，找到解密程序，并逆向分析出相关算法</strong>，这也是固件解密常用的一种手段。并且，一般一个厂商的固件加密算法都是相同的，这样所有的固件我们都能够解开了</p>
+<p>解密完固件为后续的静态分析做准备</p>
+<div class="anchor" id="0x03-仿真模拟"></div>
+<h2 class="relative group">0x03 仿真模拟 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#0x03-%e4%bb%bf%e7%9c%9f%e6%a8%a1%e6%8b%9f" style="text-decoration-line: none !important;">#</a></span>
+</h2>
+<p><strong>动态分析方法</strong>需要固件进行仿真模拟，或者在物理设备上进行片上调试，来获得反馈信息</p>
+<p>真实固件的调试可以参考：<a href="https://wokough.gitbook.io/iot-firmware-aio/wiki/gu-jian-tiao-shi" target="_blank">
+    固件调试 - IOT 固件安全 All in One (gitbook.io)</a></p>
+<p>而仿真模拟可以参考以下的思路来进行：</p>
+<ul>
+<li>先使用FirmAE、Firmware Analysis Toolkit等开箱即用的工具进行仿真
+<ul>
+<li>固件跑起来并不意味着成功仿真</li>
+<li>可能会有部分功能的缺失</li>
+<li>需要测试网络是否连通，web是否正常访问，若有其他开放端口是否能正常访问等</li>
+</ul>
+</li>
+<li>也可以使用FirmAFL、FirmFuzz、Fuzzware来进行仿真模拟+fuzz</li>
+<li>工具仿真效果不理想时可以使用qemu来进行仿真
+<ul>
+<li>Unicorn和Qiling暂时了解较少，也可以用来仿真模拟</li>
+</ul>
+</li>
+</ul>
+<div class="anchor" id="firmae"></div>
+<h3 class="relative group">FirmAE 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#firmae" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<ul>
+<li>成功概率较高（优于Firmadyne）
+<ul>
+<li>FirmAE significantly increases the emulation success rate (From <a href="https://github.com/firmadyne/firmadyne" target="_blank">
+    Firmadyne</a>’s 16.28% to 79.36%)</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><a href="https://www.52pojie.cn/thread-1572565-1-1.html" target="_blank">
+    FirmAE及DlinkDIR320、600、645漏洞复现 - 『软件调试区』 - 吾爱破解 - LCG - LSG |安卓破解|病毒分析|www.52pojie.cn</a></li>
+<li><a href="https://github.com/pr0v3rbs/FirmAE" target="_blank">
+    pr0v3rbs/FirmAE: Towards Large-Scale Emulation of IoT Firmware for Dynamic Analysis (github.com)</a></li>
+<li><a href="https://ftp.dlink.ru/pub/Router/DIR-645/Firmware/" target="_blank">
+    Index of /pub/Router/DIR-645/Firmware (dlink.ru)</a></li>
+</ul>
+<p><strong>安装：</strong></p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">git clone --recursive https://github.com/pr0v3rbs/FirmAE
+</span></span><span class="line"><span class="cl">./download.sh
+</span></span><span class="line"><span class="cl">./install.sh
+</span></span></code></pre></div><p><strong>使用：</strong></p>
+<p>执行脚本</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">./init.sh
+</span></span></code></pre></div><p>准备固件</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="c1"># 举例：</span>
+</span></span><span class="line"><span class="cl">wget https://github.com/pr0v3rbs/FirmAE/releases/download/v1.0/DIR-868L_fw_revB_2-05b02_eu_multi_20161117.zip
+</span></span></code></pre></div><p>检查仿真</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">sudo ./run.sh -c &lt;brand&gt; &lt;firmware&gt;
+</span></span></code></pre></div><p>分析目标固件</p>
+<ul>
+<li>分析模式使用 FirmAE 分析器</li>
+</ul>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">sudo ./run.sh -a &lt;brand&gt; &lt;firmware&gt;
+</span></span></code></pre></div><ul>
+<li>运行模式有助于测试 Web 服务或执行自定义分析器</li>
+</ul>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">sudo ./run.sh -r &lt;brand&gt; &lt;firmware&gt;
+</span></span></code></pre></div><p>
+<figure>
+<img alt="image-20240225104426390" class="my-0 rounded-md" src="https://s2.loli.net/2024/02/25/UhFeDBbwIEcVaHs.png"/>
+</figure>
+</p>
+<div class="anchor" id="firmware-analysis-toolkit"></div>
+<h3 class="relative group">Firmware Analysis Toolkit 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#firmware-analysis-toolkit" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<p><a href="https://github.com/attify/firmware-analysis-toolkit" target="_blank">
+    attify/firmware-analysis-toolkit: Toolkit to emulate firmware and analyse it for security vulnerabilities (github.com)</a></p>
+<p><strong>安装：</strong></p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">git clone https://github.com/attify/firmware-analysis-toolkit
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> firmware-analysis-toolkit
+</span></span><span class="line"><span class="cl">./setup.sh
+</span></span></code></pre></div><div class="highlight"><pre class="chroma" tabindex="0"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="c1"># fat.config</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>DEFAULT<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="nv">sudo_password</span><span class="o">=</span>attify123
+</span></span><span class="line"><span class="cl"><span class="nv">firmadyne_path</span><span class="o">=</span>/home/attify/firmadyne
+</span></span></code></pre></div><p><strong>使用：</strong></p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">./fat.py &lt;firmware file&gt;
+</span></span></code></pre></div><div class="highlight"><pre class="chroma" tabindex="0"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ ./fat.py DIR-601_REVB_FIRMWARE_2.01.BIN 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                               __           _   
+</span></span><span class="line"><span class="cl">                              / _<span class="p">|</span>         <span class="p">|</span> <span class="p">|</span>  
+</span></span><span class="line"><span class="cl">                             <span class="p">|</span> <span class="p">|</span>_    __ _  <span class="p">|</span> <span class="p">|</span>_ 
+</span></span><span class="line"><span class="cl">                             <span class="p">|</span>  _<span class="p">|</span>  / _<span class="sb">`</span> <span class="p">|</span> <span class="p">|</span> __<span class="p">|</span>
+</span></span><span class="line"><span class="cl">                             <span class="p">|</span> <span class="p">|</span>   <span class="p">|</span> <span class="o">(</span>_<span class="p">|</span> <span class="p">|</span> <span class="p">|</span> <span class="p">|</span>_ 
+</span></span><span class="line"><span class="cl">                             <span class="p">|</span>_<span class="p">|</span>    <span class="se">\_</span>_,_<span class="p">|</span>  <span class="se">\_</span>_<span class="p">|</span>                    
+</span></span><span class="line"><span class="cl">                    
+</span></span><span class="line"><span class="cl">                Welcome to the Firmware Analysis Toolkit - v0.3
+</span></span><span class="line"><span class="cl">    Offensive IoT Exploitation Training http://bit.do/offensiveiotexploitation
+</span></span><span class="line"><span class="cl">                  By Attify - https://attify.com  <span class="p">|</span> @attifyme
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> Firmware: DIR-601_REVB_FIRMWARE_2.01.BIN
+</span></span><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> Extracting the firmware...
+</span></span><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> Image ID: <span class="m">1</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> Identifying architecture...
+</span></span><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> Architecture: mipseb
+</span></span><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> Building QEMU disk image...
+</span></span><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> Setting up the network connection, please standby...
+</span></span><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> Network interfaces: <span class="o">[(</span><span class="s1">'br0'</span>, <span class="s1">'192.168.0.1'</span><span class="o">)]</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> All set! Press ENTER to run the firmware...
+</span></span><span class="line"><span class="cl"><span class="o">[</span>+<span class="o">]</span> When running, press Ctrl + A X to terminate qemu
+</span></span></code></pre></div><p>
+<figure>
+<img alt="image-20240223021726180" class="my-0 rounded-md" src="https://s2.loli.net/2024/02/25/5vn4FhxHLXNaVkY.png"/>
+</figure>
+</p>
+<div class="anchor" id="qemu"></div>
+<h3 class="relative group">QEMU 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#qemu" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<p><a href="https://wokough.gitbook.io/iot-firmware-aio/wiki/fang-zhen-fen-xi#id-1.1-qemu" target="_blank">
+    https://wokough.gitbook.io/iot-firmware-aio/wiki/fang-zhen-fen-xi#id-1.1-qemu</a></p>
+<p>具体问题具体分析</p>
+<p>具体固件使用对应的命令进行仿真</p>
+<ul>
+<li>先上网搜索相关信息，看看有没有文章已经仿真过了</li>
+<li>参考之前仿真设备的案例来试着仿真</li>
+<li>如果都没有就需要我们参考着官方文档以及对固件的静态分析来自己调整命令
+<ul>
+<li>如果遇到一些参数实在没有办法满足时可以先跑起来</li>
+<li>在动态调试的过程看是哪个汇编执行报错
+<ul>
+<li>再在IDA中进行合适的patch来使得固件可以成功仿真</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>例如当我们需要向<code>main</code>函数传递参数<code>argv</code>和设置环境变量时，可以先看看官方usage：</p>
+<p>
+<figure>
+<img alt="image-20240224180845930" class="my-0 rounded-md" src="https://s2.loli.net/2024/02/25/apCn8t9zLSGwFbK.png"/>
+</figure>
+</p>
+<p>发现我们可以用<code>-0</code>选项传递第一个参数，用<code>-E</code>选项设置环境变量，用<code>-L</code>选项做到类似于更改根目录的效果，用<code>-strace</code>选项追踪程序执行时进程系统调用和所接收的信号，方便调试</p>
+<ul>
+<li>
+<p>部分固件的仿真需要我们使用qemu来配置网络</p>
+<ul>
+<li>
+<p>可以先拍一个快照再来开始仿真，便于会快照重新配置</p>
+</li>
+<li>
+<p>参考<a href="https://github.com/Vu1nT0tal/IoT-vulhub/tree/master/HUAWEI/CVE-2017-17215" target="_blank">
+    IoT-vulhub</a>项目网络配置的方法，可以得到一个配置网络的shell文件模版</p>
+</li>
+<li>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 启动 ssh 服务</span>
+</span></span><span class="line"><span class="cl">/etc/init.d/ssh start
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 配置网卡</span>
+</span></span><span class="line"><span class="cl">tunctl -t tap0
+</span></span><span class="line"><span class="cl">ifconfig tap0 192.168.2.1/24
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 启动 http 服务</span>
+</span></span><span class="line"><span class="cl">nohup python3 -m http.server <span class="m">8000</span> 1&gt;<span class="p">&amp;</span>/dev/null <span class="p">&amp;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 进入 qemu 镜像目录</span>
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> /root/images
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">/usr/bin/expect<span class="s">&lt;&lt;EOF
+</span></span></span><span class="line"><span class="cl"><span class="s">set timeout 10000
+</span></span></span><span class="line"><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s"># 依照固件及qemu文档更改此处命令
+</span></span></span><span class="line"><span class="cl"><span class="s">spawn qemu-system-mips -M malta -kernel vmlinux-3.2.0-4-4kc-malta -hda debian_wheezy_mips_standard.qcow2 -append "root=/dev/sda1 console=tty0" -netdev tap,id=tapnet,ifname=tap0,script=no -device rtl8139,netdev=tapnet -nographic
+</span></span></span><span class="line"><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">expect "debian-mips login:"
+</span></span></span><span class="line"><span class="cl"><span class="s">send "root\r"
+</span></span></span><span class="line"><span class="cl"><span class="s">expect "Password:"
+</span></span></span><span class="line"><span class="cl"><span class="s">send "root\r"
+</span></span></span><span class="line"><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">expect "root@debian-mips:~# "
+</span></span></span><span class="line"><span class="cl"><span class="s">send "ifconfig eth0 192.168.2.2/24\r"
+</span></span></span><span class="line"><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">#expect "root@debian-mips:~# "
+</span></span></span><span class="line"><span class="cl"><span class="s">#send "echo 0 &gt; /proc/sys/kernel/randomize_va_space\r"
+</span></span></span><span class="line"><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">expect "root@debian-mips:~# "
+</span></span></span><span class="line"><span class="cl"><span class="s">send "scp root@192.168.2.1:/root/squashfs-root.tar.gz /root/squashfs-root.tar.gz\r"
+</span></span></span><span class="line"><span class="cl"><span class="s">expect {
+</span></span></span><span class="line"><span class="cl"><span class="s">    "(yes/no)? " { send "yes\r"; exp_continue }
+</span></span></span><span class="line"><span class="cl"><span class="s">    "password: " { send "root\r" }
+</span></span></span><span class="line"><span class="cl"><span class="s">}
+</span></span></span><span class="line"><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">expect "root@debian-mips:~# "
+</span></span></span><span class="line"><span class="cl"><span class="s">send "tar xzf squashfs-root.tar.gz &amp;&amp; rm squashfs-root.tar.gz\r"
+</span></span></span><span class="line"><span class="cl"><span class="s">expect "root@debian-mips:~# "
+</span></span></span><span class="line"><span class="cl"><span class="s">send "mount -o bind /dev ./squashfs-root/dev &amp;&amp; mount -t proc /proc ./squashfs-root/proc\r"
+</span></span></span><span class="line"><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">expect "root@debian-mips:~# "
+</span></span></span><span class="line"><span class="cl"><span class="s">send "scp -r root@192.168.2.1:/root/tools /root/squashfs-root/tools\r"
+</span></span></span><span class="line"><span class="cl"><span class="s">expect {
+</span></span></span><span class="line"><span class="cl"><span class="s">    "(yes/no)? " { send "yes\r"; exp_continue }
+</span></span></span><span class="line"><span class="cl"><span class="s">    "password: " { send "root\r" }
+</span></span></span><span class="line"><span class="cl"><span class="s">}
+</span></span></span><span class="line"><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">expect "root@debian-mips:~# "
+</span></span></span><span class="line"><span class="cl"><span class="s">send "echo 'sleep 30' &gt; net.sh\r"
+</span></span></span><span class="line"><span class="cl"><span class="s">expect "root@debian-mips:~# "
+</span></span></span><span class="line"><span class="cl"><span class="s">send "echo 'ifconfig eth0 192.168.2.2/24' &gt;&gt; net.sh\r"
+</span></span></span><span class="line"><span class="cl"><span class="s">expect "root@debian-mips:~# "
+</span></span></span><span class="line"><span class="cl"><span class="s">send "echo 'ifconfig br0 192.168.2.3/24' &gt;&gt; net.sh\r"
+</span></span></span><span class="line"><span class="cl"><span class="s">expect "root@debian-mips:~# "
+</span></span></span><span class="line"><span class="cl"><span class="s">send "chmod +x net.sh &amp;&amp; /bin/sh net.sh &amp;\r"
+</span></span></span><span class="line"><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">expect "root@debian-mips:~# "
+</span></span></span><span class="line"><span class="cl"><span class="s">send "chroot squashfs-root/ sh\r"
+</span></span></span><span class="line"><span class="cl"><span class="s">expect "# "
+</span></span></span><span class="line"><span class="cl"><span class="s">send "./bin/upnp\r"
+</span></span></span><span class="line"><span class="cl"><span class="s">expect "# "
+</span></span></span><span class="line"><span class="cl"><span class="s">send "./bin/mic\r"
+</span></span></span><span class="line"><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">expect eof
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span></code></pre></div></li>
+</ul>
+</li>
+</ul>
+<div class="anchor" id="0x04-fuzz"></div>
+<h2 class="relative group">0x04 fuzz 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#0x04-fuzz" style="text-decoration-line: none !important;">#</a></span>
+</h2>
+<p><strong>动态分析</strong>查找漏洞时主要通过各类fuzz工具来得到漏洞的触发点</p>
+<ul>
+<li>主要使用FirmAFL、FirmFuzz、Fuzzware工具来进行fuzz</li>
+<li>也可以使用afl与afl++</li>
+</ul>
+<div class="anchor" id="fuzzware"></div>
+<h3 class="relative group">Fuzzware 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#fuzzware" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<p><a href="https://github.com/fuzzware-fuzzer/fuzzware" target="_blank">
+    fuzzware-fuzzer/fuzzware: Fuzzware’s main repository. Start here to install. (github.com)</a></p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">git clone https://github.com/fuzzware-fuzzer/fuzzware.git
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sudo ./build_docker.sh
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sudo ./run_docker.sh examples fuzzware pipeline --skip-afl-cpufreq pw-recovery/ARCH_PRO
+</span></span><span class="line"><span class="cl">sudo ./run_docker.sh <span class="nb">test</span> fuzzware pipeline --skip-afl-cpufreq .
+</span></span></code></pre></div><p>成功将固件跑起来：</p>
+<p>
+<figure>
+<img alt="image-20240202005856817" class="my-0 rounded-md" src="https://s2.loli.net/2024/02/25/krvpGM6NwIgKcLs.png"/>
+</figure>
+</p>
+<p>由图可以看到刚开始运行时发现新的MMIO寄存器模型，由于MMIO Access Model中并不存在，因此会将其定义为新的模型，然后继续向下运行</p>
+<p>
+<figure>
+<img alt="image-20240202010428350" class="my-0 rounded-md" src="https://s2.loli.net/2024/02/25/PunMRS4qrwWbN93.png"/>
+</figure>
+</p>
+<p>建模完毕后，开始进行正常的fuzzing阶段：</p>
+<p>
+<figure>
+<img alt="image-20240202011901838" class="my-0 rounded-md" src="https://s2.loli.net/2024/02/25/MnVkI6tiX5OAKlC.png"/>
+</figure>
+</p>
+<p>每一轮fuzzing结束后，根据反馈调整输入，开始下一阶段fuzzing：</p>
+<p>
+<figure>
+<img alt="image-20240202010524792" class="my-0 rounded-md" src="https://s2.loli.net/2024/02/25/7p9AVbuitzjJGg5.png"/>
+</figure>
+</p>
+<div class="anchor" id="afl"></div>
+<h3 class="relative group">afl++ 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#afl" style="text-decoration-line: none !important;">#</a></span>
+</h3>
+<div class="anchor" id="有源码"></div>
+<h4 class="relative group">有源码 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e6%9c%89%e6%ba%90%e7%a0%81" style="text-decoration-line: none !important;">#</a></span>
+</h4>
+<p>使用 afl-gcc 进行插桩编译：</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">afl-gcc test.c -o test_file
+</span></span><span class="line"><span class="cl">gcc test.c -o test_gcc
+</span></span></code></pre></div><ul>
+<li>afl-gcc 插桩编译后，fuzz 的速度会快一些</li>
+</ul>
+<p>接下来就可以进行 fuzz 了：</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">afl-fuzz -i ./fuzz_in -o ./fuzz_out ./test_file -f
+</span></span></code></pre></div><ul>
+<li>fuzz_in 为语料库，可以直接使用 AFL 自带的 testcases</li>
+<li>fuzz_out 就是输出的内容</li>
+</ul>
+<div class="anchor" id="无源码"></div>
+<h4 class="relative group">无源码 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e6%97%a0%e6%ba%90%e7%a0%81" style="text-decoration-line: none !important;">#</a></span>
+</h4>
+<p>配置：</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">sudo apt-get install libtool-bin libgtk2.0-dev -y
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> /home/iot/test/tools/AFLplusplus/qemu_mode
+</span></span><span class="line"><span class="cl">./build_qemu_support.sh
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> ..
+</span></span><span class="line"><span class="cl">sudo make install
+</span></span></code></pre></div><div class="highlight"><pre class="chroma" tabindex="0"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">afl-fuzz -Q -m none -i in -o out ./pwn_file @@
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">/home/iot/test/tools/AFLplusplus/afl-fuzz -i fuzz_in -o ./fuzz_out -Q ./pwn
+</span></span></code></pre></div><p>
+<figure>
+<img alt="image-20240202034131386" class="my-0 rounded-md" src="https://s2.loli.net/2024/02/25/FLNCaEdOGBynpku.png"/>
+</figure>
+</p>
+<div class="anchor" id="0x05-静态分析"></div>
+<h2 class="relative group">0x05 静态分析 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#0x05-%e9%9d%99%e6%80%81%e5%88%86%e6%9e%90" style="text-decoration-line: none !important;">#</a></span>
+</h2>
+<p><a href="https://www.freebuf.com/sectool/339207.html" target="_blank">
+    浅析IOT二进制静态辅助方法 - FreeBuf网络安全行业门户</a></p>
+<ul>
+<li>
+<p>IDA</p>
+<ul>
+<li>大多数是32位的，少数是64位的</li>
+<li>推荐安装keypatch插件，在patch固件的时候会方便一些</li>
+</ul>
+</li>
+<li>
+<p>Ghira</p>
+<ul>
+<li>可以安装许多有用的插件</li>
+</ul>
+</li>
+<li>
+<p>SaTC</p>
+<ul>
+<li>自动化挖掘工具</li>
+</ul>
+</li>
+<li>
+<p>其他二进制静态辅助工具</p>
+<ul>
+<li>BinAbsInspector</li>
+<li>Rhabdomancer</li>
+<li>Haruspex + semgrep</li>
+</ul>
+</li>
+</ul>
+<div class="anchor" id="satc"></div>
+<h4 class="relative group">SaTC 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#satc" style="text-decoration-line: none !important;">#</a></span>
+</h4>
+<p><a href="https://github.com/NSSL-SJTU/SaTC" target="_blank">
+    NSSL-SJTU/SaTC: A prototype of Shared-keywords aware Taint Checking, a novel static analysis approach that tracks the data flow of the user input between front-end and back-end to precisely detect security vulnerabilities. (github.com)</a></p>
+<p><strong>安装</strong></p>
+<p>建议通过使用Dockerfile来构建系统环境:</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="c1"># 进入SaTC代码目录</span>
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> SaTC 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 构建Docker镜像</span>
+</span></span><span class="line"><span class="cl">docker build . -t satc
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 进入Dokcer环境, 自行添加目录映射</span>
+</span></span><span class="line"><span class="cl">docker run -it satc
+</span></span></code></pre></div><p>如果因为网络等原因无法构建，可使用我们提供等docker image</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="c1"># 从docker hun拉去image</span>
+</span></span><span class="line"><span class="cl">docker pull smile0304/satc:V1.0
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 进入Dokcer环境, 自行添加目录映射</span>
+</span></span><span class="line"><span class="cl">docker run -it smile0304/satc:V1.0
+</span></span></code></pre></div><p><strong>使用方法</strong></p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">usage: satc.py <span class="o">[</span>-h<span class="o">]</span> -d /root/path/_ac18.extracted -o /root/output
+</span></span><span class="line"><span class="cl">               <span class="o">[</span>--ghidra_script <span class="o">{</span>ref2sink_cmdi,ref2sink_bof,share2sink,ref2share,all<span class="o">}]</span>
+</span></span><span class="line"><span class="cl">               <span class="o">[</span>--save_ghidra_project<span class="o">]</span> --taint_check
+</span></span><span class="line"><span class="cl">               <span class="o">[</span>-b /var/ac18/bin/httpd <span class="p">|</span> -l 3<span class="o">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">SATC tool
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">optional arguments:
+</span></span><span class="line"><span class="cl">  -h, --help            查看帮助
+</span></span><span class="line"><span class="cl">  -d /root/path/_ac18.extracted, --directory /root/path/_ac18.extracted
+</span></span><span class="line"><span class="cl">                        指定从固件中提取出的文件系统
+</span></span><span class="line"><span class="cl">  -o /root/output, --output /root/output
+</span></span><span class="line"><span class="cl">                        指定结果输出位置
+</span></span><span class="line"><span class="cl">  --ghidra_script <span class="o">{</span>ref2sink_cmdi,ref2sink_bof,share2sink,ref2share,all<span class="o">}</span>
+</span></span><span class="line"><span class="cl">                        <span class="o">(</span>可选<span class="o">)</span> 指定要使用的 Ghidra 脚本。 如果使用<span class="sb">`</span>all<span class="sb">`</span>命令，<span class="sb">`</span>ref2sink_cmdi<span class="sb">`</span>、<span class="sb">`</span>ref2sink_bof<span class="sb">`</span>和<span class="sb">`</span>ref2share<span class="sb">`</span>三个脚本将同时运行
+</span></span><span class="line"><span class="cl">  --ref2share_result /root/path/ref2share_result  <span class="o">(</span>可选<span class="o">)</span> 运行<span class="sb">`</span>share2sink<span class="sb">`</span> Ghidra脚本时，需要使用该参数指定<span class="sb">`</span>ref2share<span class="sb">`</span>脚本的输出结果
+</span></span><span class="line"><span class="cl">  --save_ghidra_project <span class="o">(</span>可选<span class="o">)</span> 是否保存程序运行时产生的ghidra工程路径
+</span></span><span class="line"><span class="cl">  --taint_check         <span class="o">(</span>可选<span class="o">)</span> 指定是否启用污点分析
+</span></span><span class="line"><span class="cl">  -b /var/ac18/bin/httpd, --bin /var/ac18/bin/httpd
+</span></span><span class="line"><span class="cl">                        <span class="o">(</span>可选<span class="o">)</span> 用于指定需要分析的程序，如果不指定，SaTC将使用内置算法确认需要分析的程序
+</span></span><span class="line"><span class="cl">  -l 3, --len <span class="m">3</span>         <span class="o">(</span>可选<span class="o">)</span> 根据分析结果分析可能为边界的前N个程序，默认为3
+</span></span></code></pre></div><p>输出结果的目录结构为：</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="p">|</span>-- ghidra_extract_result <span class="c1"># ghidra寻找函数调用路径的分析结果, 启用`--ghidra_script`选项会输出该目录</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   <span class="p">|</span>-- httpd <span class="c1"># 每个被分析的bin都会生成一个同名文件夹</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>       <span class="p">|</span>-- httpd <span class="c1"># 被分析的bin</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>       <span class="p">|</span>-- httpd_ref2sink_bof.result <span class="c1"># 定位bof类型的sink函数路径</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>       <span class="p">|</span>-- httpd_ref2sink_cmdi.result <span class="c1"># 定位cmdi类型的sink函数路径</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>-- keyword_extract_result  <span class="c1"># 关键字提取结果</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   <span class="p">|</span>-- detail  <span class="c1"># 前端关键字提取结果(详细分析结果)</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   <span class="p">|</span>   <span class="p">|</span>-- API_detail.result <span class="c1"># 提取的API详细结果</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   <span class="p">|</span>   <span class="p">|</span>-- API_remove_detail.result <span class="c1"># 被过滤掉的API信息</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   <span class="p">|</span>   <span class="p">|</span>-- api_split.result  <span class="c1"># 模糊匹配的API结果</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   <span class="p">|</span>   <span class="p">|</span>-- Clustering_result_v2.result <span class="c1"># 详细分析结果(不关心其他过程关心此文件即可)</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   <span class="p">|</span>   <span class="p">|</span>-- File_detail.result  <span class="c1"># 记录了从单独文件中提取的关键字</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   <span class="p">|</span>   <span class="p">|</span>-- from_bin_add_para.result <span class="c1"># 在二进制匹配过程中新增的关键字</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   <span class="p">|</span>   <span class="p">|</span>-- from_bin_add_para.result_v2 <span class="c1"># 同上,V2版本</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   <span class="p">|</span>   <span class="p">|</span>-- Not_Analysise_JS_File.result <span class="c1"># 未被分析的JS文件</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   <span class="p">|</span>   <span class="p">|</span>-- Prar_detail.result <span class="c1"># 提取的Prar详细结果</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   <span class="p">|</span>   <span class="p">|</span>-- Prar_remove_detail.result <span class="c1"># 被过滤掉的Prar结果</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   <span class="p">|</span>-- info.txt  <span class="c1"># 记录前端关键字提取时间等信息</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   <span class="p">|</span>-- simple  <span class="c1"># 前端关键字提取结果, 比较简单</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>       <span class="p">|</span>-- API_simple.result <span class="c1"># 在全部二进制中出现的全部API名称</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>       <span class="p">|</span>-- Prar_simple.result  <span class="c1"># 在全部二进制中出现等的全部Prar</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>-- result-httpd-ref2sink_cmdi-ctW8.txt <span class="c1"># 污点分析结果,启用`--taint-check` 和 `--ghidra_script`选项才会生成该文件</span>
+</span></span></code></pre></div><p>在<code>/home/satc/res</code>下生成的txt文件可以查看结果</p>
+<p>
+<figure>
+<img alt="image-20240225155835675" class="my-0 rounded-md" src="https://s2.loli.net/2024/02/25/cFOLYQuvWgzjpid.png"/>
+</figure>
+</p>
+<div class="anchor" id="0x06-验证漏洞"></div>
+<h2 class="relative group">0x06 验证漏洞 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#0x06-%e9%aa%8c%e8%af%81%e6%bc%8f%e6%b4%9e" style="text-decoration-line: none !important;">#</a></span>
+</h2>
+<ul>
+<li>直接购买真实设备来验证漏洞</li>
+<li>本地仿真模拟来验证 or 复现
+<ul>
+<li>可以先按照 0x03 部分先对固件进行仿真模拟</li>
+<li>然后在本地对漏洞进行验证或复现</li>
+</ul>
+</li>
+<li>一些路由器固件的漏洞可以在一些网站上查找到还在用此路由器设备的站点
+<ul>
+<li><a href="https://www.shodan.io/" target="_blank">
+    shodan</a></li>
+<li><a href="https://www.zoomeye.org/discover" target="_blank">
+    ZoomEye</a></li>
+</ul>
+</li>
+</ul>
+<div class="anchor" id="0x07-其他"></div>
+<h2 class="relative group">0x07 其他 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#0x07-%e5%85%b6%e4%bb%96" style="text-decoration-line: none !important;">#</a></span>
+</h2>
+<ul>
+<li>
+<p>挖漏洞之前可以先在各类cve cnvd平台搜索一下</p>
+<ul>
+<li>
+<p>相关产品的漏洞可以提供参考</p>
+</li>
+<li>
+<p>也可以避免重复挖出/提交已有的漏洞</p>
+</li>
+<li>
+<p><a href="https://cve.mitre.org/cve/search_cve_list.html" target="_blank">
+    CVE - Search CVE List (mitre.org)</a></p>
+</li>
+<li>
+<p><a href="https://cve.ics-csirt.io/cve" target="_blank">
+    Vulnerabilities (CVE) - OpenCVE (ics-csirt.io)</a></p>
+</li>
+</ul>
+</li>
+<li>
+<p>挖出一个洞之后</p>
+<ul>
+<li>可以横向看看同一家厂商的其他产品是不是也存在类似的漏洞</li>
+<li>可以思考这个漏洞点是否有其他更加有危害的利用方式</li>
+</ul>
+</li>
+<li>
+<p>还可以思考一下如何修复这个漏洞</p>
+<ul>
+<li>应该如何打补丁</li>
+<li>一些有漏洞的固件在第一次修补之后仍存在漏洞，我们的修复方式是否能避免这样的情况</li>
+</ul>
+</li>
+<li>
+<p>可以参考一下winmt师傅的挖洞经历</p>
+<ul>
+<li><a href="https://bbs.kanxue.com/thread-277386.htm#msg_header_h2_6" target="_blank">
+    记一次全设备通杀未授权RCE的挖掘经历-看雪-安全社区|</a></li>
+</ul>
+</li>
+</ul>
+<div class="anchor" id="后记"></div>
+<h2 class="relative group">后记 
+    <span class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+<a aria-label="锚点" class="group-hover:text-primary-300 dark:group-hover:text-neutral-700" href="#%e5%90%8e%e8%ae%b0" style="text-decoration-line: none !important;">#</a></span>
+</h2>
+<p>漏洞挖掘众多尝试的一小部分：</p>
+<ul>
+<li>尝试1</li>
+</ul>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ wget https://down.tenda.com.cn/uploadfile/AC18/ac18_kf_V15.03.05.19<span class="o">(</span>6318_<span class="o">)</span>_cn.zip
+</span></span><span class="line"><span class="cl">$ binwalk -Me ac18_kf_V15.03.05.19<span class="o">(</span>6318_<span class="o">)</span>_cn.zip
+</span></span><span class="line"><span class="cl">$ sudo docker run -it -v ./squashfs-root/:/home/satc/SaTC/SaTC_data smile0304/satc
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 进入SaTC容器中</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 检查/home/satc/SaTC/SaTC_data文件夹中是否有数据</span>
+</span></span><span class="line"><span class="cl">$ ls /home/satc/SaTC/SaTC_data
+</span></span><span class="line"><span class="cl">$ <span class="nb">cd</span> ~/SaTC
+</span></span><span class="line"><span class="cl"><span class="c1"># 测试/bin/httpd是否存在命令注入漏洞</span>
+</span></span><span class="line"><span class="cl">$ python satc.py -d /home/satc/SaTC/SaTC_data -o /home/satc/res --ghidra_script<span class="o">=</span>ref2sink_cmdi -b httpd --taint_check
+</span></span><span class="line"><span class="cl"><span class="c1"># 测试/bin/httpd是否存在缓冲区溢出漏洞</span>
+</span></span><span class="line"><span class="cl">$ python satc.py -d /home/satc/SaTC/SaTC_data -o /home/satc/res --ghidra_script<span class="o">=</span>ref2sink_bof -b httpd --taint_check
+</span></span></code></pre></div><p>
+<figure>
+<img alt="image-20240225123452035" class="my-0 rounded-md" src="https://s2.loli.net/2024/02/25/NIs4Tolehu6FVn5.png"/>
+</figure>
+</p>
+<p>过程中可能会飘红，或者警告，直接忽略，只要在<code>/home/satc/res</code>下输出txt文件就ok</p>
+<ul>
+<li>尝试2</li>
+</ul>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-SH" data-lang="SH"><span class="line"><span class="cl">$ wget https://down.tenda.com.cn/uploadfile/AC10/V16.03.48.23.zip
+</span></span><span class="line"><span class="cl">$ unzip V16.03.48.23.zip <span class="o">&amp;&amp;</span> <span class="nb">cd</span> V16.03.48.23
+</span></span><span class="line"><span class="cl">$ binwalk -Me US_AC10V5.0si_V16.03.48.23_cn_TDC01.bin 
+</span></span></code></pre></div><p>
+<figure>
+<img alt="image-20240225123547359" class="my-0 rounded-md" src="https://s2.loli.net/2024/02/25/bT35JcBd2Sn4gvR.png"/>
+</figure>
+</p>
+<ul>
+<li>尝试3</li>
+</ul>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="nv">$wget</span> https://ftp.dlink.ru/pub/Router/DWR-921/Firmware/2023.07.20-15.22_DWR_921_POST_4.0.2_release.bin
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">$ <span class="nb">cd</span> /home/iot/tools/firmware-analysis-toolkit
+</span></span><span class="line"><span class="cl">$ ./fat.py /home/iot/vul/D-Link/DWR-921/2023.07.20-15.22_DWR_921_POST_4.0.2_release.bin
+</span></span></code></pre></div><p>
+<figure>
+<img alt="image-20240225121253995" class="my-0 rounded-md" src="https://s2.loli.net/2024/02/25/2rAUfnyPv3qkLZa.png"/>
+</figure>
+</p>
+<div class="highlight"><pre class="chroma" tabindex="0"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ binwalk -Me 2023.07.20-15.22_DWR_921_POST_4.0.2_release.bin
+</span></span><span class="line"><span class="cl">$ sudo docker run -it -v ./squashfs-root/:/home/satc/SaTC/SaTC_data smile0304/satc
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 进入SaTC容器中</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 检查/home/satc/SaTC/SaTC_data文件夹中是否有数据</span>
+</span></span><span class="line"><span class="cl">$ ls /home/satc/SaTC/SaTC_data
+</span></span><span class="line"><span class="cl">$ <span class="nb">cd</span> ~/SaTC
+</span></span><span class="line"><span class="cl"><span class="c1"># 测试/bin/httpd是否存在命令注入漏洞</span>
+</span></span><span class="line"><span class="cl">$ python satc.py -d /home/satc/SaTC/SaTC_data -o /home/satc/res --ghidra_script<span class="o">=</span>ref2sink_cmdi -b httpd --taint_check
+</span></span><span class="line"><span class="cl"><span class="c1"># 测试/bin/httpd是否存在缓冲区溢出漏洞</span>
+</span></span><span class="line"><span class="cl">$ python satc.py -d /home/satc/SaTC/SaTC_data -o /home/satc/res --ghidra_script<span class="o">=</span>ref2sink_bof -b httpd --taint_check
+</span></span></code></pre></div><p>
+<figure>
+<img alt="image-20240225123710408" class="my-0 rounded-md" src="https://s2.loli.net/2024/02/25/8XGEe9RblsIdCcF.png"/>
+</figure>
+</p>
+<p><strong>文章后面的部分还在施工中，</strong></p>
+<p>路过的师傅们看看远处的学习记录吧！</p>
+<div class="hugo-encryptor-container">
+<div class="hugo-encryptor-prompt">
+<p>文章的部分内容被密码保护：</p>
+</div>
+<div class="hugo-encryptor-form">
+<input class="hugo-encryptor-input" placeholder="请输入密码"/>
+<input class="hugo-encryptor-button" onclick="_click_handler(this)" type="button" value="点击验证"/>
+</div>
+<div class="hugo-encryptor-cipher-text" style="display: none;">l2JPLEO32BC9w43tsqtzGeyRiUtbA9EMLpcL3Q96nPyVyh45ujWW3pgIaKEkA+jNooZUjWBDe85luqjq5q9UEYJc3yu5b28PHmaoKDyWkdh8HJYXcr3E8cLySSIpc95wCcUsnNs2DKG6k5a+DOk6vlS8vugCjUBrxlxSIje87uY=</div>
+</div>
+<br/>
+<hr/>
+<section class="space-y-10 w-full">
+<a class="flex flex-wrap article border border-neutral-200 dark:border-neutral-700 border-2 rounded-md backdrop-blur" href="/posts/iot/0x01/">
+<div class="w-full md:w-auto h-full thumbnail nozoom" style="background-image:url(/posts/iot/0x01/featured.jpg);"></div>
+<div class="p-4">
+<div class="items-center text-xl font-semibold">
+<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/iot/0x01/">IoT基础学习</div>
+</div>
+<div class="text-sm text-neutral-500 dark:text-neutral-400">
+<div class="flex flex-row flex-wrap items-center">
+<time datetime="2024-02-21 00:00:00 +0000 UTC">February 21, 2024</time><span class="px-2 text-primary-500">·</span><time datetime="2024-02-23 00:00:00 +0000 UTC"></time><span class="px-2 text-primary-500">·</span><span>6165 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">13 分钟</span>
+</div>
+<div class="flex flex-row flex-wrap items-center">
+<span class="mr-2" onclick="window.open(&quot;/categories/iot%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    IoT学习记录
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/iot/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    IoT
+  </span>
+</span>
+</span>
+</div>
+</div>
+</div>
+</a>
+</section>
+<hr/>
+<section class="space-y-10 w-full">
+<a class="flex flex-wrap article border border-neutral-200 dark:border-neutral-700 border-2 rounded-md backdrop-blur" href="/posts/iot/0x02/">
+<div class="w-full md:w-auto h-full thumbnail nozoom" style="background-image:url(/posts/iot/0x02/featured.jpg);"></div>
+<div class="p-4">
+<div class="items-center text-xl font-semibold">
+<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/iot/0x02/">IoT漏洞复现记录</div>
+</div>
+<div class="text-sm text-neutral-500 dark:text-neutral-400">
+<div class="flex flex-row flex-wrap items-center">
+<time datetime="2024-02-22 00:00:00 +0000 UTC">February 22, 2024</time><span class="px-2 text-primary-500">·</span><time datetime="2024-02-23 00:00:00 +0000 UTC"></time><span class="px-2 text-primary-500">·</span><span>13389 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">27 分钟</span>
+</div>
+<div class="flex flex-row flex-wrap items-center">
+<span class="mr-2" onclick="window.open(&quot;/categories/iot%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    IoT学习记录
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/iot/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    IoT
+  </span>
+</span>
+</span>
+</div>
+</div>
+</div>
+</a>
+</section>
+<hr/>
+<ul>
+<li>尝试10086…</li>
+</ul>
+<br/>
+<details class="mt-2 mb-5 overflow-hidden rounded-lg ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5" style="margin-left:0px">
+<summary class="py-1 text-lg font-semibold cursor-pointer bg-primary-200 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-primary-800 dark:text-neutral-100">
+        IoT学习小记 - This article is part of a series.
+    </summary>
+<div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+<a href="https://ta0lve.github.io/posts/iot/0x01/">
+            Part 1: IoT基础学习
+        </a>
+</div>
+<div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+<a href="https://ta0lve.github.io/posts/iot/0x02/">
+            Part 2: IoT漏洞复现记录
+        </a>
+</div>
+<div class="py-1 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+        Part 3: This Article
+    </div>
+</details>
+</div>
+<script>
+        var oid = "views_posts\\IoT\\0x03\\index.md"
+        var oid_likes = "likes_posts\\IoT\\0x03\\index.md"
+      </script>
+<script integrity="sha512-DkmXO0rQo4LHxgEti/+CJjFmQtqrxPiiBHe9CGdPPabi+pk7wgrU9R58W7aOb5E6IHp8T+N+oOe4BolK/OCmTg==" src="/js/page.min.0e49973b4ad0a382c7c6012d8bff8226316642daabc4f8a20477bd08674f3da6e2fa993bc20ad4f51e7c5bb68e6f913a207a7c4fe37ea0e7b806894afce0a64e.js" type="text/javascript"></script>
+</section>
+<footer class="pt-8 max-w-prose print:hidden">
+<h2 class="mt-8 text-2xl font-extrabold mb-10">Related</h2>
+<section class="w-full grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+<a class="min-w-full" href="/posts/iot/0x01/">
+<div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
+<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/posts/iot/0x01/featured.jpg);"></div>
+<div class="px-6 py-4">
+<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/iot/0x01/">IoT基础学习</div>
+<div class="text-sm text-neutral-500 dark:text-neutral-400">
+<div class="flex flex-row flex-wrap items-center">
+<time datetime="2024-02-21 00:00:00 +0000 UTC">February 21, 2024</time><span class="px-2 text-primary-500">·</span><time datetime="2024-02-23 00:00:00 +0000 UTC"></time><span class="px-2 text-primary-500">·</span><span>6165 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">13 分钟</span>
+</div>
+<div class="flex flex-row flex-wrap items-center">
+<span class="mr-2" onclick="window.open(&quot;/categories/iot%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    IoT学习记录
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/iot/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    IoT
+  </span>
+</span>
+</span>
+</div>
+</div>
+</div>
+<div class="px-6 pt-4 pb-2">
+</div>
+</div>
+</a>
+<a class="min-w-full" href="/posts/iot/0x02/">
+<div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
+<div class="w-full thumbnail_card_related nozoom" style="background-image:url(/posts/iot/0x02/featured.jpg);"></div>
+<div class="px-6 py-4">
+<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/iot/0x02/">IoT漏洞复现记录</div>
+<div class="text-sm text-neutral-500 dark:text-neutral-400">
+<div class="flex flex-row flex-wrap items-center">
+<time datetime="2024-02-22 00:00:00 +0000 UTC">February 22, 2024</time><span class="px-2 text-primary-500">·</span><time datetime="2024-02-23 00:00:00 +0000 UTC"></time><span class="px-2 text-primary-500">·</span><span>13389 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">27 分钟</span>
+</div>
+<div class="flex flex-row flex-wrap items-center">
+<span class="mr-2" onclick="window.open(&quot;/categories/iot%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    IoT学习记录
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/iot/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    IoT
+  </span>
+</span>
+</span>
+</div>
+</div>
+</div>
+<div class="px-6 pt-4 pb-2">
+</div>
+</div>
+</a>
+<a class="min-w-full" href="/posts/pwn/risc-v/0x01/">
+<div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative backdrop-blur">
+<div class="px-6 py-4">
+<div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral" href="/posts/pwn/risc-v/0x01/">RISC-V PWN学习</div>
+<div class="text-sm text-neutral-500 dark:text-neutral-400">
+<div class="flex flex-row flex-wrap items-center">
+<time datetime="2023-09-03 00:00:00 +0000 UTC">September 3, 2023</time><span class="px-2 text-primary-500">·</span><span>11267 字</span><span class="px-2 text-primary-500">·</span><span title="预计阅读">23 分钟</span>
+</div>
+<div class="flex flex-row flex-wrap items-center">
+<span class="mr-2" onclick="window.open(&quot;/categories/pwn%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    PWN学习记录
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/ctf/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    CTF
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/pwn/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    PWN
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/riscv64/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    riscv64
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/%E5%BC%82%E6%9E%84pwn/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    异构PWN
+  </span>
+</span>
+</span>
+<span class="mr-2" onclick="window.open(&quot;/tags/iot/&quot;,'_self');" style="margin-top:0.5rem">
+<span class="flex">
+<span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    IoT
+  </span>
+</span>
+</span>
+</div>
+</div>
+</div>
+<div class="px-6 pt-4 pb-2">
+</div>
+</div>
+</a>
+</section>
+<div class="content" id="content">
+<div style="margin-top:2em;padding:0 0.5em;font-size:.875rem">
+<hr/>
+<br/>
+<div style="padding-bottom:1em;">
+<p> </p>
+<p>本文作者：<a href="https://ta0lve.github.io/about/" target="_blank"><font color="#49b1f5" style="text-decoration: underline">ta0lve</font></a></p>
+<p>本文链接：<a href="https://ta0lve.github.io/posts/iot/0x03/" target="_blank"><font color="#49b1f5" style="text-decoration: underline">IoT漏洞挖掘思路</font></a></p>
+<p><a href="https://ta0lve.github.io/posts/iot/0x03/" target="_blank"><font color="#49b1f5" style="text-decoration: underline"> https://ta0lve.github.io/posts/iot/0x03/ </font></a></p>
+<p>版权声明：本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank"><font color="#49b1f5" style="text-decoration: underline"> CC BY-NC 4.0 </font></a> 许可协议。</p>
+<p>转载请注明来自<a class="redlink" href="https://ta0lve.github.io/" target="_blank"> <font color="#49b1f5" style="text-decoration: underline">ta0lve's Blog</font></a> ！</p>
+</div>
+</div>
+</div>
+<div class="pt-8">
+<hr class="border-dotted border-neutral-300 dark:border-neutral-600"/>
+<div class="flex justify-between pt-3">
+<span>
+<a class="flex group mr-3" href="/posts/iot/0x02/">
+<span class="mr-3 text-neutral-700 group-hover:text-primary-600 ltr:inline rtl:hidden dark:text-neutral dark:group-hover:text-primary-400">←</span>
+<span class="ml-3 text-neutral-700 group-hover:text-primary-600 ltr:hidden rtl:inline dark:text-neutral dark:group-hover:text-primary-400">→</span>
+<span class="flex flex-col">
+<span class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500">IoT漏洞复现记录</span>
+<span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
+<time datetime="2024-02-22 00:00:00 +0000 UTC">February 22, 2024</time>
+</span>
+</span>
+</a>
+</span>
+<span>
+<a class="flex text-right group ml-3" href="/posts/pwn/basic/remember-it-wp/">
+<span class="flex flex-col">
+<span class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500">remember-it-012 official wp</span>
+<span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
+<time datetime="2024-05-06 00:00:00 +0000 UTC">May 6, 2024</time>
+</span>
+</span>
+<span class="ml-3 text-neutral-700 group-hover:text-primary-600 ltr:inline rtl:hidden dark:text-neutral dark:group-hover:text-primary-400">→</span>
+<span class="mr-3 text-neutral-700 group-hover:text-primary-600 ltr:hidden rtl:inline dark:text-neutral dark:group-hover:text-primary-400">←</span>
+</a>
+</span>
+</div>
+</div>
+<script async="" crossorigin="anonymous" data-category="Announcements" data-category-id="DIC_kwDOJ9Vlo84CX_0P" data-emit-metadata="0" data-input-position="bottom" data-lang="zh-CN" data-mapping="pathname" data-reactions-enabled="1" data-repo="ta0lve/blogtalk" data-repo-id="R_kgDOJ9Vlow" data-strict="0" data-theme="dark_dimmed" src="https://giscus.app/client.js">
+</script>
+</footer>
+</article>
+<div class="pointer-events-none absolute top-[110vh] bottom-0 w-12 ltr:right-0 rtl:left-0" id="top-scroller">
+<a aria-label="" class="pointer-events-auto sticky top-[calc(100vh-5.5rem)] flex h-12 w-12 mb-16 items-center justify-center rounded-full bg-neutral/50 text-xl text-neutral-700 backdrop-blur hover:text-primary-600 dark:bg-neutral-800/50 dark:text-neutral dark:hover:text-primary-400" href="#the-top" title="">
+    ↑
+  </a>
+</div>
+</main><footer class="py-10 print:hidden" id="site-footer">
+<nav class="flex flex-row pb-4 text-base font-medium text-neutral-500 dark:text-neutral-400">
+<ul class="flex flex-col list-none sm:flex-row">
+<li class="flex mb-1 ltr:text-right rtl:text-left sm:mb-0 ltr:sm:mr-7 ltr:sm:last:mr-0 rtl:sm:ml-7 rtl:sm:last:ml-0">
+<a class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2" href="/about/" title="About">About</a>
+</li>
+<li class="flex mb-1 ltr:text-right rtl:text-left sm:mb-0 ltr:sm:mr-7 ltr:sm:last:mr-0 rtl:sm:ml-7 rtl:sm:last:ml-0">
+<a class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2" href="/tags/pwn/" title="PWN">pwn2own , pwn4fun</a>
+</li>
+</ul>
+</nav>
+<div class="flex items-center justify-between">
+<p class="text-sm text-neutral-500 dark:text-neutral-400">
+      Copyright ©2024 ta0lve, All Rights Reserved.
+    </p>
+<p class="text-xs text-neutral-500 dark:text-neutral-400">
+      
+      
+      由 <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500" href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &amp; <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500" href="https://blowfish.page/" rel="noopener noreferrer" target="_blank">Blowfish</a> 强力驱动
+    </p>
+</div>
+<script>
+    
+    mediumZoom(document.querySelectorAll("img:not(.nozoom)"), {
+      margin: 24,
+      background: 'rgba(0,0,0,0.5)',
+      scrollOffset: 0,
+    })
+    
+  </script>
+<script integrity="sha512-NcERO8wWxaWb8DEIL55jgiqpUoBCOIGnhHp/8zoW5imc5qhA2e9OENlH4DChjz8gNZr7LsDzWWdIS5qTYKwxRQ==" src="/js/process.min.35c1113bcc16c5a59bf031082f9e63822aa95280423881a7847a7ff33a16e6299ce6a840d9ef4e10d947e030a18f3f20359afb2ec0f35967484b9a9360ac3145.js" type="text/javascript"></script>
+</footer><div class="invisible fixed inset-0 flex h-screen w-screen cursor-default flex-col bg-neutral-500/50 p-4 backdrop-blur-sm dark:bg-neutral-900/50 sm:p-6 md:p-[10vh] lg:p-[12vh]" data-url="https://ta0lve.github.io/" id="search-wrapper" style="z-index:500">
+<div class="flex flex-col w-full max-w-3xl min-h-0 mx-auto border rounded-md shadow-lg top-20 border-neutral-200 bg-neutral dark:border-neutral-700 dark:bg-neutral-800" id="search-modal">
+<header class="relative z-10 flex items-center justify-between flex-none px-2">
+<form class="flex items-center flex-auto min-w-0">
+<div class="flex items-center justify-center w-8 h-8 text-neutral-400">
+<span class="relative block icon">
+<svg aria-hidden="true" class="svg-inline--fa fa-search fa-w-16" data-icon="search" data-prefix="fas" focusable="false" role="img" viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z" fill="currentColor"></path></svg>
+</span>
+</div>
+<input class="flex flex-auto h-12 mx-1 bg-transparent appearance-none focus:outline-dotted focus:outline-2 focus:outline-transparent" id="search-query" placeholder="" tabindex="0" type="search"/>
+</form>
+<button class="flex items-center justify-center w-8 h-8 text-neutral-700 hover:text-primary-600 dark:text-neutral dark:hover:text-primary-400" id="close-search-button" title="">
+<span class="relative block icon">
+<svg viewbox="0 0 320 512" xmlns="http://www.w3.org/2000/svg"><path d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z" fill="currentColor"></path></svg>
+</span>
+</button>
+</header>
+<section class="flex-auto px-2 overflow-auto">
+<ul id="search-results">
+</ul>
+</section>
+</div>
+</div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script><script src="/decrypt.js"></script></body>
+</html>
